@@ -48,10 +48,6 @@ const Index = () => {
               </div>
               <div className="flex items-center gap-3 bg-purple-50 p-4 rounded-lg hover:bg-purple-100 transition-colors">
                 <Briefcase className="w-6 h-6 text-purple-600 flex-shrink-0" />
-                <span className="text-gray-700">Lead Generation</span>
-              </div>
-              <div className="flex items-center gap-3 bg-purple-50 p-4 rounded-lg hover:bg-purple-100 transition-colors">
-                <Briefcase className="w-6 h-6 text-purple-600 flex-shrink-0" />
                 <span className="text-gray-700">Process Automation</span>
               </div>
             </div>
