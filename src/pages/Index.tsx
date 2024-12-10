@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Toaster } from "@/components/ui/toaster";
 import {
   Card,
   CardContent,
@@ -11,6 +11,10 @@ import { Briefcase, Globe, Mail, Phone, User, Facebook, Instagram, Video, Twitte
 const Index = () => {
   console.log("Rendering Index page");
   
+  const handleBooking = () => {
+    window.open('https://calendly.com/aiautomatizari/30min?month=2024-12', '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] flex items-center justify-center p-4">
       <Card className="w-full max-w-2xl bg-[#1A1F2C] border-purple-500/50">
@@ -121,12 +125,12 @@ const Index = () => {
 
           {/* CTA Button */}
           <div className="text-center pt-4 md:pt-6">
-            <Button 
-              size="lg" 
-              className="bg-purple-500 text-white hover:bg-purple-600 transition-colors text-base md:text-lg px-6 md:px-8 py-4 md:py-6 h-auto"
+            <button 
+              onClick={handleBooking}
+              className="bg-purple-500 text-white hover:bg-purple-600 transition-colors text-base md:text-lg px-6 md:px-8 py-4 md:py-6 h-auto rounded-md"
             >
               Book a Free AI Audit
-            </Button>
+            </button>
           </div>
         </CardContent>
       </Card>
