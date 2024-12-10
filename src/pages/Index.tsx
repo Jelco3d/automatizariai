@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Briefcase, Globe, Mail, Phone, User } from "lucide-react";
+import { Briefcase, Globe, Mail, Phone, User, Facebook, Instagram, Video, Twitter } from "lucide-react";
 
 const Index = () => {
   console.log("Rendering Index page");
@@ -80,6 +80,42 @@ const Index = () => {
               >
                 <Globe className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 <span>automatizariAi.ro</span>
+              </a>
+            </div>
+
+            {/* Social Media Links */}
+            <div className="flex justify-center gap-6 pt-4">
+              <a 
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-purple-600 transition-colors"
+              >
+                <Instagram className="w-6 h-6" />
+              </a>
+              <a 
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-purple-600 transition-colors"
+              >
+                <Facebook className="w-6 h-6" />
+              </a>
+              <a 
+                href="https://tiktok.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-purple-600 transition-colors"
+              >
+                <Video className="w-6 h-6" />
+              </a>
+              <a 
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-purple-600 transition-colors"
+              >
+                <Twitter className="w-6 h-6" />
               </a>
             </div>
           </div>
