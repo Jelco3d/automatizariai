@@ -30,8 +30,8 @@ const Index = () => {
           {/* Bio Section */}
           <p className="text-center text-gray-600 max-w-xl mx-auto leading-relaxed">
             I help businesses automate repetitive tasks and processes using AI tools, 
-            reducing operational costs and boosting productivity. From lead generation 
-            to data entry, I create seamless automation systems.
+            reducing operational costs and boosting productivity. From data analysis 
+            to workflow optimization, I create seamless automation systems.
           </p>
 
           {/* Services */}
