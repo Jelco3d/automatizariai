@@ -40,10 +40,6 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex items-center gap-3 bg-purple-50 p-4 rounded-lg hover:bg-purple-100 transition-colors">
                 <Briefcase className="w-6 h-6 text-purple-600 flex-shrink-0" />
-                <span className="text-gray-700">AI Automation Solutions</span>
-              </div>
-              <div className="flex items-center gap-3 bg-purple-50 p-4 rounded-lg hover:bg-purple-100 transition-colors">
-                <Briefcase className="w-6 h-6 text-purple-600 flex-shrink-0" />
                 <span className="text-gray-700">Workflow Optimization</span>
               </div>
               <div className="flex items-center gap-3 bg-purple-50 p-4 rounded-lg hover:bg-purple-100 transition-colors">
