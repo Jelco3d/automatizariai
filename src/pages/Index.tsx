@@ -25,6 +25,41 @@ const Index = () => {
             <CardTitle className="text-3xl md:text-4xl font-bold text-white">
               AI Automation Expert
             </CardTitle>
+            {/* Social Media Links moved here */}
+            <div className="flex justify-center gap-6 md:gap-8 pt-4 md:pt-6">
+              <a 
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-purple-300 transition-colors"
+              >
+                <Instagram className="w-5 h-5 md:w-6 md:h-6" />
+              </a>
+              <a 
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-purple-300 transition-colors"
+              >
+                <Facebook className="w-5 h-5 md:w-6 md:h-6" />
+              </a>
+              <a 
+                href="https://tiktok.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-purple-300 transition-colors"
+              >
+                <Video className="w-5 h-5 md:w-6 md:h-6" />
+              </a>
+              <a 
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-purple-300 transition-colors"
+              >
+                <Twitter className="w-5 h-5 md:w-6 md:h-6" />
+              </a>
+            </div>
           </div>
           <CardDescription className="text-base md:text-lg text-white max-w-lg mx-auto leading-relaxed font-medium">
             Helping businesses save 10+ hours weekly through AI automation
@@ -80,42 +115,6 @@ const Index = () => {
               >
                 <Globe className="w-4 h-4 md:w-5 md:h-5" />
                 <span>automatizariAi.ro</span>
-              </a>
-            </div>
-
-            {/* Social Media Links */}
-            <div className="flex justify-center gap-6 md:gap-8 pt-4 md:pt-6">
-              <a 
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-purple-300 transition-colors"
-              >
-                <Instagram className="w-5 h-5 md:w-6 md:h-6" />
-              </a>
-              <a 
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-purple-300 transition-colors"
-              >
-                <Facebook className="w-5 h-5 md:w-6 md:h-6" />
-              </a>
-              <a 
-                href="https://tiktok.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-purple-300 transition-colors"
-              >
-                <Video className="w-5 h-5 md:w-6 md:h-6" />
-              </a>
-              <a 
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-purple-300 transition-colors"
-              >
-                <Twitter className="w-5 h-5 md:w-6 md:h-6" />
               </a>
             </div>
           </div>
