@@ -20,21 +20,21 @@ const Index = () => {
             <User className="w-16 h-16 text-purple-300 relative z-10" />
           </div>
           <div className="space-y-2">
-            <h2 className="text-2xl font-semibold text-purple-300">
+            <h2 className="text-2xl font-semibold bg-gradient-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent">
               Erdelean Jelco
             </h2>
-            <CardTitle className="text-4xl font-bold bg-gradient-to-r from-purple-300 via-purple-200 to-purple-300 bg-clip-text text-transparent">
+            <CardTitle className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-fuchsia-300 to-purple-400 bg-clip-text text-transparent">
               AI Automation Expert
             </CardTitle>
           </div>
-          <CardDescription className="text-lg text-purple-100/80 max-w-lg mx-auto leading-relaxed">
+          <CardDescription className="text-lg text-purple-200/90 max-w-lg mx-auto leading-relaxed font-medium">
             Helping businesses save 10+ hours weekly through AI automation
           </CardDescription>
         </CardHeader>
         
         <CardContent className="space-y-10">
           {/* Bio Section */}
-          <p className="text-center text-purple-100/70 max-w-xl mx-auto leading-relaxed">
+          <p className="text-center text-purple-100/90 max-w-xl mx-auto leading-relaxed font-medium">
             I help businesses automate repetitive tasks and processes using AI tools, 
             reducing operational costs and boosting productivity. From data analysis 
             to workflow optimization, I create seamless automation systems.
@@ -42,33 +42,33 @@ const Index = () => {
 
           {/* Services */}
           <div className="grid gap-6">
-            <h3 className="font-semibold text-xl text-purple-200">Services:</h3>
+            <h3 className="font-semibold text-xl bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">Services:</h3>
             <div className="grid grid-cols-2 gap-4">
               <div className="flex items-center gap-3 bg-gradient-to-br from-purple-500/10 to-purple-600/5 p-4 rounded-lg hover:from-purple-500/20 hover:to-purple-600/10 transition-all duration-300 border border-purple-500/20">
                 <Briefcase className="w-6 h-6 text-purple-300 flex-shrink-0" />
-                <span className="text-purple-100">AI Automation Solutions</span>
+                <span className="text-purple-200">AI Automation Solutions</span>
               </div>
               <div className="flex items-center gap-3 bg-gradient-to-br from-purple-500/10 to-purple-600/5 p-4 rounded-lg hover:from-purple-500/20 hover:to-purple-600/10 transition-all duration-300 border border-purple-500/20">
                 <Briefcase className="w-6 h-6 text-purple-300 flex-shrink-0" />
-                <span className="text-purple-100">Process Automation</span>
+                <span className="text-purple-200">Process Automation</span>
               </div>
             </div>
           </div>
 
           {/* Contact Information */}
           <div className="space-y-6">
-            <h3 className="font-semibold text-xl text-purple-200">Contact:</h3>
+            <h3 className="font-semibold text-xl bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">Contact:</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <a 
                 href="tel:0754274528" 
-                className="flex items-center gap-3 text-purple-100/80 hover:text-purple-300 transition-colors group"
+                className="flex items-center gap-3 text-purple-200/90 hover:text-purple-300 transition-colors group"
               >
                 <Phone className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 <span>0754274528</span>
               </a>
               <a 
                 href="mailto:automationaisolution@gmail.com"
-                className="flex items-center gap-3 text-purple-100/80 hover:text-purple-300 transition-colors group"
+                className="flex items-center gap-3 text-purple-200/90 hover:text-purple-300 transition-colors group"
               >
                 <Mail className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 <span>automationaisolution@gmail.com</span>
@@ -77,7 +77,7 @@ const Index = () => {
                 href="https://automatizariai.ro"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-purple-100/80 hover:text-purple-300 transition-colors group"
+                className="flex items-center gap-3 text-purple-200/90 hover:text-purple-300 transition-colors group"
               >
                 <Globe className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 <span>automatizariAi.ro</span>
@@ -90,7 +90,7 @@ const Index = () => {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-purple-300/60 hover:text-purple-300 transition-all duration-300 hover:scale-110"
+                className="text-purple-300/80 hover:text-purple-200 transition-all duration-300 hover:scale-110"
               >
                 <Instagram className="w-6 h-6" />
               </a>
@@ -98,7 +98,7 @@ const Index = () => {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-purple-300/60 hover:text-purple-300 transition-all duration-300 hover:scale-110"
+                className="text-purple-300/80 hover:text-purple-200 transition-all duration-300 hover:scale-110"
               >
                 <Facebook className="w-6 h-6" />
               </a>
@@ -106,7 +106,7 @@ const Index = () => {
                 href="https://tiktok.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-purple-300/60 hover:text-purple-300 transition-all duration-300 hover:scale-110"
+                className="text-purple-300/80 hover:text-purple-200 transition-all duration-300 hover:scale-110"
               >
                 <Video className="w-6 h-6" />
               </a>
@@ -114,7 +114,7 @@ const Index = () => {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-purple-300/60 hover:text-purple-300 transition-all duration-300 hover:scale-110"
+                className="text-purple-300/80 hover:text-purple-200 transition-all duration-300 hover:scale-110"
               >
                 <Twitter className="w-6 h-6" />
               </a>
