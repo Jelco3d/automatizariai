@@ -82,13 +82,13 @@ const Index = () => {
           <div className="grid gap-2 md:gap-6">
             <h3 className="font-semibold text-base md:text-xl text-white">Services:</h3>
             <div className="flex flex-wrap gap-2 md:gap-4">
-              <div className="flex-1 flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500">
-                <Briefcase className="w-4 h-4 md:w-6 md:h-6 text-white flex-shrink-0" />
-                <span className="text-xs md:text-base text-white">AI Automation Solutions</span>
+              <div className="flex-1 flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500/50 hover:border-purple-400 transition-all duration-300 hover:bg-purple-900/40 group cursor-pointer">
+                <Briefcase className="w-4 h-4 md:w-6 md:h-6 text-purple-400 flex-shrink-0 group-hover:text-purple-300 transition-colors" />
+                <span className="text-xs md:text-base text-white group-hover:text-purple-100">AI Automation Solutions</span>
               </div>
-              <div className="flex-1 flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500">
-                <Briefcase className="w-4 h-4 md:w-6 md:h-6 text-white flex-shrink-0" />
-                <span className="text-xs md:text-base text-white">Process Automation</span>
+              <div className="flex-1 flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500/50 hover:border-purple-400 transition-all duration-300 hover:bg-purple-900/40 group cursor-pointer">
+                <Briefcase className="w-4 h-4 md:w-6 md:h-6 text-purple-400 flex-shrink-0 group-hover:text-purple-300 transition-colors" />
+                <span className="text-xs md:text-base text-white group-hover:text-purple-100">Process Automation</span>
               </div>
             </div>
           </div>
