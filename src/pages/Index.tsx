@@ -81,12 +81,12 @@ const Index = () => {
           {/* Services */}
           <div className="grid gap-2 md:gap-6">
             <h3 className="font-semibold text-base md:text-xl text-white">Services:</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
-              <div className="flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500">
+            <div className="flex flex-wrap gap-2 md:gap-4">
+              <div className="flex-1 flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500">
                 <Briefcase className="w-4 h-4 md:w-6 md:h-6 text-white flex-shrink-0" />
                 <span className="text-xs md:text-base text-white">AI Automation Solutions</span>
               </div>
-              <div className="flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500">
+              <div className="flex-1 flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500">
                 <Briefcase className="w-4 h-4 md:w-6 md:h-6 text-white flex-shrink-0" />
                 <span className="text-xs md:text-base text-white">Process Automation</span>
               </div>
