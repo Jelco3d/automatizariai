@@ -54,27 +54,27 @@ const Index = () => {
             <h3 className="font-semibold text-xl text-purple-800">Contact:</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <a 
-                href="tel:+1234567890" 
+                href="tel:0754274528" 
                 className="flex items-center gap-3 text-gray-700 hover:text-purple-600 transition-colors group"
               >
                 <Phone className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span>+1 (234) 567-890</span>
+                <span>0754274528</span>
               </a>
               <a 
-                href="mailto:contact@example.com"
+                href="mailto:automationaisolution@gmail.com"
                 className="flex items-center gap-3 text-gray-700 hover:text-purple-600 transition-colors group"
               >
                 <Mail className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span>contact@example.com</span>
+                <span>automationaisolution@gmail.com</span>
               </a>
               <a 
-                href="https://yourwebsite.com"
+                href="https://automatizariai.ro"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-700 hover:text-purple-600 transition-colors group"
               >
                 <Globe className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span>yourwebsite.com</span>
+                <span>automatizariAi.ro</span>
               </a>
             </div>
           </div>
