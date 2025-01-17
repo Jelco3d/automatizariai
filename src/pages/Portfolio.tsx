@@ -9,6 +9,22 @@ const Portfolio = () => {
 
   const caseStudies = [
     {
+      client: "AI Email Assistant",
+      industry: "Business Process Automation",
+      challenge: "Managing high volume of emails, scheduling, and client communication manually",
+      solution: "Implemented an AI-powered email assistant for automated response handling, appointment scheduling, and client communication management",
+      results: {
+        timeReduction: "95%",
+        costSaving: "$200,000 annually",
+        roi: "500%",
+        timeline: "1 month"
+      },
+      beforeAfter: {
+        before: "4+ hours daily on email management",
+        after: "Automated responses, instant scheduling"
+      }
+    },
+    {
       client: "TechCorp Solutions",
       industry: "Manufacturing",
       challenge: "Manual data processing taking 40+ hours weekly",
@@ -84,7 +100,7 @@ const Portfolio = () => {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="container mx-auto px-4 py-16"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {caseStudies.map((study, index) => (
             <CaseStudyCard key={index} {...study} />
           ))}
