@@ -434,173 +434,122 @@ export const caseStudies: CaseStudy[] = [
     }
   },
   {
-    client: "Smart City Initiative",
-    industry: "Government",
-    category: "more",
-    challenge: "Manual urban data collection and analysis",
-    solution: "Automated IoT data processing platform",
+    client: "Lead Generation Pro",
+    industry: "B2B Sales",
+    category: "sales",
+    challenge: "Manual lead identification and qualification process",
+    solution: "AI-powered lead scoring and qualification system",
     results: {
-      timeReduction: "90%",
-      costSaving: "$500,000 annually",
-      roi: "600%",
-      timeline: "6 months"
+      timeReduction: "88%",
+      costSaving: "$280,000 annually",
+      roi: "490%",
+      timeline: "2 months"
     },
     beforeAfter: {
-      before: "Manual data collection",
-      after: "Real-time data processing"
+      before: "Manual lead qualification",
+      after: "Automated lead scoring and prioritization"
     }
   },
   {
-    client: "Research Institution",
-    industry: "Scientific Research",
-    category: "more",
-    challenge: "Complex data analysis workflow",
-    solution: "Automated research data processing pipeline",
-    results: {
-      timeReduction: "85%",
-      costSaving: "$300,000 annually",
-      roi: "450%",
-      timeline: "4 months"
-    },
-    beforeAfter: {
-      before: "Manual data analysis",
-      after: "Automated analysis pipeline"
-    }
-  },
-  {
-    client: "Environmental Agency",
-    industry: "Environmental",
-    category: "more",
-    challenge: "Manual environmental monitoring",
-    solution: "Automated sensor network and analysis system",
-    results: {
-      timeReduction: "95%",
-      costSaving: "$400,000 annually",
-      roi: "550%",
-      timeline: "5 months"
-    },
-    beforeAfter: {
-      before: "Weekly manual monitoring",
-      after: "Continuous automated monitoring"
-    }
-  },
-  {
-    client: "Education Platform",
-    industry: "Education",
-    category: "more",
-    challenge: "Manual student progress tracking",
-    solution: "AI-powered learning analytics system",
-    results: {
-      timeReduction: "80%",
-      costSaving: "$250,000 annually",
-      roi: "400%",
-      timeline: "3 months"
-    },
-    beforeAfter: {
-      before: "Manual progress reports",
-      after: "Real-time learning analytics"
-    }
-  },
-  {
-    client: "Sports Analytics",
-    industry: "Sports",
-    category: "more",
-    challenge: "Complex performance data analysis",
-    solution: "Automated performance tracking and analysis",
-    results: {
-      timeReduction: "75%",
-      costSaving: "$200,000 annually",
-      roi: "380%",
-      timeline: "2.5 months"
-    },
-    beforeAfter: {
-      before: "Manual performance tracking",
-      after: "Real-time performance analytics"
-    }
-  },
-  {
-    client: "Healthcare Analytics Platform",
-    industry: "Healthcare",
-    category: "more",
-    challenge: "Complex patient data analysis and prediction requirements",
-    solution: "AI-powered healthcare analytics platform with predictive modeling",
-    results: {
-      timeReduction: "85%",
-      costSaving: "$450,000 annually",
-      roi: "580%",
-      timeline: "5 months"
-    },
-    beforeAfter: {
-      before: "Manual data analysis and predictions",
-      after: "Automated health analytics and predictions"
-    }
-  },
-  {
-    client: "Agricultural IoT System",
-    industry: "Agriculture",
-    category: "more",
-    challenge: "Inefficient crop monitoring and resource management",
-    solution: "IoT-based agricultural monitoring and automation system",
-    results: {
-      timeReduction: "70%",
-      costSaving: "$350,000 annually",
-      roi: "480%",
-      timeline: "4 months"
-    },
-    beforeAfter: {
-      before: "Manual crop monitoring",
-      after: "Automated agricultural monitoring"
-    }
-  },
-  {
-    client: "Legal Document AI",
-    industry: "Legal Tech",
-    category: "more",
-    challenge: "Time-consuming legal document review and analysis",
-    solution: "AI-powered legal document processing and analysis system",
+    client: "Email Campaign Master",
+    industry: "Digital Marketing",
+    category: "sales",
+    challenge: "Inefficient email campaign management and personalization",
+    solution: "AI-driven email marketing automation platform",
     results: {
       timeReduction: "92%",
-      costSaving: "$600,000 annually",
-      roi: "650%",
+      costSaving: "$320,000 annually",
+      roi: "510%",
       timeline: "3 months"
     },
     beforeAfter: {
-      before: "Manual document review process",
-      after: "Automated legal document analysis"
+      before: "Manual email campaign creation",
+      after: "Automated personalized campaigns"
     }
   },
   {
-    client: "Music Production AI",
-    industry: "Entertainment",
-    category: "more",
-    challenge: "Complex music production workflow management",
-    solution: "AI-assisted music production and workflow automation",
+    client: "Social Sales Connect",
+    industry: "Social Selling",
+    category: "sales",
+    challenge: "Disconnected social media lead generation efforts",
+    solution: "Integrated social media prospecting and engagement platform",
     results: {
-      timeReduction: "75%",
-      costSaving: "$200,000 annually",
-      roi: "420%",
+      timeReduction: "85%",
+      costSaving: "$240,000 annually",
+      roi: "460%",
       timeline: "2.5 months"
     },
     beforeAfter: {
-      before: "Manual production workflow",
-      after: "Streamlined AI-assisted production"
+      before: "Manual social media prospecting",
+      after: "Automated social lead generation"
     }
   },
   {
-    client: "Real Estate Analytics",
-    industry: "Real Estate",
-    category: "more",
-    challenge: "Inefficient property analysis and valuation process",
-    solution: "AI-powered real estate analytics and valuation platform",
+    client: "Sales Intelligence Hub",
+    industry: "Sales Analytics",
+    category: "sales",
+    challenge: "Limited visibility into sales opportunities and trends",
+    solution: "AI-powered sales intelligence and forecasting platform",
     results: {
-      timeReduction: "80%",
-      costSaving: "$380,000 annually",
-      roi: "520%",
+      timeReduction: "78%",
+      costSaving: "$290,000 annually",
+      roi: "480%",
       timeline: "3.5 months"
     },
     beforeAfter: {
-      before: "Manual property analysis",
-      after: "Automated property valuation"
+      before: "Manual sales analysis",
+      after: "Real-time sales intelligence"
+    }
+  },
+  {
+    client: "Pipeline Optimizer",
+    industry: "Sales Operations",
+    category: "sales",
+    challenge: "Inefficient sales pipeline management",
+    solution: "Automated pipeline optimization and deal tracking system",
+    results: {
+      timeReduction: "82%",
+      costSaving: "$310,000 annually",
+      roi: "495%",
+      timeline: "3 months"
+    },
+    beforeAfter: {
+      before: "Manual pipeline updates",
+      after: "Automated pipeline management"
+    }
+  },
+  {
+    client: "Account Based Marketing Pro",
+    industry: "B2B Marketing",
+    category: "sales",
+    challenge: "Fragmented ABM campaign execution",
+    solution: "Integrated ABM automation platform",
+    results: {
+      timeReduction: "87%",
+      costSaving: "$270,000 annually",
+      roi: "470%",
+      timeline: "2.5 months"
+    },
+    beforeAfter: {
+      before: "Manual ABM campaign management",
+      after: "Automated multi-channel ABM"
+    }
+  },
+  {
+    client: "Sales Engagement Suite",
+    industry: "Sales Technology",
+    category: "sales",
+    challenge: "Inconsistent sales engagement processes",
+    solution: "Automated multi-channel sales engagement platform",
+    results: {
+      timeReduction: "90%",
+      costSaving: "$330,000 annually",
+      roi: "530%",
+      timeline: "3 months"
+    },
+    beforeAfter: {
+      before: "Manual engagement tracking",
+      after: "Automated engagement orchestration"
     }
   }
 ];
