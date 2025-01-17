@@ -179,173 +179,343 @@ export const caseStudies: CaseStudy[] = [
     }
   },
   {
-    client: "Fashion Boutique Store",
+    client: "Luxury Watch Store",
     industry: "Shopify Ecommerce",
     category: "ecommerce",
-    challenge: "Manual inventory management and order processing causing delays",
-    solution: "Implemented automated inventory sync and order fulfillment system",
-    results: {
-      timeReduction: "75%",
-      costSaving: "$50,000 annually",
-      roi: "300%",
-      timeline: "6 weeks"
-    },
-    beforeAfter: {
-      before: "4 hours daily on order processing",
-      after: "Automated processing within minutes"
-    }
-  },
-  {
-    client: "Luxury Cosmetics Brand",
-    industry: "Shopify Ecommerce",
-    category: "ecommerce",
-    challenge: "Inefficient customer support and product recommendation system",
-    solution: "Implemented AI-powered chatbot and personalized recommendation engine",
-    results: {
-      timeReduction: "65%",
-      costSaving: "$80,000 annually",
-      roi: "400%",
-      timeline: "2 months"
-    },
-    beforeAfter: {
-      before: "Manual customer support, generic recommendations",
-      after: "24/7 AI support, personalized shopping experience"
-    }
-  },
-  {
-    client: "Artisanal Food Market",
-    industry: "Shopify Ecommerce",
-    category: "ecommerce",
-    challenge: "Complex shipping logistics and delivery tracking",
-    solution: "Automated shipping integration with real-time tracking updates",
-    results: {
-      timeReduction: "70%",
-      costSaving: "$40,000 annually",
-      roi: "250%",
-      timeline: "1 month"
-    },
-    beforeAfter: {
-      before: "Manual shipping label creation and tracking",
-      after: "Automated shipping process with real-time updates"
-    }
-  },
-  {
-    client: "Sustainable Fashion Brand",
-    industry: "Shopify Ecommerce",
-    category: "ecommerce",
-    challenge: "Manual social media content management and product launches",
-    solution: "Automated social media integration and product launch system",
-    results: {
-      timeReduction: "80%",
-      costSaving: "$60,000 annually",
-      roi: "350%",
-      timeline: "6 weeks"
-    },
-    beforeAfter: {
-      before: "5+ hours daily on social media management",
-      after: "Automated content scheduling and product syncing"
-    }
-  },
-  {
-    client: "Handmade Jewelry Store",
-    industry: "Shopify Ecommerce",
-    category: "ecommerce",
-    challenge: "Inefficient inventory tracking and product variant management",
-    solution: "Implemented automated inventory and variant control system",
+    challenge: "Manual product customization and order processing",
+    solution: "Implemented automated product configurator and order workflow",
     results: {
       timeReduction: "85%",
-      costSaving: "$45,000 annually",
-      roi: "275%",
-      timeline: "5 weeks"
-    },
-    beforeAfter: {
-      before: "Manual inventory counts and variant updates",
-      after: "Real-time inventory sync across all channels"
-    }
-  },
-  {
-    client: "Digital Marketing Agency",
-    industry: "Marketing Services",
-    category: "sales",
-    challenge: "Manual campaign reporting and analytics tracking",
-    solution: "Implemented automated reporting system with real-time analytics dashboard",
-    results: {
-      timeReduction: "75%",
       costSaving: "$120,000 annually",
-      roi: "380%",
-      timeline: "2 months"
-    },
-    beforeAfter: {
-      before: "20+ hours weekly on reporting",
-      after: "Automated reports in minutes"
-    }
-  },
-  {
-    client: "Real Estate Firm",
-    industry: "Real Estate",
-    category: "sales",
-    challenge: "Inefficient lead management and follow-up process",
-    solution: "Automated lead scoring and nurturing system",
-    results: {
-      timeReduction: "65%",
-      costSaving: "$90,000 annually",
-      roi: "320%",
-      timeline: "6 weeks"
-    },
-    beforeAfter: {
-      before: "Manual lead tracking and follow-ups",
-      after: "Automated lead nurturing sequences"
-    }
-  },
-  {
-    client: "B2B Software Company",
-    industry: "Software Sales",
-    category: "sales",
-    challenge: "Long sales cycle and manual proposal creation",
-    solution: "Automated proposal generation and follow-up system",
-    results: {
-      timeReduction: "70%",
-      costSaving: "$150,000 annually",
       roi: "400%",
       timeline: "3 months"
     },
     beforeAfter: {
-      before: "2+ weeks sales cycle",
-      after: "5-day average sales cycle"
+      before: "Manual customization process, 2-day order processing",
+      after: "Instant customization, same-day processing"
     }
   },
   {
-    client: "Insurance Agency",
-    industry: "Insurance",
-    category: "sales",
-    challenge: "Manual policy renewal and customer outreach",
-    solution: "Automated renewal notifications and customer engagement system",
+    client: "Organic Food Market",
+    industry: "Shopify Ecommerce",
+    category: "ecommerce",
+    challenge: "Complex subscription management and delivery scheduling",
+    solution: "Automated subscription system with smart delivery optimization",
     results: {
-      timeReduction: "80%",
-      costSaving: "$100,000 annually",
+      timeReduction: "70%",
+      costSaving: "$90,000 annually",
       roi: "350%",
       timeline: "2 months"
     },
     beforeAfter: {
-      before: "15+ hours weekly on renewals",
-      after: "Automated renewal management"
+      before: "Manual subscription tracking",
+      after: "Automated subscription management"
     }
   },
   {
-    client: "SaaS Startup",
-    industry: "Technology",
+    client: "Designer Furniture Store",
+    industry: "Shopify Ecommerce",
+    category: "ecommerce",
+    challenge: "Inefficient made-to-order process and stock management",
+    solution: "Implemented automated production tracking and inventory forecasting",
+    results: {
+      timeReduction: "75%",
+      costSaving: "$150,000 annually",
+      roi: "425%",
+      timeline: "4 months"
+    },
+    beforeAfter: {
+      before: "Manual production tracking",
+      after: "Real-time production monitoring"
+    }
+  },
+  {
+    client: "Wellness Products Brand",
+    industry: "Shopify Ecommerce",
+    category: "ecommerce",
+    challenge: "Complex multi-channel inventory management",
+    solution: "Implemented cross-platform inventory synchronization",
+    results: {
+      timeReduction: "80%",
+      costSaving: "$100,000 annually",
+      roi: "375%",
+      timeline: "2.5 months"
+    },
+    beforeAfter: {
+      before: "Manual inventory updates across channels",
+      after: "Automated multi-channel sync"
+    }
+  },
+  {
+    client: "Vintage Collectibles Shop",
+    industry: "Shopify Ecommerce",
+    category: "ecommerce",
+    challenge: "Manual authentication and pricing process",
+    solution: "Automated authentication workflow and dynamic pricing system",
+    results: {
+      timeReduction: "65%",
+      costSaving: "$80,000 annually",
+      roi: "300%",
+      timeline: "2 months"
+    },
+    beforeAfter: {
+      before: "Manual authentication process",
+      after: "Streamlined authentication workflow"
+    }
+  },
+  {
+    client: "Handmade Crafts Marketplace",
+    industry: "Shopify Ecommerce",
+    category: "ecommerce",
+    challenge: "Complex artist payments and commission tracking",
+    solution: "Automated payment distribution and commission calculation",
+    results: {
+      timeReduction: "90%",
+      costSaving: "$130,000 annually",
+      roi: "450%",
+      timeline: "3 months"
+    },
+    beforeAfter: {
+      before: "Manual payment processing",
+      after: "Instant automated payments"
+    }
+  },
+  {
+    client: "Premium Pet Supplies",
+    industry: "Shopify Ecommerce",
+    category: "ecommerce",
+    challenge: "Inefficient personalized product recommendations",
+    solution: "AI-powered recommendation engine with pet profiles",
+    results: {
+      timeReduction: "75%",
+      costSaving: "$95,000 annually",
+      roi: "380%",
+      timeline: "2 months"
+    },
+    beforeAfter: {
+      before: "Generic product suggestions",
+      after: "Personalized pet-specific recommendations"
+    }
+  },
+  {
+    client: "Athletic Wear Brand",
+    industry: "Shopify Ecommerce",
+    category: "ecommerce",
+    challenge: "Complex size recommendation system",
+    solution: "Implemented AI size prediction algorithm",
+    results: {
+      timeReduction: "70%",
+      costSaving: "$110,000 annually",
+      roi: "400%",
+      timeline: "2.5 months"
+    },
+    beforeAfter: {
+      before: "High return rate due to sizing issues",
+      after: "50% reduction in size-related returns"
+    }
+  },
+  {
+    client: "Gourmet Coffee Roaster",
+    industry: "Shopify Ecommerce",
+    category: "ecommerce",
+    challenge: "Manual subscription customization and roasting schedule",
+    solution: "Automated subscription preferences and production planning",
+    results: {
+      timeReduction: "85%",
+      costSaving: "$75,000 annually",
+      roi: "350%",
+      timeline: "2 months"
+    },
+    beforeAfter: {
+      before: "Manual roasting schedule management",
+      after: "Automated production optimization"
+    }
+  },
+  {
+    client: "Custom Printing Service",
+    industry: "Shopify Ecommerce",
+    category: "ecommerce",
+    challenge: "Complex design approval and production workflow",
+    solution: "Automated design verification and production pipeline",
+    results: {
+      timeReduction: "80%",
+      costSaving: "$140,000 annually",
+      roi: "425%",
+      timeline: "3 months"
+    },
+    beforeAfter: {
+      before: "Manual design review process",
+      after: "Automated design verification"
+    }
+  },
+  {
+    client: "Enterprise Solutions Provider",
+    industry: "B2B Sales",
     category: "sales",
-    challenge: "Inefficient customer onboarding and training",
-    solution: "Automated onboarding sequence and training platform",
+    challenge: "Complex enterprise sales cycle management",
+    solution: "Implemented AI-driven sales pipeline automation",
+    results: {
+      timeReduction: "60%",
+      costSaving: "$300,000 annually",
+      roi: "500%",
+      timeline: "4 months"
+    },
+    beforeAfter: {
+      before: "6-month average sales cycle",
+      after: "2.5-month average sales cycle"
+    }
+  },
+  {
+    client: "Financial Services Firm",
+    industry: "Financial Sales",
+    category: "sales",
+    challenge: "Manual client portfolio management",
+    solution: "Automated portfolio tracking and opportunity detection",
+    results: {
+      timeReduction: "75%",
+      costSaving: "$250,000 annually",
+      roi: "450%",
+      timeline: "3 months"
+    },
+    beforeAfter: {
+      before: "Manual portfolio review",
+      after: "Real-time portfolio optimization"
+    }
+  },
+  {
+    client: "Manufacturing Equipment",
+    industry: "Industrial Sales",
+    category: "sales",
+    challenge: "Complex quote generation process",
+    solution: "Automated quote generation and approval workflow",
     results: {
       timeReduction: "85%",
       costSaving: "$200,000 annually",
+      roi: "400%",
+      timeline: "2.5 months"
+    },
+    beforeAfter: {
+      before: "48-hour quote turnaround",
+      after: "Instant quote generation"
+    }
+  },
+  {
+    client: "Healthcare Solutions",
+    industry: "Medical Sales",
+    category: "sales",
+    challenge: "Compliance-heavy sales documentation",
+    solution: "Automated compliance verification and documentation",
+    results: {
+      timeReduction: "70%",
+      costSaving: "$180,000 annually",
+      roi: "380%",
+      timeline: "3 months"
+    },
+    beforeAfter: {
+      before: "Manual compliance checks",
+      after: "Automated compliance verification"
+    }
+  },
+  {
+    client: "Cloud Services Provider",
+    industry: "Tech Sales",
+    category: "sales",
+    challenge: "Complex service bundling and pricing",
+    solution: "AI-powered service configuration and pricing engine",
+    results: {
+      timeReduction: "80%",
+      costSaving: "$350,000 annually",
+      roi: "520%",
+      timeline: "4 months"
+    },
+    beforeAfter: {
+      before: "Manual service configuration",
+      after: "Instant bundle optimization"
+    }
+  },
+  {
+    client: "Smart City Initiative",
+    industry: "Government",
+    category: "more",
+    challenge: "Manual urban data collection and analysis",
+    solution: "Automated IoT data processing platform",
+    results: {
+      timeReduction: "90%",
+      costSaving: "$500,000 annually",
+      roi: "600%",
+      timeline: "6 months"
+    },
+    beforeAfter: {
+      before: "Manual data collection",
+      after: "Real-time data processing"
+    }
+  },
+  {
+    client: "Research Institution",
+    industry: "Scientific Research",
+    category: "more",
+    challenge: "Complex data analysis workflow",
+    solution: "Automated research data processing pipeline",
+    results: {
+      timeReduction: "85%",
+      costSaving: "$300,000 annually",
       roi: "450%",
       timeline: "4 months"
     },
     beforeAfter: {
-      before: "Manual onboarding process",
-      after: "Streamlined automated onboarding"
+      before: "Manual data analysis",
+      after: "Automated analysis pipeline"
+    }
+  },
+  {
+    client: "Environmental Agency",
+    industry: "Environmental",
+    category: "more",
+    challenge: "Manual environmental monitoring",
+    solution: "Automated sensor network and analysis system",
+    results: {
+      timeReduction: "95%",
+      costSaving: "$400,000 annually",
+      roi: "550%",
+      timeline: "5 months"
+    },
+    beforeAfter: {
+      before: "Weekly manual monitoring",
+      after: "Continuous automated monitoring"
+    }
+  },
+  {
+    client: "Education Platform",
+    industry: "Education",
+    category: "more",
+    challenge: "Manual student progress tracking",
+    solution: "AI-powered learning analytics system",
+    results: {
+      timeReduction: "80%",
+      costSaving: "$250,000 annually",
+      roi: "400%",
+      timeline: "3 months"
+    },
+    beforeAfter: {
+      before: "Manual progress reports",
+      after: "Real-time learning analytics"
+    }
+  },
+  {
+    client: "Sports Analytics",
+    industry: "Sports",
+    category: "more",
+    challenge: "Complex performance data analysis",
+    solution: "Automated performance tracking and analysis",
+    results: {
+      timeReduction: "75%",
+      costSaving: "$200,000 annually",
+      roi: "380%",
+      timeline: "2.5 months"
+    },
+    beforeAfter: {
+      before: "Manual performance tracking",
+      after: "Real-time performance analytics"
     }
   }
 ];
