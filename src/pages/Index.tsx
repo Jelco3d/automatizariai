@@ -13,7 +13,7 @@ const Index = () => {
   console.log("Rendering Index page");
   
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/30min?month=2024-12', '_blank');
+    window.open('https://calendly.com/aiautomatizari/30min', '_blank');
   };
 
   return (
@@ -70,7 +70,6 @@ const Index = () => {
             Helping businesses save 10+ hours weekly through AI automation
           </CardDescription>
         </CardHeader>
-        
         <CardContent className="space-y-4 md:space-y-10 px-3 md:px-6">
           {/* Bio Section */}
           <p className="text-xs md:text-base text-center text-white max-w-xl mx-auto leading-relaxed font-medium">
@@ -93,7 +92,6 @@ const Index = () => {
               </div>
             </div>
           </div>
-
           {/* Contact Information */}
           <div className="space-y-2 md:space-y-6">
             <h3 className="font-semibold text-base md:text-xl text-white">Contact:</h3>
