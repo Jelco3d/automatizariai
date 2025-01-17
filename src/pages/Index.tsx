@@ -134,6 +134,7 @@ const Index = () => {
           </div>
         </CardContent>
       </Card>
+      <Toaster />
     </div>
   );
 };
