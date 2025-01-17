@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Bot, Brain, Clock, Coins, Quote, Star, Zap, Github, Linkedin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Navigation } from "@/components/website/Navigation";
 
 const Website = () => {
   console.log("Rendering Website page");
@@ -12,6 +13,7 @@ const Website = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] relative overflow-hidden">
+      <Navigation />
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
