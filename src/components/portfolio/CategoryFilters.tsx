@@ -19,7 +19,7 @@ export const CategoryFilters = ({
       <Button
         variant={activeCategory === "all" ? "default" : "outline"}
         onClick={() => onCategoryChange("all")}
-        className="bg-[#0EA5E9] hover:bg-[#0EA5E9]/90"
+        className="bg-purple-500 hover:bg-purple-600"
       >
         All
       </Button>
@@ -28,7 +28,7 @@ export const CategoryFilters = ({
           key={category.id}
           variant={activeCategory === category.id ? "default" : "outline"}
           onClick={() => onCategoryChange(category.id)}
-          className={activeCategory === category.id ? "bg-[#0EA5E9] hover:bg-[#0EA5E9]/90" : ""}
+          className={activeCategory === category.id ? "bg-purple-500 hover:bg-purple-600" : ""}
         >
           {category.label}
         </Button>
