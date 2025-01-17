@@ -127,23 +127,74 @@ export const caseStudies: CaseStudy[] = [
         after: "13 hours with AI automation"
       }
     },
-    {
-      client: "TechCorp Solutions",
-      industry: "Manufacturing",
-      category: "ecommerce",
-      challenge: "Manual data processing taking 40+ hours weekly",
-      solution: "Implemented AI-powered document processing",
-      results: {
-        timeReduction: "85%",
-        costSaving: "$120,000 annually",
-        roi: "380%",
-        timeline: "3 months"
-      },
-      beforeAfter: {
-        before: "Manual data entry, high error rates",
-        after: "Automated processing, 99.9% accuracy"
-      }
+  {
+    client: "TechCorp Solutions",
+    industry: "Manufacturing",
+    category: "ecommerce",
+    challenge: "Manual data processing taking 40+ hours weekly",
+    solution: "Implemented AI-powered document processing",
+    results: {
+      timeReduction: "85%",
+      costSaving: "$120,000 annually",
+      roi: "380%",
+      timeline: "3 months"
     },
+    beforeAfter: {
+      before: "Manual data entry, high error rates",
+      after: "Automated processing, 99.9% accuracy"
+    }
+  },
+  {
+    client: "SmartCart",
+    industry: "E-commerce Platform",
+    category: "ecommerce",
+    challenge: "Inefficient inventory management and product recommendations",
+    solution: "AI-powered inventory forecasting and personalized recommendation engine",
+    results: {
+      timeReduction: "75%",
+      costSaving: "$300,000 annually",
+      roi: "420%",
+      timeline: "4 months"
+    },
+    beforeAfter: {
+      before: "Manual inventory tracking, generic recommendations",
+      after: "Automated restocking, 40% higher conversion rate"
+    }
+  },
+  {
+    client: "FashionFlow",
+    industry: "Online Retail",
+    category: "ecommerce",
+    challenge: "Customer support overwhelm and return processing delays",
+    solution: "Implemented AI chatbot and automated return management system",
+    results: {
+      timeReduction: "80%",
+      costSaving: "$250,000 annually",
+      roi: "390%",
+      timeline: "3 months"
+    },
+    beforeAfter: {
+      before: "48hr support response time, manual returns",
+      after: "Instant responses, automated returns processing"
+    }
+  },
+  {
+    client: "GlobalMart",
+    industry: "Multi-channel Retail",
+    category: "ecommerce",
+    challenge: "Complex multi-channel order management and fulfillment",
+    solution: "Automated order processing and smart fulfillment system",
+    results: {
+      timeReduction: "70%",
+      costSaving: "$400,000 annually",
+      roi: "450%",
+      timeline: "5 months"
+    },
+    beforeAfter: {
+      before: "Manual order routing, shipping delays",
+      after: "Automated fulfillment, same-day shipping"
+    }
+  },
     {
       client: "Global Logistics Inc",
       industry: "Transportation",
