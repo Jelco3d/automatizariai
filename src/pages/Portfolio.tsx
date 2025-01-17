@@ -87,6 +87,57 @@ const Portfolio = () => {
       }
     },
     {
+      client: "AI Research Assistant",
+      industry: "Academic Research",
+      category: "productivity",
+      challenge: "Time-consuming literature review and research synthesis process",
+      solution: "Developed an AI-powered research assistant for automated paper analysis, summary generation, and citation management",
+      results: {
+        timeReduction: "75%",
+        costSaving: "$100,000 annually",
+        roi: "350%",
+        timeline: "2 months"
+      },
+      beforeAfter: {
+        before: "40+ hours per research paper review",
+        after: "10 hours with AI assistance"
+      }
+    },
+    {
+      client: "AI Writing Assistant",
+      industry: "Content Creation",
+      category: "productivity",
+      challenge: "Slow content creation and editing process",
+      solution: "Implemented an AI writing assistant for content generation, editing, and style consistency",
+      results: {
+        timeReduction: "65%",
+        costSaving: "$90,000 annually",
+        roi: "300%",
+        timeline: "1.5 months"
+      },
+      beforeAfter: {
+        before: "20+ hours per content piece",
+        after: "7 hours with AI assistance"
+      }
+    },
+    {
+      client: "Project Management AI",
+      industry: "Software Development",
+      category: "productivity",
+      challenge: "Inefficient project tracking and resource allocation",
+      solution: "Created an AI-powered project management system for automated task assignment and progress tracking",
+      results: {
+        timeReduction: "55%",
+        costSaving: "$200,000 annually",
+        roi: "400%",
+        timeline: "3 months"
+      },
+      beforeAfter: {
+        before: "30+ hours weekly on project management",
+        after: "13 hours with AI automation"
+      }
+    },
+    {
       client: "TechCorp Solutions",
       industry: "Manufacturing",
       category: "ecommerce",
