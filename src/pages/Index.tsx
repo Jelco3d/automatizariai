@@ -32,7 +32,7 @@ const Index = () => {
             {/* Social Media Links */}
             <div className="flex justify-center gap-4 md:gap-8 pt-2 md:pt-6">
               <a 
-                href="https://instagram.com"
+                href="https://www.instagram.com/erdeleanjelco/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-purple-300 transition-colors"
