@@ -9,6 +9,22 @@ const Portfolio = () => {
 
   const caseStudies = [
     {
+      client: "Personal AI Assistant",
+      industry: "Personal Productivity",
+      challenge: "Managing daily tasks, scheduling, and personal organization manually",
+      solution: "Implemented a comprehensive AI assistant for task management, calendar organization, and personal workflow automation",
+      results: {
+        timeReduction: "80%",
+        costSaving: "$150,000 annually",
+        roi: "450%",
+        timeline: "2 months"
+      },
+      beforeAfter: {
+        before: "6+ hours daily on personal management",
+        after: "Automated task handling, smart scheduling"
+      }
+    },
+    {
       client: "AI Email Assistant",
       industry: "Business Process Automation",
       challenge: "Managing high volume of emails, scheduling, and client communication manually",
