@@ -2,7 +2,7 @@ import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Bot, Zap, Brain, ArrowRight, Database, Cloud, Lock, Cog } from "lucide-react";
+import { Bot, Zap, Brain, ArrowRight, Database, Cloud, Lock, Cog, Network, Building2, Shield, Handshake } from "lucide-react";
 
 const Services = () => {
   console.log("Rendering Services page");
@@ -33,7 +33,8 @@ const Services = () => {
 
       {/* Detailed Services Section */}
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Existing Service Cards */}
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
             <CardContent className="p-6">
               <Bot className="w-12 h-12 text-purple-400 mb-4" />
@@ -73,6 +74,95 @@ const Services = () => {
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
                   Real-time monitoring
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          {/* New Service Cards */}
+          <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
+            <CardContent className="p-6">
+              <Network className="w-12 h-12 text-purple-400 mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-4">Integration Services</h3>
+              <p className="text-gray-300 mb-4">Seamlessly connect your existing systems with cutting-edge AI solutions for enhanced productivity.</p>
+              <ul className="text-gray-300 space-y-2">
+                <li className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4 text-purple-400" />
+                  API development
+                </li>
+                <li className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4 text-purple-400" />
+                  System integration
+                </li>
+                <li className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4 text-purple-400" />
+                  Custom connectors
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
+            <CardContent className="p-6">
+              <Building2 className="w-12 h-12 text-purple-400 mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-4">Enterprise Solutions</h3>
+              <p className="text-gray-300 mb-4">Comprehensive AI solutions tailored for large-scale business operations and complex workflows.</p>
+              <ul className="text-gray-300 space-y-2">
+                <li className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4 text-purple-400" />
+                  Scalable architecture
+                </li>
+                <li className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4 text-purple-400" />
+                  Enterprise security
+                </li>
+                <li className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4 text-purple-400" />
+                  24/7 support
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
+            <CardContent className="p-6">
+              <Shield className="w-12 h-12 text-purple-400 mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-4">Security & Compliance</h3>
+              <p className="text-gray-300 mb-4">Ensure your AI implementations meet industry standards and regulatory requirements.</p>
+              <ul className="text-gray-300 space-y-2">
+                <li className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4 text-purple-400" />
+                  Data protection
+                </li>
+                <li className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4 text-purple-400" />
+                  Compliance audits
+                </li>
+                <li className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4 text-purple-400" />
+                  Risk assessment
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
+            <CardContent className="p-6">
+              <Handshake className="w-12 h-12 text-purple-400 mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-4">Consulting Services</h3>
+              <p className="text-gray-300 mb-4">Expert guidance on AI strategy, implementation, and optimization for your business needs.</p>
+              <ul className="text-gray-300 space-y-2">
+                <li className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4 text-purple-400" />
+                  Strategy planning
+                </li>
+                <li className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4 text-purple-400" />
+                  Technical consulting
+                </li>
+                <li className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4 text-purple-400" />
+                  Implementation support
                 </li>
               </ul>
             </CardContent>
