@@ -262,5 +262,90 @@ export const caseStudies: CaseStudy[] = [
       before: "Manual inventory counts and variant updates",
       after: "Real-time inventory sync across all channels"
     }
+  },
+  {
+    client: "Digital Marketing Agency",
+    industry: "Marketing Services",
+    category: "sales",
+    challenge: "Manual campaign reporting and analytics tracking",
+    solution: "Implemented automated reporting system with real-time analytics dashboard",
+    results: {
+      timeReduction: "75%",
+      costSaving: "$120,000 annually",
+      roi: "380%",
+      timeline: "2 months"
+    },
+    beforeAfter: {
+      before: "20+ hours weekly on reporting",
+      after: "Automated reports in minutes"
+    }
+  },
+  {
+    client: "Real Estate Firm",
+    industry: "Real Estate",
+    category: "sales",
+    challenge: "Inefficient lead management and follow-up process",
+    solution: "Automated lead scoring and nurturing system",
+    results: {
+      timeReduction: "65%",
+      costSaving: "$90,000 annually",
+      roi: "320%",
+      timeline: "6 weeks"
+    },
+    beforeAfter: {
+      before: "Manual lead tracking and follow-ups",
+      after: "Automated lead nurturing sequences"
+    }
+  },
+  {
+    client: "B2B Software Company",
+    industry: "Software Sales",
+    category: "sales",
+    challenge: "Long sales cycle and manual proposal creation",
+    solution: "Automated proposal generation and follow-up system",
+    results: {
+      timeReduction: "70%",
+      costSaving: "$150,000 annually",
+      roi: "400%",
+      timeline: "3 months"
+    },
+    beforeAfter: {
+      before: "2+ weeks sales cycle",
+      after: "5-day average sales cycle"
+    }
+  },
+  {
+    client: "Insurance Agency",
+    industry: "Insurance",
+    category: "sales",
+    challenge: "Manual policy renewal and customer outreach",
+    solution: "Automated renewal notifications and customer engagement system",
+    results: {
+      timeReduction: "80%",
+      costSaving: "$100,000 annually",
+      roi: "350%",
+      timeline: "2 months"
+    },
+    beforeAfter: {
+      before: "15+ hours weekly on renewals",
+      after: "Automated renewal management"
+    }
+  },
+  {
+    client: "SaaS Startup",
+    industry: "Technology",
+    category: "sales",
+    challenge: "Inefficient customer onboarding and training",
+    solution: "Automated onboarding sequence and training platform",
+    results: {
+      timeReduction: "85%",
+      costSaving: "$200,000 annually",
+      roi: "450%",
+      timeline: "4 months"
+    },
+    beforeAfter: {
+      before: "Manual onboarding process",
+      after: "Streamlined automated onboarding"
+    }
   }
 ];
