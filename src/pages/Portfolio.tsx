@@ -89,7 +89,7 @@ const Portfolio = () => {
             <Card key={index} className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm hover:border-purple-500/40 transition-all">
               <CardContent className="p-6">
                 <h3 className="text-2xl font-bold text-purple-400 mb-4">{study.client}</h3>
-                <p className="text-gray-400 mb-4">{study.industry}</p>
+                <p className="text-gray-300 mb-4">{study.industry}</p>
                 
                 <div className="space-y-6">
                   {/* Challenge & Solution */}
@@ -104,11 +104,11 @@ const Portfolio = () => {
                   <div className="grid grid-cols-2 gap-4 bg-purple-500/5 p-4 rounded-lg text-white">
                     <div>
                       <h5 className="font-semibold text-purple-400 mb-2">Before</h5>
-                      <p className="text-sm text-gray-300">{study.beforeAfter.before}</p>
+                      <p className="text-gray-300">{study.beforeAfter.before}</p>
                     </div>
                     <div>
                       <h5 className="font-semibold text-purple-400 mb-2">After</h5>
-                      <p className="text-sm text-gray-300">{study.beforeAfter.after}</p>
+                      <p className="text-gray-300">{study.beforeAfter.after}</p>
                     </div>
                   </div>
 
@@ -117,29 +117,29 @@ const Portfolio = () => {
                     <div className="flex items-center gap-2">
                       <Clock className="text-purple-400" />
                       <div>
-                        <p className="text-sm text-gray-400">Time Saved</p>
-                        <p className="font-semibold">{study.results.timeReduction}</p>
+                        <p className="text-sm text-gray-300">Time Saved</p>
+                        <p className="font-semibold text-white">{study.results.timeReduction}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <DollarSign className="text-purple-400" />
                       <div>
-                        <p className="text-sm text-gray-400">Cost Savings</p>
-                        <p className="font-semibold">{study.results.costSaving}</p>
+                        <p className="text-sm text-gray-300">Cost Savings</p>
+                        <p className="font-semibold text-white">{study.results.costSaving}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <LineChart className="text-purple-400" />
                       <div>
-                        <p className="text-sm text-gray-400">ROI</p>
-                        <p className="font-semibold">{study.results.roi}</p>
+                        <p className="text-sm text-gray-300">ROI</p>
+                        <p className="font-semibold text-white">{study.results.roi}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <Zap className="text-purple-400" />
                       <div>
-                        <p className="text-sm text-gray-400">Timeline</p>
-                        <p className="font-semibold">{study.results.timeline}</p>
+                        <p className="text-sm text-gray-300">Timeline</p>
+                        <p className="font-semibold text-white">{study.results.timeline}</p>
                       </div>
                     </div>
                   </div>
@@ -157,7 +157,7 @@ const Portfolio = () => {
         transition={{ duration: 0.6, delay: 0.4 }}
         className="container mx-auto px-4 py-16 text-center"
       >
-        <h2 className="text-2xl md:text-3xl font-bold mb-6">
+        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
           Ready to Transform Your Business?
         </h2>
         <Button
