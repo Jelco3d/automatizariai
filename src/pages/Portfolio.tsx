@@ -53,6 +53,40 @@ const Portfolio = () => {
       }
     },
     {
+      client: "AI Meeting Assistant",
+      industry: "Corporate Productivity",
+      category: "productivity",
+      challenge: "Time wasted in unproductive meetings and manual note-taking",
+      solution: "Developed an AI meeting assistant for automated transcription, action item extraction, and follow-up management",
+      results: {
+        timeReduction: "70%",
+        costSaving: "$180,000 annually",
+        roi: "400%",
+        timeline: "3 months"
+      },
+      beforeAfter: {
+        before: "3+ hours daily on meeting management",
+        after: "Automated transcripts and action items"
+      }
+    },
+    {
+      client: "Document Processing AI",
+      industry: "Legal Services",
+      category: "productivity",
+      challenge: "Manual document review and data extraction taking excessive time",
+      solution: "Implemented AI-powered document analysis and data extraction system",
+      results: {
+        timeReduction: "85%",
+        costSaving: "$300,000 annually",
+        roi: "550%",
+        timeline: "4 months"
+      },
+      beforeAfter: {
+        before: "8+ hours per document batch",
+        after: "15 minutes per batch with AI"
+      }
+    },
+    {
       client: "TechCorp Solutions",
       industry: "Manufacturing",
       category: "ecommerce",
