@@ -1,4 +1,5 @@
 import { Navigation } from "@/components/website/Navigation";
+import { Footer } from "@/components/website/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Bot, Zap, Brain, ArrowRight, Database, Cloud, Lock, Cog } from "lucide-react";
@@ -278,6 +279,8 @@ const Services = () => {
           <ArrowRight className="ml-2" />
         </Button>
       </div>
+
+      <Footer />
     </div>
   );
 };

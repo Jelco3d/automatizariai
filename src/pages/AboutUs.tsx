@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Navigation } from "@/components/website/Navigation";
+import { Footer } from "@/components/website/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -178,6 +179,8 @@ const AboutUs = () => {
           Book a Consultation
         </Button>
       </motion.section>
+
+      <Footer />
     </div>
   );
 };

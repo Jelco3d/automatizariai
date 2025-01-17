@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Navigation } from "@/components/website/Navigation";
+import { Footer } from "@/components/website/Footer";
 import { CaseStudyCard } from "@/components/portfolio/CaseStudyCard";
 import { CTASection } from "@/components/portfolio/CTASection";
 
@@ -92,6 +93,8 @@ const Portfolio = () => {
 
       {/* CTA Section */}
       <CTASection />
+
+      <Footer />
     </div>
   );
 };
