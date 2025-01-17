@@ -20,11 +20,11 @@ const Website = () => {
 
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-16 text-center relative">
-        <div className="animate-fade-in">
+        <div className="animate-[fade-in_0.5s_ease-out_forwards]">
           <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500 mb-6 animate-shimmer">
             AI Automation Solutions
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8 opacity-0 animate-[fade-in_0.5s_ease-out_0.3s_forwards]">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
             Transform your business operations with cutting-edge AI automation. Save time, reduce costs, and boost productivity.
           </p>
           <Button 
