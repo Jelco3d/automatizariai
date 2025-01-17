@@ -5,6 +5,10 @@ import { ArrowRight } from "lucide-react";
 export const CTASection = () => {
   console.log("Rendering CTASection");
   
+  const handleBooking = () => {
+    window.open('https://calendly.com/aiautomatizari/30min', '_blank');
+  };
+  
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -16,7 +20,7 @@ export const CTASection = () => {
         Ready to Transform Your Business?
       </h2>
       <Button
-        onClick={() => window.open('https://calendly.com/aiautomatizari/30min?month=2024-12', '_blank')}
+        onClick={handleBooking}
         className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
       >
         Book a Consultation
