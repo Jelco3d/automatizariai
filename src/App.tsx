@@ -6,6 +6,8 @@ import AboutUs from './pages/AboutUs';
 import Portfolio from './pages/Portfolio';
 
 const App = () => {
+  console.log("Rendering App component");
+  
   return (
     <Router>
       <Routes>
