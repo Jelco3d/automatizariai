@@ -101,7 +101,7 @@ const Portfolio = () => {
                   </div>
 
                   {/* Before/After */}
-                  <div className="grid grid-cols-2 gap-4 bg-purple-500/5 p-4 rounded-lg">
+                  <div className="grid grid-cols-2 gap-4 bg-purple-500/5 p-4 rounded-lg text-white">
                     <div>
                       <h5 className="font-semibold text-purple-400 mb-2">Before</h5>
                       <p className="text-sm text-gray-300">{study.beforeAfter.before}</p>
