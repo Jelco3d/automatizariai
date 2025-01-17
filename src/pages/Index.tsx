@@ -111,15 +111,13 @@ const Index = () => {
                 <Mail className="w-3 h-3 md:w-5 md:h-5" />
                 <span>automationaisolution@gmail.com</span>
               </a>
-              <a 
-                href="https://automatizariai.ro"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link 
+                to="/website"
                 className="flex items-center gap-2 md:gap-3 text-white hover:text-purple-300 transition-colors text-xs md:text-base"
               >
                 <Globe className="w-3 h-3 md:w-5 md:h-5" />
-                <span>automatizariAi.ro</span>
-              </a>
+                <span>View Full Website</span>
+              </Link>
             </div>
           </div>
 
