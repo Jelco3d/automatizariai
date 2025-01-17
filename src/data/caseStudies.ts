@@ -517,5 +517,90 @@ export const caseStudies: CaseStudy[] = [
       before: "Manual performance tracking",
       after: "Real-time performance analytics"
     }
+  },
+  {
+    client: "Healthcare Analytics Platform",
+    industry: "Healthcare",
+    category: "more",
+    challenge: "Complex patient data analysis and prediction requirements",
+    solution: "AI-powered healthcare analytics platform with predictive modeling",
+    results: {
+      timeReduction: "85%",
+      costSaving: "$450,000 annually",
+      roi: "580%",
+      timeline: "5 months"
+    },
+    beforeAfter: {
+      before: "Manual data analysis and predictions",
+      after: "Automated health analytics and predictions"
+    }
+  },
+  {
+    client: "Agricultural IoT System",
+    industry: "Agriculture",
+    category: "more",
+    challenge: "Inefficient crop monitoring and resource management",
+    solution: "IoT-based agricultural monitoring and automation system",
+    results: {
+      timeReduction: "70%",
+      costSaving: "$350,000 annually",
+      roi: "480%",
+      timeline: "4 months"
+    },
+    beforeAfter: {
+      before: "Manual crop monitoring",
+      after: "Automated agricultural monitoring"
+    }
+  },
+  {
+    client: "Legal Document AI",
+    industry: "Legal Tech",
+    category: "more",
+    challenge: "Time-consuming legal document review and analysis",
+    solution: "AI-powered legal document processing and analysis system",
+    results: {
+      timeReduction: "92%",
+      costSaving: "$600,000 annually",
+      roi: "650%",
+      timeline: "3 months"
+    },
+    beforeAfter: {
+      before: "Manual document review process",
+      after: "Automated legal document analysis"
+    }
+  },
+  {
+    client: "Music Production AI",
+    industry: "Entertainment",
+    category: "more",
+    challenge: "Complex music production workflow management",
+    solution: "AI-assisted music production and workflow automation",
+    results: {
+      timeReduction: "75%",
+      costSaving: "$200,000 annually",
+      roi: "420%",
+      timeline: "2.5 months"
+    },
+    beforeAfter: {
+      before: "Manual production workflow",
+      after: "Streamlined AI-assisted production"
+    }
+  },
+  {
+    client: "Real Estate Analytics",
+    industry: "Real Estate",
+    category: "more",
+    challenge: "Inefficient property analysis and valuation process",
+    solution: "AI-powered real estate analytics and valuation platform",
+    results: {
+      timeReduction: "80%",
+      costSaving: "$380,000 annually",
+      roi: "520%",
+      timeline: "3.5 months"
+    },
+    beforeAfter: {
+      before: "Manual property analysis",
+      after: "Automated property valuation"
+    }
   }
 ];
