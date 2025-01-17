@@ -94,9 +94,9 @@ const Portfolio = () => {
                 <div className="space-y-6">
                   {/* Challenge & Solution */}
                   <div>
-                    <h4 className="text-lg font-semibold mb-2">Challenge:</h4>
+                    <h4 className="text-lg font-semibold mb-2 text-white">Challenge:</h4>
                     <p className="text-gray-300">{study.challenge}</p>
-                    <h4 className="text-lg font-semibold mt-4 mb-2">Solution:</h4>
+                    <h4 className="text-lg font-semibold mt-4 mb-2 text-white">Solution:</h4>
                     <p className="text-gray-300">{study.solution}</p>
                   </div>
 
