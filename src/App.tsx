@@ -3,6 +3,7 @@ import Index from './pages/Index';
 import Website from './pages/Website';
 import Services from './pages/Services';
 import AboutUs from './pages/AboutUs';
+import Portfolio from './pages/Portfolio';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route path="/website" element={<Website />} />
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/portfolio" element={<Portfolio />} />
       </Routes>
     </Router>
   );
