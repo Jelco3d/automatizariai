@@ -124,7 +124,35 @@ const Index = () => {
           <div className="text-center pt-2 md:pt-6">
             <button 
               onClick={handleBooking}
-              className="bg-purple-500 text-white hover:bg-purple-600 transition-colors text-sm md:text-lg px-4 md:px-8 py-2 md:py-6 h-auto rounded-md"
+              className="
+                relative
+                bg-gradient-to-r from-[#9b87f5] to-[#8B5CF6]
+                text-white
+                hover:from-[#8B5CF6] hover:to-[#D946EF]
+                transition-all duration-300
+                text-sm md:text-lg
+                px-6 md:px-10
+                py-3 md:py-4
+                h-auto rounded-lg
+                shadow-[0_0_20px_rgba(139,92,246,0.3)]
+                hover:shadow-[0_0_30px_rgba(217,70,239,0.4)]
+                border border-purple-400/30
+                backdrop-blur-sm
+                animate-pulse
+                hover:animate-none
+                hover:scale-105
+                before:absolute
+                before:inset-0
+                before:bg-gradient-to-r
+                before:from-[#9b87f5]/10
+                before:to-[#D946EF]/10
+                before:rounded-lg
+                before:opacity-0
+                hover:before:opacity-100
+                before:transition-opacity
+                font-medium
+                tracking-wide
+              "
             >
               Book a Free AI Audit
             </button>
