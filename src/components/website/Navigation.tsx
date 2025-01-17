@@ -5,6 +5,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { Link } from "react-router-dom"
 
 export function Navigation() {
   console.log("Rendering Navigation component")
@@ -23,11 +24,35 @@ export function Navigation() {
         </SheetTrigger>
         <SheetContent className="w-[300px] bg-[#1A1F2C]/95 backdrop-blur-lg border-purple-500/20">
           <nav className="flex flex-col gap-4 mt-8">
+            <Link 
+              to="/" 
+              className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
+            >
+              Home
+            </Link>
+            <Link 
+              to="/services" 
+              className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
+            >
+              Services
+            </Link>
+            <Link 
+              to="/about" 
+              className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
+            >
+              About Us
+            </Link>
+            <Link 
+              to="/portfolio" 
+              className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
+            >
+              Portfolio
+            </Link>
             <a 
               href="#services" 
               className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
             >
-              Services
+              Services Section
             </a>
             <a 
               href="#benefits" 
