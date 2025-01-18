@@ -20,7 +20,6 @@ const Portfolio = () => {
       <Navigation />
       <PortfolioHero />
       <CategoryFilters 
-        categories={categories}
         activeCategory={activeCategory}
         onCategoryChange={setActiveCategory}
       />
