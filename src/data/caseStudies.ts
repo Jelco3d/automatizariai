@@ -1,10 +1,10 @@
 import { CaseStudy, Category } from "@/types/portfolio";
 
 export const categories: Category[] = [
-  { id: "productivity", label: "Productivity" },
-  { id: "ecommerce", label: "Ecommerce" },
-  { id: "sales", label: "Sales" },
-  { id: "more", label: "And More" },
+  { id: "productivity", label: "Productivitate" },
+  { id: "ecommerce", label: "E-commerce" },
+  { id: "sales", label: "Vânzări" },
+  { id: "more", label: "Și Altele" },
 ];
 
 export const caseStudies: CaseStudy[] = [

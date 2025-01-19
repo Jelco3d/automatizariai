@@ -11,10 +11,10 @@ export const PortfolioHero = () => {
       className="container mx-auto px-4 pt-24 pb-16"
     >
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-        Success Stories
+        Povești de Succes
       </h1>
       <p className="text-xl text-gray-300 text-center max-w-3xl mx-auto mb-12">
-        Discover how our AI automation solutions have transformed businesses and delivered measurable results.
+        Descoperă cum soluțiile noastre de automatizare AI au transformat afaceri și au adus rezultate măsurabile.
       </p>
     </motion.section>
   );

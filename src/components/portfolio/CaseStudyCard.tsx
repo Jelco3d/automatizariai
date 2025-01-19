@@ -46,20 +46,20 @@ export const CaseStudyCard = ({
         <div className="space-y-6">
           {/* Challenge & Solution */}
           <div>
-            <h4 className="text-lg font-semibold mb-2 text-white">Challenge:</h4>
+            <h4 className="text-lg font-semibold mb-2 text-white">Provocare:</h4>
             <p className="text-gray-300">{challenge}</p>
-            <h4 className="text-lg font-semibold mt-4 mb-2 text-white">Solution:</h4>
+            <h4 className="text-lg font-semibold mt-4 mb-2 text-white">Soluție:</h4>
             <p className="text-gray-300">{solution}</p>
           </div>
 
           {/* Before/After */}
           <div className="grid grid-cols-2 gap-4 bg-purple-500/5 p-4 rounded-lg text-white">
             <div>
-              <h5 className="font-semibold text-purple-400 mb-2">Before</h5>
+              <h5 className="font-semibold text-purple-400 mb-2">Înainte</h5>
               <p className="text-gray-300">{beforeAfter.before}</p>
             </div>
             <div>
-              <h5 className="font-semibold text-purple-400 mb-2">After</h5>
+              <h5 className="font-semibold text-purple-400 mb-2">După</h5>
               <p className="text-gray-300">{beforeAfter.after}</p>
             </div>
           </div>
@@ -69,14 +69,14 @@ export const CaseStudyCard = ({
             <div className="flex items-center gap-2">
               <Clock className="text-purple-400" />
               <div>
-                <p className="text-sm text-gray-300">Time Saved</p>
+                <p className="text-sm text-gray-300">Timp Economisit</p>
                 <p className="font-semibold text-white">{results.timeReduction}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <DollarSign className="text-purple-400" />
               <div>
-                <p className="text-sm text-gray-300">Cost Savings</p>
+                <p className="text-sm text-gray-300">Economii</p>
                 <p className="font-semibold text-white">{results.costSaving}</p>
               </div>
             </div>
@@ -90,7 +90,7 @@ export const CaseStudyCard = ({
             <div className="flex items-center gap-2">
               <Zap className="text-purple-400" />
               <div>
-                <p className="text-sm text-gray-300">Timeline</p>
+                <p className="text-sm text-gray-300">Durată</p>
                 <p className="font-semibold text-white">{results.timeline}</p>
               </div>
             </div>
