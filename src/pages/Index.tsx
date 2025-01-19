@@ -16,6 +16,17 @@ const Index = () => {
     window.open('https://calendly.com/aiautomatizari/30min', '_blank');
   };
 
+  const techStack = [
+    { name: "Make (Integromat)", description: "Advanced automation platform" },
+    { name: "n8n", description: "Workflow automation tool" },
+    { name: "Relevance AI", description: "AI-powered automation solutions" },
+    { name: "Zapier", description: "Integration platform" },
+    { name: "OpenAI", description: "AI language models" },
+    { name: "Langchain", description: "LLM framework" },
+    { name: "AutoGPT", description: "Autonomous AI agents" },
+    { name: "Power Automate", description: "Microsoft automation platform" }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] flex items-center justify-center p-2 md:p-4">
       <Card className="w-full max-w-2xl bg-[#1A1F2C] border-purple-500/50">
@@ -78,20 +89,22 @@ const Index = () => {
             to workflow optimization, I create seamless automation systems.
           </p>
 
-          {/* Services */}
-          <div className="grid gap-2 md:gap-6">
-            <h3 className="font-semibold text-base md:text-xl text-white">Services:</h3>
-            <div className="flex flex-wrap gap-2 md:gap-4">
-              <div className="flex-1 flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500/50 hover:border-purple-400 transition-all duration-300 hover:bg-purple-900/40 group cursor-pointer">
-                <Briefcase className="w-4 h-4 md:w-6 md:h-6 text-purple-400 flex-shrink-0 group-hover:text-purple-300 transition-colors" />
-                <span className="text-xs md:text-base text-white group-hover:text-purple-100">AI Automation Solutions</span>
-              </div>
-              <div className="flex-1 flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500/50 hover:border-purple-400 transition-all duration-300 hover:bg-purple-900/40 group cursor-pointer">
-                <Briefcase className="w-4 h-4 md:w-6 md:h-6 text-purple-400 flex-shrink-0 group-hover:text-purple-300 transition-colors" />
-                <span className="text-xs md:text-base text-white group-hover:text-purple-100">Process Automation</span>
-              </div>
+          {/* Tech Stack Section */}
+          <div className="mt-8 px-3 md:px-6 pb-6">
+            <h3 className="text-lg md:text-xl font-semibold text-white mb-4">Technologies We Use</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {techStack.map((tech) => (
+                <div 
+                  key={tech.name}
+                  className="p-3 border border-purple-500/30 rounded-lg bg-purple-900/20 hover:bg-purple-900/30 transition-all"
+                >
+                  <h4 className="text-purple-300 font-medium text-sm md:text-base">{tech.name}</h4>
+                  <p className="text-gray-400 text-xs md:text-sm mt-1">{tech.description}</p>
+                </div>
+              ))}
             </div>
           </div>
+
           {/* Contact Information */}
           <div className="space-y-2 md:space-y-6">
             <h3 className="font-semibold text-base md:text-xl text-white">Contact:</h3>
