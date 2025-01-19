@@ -134,36 +134,6 @@ const AboutUs = () => {
         </div>
       </motion.section>
 
-      {/* Awards Section */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
-        className="container mx-auto px-4 py-16"
-      >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Premii & Recunoașteri</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <Card className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm">
-            <CardContent className="p-6 text-center">
-              <h3 className="text-xl font-semibold text-purple-400 mb-2">Premiul pentru Inovație 2023</h3>
-              <p className="text-gray-400">Summit-ul de Inovație Tech</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm">
-            <CardContent className="p-6 text-center">
-              <h3 className="text-xl font-semibold text-purple-400 mb-2">Cea Mai Bună Soluție AI</h3>
-              <p className="text-gray-400">Premiile Tech Global 2023</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm">
-            <CardContent className="p-6 text-center">
-              <h3 className="text-xl font-semibold text-purple-400 mb-2">Top Startup 2022</h3>
-              <p className="text-gray-400">Revista Enterprise Tech</p>
-            </CardContent>
-          </Card>
-        </div>
-      </motion.section>
-
       {/* CTA Section */}
       <motion.section 
         initial={{ opacity: 0 }}
