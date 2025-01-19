@@ -6,42 +6,42 @@ export const TechStackSection = () => {
   const techStack = [
     {
       name: "Make (Integromat)",
-      description: "Advanced automation platform for complex workflows",
+      description: "Platformă avansată de automatizare pentru fluxuri de lucru complexe",
       icon: <Workflow className="w-5 h-5 text-purple-300" />
     },
     {
       name: "n8n",
-      description: "Open-source workflow automation tool",
+      description: "Instrument open-source pentru automatizarea fluxurilor de lucru",
       icon: <Network className="w-5 h-5 text-purple-300" />
     },
     {
       name: "Relevance AI",
-      description: "AI-powered data processing and analysis",
+      description: "Procesare și analiză de date bazată pe AI",
       icon: <Brain className="w-5 h-5 text-purple-300" />
     },
     {
       name: "Zapier",
-      description: "Connect and automate your favorite apps",
+      description: "Conectați și automatizați aplicațiile preferate",
       icon: <Zap className="w-5 h-5 text-purple-300" />
     },
     {
       name: "OpenAI",
-      description: "Advanced language models and AI capabilities",
+      description: "Modele de limbaj avansate și capabilități AI",
       icon: <Sparkles className="w-5 h-5 text-purple-300" />
     },
     {
       name: "Langchain",
-      description: "Framework for developing AI-powered applications",
+      description: "Framework pentru dezvoltarea aplicațiilor bazate pe AI",
       icon: <Code2 className="w-5 h-5 text-purple-300" />
     },
     {
       name: "AutoGPT",
-      description: "Autonomous AI agent for task automation",
+      description: "Agent AI autonom pentru automatizarea sarcinilor",
       icon: <Bot className="w-5 h-5 text-purple-300" />
     },
     {
       name: "Power Automate",
-      description: "Microsoft's automation solution for business processes",
+      description: "Soluția Microsoft pentru automatizarea proceselor de business",
       icon: <Cpu className="w-5 h-5 text-purple-300" />
     }
   ];
@@ -51,10 +51,10 @@ export const TechStackSection = () => {
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-6">
           <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
-            Our Tech Stack
+            Tehnologiile Noastre
           </h2>
           <p className="text-purple-200 text-xs max-w-xl mx-auto">
-            We leverage cutting-edge automation tools and platforms to deliver powerful solutions
+            Folosim instrumente și platforme de automatizare de ultimă generație pentru a oferi soluții puternice
           </p>
         </div>
         
