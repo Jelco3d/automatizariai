@@ -9,547 +9,547 @@ export const categories: Category[] = [
 
 export const caseStudies: CaseStudy[] = [
   {
-    client: "Personal AI Assistant",
-    industry: "Personal Productivity",
+    client: "Asistent AI Personal",
+    industry: "Productivitate Personală",
     category: "productivity",
-    challenge: "Managing daily tasks, scheduling, and personal organization manually",
-    solution: "Implemented a comprehensive AI assistant for task management, calendar organization, and personal workflow automation",
+    challenge: "Gestionarea manuală a sarcinilor zilnice, programărilor și organizării personale",
+    solution: "Implementarea unui asistent AI comprehensiv pentru managementul sarcinilor, organizarea calendarului și automatizarea fluxului de lucru personal",
     results: {
       timeReduction: "80%",
-      costSaving: "$150,000 annually",
+      costSaving: "150.000€ anual",
       roi: "450%",
-      timeline: "2 months"
+      timeline: "2 luni"
     },
     beforeAfter: {
-      before: "6+ hours daily on personal management",
-      after: "Automated task handling, smart scheduling"
+      before: "6+ ore zilnic pentru management personal",
+      after: "Gestionare automată a sarcinilor, programare inteligentă"
     }
   },
   {
-    client: "AI Email Assistant",
-    industry: "Business Process Automation",
+    client: "Asistent Email AI",
+    industry: "Automatizare Procese de Afaceri",
     category: "productivity",
-    challenge: "Managing high volume of emails, scheduling, and client communication manually",
-    solution: "Implemented an AI-powered email assistant for automated response handling, appointment scheduling, and client communication management",
+    challenge: "Gestionarea manuală a unui volum mare de email-uri, programări și comunicare cu clienții",
+    solution: "Implementarea unui asistent email bazat pe AI pentru gestionarea automată a răspunsurilor, programărilor și comunicării cu clienții",
     results: {
       timeReduction: "95%",
-      costSaving: "$200,000 annually",
+      costSaving: "200.000€ anual",
       roi: "500%",
-      timeline: "1 month"
+      timeline: "1 lună"
     },
     beforeAfter: {
-      before: "4+ hours daily on email management",
-      after: "Automated responses, instant scheduling"
+      before: "4+ ore zilnic pentru gestionarea email-urilor",
+      after: "Răspunsuri automate, programare instantanee"
     }
   },
   {
-    client: "AI Meeting Assistant",
-    industry: "Corporate Productivity",
+    client: "Asistent Întâlniri AI",
+    industry: "Productivitate Corporativă",
     category: "productivity",
-    challenge: "Time wasted in unproductive meetings and manual note-taking",
-    solution: "Developed an AI meeting assistant for automated transcription, action item extraction, and follow-up management",
+    challenge: "Timp pierdut în întâlniri neproductive și luare manuală de notițe",
+    solution: "Dezvoltarea unui asistent AI pentru întâlniri cu transcriere automată, extragerea punctelor de acțiune și gestionarea follow-up-urilor",
     results: {
       timeReduction: "70%",
-      costSaving: "$180,000 annually",
+      costSaving: "180.000€ anual",
       roi: "400%",
-      timeline: "3 months"
+      timeline: "3 luni"
     },
     beforeAfter: {
-      before: "3+ hours daily on meeting management",
-      after: "Automated transcripts and action items"
+      before: "3+ ore zilnic pentru managementul întâlnirilor",
+      after: "Transcrieri și puncte de acțiune automate"
     }
   },
   {
-    client: "Document Processing AI",
-    industry: "Legal Services",
+    client: "Procesare Documente AI",
+    industry: "Servicii Legale",
     category: "productivity",
-    challenge: "Manual document review and data extraction taking excessive time",
-    solution: "Implemented AI-powered document analysis and data extraction system",
+    challenge: "Revizuirea manuală a documentelor și extragerea datelor care durează excesiv de mult",
+    solution: "Implementarea unui sistem de analiză a documentelor bazat pe AI și extragerea datelor",
     results: {
       timeReduction: "85%",
-      costSaving: "$300,000 annually",
+      costSaving: "300.000€ anual",
       roi: "550%",
-      timeline: "4 months"
+      timeline: "4 luni"
     },
     beforeAfter: {
-      before: "8+ hours per document batch",
-      after: "15 minutes per batch with AI"
+      before: "8+ ore pe lot de documente",
+      after: "15 minute pe lot cu AI"
     }
   },
   {
-    client: "AI Research Assistant",
-    industry: "Academic Research",
+    client: "Asistent de Cercetare AI",
+    industry: "Cercetare Academică",
     category: "productivity",
-    challenge: "Time-consuming literature review and research synthesis process",
-    solution: "Developed an AI-powered research assistant for automated paper analysis, summary generation, and citation management",
+    challenge: "Procesul consumator de timp de revizuire a literaturii și sinteză a cercetării",
+    solution: "Dezvoltarea unui asistent de cercetare bazat pe AI pentru analiza automată a lucrărilor, generarea de rezumate și gestionarea citatelor",
     results: {
       timeReduction: "75%",
-      costSaving: "$100,000 annually",
+      costSaving: "100.000€ anual",
       roi: "350%",
-      timeline: "2 months"
+      timeline: "2 luni"
     },
     beforeAfter: {
-      before: "40+ hours per research paper review",
-      after: "10 hours with AI assistance"
+      before: "40+ ore pe revizuirea unei lucrări de cercetare",
+      after: "10 ore cu asistență AI"
     }
   },
   {
-    client: "AI Writing Assistant",
-    industry: "Content Creation",
+    client: "Asistent de Scriere AI",
+    industry: "Creare de Conținut",
     category: "productivity",
-    challenge: "Slow content creation and editing process",
-    solution: "Implemented an AI writing assistant for content generation, editing, and style consistency",
+    challenge: "Proces lent de creare și editare a conținutului",
+    solution: "Implementarea unui asistent de scriere AI pentru generarea de conținut, editare și consistență stilistică",
     results: {
       timeReduction: "65%",
-      costSaving: "$90,000 annually",
+      costSaving: "90.000€ anual",
       roi: "300%",
-      timeline: "1.5 months"
+      timeline: "1.5 luni"
     },
     beforeAfter: {
-      before: "20+ hours per content piece",
-      after: "7 hours with AI assistance"
+      before: "20+ ore pe piesă de conținut",
+      after: "7 ore cu asistență AI"
     }
   },
   {
-    client: "Project Management AI",
-    industry: "Software Development",
+    client: "AI pentru Managementul Proiectelor",
+    industry: "Dezvoltare Software",
     category: "productivity",
-    challenge: "Inefficient project tracking and resource allocation",
-    solution: "Created an AI-powered project management system for automated task assignment and progress tracking",
+    challenge: "Urmărirea ineficientă a proiectelor și alocarea resurselor",
+    solution: "Crearea unui sistem de management al proiectelor bazat pe AI pentru atribuirea automată a sarcinilor și urmărirea progresului",
     results: {
       timeReduction: "55%",
-      costSaving: "$200,000 annually",
+      costSaving: "200.000€ anual",
       roi: "400%",
-      timeline: "3 months"
+      timeline: "3 luni"
     },
     beforeAfter: {
-      before: "30+ hours weekly on project management",
-      after: "13 hours with AI automation"
+      before: "30+ ore săptămânal pentru managementul proiectelor",
+      after: "13 ore cu automatizare AI"
     }
   },
   {
     client: "TechCorp Solutions",
-    industry: "Manufacturing",
+    industry: "Producție",
     category: "ecommerce",
-    challenge: "Manual data processing taking 40+ hours weekly",
-    solution: "Implemented AI-powered document processing",
+    challenge: "Procesare manuală a datelor care durează 40+ ore săptămânal",
+    solution: "Implementarea procesării documentelor bazate pe AI",
     results: {
       timeReduction: "85%",
-      costSaving: "$120,000 annually",
+      costSaving: "120.000€ anual",
       roi: "380%",
-      timeline: "3 months"
+      timeline: "3 luni"
     },
     beforeAfter: {
-      before: "Manual data entry, high error rates",
-      after: "Automated processing, 99.9% accuracy"
+      before: "Introducere manuală a datelor, rate mari de eroare",
+      after: "Procesare automată, 99.9% acuratețe"
     }
   },
   {
     client: "Global Logistics Inc",
-    industry: "Transportation",
+    industry: "Transport",
     category: "sales",
-    challenge: "Inefficient route planning and scheduling",
-    solution: "AI route optimization system",
+    challenge: "Planificare și programare ineficientă a rutelor",
+    solution: "Sistem de optimizare a rutelor bazat pe AI",
     results: {
       timeReduction: "60%",
-      costSaving: "$250,000 annually",
+      costSaving: "250.000€ anual",
       roi: "450%",
-      timeline: "4 months"
+      timeline: "4 luni"
     },
     beforeAfter: {
-      before: "Manual route planning, fuel wastage",
-      after: "Optimized routes, 40% fuel savings"
+      before: "Planificare manuală a rutelor, risipă de combustibil",
+      after: "Rute optimizate, economii de combustibil de 40%"
     }
   },
   {
-    client: "FinTech Innovations",
-    industry: "Financial Services",
+    client: "Inovații Financiare",
+    industry: "Servicii Financiare",
     category: "more",
-    challenge: "Customer support backlog of 72+ hours",
-    solution: "AI chatbot and ticket automation",
+    challenge: "Întârziere de 72+ ore în suportul clienților",
+    solution: "Chatbot AI și automatizare a tichetelor",
     results: {
       timeReduction: "90%",
-      costSaving: "$180,000 annually",
+      costSaving: "180.000€ anual",
       roi: "320%",
-      timeline: "2 months"
+      timeline: "2 luni"
     },
     beforeAfter: {
-      before: "72-hour response time",
-      after: "Instant responses, 95% satisfaction"
+      before: "Timp de răspuns de 72 de ore",
+      after: "Răspunsuri instantanee, satisfacție de 95%"
     }
   },
   {
-    client: "Luxury Watch Store",
-    industry: "Shopify Ecommerce",
+    client: "Magazin de Ceasuri de Lux",
+    industry: "E-commerce Shopify",
     category: "ecommerce",
-    challenge: "Manual product customization and order processing",
-    solution: "Implemented automated product configurator and order workflow",
+    challenge: "Personalizare manuală a produselor și procesare a comenzilor",
+    solution: "Implementarea unui configurator de produse automatizat și flux de lucru pentru comenzi",
     results: {
       timeReduction: "85%",
-      costSaving: "$120,000 annually",
+      costSaving: "120.000€ anual",
       roi: "400%",
-      timeline: "3 months"
+      timeline: "3 luni"
     },
     beforeAfter: {
-      before: "Manual customization process, 2-day order processing",
-      after: "Instant customization, same-day processing"
+      before: "Proces de personalizare manuală, procesare a comenzilor în 2 zile",
+      after: "Personalizare instantanee, procesare în aceeași zi"
     }
   },
   {
-    client: "Organic Food Market",
-    industry: "Shopify Ecommerce",
+    client: "Piața de Alimente Organice",
+    industry: "E-commerce Shopify",
     category: "ecommerce",
-    challenge: "Complex subscription management and delivery scheduling",
-    solution: "Automated subscription system with smart delivery optimization",
+    challenge: "Gestionarea complexă a abonamentelor și programarea livrărilor",
+    solution: "Sistem automatizat de abonamente cu optimizare inteligentă a livrărilor",
     results: {
       timeReduction: "70%",
-      costSaving: "$90,000 annually",
+      costSaving: "90.000€ anual",
       roi: "350%",
-      timeline: "2 months"
+      timeline: "2 luni"
     },
     beforeAfter: {
-      before: "Manual subscription tracking",
-      after: "Automated subscription management"
+      before: "Urmărire manuală a abonamentelor",
+      after: "Gestionare automată a abonamentelor"
     }
   },
   {
-    client: "Designer Furniture Store",
-    industry: "Shopify Ecommerce",
+    client: "Magazin de Mobilier Designer",
+    industry: "E-commerce Shopify",
     category: "ecommerce",
-    challenge: "Inefficient made-to-order process and stock management",
-    solution: "Implemented automated production tracking and inventory forecasting",
+    challenge: "Proces ineficient de realizare la comandă și gestionare a stocurilor",
+    solution: "Implementarea unui sistem automatizat de urmărire a producției și prognozare a stocurilor",
     results: {
       timeReduction: "75%",
-      costSaving: "$150,000 annually",
+      costSaving: "150.000€ anual",
       roi: "425%",
-      timeline: "4 months"
+      timeline: "4 luni"
     },
     beforeAfter: {
-      before: "Manual production tracking",
-      after: "Real-time production monitoring"
+      before: "Urmărire manuală a producției",
+      after: "Monitorizare în timp real a producției"
     }
   },
   {
-    client: "Wellness Products Brand",
-    industry: "Shopify Ecommerce",
+    client: "Brand de Produse de Wellness",
+    industry: "E-commerce Shopify",
     category: "ecommerce",
-    challenge: "Complex multi-channel inventory management",
-    solution: "Implemented cross-platform inventory synchronization",
+    challenge: "Gestionarea complexă a stocurilor pe mai multe canale",
+    solution: "Implementarea sincronizării stocurilor între platforme",
     results: {
       timeReduction: "80%",
-      costSaving: "$100,000 annually",
+      costSaving: "100.000€ anual",
       roi: "375%",
-      timeline: "2.5 months"
+      timeline: "2.5 luni"
     },
     beforeAfter: {
-      before: "Manual inventory updates across channels",
-      after: "Automated multi-channel sync"
+      before: "Actualizări manuale ale stocurilor pe canale",
+      after: "Sincronizare automată pe mai multe canale"
     }
   },
   {
-    client: "Vintage Collectibles Shop",
-    industry: "Shopify Ecommerce",
+    client: "Magazin de Colecționari Vintage",
+    industry: "E-commerce Shopify",
     category: "ecommerce",
-    challenge: "Manual authentication and pricing process",
-    solution: "Automated authentication workflow and dynamic pricing system",
+    challenge: "Proces manual de autentificare și stabilire a prețurilor",
+    solution: "Flux de lucru automatizat pentru autentificare și sistem dinamic de stabilire a prețurilor",
     results: {
       timeReduction: "65%",
-      costSaving: "$80,000 annually",
+      costSaving: "80.000€ anual",
       roi: "300%",
-      timeline: "2 months"
+      timeline: "2 luni"
     },
     beforeAfter: {
-      before: "Manual authentication process",
-      after: "Streamlined authentication workflow"
+      before: "Proces manual de autentificare",
+      after: "Flux de lucru de autentificare simplificat"
     }
   },
   {
-    client: "Handmade Crafts Marketplace",
-    industry: "Shopify Ecommerce",
+    client: "Piața de Meșteșuguri Handmade",
+    industry: "E-commerce Shopify",
     category: "ecommerce",
-    challenge: "Complex artist payments and commission tracking",
-    solution: "Automated payment distribution and commission calculation",
+    challenge: "Gestionarea complexă a plăților artiștilor și urmărirea comisioanelor",
+    solution: "Distribuție automată a plăților și calcularea comisioanelor",
     results: {
       timeReduction: "90%",
-      costSaving: "$130,000 annually",
+      costSaving: "130.000€ anual",
       roi: "450%",
-      timeline: "3 months"
+      timeline: "3 luni"
     },
     beforeAfter: {
-      before: "Manual payment processing",
-      after: "Instant automated payments"
+      before: "Procesare manuală a plăților",
+      after: "Plăți automate instantanee"
     }
   },
   {
-    client: "Premium Pet Supplies",
-    industry: "Shopify Ecommerce",
+    client: "Produse pentru Pisici Premium",
+    industry: "E-commerce Shopify",
     category: "ecommerce",
-    challenge: "Inefficient personalized product recommendations",
-    solution: "AI-powered recommendation engine with pet profiles",
+    challenge: "Recomandări de produse personalizate ineficiente",
+    solution: "Motor de recomandare bazat pe AI cu profiluri pentru animale de companie",
     results: {
       timeReduction: "75%",
-      costSaving: "$95,000 annually",
+      costSaving: "95.000€ anual",
       roi: "380%",
-      timeline: "2 months"
+      timeline: "2 luni"
     },
     beforeAfter: {
-      before: "Generic product suggestions",
-      after: "Personalized pet-specific recommendations"
+      before: "Sugestii de produse generice",
+      after: "Recomandări personalizate pentru animale de companie"
     }
   },
   {
-    client: "Athletic Wear Brand",
-    industry: "Shopify Ecommerce",
+    client: "Brand de Îmbrăcăminte Sportivă",
+    industry: "E-commerce Shopify",
     category: "ecommerce",
-    challenge: "Complex size recommendation system",
-    solution: "Implemented AI size prediction algorithm",
+    challenge: "Sistem complex de recomandare a mărimilor",
+    solution: "Implementarea unui algoritm de predicție a mărimii bazat pe AI",
     results: {
       timeReduction: "70%",
-      costSaving: "$110,000 annually",
+      costSaving: "110.000€ anual",
       roi: "400%",
-      timeline: "2.5 months"
+      timeline: "2.5 luni"
     },
     beforeAfter: {
-      before: "High return rate due to sizing issues",
-      after: "50% reduction in size-related returns"
+      before: "Rată mare de returnare din cauza problemelor de mărime",
+      after: "Reducere de 50% a returnărilor legate de mărime"
     }
   },
   {
-    client: "Gourmet Coffee Roaster",
-    industry: "Shopify Ecommerce",
+    client: "Prăjitorie de Cafea Gourmet",
+    industry: "E-commerce Shopify",
     category: "ecommerce",
-    challenge: "Manual subscription customization and roasting schedule",
-    solution: "Automated subscription preferences and production planning",
+    challenge: "Personalizare manuală a abonamentelor și programarea prăjirii",
+    solution: "Preferințe automate pentru abonamente și planificare a producției",
     results: {
       timeReduction: "85%",
-      costSaving: "$75,000 annually",
+      costSaving: "75.000€ anual",
       roi: "350%",
-      timeline: "2 months"
+      timeline: "2 luni"
     },
     beforeAfter: {
-      before: "Manual roasting schedule management",
-      after: "Automated production optimization"
+      before: "Gestionarea manuală a programului de prăjire",
+      after: "Optimizare automată a producției"
     }
   },
   {
-    client: "Custom Printing Service",
-    industry: "Shopify Ecommerce",
+    client: "Serviciu de Imprimare Personalizată",
+    industry: "E-commerce Shopify",
     category: "ecommerce",
-    challenge: "Complex design approval and production workflow",
-    solution: "Automated design verification and production pipeline",
+    challenge: "Flux de lucru complex pentru aprobat designul și producția",
+    solution: "Verificare automată a designului și pipeline de producție",
     results: {
       timeReduction: "80%",
-      costSaving: "$140,000 annually",
+      costSaving: "140.000€ anual",
       roi: "425%",
-      timeline: "3 months"
+      timeline: "3 luni"
     },
     beforeAfter: {
-      before: "Manual design review process",
-      after: "Automated design verification"
+      before: "Proces manual de revizuire a designului",
+      after: "Verificare automată a designului"
     }
   },
   {
-    client: "Enterprise Solutions Provider",
-    industry: "B2B Sales",
+    client: "Furnizor de Soluții pentru Întreprinderi",
+    industry: "Vânzări B2B",
     category: "sales",
-    challenge: "Complex enterprise sales cycle management",
-    solution: "Implemented AI-driven sales pipeline automation",
+    challenge: "Gestionarea complexă a ciclului de vânzări pentru întreprinderi",
+    solution: "Implementarea automatizării pipeline-ului de vânzări bazată pe AI",
     results: {
       timeReduction: "60%",
-      costSaving: "$300,000 annually",
+      costSaving: "300.000€ anual",
       roi: "500%",
-      timeline: "4 months"
+      timeline: "4 luni"
     },
     beforeAfter: {
-      before: "6-month average sales cycle",
-      after: "2.5-month average sales cycle"
+      before: "Ciclul mediu de vânzări de 6 luni",
+      after: "Ciclul mediu de vânzări de 2.5 luni"
     }
   },
   {
-    client: "Financial Services Firm",
-    industry: "Financial Sales",
+    client: "Firmă de Servicii Financiare",
+    industry: "Vânzări Financiare",
     category: "sales",
-    challenge: "Manual client portfolio management",
-    solution: "Automated portfolio tracking and opportunity detection",
+    challenge: "Gestionarea manuală a portofoliului de clienți",
+    solution: "Urmărirea automată a portofoliului și detectarea oportunităților",
     results: {
       timeReduction: "75%",
-      costSaving: "$250,000 annually",
+      costSaving: "250.000€ anual",
       roi: "450%",
-      timeline: "3 months"
+      timeline: "3 luni"
     },
     beforeAfter: {
-      before: "Manual portfolio review",
-      after: "Real-time portfolio optimization"
+      before: "Revizuire manuală a portofoliului",
+      after: "Optimizare în timp real a portofoliului"
     }
   },
   {
-    client: "Manufacturing Equipment",
-    industry: "Industrial Sales",
+    client: "Echipamente de Producție",
+    industry: "Vânzări Industriale",
     category: "sales",
-    challenge: "Complex quote generation process",
-    solution: "Automated quote generation and approval workflow",
+    challenge: "Proces complex de generare a ofertelor",
+    solution: "Generare automată a ofertelor și flux de aprobat",
     results: {
       timeReduction: "85%",
-      costSaving: "$200,000 annually",
+      costSaving: "200.000€ anual",
       roi: "400%",
-      timeline: "2.5 months"
+      timeline: "2.5 luni"
     },
     beforeAfter: {
-      before: "48-hour quote turnaround",
-      after: "Instant quote generation"
+      before: "Timp de răspuns de 48 de ore pentru ofertă",
+      after: "Generare instantanee a ofertelor"
     }
   },
   {
-    client: "Healthcare Solutions",
-    industry: "Medical Sales",
+    client: "Soluții pentru Sănătate",
+    industry: "Vânzări Medicale",
     category: "sales",
-    challenge: "Compliance-heavy sales documentation",
-    solution: "Automated compliance verification and documentation",
+    challenge: "Documentație de vânzări supusă conformității",
+    solution: "Verificare automată a conformității și documentației",
     results: {
       timeReduction: "70%",
-      costSaving: "$180,000 annually",
+      costSaving: "180.000€ anual",
       roi: "380%",
-      timeline: "3 months"
+      timeline: "3 luni"
     },
     beforeAfter: {
-      before: "Manual compliance checks",
-      after: "Automated compliance verification"
+      before: "Verificări manuale ale conformității",
+      after: "Verificare automată a conformității"
     }
   },
   {
-    client: "Cloud Services Provider",
-    industry: "Tech Sales",
+    client: "Furnizor de Servicii Cloud",
+    industry: "Vânzări Tehnologice",
     category: "sales",
-    challenge: "Complex service bundling and pricing",
-    solution: "AI-powered service configuration and pricing engine",
+    challenge: "Pachetare și stabilire a prețurilor complexe",
+    solution: "Motor de configurare a serviciilor și stabilire a prețurilor bazat pe AI",
     results: {
       timeReduction: "80%",
-      costSaving: "$350,000 annually",
+      costSaving: "350.000€ anual",
       roi: "520%",
-      timeline: "4 months"
+      timeline: "4 luni"
     },
     beforeAfter: {
-      before: "Manual service configuration",
-      after: "Instant bundle optimization"
+      before: "Configurare manuală a serviciilor",
+      after: "Optimizare instantanee a pachetelor"
     }
   },
   {
-    client: "Lead Generation Pro",
-    industry: "B2B Sales",
+    client: "Pro Lead Generation",
+    industry: "Vânzări B2B",
     category: "sales",
-    challenge: "Manual lead identification and qualification process",
-    solution: "AI-powered lead scoring and qualification system",
+    challenge: "Proces manual de identificare și calificare a lead-urilor",
+    solution: "Sistem de calificare și scorare a lead-urilor bazat pe AI",
     results: {
       timeReduction: "88%",
-      costSaving: "$280,000 annually",
+      costSaving: "280.000€ anual",
       roi: "490%",
-      timeline: "2 months"
+      timeline: "2 luni"
     },
     beforeAfter: {
-      before: "Manual lead qualification",
-      after: "Automated lead scoring and prioritization"
+      before: "Calificare manuală a lead-urilor",
+      after: "Scorare și prioritizare automată a lead-urilor"
     }
   },
   {
-    client: "Email Campaign Master",
-    industry: "Digital Marketing",
+    client: "Master Campanii Email",
+    industry: "Marketing Digital",
     category: "sales",
-    challenge: "Inefficient email campaign management and personalization",
-    solution: "AI-driven email marketing automation platform",
+    challenge: "Gestionarea ineficientă a campaniilor email și personalizare",
+    solution: "Platformă de automatizare a marketingului prin email bazată pe AI",
     results: {
       timeReduction: "92%",
-      costSaving: "$320,000 annually",
+      costSaving: "320.000€ anual",
       roi: "510%",
-      timeline: "3 months"
+      timeline: "3 luni"
     },
     beforeAfter: {
-      before: "Manual email campaign creation",
-      after: "Automated personalized campaigns"
+      before: "Crearea manuală a campaniilor email",
+      after: "Campanii personalizate automate"
     }
   },
   {
     client: "Social Sales Connect",
-    industry: "Social Selling",
+    industry: "Vânzări Sociale",
     category: "sales",
-    challenge: "Disconnected social media lead generation efforts",
-    solution: "Integrated social media prospecting and engagement platform",
+    challenge: "Eforturi de generare de lead-uri pe rețele sociale deconectate",
+    solution: "Platformă integrată de prospectare și angajare pe rețele sociale",
     results: {
       timeReduction: "85%",
-      costSaving: "$240,000 annually",
+      costSaving: "240.000€ anual",
       roi: "460%",
-      timeline: "2.5 months"
+      timeline: "2.5 luni"
     },
     beforeAfter: {
-      before: "Manual social media prospecting",
-      after: "Automated social lead generation"
+      before: "Prospectare manuală pe rețele sociale",
+      after: "Generare automată de lead-uri sociale"
     }
   },
   {
-    client: "Sales Intelligence Hub",
-    industry: "Sales Analytics",
+    client: "Hub de Inteligență în Vânzări",
+    industry: "Analiza Vânzărilor",
     category: "sales",
-    challenge: "Limited visibility into sales opportunities and trends",
-    solution: "AI-powered sales intelligence and forecasting platform",
+    challenge: "Vizibilitate limitată în oportunitățile și tendințele de vânzări",
+    solution: "Platformă de inteligență și prognoză în vânzări bazată pe AI",
     results: {
       timeReduction: "78%",
-      costSaving: "$290,000 annually",
+      costSaving: "290.000€ anual",
       roi: "480%",
-      timeline: "3.5 months"
+      timeline: "3.5 luni"
     },
     beforeAfter: {
-      before: "Manual sales analysis",
-      after: "Real-time sales intelligence"
+      before: "Analiză manuală a vânzărilor",
+      after: "Inteligență în vânzări în timp real"
     }
   },
   {
-    client: "Pipeline Optimizer",
-    industry: "Sales Operations",
+    client: "Optimizator de Pipeline",
+    industry: "Operațiuni de Vânzări",
     category: "sales",
-    challenge: "Inefficient sales pipeline management",
-    solution: "Automated pipeline optimization and deal tracking system",
+    challenge: "Gestionare ineficientă a pipeline-ului de vânzări",
+    solution: "Sistem de optimizare automată a pipeline-ului și urmărire a ofertelor",
     results: {
       timeReduction: "82%",
-      costSaving: "$310,000 annually",
+      costSaving: "310.000€ anual",
       roi: "495%",
-      timeline: "3 months"
+      timeline: "3 luni"
     },
     beforeAfter: {
-      before: "Manual pipeline updates",
-      after: "Automated pipeline management"
+      before: "Actualizări manuale ale pipeline-ului",
+      after: "Gestionare automată a pipeline-ului"
     }
   },
   {
-    client: "Account Based Marketing Pro",
-    industry: "B2B Marketing",
+    client: "Pro Marketing Bazat pe Conturi",
+    industry: "Marketing B2B",
     category: "sales",
-    challenge: "Fragmented ABM campaign execution",
-    solution: "Integrated ABM automation platform",
+    challenge: "Executarea fragmentată a campaniilor ABM",
+    solution: "Platformă integrată de automatizare ABM",
     results: {
       timeReduction: "87%",
-      costSaving: "$270,000 annually",
+      costSaving: "270.000€ anual",
       roi: "470%",
-      timeline: "2.5 months"
+      timeline: "2.5 luni"
     },
     beforeAfter: {
-      before: "Manual ABM campaign management",
-      after: "Automated multi-channel ABM"
+      before: "Gestionare manuală a campaniilor ABM",
+      after: "ABM automatizat pe mai multe canale"
     }
   },
   {
-    client: "Sales Engagement Suite",
-    industry: "Sales Technology",
+    client: "Suită de Angajament în Vânzări",
+    industry: "Tehnologie în Vânzări",
     category: "sales",
-    challenge: "Inconsistent sales engagement processes",
-    solution: "Automated multi-channel sales engagement platform",
+    challenge: "Procese de angajament în vânzări inconsistente",
+    solution: "Platformă automată de angajament în vânzări pe mai multe canale",
     results: {
       timeReduction: "90%",
-      costSaving: "$330,000 annually",
+      costSaving: "330.000€ anual",
       roi: "530%",
-      timeline: "3 months"
+      timeline: "3 luni"
     },
     beforeAfter: {
-      before: "Manual engagement tracking",
-      after: "Automated engagement orchestration"
+      before: "Urmărire manuală a angajamentului",
+      after: "Orchestrare automată a angajamentului"
     }
   }
 ];

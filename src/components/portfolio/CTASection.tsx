@@ -17,13 +17,13 @@ export const CTASection = () => {
       className="container mx-auto px-4 py-16 text-center"
     >
       <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
-        Ready to Transform Your Business?
+        Pregătit să-ți Transformi Afacerea?
       </h2>
       <Button
         onClick={handleBooking}
         className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
       >
-        Book a Consultation
+        Programează o Consultație
         <ArrowRight className="ml-2" />
       </Button>
     </motion.section>
