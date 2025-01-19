@@ -6,6 +6,7 @@ import { ServicesSection } from "@/components/website/ServicesSection";
 import { BenefitsSection } from "@/components/website/BenefitsSection";
 import { TestimonialsSection } from "@/components/website/TestimonialsSection";
 import { CTASection } from "@/components/website/CTASection";
+import { TechStackSection } from "@/components/website/TechStackSection";
 
 const Website = () => {
   console.log("Rendering Website page");
@@ -22,6 +23,7 @@ const Website = () => {
       <HeroSection />
       <ServicesSection />
       <BenefitsSection />
+      <TechStackSection />
       <TestimonialsSection />
       <CTASection />
       <Footer />
