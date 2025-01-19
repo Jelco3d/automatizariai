@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, DollarSign, LineChart, Zap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface CaseStudyResult {
   timeReduction: string;
@@ -31,9 +32,13 @@ export const CaseStudyCard = ({
   beforeAfter,
 }: CaseStudyProps) => {
   console.log("Rendering CaseStudyCard for:", client);
+  const navigate = useNavigate();
   
   return (
-    <Card className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm hover:border-purple-500/40 transition-all">
+    <Card 
+      className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm hover:border-purple-500/40 transition-all cursor-pointer"
+      onClick={() => navigate('/portfolio')}
+    >
       <CardContent className="p-6">
         <h3 className="text-2xl font-bold text-purple-400 mb-4">{client}</h3>
         <p className="text-gray-300 mb-4">{industry}</p>
