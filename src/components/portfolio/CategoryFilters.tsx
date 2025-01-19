@@ -16,7 +16,7 @@ export const CategoryFilters = ({ activeCategory, onCategoryChange }: CategoryFi
         onClick={() => onCategoryChange("all")}
         className={`${
           activeCategory === "all" 
-            ? "bg-purple-500 hover:bg-purple-600" 
+            ? "bg-purple-500 hover:bg-purple-600 text-white" 
             : "border-purple-500 text-purple-500 hover:bg-purple-100/10"
         }`}
       >
@@ -29,7 +29,7 @@ export const CategoryFilters = ({ activeCategory, onCategoryChange }: CategoryFi
           onClick={() => onCategoryChange(category.id)}
           className={`${
             activeCategory === category.id 
-              ? "bg-purple-500 hover:bg-purple-600" 
+              ? "bg-purple-500 hover:bg-purple-600 text-white" 
               : "border-purple-500 text-purple-500 hover:bg-purple-100/10"
           }`}
         >
