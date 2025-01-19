@@ -8,29 +8,29 @@ export const Footer = () => {
         {/* Company Info */}
         <div className="space-y-4">
           <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
-            AI Automation Solutions
+            Soluții de Automatizare AI
           </h3>
           <p className="text-gray-300">
-            Transforming businesses through intelligent automation solutions.
+            Transformăm afacerile prin soluții inteligente de automatizare.
           </p>
         </div>
 
         {/* Quick Links */}
         <div className="space-y-4">
           <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
-            Quick Links
+            Link-uri Rapide
           </h3>
           <div className="flex flex-col space-y-2">
-            <Link to="/services" className="text-gray-300 hover:text-purple-400 transition-colors">Services</Link>
-            <Link to="/about" className="text-gray-300 hover:text-purple-400 transition-colors">About Us</Link>
-            <Link to="/portfolio" className="text-gray-300 hover:text-purple-400 transition-colors">Portfolio</Link>
+            <Link to="/services" className="text-gray-300 hover:text-purple-400 transition-colors">Servicii</Link>
+            <Link to="/about" className="text-gray-300 hover:text-purple-400 transition-colors">Despre Noi</Link>
+            <Link to="/portfolio" className="text-gray-300 hover:text-purple-400 transition-colors">Portofoliu</Link>
           </div>
         </div>
 
         {/* Contact Info */}
         <div className="space-y-4">
           <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
-            Connect With Us
+            Conectează-te cu Noi
           </h3>
           <div className="flex space-x-4">
             <a 
@@ -61,7 +61,7 @@ export const Footer = () => {
 
       {/* Copyright */}
       <div className="text-center mt-12 text-gray-400 text-sm">
-        © {new Date().getFullYear()} AI Automation Solutions. All rights reserved.
+        © {new Date().getFullYear()} Soluții de Automatizare AI. Toate drepturile rezervate.
       </div>
     </div>
   );

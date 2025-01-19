@@ -28,49 +28,49 @@ export function Navigation() {
               to="/website" 
               className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
             >
-              Home
+              Acasă
             </Link>
             <Link 
               to="/services" 
               className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
             >
-              Services
+              Servicii
             </Link>
             <Link 
               to="/about" 
               className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
             >
-              About Us
+              Despre Noi
             </Link>
             <Link 
               to="/portfolio" 
               className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
             >
-              Portfolio
+              Portofoliu
             </Link>
             <a 
               href="#services" 
               className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
             >
-              Services Section
+              Secțiunea Servicii
             </a>
             <a 
               href="#benefits" 
               className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
             >
-              Benefits
+              Beneficii
             </a>
             <a 
               href="#testimonials" 
               className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
             >
-              Testimonials
+              Testimoniale
             </a>
             <Button 
               onClick={handleBooking}
               className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white mt-4"
             >
-              Book Consultation
+              Programează Consultație
             </Button>
           </nav>
         </SheetContent>
