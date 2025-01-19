@@ -47,28 +47,28 @@ export const TechStackSection = () => {
   ];
 
   return (
-    <section className="py-12 relative">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
+    <section className="py-8 relative">
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="text-center mb-6">
           <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
             Our Tech Stack
           </h2>
-          <p className="text-purple-200 text-sm max-w-2xl mx-auto">
+          <p className="text-purple-200 text-xs max-w-xl mx-auto">
             We leverage cutting-edge automation tools and platforms to deliver powerful solutions
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
           {techStack.map((tech, index) => (
             <div
               key={tech.name}
-              className="p-3 rounded-lg bg-purple-900/20 border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300 group"
+              className="p-2 rounded-lg bg-purple-900/20 border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300 group"
             >
-              <div className="flex flex-col items-center text-center space-y-2">
-                <div className="p-1.5 rounded-full bg-purple-900/30 group-hover:bg-purple-900/50 transition-colors">
+              <div className="flex flex-col items-center text-center space-y-1">
+                <div className="p-1 rounded-full bg-purple-900/30 group-hover:bg-purple-900/50 transition-colors">
                   {tech.icon}
                 </div>
-                <h3 className="text-base font-semibold text-white">{tech.name}</h3>
+                <h3 className="text-sm font-semibold text-white">{tech.name}</h3>
                 <p className="text-purple-200 text-xs">{tech.description}</p>
               </div>
             </div>
