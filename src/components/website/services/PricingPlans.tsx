@@ -12,7 +12,7 @@ export const PricingPlans = ({ handleBooking }: { handleBooking: () => void }) =
         <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
           <CardContent className="p-6 text-center">
             <h3 className="text-xl font-bold text-white mb-2">Începător</h3>
-            <p className="text-3xl font-bold text-purple-400 mb-4">999€<span className="text-sm text-gray-400">/lună</span></p>
+            <p className="text-3xl font-bold text-purple-400 mb-4">999€</p>
             <ul className="text-gray-300 space-y-2 mb-6 text-left">
               <li className="flex items-center gap-2">
                 <ArrowRight className="w-4 h-4 text-purple-400" />
@@ -39,7 +39,7 @@ export const PricingPlans = ({ handleBooking }: { handleBooking: () => void }) =
           </div>
           <CardContent className="p-6 text-center">
             <h3 className="text-xl font-bold text-white mb-2">Profesional</h3>
-            <p className="text-3xl font-bold text-purple-400 mb-4">2.499€<span className="text-sm text-gray-400">/lună</span></p>
+            <p className="text-3xl font-bold text-purple-400 mb-4">2.499€</p>
             <ul className="text-gray-300 space-y-2 mb-6 text-left">
               <li className="flex items-center gap-2">
                 <ArrowRight className="w-4 h-4 text-purple-400" />
