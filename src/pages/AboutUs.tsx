@@ -10,17 +10,17 @@ const AboutUs = () => {
   const teamMembers = [
     {
       name: "John Smith",
-      role: "CEO & Founder",
+      role: "CEO & Fondator",
       image: "/placeholder.svg",
     },
     {
       name: "Sarah Johnson",
-      role: "Head of AI Development",
+      role: "Director Dezvoltare AI",
       image: "/placeholder.svg",
     },
     {
       name: "Michael Chen",
-      role: "Technical Director",
+      role: "Director Tehnic",
       image: "/placeholder.svg",
     },
   ];
@@ -37,14 +37,14 @@ const AboutUs = () => {
         className="container mx-auto px-4 pt-24 pb-16"
       >
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-          Our Story
+          Povestea Noastră
         </h1>
         <div className="max-w-3xl mx-auto text-gray-300 space-y-4">
           <p>
-            Founded in 2020, our company emerged from a vision to revolutionize business processes through AI automation. What started as a small team of innovators has grown into a leading force in the automation industry.
+            Fondată în 2020, compania noastră s-a născut dintr-o viziune de a revoluționa procesele de afaceri prin automatizare AI. Ce a început ca o mică echipă de inovatori s-a transformat într-o forță conducătoare în industria automatizării.
           </p>
           <p>
-            Today, we continue to push the boundaries of what's possible with AI, helping businesses across the globe transform their operations and achieve unprecedented efficiency.
+            Astăzi, continuăm să împingem limitele posibilului cu AI, ajutând afaceri din întreaga lume să-și transforme operațiunile și să atingă o eficiență fără precedent.
           </p>
         </div>
       </motion.section>
@@ -56,7 +56,7 @@ const AboutUs = () => {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="container mx-auto px-4 py-16"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Team</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Echipa Noastră</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {teamMembers.map((member) => (
             <Card key={member.name} className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm">
@@ -81,24 +81,24 @@ const AboutUs = () => {
         transition={{ duration: 0.6, delay: 0.4 }}
         className="container mx-auto px-4 py-16 bg-gradient-to-b from-transparent to-purple-900/10"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Mission & Values</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Misiune & Valori</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <Card className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm">
             <CardContent className="p-6">
-              <h3 className="text-xl font-semibold mb-4 text-purple-400">Our Mission</h3>
+              <h3 className="text-xl font-semibold mb-4 text-purple-400">Misiunea Noastră</h3>
               <p className="text-gray-300">
-                To empower businesses through intelligent automation solutions that drive growth and innovation.
+                Să împuternicim afacerile prin soluții inteligente de automatizare care stimulează creșterea și inovația.
               </p>
             </CardContent>
           </Card>
           <Card className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm">
             <CardContent className="p-6">
-              <h3 className="text-xl font-semibold mb-4 text-purple-400">Our Values</h3>
+              <h3 className="text-xl font-semibold mb-4 text-purple-400">Valorile Noastre</h3>
               <ul className="text-gray-300 space-y-2">
-                <li>• Innovation First</li>
-                <li>• Client Success</li>
-                <li>• Continuous Learning</li>
-                <li>• Ethical AI</li>
+                <li>• Inovație în Prim Plan</li>
+                <li>• Succesul Clientului</li>
+                <li>• Învățare Continuă</li>
+                <li>• AI Etic</li>
               </ul>
             </CardContent>
           </Card>
@@ -112,23 +112,23 @@ const AboutUs = () => {
         transition={{ duration: 0.6, delay: 0.6 }}
         className="container mx-auto px-4 py-16"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Culture</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Cultura Noastră</h2>
         <div className="max-w-3xl mx-auto text-gray-300 space-y-6">
           <p className="text-center">
-            We foster an environment of creativity, collaboration, and continuous growth. Our team members are encouraged to innovate, take initiative, and contribute to our collective success.
+            Promovăm un mediu de creativitate, colaborare și creștere continuă. Membrii echipei noastre sunt încurajați să inoveze, să ia inițiativă și să contribuie la succesul nostru colectiv.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div className="p-4 bg-purple-500/10 rounded-lg">
               <p className="font-semibold">Remote-First</p>
             </div>
             <div className="p-4 bg-purple-500/10 rounded-lg">
-              <p className="font-semibold">Flexible Hours</p>
+              <p className="font-semibold">Program Flexibil</p>
             </div>
             <div className="p-4 bg-purple-500/10 rounded-lg">
-              <p className="font-semibold">Learning Budget</p>
+              <p className="font-semibold">Buget pentru Învățare</p>
             </div>
             <div className="p-4 bg-purple-500/10 rounded-lg">
-              <p className="font-semibold">Team Events</p>
+              <p className="font-semibold">Evenimente de Echipă</p>
             </div>
           </div>
         </div>
@@ -141,24 +141,24 @@ const AboutUs = () => {
         transition={{ duration: 0.6, delay: 0.8 }}
         className="container mx-auto px-4 py-16"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Awards & Recognition</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Premii & Recunoașteri</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
           <Card className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm">
             <CardContent className="p-6 text-center">
-              <h3 className="text-xl font-semibold text-purple-400 mb-2">Innovation Award 2023</h3>
-              <p className="text-gray-400">Tech Innovation Summit</p>
+              <h3 className="text-xl font-semibold text-purple-400 mb-2">Premiul pentru Inovație 2023</h3>
+              <p className="text-gray-400">Summit-ul de Inovație Tech</p>
             </CardContent>
           </Card>
           <Card className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm">
             <CardContent className="p-6 text-center">
-              <h3 className="text-xl font-semibold text-purple-400 mb-2">Best AI Solution</h3>
-              <p className="text-gray-400">Global Tech Awards 2023</p>
+              <h3 className="text-xl font-semibold text-purple-400 mb-2">Cea Mai Bună Soluție AI</h3>
+              <p className="text-gray-400">Premiile Tech Global 2023</p>
             </CardContent>
           </Card>
           <Card className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm">
             <CardContent className="p-6 text-center">
               <h3 className="text-xl font-semibold text-purple-400 mb-2">Top Startup 2022</h3>
-              <p className="text-gray-400">Enterprise Tech Magazine</p>
+              <p className="text-gray-400">Revista Enterprise Tech</p>
             </CardContent>
           </Card>
         </div>
@@ -171,12 +171,12 @@ const AboutUs = () => {
         transition={{ duration: 0.6, delay: 1 }}
         className="container mx-auto px-4 py-16 text-center"
       >
-        <h2 className="text-2xl md:text-3xl font-bold mb-6">Ready to Transform Your Business?</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-6">Gata să-ți Transformi Afacerea?</h2>
         <Button 
           onClick={() => window.open('https://calendly.com/aiautomatizari/30min?month=2024-12', '_blank')}
           className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
         >
-          Book a Consultation
+          Programează o Consultație
         </Button>
       </motion.section>
 
