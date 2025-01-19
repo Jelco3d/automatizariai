@@ -36,7 +36,7 @@ export const CaseStudiesGrid = ({ caseStudies }: CaseStudiesGridProps) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className="container mx-auto px-4 py-16"
+      className="container mx-auto px-4 py-16 bg-transparent"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
         {currentCaseStudies.map((study, index) => (
