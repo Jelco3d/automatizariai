@@ -41,7 +41,7 @@ const AboutUs = () => {
         </h1>
         <div className="max-w-3xl mx-auto text-gray-300 space-y-4">
           <p>
-            Fondată în 2020, compania noastră s-a născut dintr-o viziune de a revoluționa procesele de afaceri prin automatizare AI. Ce a început ca o mică echipă de inovatori s-a transformat într-o forță conducătoare în industria automatizării.
+            Fondată în 2024, compania noastră s-a născut din dorința de a transforma și simplifica procesele de afaceri prin soluții AI avansate. Pornind de la o echipă mică dar ambițioasă, ne-am dezvoltat rapid într-un lider inovator în domeniul automatizării.
           </p>
           <p>
             Astăzi, continuăm să împingem limitele posibilului cu AI, ajutând afaceri din întreaga lume să-și transforme operațiunile și să atingă o eficiență fără precedent.
