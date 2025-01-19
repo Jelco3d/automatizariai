@@ -28,7 +28,7 @@ const Index = () => {
               Erdelean Jelco
             </h2>
             <CardTitle className="text-2xl md:text-4xl font-bold text-white">
-              AI Automation Expert
+              Expert în Automatizare AI
             </CardTitle>
             {/* Social Media Links */}
             <div className="flex justify-center gap-4 md:gap-8 pt-2 md:pt-6">
@@ -67,28 +67,28 @@ const Index = () => {
             </div>
           </div>
           <CardDescription className="text-sm md:text-lg text-white max-w-lg mx-auto leading-relaxed font-medium">
-            Helping businesses save 10+ hours weekly through AI automation
+            Ajut companiile să economisească peste 10 ore săptămânal prin automatizare AI
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 md:space-y-10 px-3 md:px-6">
           {/* Bio Section */}
           <p className="text-xs md:text-base text-center text-white max-w-xl mx-auto leading-relaxed font-medium">
-            I help businesses automate repetitive tasks and processes using AI tools, 
-            reducing operational costs and boosting productivity. From data analysis 
-            to workflow optimization, I create seamless automation systems.
+            Ajut companiile să automatizeze sarcini și procese repetitive folosind instrumente AI, 
+            reducând costurile operaționale și crescând productivitatea. De la analiza datelor 
+            până la optimizarea fluxului de lucru, creez sisteme de automatizare perfecte.
           </p>
 
           {/* Services */}
           <div className="grid gap-2 md:gap-6">
-            <h3 className="font-semibold text-base md:text-xl text-white">Services:</h3>
+            <h3 className="font-semibold text-base md:text-xl text-white">Servicii:</h3>
             <div className="flex flex-wrap gap-2 md:gap-4">
               <div className="flex-1 flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500/50 hover:border-purple-400 transition-all duration-300 hover:bg-purple-900/40 group cursor-pointer">
                 <Briefcase className="w-4 h-4 md:w-6 md:h-6 text-purple-400 flex-shrink-0 group-hover:text-purple-300 transition-colors" />
-                <span className="text-xs md:text-base text-white group-hover:text-purple-100">AI Automation Solutions</span>
+                <span className="text-xs md:text-base text-white group-hover:text-purple-100">Soluții de Automatizare AI</span>
               </div>
               <div className="flex-1 flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500/50 hover:border-purple-400 transition-all duration-300 hover:bg-purple-900/40 group cursor-pointer">
                 <Briefcase className="w-4 h-4 md:w-6 md:h-6 text-purple-400 flex-shrink-0 group-hover:text-purple-300 transition-colors" />
-                <span className="text-xs md:text-base text-white group-hover:text-purple-100">Process Automation</span>
+                <span className="text-xs md:text-base text-white group-hover:text-purple-100">Automatizare Procese</span>
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@ const Index = () => {
                 className="flex items-center gap-2 md:gap-3 text-white hover:text-purple-300 transition-colors text-xs md:text-base"
               >
                 <Globe className="w-3 h-3 md:w-5 md:h-5" />
-                <span>View Full Website</span>
+                <span>Vezi Site-ul Complet</span>
               </Link>
             </div>
           </div>
@@ -154,7 +154,7 @@ const Index = () => {
                 tracking-wide
               "
             >
-              Book a Free AI Audit
+              Programează un Audit AI Gratuit
             </button>
           </div>
         </CardContent>
