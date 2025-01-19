@@ -24,34 +24,33 @@ const Services = () => {
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-16 text-center relative">
         <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6">
-          Our Services
+          Serviciile Noastre
         </h1>
         <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-          Comprehensive AI automation solutions tailored to your business needs
+          Soluții complete de automatizare AI adaptate nevoilor afacerii dumneavoastră
         </p>
       </div>
 
       {/* Detailed Services Section */}
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Existing Service Cards */}
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
             <CardContent className="p-6">
               <Bot className="w-12 h-12 text-purple-400 mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Process Automation</h3>
-              <p className="text-gray-300 mb-4">Transform your business operations with AI-powered automation solutions that streamline workflows and reduce manual tasks.</p>
+              <h3 className="text-2xl font-bold text-white mb-4">Automatizare Procese</h3>
+              <p className="text-gray-300 mb-4">Transformați operațiunile de afaceri cu soluții de automatizare bazate pe AI care optimizează fluxurile de lucru și reduc sarcinile manuale.</p>
               <ul className="text-gray-300 space-y-2">
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Workflow optimization
+                  Optimizarea fluxului de lucru
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Document processing
+                  Procesarea documentelor
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Data entry automation
+                  Automatizarea introducerii datelor
                 </li>
               </ul>
             </CardContent>
@@ -60,43 +59,42 @@ const Services = () => {
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
             <CardContent className="p-6">
               <Brain className="w-12 h-12 text-purple-400 mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">AI Analytics</h3>
-              <p className="text-gray-300 mb-4">Leverage advanced AI algorithms to analyze your data and extract actionable insights for better decision-making.</p>
+              <h3 className="text-2xl font-bold text-white mb-4">Analiză AI</h3>
+              <p className="text-gray-300 mb-4">Utilizați algoritmi AI avansați pentru a analiza datele și a extrage informații acționabile pentru decizii mai bune.</p>
               <ul className="text-gray-300 space-y-2">
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Predictive analytics
+                  Analiză predictivă
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Pattern recognition
+                  Recunoașterea tiparelor
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Real-time monitoring
+                  Monitorizare în timp real
                 </li>
               </ul>
             </CardContent>
           </Card>
 
-          {/* New Service Cards */}
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
             <CardContent className="p-6">
               <Network className="w-12 h-12 text-purple-400 mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Integration Services</h3>
-              <p className="text-gray-300 mb-4">Seamlessly connect your existing systems with cutting-edge AI solutions for enhanced productivity.</p>
+              <h3 className="text-2xl font-bold text-white mb-4">Servicii de Integrare</h3>
+              <p className="text-gray-300 mb-4">Conectați perfect sistemele existente cu soluții AI de ultimă generație pentru productivitate îmbunătățită.</p>
               <ul className="text-gray-300 space-y-2">
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  API development
+                  Dezvoltare API
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  System integration
+                  Integrare sisteme
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Custom connectors
+                  Conectori personalizați
                 </li>
               </ul>
             </CardContent>
@@ -105,20 +103,20 @@ const Services = () => {
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
             <CardContent className="p-6">
               <Building2 className="w-12 h-12 text-purple-400 mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Enterprise Solutions</h3>
-              <p className="text-gray-300 mb-4">Comprehensive AI solutions tailored for large-scale business operations and complex workflows.</p>
+              <h3 className="text-2xl font-bold text-white mb-4">Soluții pentru Întreprinderi</h3>
+              <p className="text-gray-300 mb-4">Soluții AI complete adaptate pentru operațiuni de afaceri la scară largă și fluxuri de lucru complexe.</p>
               <ul className="text-gray-300 space-y-2">
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Scalable architecture
+                  Arhitectură scalabilă
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Enterprise security
+                  Securitate pentru întreprinderi
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  24/7 support
+                  Suport 24/7
                 </li>
               </ul>
             </CardContent>
@@ -127,20 +125,20 @@ const Services = () => {
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
             <CardContent className="p-6">
               <Shield className="w-12 h-12 text-purple-400 mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Security & Compliance</h3>
-              <p className="text-gray-300 mb-4">Ensure your AI implementations meet industry standards and regulatory requirements.</p>
+              <h3 className="text-2xl font-bold text-white mb-4">Securitate și Conformitate</h3>
+              <p className="text-gray-300 mb-4">Asigurați-vă că implementările AI respectă standardele industriei și cerințele de reglementare.</p>
               <ul className="text-gray-300 space-y-2">
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Data protection
+                  Protecția datelor
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Compliance audits
+                  Audituri de conformitate
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Risk assessment
+                  Evaluarea riscurilor
                 </li>
               </ul>
             </CardContent>
@@ -149,20 +147,20 @@ const Services = () => {
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
             <CardContent className="p-6">
               <Handshake className="w-12 h-12 text-purple-400 mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Consulting Services</h3>
-              <p className="text-gray-300 mb-4">Expert guidance on AI strategy, implementation, and optimization for your business needs.</p>
+              <h3 className="text-2xl font-bold text-white mb-4">Servicii de Consultanță</h3>
+              <p className="text-gray-300 mb-4">Îndrumare expertă privind strategia AI, implementarea și optimizarea pentru nevoile afacerii dumneavoastră.</p>
               <ul className="text-gray-300 space-y-2">
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Strategy planning
+                  Planificare strategică
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Technical consulting
+                  Consultanță tehnică
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Implementation support
+                  Suport implementare
                 </li>
               </ul>
             </CardContent>
@@ -173,60 +171,60 @@ const Services = () => {
       {/* Pricing Plans Section */}
       <div className="container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 text-center mb-12">
-          Pricing Plans
+          Planuri de Prețuri
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
             <CardContent className="p-6 text-center">
-              <h3 className="text-xl font-bold text-white mb-2">Starter</h3>
-              <p className="text-3xl font-bold text-purple-400 mb-4">$999<span className="text-sm text-gray-400">/month</span></p>
+              <h3 className="text-xl font-bold text-white mb-2">Începător</h3>
+              <p className="text-3xl font-bold text-purple-400 mb-4">999€<span className="text-sm text-gray-400">/lună</span></p>
               <ul className="text-gray-300 space-y-2 mb-6 text-left">
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Basic process automation
+                  Automatizare de bază a proceselor
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  5 automated workflows
+                  5 fluxuri de lucru automatizate
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Email support
+                  Suport prin email
                 </li>
               </ul>
               <Button onClick={handleBooking} className="w-full bg-gradient-to-r from-purple-500 to-pink-500">
-                Get Started
+                Începe Acum
               </Button>
             </CardContent>
           </Card>
 
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105 relative">
             <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-sm">
-              Most Popular
+              Cel Mai Popular
             </div>
             <CardContent className="p-6 text-center">
-              <h3 className="text-xl font-bold text-white mb-2">Professional</h3>
-              <p className="text-3xl font-bold text-purple-400 mb-4">$2,499<span className="text-sm text-gray-400">/month</span></p>
+              <h3 className="text-xl font-bold text-white mb-2">Profesional</h3>
+              <p className="text-3xl font-bold text-purple-400 mb-4">2.499€<span className="text-sm text-gray-400">/lună</span></p>
               <ul className="text-gray-300 space-y-2 mb-6 text-left">
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Advanced automation
+                  Automatizare avansată
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  15 automated workflows
+                  15 fluxuri de lucru automatizate
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Priority support
+                  Suport prioritar
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Custom integrations
+                  Integrări personalizate
                 </li>
               </ul>
               <Button onClick={handleBooking} className="w-full bg-gradient-to-r from-purple-500 to-pink-500">
-                Get Started
+                Începe Acum
               </Button>
             </CardContent>
           </Card>
@@ -234,27 +232,27 @@ const Services = () => {
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
             <CardContent className="p-6 text-center">
               <h3 className="text-xl font-bold text-white mb-2">Enterprise</h3>
-              <p className="text-3xl font-bold text-purple-400 mb-4">Custom</p>
+              <p className="text-3xl font-bold text-purple-400 mb-4">Personalizat</p>
               <ul className="text-gray-300 space-y-2 mb-6 text-left">
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Full automation suite
+                  Suită completă de automatizare
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Unlimited workflows
+                  Fluxuri de lucru nelimitate
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  24/7 support
+                  Suport 24/7
                 </li>
                 <li className="flex items-center gap-2">
                   <ArrowRight className="w-4 h-4 text-purple-400" />
-                  Dedicated account manager
+                  Manager de cont dedicat
                 </li>
               </ul>
               <Button onClick={handleBooking} className="w-full bg-gradient-to-r from-purple-500 to-pink-500">
-                Contact Us
+                Contactează-ne
               </Button>
             </CardContent>
           </Card>
@@ -264,27 +262,27 @@ const Services = () => {
       {/* Case Studies Section */}
       <div className="container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 text-center mb-12">
-          Case Studies
+          Studii de Caz
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50">
             <CardContent className="p-6">
-              <h3 className="text-2xl font-bold text-white mb-4">E-commerce Giant</h3>
-              <p className="text-gray-300 mb-4">Automated customer service operations resulting in 70% reduction in response time</p>
+              <h3 className="text-2xl font-bold text-white mb-4">Gigant E-commerce</h3>
+              <p className="text-gray-300 mb-4">Operațiuni de servicii pentru clienți automatizate, rezultând o reducere cu 70% a timpului de răspuns</p>
               <div className="flex justify-between text-purple-400">
                 <span>ROI: 300%</span>
-                <span>Time: 3 months</span>
+                <span>Durată: 3 luni</span>
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50">
             <CardContent className="p-6">
-              <h3 className="text-2xl font-bold text-white mb-4">Financial Institution</h3>
-              <p className="text-gray-300 mb-4">Implemented AI-driven fraud detection system, preventing $2M in fraudulent transactions</p>
+              <h3 className="text-2xl font-bold text-white mb-4">Instituție Financiară</h3>
+              <p className="text-gray-300 mb-4">Sistem de detectare a fraudelor bazat pe AI implementat, prevenind tranzacții frauduloase în valoare de 2M€</p>
               <div className="flex justify-between text-purple-400">
                 <span>ROI: 500%</span>
-                <span>Time: 6 months</span>
+                <span>Durată: 6 luni</span>
               </div>
             </CardContent>
           </Card>
@@ -294,38 +292,38 @@ const Services = () => {
       {/* Technical Capabilities Section */}
       <div className="container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 text-center mb-12">
-          Technical Capabilities
+          Capabilități Tehnice
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50">
             <CardContent className="p-6 text-center">
               <Database className="w-12 h-12 text-purple-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Data Processing</h3>
-              <p className="text-gray-300">Advanced algorithms for efficient data handling</p>
+              <h3 className="text-xl font-bold text-white mb-2">Procesare Date</h3>
+              <p className="text-gray-300">Algoritmi avansați pentru procesarea eficientă a datelor</p>
             </CardContent>
           </Card>
 
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50">
             <CardContent className="p-6 text-center">
               <Cloud className="w-12 h-12 text-purple-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Cloud Integration</h3>
-              <p className="text-gray-300">Seamless cloud service integration</p>
+              <h3 className="text-xl font-bold text-white mb-2">Integrare Cloud</h3>
+              <p className="text-gray-300">Integrare perfectă cu serviciile cloud</p>
             </CardContent>
           </Card>
 
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50">
             <CardContent className="p-6 text-center">
               <Lock className="w-12 h-12 text-purple-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Security</h3>
-              <p className="text-gray-300">Enterprise-grade security protocols</p>
+              <h3 className="text-xl font-bold text-white mb-2">Securitate</h3>
+              <p className="text-gray-300">Protocoale de securitate la nivel de întreprindere</p>
             </CardContent>
           </Card>
 
           <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50">
             <CardContent className="p-6 text-center">
               <Cog className="w-12 h-12 text-purple-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Customization</h3>
-              <p className="text-gray-300">Flexible and customizable solutions</p>
+              <h3 className="text-xl font-bold text-white mb-2">Personalizare</h3>
+              <p className="text-gray-300">Soluții flexibile și personalizabile</p>
             </CardContent>
           </Card>
         </div>
@@ -334,10 +332,9 @@ const Services = () => {
       {/* Integration Options Section */}
       <div className="container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 text-center mb-12">
-          Integration Options
+          Opțiuni de Integrare
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* Add your integration partner logos here */}
           <div className="bg-white/10 backdrop-blur-xl p-6 rounded-lg flex items-center justify-center">
             <span className="text-white">Salesforce</span>
           </div>
@@ -356,16 +353,16 @@ const Services = () => {
       {/* CTA Section */}
       <div className="container mx-auto px-4 py-16 text-center">
         <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6">
-          Ready to Transform Your Business?
+          Pregătiți să Vă Transformați Afacerea?
         </h2>
         <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-          Book a free consultation to discover how our AI automation services can benefit your business
+          Programați o consultație gratuită pentru a descoperi cum serviciile noastre de automatizare AI vă pot ajuta afacerea
         </p>
         <Button 
           onClick={handleBooking}
           className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-lg transform transition-all hover:scale-105"
         >
-          Schedule Your Free Consultation
+          Programează Consultația Gratuită
           <ArrowRight className="ml-2" />
         </Button>
       </div>
