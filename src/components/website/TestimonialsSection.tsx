@@ -3,7 +3,7 @@ import { Quote, Star } from "lucide-react";
 
 export const TestimonialsSection = () => {
   return (
-    <div className="container mx-auto px-4 py-16 relative">
+    <div className="container mx-auto px-4 py-8 relative">
       <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 text-center mb-12">Ce Spun Clienții Noștri</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
