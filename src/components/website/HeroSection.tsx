@@ -11,7 +11,7 @@ export const HeroSection = () => {
       <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 animate-[fade-in_1s_ease-out]">
         Soluții de Automatizare cu AI
       </h1>
-      <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8 animate-[fade-in_1s_ease-out_0.3s]">
+      <p className="text-base text-gray-300 max-w-2xl mx-auto mb-8 animate-[fade-in_1s_ease-out_0.3s]">
         Transformă operațiunile afacerii tale cu automatizare AI de ultimă generație. Economisește timp, reduce costurile și crește productivitatea.
       </p>
       <Button 
