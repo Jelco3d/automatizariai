@@ -16,7 +16,7 @@ export const HeroSection = () => {
       </p>
       <Button 
         onClick={handleBooking}
-        className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-lg transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 animate-[fade-in_1s_ease-out_0.6s]"
+        className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 text-base rounded-lg transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 animate-[fade-in_1s_ease-out_0.6s]"
       >
         Programează Consultație Gratuită
         <ArrowRight className="ml-2 animate-bounce" />
