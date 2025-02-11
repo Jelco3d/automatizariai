@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Link } from "react-router-dom";
 import {
@@ -30,7 +31,6 @@ const Index = () => {
             <CardTitle className="text-2xl md:text-4xl font-bold text-white">
               Expert în Automatizare AI
             </CardTitle>
-            {/* Social Media Links */}
             <div className="flex justify-center gap-4 md:gap-8 pt-2 md:pt-6">
               <a 
                 href="https://www.instagram.com/erdeleanjelco/"

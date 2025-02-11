@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Index from './pages/Index';
 import Website from './pages/Website';
@@ -6,6 +7,7 @@ import AboutUs from './pages/AboutUs';
 import Portfolio from './pages/Portfolio';
 
 const App = () => {
+  console.log("Rendering App component");
   return (
     <Router>
       <Routes>
