@@ -80,7 +80,7 @@ const Index = () => {
         <CardContent className="space-y-4 md:space-y-10 px-3 md:px-6">
           {/* Bio Section */}
           <p className="text-sm md:text-lg text-white max-w-lg mx-auto leading-relaxed font-medium text-center whitespace-pre-line">
-            {"🚀 Ajut companiile Să Crească cu AI\n| Economisiți timp ⏳ | Creșteți veniturile 💰 | Câștigă mai mult ⚡\n\n📩 Dă-mi un DM pentru a-ți automatiza afacerea astăzi!"}
+            {"🚀 Ajut companiile Să Crească cu AI\n| Economisiți timp ⏳ | Creșteți veniturile 💰 |\n\n📩 Dă-mi un DM pentru a-ți automatiza afacerea astăzi!"}
           </p>
 
           {/* Services */}
