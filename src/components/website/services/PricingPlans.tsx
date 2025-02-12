@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
@@ -9,11 +10,11 @@ export const PricingPlans = ({ handleBooking }: { handleBooking: () => void }) =
         Planuri de Prețuri
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
-          <CardContent className="p-6 text-center">
+        <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105 flex flex-col">
+          <CardContent className="p-6 text-center flex flex-col flex-1">
             <h3 className="text-xl font-bold text-white mb-2">Începător</h3>
             <p className="text-3xl font-bold text-purple-400 mb-4">999€</p>
-            <ul className="text-gray-300 space-y-2 mb-6 text-left">
+            <ul className="text-gray-300 space-y-2 mb-6 text-left flex-1">
               <li className="flex items-center gap-2">
                 <ArrowRight className="w-4 h-4 text-purple-400" />
                 Automatizare de bază a proceselor
@@ -33,14 +34,14 @@ export const PricingPlans = ({ handleBooking }: { handleBooking: () => void }) =
           </CardContent>
         </Card>
 
-        <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105 relative">
+        <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105 relative flex flex-col">
           <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-sm">
             Cel Mai Popular
           </div>
-          <CardContent className="p-6 text-center">
+          <CardContent className="p-6 text-center flex flex-col flex-1">
             <h3 className="text-xl font-bold text-white mb-2">Profesional</h3>
             <p className="text-3xl font-bold text-purple-400 mb-4">2.499€</p>
-            <ul className="text-gray-300 space-y-2 mb-6 text-left">
+            <ul className="text-gray-300 space-y-2 mb-6 text-left flex-1">
               <li className="flex items-center gap-2">
                 <ArrowRight className="w-4 h-4 text-purple-400" />
                 Automatizare avansată
@@ -64,11 +65,11 @@ export const PricingPlans = ({ handleBooking }: { handleBooking: () => void }) =
           </CardContent>
         </Card>
 
-        <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
-          <CardContent className="p-6 text-center">
+        <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105 flex flex-col">
+          <CardContent className="p-6 text-center flex flex-col flex-1">
             <h3 className="text-xl font-bold text-white mb-2">Enterprise</h3>
             <p className="text-3xl font-bold text-purple-400 mb-4">Personalizat</p>
-            <ul className="text-gray-300 space-y-2 mb-6 text-left">
+            <ul className="text-gray-300 space-y-2 mb-6 text-left flex-1">
               <li className="flex items-center gap-2">
                 <ArrowRight className="w-4 h-4 text-purple-400" />
                 Suită completă de automatizare
