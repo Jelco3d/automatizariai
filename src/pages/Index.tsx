@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Link } from "react-router-dom";
 import {
@@ -82,9 +81,8 @@ const Index = () => {
         </CardHeader>
         <CardContent className="space-y-4 md:space-y-10 px-3 md:px-6">
           {/* Bio Section */}
-          <p className="text-xs md:text-base text-center text-white max-w-xl mx-auto leading-relaxed font-medium">
-            Ajut companiile să automatizeze sarcini și procese repetitive folosind instrumente AI, 
-            reducând costurile operaționale și crescând productivitatea.
+          <p className="text-sm md:text-lg text-white max-w-lg mx-auto leading-relaxed font-medium">
+            Ajut companiile să economisească timp, să reducă costurile și să își scaleze afacerea prin automatizare inteligentă cu AI.
           </p>
 
           {/* Services */}
