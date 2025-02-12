@@ -8,7 +8,7 @@ export const ServicesHero = ({ handleBooking }: { handleBooking: () => void }) =
       <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
         Serviciile Noastre
       </h1>
-      <p className="text-lg text-gray-300 max-w-2xl mx-auto mt-auto">
+      <p className="text-lg text-gray-300 max-w-4xl mx-auto mt-auto">
         Soluții complete de automatizare AI adaptate nevoilor afacerii dumneavoastră
       </p>
     </div>
