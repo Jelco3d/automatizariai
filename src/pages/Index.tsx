@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Link } from "react-router-dom";
 import {
@@ -83,8 +84,7 @@ const Index = () => {
           {/* Bio Section */}
           <p className="text-xs md:text-base text-center text-white max-w-xl mx-auto leading-relaxed font-medium">
             Ajut companiile să automatizeze sarcini și procese repetitive folosind instrumente AI, 
-            reducând costurile operaționale și crescând productivitatea. De la analiza datelor 
-            până la optimizarea fluxului de lucru, creez sisteme de automatizare perfecte.
+            reducând costurile operaționale și crescând productivitatea.
           </p>
 
           {/* Services */}
