@@ -5,10 +5,10 @@ import { ArrowRight } from "lucide-react";
 export const CTASection = ({ handleBooking }: { handleBooking: () => void }) => {
   return (
     <div className="container mx-auto px-4 py-16 text-center">
-      <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6">
+      <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6">
         Pregătiți să Vă Transformați Afacerea?
       </h2>
-      <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+      <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
         Programați o consultație gratuită pentru a descoperi cum serviciile noastre de automatizare AI vă pot ajuta afacerea
       </p>
       <Button 
