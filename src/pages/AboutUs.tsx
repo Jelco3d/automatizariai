@@ -14,32 +14,12 @@ const AboutUs = () => {
     <div className="min-h-screen bg-[#1A1F2C] text-white overflow-hidden">
       <Navigation />
       
-      {/* Company Story Section */}
-      <motion.section 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="container mx-auto px-4 pt-24 pb-16"
-      >
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-          Povestea Noastră
-        </h1>
-        <div className="max-w-3xl mx-auto text-gray-300 space-y-4">
-          <p>
-            Fondată în 2024, compania noastră s-a născut din dorința de a transforma și simplifica procesele de afaceri prin soluții AI avansate. Pornind de la o echipă mică dar ambițioasă, ne-am dezvoltat rapid într-un lider inovator în domeniul automatizării.
-          </p>
-          <p>
-            Astăzi, continuăm să împingem limitele posibilului cu AI, ajutând afaceri din întreaga lume să-și transforme operațiunile și să atingă o eficiență fără precedent.
-          </p>
-        </div>
-      </motion.section>
-
       {/* About Me Section */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="container mx-auto px-4 py-16"
+        className="container mx-auto px-4 pt-24 pb-16"
       >
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Despre Mine</h2>
         <div className="max-w-4xl mx-auto">
@@ -71,6 +51,26 @@ const AboutUs = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+      </motion.section>
+
+      {/* Company Story Section */}
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="container mx-auto px-4 py-16"
+      >
+        <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+          Povestea Noastră
+        </h1>
+        <div className="max-w-3xl mx-auto text-gray-300 space-y-4">
+          <p>
+            Fondată în 2024, compania noastră s-a născut din dorința de a transforma și simplifica procesele de afaceri prin soluții AI avansate. Pornind de la o echipă mică dar ambițioasă, ne-am dezvoltat rapid într-un lider inovator în domeniul automatizării.
+          </p>
+          <p>
+            Astăzi, continuăm să împingem limitele posibilului cu AI, ajutând afaceri din întreaga lume să-și transforme operațiunile și să atingă o eficiență fără precedent.
+          </p>
         </div>
       </motion.section>
 
