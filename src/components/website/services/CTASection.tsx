@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
@@ -12,7 +13,7 @@ export const CTASection = ({ handleBooking }: { handleBooking: () => void }) => 
       </p>
       <Button 
         onClick={handleBooking}
-        className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-lg transform transition-all hover:scale-105"
+        className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-4 text-base rounded-lg transform transition-all hover:scale-105"
       >
         Programează Consultația Gratuită
         <ArrowRight className="ml-2" />
