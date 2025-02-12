@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Bot, Brain, Network, Building2, Shield, Handshake } from "lucide-react";
 
@@ -74,7 +75,7 @@ export const DetailedServices = () => {
         <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
           <CardContent className="p-6">
             <Building2 className="w-12 h-12 text-purple-400 mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-4">Soluții pentru Întreprinderi</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">Soluții Întreprinderi</h3>
             <p className="text-gray-300 mb-4">Soluții AI complete adaptate pentru operațiuni de afaceri la scară largă și fluxuri de lucru complexe.</p>
             <ul className="text-gray-300 space-y-2">
               <li className="flex items-center gap-2">
@@ -96,7 +97,7 @@ export const DetailedServices = () => {
         <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105">
           <CardContent className="p-6">
             <Shield className="w-12 h-12 text-purple-400 mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-4">Securitate și Conformitate</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">Securitate & Conformitate</h3>
             <p className="text-gray-300 mb-4">Asigurați-vă că implementările AI respectă standardele industriei și cerințele de reglementare.</p>
             <ul className="text-gray-300 space-y-2">
               <li className="flex items-center gap-2">
