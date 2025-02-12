@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Link } from "react-router-dom";
 import {
@@ -8,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Briefcase, Globe, Mail, Phone, User, Facebook, Instagram, Video, Twitter } from "lucide-react";
 
 const Index = () => {
@@ -21,8 +21,17 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] flex items-center justify-center p-2 md:p-4">
       <Card className="w-full max-w-2xl bg-[#1A1F2C] border-purple-500/50">
         <CardHeader className="text-center space-y-3 md:space-y-6 pb-4 md:pb-8 px-3 md:px-6">
-          <div className="mx-auto bg-purple-500/20 rounded-full p-4 md:p-8 w-fit">
-            <User className="w-8 h-8 md:w-16 md:h-16 text-purple-400" />
+          <div className="mx-auto bg-purple-500/20 rounded-full p-1 md:p-2 w-fit">
+            <Avatar className="w-24 h-24 md:w-32 md:h-32">
+              <AvatarImage 
+                src="/lovable-uploads/6d88c142-2eb2-4748-beed-6a725d1dc7e1.png" 
+                alt="Erdelean Jelco" 
+                className="object-cover"
+              />
+              <AvatarFallback>
+                <User className="w-12 h-12 text-purple-400" />
+              </AvatarFallback>
+            </Avatar>
           </div>
           <div className="space-y-1 md:space-y-2">
             <h2 className="text-lg md:text-2xl font-semibold text-white">
