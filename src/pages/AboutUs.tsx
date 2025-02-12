@@ -59,7 +59,7 @@ const AboutUs = () => {
                   <p className="text-gray-300">
                     Cu o pasiune pentru tehnologie și inovație, m-am dedicat dezvoltării de soluții AI care transformă modul în care companiile operează. Specializat în automatizarea proceselor de afaceri, ajut organizațiile să-și eficientizeze operațiunile și să-și maximizeze potențialul prin implementarea tehnologiilor inteligente.
                   </p>
-                  <div className="pt-4">
+                  <div className="pt-4 flex justify-center">
                     <Button 
                       onClick={() => window.open('https://calendly.com/aiautomatizari/30min?month=2024-12', '_blank')}
                       className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
