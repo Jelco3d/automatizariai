@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Link } from "react-router-dom";
 import {
@@ -75,9 +76,6 @@ const Index = () => {
               </a>
             </div>
           </div>
-          <CardDescription className="text-sm md:text-lg text-white max-w-lg mx-auto leading-relaxed font-medium">
-            Ajut companiile să economisească peste 10 ore săptămânal prin automatizare AI
-          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 md:space-y-10 px-3 md:px-6">
           {/* Bio Section */}
