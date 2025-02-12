@@ -1,29 +1,14 @@
+
 import { motion } from "framer-motion";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { User } from "lucide-react";
 
 const AboutUs = () => {
   console.log("Rendering AboutUs page");
-
-  const teamMembers = [
-    {
-      name: "John Smith",
-      role: "CEO & Fondator",
-      image: "/placeholder.svg",
-    },
-    {
-      name: "Sarah Johnson",
-      role: "Director Dezvoltare AI",
-      image: "/placeholder.svg",
-    },
-    {
-      name: "Michael Chen",
-      role: "Director Tehnic",
-      image: "/placeholder.svg",
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-[#1A1F2C] text-white overflow-hidden">
@@ -49,28 +34,43 @@ const AboutUs = () => {
         </div>
       </motion.section>
 
-      {/* Team Members Section */}
+      {/* About Me Section */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
         className="container mx-auto px-4 py-16"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Echipa Noastră</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {teamMembers.map((member) => (
-            <Card key={member.name} className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <img 
-                  src={member.image} 
-                  alt={member.name} 
-                  className="w-32 h-32 rounded-full mx-auto mb-4 bg-purple-500/20"
-                />
-                <h3 className="text-xl font-semibold text-center text-purple-400">{member.name}</h3>
-                <p className="text-center text-gray-400">{member.role}</p>
-              </CardContent>
-            </Card>
-          ))}
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Despre Mine</h2>
+        <div className="max-w-4xl mx-auto">
+          <Card className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm">
+            <CardContent className="p-8">
+              <div className="flex flex-col md:flex-row gap-8 items-center">
+                <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-purple-500/20">
+                  <img 
+                    src="/lovable-uploads/18adcde2-6fef-4f80-9177-96ee902a301b.png"
+                    alt="Erdelean Jelco"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex-1 space-y-4">
+                  <h3 className="text-2xl font-semibold text-purple-400">Erdelean Jelco</h3>
+                  <p className="text-lg text-gray-300">Expert în Automatizare AI & Fondator</p>
+                  <p className="text-gray-300">
+                    Cu o pasiune pentru tehnologie și inovație, m-am dedicat dezvoltării de soluții AI care transformă modul în care companiile operează. Specializat în automatizarea proceselor de afaceri, ajut organizațiile să-și eficientizeze operațiunile și să-și maximizeze potențialul prin implementarea tehnologiilor inteligente.
+                  </p>
+                  <div className="pt-4">
+                    <Button 
+                      onClick={() => window.open('https://calendly.com/aiautomatizari/30min?month=2024-12', '_blank')}
+                      className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                    >
+                      Programează o Consultație
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </motion.section>
 
