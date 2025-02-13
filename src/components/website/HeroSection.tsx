@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 export const HeroSection = () => {
@@ -11,9 +12,9 @@ export const HeroSection = () => {
       <p className="text-base md:text-lg text-gray-300 max-w-3xl mx-auto mb-8 animate-[fade-in_1s_ease-out_0.3s]">
         Expertul tău în automatizare AI pentru creșterea eficienței operaționale. Implementăm soluții personalizate de automatizare bazate pe inteligență artificială, reducând costurile cu până la 60% și crescând productivitatea cu peste 80%.
       </p>
-      <Button onClick={handleBooking} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 text-base transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 animate-[fade-in_1s_ease-out_0.6s] rounded-lg px-[24px]">
+      <Button onClick={handleBooking} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-2 text-sm transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 animate-[fade-in_1s_ease-out_0.6s] rounded-lg px-4">
         Programează Consultație Strategică Gratuită
-        <ArrowRight className="ml-2 animate-bounce" />
+        <ArrowRight className="ml-2 animate-bounce w-4 h-4" />
       </Button>
     </div>;
 };
