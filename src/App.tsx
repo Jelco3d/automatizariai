@@ -14,7 +14,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/personal" element={<Index />} />
+        <Route path="/acasă" element={<Index />} />
         <Route path="/" element={<Website />} />
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<AboutUs />} />
