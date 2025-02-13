@@ -14,8 +14,8 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/website" element={<Website />} />
+        <Route path="/personal" element={<Index />} />
+        <Route path="/" element={<Website />} />
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/portfolio" element={<Portfolio />} />
