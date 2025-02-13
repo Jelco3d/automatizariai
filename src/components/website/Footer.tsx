@@ -27,6 +27,7 @@ export const Footer = () => {
             <Link to="/portfolio" className="text-gray-300 hover:text-purple-400 transition-colors">Portofoliu</Link>
             <Link to="/terms" className="text-gray-300 hover:text-purple-400 transition-colors">Termeni și Condiții</Link>
             <Link to="/gdpr" className="text-gray-300 hover:text-purple-400 transition-colors">Politica GDPR</Link>
+            <Link to="/privacy" className="text-gray-300 hover:text-purple-400 transition-colors">Politica de Confidențialitate</Link>
             <a 
               href="https://anpc.ro" 
               target="_blank" 
