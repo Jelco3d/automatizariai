@@ -1,4 +1,3 @@
-
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -49,6 +48,18 @@ export function Navigation() {
             >
               Portofoliu
             </Link>
+            <a 
+              href="#services" 
+              className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
+            >
+              Secțiunea Servicii
+            </a>
+            <a 
+              href="#benefits" 
+              className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
+            >
+              Beneficii
+            </a>
             <a 
               href="#testimonials" 
               className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"

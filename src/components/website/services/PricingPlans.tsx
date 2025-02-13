@@ -1,19 +1,18 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
-export const PricingPlans = ({
-  handleBooking
-}: {
-  handleBooking: () => void;
-}) => {
-  return <div className="container mx-auto px-4 py-16">
+
+export const PricingPlans = ({ handleBooking }: { handleBooking: () => void }) => {
+  return (
+    <div className="container mx-auto px-4 py-16">
       <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 text-center mb-12">
         Planuri de Prețuri
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105 flex flex-col">
           <CardContent className="p-6 text-center flex flex-col flex-1">
-            <h3 className="text-xl font-bold text-white mb-2">Basic</h3>
+            <h3 className="text-xl font-bold text-white mb-2">Începător</h3>
             <p className="text-3xl font-bold text-purple-400 mb-4">999€</p>
             <ul className="text-gray-300 space-y-2 mb-6 text-left flex-1">
               <li className="flex items-center gap-2">
@@ -29,7 +28,7 @@ export const PricingPlans = ({
                 Suport prin email
               </li>
             </ul>
-            <Button onClick={handleBooking} className="w-full bg-gradient-to-r from-purple-500 to-pink-500 px-0 py-[20px]">
+            <Button onClick={handleBooking} className="w-full bg-gradient-to-r from-purple-500 to-pink-500">
               Începe Acum
             </Button>
           </CardContent>
@@ -41,7 +40,7 @@ export const PricingPlans = ({
           </div>
           <CardContent className="p-6 text-center flex flex-col flex-1">
             <h3 className="text-xl font-bold text-white mb-2">Profesional</h3>
-            <p className="text-3xl font-bold text-purple-400 mb-4">2.899€</p>
+            <p className="text-3xl font-bold text-purple-400 mb-4">2.499€</p>
             <ul className="text-gray-300 space-y-2 mb-6 text-left flex-1">
               <li className="flex items-center gap-2">
                 <ArrowRight className="w-4 h-4 text-purple-400" />
@@ -94,5 +93,6 @@ export const PricingPlans = ({
           </CardContent>
         </Card>
       </div>
-    </div>;
+    </div>
+  );
 };
