@@ -5,6 +5,7 @@ import Website from './pages/Website';
 import Services from './pages/Services';
 import AboutUs from './pages/AboutUs';
 import Portfolio from './pages/Portfolio';
+import Terms from './pages/Terms';
 
 const App = () => {
   console.log("Rendering App component");
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/terms" element={<Terms />} />
       </Routes>
     </Router>
   );
