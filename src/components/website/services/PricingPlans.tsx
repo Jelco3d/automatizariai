@@ -1,11 +1,12 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
-
-export const PricingPlans = ({ handleBooking }: { handleBooking: () => void }) => {
-  return (
-    <div className="container mx-auto px-4 py-16">
+export const PricingPlans = ({
+  handleBooking
+}: {
+  handleBooking: () => void;
+}) => {
+  return <div className="container mx-auto px-4 py-16">
       <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 text-center mb-12">
         Planuri de Prețuri
       </h2>
@@ -40,7 +41,7 @@ export const PricingPlans = ({ handleBooking }: { handleBooking: () => void }) =
           </div>
           <CardContent className="p-6 text-center flex flex-col flex-1">
             <h3 className="text-xl font-bold text-white mb-2">Profesional</h3>
-            <p className="text-3xl font-bold text-purple-400 mb-4">2.499€</p>
+            <p className="text-3xl font-bold text-purple-400 mb-4">2.899€</p>
             <ul className="text-gray-300 space-y-2 mb-6 text-left flex-1">
               <li className="flex items-center gap-2">
                 <ArrowRight className="w-4 h-4 text-purple-400" />
@@ -93,6 +94,5 @@ export const PricingPlans = ({ handleBooking }: { handleBooking: () => void }) =
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
