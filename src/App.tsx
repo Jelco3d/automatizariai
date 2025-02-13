@@ -14,14 +14,14 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/acasă" element={<Index />} />
-        <Route path="/" element={<Website />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/terms" element={<Terms />} />
+        <Route path="/personal" element={<Index />} />
+        <Route path="/acasa" element={<Website />} />
+        <Route path="/servicii" element={<Services />} />
+        <Route path="/despre" element={<AboutUs />} />
+        <Route path="/portofoliu" element={<Portfolio />} />
+        <Route path="/termenii" element={<Terms />} />
         <Route path="/gdpr" element={<GDPR />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/politica" element={<PrivacyPolicy />} />
       </Routes>
     </Router>
   );
