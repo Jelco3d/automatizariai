@@ -26,6 +26,7 @@ export const Footer = () => {
             <Link to="/about" className="text-gray-300 hover:text-purple-400 transition-colors">Despre Noi</Link>
             <Link to="/portfolio" className="text-gray-300 hover:text-purple-400 transition-colors">Portofoliu</Link>
             <Link to="/terms" className="text-gray-300 hover:text-purple-400 transition-colors">Termeni și Condiții</Link>
+            <Link to="/gdpr" className="text-gray-300 hover:text-purple-400 transition-colors">Politica GDPR</Link>
           </div>
         </div>
 

@@ -6,6 +6,7 @@ import Services from './pages/Services';
 import AboutUs from './pages/AboutUs';
 import Portfolio from './pages/Portfolio';
 import Terms from './pages/Terms';
+import GDPR from './pages/GDPR';
 
 const App = () => {
   console.log("Rendering App component");
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/gdpr" element={<GDPR />} />
       </Routes>
     </Router>
   );
