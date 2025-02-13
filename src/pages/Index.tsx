@@ -39,7 +39,7 @@ const Index = () => {
               Erdelean Jelco
             </h2>
             <CardTitle className="text-2xl md:text-4xl font-bold text-white">
-              Expert în Automatizare AI
+              Specialist AI
             </CardTitle>
             <div className="flex justify-center gap-4 md:gap-8 pt-2 md:pt-6">
               <a 
@@ -78,26 +78,24 @@ const Index = () => {
           </div>
         </CardHeader>
         <CardContent className="space-y-4 md:space-y-10 px-3 md:px-6">
-          {/* Bio Section */}
           <p className="text-sm md:text-lg text-white max-w-lg mx-auto leading-relaxed font-medium text-center whitespace-pre-line">
-            {"🚀 Ajut companiile Să Crească cu AI\n| Economisiți timp ⏳ | Creșteți veniturile 💰 |\n\n📩 Dă-mi un DM & automatizează-ți afacerea"}
+            {"🚀 Ajut firmele să crească folosind AI\n| Economisești timp ⏳ | Crești vânzările 💰 |\n\n📩 Contactează-mă pentru automatizare"}
           </p>
 
-          {/* Services */}
           <div className="grid gap-2 md:gap-6">
-            <h3 className="font-semibold text-base md:text-xl text-white">Servicii:</h3>
+            <h3 className="font-semibold text-base md:text-xl text-white">Ce facem:</h3>
             <div className="flex flex-wrap gap-2 md:gap-4">
               <div className="flex-1 flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500/50 hover:border-purple-400 transition-all duration-300 hover:bg-purple-900/40 group cursor-pointer">
                 <Briefcase className="w-4 h-4 md:w-6 md:h-6 text-purple-400 flex-shrink-0 group-hover:text-purple-300 transition-colors" />
-                <span className="text-xs md:text-base text-white group-hover:text-purple-100">Soluții de Automatizare AI</span>
+                <span className="text-xs md:text-base text-white group-hover:text-purple-100">Automatizare cu AI</span>
               </div>
               <div className="flex-1 flex items-center gap-2 md:gap-3 bg-purple-900/30 p-2 md:p-4 rounded-lg border border-purple-500/50 hover:border-purple-400 transition-all duration-300 hover:bg-purple-900/40 group cursor-pointer">
                 <Briefcase className="w-4 h-4 md:w-6 md:h-6 text-purple-400 flex-shrink-0 group-hover:text-purple-300 transition-colors" />
-                <span className="text-xs md:text-base text-white group-hover:text-purple-100">Automatizare Procese</span>
+                <span className="text-xs md:text-base text-white group-hover:text-purple-100">Optimizare Procese</span>
               </div>
             </div>
           </div>
-          {/* Contact Information */}
+
           <div className="space-y-2 md:space-y-6">
             <h3 className="font-semibold text-base md:text-xl text-white">Contact:</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6">
@@ -120,12 +118,11 @@ const Index = () => {
                 className="flex items-center gap-2 md:gap-3 text-white hover:text-purple-300 transition-colors text-xs md:text-base"
               >
                 <Globe className="w-3 h-3 md:w-5 md:h-5" />
-                <span>Vezi Site-ul Complet</span>
+                <span>Vezi Site-ul</span>
               </Link>
             </div>
           </div>
 
-          {/* CTA Button */}
           <div className="text-center pt-2 md:pt-6">
             <button 
               onClick={handleBooking}
@@ -159,7 +156,7 @@ const Index = () => {
                 tracking-wide
               "
             >
-              Programează un Audit AI Gratuit
+              Programează o Discuție Gratuită
             </button>
           </div>
         </CardContent>
