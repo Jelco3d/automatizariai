@@ -5,10 +5,10 @@ export const ServicesHero = ({
 }: {
   handleBooking: () => void;
 }) => {
-  return <div className="container mx-auto text-center relative flex flex-col h-[200px] py-0 px-0 rounded">
-      <h1 className="md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 text-3xl my-0 py-[2px]">
+  return <div className="container mx-auto px-4 py-16 text-center relative flex flex-col h-[300px]">
+      <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
         Serviciile Noastre
       </h1>
-      <p className="text-gray-300 max-w-3xl mt-auto font-semibold px-0 mx-0 my-[25px] text-lg">Soluții Complete De Automatizare AI AdaptateAfacerii Tale</p>
+      <p className="text-gray-300 max-w-3xl mx-auto mt-auto font-semibold px-0 text-xl">Soluții Complete De Automatizare AI Adaptate Nevoilor Afacerii Dumneavoastră</p>
     </div>;
 };

@@ -1,15 +1,17 @@
+
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link } from "react-router-dom";
+
 export function Navigation() {
   console.log("Rendering Navigation component");
   const handleBooking = () => {
     window.open('https://calendly.com/aiautomatizari/30min?month=2024-12', '_blank');
   };
-  return <div className="fixed top-0 left-0 right-0 z-50 flex md:justify-between justify-center items-center px-5 relative py-[3px]">
+  return <div className="fixed top-0 left-0 right-0 z-50 flex md:justify-between justify-center items-center px-5 py-2 relative">
       <Link to="/" className="flex items-center">
-        <img alt="AI Automatizari Logo" src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" className="h-26 md:h- w-auto object-contain rounded-sm" />
+        <img alt="AI Automatizari Logo" src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" className="h-16 md:h-12 w-auto rounded-3xl object-contain" />
       </Link>
       <Sheet>
         <SheetTrigger asChild>
