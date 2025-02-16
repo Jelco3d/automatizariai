@@ -1,28 +1,15 @@
-
-import { Menu } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-import { Link } from "react-router-dom"
-
+import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Link } from "react-router-dom";
 export function Navigation() {
-  console.log("Rendering Navigation component")
-  
+  console.log("Rendering Navigation component");
   const handleBooking = () => {
     window.open('https://calendly.com/aiautomatizari/30min?month=2024-12', '_blank');
   };
-
-  return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 py-2">
+  return <div className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 py-2">
       <Link to="/" className="flex items-center">
-        <img 
-          src="/lovable-uploads/e2e8e8bd-c965-4904-8ecd-8a5e701371ea.png" 
-          alt="AI Automatizari Logo" 
-          className="h-12 w-auto"
-        />
+        <img alt="AI Automatizari Logo" src="/lovable-uploads/24bc764d-8443-4b7c-9715-f88d0815c485.png" className="h-12 w-auto object-fill rounded-3xl" />
       </Link>
       <Sheet>
         <SheetTrigger asChild>
@@ -32,39 +19,23 @@ export function Navigation() {
         </SheetTrigger>
         <SheetContent className="w-[300px] bg-[#1A1F2C]/95 backdrop-blur-lg border-purple-500/20">
           <nav className="flex flex-col gap-4 mt-8">
-            <Link 
-              to="/website" 
-              className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
-            >
+            <Link to="/website" className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10">
               Acasă
             </Link>
-            <Link 
-              to="/services" 
-              className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
-            >
+            <Link to="/services" className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10">
               Servicii
             </Link>
-            <Link 
-              to="/about" 
-              className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
-            >
+            <Link to="/about" className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10">
               Despre Noi
             </Link>
-            <Link 
-              to="/portfolio" 
-              className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10"
-            >
+            <Link to="/portfolio" className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10">
               Portofoliu
             </Link>
-            <Button 
-              onClick={handleBooking}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white mt-4"
-            >
+            <Button onClick={handleBooking} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white mt-4">
               Programează Consultație
             </Button>
           </nav>
         </SheetContent>
       </Sheet>
-    </div>
-  )
+    </div>;
 }
