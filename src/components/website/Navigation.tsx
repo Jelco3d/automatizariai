@@ -16,7 +16,14 @@ export function Navigation() {
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50">
+    <div className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 py-2">
+      <Link to="/" className="flex items-center">
+        <img 
+          src="/lovable-uploads/e2e8e8bd-c965-4904-8ecd-8a5e701371ea.png" 
+          alt="AI Automatizari Logo" 
+          className="h-12 w-auto"
+        />
+      </Link>
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="bg-background/20 backdrop-blur-sm border-purple-500/50 hover:bg-purple-500/20">
