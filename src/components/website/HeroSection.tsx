@@ -1,12 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-
 export const HeroSection = () => {
   const handleBooking = () => {
     window.open('https://calendly.com/aiautomatizari/30min?month=2024-12', '_blank');
   };
-  return <div className="container mx-auto px-4 py-16 text-center relative">
+  return <div className="container mx-auto px-4 text-center relative py-0">
       <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 animate-[fade-in_1s_ease-out]">Automatizare Inteligentă Cu AI Pentru Afaceri</h1>
       <p className="text-sm md:text-3xl text-gray-300 max-w-3xl mx-auto mb-8 animate-[fade-in_1s_ease-out_0.3s]">🚀 Lasă AI-ul Să Lucreze Pentru Tine!   
 
