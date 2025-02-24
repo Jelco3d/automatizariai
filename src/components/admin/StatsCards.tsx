@@ -15,7 +15,7 @@ export function StatsCards() {
         <div className="flex items-center gap-4">
           <Clock className="h-8 w-8 text-purple-400" />
           <div>
-            <p className="text-sm text-gray-400">Scheduled</p>
+            <p className="text-sm text-slate-50">Scheduled</p>
             <p className="text-2xl font-bold text-gray-50">3</p>
           </div>
         </div>
