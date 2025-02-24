@@ -18,11 +18,11 @@ export function Sidebar() {
       </Link>
 
       <nav className="space-y-2">
-        <Link to="/admin" className="flex items-center gap-2 text-purple-400 bg-purple-500/10 p-2 rounded-lg">
+        <Link to="/admin" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 p-2 rounded-lg hover:bg-purple-500/10">
           <LayoutDashboard className="h-5 w-5" />
           Dashboard
         </Link>
-        <Link to="/admin/blog" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 p-2 rounded-lg hover:bg-purple-500/10">
+        <Link to="/admin/blog" className="flex items-center gap-2 text-purple-400 bg-purple-500/10 p-2 rounded-lg">
           <List className="h-5 w-5" />
           Blog Posts
         </Link>
