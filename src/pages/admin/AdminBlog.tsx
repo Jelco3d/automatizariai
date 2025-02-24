@@ -1,97 +1,45 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell,
-} from "@/components/ui/table";
-import {
-  LayoutDashboard,
-  List,
-  FilePlus,
-  Tag,
-  MessageSquare,
-  ChartBar,
-  Settings,
-  LogOut,
-  Edit,
-  Trash,
-  Eye,
-  Database,
-  FileText,
-  CheckSquare,
-  Search,
-  User,
-} from "lucide-react";
-
+import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from "@/components/ui/table";
+import { LayoutDashboard, List, FilePlus, Tag, MessageSquare, ChartBar, Settings, LogOut, Edit, Trash, Eye, Database, FileText, CheckSquare, Search, User } from "lucide-react";
 export default function AdminBlog() {
   const [searchTerm, setSearchTerm] = useState("");
-
-  return (
-    <div className="min-h-screen bg-[#0F1117] text-white flex">
+  return <div className="min-h-screen bg-[#0F1117] text-white flex">
       {/* Sidebar Navigation */}
       <aside className="w-64 bg-[#1A1F2C] border-r border-purple-500/20 p-4 hidden md:block">
         <Link to="/admin" className="flex items-center mb-8">
-          <img
-            src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png"
-            alt="Logo"
-            className="h-12 w-auto rounded-xl"
-          />
+          <img src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" alt="Logo" className="h-12 w-auto rounded-xl" />
         </Link>
 
         <nav className="space-y-2">
-          <Link
-            to="/admin"
-            className="flex items-center gap-2 text-gray-400 hover:text-purple-400 p-2 rounded-lg hover:bg-purple-500/10"
-          >
+          <Link to="/admin" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 p-2 rounded-lg hover:bg-purple-500/10">
             <LayoutDashboard className="h-5 w-5" />
             Dashboard
           </Link>
-          <Link
-            to="/admin/blog"
-            className="flex items-center gap-2 text-purple-400 bg-purple-500/10 p-2 rounded-lg"
-          >
+          <Link to="/admin/blog" className="flex items-center gap-2 text-purple-400 bg-purple-500/10 p-2 rounded-lg">
             <List className="h-5 w-5" />
             Blog Posts
           </Link>
-          <Button
-            className="w-full justify-start gap-2 bg-gradient-to-r from-purple-500 to-pink-500"
-          >
+          <Button className="w-full justify-start gap-2 bg-gradient-to-r from-purple-500 to-pink-500">
             <FilePlus className="h-5 w-5" />
             New Post
           </Button>
-          <Link
-            to="/admin/categories"
-            className="flex items-center gap-2 text-gray-400 hover:text-purple-400 p-2 rounded-lg hover:bg-purple-500/10"
-          >
+          <Link to="/admin/categories" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 p-2 rounded-lg hover:bg-purple-500/10">
             <Tag className="h-5 w-5" />
             Categories
           </Link>
-          <Link
-            to="/admin/comments"
-            className="flex items-center gap-2 text-gray-400 hover:text-purple-400 p-2 rounded-lg hover:bg-purple-500/10"
-          >
+          <Link to="/admin/comments" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 p-2 rounded-lg hover:bg-purple-500/10">
             <MessageSquare className="h-5 w-5" />
             Comments
           </Link>
-          <Link
-            to="/admin/analytics"
-            className="flex items-center gap-2 text-gray-400 hover:text-purple-400 p-2 rounded-lg hover:bg-purple-500/10"
-          >
+          <Link to="/admin/analytics" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 p-2 rounded-lg hover:bg-purple-500/10">
             <ChartBar className="h-5 w-5" />
             Analytics
           </Link>
-          <Link
-            to="/admin/settings"
-            className="flex items-center gap-2 text-gray-400 hover:text-purple-400 p-2 rounded-lg hover:bg-purple-500/10"
-          >
+          <Link to="/admin/settings" className="flex items-center gap-2 text-gray-400 hover:text-purple-400 p-2 rounded-lg hover:bg-purple-500/10">
             <Settings className="h-5 w-5" />
             Settings
           </Link>
@@ -151,13 +99,7 @@ export default function AdminBlog() {
           <div className="mb-6 flex gap-4">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <Input
-                type="search"
-                placeholder="Search posts..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-[#1A1F2C]/50 border-purple-500/20"
-              />
+              <Input type="search" placeholder="Search posts..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 bg-[#1A1F2C]/50 border-purple-500/20" />
             </div>
             <Button variant="outline" className="border-purple-500/20">
               Filter
@@ -177,9 +119,8 @@ export default function AdminBlog() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {[1, 2, 3].map((i) => (
-                  <TableRow key={i}>
-                    <TableCell className="font-medium">
+                {[1, 2, 3].map(i => <TableRow key={i}>
+                    <TableCell className="font-medium bg-black/0">
                       How AI is Changing Business
                     </TableCell>
                     <TableCell>Alex Ionescu</TableCell>
@@ -202,8 +143,7 @@ export default function AdminBlog() {
                         </Button>
                       </div>
                     </TableCell>
-                  </TableRow>
-                ))}
+                  </TableRow>)}
               </TableBody>
             </Table>
           </Card>
@@ -222,6 +162,5 @@ export default function AdminBlog() {
           </div>
         </footer>
       </div>
-    </div>
-  );
+    </div>;
 }
