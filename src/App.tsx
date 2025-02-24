@@ -15,6 +15,7 @@ import Categories from './pages/admin/Categories';
 import Comments from './pages/admin/Comments';
 import BlogAnalytics from './pages/admin/BlogAnalytics';
 import BlogSettings from './pages/admin/BlogSettings';
+import Dashboard from './pages/admin/Dashboard';
 
 const App = () => {
   console.log("Rendering App component");
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/gdpr" element={<GDPR />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/blog" element={<AdminBlog />} />
         <Route path="/admin/blog/new" element={<NewBlogPost />} />
         <Route path="/admin/categories" element={<Categories />} />
