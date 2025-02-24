@@ -23,7 +23,7 @@ export default function BlogSettings() {
             <h1 className="text-xl font-semibold">Blog Settings</h1>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" className="gap-2 border-purple-500/20">
+            <Button variant="outline" className="gap-2 border-purple-500/20 bg-white text-gray-950 font-medium">
               <RotateCcw className="h-4 w-4" />
               Reset
             </Button>
@@ -41,7 +41,7 @@ export default function BlogSettings() {
           <div className="col-span-12 md:col-span-3">
             <nav className="space-y-2">
               <Link to="#general">
-                <Button variant="ghost" className="w-full justify-start gap-2 hover:bg-purple-500/10">
+                <Button variant="ghost" className="w-full justify-start gap-2 bg-[#ac41e9]/0">
                   <Settings className="h-4 w-4" />
                   General Settings
                 </Button>
@@ -65,7 +65,7 @@ export default function BlogSettings() {
                 </Button>
               </Link>
               <Link to="#appearance">
-                <Button variant="ghost" className="w-full justify-start gap-2 hover:bg-purple-500/10">
+                <Button variant="ghost" className="w-full justify-start gap-2 bg-[#ac41e9]/0">
                   <Palette className="h-4 w-4" />
                   Appearance
                 </Button>
@@ -100,11 +100,11 @@ export default function BlogSettings() {
                     <Input placeholder="Enter blog title..." className="bg-[#1A1F2C] border-purple-500/20" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium bg-white/0">Blog Description</label>
+                    <label className="text-sm font-medium bg-slate-50">Blog Description</label>
                     <Textarea placeholder="Enter blog description..." className="bg-[#1A1F2C] border-purple-500/20" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Default Author</label>
+                    <label className="text-sm font-medium bg-gray-50">Default Author</label>
                     <Input placeholder="Select default author..." className="bg-[#1A1F2C] border-purple-500/20" />
                   </div>
                 </div>
@@ -114,17 +114,17 @@ export default function BlogSettings() {
             {/* SEO & Metadata */}
             <Card className="bg-[#1A1F2C] border-purple-500/20">
               <CardContent className="p-6 space-y-4">
-                <h2 className="text-xl font-semibold flex items-center gap-2">
+                <h2 className="text-xl font-semibold flex items-center gap-2 text-slate-50">
                   <Globe className="h-5 w-5" />
                   SEO & Metadata
                 </h2>
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Meta Title Template</label>
+                    <label className="text-sm font-medium bg-zinc-50">Meta Title Template</label>
                     <Input placeholder="%post_title% | %site_name%" className="bg-[#1A1F2C] border-purple-500/20" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Meta Description Template</label>
+                    <label className="text-sm font-medium bg-slate-50">Meta Description Template</label>
                     <Textarea placeholder="Enter meta description template..." className="bg-[#1A1F2C] border-purple-500/20" />
                   </div>
                 </div>
