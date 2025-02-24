@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,15 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from "@/components/ui/table";
 import { LayoutDashboard, List, FilePlus, Tag, MessageSquare, ChartBar, Settings, LogOut, Edit, Trash, Eye, Database, FileText, CheckSquare, Search, User } from "lucide-react";
-
 export default function AdminBlog() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-
   const handleNewPost = () => {
     navigate("/admin/blog/new");
   };
-
   return <div className="min-h-screen bg-[#0F1117] text-white flex">
       {/* Sidebar Navigation */}
       <aside className="w-64 bg-[#1A1F2C] border-r border-purple-500/20 p-4 hidden md:block">
@@ -109,7 +105,7 @@ export default function AdminBlog() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input type="search" placeholder="Search posts..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 bg-[#1A1F2C]/50 border-purple-500/20" />
             </div>
-            <Button variant="outline" className="border-purple-500/20">
+            <Button variant="outline" className="border-purple-500/20 bg-[#c605e9]">
               Filter
             </Button>
           </div>
