@@ -14,7 +14,7 @@ import {
   MessageSquare,
   Link as LinkIcon,
   Palette,
-  Robot,
+  Bot,
   Shield,
   HelpCircle,
   RotateCcw
@@ -106,7 +106,7 @@ export default function BlogSettings() {
                   variant="ghost" 
                   className="w-full justify-start gap-2 hover:bg-purple-500/10"
                 >
-                  <Robot className="h-4 w-4" />
+                  <Bot className="h-4 w-4" />
                   AI Tools
                 </Button>
               </Link>
