@@ -13,6 +13,7 @@ import AdminBlog from './pages/admin/AdminBlog';
 import NewBlogPost from './pages/admin/NewBlogPost';
 import Categories from './pages/admin/Categories';
 import Comments from './pages/admin/Comments';
+import BlogAnalytics from './pages/admin/BlogAnalytics';
 
 const App = () => {
   console.log("Rendering App component");
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/admin/blog/new" element={<NewBlogPost />} />
         <Route path="/admin/categories" element={<Categories />} />
         <Route path="/admin/blog/comments" element={<Comments />} />
+        <Route path="/admin/blog/analytics" element={<BlogAnalytics />} />
       </Routes>
     </Router>
   );
