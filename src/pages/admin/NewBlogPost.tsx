@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,10 +5,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ArrowLeft, Save, Eye, Settings, Sparkles, Calendar, Globe, Lock, HelpCircle, Image } from "lucide-react";
-
 export default function NewBlogPost() {
-  return (
-    <div className="min-h-screen bg-[#0F1117] text-white">
+  return <div className="min-h-screen bg-[#0F1117] text-white">
       {/* Header */}
       <header className="border-b border-purple-500/20 bg-[#1A1F2C] p-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -26,7 +23,7 @@ export default function NewBlogPost() {
             </nav>
           </div>
           <div className="flex items-center gap-3">
-            <Button variant="outline" className="gap-2 border-purple-500/20">
+            <Button variant="outline" className="gap-2 border-purple-500/20 font-bold text-zinc-950">
               <Save className="h-4 w-4" />
               Save Draft
             </Button>
@@ -48,16 +45,8 @@ export default function NewBlogPost() {
                 <span className="text-xs text-gray-400">45/70 characters</span>
               </div>
               <div className="relative">
-                <Input
-                  placeholder="Enter your blog post title..."
-                  className="bg-[#0F1117] border-purple-500/20 pr-10"
-                />
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  className="absolute right-2 top-1/2 -translate-y-1/2"
-                  title="Generate AI suggestions"
-                >
+                <Input placeholder="Enter your blog post title..." className="bg-[#0F1117] border-purple-500/20 pr-10" />
+                <Button variant="ghost" size="icon" className="absolute right-2 top-1/2 -translate-y-1/2" title="Generate AI suggestions">
                   <Sparkles className="h-4 w-4 text-purple-400" />
                 </Button>
               </div>
@@ -71,20 +60,17 @@ export default function NewBlogPost() {
               </div>
               <Card className="bg-[#1A1F2C]/50 border-purple-500/20">
                 <div className="border-b border-purple-500/20 p-2 flex items-center gap-2">
-                  <Button variant="ghost" size="sm" className="text-xs">
+                  <Button variant="ghost" size="sm" className="bg-[#000a00]/0 text-xs text-slate-50">
                     Generate Introduction
                   </Button>
-                  <Button variant="ghost" size="sm" className="text-xs">
+                  <Button variant="ghost" size="sm" className="text-xs text-slate-50">
                     Improve SEO
                   </Button>
-                  <Button variant="ghost" size="sm" className="text-xs">
+                  <Button variant="ghost" size="sm" className="text-xs text-slate-50">
                     Fix Grammar
                   </Button>
                 </div>
-                <Textarea
-                  placeholder="Start writing or click the AI suggestions button..."
-                  className="min-h-[400px] bg-transparent border-none focus:ring-0"
-                />
+                <Textarea placeholder="Start writing or click the AI suggestions button..." className="min-h-[400px] bg-transparent border-none focus:ring-0" />
               </Card>
             </div>
           </div>
@@ -93,11 +79,7 @@ export default function NewBlogPost() {
         {/* Right Settings Panel */}
         <Sheet>
           <SheetTrigger asChild>
-            <Button 
-              variant="ghost" 
-              size="icon"
-              className="fixed right-4 top-20 md:hidden"
-            >
+            <Button variant="ghost" size="icon" className="fixed right-4 top-20 md:hidden">
               <Settings className="h-5 w-5" />
             </Button>
           </SheetTrigger>
@@ -136,10 +118,7 @@ export default function NewBlogPost() {
                       <Calendar className="h-4 w-4" />
                       <span className="text-sm">Schedule</span>
                     </div>
-                    <Input
-                      type="datetime-local"
-                      className="w-40 bg-[#0F1117] border-purple-500/20"
-                    />
+                    <Input type="datetime-local" className="w-40 bg-[#0F1117] border-purple-500/20" />
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -158,14 +137,8 @@ export default function NewBlogPost() {
               <div className="space-y-4">
                 <h3 className="font-medium">Categories & Tags</h3>
                 <div className="space-y-2">
-                  <Input
-                    placeholder="Select category..."
-                    className="bg-[#0F1117] border-purple-500/20"
-                  />
-                  <Input
-                    placeholder="Add tags..."
-                    className="bg-[#0F1117] border-purple-500/20"
-                  />
+                  <Input placeholder="Select category..." className="bg-[#0F1117] border-purple-500/20" />
+                  <Input placeholder="Add tags..." className="bg-[#0F1117] border-purple-500/20" />
                   <Button variant="ghost" className="w-full gap-2 text-purple-400">
                     <Sparkles className="h-4 w-4" />
                     Auto-tag with AI
@@ -184,6 +157,5 @@ export default function NewBlogPost() {
           </SheetContent>
         </Sheet>
       </div>
-    </div>
-  );
+    </div>;
 }
