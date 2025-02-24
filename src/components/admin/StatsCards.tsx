@@ -34,7 +34,7 @@ export function StatsCards() {
           <ChartBar className="h-8 w-8 text-purple-400" />
           <div>
             <p className="text-sm text-gray-400">Total Views</p>
-            <p className="text-2xl font-bold">12.5K</p>
+            <p className="text-2xl font-bold text-slate-50">12.5K</p>
           </div>
         </div>
       </Card>
