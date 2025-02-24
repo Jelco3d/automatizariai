@@ -6,7 +6,7 @@ export function StatsCards() {
         <div className="flex items-center gap-4">
           <List className="h-8 w-8 text-purple-400" />
           <div>
-            <p className="text-sm text-gray-400">Total Posts</p>
+            <p className="text-sm text-slate-50">Total Posts</p>
             <p className="text-2xl font-bold text-zinc-50">24</p>
           </div>
         </div>
