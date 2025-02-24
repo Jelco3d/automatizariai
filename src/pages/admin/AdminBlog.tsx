@@ -1,12 +1,20 @@
+
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from "@/components/ui/table";
 import { LayoutDashboard, List, FilePlus, Tag, MessageSquare, ChartBar, Settings, LogOut, Edit, Trash, Eye, Database, FileText, CheckSquare, Search, User } from "lucide-react";
+
 export default function AdminBlog() {
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+
+  const handleNewPost = () => {
+    navigate("/admin/blog/new");
+  };
+
   return <div className="min-h-screen bg-[#0F1117] text-white flex">
       {/* Sidebar Navigation */}
       <aside className="w-64 bg-[#1A1F2C] border-r border-purple-500/20 p-4 hidden md:block">
@@ -23,7 +31,7 @@ export default function AdminBlog() {
             <List className="h-5 w-5" />
             Blog Posts
           </Link>
-          <Button className="w-full justify-start gap-2 bg-gradient-to-r from-purple-500 to-pink-500">
+          <Button onClick={handleNewPost} className="w-full justify-start gap-2 bg-gradient-to-r from-purple-500 to-pink-500">
             <FilePlus className="h-5 w-5" />
             New Post
           </Button>
