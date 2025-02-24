@@ -8,6 +8,7 @@ import Portfolio from './pages/Portfolio';
 import Terms from './pages/Terms';
 import GDPR from './pages/GDPR';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Blog from './pages/Blog';
 
 const App = () => {
   console.log("Rendering App component");
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/terms" element={<Terms />} />
         <Route path="/gdpr" element={<GDPR />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/blog" element={<Blog />} />
       </Routes>
     </Router>
   );
