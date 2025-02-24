@@ -25,7 +25,7 @@ export function StatsCards() {
           <MessageSquare className="h-8 w-8 text-purple-400" />
           <div>
             <p className="text-sm text-gray-400">Comments</p>
-            <p className="text-2xl font-bold">156</p>
+            <p className="text-2xl font-bold text-slate-50">156</p>
           </div>
         </div>
       </Card>
