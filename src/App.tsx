@@ -11,6 +11,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Blog from './pages/Blog';
 import AdminBlog from './pages/admin/AdminBlog';
 import NewBlogPost from './pages/admin/NewBlogPost';
+import Categories from './pages/admin/Categories';
 
 const App = () => {
   console.log("Rendering App component");
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/admin/blog" element={<AdminBlog />} />
         <Route path="/admin/blog/new" element={<NewBlogPost />} />
+        <Route path="/admin/categories" element={<Categories />} />
       </Routes>
     </Router>
   );
