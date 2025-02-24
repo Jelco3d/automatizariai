@@ -1,25 +1,12 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { 
-  ArrowLeft, 
-  Search, 
-  Shield, 
-  MessageSquare, 
-  AlertTriangle,
-  CheckCircle2,
-  XCircle,
-  Flag,
-  MoreVertical 
-} from "lucide-react";
-
+import { ArrowLeft, Search, Shield, MessageSquare, AlertTriangle, CheckCircle2, XCircle, Flag, MoreVertical } from "lucide-react";
 export default function Comments() {
-  return (
-    <div className="min-h-screen bg-[#0F1117] text-white">
+  return <div className="min-h-screen bg-[#0F1117] text-white">
       {/* Header */}
       <header className="border-b border-purple-500/20 bg-[#1A1F2C] p-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -31,7 +18,7 @@ export default function Comments() {
             </Link>
             <h1 className="text-xl font-semibold">Comments Management</h1>
           </div>
-          <Button variant="outline" className="gap-2 border-purple-500/20">
+          <Button variant="outline" className="gap-2 border-purple-500/20 text-gray-900">
             <Shield className="h-4 w-4" />
             Update AI Moderation Rules
           </Button>
@@ -87,10 +74,7 @@ export default function Comments() {
                 <CardTitle>Recent Comments</CardTitle>
                 <div className="relative w-full sm:w-96">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <Input 
-                    placeholder="Search comments..." 
-                    className="pl-10 bg-[#1A1F2C] border-purple-500/20"
-                  />
+                  <Input placeholder="Search comments..." className="pl-10 bg-[#1A1F2C] border-purple-500/20" />
                 </div>
               </div>
             </CardHeader>
@@ -137,13 +121,13 @@ export default function Comments() {
                     <TableCell>2h ago</TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <Button variant="ghost" size="icon">
+                        <Button variant="ghost" size="icon" className="text-zinc-50">
                           <Flag className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="icon">
+                        <Button variant="ghost" size="icon" className="text-gray-50">
                           <MessageSquare className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="icon">
+                        <Button variant="ghost" size="icon" className="text-gray-50">
                           <MoreVertical className="h-4 w-4" />
                         </Button>
                       </div>
@@ -197,6 +181,5 @@ export default function Comments() {
           </Card>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 }
