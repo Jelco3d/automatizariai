@@ -31,7 +31,7 @@ export default function Comments() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <Card className="bg-[#1A1F2C] border-purple-500/20">
               <CardHeader>
-                <CardTitle className="text-lg">Total Comments</CardTitle>
+                <CardTitle className="text-lg text-slate-50">Total Comments</CardTitle>
                 <CardDescription>All time</CardDescription>
               </CardHeader>
               <CardContent>
@@ -40,7 +40,7 @@ export default function Comments() {
             </Card>
             <Card className="bg-[#1A1F2C] border-purple-500/20">
               <CardHeader>
-                <CardTitle className="text-lg">Pending Review</CardTitle>
+                <CardTitle className="text-lg text-gray-50">Pending Review</CardTitle>
                 <CardDescription>Needs moderation</CardDescription>
               </CardHeader>
               <CardContent>
@@ -49,7 +49,7 @@ export default function Comments() {
             </Card>
             <Card className="bg-[#1A1F2C] border-purple-500/20">
               <CardHeader>
-                <CardTitle className="text-lg">Flagged</CardTitle>
+                <CardTitle className="text-lg text-gray-50">Flagged</CardTitle>
                 <CardDescription>Potential violations</CardDescription>
               </CardHeader>
               <CardContent>
@@ -58,7 +58,7 @@ export default function Comments() {
             </Card>
             <Card className="bg-[#1A1F2C] border-purple-500/20">
               <CardHeader>
-                <CardTitle className="text-lg">AI Approved</CardTitle>
+                <CardTitle className="text-lg text-slate-50">AI Approved</CardTitle>
                 <CardDescription>Auto-moderated</CardDescription>
               </CardHeader>
               <CardContent>
