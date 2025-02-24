@@ -5,7 +5,7 @@ import { BlogContent } from "@/components/blog/BlogContent";
 
 export default function Blog() {
   return (
-    <div className="min-h-screen bg-[#0F1117] text-white">
+    <div className="min-h-screen bg-white text-black">
       <Navigation />
       <BlogContent />
       <Footer />
