@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -6,7 +7,7 @@ export const CTASection = () => {
   console.log("Rendering CTASection");
   
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/30min', '_blank');
+    window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
   };
   
   return (

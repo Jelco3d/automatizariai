@@ -41,7 +41,7 @@ const AboutUs = () => {
                   </p>
                   <div className="pt-4 flex justify-center">
                     <Button 
-                      onClick={() => window.open('https://calendly.com/aiautomatizari/30min?month=2024-12', '_blank')}
+                      onClick={() => window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank')}
                       className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
                     >
                       Programează o Consultație
@@ -143,7 +143,7 @@ const AboutUs = () => {
       >
         <h2 className="text-2xl md:text-3xl font-bold mb-6">Gata să-ți Transformi Afacerea?</h2>
         <Button 
-          onClick={() => window.open('https://calendly.com/aiautomatizari/30min?month=2024-12', '_blank')}
+          onClick={() => window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank')}
           className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
         >
           Programează o Consultație

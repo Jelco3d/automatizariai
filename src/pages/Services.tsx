@@ -13,7 +13,7 @@ const Services = () => {
   console.log("Rendering Services page");
 
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/30min?month=2024-12', '_blank');
+    window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
   };
 
   return (

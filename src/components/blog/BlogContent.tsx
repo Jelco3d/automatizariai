@@ -180,7 +180,7 @@ export function BlogContent() {
       <div className="fixed bottom-8 right-8">
         <Button 
           className="bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg"
-          onClick={() => window.open('https://calendly.com/aiautomatizari/30min?month=2024-12', '_blank')}
+          onClick={() => window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank')}
         >
           Programează O Consultație Strategică
           <ArrowRight className="ml-2 h-4 w-4" />
