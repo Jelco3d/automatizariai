@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // Store API key in memory (in a production app, this should be handled more securely)
-let apiKey = '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';
+let apiKey = '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';  // Replace with your actual OpenAI API key
 const organizationId = 'org-qRG6gdWaDdd5J0Rthm0HWjaY';
 
 export const setOpenAiApiKey = (key: string) => {

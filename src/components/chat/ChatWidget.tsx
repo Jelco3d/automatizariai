@@ -1,11 +1,12 @@
 
 import { useState, useRef, useEffect } from 'react';
-import { useOpenAi, ChatMessage } from '@/utils/openAiService';
+import { useOpenAi, ChatMessage, setOpenAiApiKey } from '@/utils/openAiService';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { X, MessageCircle, Send, Bot, ArrowRight, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 export const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,11 +17,24 @@ export const ChatWidget = () => {
     }
   ]);
   const [inputValue, setInputValue] = useState('');
+  const [apiKeyInput, setApiKeyInput] = useState('');
+  const [showApiKeyInput, setShowApiKeyInput] = useState(false);
   const { callOpenAi, isLoading, error } = useOpenAi();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
   const handleBooking = () => {
     window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
+  };
+
+  const handleUpdateApiKey = () => {
+    if (apiKeyInput.trim()) {
+      setOpenAiApiKey(apiKeyInput.trim());
+      setShowApiKeyInput(false);
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: 'API key updated successfully. How can I help you today?'
+      }]);
+    }
   };
 
   // Scroll to bottom of messages whenever messages change
@@ -84,12 +98,48 @@ export const ChatWidget = () => {
                 <Bot size={20} />
                 <h3 className="font-medium">AI Automatizari Assistant</h3>
               </div>
-              <X 
-                className="cursor-pointer hover:text-gray-200 transition-colors" 
-                size={18} 
-                onClick={() => setIsOpen(false)}
-              />
+              <div className="flex items-center gap-2">
+                <button 
+                  onClick={() => setShowApiKeyInput(!showApiKeyInput)} 
+                  className="text-xs text-white/70 hover:text-white"
+                >
+                  {showApiKeyInput ? 'Hide API' : 'API Key'}
+                </button>
+                <X 
+                  className="cursor-pointer hover:text-gray-200 transition-colors" 
+                  size={18} 
+                  onClick={() => setIsOpen(false)}
+                />
+              </div>
             </div>
+
+            {/* API Key Input */}
+            <AnimatePresence>
+              {showApiKeyInput && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  className="border-b border-gray-200 dark:border-gray-700 overflow-hidden"
+                >
+                  <div className="p-4 space-y-2">
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      Enter your OpenAI API key to connect the chatbot:
+                    </div>
+                    <div className="flex gap-2">
+                      <Input 
+                        type="password"
+                        value={apiKeyInput} 
+                        onChange={e => setApiKeyInput(e.target.value)}
+                        placeholder="sk-..." 
+                        className="text-xs"
+                      />
+                      <Button size="sm" onClick={handleUpdateApiKey}>Apply</Button>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -114,9 +164,22 @@ export const ChatWidget = () => {
                 </div>
               ))}
               {error && (
-                <div className="bg-red-100 dark:bg-red-900/30 p-2 rounded text-sm text-red-600 dark:text-red-400">
-                  {error}
-                </div>
+                <Alert variant="destructive" className="text-xs">
+                  <AlertTitle>Error</AlertTitle>
+                  <AlertDescription className="break-words">
+                    {error}
+                    {error.includes('API key') && (
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="mt-2 w-full"
+                        onClick={() => setShowApiKeyInput(true)}
+                      >
+                        Update API Key
+                      </Button>
+                    )}
+                  </AlertDescription>
+                </Alert>
               )}
               <div ref={messagesEndRef} />
             </div>
