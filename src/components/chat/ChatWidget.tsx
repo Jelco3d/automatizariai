@@ -16,7 +16,7 @@ export const ChatWidget = () => {
     }
   ]);
   const [inputValue, setInputValue] = useState('');
-  const { callOpenAi, isLoading } = useOpenAi();
+  const { callOpenAi, isLoading, error } = useOpenAi();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
   const handleBooking = () => {
@@ -113,6 +113,11 @@ export const ChatWidget = () => {
                   </div>
                 </div>
               ))}
+              {error && (
+                <div className="bg-red-100 dark:bg-red-900/30 p-2 rounded text-sm text-red-600 dark:text-red-400">
+                  {error}
+                </div>
+              )}
               <div ref={messagesEndRef} />
             </div>
 
