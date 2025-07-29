@@ -33,9 +33,6 @@ export function Navigation() {
             <Link to="/portfolio" className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10">
               Portofoliu
             </Link>
-            <Link to="/blog" className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10">
-              Blog
-            </Link>
             <Button onClick={handleBooking} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white mt-4">
               Programează Consultație
             </Button>
