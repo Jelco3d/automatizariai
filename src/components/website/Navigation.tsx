@@ -21,7 +21,7 @@ export function Navigation() {
         </SheetTrigger>
         <SheetContent className="w-[300px] bg-[#1A1F2C]/95 backdrop-blur-lg border-purple-500/20">
           <nav className="flex flex-col gap-4 mt-8">
-            <Link to="/website" className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10">
+            <Link to="/" className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10">
               Acasă
             </Link>
             <Link to="/services" className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10">
