@@ -8,7 +8,7 @@ import { BenefitsSection } from "@/components/website/BenefitsSection";
 import { TestimonialsSection } from "@/components/website/TestimonialsSection";
 import { CTASection } from "@/components/website/CTASection";
 import { TechStackSection } from "@/components/website/TechStackSection";
-import { ChatWidget } from "@/components/chat/ChatWidget";
+
 
 const Website = () => {
   console.log("Rendering Website page");
@@ -29,7 +29,7 @@ const Website = () => {
       <TestimonialsSection />
       <CTASection />
       <Footer />
-      <ChatWidget />
+      
 
       {/* Navigation back to card */}
       <div className="container mx-auto px-4 py-8 text-center">
