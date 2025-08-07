@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ChevronLeft, ChevronRight, ExternalLink, Star } from "lucide-react";
 
 interface Product {
   id: string;
@@ -16,115 +20,126 @@ interface ProductSlideshowProps {
   title?: string;
 }
 
-export const ProductSlideshow = ({ products, title }: ProductSlideshowProps) => {
-  const handleProductClick = (product: Product) => {
-    if (product.url && product.url !== '#') {
-      window.open(product.url, '_blank');
-    }
+export const ProductSlideshow = ({ products, title = "Produse recomandate" }: ProductSlideshowProps) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % products.length);
   };
 
-  if (!products || products.length === 0) {
-    return null;
-  }
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
+  };
+
+  if (!products || products.length === 0) return null;
+
+  const currentProduct = products[currentIndex];
 
   return (
-    <div className="w-full bg-background/5 backdrop-blur-sm rounded-xl p-6">
-      {title && (
-        <h3 className="text-xl font-semibold text-foreground mb-6 text-center">
-          {title}
-        </h3>
-      )}
+    <div className="w-full space-y-3 mt-2">
+      <h4 className="text-sm font-medium text-gray-200">{title}</h4>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer group"
-            onClick={() => handleProductClick(product)}
-          >
-            {/* Product Image */}
-            <div className="aspect-square p-4 bg-gray-50 flex items-center justify-center">
+      <Card className="bg-gray-800/50 border-gray-600">
+        <CardContent className="p-0">
+          {/* Gallery Section */}
+          <div className="relative bg-gray-900/50">
+            <div className="aspect-[3/2] w-full max-w-[180px] mx-auto overflow-hidden rounded-lg">
               <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                src={currentProduct.image}
+                alt={currentProduct.name}
+                className="w-full h-full object-cover"
                 onError={(e) => {
-                  e.currentTarget.src = '/placeholder.svg';
+                  const target = e.target as HTMLImageElement;
+                  target.src = "/placeholder.svg";
                 }}
               />
             </div>
-            
-            {/* Product Info */}
-            <div className="p-3 space-y-2">
-              {/* Product Name */}
-              <h4 className="text-sm font-medium text-gray-900 line-clamp-2 min-h-[2.5rem]">
-                {product.name}
-              </h4>
-              
-              {/* Price */}
+
+            {/* Navigation Arrows */}
+            {products.length > 1 && (
+              <>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 p-0 bg-black/50 border-gray-500 hover:bg-black/70 backdrop-blur-sm"
+                  onClick={prevSlide}
+                >
+                  <ChevronLeft className="w-5 h-5 text-white" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 p-0 bg-black/50 border-gray-500 hover:bg-black/70 backdrop-blur-sm"
+                  onClick={nextSlide}
+                >
+                  <ChevronRight className="w-5 h-5 text-white" />
+                </Button>
+              </>
+            )}
+
+            {/* Slide Indicators */}
+            {products.length > 1 && (
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {products.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`w-3 h-3 rounded-full transition-all ${
+                      index === currentIndex ? "bg-orange-400 shadow-lg" : "bg-white/50"
+                    }`}
+                    onClick={() => setCurrentIndex(index)}
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* Stock Badge */}
+            <div className="absolute top-3 right-3">
+              <Badge 
+                variant={currentProduct.inStock ? "default" : "destructive"}
+                className="text-xs shadow-lg"
+              >
+                {currentProduct.inStock ? "În stoc" : "Stoc epuizat"}
+              </Badge>
+            </div>
+          </div>
+
+          {/* Product Info Section */}
+          <div className="p-4 space-y-3">
+            <h5 className="text-base font-semibold text-white line-clamp-2">
+              {currentProduct.name}
+            </h5>
+
+            {/* Price Section */}
+            <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="text-lg font-bold text-gray-900">
-                  € {product.price}
+                <span className="text-xl font-bold text-orange-400">
+                  {currentProduct.price}
                 </span>
-                {product.originalPrice && (
-                  <span className="text-sm text-gray-500 line-through">
-                    € {product.originalPrice}
+                {currentProduct.originalPrice && (
+                  <span className="text-sm text-gray-400 line-through">
+                    {currentProduct.originalPrice}
                   </span>
                 )}
               </div>
-              
-              {/* Store/Seller */}
-              <div className="text-xs text-gray-600">
-                AutoShop.ro
-              </div>
-              
-              {/* Shipping */}
-              <div className="text-xs text-gray-500">
-                + € 6,90 shipping
-              </div>
-              
-              {/* Rating */}
-              {product.rating && (
+              {currentProduct.rating && (
                 <div className="flex items-center gap-1">
-                  <div className="flex text-yellow-400">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-xs">
-                        {i < Math.floor(product.rating!) ? '★' : '☆'}
-                      </span>
-                    ))}
-                  </div>
-                  <span className="text-xs text-gray-500">
-                    ({Math.floor(product.rating * 10)})
-                  </span>
+                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                 </div>
               )}
-              
-              {/* Stock Status */}
-              <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full ${product.inStock ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                <span className="text-xs text-gray-600">
-                  {product.inStock ? 'În stoc' : 'Stoc epuizat'}
-                </span>
-              </div>
-              
-              {/* Compare/Buy Button */}
-              <div className="pt-2">
-                <button className="w-full text-xs bg-blue-600 text-white py-2 px-3 rounded hover:bg-blue-700 transition-colors">
-                  Cumpără acum
-                </button>
-              </div>
             </div>
+
+            {/* Action Button */}
+            <Button
+              size="sm"
+              className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-medium"
+              onClick={() => window.open(currentProduct.url, '_blank')}
+            >
+              <ExternalLink className="w-3 h-3 mr-2" />
+              Cumpără acum
+            </Button>
           </div>
-        ))}
-      </div>
-      
-      {products.length > 4 && (
-        <div className="text-center mt-6">
-          <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-            Vezi toate produsele →
-          </button>
-        </div>
-      )}
+        </CardContent>
+      </Card>
     </div>
   );
 };

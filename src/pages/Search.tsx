@@ -3,143 +3,68 @@ import { SearchBar } from "@/components/SearchBar";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { ChatWidget } from "@/components/chat/ChatWidget";
-import { ProductSlideshow } from "@/components/chat/ProductSlideshow";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Bot, Zap, Users, TrendingUp } from "lucide-react";
 
-interface Product {
-  id: string;
-  name: string;
-  price: string;
-  originalPrice?: string;
-  image: string;
-  rating?: number;
-  inStock: boolean;
-  url: string;
-}
-
-// Function to extract product data from webhook response
-const extractProductsFromText = (text: string): Product[] => {
-  const urlRegex = /(https?:\/\/[^\s]+)/g;
-  const urls = text.match(urlRegex) || [];
-  
-  const products: Product[] = [];
-  
-  // Look for Romanian product patterns
-  const productPatterns = [
-    /([A-Za-z0-9\s\-\/]+?)\s+la\s+prețul\s+de\s+(\d+(?:[.,]\d+)?)\s*lei/gi,
-    /([A-Za-z0-9\s\-\/]+?)\s*[—–-]\s*(\d+(?:[.,]\d+)?)\s*lei/gi,
-    /([A-Za-z0-9\s\-\/]+?)\s+costă\s+(\d+(?:[.,]\d+)?)\s*lei/gi,
-    /([A-Za-z0-9\s\-\/]+?)\s+preț:\s*(\d+(?:[.,]\d+)?)\s*lei/gi,
-    /^([A-Za-z0-9\s\-\/]+?)[\n\r]*(\d+(?:[.,]\d+)?)\s*(?:RON|lei)/gmi
-  ];
-  
-  let foundProducts = false;
-  
-  for (const pattern of productPatterns) {
-    const matches = [...text.matchAll(pattern)];
-    
-    if (matches.length > 0) {
-      foundProducts = true;
-      matches.forEach((match, index) => {
-        const [, name, price] = match;
-        const productUrl = urls[index] || '#';
-        const cleanName = name.trim().replace(/^(avem|găsit|baterie|piesa?|produs)\s*/i, '');
-        
-        products.push({
-          id: `product-${index}`,
-          name: cleanName,
-          price: price.includes('RON') ? price : `${price} RON`,
-          originalPrice: undefined,
-          image: `/lovable-uploads/${[
-            '24bc764d-8443-4b7c-9715-f88d0815c485.png',
-            '5756f75e-1758-412b-9390-0cfa1f14bbc6.png',
-            '578e533f-92e8-4bf5-a4f5-5f859a59ca0f.png',
-            '6d88c142-2eb2-4748-beed-6a725d1dc7e1.png'
-          ][index % 4]}`,
-          rating: 4 + Math.random(),
-          inStock: true,
-          url: productUrl
-        });
-      });
-      break;
-    }
+const searchResults = [
+  {
+    id: 1,
+    title: "Automatizare Procese Business",
+    description: "Soluții complete de automatizare pentru optimizarea proceselor de afaceri și creșterea eficienței operaționale.",
+    category: "Automatizare",
+    tags: ["RPA", "Workflow", "Eficiență"],
+    icon: Zap,
+    link: "/services"
+  },
+  {
+    id: 2,
+    title: "Chatbot-uri AI Personalizate",
+    description: "Dezvoltăm chatbot-uri inteligente pentru suport clienți 24/7 și automatizarea comunicării.",
+    category: "AI Solutions",
+    tags: ["Chatbot", "AI", "Suport Clienți"],
+    icon: Bot,
+    link: "/services"
+  },
+  {
+    id: 3,
+    title: "Analize Predictive",
+    description: "Utilizăm machine learning pentru predicții precise și luare de decizii bazate pe date.",
+    category: "Analytics",
+    tags: ["ML", "Predicții", "Business Intelligence"],
+    icon: TrendingUp,
+    link: "/services"
+  },
+  {
+    id: 4,
+    title: "Consultanță AI Strategy",
+    description: "Strategii personalizate de implementare AI pentru transformarea digitală a afacerii tale.",
+    category: "Consultanță",
+    tags: ["Strategie", "Transformare Digitală", "AI"],
+    icon: Users,
+    link: "/services"
   }
-  
-  // Special handling for webhook output format with separated lines
-  if (!foundProducts) {
-    const lines = text.split(/[\n\r]+/).map(line => line.trim()).filter(line => line.length > 0);
-    
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      const priceMatch = line.match(/(.+?)\s+(\d+(?:[.,]\d+)?)\s*(RON|lei)/i);
-      if (priceMatch) {
-        const [, name, price, currency] = priceMatch;
-        const productUrl = urls[products.length] || '#';
-        
-        products.push({
-          id: `product-${products.length}`,
-          name: name.trim(),
-          price: `${price} ${currency.toUpperCase() === 'LEI' ? 'RON' : currency}`,
-          originalPrice: undefined,
-          image: `/lovable-uploads/${[
-            '24bc764d-8443-4b7c-9715-f88d0815c485.png',
-            '5756f75e-1758-412b-9390-0cfa1f14bbc6.png',
-            '578e533f-92e8-4bf5-a4f5-5f859a59ca0f.png',
-            '6d88c142-2eb2-4748-beed-6a725d1dc7e1.png'
-          ][products.length % 4]}`,
-          rating: 4 + Math.random(),
-          inStock: true,
-          url: productUrl
-        });
-      }
-    }
-  }
-  
-  return products;
-};
+];
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState("");
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [filteredResults, setFilteredResults] = useState(searchResults);
 
-  const handleSearch = async (value: string) => {
+  const handleSearch = (value: string) => {
     setSearchValue(value);
-    
     if (!value.trim()) {
-      setProducts([]);
+      setFilteredResults(searchResults);
       return;
     }
 
-    setIsLoading(true);
-    try {
-      const response = await fetch('https://ejelco8.app.n8n.cloud/webhook-test/a2020483-44a2-4eff-9bfd-b6b73e42fc54', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          message: value,
-          vin: "" 
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      let responseText = await response.text();
-      console.log("Webhook response:", responseText);
-
-      const extractedProducts = extractProductsFromText(responseText);
-      setProducts(extractedProducts);
-    } catch (error) {
-      console.error('Error calling webhook:', error);
-      setProducts([]);
-    } finally {
-      setIsLoading(false);
-    }
+    const filtered = searchResults.filter(result =>
+      result.title.toLowerCase().includes(value.toLowerCase()) ||
+      result.description.toLowerCase().includes(value.toLowerCase()) ||
+      result.category.toLowerCase().includes(value.toLowerCase()) ||
+      result.tags.some(tag => tag.toLowerCase().includes(value.toLowerCase()))
+    );
+    setFilteredResults(filtered);
   };
 
   const handleBooking = () => {
@@ -173,50 +98,70 @@ export default function Search() {
       {/* Results Section */}
       <section className="pb-16 px-4">
         <div className="container mx-auto max-w-6xl">
-          {searchValue && (
-            <div className="mb-8">
-              <h2 className="text-2xl font-semibold text-foreground mb-2">
-                Rezultate pentru "{searchValue}"
-              </h2>
-            </div>
-          )}
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold text-foreground mb-2">
+              {searchValue ? `Rezultate pentru "${searchValue}"` : 'Toate Serviciile'}
+            </h2>
+            <p className="text-muted-foreground">
+              {filteredResults.length} {filteredResults.length === 1 ? 'rezultat găsit' : 'rezultate găsite'}
+            </p>
+          </div>
 
-          {isLoading ? (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-4">⏳</div>
-              <h3 className="text-xl font-semibold text-foreground mb-2">
-                Se caută produse...
-              </h3>
-              <p className="text-muted-foreground">
-                Te rugăm să aștepți în timp ce găsim produsele potrivite pentru tine
-              </p>
-            </div>
-          ) : searchValue && products.length === 0 ? (
+          {filteredResults.length === 0 ? (
             <div className="text-center py-16">
               <div className="text-6xl mb-4">🔍</div>
               <h3 className="text-xl font-semibold text-foreground mb-2">
-                Nu am găsit produse
+                Nu am găsit rezultate
               </h3>
               <p className="text-muted-foreground mb-8">
-                Încearcă să cauți cu alți termeni
+                Încearcă să cauți cu alți termeni sau explorează toate serviciile noastre
               </p>
+              <Button onClick={() => handleSearch("")} variant="outline">
+                Afișează Toate Serviciile
+              </Button>
             </div>
-          ) : products.length > 0 ? (
-            <div className="max-w-4xl mx-auto">
-              <ProductSlideshow 
-                products={products} 
-                title="Produse găsite pentru căutarea ta"
-              />
-            </div>
-          ) : !searchValue && (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-xl font-semibold text-foreground mb-2">
-                Căutare Produse Auto
-              </h3>
-              <p className="text-muted-foreground">
-                Introdu termenul de căutare pentru a găsi produsele de care ai nevoie
-              </p>
+          ) : (
+            <div className="grid md:grid-cols-2 gap-6">
+              {filteredResults.map((result) => {
+                const IconComponent = result.icon;
+                return (
+                  <Card key={result.id} className="bg-background/10 backdrop-blur-md border-white/20 hover:bg-background/20 transition-all duration-300 group">
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 rounded-lg bg-primary/10">
+                            <IconComponent className="h-6 w-6 text-primary" />
+                          </div>
+                          <div>
+                            <Badge variant="secondary" className="mb-2">
+                              {result.category}
+                            </Badge>
+                            <CardTitle className="text-xl text-foreground group-hover:text-primary transition-colors">
+                              {result.title}
+                            </CardTitle>
+                          </div>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-muted-foreground mb-4 text-base">
+                        {result.description}
+                      </CardDescription>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {result.tags.map((tag) => (
+                          <Badge key={tag} variant="outline" className="text-xs">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                      <Button className="w-full group-hover:bg-primary/90 transition-colors">
+                        Află Mai Multe
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           )}
         </div>
