@@ -3,6 +3,7 @@ import { SearchBar } from "@/components/SearchBar";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { ChatWidget } from "@/components/chat/ChatWidget";
+import { MessageRenderer } from "@/components/chat/MessageRenderer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -49,22 +50,16 @@ const searchResults = [
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState("");
-  const [filteredResults, setFilteredResults] = useState(searchResults);
+  const [searchResults, setSearchResults] = useState<string>("");
+  const [hasSearched, setHasSearched] = useState(false);
 
-  const handleSearch = (value: string) => {
+  const handleSearchChange = (value: string) => {
     setSearchValue(value);
-    if (!value.trim()) {
-      setFilteredResults(searchResults);
-      return;
-    }
+  };
 
-    const filtered = searchResults.filter(result =>
-      result.title.toLowerCase().includes(value.toLowerCase()) ||
-      result.description.toLowerCase().includes(value.toLowerCase()) ||
-      result.category.toLowerCase().includes(value.toLowerCase()) ||
-      result.tags.some(tag => tag.toLowerCase().includes(value.toLowerCase()))
-    );
-    setFilteredResults(filtered);
+  const handleSearchResults = (results: string) => {
+    setSearchResults(results);
+    setHasSearched(true);
   };
 
   const handleBooking = () => {
@@ -89,7 +84,8 @@ export default function Search() {
           <div className="max-w-2xl mx-auto mb-16">
             <SearchBar 
               value={searchValue} 
-              onChange={handleSearch} 
+              onChange={handleSearchChange}
+              onSearch={handleSearchResults}
             />
           </div>
         </div>
@@ -98,70 +94,24 @@ export default function Search() {
       {/* Results Section */}
       <section className="pb-16 px-4">
         <div className="container mx-auto max-w-6xl">
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-foreground mb-2">
-              {searchValue ? `Rezultate pentru "${searchValue}"` : 'Toate Serviciile'}
-            </h2>
-            <p className="text-muted-foreground">
-              {filteredResults.length} {filteredResults.length === 1 ? 'rezultat găsit' : 'rezultate găsite'}
-            </p>
-          </div>
-
-          {filteredResults.length === 0 ? (
+          {hasSearched ? (
+            <div className="mb-8">
+              <h2 className="text-2xl font-semibold text-foreground mb-2">
+                Rezultate pentru "{searchValue}"
+              </h2>
+              <div className="mt-6">
+                <MessageRenderer text={searchResults} isUser={false} />
+              </div>
+            </div>
+          ) : (
             <div className="text-center py-16">
               <div className="text-6xl mb-4">🔍</div>
               <h3 className="text-xl font-semibold text-foreground mb-2">
-                Nu am găsit rezultate
+                Caută piese auto
               </h3>
               <p className="text-muted-foreground mb-8">
-                Încearcă să cauți cu alți termeni sau explorează toate serviciile noastre
+                Introdu termenul de căutare în bara de mai sus pentru a găsi piese auto
               </p>
-              <Button onClick={() => handleSearch("")} variant="outline">
-                Afișează Toate Serviciile
-              </Button>
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 gap-6">
-              {filteredResults.map((result) => {
-                const IconComponent = result.icon;
-                return (
-                  <Card key={result.id} className="bg-background/10 backdrop-blur-md border-white/20 hover:bg-background/20 transition-all duration-300 group">
-                    <CardHeader>
-                      <div className="flex items-start justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="p-2 rounded-lg bg-primary/10">
-                            <IconComponent className="h-6 w-6 text-primary" />
-                          </div>
-                          <div>
-                            <Badge variant="secondary" className="mb-2">
-                              {result.category}
-                            </Badge>
-                            <CardTitle className="text-xl text-foreground group-hover:text-primary transition-colors">
-                              {result.title}
-                            </CardTitle>
-                          </div>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-muted-foreground mb-4 text-base">
-                        {result.description}
-                      </CardDescription>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {result.tags.map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                      <Button className="w-full group-hover:bg-primary/90 transition-colors">
-                        Află Mai Multe
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                );
-              })}
             </div>
           )}
         </div>

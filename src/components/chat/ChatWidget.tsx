@@ -55,7 +55,7 @@ export const ChatWidget = () => {
 
     try {
       // Send message to n8n webhook
-      const response = await fetch('https://ejelco8.app.n8n.cloud/webhook-test/a2020483-44a2-4eff-9bfd-b6b73e42fc54', {
+      const response = await fetch('https://ejelco8.app.n8n.cloud/webhook/a2020483-44a2-4eff-9bfd-b6b73e42fc54', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
