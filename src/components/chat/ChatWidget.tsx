@@ -142,8 +142,8 @@ export const ChatWidget = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      <Card className={`w-80 bg-[#1A1F2C]/95 backdrop-blur-xl border-blue-500/50 shadow-2xl transition-all duration-300 ${
-        isMinimized ? "h-14" : "h-[500px]"
+      <Card className={`w-96 md:w-80 bg-[#1A1F2C]/95 backdrop-blur-xl border-blue-500/50 shadow-2xl transition-all duration-300 ${
+        isMinimized ? "h-14" : "h-[500px] md:h-96"
       }`}>
         <CardHeader className="p-4 border-b border-blue-500/30">
           <div className="flex items-center justify-between">
@@ -198,7 +198,7 @@ export const ChatWidget = () => {
 
         {!isMinimized && (
           <>
-            <CardContent className="p-0 h-64 overflow-hidden">
+            <CardContent className="p-0 h-80 md:h-64 overflow-hidden">
               <div className="h-full overflow-y-auto p-4 space-y-3">
                 {messages.map((message) => (
                   <div
