@@ -1,8 +1,12 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { SearchBar } from "@/components/SearchBar";
+import { useState } from "react";
 
 export const CTASection = () => {
+  const [searchValue, setSearchValue] = useState("");
+
   const handleBooking = () => {
     window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
   };
@@ -22,6 +26,13 @@ export const CTASection = () => {
         Programează Audit AI Gratuit
         <ArrowRight className="ml-2 animate-bounce" />
       </Button>
+      
+      <div className="max-w-md mx-auto mt-8">
+        <SearchBar 
+          value={searchValue} 
+          onChange={setSearchValue} 
+        />
+      </div>
     </div>
   );
 };
