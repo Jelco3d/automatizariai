@@ -17,7 +17,7 @@ export const ChatWidget = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Salut! Sunt asistentul virtual al AI Automatizări. Cum te pot ajuta astăzi?",
+      text: "Salut! Sunt asistentul virtual al StockAuto.ro. Cum te pot ajuta astăzi cu piese auto?",
       isUser: false,
       timestamp: new Date(),
     }
@@ -72,7 +72,11 @@ export const ChatWidget = () => {
           onClick={() => setIsOpen(true)}
           className="relative bg-gradient-to-r from-blue-600 to-orange-500 hover:from-blue-700 hover:to-orange-600 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
         >
-          <MessageCircle className="w-6 h-6" />
+          <img 
+            src="/lovable-uploads/9e4a46e2-d243-4d05-93aa-19c19276ddda.png" 
+            alt="StockAuto.ro" 
+            className="w-8 h-8 object-contain"
+          />
           {/* Green live indicator */}
           <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white">
             <div className="w-full h-full bg-green-400 rounded-full animate-pulse"></div>
@@ -91,13 +95,17 @@ export const ChatWidget = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="relative">
-                <MessageCircle className="w-5 h-5 text-blue-400" />
+                <img 
+                  src="/lovable-uploads/9e4a46e2-d243-4d05-93aa-19c19276ddda.png" 
+                  alt="StockAuto.ro" 
+                  className="w-8 h-8 object-contain"
+                />
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border border-white">
                   <div className="w-full h-full bg-green-400 rounded-full animate-pulse"></div>
                 </div>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-white">AI Assistant</h3>
+                <h3 className="text-sm font-semibold text-white">StockAuto.ro</h3>
                 <p className="text-xs text-green-400 flex items-center">
                   <span className="w-2 h-2 bg-green-400 rounded-full mr-1 animate-pulse"></span>
                   Online
