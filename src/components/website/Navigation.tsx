@@ -27,6 +27,9 @@ export function Navigation() {
             <Link to="/services" className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10">
               Servicii
             </Link>
+            <Link to="/search" className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10">
+              Căutare
+            </Link>
             <Link to="/about" className="text-gray-300 hover:text-purple-400 transition-colors px-4 py-2 rounded-lg hover:bg-purple-500/10">
               Despre Noi
             </Link>
