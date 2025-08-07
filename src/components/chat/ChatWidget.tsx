@@ -121,7 +121,7 @@ export const ChatWidget = () => {
 
   if (!isOpen) {
     return (
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-4 right-4 z-50">
         <Button
           onClick={() => setIsOpen(true)}
           className="relative bg-gradient-to-r from-blue-600 to-orange-500 hover:from-blue-700 hover:to-orange-600 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
@@ -141,9 +141,9 @@ export const ChatWidget = () => {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
-      <Card className={`w-96 bg-[#1A1F2C]/95 backdrop-blur-xl border-blue-500/50 shadow-2xl transition-all duration-300 ${
-        isMinimized ? "h-14" : "h-[500px]"
+    <div className="fixed bottom-4 right-4 z-50 w-full max-w-sm md:w-96">
+      <Card className={`w-full bg-[#1A1F2C]/95 backdrop-blur-xl border-blue-500/50 shadow-2xl transition-all duration-300 ${
+        isMinimized ? "h-14" : "h-[70vh] md:h-[500px] max-h-[600px]"
       }`}>
         <CardHeader className="p-4 border-b border-blue-500/30">
           <div className="flex items-center justify-between">
@@ -198,15 +198,15 @@ export const ChatWidget = () => {
 
         {!isMinimized && (
           <>
-            <CardContent className="p-0 h-80 overflow-hidden">
-              <div className="h-full overflow-y-auto p-4 space-y-4">
+            <CardContent className="p-0 flex-1 overflow-hidden">
+              <div className="h-full overflow-y-auto p-3 md:p-4 space-y-3">
                 {messages.map((message) => (
                   <div
                     key={message.id}
                     className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}
                   >
                     <div
-                      className={`max-w-[80%] p-3 rounded-lg ${
+                      className={`max-w-[85%] md:max-w-[80%] p-2 md:p-3 rounded-lg text-sm ${
                         message.isUser
                           ? "bg-gradient-to-r from-blue-600 to-orange-500 text-white"
                           : "bg-gray-700/80 text-gray-100"
@@ -226,7 +226,7 @@ export const ChatWidget = () => {
               </div>
             </CardContent>
 
-            <div className="p-4 border-t border-blue-500/30">
+            <div className="p-3 md:p-4 border-t border-blue-500/30">
               {showVinInput && (
                 <div className="mb-3">
                   <Input
