@@ -2,6 +2,7 @@
 import { Footer } from "@/components/website/Footer";
 import { Navigation } from "@/components/website/Navigation";
 import { Shield, Lock, FileText } from "lucide-react";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 
 const GDPR = () => {
   return (
@@ -77,6 +78,7 @@ const GDPR = () => {
         </div>
       </div>
       <Footer />
+      <ChatWidget />
     </div>
   );
 };

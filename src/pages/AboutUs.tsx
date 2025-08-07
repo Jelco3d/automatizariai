@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -151,6 +152,7 @@ const AboutUs = () => {
       </motion.section>
 
       <Footer />
+      <ChatWidget />
     </div>
   );
 };

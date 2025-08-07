@@ -1,6 +1,7 @@
 
 import { Footer } from "@/components/website/Footer";
 import { Navigation } from "@/components/website/Navigation";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 
 const Terms = () => {
   return (
@@ -42,6 +43,7 @@ const Terms = () => {
         </div>
       </div>
       <Footer />
+      <ChatWidget />
     </div>
   );
 };

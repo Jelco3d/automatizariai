@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SearchBar } from "@/components/SearchBar";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -187,6 +188,7 @@ export default function Search() {
       </section>
 
       <Footer />
+      <ChatWidget />
     </div>
   );
 }

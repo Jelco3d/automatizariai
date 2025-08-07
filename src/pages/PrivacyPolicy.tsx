@@ -2,6 +2,7 @@
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { Shield, Lock, Eye, FileText } from "lucide-react";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 
 const PrivacyPolicy = () => {
   return (
@@ -95,6 +96,7 @@ const PrivacyPolicy = () => {
         </div>
       </div>
       <Footer />
+      <ChatWidget />
     </div>
   );
 };
