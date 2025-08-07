@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { MessageCircle, Send, X, Minimize2, Car } from "lucide-react";
+import { MessageRenderer } from "./MessageRenderer";
 
 interface Message {
   id: string;
@@ -211,7 +212,7 @@ export const ChatWidget = () => {
                           : "bg-gray-700/80 text-gray-100"
                       }`}
                     >
-                      <p className="text-sm">{message.text}</p>
+                      <MessageRenderer text={message.text} isUser={message.isUser} />
                       <p className="text-xs opacity-70 mt-1">
                         {message.timestamp.toLocaleTimeString([], {
                           hour: "2-digit",
