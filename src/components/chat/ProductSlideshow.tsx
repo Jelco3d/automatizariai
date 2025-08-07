@@ -43,7 +43,7 @@ export const ProductSlideshow = ({ products, title = "Produse recomandate" }: Pr
         <CardContent className="p-0">
           {/* Gallery Section */}
           <div className="relative bg-gray-900/50">
-            <div className="aspect-[4/3] w-full overflow-hidden">
+            <div className="aspect-[3/2] w-full max-w-[180px] mx-auto overflow-hidden rounded-lg">
               <img
                 src={currentProduct.image}
                 alt={currentProduct.name}
@@ -129,30 +129,14 @@ export const ProductSlideshow = ({ products, title = "Produse recomandate" }: Pr
               )}
             </div>
 
-            {/* Reviews Section */}
-            <div className="bg-gray-700/30 rounded-lg p-3">
-              <div className="flex items-center gap-2 mb-2">
-                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                <span className="text-sm font-medium text-white">Reviews</span>
-              </div>
-              <div className="space-y-2">
-                <div className="text-xs text-gray-300">
-                  "Piesa de calitate, se potrivește perfect și a fost livrată rapid."
-                </div>
-                <div className="text-xs text-gray-400">
-                  ⭐⭐⭐⭐⭐ - Cristian M.
-                </div>
-              </div>
-            </div>
-
             {/* Action Button */}
             <Button
-              size="lg"
-              className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold shadow-lg"
+              size="sm"
+              className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-medium"
               onClick={() => window.open(currentProduct.url, '_blank')}
             >
-              <ExternalLink className="w-4 h-4 mr-2" />
-              Vezi detalii și comandă
+              <ExternalLink className="w-3 h-3 mr-2" />
+              Vezi detalii
             </Button>
           </div>
         </CardContent>
