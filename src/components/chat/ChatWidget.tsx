@@ -67,12 +67,22 @@ export const ChatWidget = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const data = await response.json();
+      // Check if response is JSON or plain text
+      const contentType = response.headers.get('content-type');
+      let responseText: string;
+      
+      if (contentType && contentType.includes('application/json')) {
+        const data = await response.json();
+        responseText = data.response || data.message || 'Am primit mesajul tău și îl procesez.';
+      } else {
+        // Handle plain text response
+        responseText = await response.text();
+      }
       
       // Add n8n response to messages
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: data.response || data.message || 'Am primit mesajul tău și îl procesez.',
+        text: responseText,
         isUser: false,
         timestamp: new Date(),
       };
