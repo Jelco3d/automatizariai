@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { MessageCircle, Send, X, Minimize2 } from "lucide-react";
+import { MessageCircle, Send, X, Minimize2, Car } from "lucide-react";
 
 interface Message {
   id: string;
@@ -14,6 +14,9 @@ interface Message {
 export const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [chatId] = useState(() => `chat-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`);
+  const [vinNumber, setVinNumber] = useState("");
+  const [showVinInput, setShowVinInput] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -57,7 +60,10 @@ export const ChatWidget = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          chat_id: chatId,
           message: currentMessage,
+          chat_messages: [...messages, newMessage],
+          vin_car: vinNumber || null,
           timestamp: new Date().toISOString(),
           user: 'website-visitor'
         }),
@@ -163,6 +169,15 @@ export const ChatWidget = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                onClick={() => setShowVinInput(!showVinInput)}
+                className="text-gray-400 hover:text-white h-8 w-8 p-0"
+                title="Adaugă VIN"
+              >
+                <Car className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={() => setIsMinimized(!isMinimized)}
                 className="text-gray-400 hover:text-white h-8 w-8 p-0"
               >
@@ -211,6 +226,17 @@ export const ChatWidget = () => {
             </CardContent>
 
             <div className="p-4 border-t border-blue-500/30">
+              {showVinInput && (
+                <div className="mb-3">
+                  <Input
+                    value={vinNumber}
+                    onChange={(e) => setVinNumber(e.target.value)}
+                    placeholder="Introdu codul VIN (opțional)"
+                    className="w-full bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500"
+                  />
+                  <p className="text-xs text-gray-400 mt-1">VIN-ul va fi inclus în toate mesajele pentru identificarea mașinii</p>
+                </div>
+              )}
               <div className="flex space-x-2">
                 <Input
                   value={inputMessage}
