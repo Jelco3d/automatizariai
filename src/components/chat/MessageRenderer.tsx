@@ -25,14 +25,14 @@ const extractProductsFromText = (text: string): { products: Product[]; cleanText
   const products: Product[] = [];
   let cleanText = text;
   
-  // Look for product patterns in the text - multiple patterns for Romanian
+  // Look for product patterns in the text - Romanian patterns
   const patterns = [
-    // Pattern 1: "Product Name - Price RON"
-    /([^,\n]+?)\s*[-–]\s*(\d+(?:[.,]\d+)?)\s*(?:RON|lei)(?:\s*\((?:era|vechiul pret|original)?\s*(\d+(?:[.,]\d+)?)\s*(?:RON|lei)\))?/gi,
-    // Pattern 2: "baterie/piesa [Brand] Product Name ... Prețul este de Price lei"
-    /(?:baterie|piesa?|produs)\s*(?:[A-Za-z]+\s+)?([A-Za-z0-9\s]+?)(?:\s+disponibilă|\s+în\s+stoc|\s+pentru).*?(?:prețul\s+este\s+de|costă|preț)\s*(\d+(?:[.,]\d+)?)\s*lei/gi,
-    // Pattern 3: Direct price mention with product context
-    /([A-Za-z][A-Za-z0-9\s]+?)\s*.*?(\d+(?:[.,]\d+)?)\s*lei/gi
+    // Pattern 1: "avem baterie Brand Model disponibilă ... Prețul este de X lei"
+    /(?:avem|găsit)\s+(?:baterie|piesa?|produs)\s+([A-Za-z0-9\s]+?)(?:\s+disponibilă|\s+în\s+stoc).*?(?:prețul\s+este\s+de|costă|preț)\s*(\d+(?:[.,]\d+)?)\s*lei/gi,
+    // Pattern 2: Direct format "Product Name — Price lei"
+    /([A-Za-z][A-Za-z0-9\s]+?)\s*[—–-]\s*(\d+(?:[.,]\d+)?)\s*lei/gi,
+    // Pattern 3: "Brand Model" followed by price anywhere in text
+    /(?:baterie|piesa?)\s+([A-Za-z]+\s+[A-Za-z0-9\s]+?)(?:\s+disponibilă|\s+în\s+stoc|\s+pentru|\s+—).*?(\d+(?:[.,]\d+)?)\s*lei/gi
   ];
   
   let matches: RegExpMatchArray[] = [];
