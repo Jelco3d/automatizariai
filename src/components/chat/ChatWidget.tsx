@@ -70,7 +70,7 @@ export const ChatWidget = () => {
       <div className="fixed bottom-6 right-6 z-50">
         <Button
           onClick={() => setIsOpen(true)}
-          className="relative bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+          className="relative bg-gradient-to-r from-blue-600 to-orange-500 hover:from-blue-700 hover:to-orange-600 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
         >
           <MessageCircle className="w-6 h-6" />
           {/* Green live indicator */}
@@ -84,14 +84,14 @@ export const ChatWidget = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      <Card className={`w-80 bg-[#1A1F2C]/95 backdrop-blur-xl border-purple-500/50 shadow-2xl transition-all duration-300 ${
+      <Card className={`w-80 bg-[#1A1F2C]/95 backdrop-blur-xl border-blue-500/50 shadow-2xl transition-all duration-300 ${
         isMinimized ? "h-14" : "h-96"
       }`}>
-        <CardHeader className="p-4 border-b border-purple-500/30">
+        <CardHeader className="p-4 border-b border-blue-500/30">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="relative">
-                <MessageCircle className="w-5 h-5 text-purple-400" />
+                <MessageCircle className="w-5 h-5 text-blue-400" />
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border border-white">
                   <div className="w-full h-full bg-green-400 rounded-full animate-pulse"></div>
                 </div>
@@ -137,7 +137,7 @@ export const ChatWidget = () => {
                     <div
                       className={`max-w-[80%] p-3 rounded-lg ${
                         message.isUser
-                          ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                          ? "bg-gradient-to-r from-blue-600 to-orange-500 text-white"
                           : "bg-gray-700/80 text-gray-100"
                       }`}
                     >
@@ -155,18 +155,18 @@ export const ChatWidget = () => {
               </div>
             </CardContent>
 
-            <div className="p-4 border-t border-purple-500/30">
+            <div className="p-4 border-t border-blue-500/30">
               <div className="flex space-x-2">
                 <Input
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Scrie un mesaj..."
-                  className="flex-1 bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-purple-500"
+                  className="flex-1 bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500"
                 />
                 <Button
                   onClick={handleSendMessage}
-                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-3"
+                  className="bg-gradient-to-r from-blue-600 to-orange-500 hover:from-blue-700 hover:to-orange-600 text-white px-3"
                 >
                   <Send className="w-4 h-4" />
                 </Button>
