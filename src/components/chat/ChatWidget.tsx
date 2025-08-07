@@ -143,7 +143,7 @@ export const ChatWidget = () => {
   return (
     <div className="fixed bottom-6 right-6 z-50">
       <Card className={`w-80 bg-[#1A1F2C]/95 backdrop-blur-xl border-blue-500/50 shadow-2xl transition-all duration-300 ${
-        isMinimized ? "h-14" : "h-96"
+        isMinimized ? "h-14" : "h-[500px]"
       }`}>
         <CardHeader className="p-4 border-b border-blue-500/30">
           <div className="flex items-center justify-between">
