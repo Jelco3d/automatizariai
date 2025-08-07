@@ -25,9 +25,23 @@ const extractProductsFromText = (text: string): { products: Product[]; cleanText
   const products: Product[] = [];
   let cleanText = text;
   
-  // Look for product patterns in the text
-  const productPattern = /([^,\n]+?)\s*[-–]\s*(\d+(?:[.,]\d+)?)\s*RON(?:\s*\((?:era|vechiul pret|original)?\s*(\d+(?:[.,]\d+)?)\s*RON\))?/gi;
-  const matches = [...text.matchAll(productPattern)];
+  // Look for product patterns in the text - multiple patterns for Romanian
+  const patterns = [
+    // Pattern 1: "Product Name - Price RON"
+    /([^,\n]+?)\s*[-–]\s*(\d+(?:[.,]\d+)?)\s*(?:RON|lei)(?:\s*\((?:era|vechiul pret|original)?\s*(\d+(?:[.,]\d+)?)\s*(?:RON|lei)\))?/gi,
+    // Pattern 2: "baterie/piesa [Brand] Product Name ... Prețul este de Price lei"
+    /(?:baterie|piesa?|produs)\s*(?:[A-Za-z]+\s+)?([A-Za-z0-9\s]+?)(?:\s+disponibilă|\s+în\s+stoc|\s+pentru).*?(?:prețul\s+este\s+de|costă|preț)\s*(\d+(?:[.,]\d+)?)\s*lei/gi,
+    // Pattern 3: Direct price mention with product context
+    /([A-Za-z][A-Za-z0-9\s]+?)\s*.*?(\d+(?:[.,]\d+)?)\s*lei/gi
+  ];
+  
+  let matches: RegExpMatchArray[] = [];
+  
+  // Try each pattern until we find matches
+  for (const pattern of patterns) {
+    matches = [...text.matchAll(pattern)];
+    if (matches.length > 0) break;
+  }
   
   matches.forEach((match, index) => {
     const [fullMatch, name, price, originalPrice] = match;
