@@ -23,6 +23,7 @@ export const ChatWidget = () => {
     }
   ]);
   const [inputMessage, setInputMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -33,8 +34,8 @@ export const ChatWidget = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSendMessage = () => {
-    if (!inputMessage.trim()) return;
+  const handleSendMessage = async () => {
+    if (!inputMessage.trim() || isLoading) return;
 
     const newMessage: Message = {
       id: Date.now().toString(),
@@ -44,18 +45,54 @@ export const ChatWidget = () => {
     };
 
     setMessages(prev => [...prev, newMessage]);
+    const currentMessage = inputMessage;
     setInputMessage("");
+    setIsLoading(true);
 
-    // Simulate bot response (frontend only)
-    setTimeout(() => {
+    try {
+      // Send message to n8n webhook
+      const response = await fetch('https://ejelco8.app.n8n.cloud/webhook/a2020483-44a2-4eff-9bfd-b6b73e42fc54', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: currentMessage,
+          timestamp: new Date().toISOString(),
+          user: 'website-visitor'
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      // Add n8n response to messages
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: "Mulțumesc pentru mesaj! Momentan sunt în modul demo. Pentru o consultație reală, vă rog să programați o întâlnire folosind butonul din pagină.",
+        text: data.response || data.message || 'Am primit mesajul tău și îl procesez.',
         isUser: false,
         timestamp: new Date(),
       };
+      
       setMessages(prev => [...prev, botResponse]);
-    }, 1000);
+    } catch (error) {
+      console.error('Error sending message to n8n:', error);
+      
+      // Add error message
+      const errorResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        text: 'Ne pare rău, a apărut o eroare în procesarea mesajului. Te rog încearcă din nou.',
+        isUser: false,
+        timestamp: new Date(),
+      };
+      
+      setMessages(prev => [...prev, errorResponse]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -169,14 +206,16 @@ export const ChatWidget = () => {
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Scrie un mesaj..."
-                  className="flex-1 bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500"
+                  placeholder={isLoading ? "Se trimite..." : "Scrie un mesaj..."}
+                  disabled={isLoading}
+                  className="flex-1 bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 disabled:opacity-50"
                 />
                 <Button
                   onClick={handleSendMessage}
-                  className="bg-gradient-to-r from-blue-600 to-orange-500 hover:from-blue-700 hover:to-orange-600 text-white px-3"
+                  disabled={isLoading}
+                  className="bg-gradient-to-r from-blue-600 to-orange-500 hover:from-blue-700 hover:to-orange-600 text-white px-3 disabled:opacity-50"
                 >
-                  <Send className="w-4 h-4" />
+                  {isLoading ? "..." : <Send className="w-4 h-4" />}
                 </Button>
               </div>
             </div>
