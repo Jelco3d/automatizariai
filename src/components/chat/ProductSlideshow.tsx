@@ -135,7 +135,7 @@ export const ProductSlideshow = ({ products, title = "Produse recomandate" }: Pr
               onClick={() => window.open(currentProduct.url, '_blank')}
             >
               <ExternalLink className="w-3 h-3 mr-2" />
-              Vezi detalii
+              Cumpără acum
             </Button>
           </div>
         </CardContent>
