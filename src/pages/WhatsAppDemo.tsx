@@ -51,7 +51,7 @@ const WhatsAppDemo = () => {
           </div>
           <div className="text-center">
             <Button onClick={handleBooking} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 sm:py-4 text-sm sm:text-base rounded-lg px-4 sm:px-6 w-full sm:w-auto">
-              Programează un Call Gratuit
+              Programează Un Apel Gratuit
               <ArrowRight className="ml-2 flex-shrink-0" />
             </Button>
           </div>
