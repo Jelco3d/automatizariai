@@ -57,26 +57,53 @@ const WhatsAppDemo = () => {
 
       {/* Benefits Section */}
       <section className="container mx-auto px-4 py-12 md:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          <div className="bg-gray-800/50 p-6 rounded-xl backdrop-blur-sm border border-gray-700/50 text-center">
-            <Clock className="w-10 h-10 sm:w-12 sm:h-12 text-purple-400 mx-auto mb-4" />
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Răspunsuri Instant</h3>
-            <p className="text-sm sm:text-base text-gray-300">Nu mai pierzi pacienți din cauza timpilor lungi de răspuns</p>
+        <div className="max-w-4xl mx-auto">
+          {/* Icons Row */}
+          <div className="grid grid-cols-4 gap-4 mb-6">
+            <div className="text-center">
+              <Clock className="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 mx-auto" />
+            </div>
+            <div className="text-center">
+              <Calendar className="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 mx-auto" />
+            </div>
+            <div className="text-center">
+              <Bell className="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 mx-auto" />
+            </div>
+            <div className="text-center">
+              <Star className="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 mx-auto" />
+            </div>
           </div>
-          <div className="bg-gray-800/50 p-6 rounded-xl backdrop-blur-sm border border-gray-700/50 text-center">
-            <Calendar className="w-10 h-10 sm:w-12 sm:h-12 text-purple-400 mx-auto mb-4" />
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Programări Automate</h3>
-            <p className="text-sm sm:text-base text-gray-300">Integrate cu calendarul clinicii pentru programări seamless</p>
+          
+          {/* Titles Row */}
+          <div className="grid grid-cols-4 gap-4 mb-4">
+            <div className="text-center">
+              <h3 className="text-sm sm:text-lg font-bold text-white">Răspunsuri Instant</h3>
+            </div>
+            <div className="text-center">
+              <h3 className="text-sm sm:text-lg font-bold text-white">Programări Automate</h3>
+            </div>
+            <div className="text-center">
+              <h3 className="text-sm sm:text-lg font-bold text-white">Remindere</h3>
+            </div>
+            <div className="text-center">
+              <h3 className="text-sm sm:text-lg font-bold text-white">Recenzii Google</h3>
+            </div>
           </div>
-          <div className="bg-gray-800/50 p-6 rounded-xl backdrop-blur-sm border border-gray-700/50 text-center">
-            <Bell className="w-10 h-10 sm:w-12 sm:h-12 text-purple-400 mx-auto mb-4" />
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Remindere</h3>
-            <p className="text-sm sm:text-base text-gray-300">Scad absențele cu 30% prin remindere automate</p>
-          </div>
-          <div className="bg-gray-800/50 p-6 rounded-xl backdrop-blur-sm border border-gray-700/50 text-center">
-            <Star className="w-10 h-10 sm:w-12 sm:h-12 text-purple-400 mx-auto mb-4" />
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Recenzii Google</h3>
-            <p className="text-sm sm:text-base text-gray-300">Crește reputația clinicii prin solicitarea automată de recenzii</p>
+          
+          {/* Descriptions Row */}
+          <div className="grid grid-cols-4 gap-4">
+            <div className="text-center">
+              <p className="text-xs sm:text-sm text-gray-300">Nu mai pierzi pacienți din cauza timpilor lungi de răspuns</p>
+            </div>
+            <div className="text-center">
+              <p className="text-xs sm:text-sm text-gray-300">Integrate cu calendarul clinicii pentru programări seamless</p>
+            </div>
+            <div className="text-center">
+              <p className="text-xs sm:text-sm text-gray-300">Scad absențele cu 30% prin remindere automate</p>
+            </div>
+            <div className="text-center">
+              <p className="text-xs sm:text-sm text-gray-300">Crește reputația clinicii prin solicitarea automată de recenzii</p>
+            </div>
           </div>
         </div>
       </section>
