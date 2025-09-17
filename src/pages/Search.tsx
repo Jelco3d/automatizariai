@@ -2,8 +2,6 @@ import { useState } from "react";
 import { SearchBar } from "@/components/SearchBar";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
-import { ChatWidget } from "@/components/chat/ChatWidget";
-import { MessageRenderer } from "@/components/chat/MessageRenderer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -99,8 +97,10 @@ export default function Search() {
               <h2 className="text-2xl font-semibold text-foreground mb-2">
                 Rezultate pentru "{searchValue}"
               </h2>
-              <div className="mt-6">
-                <MessageRenderer text={searchResults} isUser={false} />
+              <div className="mt-6 bg-gray-800/50 rounded-lg p-4">
+                <div className="text-gray-200 whitespace-pre-wrap">
+                  {searchResults}
+                </div>
               </div>
             </div>
           ) : (
@@ -138,7 +138,6 @@ export default function Search() {
       </section>
 
       <Footer />
-      <ChatWidget />
     </div>
   );
 }

@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
-import { ChatWidget } from "@/components/chat/ChatWidget";
 import { CTASection } from "@/components/portfolio/CTASection";
 import { CategoryFilters } from "@/components/portfolio/CategoryFilters";
 import { PortfolioHero } from "@/components/portfolio/PortfolioHero";
@@ -28,7 +27,6 @@ const Portfolio = () => {
       <CaseStudiesGrid caseStudies={filteredCaseStudies} />
       <CTASection />
       <Footer />
-      <ChatWidget />
     </div>
   );
 };

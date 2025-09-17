@@ -1,7 +1,6 @@
 
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
-import { ChatWidget } from "@/components/chat/ChatWidget";
 import { ServicesHero } from "@/components/website/services/ServicesHero";
 import { DetailedServices } from "@/components/website/services/DetailedServices";
 import { PricingPlans } from "@/components/website/services/PricingPlans";
@@ -36,7 +35,6 @@ const Services = () => {
       <CTASection handleBooking={handleBooking} />
 
       <Footer />
-      <ChatWidget />
     </div>
   );
 };

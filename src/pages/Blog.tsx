@@ -2,7 +2,6 @@
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { BlogContent } from "@/components/blog/BlogContent";
-import { ChatWidget } from "@/components/chat/ChatWidget";
 
 export default function Blog() {
   return (
@@ -10,7 +9,6 @@ export default function Blog() {
       <Navigation />
       <BlogContent />
       <Footer />
-      <ChatWidget />
     </div>
   );
 }

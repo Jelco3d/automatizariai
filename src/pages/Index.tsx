@@ -1,7 +1,6 @@
 
 import { Toaster } from "@/components/ui/toaster";
 import { Link } from "react-router-dom";
-import { ChatWidget } from "@/components/chat/ChatWidget";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Briefcase, Globe, Mail, Phone, User, Facebook, Instagram, Video, Twitter } from "lucide-react";
@@ -115,7 +114,6 @@ const Index = () => {
           </div>
         </CardContent>
       </Card>
-      <ChatWidget />
       <Toaster />
     </div>;
 };
