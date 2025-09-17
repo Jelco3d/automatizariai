@@ -2,7 +2,44 @@ import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, Calendar, Bell, Star, Shield, Clock } from "lucide-react";
+import { useEffect, useState } from "react";
+
 const WhatsAppDemo = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const totalSlides = 4;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    }, 4000); // Auto-slide every 4 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const slider = document.getElementById('testimonials-slider');
+    const dots = document.querySelectorAll('.testimonial-dot');
+    
+    if (slider) {
+      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    dots.forEach((dot, index) => {
+      if (index === currentSlide) {
+        dot.classList.remove('bg-gray-600');
+        dot.classList.add('bg-purple-500');
+      } else {
+        dot.classList.remove('bg-purple-500');
+        dot.classList.add('bg-gray-600');
+      }
+    });
+
+    // Add click handlers to dots
+    dots.forEach((dot, index) => {
+      (dot as HTMLElement).onclick = () => setCurrentSlide(index);
+    });
+  }, [currentSlide]);
+
   const scrollToForm = () => {
     const formElement = document.getElementById('demo-form');
     formElement?.scrollIntoView({
@@ -124,20 +161,96 @@ const WhatsAppDemo = () => {
             Serviciul costă 300€/lună, dar un singur pacient de implant aduce 2.000€. 
             Calculul este simplu: recuperezi investiția cu primul pacient nou.
           </p>
-          <div className="bg-gray-800/50 p-6 sm:p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50">
-            <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
-              <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto sm:mx-0 flex-shrink-0">
-                <Star className="w-6 h-6 text-white" />
-              </div>
-              <div className="text-center sm:text-left">
-                <h4 className="text-lg font-bold text-white">Dr. Maria Popescu</h4>
-                <p className="text-gray-400 text-sm sm:text-base">Clinica Dental Excellence</p>
+          
+          {/* Testimonials Carousel */}
+          <div className="relative">
+            <div className="overflow-hidden">
+              <div className="flex transition-transform duration-500 ease-in-out" id="testimonials-slider">
+                {/* Testimonial 1 */}
+                <div className="w-full flex-shrink-0">
+                  <div className="bg-gray-800/50 p-6 sm:p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50">
+                    <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+                      <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto sm:mx-0 flex-shrink-0">
+                        <Star className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="text-center sm:text-left">
+                        <h4 className="text-lg font-bold text-white">Dr. Maria Popescu</h4>
+                        <p className="text-gray-400 text-sm sm:text-base">Clinica Dental Excellence</p>
+                      </div>
+                    </div>
+                    <p className="text-base sm:text-lg text-gray-300 italic px-2">
+                      "Am programat 15 consultații de implant în 30 de zile cu asistentul AI. 
+                      ROI-ul a fost incredibil - am recuperat investiția în prima săptămână."
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Testimonial 2 */}
+                <div className="w-full flex-shrink-0">
+                  <div className="bg-gray-800/50 p-6 sm:p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50">
+                    <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+                      <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto sm:mx-0 flex-shrink-0">
+                        <Star className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="text-center sm:text-left">
+                        <h4 className="text-lg font-bold text-white">Dr. Alexandru Ionescu</h4>
+                        <p className="text-gray-400 text-sm sm:text-base">Clinica Smile Perfect</p>
+                      </div>
+                    </div>
+                    <p className="text-base sm:text-lg text-gray-300 italic px-2">
+                      "În doar 3 săptămâni am avut 22 de programări noi. Asistentul AI a redus timpul nostru 
+                      de administrare cu 80% și ne-a crescut eficiența incredibil."
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Testimonial 3 */}
+                <div className="w-full flex-shrink-0">
+                  <div className="bg-gray-800/50 p-6 sm:p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50">
+                    <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+                      <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto sm:mx-0 flex-shrink-0">
+                        <Star className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="text-center sm:text-left">
+                        <h4 className="text-lg font-bold text-white">Dr. Elena Georgescu</h4>
+                        <p className="text-gray-400 text-sm sm:text-base">Cabinet Individual</p>
+                      </div>
+                    </div>
+                    <p className="text-base sm:text-lg text-gray-300 italic px-2">
+                      "Remindere-urile automate au redus absențele cu 35%. Plus că pacienții sunt 
+                      impresionați de răspunsurile instant și profesionalismul comunicării AI."
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Testimonial 4 */}
+                <div className="w-full flex-shrink-0">
+                  <div className="bg-gray-800/50 p-6 sm:p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50">
+                    <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+                      <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto sm:mx-0 flex-shrink-0">
+                        <Star className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="text-center sm:text-left">
+                        <h4 className="text-lg font-bold text-white">Dr. Radu Mihăilescu</h4>
+                        <p className="text-gray-400 text-sm sm:text-base">Clinica Dent Art</p>
+                      </div>
+                    </div>
+                    <p className="text-base sm:text-lg text-gray-300 italic px-2">
+                      "Cea mai bună investiție făcută anul acesta! Am obținut 8 recenzii Google 
+                      în prima lună și rata de conversie a crescut cu 40%."
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-            <p className="text-base sm:text-lg text-gray-300 italic px-2">
-              "Am programat 15 consultații de implant în 30 de zile cu asistentul AI. 
-              ROI-ul a fost incredibil - am recuperat investiția în prima săptămână."
-            </p>
+            
+            {/* Navigation dots */}
+            <div className="flex justify-center space-x-2 mt-6">
+              <button className="testimonial-dot w-3 h-3 rounded-full bg-purple-500 transition-all" data-slide="0"></button>
+              <button className="testimonial-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-purple-400 transition-all" data-slide="1"></button>
+              <button className="testimonial-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-purple-400 transition-all" data-slide="2"></button>
+              <button className="testimonial-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-purple-400 transition-all" data-slide="3"></button>
+            </div>
           </div>
         </div>
       </section>
