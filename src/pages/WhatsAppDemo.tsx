@@ -54,7 +54,7 @@ const WhatsAppDemo = () => {
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 md:py-24 text-center relative py-0">
-        <h1 className="sm:text-4xl md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 leading-tight text-center font-bold py-[23px] text-2xl">Oprește Pierderea Pacienților Din Cauza Răspunsurilor Întârziate pe WhatsApp</h1>
+        <h1 className="sm:text-4xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 leading-tight text-center text-2xl py-[10px] font-bold lg:text-5xl">Oprește Pierderea Pacienților Din Cauza Răspunsurilor Întârziate pe WhatsApp</h1>
         <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto mb-8 px-0">
           <strong className="rounded-md">Asistentul nostru AI pe WhatsApp răspunde instant, face programări, trimite remindere și cere recenzii</strong> — 
           astfel adaugi peste 5.000€ în tratamente lunar, fără personal suplimentar.
