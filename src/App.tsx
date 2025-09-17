@@ -17,6 +17,7 @@ import Comments from './pages/admin/Comments';
 import BlogAnalytics from './pages/admin/BlogAnalytics';
 import BlogSettings from './pages/admin/BlogSettings';
 import Dashboard from './pages/admin/Dashboard';
+import WhatsAppDemo from './pages/WhatsAppDemo';
 
 const App = () => {
   console.log("Rendering App component");
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/admin/blog/comments" element={<Comments />} />
         <Route path="/admin/blog/analytics" element={<BlogAnalytics />} />
         <Route path="/admin/blog/settings" element={<BlogSettings />} />
+        <Route path="/whatsapp-demo" element={<WhatsAppDemo />} />
       </Routes>
     </Router>
   );
