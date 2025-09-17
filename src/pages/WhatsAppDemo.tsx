@@ -3,27 +3,22 @@ import { Footer } from "@/components/website/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, Calendar, Bell, Star, Shield, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
-
 const WhatsAppDemo = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 4;
-
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+      setCurrentSlide(prev => (prev + 1) % totalSlides);
     }, 4000); // Auto-slide every 4 seconds
 
     return () => clearInterval(interval);
   }, []);
-
   useEffect(() => {
     const slider = document.getElementById('testimonials-slider');
     const dots = document.querySelectorAll('.testimonial-dot');
-    
     if (slider) {
       slider.style.transform = `translateX(-${currentSlide * 100}%)`;
     }
-
     dots.forEach((dot, index) => {
       if (index === currentSlide) {
         dot.classList.remove('bg-gray-600');
@@ -39,7 +34,6 @@ const WhatsAppDemo = () => {
       (dot as HTMLElement).onclick = () => setCurrentSlide(index);
     });
   }, [currentSlide]);
-
   const scrollToForm = () => {
     const formElement = document.getElementById('demo-form');
     formElement?.scrollIntoView({
@@ -60,7 +54,7 @@ const WhatsAppDemo = () => {
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 md:py-24 text-center relative py-0">
-        <h1 className="sm:text-4xl md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 leading-tight text-center text-xl font-bold py-[23px]">Oprește Pierderea Pacienților Din Cauza Răspunsurilor Întârziate pe WhatsApp</h1>
+        <h1 className="sm:text-4xl md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 leading-tight text-center font-bold py-[23px] text-2xl">Oprește Pierderea Pacienților Din Cauza Răspunsurilor Întârziate pe WhatsApp</h1>
         <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto mb-8 px-0">
           <strong className="rounded-md">Asistentul nostru AI pe WhatsApp răspunde instant, face programări, trimite remindere și cere recenzii</strong> — 
           astfel adaugi peste 5.000€ în tratamente lunar, fără personal suplimentar.
