@@ -170,7 +170,7 @@ const WhatsAppDemo = () => {
           asistentul AI va transforma comunicarea cu pacienții tăi.
         </p>
         <Button onClick={handleBooking} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl rounded-lg transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 w-full sm:w-auto">
-          Rezervă acum Demo Gratuit
+          Programează Un Apel Gratuit!
           <ArrowRight className="ml-2" />
         </Button>
       </section>
