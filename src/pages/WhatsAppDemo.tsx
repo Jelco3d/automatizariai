@@ -61,16 +61,24 @@ const WhatsAppDemo = () => {
           {/* Icons Row */}
           <div className="grid grid-cols-4 gap-4 mb-6">
             <div className="text-center">
-              <Clock className="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 mx-auto" />
+              <div className="inline-flex p-3 rounded-full bg-purple-500/20 shadow-lg shadow-purple-500/50">
+                <Clock className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400" />
+              </div>
             </div>
             <div className="text-center">
-              <Calendar className="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 mx-auto" />
+              <div className="inline-flex p-3 rounded-full bg-purple-500/20 shadow-lg shadow-purple-500/50">
+                <Calendar className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400" />
+              </div>
             </div>
             <div className="text-center">
-              <Bell className="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 mx-auto" />
+              <div className="inline-flex p-3 rounded-full bg-purple-500/20 shadow-lg shadow-purple-500/50">
+                <Bell className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400" />
+              </div>
             </div>
             <div className="text-center">
-              <Star className="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 mx-auto" />
+              <div className="inline-flex p-3 rounded-full bg-purple-500/20 shadow-lg shadow-purple-500/50">
+                <Star className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400" />
+              </div>
             </div>
           </div>
           
