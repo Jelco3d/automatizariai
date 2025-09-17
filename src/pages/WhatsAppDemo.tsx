@@ -22,18 +22,15 @@ const WhatsAppDemo = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 md:py-24 text-center relative">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 leading-tight">
+      <section className="container mx-auto px-4 md:py-24 text-center relative py-0">
+        <h1 className="sm:text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 leading-tight text-center text-xl">
           Oprește pierderea pacienților din cauza răspunsurilor întârziate pe WhatsApp
         </h1>
         <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto mb-8 px-2">
           <strong className="rounded-md">Asistentul nostru AI pe WhatsApp răspunde instant, face programări, trimite remindere și cere recenzii</strong> — 
           astfel adaugi peste 5.000€ în tratamente lunar, fără personal suplimentar.
         </p>
-        <Button onClick={scrollToForm} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg rounded-lg transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 w-full sm:w-auto">
-          Programează Demo Gratuit
-          <ArrowRight className="ml-2" />
-        </Button>
+        
       </section>
 
       {/* VSL Section */}
