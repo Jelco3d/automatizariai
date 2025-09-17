@@ -2,19 +2,17 @@ import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, Calendar, Bell, Star, Shield, Clock } from "lucide-react";
-
 const WhatsAppDemo = () => {
   const scrollToForm = () => {
     const formElement = document.getElementById('demo-form');
-    formElement?.scrollIntoView({ behavior: 'smooth' });
+    formElement?.scrollIntoView({
+      behavior: 'smooth'
+    });
   };
-
   const handleBooking = () => {
     window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] relative overflow-hidden">
+  return <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] relative overflow-hidden">
       <Navigation />
       
       {/* Animated background elements */}
@@ -25,17 +23,14 @@ const WhatsAppDemo = () => {
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-24 text-center relative">
-        <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6">
+        <h1 className="md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 text-2xl">
           Oprește pierderea pacienților din cauza răspunsurilor întârziate pe WhatsApp
         </h1>
         <p className="text-xl text-gray-300 max-w-4xl mx-auto mb-8">
-          <strong>Asistentul nostru AI pe WhatsApp răspunde instant, face programări, trimite remindere și cere recenzii</strong> — 
+          <strong className="rounded-md">Asistentul nostru AI pe WhatsApp răspunde instant, face programări, trimite remindere și cere recenzii</strong> — 
           astfel adaugi peste 5.000€ în tratamente lunar, fără personal suplimentar.
         </p>
-        <Button 
-          onClick={scrollToForm}
-          className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-lg transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
-        >
+        <Button onClick={scrollToForm} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-lg transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
           Programează Demo Gratuit
           <ArrowRight className="ml-2" />
         </Button>
@@ -55,10 +50,7 @@ const WhatsAppDemo = () => {
             </div>
           </div>
           <div className="text-center">
-            <Button 
-              onClick={handleBooking}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-4 text-base rounded-lg"
-            >
+            <Button onClick={handleBooking} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-4 text-base rounded-lg px-[15px]">
               Urmărește Demo-ul, apoi Programează un Call Gratuit
               <ArrowRight className="ml-2" />
             </Button>
@@ -145,18 +137,13 @@ const WhatsAppDemo = () => {
           Programează o demonstrație gratuită de 30 de minute și vezi exact cum 
           asistentul AI va transforma comunicarea cu pacienții tăi.
         </p>
-        <Button 
-          onClick={handleBooking}
-          className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-12 py-6 text-xl rounded-lg transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
-        >
+        <Button onClick={handleBooking} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-12 py-6 text-xl rounded-lg transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
           Rezervă acum Demo Gratuit
           <ArrowRight className="ml-2" />
         </Button>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default WhatsAppDemo;
