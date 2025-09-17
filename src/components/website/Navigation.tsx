@@ -11,7 +11,7 @@ export function Navigation() {
   };
   return <div className="fixed top-0 left-0 right-0 z-50 flex md:justify-center justify-center items-center px-5 py-2 relative">
       <Link to="/" className="flex items-center">
-        <img alt="AI Automatizari Logo" src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" className="h-16 md:h-24 w-auto rounded-3xl object-contain" />
+        <img alt="AI Automatizari Logo" src="/lovable-uploads/new-logo.png" className="h-16 md:h-24 w-auto rounded-3xl object-contain" />
       </Link>
       <Sheet>
         <SheetTrigger asChild>
