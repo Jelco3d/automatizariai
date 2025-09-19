@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import * as QRCode from 'qrcode';
 import { Download, User, Phone, Mail } from "lucide-react";
+import jelcoProfile from '@/assets/jelco-profile.jpg';
 
 const BusinessCard = () => {
   const [qrCodeUrl, setQrCodeUrl] = React.useState('');
@@ -64,8 +65,12 @@ const BusinessCard = () => {
                 <div className="flex flex-col h-full space-y-8">
                   {/* Header */}
                   <div className="flex items-center justify-between">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                      <User className="w-8 h-8 text-white" />
+                    <div className="w-16 h-16 rounded-xl overflow-hidden shadow-lg ring-2 ring-blue-500/20">
+                      <img 
+                        src={jelcoProfile} 
+                        alt="Jelco - Founder" 
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div className="text-right">
                       <div className="w-12 h-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mb-2"></div>
@@ -73,11 +78,14 @@ const BusinessCard = () => {
                     </div>
                   </div>
                   
-                  {/* Company Info */}
+                  {/* Personal & Company Info */}
                   <div>
-                    <h2 className="text-4xl font-bold text-white mb-3 tracking-tight">
-                      AI Automatizări
+                    <h2 className="text-3xl font-bold text-white mb-2 tracking-tight">
+                      Jelco
                     </h2>
+                    <h3 className="text-2xl font-semibold text-blue-300 mb-3 tracking-tight">
+                      AI Automatizări
+                    </h3>
                     <p className="text-slate-300 text-lg font-medium mb-1">
                       Automatizare & Dezvoltare Web
                     </p>
