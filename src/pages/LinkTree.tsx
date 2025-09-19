@@ -49,9 +49,14 @@ const LinkTree = () => {
         {/* Profile Section */}
         <div className="text-center mb-12 animate-fade-in">
           <div className="relative mb-6">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-xl opacity-30"></div>
-            <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden ring-4 ring-slate-700/50 shadow-2xl">
-              <img src={jelcoProfile} alt="Jelco - Founder" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-xl opacity-30 animate-pulse"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-2xl opacity-40"></div>
+            <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden ring-4 ring-gradient-to-r ring-blue-400/60 shadow-2xl">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 p-1">
+                <div className="w-full h-full rounded-full overflow-hidden bg-slate-900 p-1">
+                  <img src={jelcoProfile} alt="Jelco - Founder" className="w-full h-full object-cover rounded-full" />
+                </div>
+              </div>
             </div>
           </div>
           <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">Jelco</h1>
