@@ -74,7 +74,7 @@ const LinkTree = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <Card className="relative backdrop-blur-xl bg-slate-900/60 border border-slate-700/50 hover:border-slate-600/50 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group-hover:scale-[1.02]">
                   <CardContent className="p-0">
-                    <a href={link.url.startsWith('/') ? link.url : link.url} className="flex items-center p-6 group/link" target={link.url.startsWith('http') ? '_blank' : '_self'} rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''}>
+                    <a href={link.url.startsWith('/') ? link.url : link.url} className="flex items-center p-4 group/link" target={link.url.startsWith('http') ? '_blank' : '_self'} rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''}>
                       <div className="w-14 h-14 bg-gradient-to-br from-slate-800/50 to-slate-700/50 rounded-xl flex items-center justify-center group-hover/link:from-blue-600/20 group-hover/link:to-purple-600/20 transition-all duration-300 mr-4">
                         <div className="text-slate-400 group-hover/link:text-blue-400 transition-colors">
                           {link.icon}
