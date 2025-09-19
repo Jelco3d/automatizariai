@@ -46,29 +46,36 @@ export const Footer = () => {
           <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
             Conectează-te cu Noi
           </h3>
-          <div className="flex space-x-4">
-            <a 
-              href="https://github.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-gray-300 hover:text-purple-400 transition-colors"
-            >
-              <Github className="w-6 h-6" />
-            </a>
-            <a 
-              href="https://linkedin.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-gray-300 hover:text-purple-400 transition-colors"
-            >
-              <Linkedin className="w-6 h-6" />
-            </a>
-            <a 
-              href="mailto:automationaisolution@gmail.com"
-              className="text-gray-300 hover:text-purple-400 transition-colors"
-            >
-              <Mail className="w-6 h-6" />
-            </a>
+          <div className="space-y-3">
+            <div className="text-gray-300">
+              <p className="font-semibold">Jelco</p>
+              <p>Telefon: +40754274528</p>
+              <p>Email: contact@aiautomatizari.ro</p>
+            </div>
+            <div className="flex space-x-4">
+              <a 
+                href="https://github.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-purple-400 transition-colors"
+              >
+                <Github className="w-6 h-6" />
+              </a>
+              <a 
+                href="https://linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-purple-400 transition-colors"
+              >
+                <Linkedin className="w-6 h-6" />
+              </a>
+              <a 
+                href="mailto:contact@aiautomatizari.ro"
+                className="text-gray-300 hover:text-purple-400 transition-colors"
+              >
+                <Mail className="w-6 h-6" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
