@@ -19,6 +19,7 @@ import BlogAnalytics from './pages/admin/BlogAnalytics';
 import BlogSettings from './pages/admin/BlogSettings';
 import Dashboard from './pages/admin/Dashboard';
 import WhatsAppDemo from './pages/WhatsAppDemo';
+import Contact from './pages/Contact';
 import { CookieConsent } from './components/CookieConsent';
 
 const App = () => {
@@ -45,6 +46,7 @@ const App = () => {
         <Route path="/admin/blog/analytics" element={<BlogAnalytics />} />
         <Route path="/admin/blog/settings" element={<BlogSettings />} />
         <Route path="/whatsapp-demo" element={<WhatsAppDemo />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <CookieConsent />
     </Router>
