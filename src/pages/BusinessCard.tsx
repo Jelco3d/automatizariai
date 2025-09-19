@@ -40,58 +40,120 @@ const BusinessCard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-secondary/10 flex items-center justify-center p-4">
-      <div className="max-w-4xl w-full">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-primary mb-4">Business Card</h1>
-          <p className="text-muted-foreground">Scanați codul QR pentru a accesa informațiile mele de contact</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10"></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+      
+      <div className="max-w-6xl w-full relative z-10">
+        <div className="text-center mb-12">
+          <h1 className="text-6xl font-extralight text-white mb-6 tracking-wide">
+            Premium <span className="font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Business Card</span>
+          </h1>
+          <p className="text-slate-400 text-xl font-light">Experiență digitală de înaltă calitate</p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          {/* Business Card */}
-          <Card className="p-8 bg-gradient-to-br from-primary to-primary/80 text-white shadow-2xl">
-            <CardContent className="space-y-6">
-              <div className="text-center">
-                <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <User className="w-10 h-10" />
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Premium Business Card */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+            <Card className="relative backdrop-blur-xl bg-gradient-to-br from-slate-900/90 to-slate-800/90 border border-slate-700/50 rounded-2xl overflow-hidden shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-purple-600/5"></div>
+              <CardContent className="p-10 relative">
+                <div className="flex flex-col h-full space-y-8">
+                  {/* Header */}
+                  <div className="flex items-center justify-between">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <User className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="text-right">
+                      <div className="w-12 h-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mb-2"></div>
+                      <div className="w-8 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Company Info */}
+                  <div>
+                    <h2 className="text-4xl font-bold text-white mb-3 tracking-tight">
+                      AI Automatizări
+                    </h2>
+                    <p className="text-slate-300 text-lg font-medium mb-1">
+                      Automatizare & Dezvoltare Web
+                    </p>
+                    <p className="text-slate-400 text-sm font-light">
+                      Premium Digital Solutions
+                    </p>
+                  </div>
+                  
+                  {/* Contact Info */}
+                  <div className="space-y-4 pt-4 border-t border-slate-700/50">
+                    <div className="flex items-center gap-4 group/contact">
+                      <div className="w-10 h-10 bg-slate-800/50 rounded-lg flex items-center justify-center group-hover/contact:bg-blue-600/20 transition-colors">
+                        <Phone className="w-4 h-4 text-slate-400 group-hover/contact:text-blue-400" />
+                      </div>
+                      <span className="text-slate-300 font-mono text-sm tracking-wider">+40754274528</span>
+                    </div>
+                    <div className="flex items-center gap-4 group/contact">
+                      <div className="w-10 h-10 bg-slate-800/50 rounded-lg flex items-center justify-center group-hover/contact:bg-purple-600/20 transition-colors">
+                        <Mail className="w-4 h-4 text-slate-400 group-hover/contact:text-purple-400" />
+                      </div>
+                      <span className="text-slate-300 font-mono text-sm tracking-wider">contact@aiautomatizari.ro</span>
+                    </div>
+                  </div>
                 </div>
-                <h2 className="text-2xl font-bold mb-2">AI Automatizări</h2>
-                <p className="text-white/90 text-lg">Automatizare & Dezvoltare Web</p>
-              </div>
-              
-              <div className="space-y-3 text-sm">
-                <div className="flex items-center gap-3">
-                  <Phone className="w-4 h-4" />
-                  <span>+40754274528</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Mail className="w-4 h-4" />
-                  <span>contact@aiautomatizari.ro</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* QR Code Section */}
-          <div className="text-center">
-            <Card className="p-6 inline-block">
-              <CardContent className="space-y-4">
-                {qrCodeUrl && (
-                  <img 
-                    src={qrCodeUrl} 
-                    alt="QR Code pentru link tree" 
-                    className="mx-auto"
-                  />
-                )}
-                <p className="text-sm text-muted-foreground">
-                  Scanați pentru acces rapid la toate linkurile
-                </p>
-                <Button onClick={handleDownload} variant="outline" size="sm">
-                  <Download className="w-4 h-4 mr-2" />
-                  Descărcați QR Code
-                </Button>
               </CardContent>
             </Card>
+          </div>
+
+          {/* Premium QR Code Section */}
+          <div className="flex flex-col items-center space-y-8">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur-2xl opacity-20"></div>
+              <Card className="relative backdrop-blur-xl bg-slate-900/90 border border-slate-700/50 rounded-3xl p-8 shadow-2xl">
+                <CardContent className="flex flex-col items-center space-y-6">
+                  <div className="text-center mb-2">
+                    <h3 className="text-2xl font-bold text-white mb-2">Conectare Instant</h3>
+                    <p className="text-slate-400 text-sm">Scanați pentru acces complet</p>
+                  </div>
+                  
+                  {qrCodeUrl && (
+                    <div className="relative p-6 bg-white rounded-2xl shadow-inner">
+                      <img 
+                        src={qrCodeUrl} 
+                        alt="QR Code pentru link tree" 
+                        className="w-48 h-48 object-contain"
+                      />
+                    </div>
+                  )}
+                  
+                  <Button 
+                    onClick={handleDownload} 
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 px-8 py-3 rounded-xl font-medium tracking-wide shadow-lg hover:shadow-xl transition-all duration-300"
+                    size="lg"
+                  >
+                    <Download className="w-5 h-5 mr-3" />
+                    Descărcare Premium
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+            
+            {/* Premium Features */}
+            <div className="grid grid-cols-2 gap-4 w-full max-w-sm">
+              <div className="text-center p-4 rounded-xl bg-slate-900/50 border border-slate-700/30">
+                <div className="w-8 h-8 bg-blue-600/20 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                </div>
+                <p className="text-xs text-slate-400">Calitate Premium</p>
+              </div>
+              <div className="text-center p-4 rounded-xl bg-slate-900/50 border border-slate-700/30">
+                <div className="w-8 h-8 bg-purple-600/20 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                </div>
+                <p className="text-xs text-slate-400">Acces Instant</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
