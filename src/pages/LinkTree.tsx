@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Globe, Mail, Phone, User, Briefcase, Search, ArrowRight } from "lucide-react";
-import jelcoProfile from '@/assets/jelco-profile.jpg';
+
 
 const LinkTree = () => {
   const links = [{
@@ -54,7 +54,7 @@ const LinkTree = () => {
             <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden ring-4 ring-gradient-to-r ring-blue-400/60 shadow-2xl">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 p-1">
                 <div className="w-full h-full rounded-full overflow-hidden bg-slate-900 p-1">
-                  <img src={jelcoProfile} alt="Jelco - Founder" className="w-full h-full object-cover rounded-full" />
+                  <img src="/lovable-uploads/18adcde2-6fef-4f80-9177-96ee902a301b.png" alt="Jelco - Founder" className="w-full h-full object-cover rounded-full" />
                 </div>
               </div>
             </div>

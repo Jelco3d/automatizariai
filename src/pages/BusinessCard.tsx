@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import * as QRCode from 'qrcode';
 import { Download, User, Phone, Mail } from "lucide-react";
-import jelcoProfile from '@/assets/jelco-profile.jpg';
+
 
 const BusinessCard = () => {
   const [qrCodeUrl, setQrCodeUrl] = React.useState('');
@@ -67,7 +67,7 @@ const BusinessCard = () => {
                   <div className="flex items-center justify-between">
                     <div className="w-16 h-16 rounded-xl overflow-hidden shadow-lg ring-2 ring-blue-500/20">
                       <img 
-                        src={jelcoProfile} 
+                        src="/lovable-uploads/18adcde2-6fef-4f80-9177-96ee902a301b.png" 
                         alt="Jelco - Founder" 
                         className="w-full h-full object-cover"
                       />
