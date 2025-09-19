@@ -115,7 +115,7 @@ const LinkTree = () => {
                       </div>
                       <div className="flex-1">
                         <p className="text-xs text-slate-500 uppercase tracking-widest font-medium mb-1">{contact.label}</p>
-                        <p className="text-lg font-medium text-white group-hover/contact:text-blue-300 transition-colors font-mono">
+                        <p className="text-sm font-medium text-white group-hover/contact:text-blue-300 transition-colors font-mono">
                           {contact.value}
                         </p>
                       </div>
