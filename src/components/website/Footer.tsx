@@ -48,7 +48,6 @@ export const Footer = () => {
           </h3>
           <div className="space-y-3">
             <div className="text-gray-300">
-              <p className="font-semibold">Jelco</p>
               <p>Telefon: +40754274528</p>
               <p>Email: contact@aiautomatizari.ro</p>
             </div>
