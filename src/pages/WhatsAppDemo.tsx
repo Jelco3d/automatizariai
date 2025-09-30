@@ -70,7 +70,7 @@ const WhatsAppDemo = () => {
         <div className="max-w-4xl mx-auto bg-gray-800/50 p-4 sm:p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50">
           <div className="aspect-video bg-gray-900 rounded-lg overflow-hidden mb-4 sm:mb-6">
             <iframe 
-              src="https://new.express.adobe.com/id/urn:aaid:sc:EU:bb2c6df1-85a2-4a7f-ab4f-e2c14aa4569d?invite=true&accept=true?preload=sharesheet"
+              src="https://www.loom.com/embed/d3a231a73cba4a5bbbaad9c449528104"
               className="w-full h-full"
               allowFullScreen
               title="WhatsApp AI Assistant Demo"
