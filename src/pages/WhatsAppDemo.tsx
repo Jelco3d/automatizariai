@@ -70,9 +70,11 @@ const WhatsAppDemo = () => {
         <div className="max-w-4xl mx-auto bg-gray-800/50 p-4 sm:p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50">
           <div className="aspect-video bg-gray-900 rounded-lg overflow-hidden mb-4 sm:mb-6">
             <iframe 
-              src="https://www.loom.com/embed/d3a231a73cba4a5bbbaad9c449528104"
-              className="w-full h-full"
+              src="https://www.loom.com/embed/d3a231a73cba4a5bbbaad9c449528104?sid=b0f93554-14f3-497d-9f6a-26a57168cc20"
+              className="w-full h-full border-0"
+              frameBorder="0"
               allowFullScreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               title="WhatsApp AI Assistant Demo"
             />
           </div>
