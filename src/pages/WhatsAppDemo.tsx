@@ -68,12 +68,13 @@ const WhatsAppDemo = () => {
           Vezi cum funcționează Asistentul AI WhatsApp în 4 minute
         </h2>
         <div className="max-w-4xl mx-auto bg-gray-800/50 p-4 sm:p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50">
-          <div className="aspect-video bg-gray-900 rounded-lg flex items-center justify-center mb-4 sm:mb-6">
-            <div className="text-center px-4">
-              <MessageCircle className="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 mx-auto mb-4" />
-              <p className="text-gray-400 text-sm sm:text-base">Video Demo Placeholder</p>
-              <p className="text-xs sm:text-sm text-gray-500">Integrează video-ul tău demo aici</p>
-            </div>
+          <div className="aspect-video bg-gray-900 rounded-lg overflow-hidden mb-4 sm:mb-6">
+            <iframe 
+              src="https://new.express.adobe.com/id/urn:aaid:sc:EU:bb2c6df1-85a2-4a7f-ab4f-e2c14aa4569d?invite=true&accept=true?preload=sharesheet"
+              className="w-full h-full"
+              allowFullScreen
+              title="WhatsApp AI Assistant Demo"
+            />
           </div>
           <div className="text-center">
             <Button onClick={handleBooking} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 sm:py-4 text-sm sm:text-base rounded-lg px-4 sm:px-6 w-full sm:w-auto">
