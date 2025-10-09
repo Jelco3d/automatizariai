@@ -147,21 +147,20 @@ const AuditGratuit = () => {
           <p className="text-2xl text-center text-white mb-8 italic">
             „Hai să facem împreună afacerea ta mai inteligentă, mai eficientă și pregătită pentru viitor."
           </p>
+        </div>
 
-          <div className="text-center">
-            <Button
-              onClick={handleBookCall}
-              size="lg"
-              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-4 text-base rounded-lg transform transition-all hover:scale-105 shadow-lg shadow-purple-500/25"
-            >
-              <Phone className="mr-2 w-5 h-5" />
-              Programează Un Apel Strategic
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <p className="text-gray-400 text-sm mt-4">
-              100% gratuit • Fără obligații • Rezultate concrete
-            </p>
-          </div>
+        <div className="text-center mt-8">
+          <Button
+            onClick={handleBookCall}
+            className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-5 py-3 text-sm rounded-lg transform transition-all hover:scale-105 shadow-lg shadow-purple-500/25"
+          >
+            <Phone className="mr-2 w-4 h-4" />
+            Programează Un Apel Strategic
+            <ArrowRight className="ml-2 w-4 h-4" />
+          </Button>
+          <p className="text-gray-400 text-sm mt-3">
+            100% gratuit • Fără obligații • Rezultate concrete
+          </p>
         </div>
       </section>
 
