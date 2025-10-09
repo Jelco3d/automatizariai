@@ -127,9 +127,7 @@ const AuditGratuit = () => {
           
           
 
-          <p className="text-2xl text-center text-white mb-8 italic">
-            „Hai să facem împreună afacerea ta mai inteligentă, mai eficientă și pregătită pentru viitor."
-          </p>
+          
         </div>
       </section>
 
