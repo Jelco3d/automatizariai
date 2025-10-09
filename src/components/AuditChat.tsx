@@ -3,10 +3,17 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Send, Loader2, Bot, User, Plus, Mic, Globe, Zap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
 interface Message {
   role: "user" | "assistant";
   content: string;
 }
+
+// Function to format markdown-style text to HTML
+const formatMessage = (text: string): string => {
+  // Convert **text** to <strong>text</strong>
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+};
 export const AuditChat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -160,7 +167,14 @@ export const AuditChat = () => {
                     <Bot className="w-5 h-5 text-white" />
                   </div>}
                 <div className={`max-w-[80%] rounded-2xl px-4 py-3 ${message.role === "user" ? "bg-gradient-to-br from-purple-500 to-pink-500 text-white" : "bg-[#2C1F3C]/60 text-gray-200 border border-purple-500/20"}`}>
-                  <p className="whitespace-pre-wrap">{message.content}</p>
+                  {message.role === "assistant" ? (
+                    <div 
+                      className="whitespace-pre-wrap text-lg font-semibold leading-relaxed"
+                      dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }}
+                    />
+                  ) : (
+                    <p className="whitespace-pre-wrap">{message.content}</p>
+                  )}
                 </div>
                 {message.role === "user" && <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
                     <User className="w-5 h-5 text-white" />
