@@ -14,12 +14,18 @@ const AuditGratuit = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900/20 to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      </div>
+      
       <Navigation />
       
       {/* Hero Section */}
-      <section className="container mx-auto px-4 pt-32 pb-16 text-center">
-        <div className="max-w-4xl mx-auto">
+      <section className="container mx-auto px-4 pt-32 pb-16 text-center relative">
+        <div className="max-w-4xl mx-auto relative z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
             Descoperă cum poate AI să-ți transforme afacerea — în doar câteva minute!
           </h1>
@@ -30,15 +36,15 @@ const AuditGratuit = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="container mx-auto px-4 py-16 relative z-10">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
           💬 Cum funcționează
         </h2>
         
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <Card className="bg-gray-800/50 border-purple-500/20 backdrop-blur-sm">
+          <Card className="bg-[#1A1F2C]/80 border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
             <CardContent className="p-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/25">
                 <MessageCircle className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-3">Descrie-ți afacerea</h3>
@@ -48,9 +54,9 @@ const AuditGratuit = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-800/50 border-purple-500/20 backdrop-blur-sm">
+          <Card className="bg-[#1A1F2C]/80 border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
             <CardContent className="p-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/25">
                 <Target className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-3">AI-ul analizează</h3>
@@ -60,9 +66,9 @@ const AuditGratuit = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-800/50 border-purple-500/20 backdrop-blur-sm">
+          <Card className="bg-[#1A1F2C]/80 border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
             <CardContent className="p-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/25">
                 <TrendingUp className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-3">Primești raportul</h3>
@@ -75,13 +81,13 @@ const AuditGratuit = () => {
       </section>
 
       {/* Why You'll Love It Section */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="container mx-auto px-4 py-16 relative z-10">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
           ❤️ De ce o să-ți placă
         </h2>
         
         <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          <div className="flex items-start gap-4 bg-gray-800/30 p-6 rounded-lg border border-purple-500/20">
+          <div className="flex items-start gap-4 bg-[#1A1F2C]/60 p-6 rounded-lg border border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
             <DollarSign className="w-8 h-8 text-green-400 flex-shrink-0" />
             <div>
               <h3 className="text-lg font-semibold text-white mb-2">100% gratuit</h3>
@@ -89,7 +95,7 @@ const AuditGratuit = () => {
             </div>
           </div>
 
-          <div className="flex items-start gap-4 bg-gray-800/30 p-6 rounded-lg border border-purple-500/20">
+          <div className="flex items-start gap-4 bg-[#1A1F2C]/60 p-6 rounded-lg border border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
             <Target className="w-8 h-8 text-purple-400 flex-shrink-0" />
             <div>
               <h3 className="text-lg font-semibold text-white mb-2">Creat special pentru tine</h3>
@@ -97,7 +103,7 @@ const AuditGratuit = () => {
             </div>
           </div>
 
-          <div className="flex items-start gap-4 bg-gray-800/30 p-6 rounded-lg border border-purple-500/20">
+          <div className="flex items-start gap-4 bg-[#1A1F2C]/60 p-6 rounded-lg border border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
             <Rocket className="w-8 h-8 text-pink-400 flex-shrink-0" />
             <div>
               <h3 className="text-lg font-semibold text-white mb-2">Dezvăluie-ți potențialul</h3>
@@ -108,8 +114,8 @@ const AuditGratuit = () => {
       </section>
 
       {/* Next Steps Section */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto bg-gradient-to-br from-purple-900/30 to-pink-900/30 p-8 md:p-12 rounded-2xl border border-purple-500/30 backdrop-blur-sm">
+      <section className="container mx-auto px-4 py-16 relative z-10">
+        <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#2C1F3C]/80 to-[#3C1F3C]/80 p-8 md:p-12 rounded-2xl border border-purple-500/40 backdrop-blur-sm shadow-lg shadow-purple-500/20">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-white">
             🤝 Vrei să mergem mai departe?
           </h2>
@@ -139,7 +145,7 @@ const AuditGratuit = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="container mx-auto px-4 py-16 relative z-10">
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <Button
             onClick={handleStartAnalysis}
@@ -161,7 +167,7 @@ const AuditGratuit = () => {
             onClick={handleBookCall}
             variant="outline"
             size="lg"
-            className="border-2 border-purple-500 text-purple-300 hover:bg-purple-500/10 px-8 py-6 text-lg rounded-lg w-full md:w-auto"
+            className="border-2 border-purple-500 text-purple-300 hover:bg-purple-500/20 hover:border-purple-400 px-8 py-6 text-lg rounded-lg w-full md:w-auto transition-all"
           >
             <Phone className="mr-2" />
             🗓️ Programează un apel strategic gratuit cu un expert AI
@@ -170,26 +176,26 @@ const AuditGratuit = () => {
       </section>
 
       {/* Bonus Section */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="container mx-auto px-4 py-16 relative z-10">
         <div className="max-w-4xl mx-auto">
           <h3 className="text-2xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
             💡 Bonus
           </h3>
           
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="flex flex-col items-center text-center p-6 bg-gray-800/30 rounded-lg border border-purple-500/20">
+            <div className="flex flex-col items-center text-center p-6 bg-[#1A1F2C]/60 rounded-lg border border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
               <Lock className="w-12 h-12 text-purple-400 mb-4" />
               <h4 className="text-white font-semibold mb-2">100% confidențial</h4>
               <p className="text-gray-400 text-sm">Informațiile tale rămân private</p>
             </div>
 
-            <div className="flex flex-col items-center text-center p-6 bg-gray-800/30 rounded-lg border border-purple-500/20">
+            <div className="flex flex-col items-center text-center p-6 bg-[#1A1F2C]/60 rounded-lg border border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
               <Zap className="w-12 h-12 text-yellow-400 mb-4" />
               <h4 className="text-white font-semibold mb-2">Rezultate instantanee</h4>
               <p className="text-gray-400 text-sm">Fără formulare complicate</p>
             </div>
 
-            <div className="flex flex-col items-center text-center p-6 bg-gray-800/30 rounded-lg border border-purple-500/20">
+            <div className="flex flex-col items-center text-center p-6 bg-[#1A1F2C]/60 rounded-lg border border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
               <CheckCircle className="w-12 h-12 text-green-400 mb-4" />
               <h4 className="text-white font-semibold mb-2">De încredere</h4>
               <p className="text-gray-400 text-sm">Pentru antreprenori, consultanți și creatori</p>
