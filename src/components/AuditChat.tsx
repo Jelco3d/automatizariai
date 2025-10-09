@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { Send, Loader2, Bot, User } from "lucide-react";
+import { Send, Loader2, Bot, User, Plus, Mic, Globe, Zap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface Message {
@@ -151,87 +150,125 @@ export const AuditChat = () => {
     await streamChat(userMessage);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
       e.preventDefault();
       handleSubmit(e);
     }
   };
 
   return (
-    <Card className="w-full max-w-4xl mx-auto bg-[#1A1F2C]/80 border-purple-500/30 backdrop-blur-sm overflow-hidden">
-      <div className="flex flex-col h-[600px]">
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-4">
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`flex gap-3 ${
-                message.role === "user" ? "justify-end" : "justify-start"
-              }`}
-            >
-              {message.role === "assistant" && (
+    <div className="w-full max-w-4xl mx-auto space-y-4">
+      {/* Messages */}
+      {messages.length > 1 && (
+        <Card className="bg-[#1A1F2C]/80 border-purple-500/30 backdrop-blur-sm overflow-hidden">
+          <div className="max-h-[400px] overflow-y-auto p-6 space-y-4">
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`flex gap-3 ${
+                  message.role === "user" ? "justify-end" : "justify-start"
+                }`}
+              >
+                {message.role === "assistant" && (
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0">
+                    <Bot className="w-5 h-5 text-white" />
+                  </div>
+                )}
+                <div
+                  className={`max-w-[80%] rounded-2xl px-4 py-3 ${
+                    message.role === "user"
+                      ? "bg-gradient-to-br from-purple-500 to-pink-500 text-white"
+                      : "bg-[#2C1F3C]/60 text-gray-200 border border-purple-500/20"
+                  }`}
+                >
+                  <p className="whitespace-pre-wrap">{message.content}</p>
+                </div>
+                {message.role === "user" && (
+                  <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
+                    <User className="w-5 h-5 text-white" />
+                  </div>
+                )}
+              </div>
+            ))}
+            {isLoading && (
+              <div className="flex gap-3 justify-start">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0">
                   <Bot className="w-5 h-5 text-white" />
                 </div>
-              )}
-              <div
-                className={`max-w-[80%] rounded-2xl px-4 py-3 ${
-                  message.role === "user"
-                    ? "bg-gradient-to-br from-purple-500 to-pink-500 text-white"
-                    : "bg-[#2C1F3C]/60 text-gray-200 border border-purple-500/20"
-                }`}
-              >
-                <p className="whitespace-pre-wrap">{message.content}</p>
-              </div>
-              {message.role === "user" && (
-                <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
-                  <User className="w-5 h-5 text-white" />
+                <div className="bg-[#2C1F3C]/60 rounded-2xl px-4 py-3 border border-purple-500/20">
+                  <Loader2 className="w-5 h-5 animate-spin text-purple-400" />
                 </div>
-              )}
-            </div>
-          ))}
-          {isLoading && (
-            <div className="flex gap-3 justify-start">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0">
-                <Bot className="w-5 h-5 text-white" />
               </div>
-              <div className="bg-[#2C1F3C]/60 rounded-2xl px-4 py-3 border border-purple-500/20">
-                <Loader2 className="w-5 h-5 animate-spin text-purple-400" />
-              </div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+        </Card>
+      )}
 
-        {/* Input */}
-        <form onSubmit={handleSubmit} className="p-4 border-t border-purple-500/20">
-          <div className="flex gap-2">
-            <Textarea
+      {/* Input - Lovable Style */}
+      <form onSubmit={handleSubmit}>
+        <div className="bg-[#2C2D2E] rounded-[32px] p-4 shadow-2xl">
+          <div className="mb-3">
+            <input
+              type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Scrie mesajul tău aici..."
-              className="flex-1 min-h-[60px] max-h-[120px] resize-none bg-[#2C1F3C]/60 border-purple-500/30 text-white placeholder:text-gray-400 focus:border-purple-500/50"
+              placeholder="Scrie despre afacerea ta..."
+              className="w-full bg-transparent text-white text-lg placeholder:text-gray-400 outline-none"
               disabled={isLoading}
             />
-            <Button
-              type="submit"
-              disabled={!input.trim() || isLoading}
-              className="self-end bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-4"
-            >
-              {isLoading ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
-              ) : (
-                <Send className="w-5 h-5" />
-              )}
-            </Button>
           </div>
-          <p className="text-xs text-gray-500 mt-2">
-            Apasă Enter pentru a trimite, Shift+Enter pentru linie nouă
-          </p>
-        </form>
-      </div>
-    </Card>
+          
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="h-10 w-10 rounded-full hover:bg-gray-700/50 text-gray-400"
+              >
+                <Plus className="w-5 h-5" />
+              </Button>
+              
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-600 bg-gray-700/30">
+                <Globe className="w-4 h-4 text-gray-300" />
+                <span className="text-sm text-gray-300">Public</span>
+              </div>
+              
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-900/20">
+                <Zap className="w-4 h-4 text-purple-400" />
+                <span className="text-sm text-purple-300">Lovable Cloud</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="h-10 w-10 rounded-full hover:bg-gray-700/50 text-gray-400"
+              >
+                <Mic className="w-5 h-5" />
+              </Button>
+              
+              <Button
+                type="submit"
+                disabled={!input.trim() || isLoading}
+                size="icon"
+                className="h-10 w-10 rounded-full bg-white hover:bg-gray-100 text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoading ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  <Send className="w-5 h-5" />
+                )}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
