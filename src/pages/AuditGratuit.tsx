@@ -138,7 +138,7 @@ const AuditGratuit = () => {
       <section className="container mx-auto px-4 py-16 relative z-10">
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <Button onClick={handleStartAnalysis} size="lg" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-lg transform transition-all hover:scale-105 w-full md:w-auto">
-            👉 Începe analiza mea AI gratuită
+            Vreau AI În Afacerea Mea
             <ArrowRight className="ml-2" />
           </Button>
           <p className="text-gray-400 text-sm">
