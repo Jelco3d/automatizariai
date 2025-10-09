@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, ArrowRight, Lock, Zap, MessageCircle, Target, DollarSign, Rocket, TrendingUp, Clock, Phone } from "lucide-react";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
+import { AuditChat } from "@/components/AuditChat";
 
 const AuditGratuit = () => {
   const handleStartAnalysis = () => {
@@ -24,15 +25,20 @@ const AuditGratuit = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="container mx-auto px-4 pt-32 pb-16 text-center relative">
+      <section className="container mx-auto px-4 pt-32 pb-8 text-center relative z-10">
         <div className="max-w-4xl mx-auto relative z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
             Descoperă cum poate AI să-ți transforme afacerea — în doar câteva minute!
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
             Povestește-ne puțin despre afacerea ta, iar AI-ul nostru inteligent o va analiza personal — dezvăluindu-ți cum poți economisi timp, reduce costurile și crește mai rapid prin automatizare și optimizare bazată pe inteligență artificială.
           </p>
         </div>
+      </section>
+
+      {/* Chat Section */}
+      <section className="container mx-auto px-4 pb-16 relative z-10">
+        <AuditChat />
       </section>
 
       {/* How It Works Section */}
