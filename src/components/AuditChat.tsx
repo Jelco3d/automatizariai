@@ -161,7 +161,7 @@ export const AuditChat = () => {
   return <div className="w-full max-w-4xl mx-auto space-y-4">
       {/* Messages */}
       {messages.length > 1 && <Card className="bg-[#1A1F2C]/80 border-purple-500/30 backdrop-blur-sm overflow-hidden">
-          <div className="max-h-[400px] overflow-y-auto p-6 space-y-4">
+          <div className="max-h-[600px] overflow-y-auto p-6 space-y-4">
             {messages.map((message, index) => <div key={index} className={`flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"}`}>
                 {message.role === "assistant" && <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0">
                     <Bot className="w-5 h-5 text-white" />
@@ -169,11 +169,11 @@ export const AuditChat = () => {
                 <div className={`max-w-[80%] rounded-2xl px-4 py-3 ${message.role === "user" ? "bg-gradient-to-br from-purple-500 to-pink-500 text-white" : "bg-[#2C1F3C]/60 text-gray-200 border border-purple-500/20"}`}>
                   {message.role === "assistant" ? (
                     <div 
-                      className="whitespace-pre-wrap text-lg font-semibold leading-relaxed"
+                      className="whitespace-pre-wrap text-base leading-relaxed"
                       dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }}
                     />
                   ) : (
-                    <p className="whitespace-pre-wrap">{message.content}</p>
+                    <p className="whitespace-pre-wrap text-base">{message.content}</p>
                   )}
                 </div>
                 {message.role === "user" && <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
