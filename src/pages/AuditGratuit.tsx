@@ -38,7 +38,49 @@ const AuditGratuit = () => {
       </section>
 
       {/* How It Works Section */}
-      
+      <section className="container mx-auto px-4 py-16 relative z-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+          💬 Cum funcționează
+        </h2>
+        
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <Card className="bg-[#1A1F2C]/80 border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
+            <CardContent className="p-6 text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/25">
+                <MessageCircle className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-3">Descrie-ți afacerea</h3>
+              <p className="text-gray-300">
+                Ce faci, cui te adresezi și care sunt provocările tale zilnice.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-[#1A1F2C]/80 border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
+            <CardContent className="p-6 text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/25">
+                <Target className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-3">AI-ul analizează</h3>
+              <p className="text-gray-300">
+                Răspunsurile tale sunt analizate și identificăm oportunități de automatizare și soluții inteligente.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-[#1A1F2C]/80 border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
+            <CardContent className="p-6 text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/25">
+                <TrendingUp className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-3">Primești raportul</h3>
+              <p className="text-gray-300">
+                Raport personalizat instant — cu recomandări clare despre cum să începi și să scalezi cu AI.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
 
       {/* Why You'll Love It Section */}
       <section className="container mx-auto px-4 py-16 relative z-10">
@@ -83,20 +125,7 @@ const AuditGratuit = () => {
             După ce vezi planul tău de optimizare AI, poți programa gratuit un apel strategic cu echipa noastră.
           </p>
           
-          <div className="space-y-4 mb-8">
-            <div className="flex items-start gap-3">
-              <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-              <p className="text-gray-300">Cum să implementezi recomandările din raport</p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-              <p className="text-gray-300">Ce instrumente AI se potrivesc cel mai bine afacerii tale</p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
-              <p className="text-gray-300">Cum să începi să automatizezi și să crești imediat</p>
-            </div>
-          </div>
+          
 
           <p className="text-2xl text-center text-white mb-8 italic">
             „Hai să facem împreună afacerea ta mai inteligentă, mai eficientă și pregătită pentru viitor."
@@ -108,7 +137,7 @@ const AuditGratuit = () => {
       <section className="container mx-auto px-4 py-16 relative z-10">
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <Button onClick={handleStartAnalysis} size="lg" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-lg transform transition-all hover:scale-105 w-full md:w-auto">
-            Programează Gratuit Un Consult
+            👉 Începe analiza mea AI gratuită
             <ArrowRight className="ml-2" />
           </Button>
           <p className="text-gray-400 text-sm">
