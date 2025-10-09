@@ -14,7 +14,118 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      audit_insights: {
+        Row: {
+          ai_recommendations: string | null
+          business_description: string | null
+          business_type: string | null
+          created_at: string
+          desired_solutions: Json | null
+          goals: Json | null
+          id: string
+          painpoints: Json | null
+          session_id: string
+          target_audience: string | null
+          team_size: string | null
+          tools_used: Json | null
+          updated_at: string
+        }
+        Insert: {
+          ai_recommendations?: string | null
+          business_description?: string | null
+          business_type?: string | null
+          created_at?: string
+          desired_solutions?: Json | null
+          goals?: Json | null
+          id?: string
+          painpoints?: Json | null
+          session_id: string
+          target_audience?: string | null
+          team_size?: string | null
+          tools_used?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          ai_recommendations?: string | null
+          business_description?: string | null
+          business_type?: string | null
+          created_at?: string
+          desired_solutions?: Json | null
+          goals?: Json | null
+          id?: string
+          painpoints?: Json | null
+          session_id?: string
+          target_audience?: string | null
+          team_size?: string | null
+          tools_used?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_insights_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "audit_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      audit_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          role: string
+          session_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          role: string
+          session_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          role?: string
+          session_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_messages_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "audit_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      audit_sessions: {
+        Row: {
+          created_at: string
+          id: string
+          status: string
+          updated_at: string
+          user_email: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          status?: string
+          updated_at?: string
+          user_email?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          status?: string
+          updated_at?: string
+          user_email?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
