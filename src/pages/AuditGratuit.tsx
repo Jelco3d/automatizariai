@@ -4,18 +4,14 @@ import { CheckCircle, ArrowRight, Lock, Zap, MessageCircle, Target, DollarSign, 
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { AuditChat } from "@/components/AuditChat";
-
 const AuditGratuit = () => {
   const handleStartAnalysis = () => {
     window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
   };
-
   const handleBookCall = () => {
     window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] relative overflow-hidden">
+  return <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
@@ -42,49 +38,7 @@ const AuditGratuit = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="container mx-auto px-4 py-16 relative z-10">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
-          💬 Cum funcționează
-        </h2>
-        
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <Card className="bg-[#1A1F2C]/80 border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
-            <CardContent className="p-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/25">
-                <MessageCircle className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-3">Descrie-ți afacerea</h3>
-              <p className="text-gray-300">
-                Ce faci, cui te adresezi și care sunt provocările tale zilnice.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-[#1A1F2C]/80 border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
-            <CardContent className="p-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/25">
-                <Target className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-3">AI-ul analizează</h3>
-              <p className="text-gray-300">
-                Răspunsurile tale sunt analizate și identificăm oportunități de automatizare și soluții inteligente.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-[#1A1F2C]/80 border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
-            <CardContent className="p-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/25">
-                <TrendingUp className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-3">Primești raportul</h3>
-              <p className="text-gray-300">
-                Raport personalizat instant — cu recomandări clare despre cum să începi și să scalezi cu AI.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
+      
 
       {/* Why You'll Love It Section */}
       <section className="container mx-auto px-4 py-16 relative z-10">
@@ -148,19 +102,27 @@ const AuditGratuit = () => {
             „Hai să facem împreună afacerea ta mai inteligentă, mai eficientă și pregătită pentru viitor."
           </p>
         </div>
+      </section>
 
-        <div className="text-center mt-8">
-          <Button
-            onClick={handleBookCall}
-            className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-5 py-3 text-sm rounded-lg transform transition-all hover:scale-105 shadow-lg shadow-purple-500/25"
-          >
-            <Phone className="mr-2 w-4 h-4" />
-            Programează Un Apel Strategic
-            <ArrowRight className="ml-2 w-4 h-4" />
+      {/* CTA Section */}
+      <section className="container mx-auto px-4 py-16 relative z-10">
+        <div className="max-w-3xl mx-auto text-center space-y-6">
+          <Button onClick={handleStartAnalysis} size="lg" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-lg transform transition-all hover:scale-105 w-full md:w-auto">
+            👉 Începe analiza mea AI gratuită
+            <ArrowRight className="ml-2" />
           </Button>
-          <p className="text-gray-400 text-sm mt-3">
-            100% gratuit • Fără obligații • Rezultate concrete
+          <p className="text-gray-400 text-sm">
+            Durează mai puțin de 2 minute — rezultate instantanee
           </p>
+
+          <div className="py-4">
+            <span className="text-gray-500">sau</span>
+          </div>
+
+          <Button onClick={handleBookCall} variant="outline" size="lg" className="border-2 border-purple-500 text-purple-300 hover:bg-purple-500/20 hover:border-purple-400 px-8 py-6 text-lg rounded-lg w-full md:w-auto transition-all">
+            <Phone className="mr-2" />
+            🗓️ Programează un apel strategic gratuit cu un expert AI
+          </Button>
         </div>
       </section>
 
@@ -194,8 +156,6 @@ const AuditGratuit = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default AuditGratuit;
