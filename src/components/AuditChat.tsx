@@ -16,14 +16,6 @@ export const AuditChat = () => {
   const {
     toast
   } = useToast();
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({
-      behavior: "smooth"
-    });
-  };
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
   useEffect(() => {
     // Welcome message
     setMessages([{
