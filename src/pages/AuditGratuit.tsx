@@ -147,37 +147,21 @@ const AuditGratuit = () => {
           <p className="text-2xl text-center text-white mb-8 italic">
             „Hai să facem împreună afacerea ta mai inteligentă, mai eficientă și pregătită pentru viitor."
           </p>
-        </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="container mx-auto px-4 py-16 relative z-10">
-        <div className="max-w-3xl mx-auto text-center space-y-6">
-          <Button
-            onClick={handleStartAnalysis}
-            size="lg"
-            className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-lg transform transition-all hover:scale-105 w-full md:w-auto"
-          >
-            👉 Începe analiza mea AI gratuită
-            <ArrowRight className="ml-2" />
-          </Button>
-          <p className="text-gray-400 text-sm">
-            Durează mai puțin de 2 minute — rezultate instantanee
-          </p>
-
-          <div className="py-4">
-            <span className="text-gray-500">sau</span>
+          <div className="text-center">
+            <Button
+              onClick={handleBookCall}
+              size="lg"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-lg transform transition-all hover:scale-105 shadow-lg shadow-purple-500/25"
+            >
+              <Phone className="mr-2" />
+              Programează Un Apel Strategic
+              <ArrowRight className="ml-2" />
+            </Button>
+            <p className="text-gray-400 text-sm mt-4">
+              100% gratuit • Fără obligații • Rezultate concrete
+            </p>
           </div>
-
-          <Button
-            onClick={handleBookCall}
-            variant="outline"
-            size="lg"
-            className="border-2 border-purple-500 text-purple-300 hover:bg-purple-500/20 hover:border-purple-400 px-8 py-6 text-lg rounded-lg w-full md:w-auto transition-all"
-          >
-            <Phone className="mr-2" />
-            🗓️ Programează un apel strategic gratuit cu un expert AI
-          </Button>
         </div>
       </section>
 
