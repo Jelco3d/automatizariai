@@ -152,11 +152,11 @@ const AuditGratuit = () => {
             <Button
               onClick={handleBookCall}
               size="lg"
-              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-lg transform transition-all hover:scale-105 shadow-lg shadow-purple-500/25"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-4 text-base rounded-lg transform transition-all hover:scale-105 shadow-lg shadow-purple-500/25"
             >
-              <Phone className="mr-2" />
+              <Phone className="mr-2 w-5 h-5" />
               Programează Un Apel Strategic
-              <ArrowRight className="ml-2" />
+              <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
             <p className="text-gray-400 text-sm mt-4">
               100% gratuit • Fără obligații • Rezultate concrete
