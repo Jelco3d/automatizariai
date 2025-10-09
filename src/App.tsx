@@ -19,6 +19,7 @@ import BlogAnalytics from './pages/admin/BlogAnalytics';
 import BlogSettings from './pages/admin/BlogSettings';
 import Dashboard from './pages/admin/Dashboard';
 import WhatsAppDemo from './pages/WhatsAppDemo';
+import AuditGratuit from './pages/AuditGratuit';
 import Contact from './pages/Contact';
 import BusinessCard from './pages/BusinessCard';
 import LinkTree from './pages/LinkTree';
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/admin/blog/analytics" element={<BlogAnalytics />} />
         <Route path="/admin/blog/settings" element={<BlogSettings />} />
         <Route path="/whatsapp-demo" element={<WhatsAppDemo />} />
+        <Route path="/audit-gratuit" element={<AuditGratuit />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/business-card" element={<BusinessCard />} />
         <Route path="/linktree" element={<LinkTree />} />
