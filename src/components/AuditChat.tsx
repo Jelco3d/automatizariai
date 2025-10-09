@@ -11,6 +11,7 @@ export const AuditChat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [sessionId] = useState(() => crypto.randomUUID());
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const {
     toast
@@ -45,7 +46,8 @@ export const AuditChat = () => {
           Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`
         },
         body: JSON.stringify({
-          messages: newMessages
+          messages: newMessages,
+          sessionId
         })
       });
       if (!response.ok || !response.body) {

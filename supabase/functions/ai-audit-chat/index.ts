@@ -1,4 +1,6 @@
+import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3';
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -11,12 +13,45 @@ serve(async (req) => {
   }
 
   try {
-    const { messages } = await req.json();
-    console.log("Received messages:", messages);
+    const { messages, sessionId } = await req.json();
+    console.log("Received messages:", messages, "Session ID:", sessionId);
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
+    }
+
+    // Initialize Supabase client
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // Create or update session
+    if (sessionId) {
+      const { data: existingSession } = await supabase
+        .from('audit_sessions')
+        .select('id')
+        .eq('id', sessionId)
+        .single();
+
+      if (!existingSession) {
+        await supabase.from('audit_sessions').insert({
+          id: sessionId,
+          status: 'active'
+        });
+      }
+    }
+
+    // Save user message to database
+    if (sessionId && messages.length > 0) {
+      const lastMessage = messages[messages.length - 1];
+      if (lastMessage.role === 'user') {
+        await supabase.from('audit_messages').insert({
+          session_id: sessionId,
+          role: 'user',
+          content: lastMessage.content
+        });
+      }
     }
 
     const systemPrompt = `🧠 PROMPT PENTRU AI (analiză și răspuns personalizat)
@@ -85,6 +120,45 @@ Dacă vrei, putem programa un apel gratuit pentru a discuta exact cum poți impl
           ...messages,
         ],
         stream: true,
+        tools: [
+          {
+            type: "function",
+            function: {
+              name: "extract_business_insights",
+              description: "Extract structured business information from the conversation when enough details are provided",
+              parameters: {
+                type: "object",
+                properties: {
+                  business_type: { type: "string", description: "Type of business (e.g., e-commerce, services, education)" },
+                  business_description: { type: "string", description: "Detailed description of the business" },
+                  target_audience: { type: "string", description: "Target customers or audience" },
+                  team_size: { type: "string", description: "Size of the team" },
+                  painpoints: { 
+                    type: "array",
+                    items: { type: "string" },
+                    description: "List of problems and frustrations mentioned"
+                  },
+                  desired_solutions: {
+                    type: "array",
+                    items: { type: "string" },
+                    description: "List of solutions the user is interested in"
+                  },
+                  tools_used: {
+                    type: "array",
+                    items: { type: "string" },
+                    description: "Digital tools currently being used"
+                  },
+                  goals: {
+                    type: "array",
+                    items: { type: "string" },
+                    description: "Business goals and objectives"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        tool_choice: "auto"
       }),
     });
 
@@ -118,7 +192,100 @@ Dacă vrei, putem programa un apel gratuit pentru a discuta exact cum poți impl
       );
     }
 
-    return new Response(response.body, {
+    // Stream response and save assistant message + insights
+    const reader = response.body?.getReader();
+    const decoder = new TextDecoder();
+    let assistantMessage = "";
+    let toolCallArgs = "";
+
+    const stream = new ReadableStream({
+      async start(controller) {
+        try {
+          while (true) {
+            const { done, value } = await reader!.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value);
+            const lines = chunk.split('\n');
+
+            for (const line of lines) {
+              if (line.startsWith('data: ')) {
+                const data = line.slice(6);
+                if (data === '[DONE]') continue;
+
+                try {
+                  const parsed = JSON.parse(data);
+                  
+                  // Collect assistant message content
+                  if (parsed.choices?.[0]?.delta?.content) {
+                    assistantMessage += parsed.choices[0].delta.content;
+                  }
+
+                  // Check for tool calls
+                  if (parsed.choices?.[0]?.delta?.tool_calls) {
+                    const toolCall = parsed.choices[0].delta.tool_calls[0];
+                    if (toolCall?.function?.arguments) {
+                      toolCallArgs += toolCall.function.arguments;
+                    }
+                  }
+
+                  // Check if tool call is complete
+                  if (parsed.choices?.[0]?.finish_reason === 'tool_calls' && toolCallArgs) {
+                    try {
+                      const insights = JSON.parse(toolCallArgs);
+                      console.log("Extracted insights:", insights);
+
+                      // Save insights to database
+                      if (sessionId) {
+                        await supabase.from('audit_insights').upsert({
+                          session_id: sessionId,
+                          business_type: insights.business_type,
+                          business_description: insights.business_description,
+                          target_audience: insights.target_audience,
+                          team_size: insights.team_size,
+                          painpoints: insights.painpoints || [],
+                          desired_solutions: insights.desired_solutions || [],
+                          tools_used: insights.tools_used || [],
+                          goals: insights.goals || []
+                        }, { onConflict: 'session_id' });
+                      }
+                    } catch (e) {
+                      console.error("Failed to parse tool call args:", e);
+                    }
+                  }
+                } catch (e) {
+                  // Ignore parse errors for streaming chunks
+                }
+              }
+            }
+
+            controller.enqueue(value);
+          }
+
+          // Save complete assistant message
+          if (sessionId && assistantMessage) {
+            await supabase.from('audit_messages').insert({
+              session_id: sessionId,
+              role: 'assistant',
+              content: assistantMessage
+            });
+
+            // Update session status
+            await supabase.from('audit_sessions').update({
+              status: 'active',
+              updated_at: new Date().toISOString()
+            }).eq('id', sessionId);
+          }
+
+          controller.close();
+        } catch (error) {
+          console.error("Stream error:", error);
+          controller.error(error);
+        }
+      }
+    });
+
+    return new Response(stream, {
       headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
     });
   } catch (error) {
