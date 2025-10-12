@@ -228,6 +228,36 @@ Fii exhaustiv și nu rata nicio informație importantă.`
 
     console.log(`[${new Date().toISOString()}] ✅ Insights saved successfully to audit_insights`);
 
+    // Send data to n8n webhook
+    const n8nWebhookUrl = Deno.env.get('N8N_WEBHOOK_URL');
+    if (n8nWebhookUrl) {
+      try {
+        console.log(`[${new Date().toISOString()}] 📤 Sending data to n8n webhook...`);
+        const n8nResponse = await fetch(n8nWebhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            session_id: sessionId,
+            insights: savedInsights,
+            timestamp: new Date().toISOString()
+          })
+        });
+
+        if (n8nResponse.ok) {
+          console.log(`[${new Date().toISOString()}] ✅ Data sent to n8n successfully`);
+        } else {
+          console.error(`[${new Date().toISOString()}] ❌ Failed to send data to n8n:`, n8nResponse.status);
+        }
+      } catch (n8nError) {
+        console.error(`[${new Date().toISOString()}] ❌ Error sending data to n8n:`, n8nError);
+        // Continue anyway - insights were saved successfully
+      }
+    } else {
+      console.warn(`[${new Date().toISOString()}] ⚠️ N8N_WEBHOOK_URL not configured - skipping n8n notification`);
+    }
+
     return new Response(
       JSON.stringify({ 
         success: true, 
