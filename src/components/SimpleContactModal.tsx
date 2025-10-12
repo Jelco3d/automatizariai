@@ -70,9 +70,9 @@ export function SimpleContactModal({ isOpen, onClose }: SimpleContactModalProps)
         console.error('❌ Eroare trimitere Google Sheets:', err);
       });
       
-      toast.success("🎉 Datele tale au fost trimise!", {
-        description: "Vei fi contactat în curând de echipa noastră pentru a discuta despre audit.",
-        duration: 6000,
+      toast.success("🎉 Gata! Raportul tău vine spre tine!", {
+        description: "Am primit datele tale și pregătim raportul personalizat. Verifică emailul în câteva minute!",
+        duration: 7000,
       });
       
       form.reset();
