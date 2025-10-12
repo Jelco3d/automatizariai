@@ -19,23 +19,24 @@ export const SimpleChat = () => {
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   };
 
   useEffect(() => {
-    // Scroll doar când se primește un mesaj nou, nu la fiecare render
+    // Scroll doar când se primește un mesaj nou de la assistant
     if (messages.length > 0) {
       const lastMessage = messages[messages.length - 1];
-      // Scroll doar pentru mesaje de la assistant sau când loading-ul se termină
-      if (lastMessage.role === "assistant" || !isLoading) {
+      if (lastMessage.role === "assistant") {
         scrollToBottom();
       }
     }
-  }, [messages.length, isLoading]);
+  }, [messages.length]);
 
   const streamChat = async (userMessage: string) => {
     const newMessages = [...messages, { role: "user" as const, content: userMessage }];
@@ -141,7 +142,7 @@ export const SimpleChat = () => {
     <Card className="w-full max-w-4xl mx-auto bg-[#1A1F2C]/90 border-purple-500/30 backdrop-blur-sm shadow-lg shadow-purple-500/10">
       <div className="flex flex-col h-[600px]">
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-4">
+        <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-6 space-y-4">
           {messages.map((message, index) => (
             <div
               key={index}
@@ -165,7 +166,6 @@ export const SimpleChat = () => {
               </div>
             </div>
           )}
-          <div ref={messagesEndRef} />
         </div>
 
         {/* Input */}
