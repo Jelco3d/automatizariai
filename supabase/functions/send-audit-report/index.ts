@@ -33,28 +33,103 @@ const handler = async (req: Request): Promise<Response> => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
 
-    // Fetch audit insights
-    const { data: insights, error: insightsError } = await supabaseClient
-      .from("audit_insights")
-      .select("*")
-      .eq("session_id", sessionId)
-      .single();
-
-    if (insightsError) {
-      console.error("Error fetching insights:", insightsError);
-      throw new Error("Nu am găsit datele analizei");
-    }
-
-    // Fetch conversation messages
+    // Fetch conversation messages first
     const { data: messages, error: messagesError } = await supabaseClient
       .from("audit_messages")
       .select("*")
       .eq("session_id", sessionId)
       .order("created_at", { ascending: true });
 
-    if (messagesError) {
+    if (messagesError || !messages || messages.length === 0) {
       console.error("Error fetching messages:", messagesError);
       throw new Error("Nu am găsit conversația");
+    }
+
+    // Try to fetch existing insights
+    let { data: insights } = await supabaseClient
+      .from("audit_insights")
+      .select("*")
+      .eq("session_id", sessionId)
+      .single();
+
+    // If no insights exist, extract them from the conversation using AI
+    if (!insights) {
+      console.log("No insights found, extracting from conversation...");
+      
+      const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+      if (!LOVABLE_API_KEY) {
+        throw new Error("LOVABLE_API_KEY is not configured");
+      }
+
+      // Create conversation text for AI analysis
+      const conversationText = messages
+        .map(msg => `${msg.role === 'user' ? 'Utilizator' : 'Asistent'}: ${msg.content}`)
+        .join('\n\n');
+
+      const extractionPrompt = `Analizează următoarea conversație și extrage informațiile structurate despre afacere.
+
+Conversație:
+${conversationText}
+
+Returnează DOAR un obiect JSON valid cu următoarele câmpuri (folosește informațiile din conversație, dacă ceva nu e menționat pune un string gol sau array gol):
+{
+  "business_type": "tipul afacerii (ex: e-commerce, servicii, producție)",
+  "business_description": "descriere scurtă a afacerii",
+  "target_audience": "publicul țintă",
+  "team_size": "mărimea echipei",
+  "painpoints": ["listă", "cu", "probleme"],
+  "desired_solutions": ["listă", "cu", "soluții", "dorite"],
+  "tools_used": ["listă", "cu", "instrumente", "folosite"],
+  "goals": ["listă", "cu", "obiective"]
+}`;
+
+      const aiResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${LOVABLE_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "google/gemini-2.5-flash",
+          messages: [
+            { role: "user", content: extractionPrompt }
+          ],
+          temperature: 0.3,
+        }),
+      });
+
+      if (!aiResponse.ok) {
+        console.error("AI extraction failed:", aiResponse.status);
+        throw new Error("Nu am putut extrage datele din conversație");
+      }
+
+      const aiData = await aiResponse.json();
+      const extractedData = JSON.parse(aiData.choices[0].message.content);
+
+      // Save extracted insights to database
+      const { data: savedInsights, error: saveError } = await supabaseClient
+        .from("audit_insights")
+        .insert({
+          session_id: sessionId,
+          business_type: extractedData.business_type || "",
+          business_description: extractedData.business_description || "",
+          target_audience: extractedData.target_audience || "",
+          team_size: extractedData.team_size || "",
+          painpoints: extractedData.painpoints || [],
+          desired_solutions: extractedData.desired_solutions || [],
+          tools_used: extractedData.tools_used || [],
+          goals: extractedData.goals || []
+        })
+        .select()
+        .single();
+
+      if (saveError) {
+        console.error("Error saving extracted insights:", saveError);
+        throw new Error("Nu am putut salva datele extrase");
+      }
+
+      insights = savedInsights;
+      console.log("Insights extracted and saved successfully");
     }
 
     // Save contact information
