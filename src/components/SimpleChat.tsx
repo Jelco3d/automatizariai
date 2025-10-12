@@ -36,126 +36,38 @@ export const SimpleChat = () => {
     setIsLoading(true);
 
     try {
-      const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat-stream`;
+      const N8N_WEBHOOK = "https://n8n.srv1055552.hstgr.cloud/webhook-test/4365afb5-e39d-4ff0-a9c0-acc1cd5b21ef";
       
-      const response = await fetch(CHAT_URL, {
+      const response = await fetch(N8N_WEBHOOK, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
         },
-        body: JSON.stringify({ messages: newMessages }),
+        body: JSON.stringify({ 
+          message: userMessage,
+          conversationHistory: newMessages
+        }),
       });
 
       if (!response.ok) {
-        if (response.status === 429) {
-          toast({
-            title: "Limită depășită",
-            description: "Prea multe cereri. Te rog încearcă mai târziu.",
-            variant: "destructive",
-          });
-          return;
-        }
-        if (response.status === 402) {
-          toast({
-            title: "Plată necesară",
-            description: "Serviciul AI necesită plată.",
-            variant: "destructive",
-          });
-          return;
-        }
-        throw new Error("Failed to start stream");
+        throw new Error(`n8n webhook error: ${response.status}`);
       }
 
-      if (!response.body) throw new Error("No response body");
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let textBuffer = "";
-      let streamDone = false;
-      let assistantContent = "";
-
-      // Add empty assistant message
-      setMessages(prev => [...prev, { role: "assistant", content: "" }]);
-
-      while (!streamDone) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        
-        textBuffer += decoder.decode(value, { stream: true });
-
-        let newlineIndex: number;
-        while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
-          let line = textBuffer.slice(0, newlineIndex);
-          textBuffer = textBuffer.slice(newlineIndex + 1);
-
-          if (line.endsWith("\r")) line = line.slice(0, -1);
-          if (line.startsWith(":") || line.trim() === "") continue;
-          if (!line.startsWith("data: ")) continue;
-
-          const jsonStr = line.slice(6).trim();
-          if (jsonStr === "[DONE]") {
-            streamDone = true;
-            break;
-          }
-
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const content = parsed.choices?.[0]?.delta?.content as string | undefined;
-            if (content) {
-              assistantContent += content;
-              setMessages(prev => {
-                const newMessages = [...prev];
-                newMessages[newMessages.length - 1] = {
-                  role: "assistant",
-                  content: assistantContent
-                };
-                return newMessages;
-              });
-            }
-          } catch {
-            textBuffer = line + "\n" + textBuffer;
-            break;
-          }
-        }
-      }
-
-      // Final flush
-      if (textBuffer.trim()) {
-        for (let raw of textBuffer.split("\n")) {
-          if (!raw) continue;
-          if (raw.endsWith("\r")) raw = raw.slice(0, -1);
-          if (raw.startsWith(":") || raw.trim() === "") continue;
-          if (!raw.startsWith("data: ")) continue;
-          const jsonStr = raw.slice(6).trim();
-          if (jsonStr === "[DONE]") continue;
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const content = parsed.choices?.[0]?.delta?.content as string | undefined;
-            if (content) {
-              assistantContent += content;
-              setMessages(prev => {
-                const newMessages = [...prev];
-                newMessages[newMessages.length - 1] = {
-                  role: "assistant",
-                  content: assistantContent
-                };
-                return newMessages;
-              });
-            }
-          } catch { /* ignore */ }
-        }
-      }
+      const data = await response.json();
+      
+      // Extract the response from n8n
+      const assistantMessage = data.response || data.message || data.text || JSON.stringify(data);
+      
+      // Add assistant response
+      setMessages(prev => [...prev, { role: "assistant", content: assistantMessage }]);
 
     } catch (error) {
       console.error("Chat error:", error);
       toast({
         title: "Eroare",
-        description: "A apărut o eroare la comunicarea cu AI-ul.",
+        description: "A apărut o eroare la comunicarea cu n8n.",
         variant: "destructive",
       });
-      // Remove the empty assistant message
-      setMessages(prev => prev.slice(0, -1));
     } finally {
       setIsLoading(false);
     }
