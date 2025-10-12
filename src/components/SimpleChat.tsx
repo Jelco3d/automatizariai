@@ -11,6 +11,7 @@ type Message = {
 };
 
 export const SimpleChat = () => {
+  const [sessionId] = useState(() => crypto.randomUUID());
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -53,7 +54,8 @@ export const SimpleChat = () => {
         },
         body: JSON.stringify({ 
           message: userMessage,
-          conversationHistory: newMessages
+          conversationHistory: newMessages,
+          sessionId: sessionId
         }),
       });
 
@@ -67,6 +69,7 @@ export const SimpleChat = () => {
       console.log("📩 Răspuns complet de la n8n:", data);
       console.log("📊 Tipul răspunsului:", typeof data);
       console.log("🔑 Chei disponibile:", Array.isArray(data) ? "Array" : Object.keys(data));
+      console.log("🆔 Session ID:", sessionId);
       
       // Dacă data este un array, ia primul element
       const responseData = Array.isArray(data) ? data[0] : data;
