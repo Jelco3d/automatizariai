@@ -142,14 +142,14 @@ export const SimpleChat = () => {
   };
 
   return (
-    <Card className="w-full max-w-4xl mx-auto bg-gradient-to-br from-white/10 via-white/5 to-purple-500/10 border border-white/20 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(139,92,246,0.37)] overflow-hidden relative before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/20 before:to-transparent before:pointer-events-none before:rounded-lg">
+    <Card className="w-full max-w-4xl mx-auto bg-gradient-to-br from-background/95 via-background/90 to-muted/50 border border-border backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] overflow-hidden relative before:absolute before:inset-0 before:bg-gradient-to-br before:from-accent/10 before:to-transparent before:pointer-events-none before:rounded-lg">
       <div className="flex flex-col h-[600px] relative">
         {/* 3D Glass layers */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-400/10 via-pink-500/5 to-purple-600/10 pointer-events-none rounded-lg" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-muted/5 to-accent/5 pointer-events-none rounded-lg" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
         
         {/* Messages */}
-        <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-6 space-y-4 relative z-10 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-track]:bg-transparent">
+        <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-6 space-y-4 relative z-10 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border [&::-webkit-scrollbar-track]:bg-transparent">
           {messages.map((message, index) => (
             <div
               key={index}
@@ -158,8 +158,8 @@ export const SimpleChat = () => {
               <div
                 className={`max-w-[80%] rounded-2xl p-4 transition-all duration-300 ${
                   message.role === "user"
-                    ? "bg-gradient-to-br from-purple-500/90 via-purple-600/90 to-pink-500/90 text-white backdrop-blur-xl shadow-[0_8px_32px_0_rgba(139,92,246,0.4)] border border-white/20 hover:shadow-[0_12px_48px_0_rgba(139,92,246,0.5)] hover:translate-y-[-2px]"
-                    : "bg-white/10 text-white border border-white/30 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] hover:border-white/40 hover:bg-white/15 hover:translate-y-[-2px]"
+                    ? "bg-primary text-primary-foreground backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.15)] border border-primary/20 hover:shadow-[0_12px_48px_0_rgba(0,0,0,0.2)] hover:translate-y-[-2px]"
+                    : "bg-muted/80 text-foreground border border-border backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] hover:border-border/60 hover:bg-muted hover:translate-y-[-2px]"
                 }`}
               >
                 <p className="whitespace-pre-wrap leading-relaxed text-sm">{message.content}</p>
@@ -168,10 +168,10 @@ export const SimpleChat = () => {
           ))}
           {isLoading && (
             <div className="flex justify-start animate-fade-in">
-              <div className="bg-white/10 border border-white/30 backdrop-blur-xl rounded-2xl p-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.2)]">
+              <div className="bg-muted/80 border border-border backdrop-blur-xl rounded-2xl p-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)]">
                 <div className="flex items-center gap-2">
-                  <Loader2 className="w-5 h-5 animate-spin text-purple-300" />
-                  <span className="text-sm text-purple-200">Se gândește...</span>
+                  <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
+                  <span className="text-sm text-muted-foreground">Se gândește...</span>
                 </div>
               </div>
             </div>
@@ -179,20 +179,20 @@ export const SimpleChat = () => {
         </div>
 
         {/* Input */}
-        <form onSubmit={handleSubmit} className="p-6 border-t border-white/20 backdrop-blur-xl bg-white/5 relative z-10">
+        <form onSubmit={handleSubmit} className="p-6 border-t border-border backdrop-blur-xl bg-muted/30 relative z-10">
           <div className="flex gap-3">
             <Textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Scrie mesajul tău aici..."
-              className="flex-1 min-h-[60px] max-h-[120px] bg-white/10 border-white/30 text-white placeholder:text-white/50 resize-none focus:border-white/50 focus:ring-2 focus:ring-purple-500/30 rounded-xl transition-all duration-300 backdrop-blur-xl shadow-[inset_0_2px_8px_0_rgba(0,0,0,0.2)]"
+              className="flex-1 min-h-[60px] max-h-[120px] bg-background/50 border-border text-foreground placeholder:text-muted-foreground resize-none focus:border-primary/50 focus:ring-2 focus:ring-ring rounded-xl transition-all duration-300 backdrop-blur-xl shadow-[inset_0_2px_8px_0_rgba(0,0,0,0.05)]"
               disabled={isLoading}
             />
             <Button
               type="submit"
               disabled={!input.trim() || isLoading}
-              className="bg-gradient-to-br from-purple-500/90 via-purple-600/90 to-pink-500/90 hover:from-purple-600 hover:via-purple-700 hover:to-pink-600 h-[60px] px-6 rounded-xl shadow-[0_8px_32px_0_rgba(139,92,246,0.4)] hover:shadow-[0_12px_48px_0_rgba(139,92,246,0.5)] transition-all duration-300 hover:scale-105 hover:translate-y-[-2px] disabled:opacity-50 disabled:hover:scale-100 disabled:hover:translate-y-0 backdrop-blur-xl border border-white/20"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 h-[60px] px-6 rounded-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.15)] hover:shadow-[0_12px_48px_0_rgba(0,0,0,0.2)] transition-all duration-300 hover:scale-105 hover:translate-y-[-2px] disabled:opacity-50 disabled:hover:scale-100 disabled:hover:translate-y-0 backdrop-blur-xl border border-primary/20"
             >
               {isLoading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
@@ -201,8 +201,8 @@ export const SimpleChat = () => {
               )}
             </Button>
           </div>
-          <p className="text-xs text-white/60 mt-3 flex items-center gap-1">
-            <span className="text-purple-300">💡</span>
+          <p className="text-xs text-muted-foreground mt-3 flex items-center gap-1">
+            <span>💡</span>
             Apasă Enter pentru a trimite, Shift+Enter pentru linie nouă
           </p>
         </form>
