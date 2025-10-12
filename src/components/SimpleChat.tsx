@@ -27,8 +27,15 @@ export const SimpleChat = () => {
   };
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    // Scroll doar când se primește un mesaj nou, nu la fiecare render
+    if (messages.length > 0) {
+      const lastMessage = messages[messages.length - 1];
+      // Scroll doar pentru mesaje de la assistant sau când loading-ul se termină
+      if (lastMessage.role === "assistant" || !isLoading) {
+        scrollToBottom();
+      }
+    }
+  }, [messages.length, isLoading]);
 
   const streamChat = async (userMessage: string) => {
     const newMessages = [...messages, { role: "user" as const, content: userMessage }];
