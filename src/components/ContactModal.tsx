@@ -64,9 +64,9 @@ export function ContactModal({ isOpen, onClose, sessionId }: ContactModalProps) 
         return;
       }
 
-      toast.success("Raportul a fost trimis cu succes! Verifică emailul tău.", {
-        description: "Ai primit un raport complet personalizat cu recomandările AI pentru afacerea ta.",
-        duration: 5000,
+      toast.success("🎉 Raportul tău este pe drum!", {
+        description: "Verifică inbox-ul sau folderul de spam pentru a primi analiza completă personalizată. Ar trebui să ajungă în câteva minute!",
+        duration: 6000,
       });
       
       form.reset();
