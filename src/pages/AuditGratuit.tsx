@@ -141,18 +141,13 @@ const AuditGratuit = () => {
             Vreau AI În Afacerea Mea
             <ArrowRight className="ml-2" />
           </Button>
-          <p className="text-gray-400 text-sm">
-            Durează mai puțin de 2 minute — rezultate instantanee
-          </p>
+          
 
           <div className="py-4">
-            <span className="text-gray-500">sau</span>
+            
           </div>
 
-          <Button onClick={handleBookCall} variant="outline" size="lg" className="border-2 border-purple-500 text-purple-300 hover:bg-purple-500/20 hover:border-purple-400 px-8 py-6 text-lg rounded-lg w-full md:w-auto transition-all">
-            <Phone className="mr-2" />
-            🗓️ Programează un apel strategic gratuit cu un expert AI
-          </Button>
+          
         </div>
       </section>
 
