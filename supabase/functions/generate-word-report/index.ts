@@ -127,9 +127,9 @@ const handler = async (req: Request): Promise<Response> => {
       }
     }
 
-    // Generate AI Summary
-    console.log("Generating AI summary...");
-    const summaryResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    // Generate AI-Powered Personalized Report Content
+    console.log("Generating AI-powered personalized report...");
+    const reportResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${Deno.env.get('LOVABLE_API_KEY')}`,
@@ -140,39 +140,67 @@ const handler = async (req: Request): Promise<Response> => {
         messages: [
           { 
             role: "system", 
-            content: `Ești un consultant senior în automatizare și AI pentru afaceri B2B.
+            content: `Ești un consultant senior în automatizare și AI pentru afaceri B2B. 
 
-Generează un rezumat executiv PROFESIONAL și ACȚIONABIL de 200-300 cuvinte care să includă:
+Generează un raport profesional personalizat pentru clientul de mai jos. Raportul trebuie să fie CONCIS (maximum 8-10 pagini când e tipărit) și să conțină exact următoarele secțiuni în format JSON:
 
-1. **Contextul afacerii clientului** - Ce face, cine servește, câți oameni are în echipă
-2. **Provocările identificate** - Top 3-5 pain points concrete
-3. **Oportunități de automatizare cu AI** - Soluții specifice pentru provocările lor
-4. **Impact estimat** - Timp economisit, costuri reduse, creștere accelerată
-5. **Pași următori recomandați** - Acțiuni concrete pe care clientul le poate face
+{
+  "executive_summary": "Rezumat executiv de 250-300 cuvinte: Context afacere, provocări, oportunități AI, impact estimat, pași următori",
+  "business_analysis": "Analiză detaliată 200-250 cuvinte: Industrie, maturitate, readiness score, public țintă, echipă",
+  "challenges_deep_dive": "Analiză provocări 200-250 cuvinte: Fiecare pain point cu impact și cauze",
+  "ai_solutions": "Soluții AI personalizate 300-350 cuvinte: 3-5 soluții concrete cu tehnologii specifice și beneficii",
+  "implementation_roadmap": "Plan implementare 250-300 cuvinte: Faze (Quick Wins 0-1 luni, Core Systems 1-3 luni, Advanced 3-6 luni)",
+  "roi_analysis": "Analiză ROI 200-250 cuvinte: Investiție estimată, economii timp/costuri, breakeven",
+  "next_steps": "Pași concreți 150-200 cuvinte: Ce face clientul ACUM (3-4 acțiuni concrete)"
+}
 
-TON: Profesional, empatic, orientat pe soluții concrete și rezultate măsurabile.
-FORMAT: Scrie în paragrafe scurte (3-4 propoziții), folosește structură clară.` 
+**EXTREM DE IMPORTANT:**
+- Scrie CONCIS și LA OBIECT - respectă limitele de cuvinte
+- TON: Profesional, consultativ, orientat pe ROI măsurabil
+- Folosește date concrete când sunt disponibile
+- Personalizează fiecare secțiune pentru industriea și situația specifică
+- Nu repeta informații între secțiuni` 
           },
           { 
             role: "user", 
-            content: `Analizează următoarea conversație și insights-uri extrase pentru a genera rezumatul executiv:
+            content: `Generează raportul personalizat pentru acest client:
 
-**Insights Structurate:**
+**Date Structurate:**
 ${JSON.stringify(finalInsights, null, 2)}
 
 **Conversație Completă:**
 ${(messages || []).map((m: any) => `${m.role}: ${m.content}`).join('\n\n')}
 
-Generează un rezumat executiv profesional, acționabil și personalizat pentru această afacere.` 
+Returnează DOAR JSON-ul cu cele 7 secțiuni, fără text suplimentar.` 
           }
         ],
         temperature: 0.7,
+        max_tokens: 3000,
       }),
     });
 
-    const summaryData = await summaryResponse.json();
-    const aiGeneratedSummary = summaryData.choices[0].message.content;
-    console.log("AI summary generated successfully");
+    const reportData = await reportResponse.json();
+    let aiReport;
+    try {
+      const content = reportData.choices[0].message.content;
+      // Try to extract JSON from markdown code block if present
+      const jsonMatch = content.match(/```(?:json)?\s*(\{[\s\S]*\})\s*```/);
+      const jsonString = jsonMatch ? jsonMatch[1] : content;
+      aiReport = JSON.parse(jsonString);
+    } catch (e) {
+      console.error("Failed to parse AI report:", e);
+      // Fallback to basic report
+      aiReport = {
+        executive_summary: reportData.choices[0].message.content || "Raport generat pentru afacerea dvs.",
+        business_analysis: `Industrie: ${finalInsights?.industry || 'N/A'}`,
+        challenges_deep_dive: (finalInsights?.painpoints || []).join(', '),
+        ai_solutions: (finalInsights?.desired_solutions || []).join(', '),
+        implementation_roadmap: "Plan de implementare personalizat",
+        roi_analysis: "Analiză ROI estimativă",
+        next_steps: "Programează o consultație"
+      };
+    }
+    console.log("AI report generated successfully");
 
     // Download logo
     console.log("Downloading logo...");
@@ -257,56 +285,60 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
     // Executive Summary
     doc.addPage();
     addTitle('REZUMAT EXECUTIV');
-    addText(aiGeneratedSummary, 12);
+    addText(aiReport.executive_summary, 12);
     doc.moveDown(1);
 
-    // Business Profile
+    // Business Analysis
     doc.addPage();
-    addTitle('PROFILUL AFACERII');
-    
-    addSubtitle('Tip Afacere');
-    addText(finalInsights?.business_type || 'N/A');
-    
-    addSubtitle('Descriere Afacere');
-    addText(finalInsights?.business_description || 'N/A');
-    
-    addSubtitle('Public Țintă');
-    addText(finalInsights?.target_audience || 'N/A');
-    
-    addSubtitle('Mărime Echipă');
-    addText(finalInsights?.team_size || 'N/A');
-
-    // Situation Analysis
-    doc.addPage();
-    addTitle('ANALIZA SITUAȚIEI');
-    
-    addSubtitle('⚠️ Provocări Identificate');
-    (finalInsights?.painpoints || []).forEach((painPoint: string) => {
-      addBullet(painPoint);
-    });
+    addTitle('ANALIZA AFACERII');
+    addText(aiReport.business_analysis, 11);
     doc.moveDown(1);
     
-    addSubtitle('🎯 Obiective');
-    (finalInsights?.goals || []).forEach((goal: string) => {
-      addBullet(goal);
-    });
-    doc.moveDown(1);
-    
-    addSubtitle('🛠️ Instrumente Actuale');
-    (finalInsights?.tools_used || []).forEach((tool: string) => {
-      addBullet(tool);
-    });
+    // Add key metrics if available
+    if (finalInsights?.industry || finalInsights?.automation_readiness_score) {
+      doc.fontSize(10).fillColor('#666666').font('Helvetica-Bold').text('Metrici Cheie:');
+      doc.moveDown(0.3);
+      if (finalInsights?.industry) {
+        addBullet(`Industrie: ${finalInsights.industry}`);
+      }
+      if (finalInsights?.company_maturity) {
+        addBullet(`Maturitate: ${finalInsights.company_maturity}`);
+      }
+      if (finalInsights?.automation_readiness_score) {
+        addBullet(`Automation Readiness Score: ${finalInsights.automation_readiness_score}/10`);
+      }
+      doc.moveDown(1);
+    }
 
-    // Recommended Solutions
+    // Challenges Deep Dive
     doc.addPage();
-    addTitle('SOLUȚII RECOMANDATE');
-    (finalInsights?.desired_solutions || []).forEach((solution: string) => {
-      addBullet(`✅ ${solution}`);
-    });
+    addTitle('PROVOCĂRI ȘI OPORTUNITĂȚI');
+    addText(aiReport.challenges_deep_dive, 11);
+    doc.moveDown(1);
+
+    // AI Solutions
+    doc.addPage();
+    addTitle('SOLUȚII AI PERSONALIZATE');
+    addText(aiReport.ai_solutions, 11);
+    doc.moveDown(1);
+
+    // Implementation Roadmap
+    doc.addPage();
+    addTitle('PLAN DE IMPLEMENTARE');
+    addText(aiReport.implementation_roadmap, 11);
+    doc.moveDown(1);
+
+    // ROI Analysis
+    doc.addPage();
+    addTitle('ANALIZA ROI');
+    addText(aiReport.roi_analysis, 11);
+    doc.moveDown(1);
 
     // Next Steps
     doc.addPage();
     addTitle('PAȘI URMĂTORI');
+    addText(aiReport.next_steps, 11);
+    doc.moveDown(1);
     
     addSubtitle('🎯 Consultație Strategică GRATUITĂ');
     addText('Pregătit să transformi aceste insights în rezultate concrete? Programează o consultație strategică de 30 de minute pentru a discuta implementarea soluțiilor personalizate pentru afacerea ta!');
@@ -365,7 +397,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
     
     const { data: emailData, error: emailError } = await resend.emails.send({
       from: "AI Automatizări <onboarding@resend.dev>",
-      to: [email],
+      to: email,
       subject: `🚀 Raportul Tău PDF - Analiza AI pentru ${finalInsights?.business_type || "Afacerea Ta"}`,
       html: `
         <!DOCTYPE html>
