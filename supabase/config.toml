@@ -6,5 +6,8 @@ verify_jwt = false
 [functions.ai-copywriter]
 verify_jwt = false
 
+[functions.extract-audit-insights]
+verify_jwt = false
+
 [functions.send-report-pdf]
 verify_jwt = false
