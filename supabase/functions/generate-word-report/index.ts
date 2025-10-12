@@ -23,9 +23,9 @@ const corsHeaders = {
 
 interface RequestBody {
   sessionId: string;
-  name: string;
-  email: string;
-  phone: string;
+  name?: string;
+  email?: string;
+  phone?: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -35,6 +35,7 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const { sessionId, name, email, phone }: RequestBody = await req.json();
+    const generateOnly = !name && !email && !phone;
     console.log("Generating report for session:", sessionId);
 
     const supabaseClient = createClient(

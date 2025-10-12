@@ -22,6 +22,8 @@ export const AuditChat = () => {
   const [sessionId] = useState(() => crypto.randomUUID());
   const [showContactModal, setShowContactModal] = useState(false);
   const [showReportButton, setShowReportButton] = useState(false);
+  const [isGeneratingReport, setIsGeneratingReport] = useState(false);
+  const [reportUrl, setReportUrl] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
   useEffect(() => {
@@ -140,14 +142,54 @@ export const AuditChat = () => {
         }
       }
 
-      // Check if AI is asking for report confirmation
-      const lowerContent = fullAssistantMessage.toLowerCase();
-      if (
-        (lowerContent.includes('raport') && lowerContent.includes('email')) ||
-        lowerContent.includes('îți trimit raportul') || 
-        lowerContent.includes('iti trimit raportul')
-      ) {
-        setShowReportButton(true);
+      // Check if AI wants to generate the report
+      if (fullAssistantMessage.includes('GENERATE_REPORT_NOW')) {
+        setIsGeneratingReport(true);
+        // Remove the marker from display
+        const cleanMessage = fullAssistantMessage.replace('GENERATE_REPORT_NOW', '').trim();
+        setMessages([...newMessages, {
+          role: "assistant",
+          content: cleanMessage
+        }]);
+        
+        // Generate the report in the background
+        try {
+          const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-word-report`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`
+            },
+            body: JSON.stringify({ sessionId })
+          });
+          
+          const data = await response.json();
+          
+          if (data?.downloadUrl) {
+            setReportUrl(data.downloadUrl);
+            setShowReportButton(true);
+            setIsGeneratingReport(false);
+          }
+        } catch (error) {
+          console.error('Error generating report:', error);
+          toast({
+            title: "Eroare",
+            description: "A apărut o eroare la generarea raportului",
+            variant: "destructive"
+          });
+          setIsGeneratingReport(false);
+        }
+      }
+      
+      // Check if AI wants to show the report button (fallback for old flow)
+      if (fullAssistantMessage.includes('REPORT_READY_MARKER')) {
+        // Remove the marker from display
+        const cleanMessage = fullAssistantMessage.replace('REPORT_READY_MARKER', '').trim();
+        setMessages([...newMessages, {
+          role: "assistant",
+          content: cleanMessage
+        }]);
+        setShowContactModal(true);
       }
     } catch (error) {
       console.error("Chat error:", error);
@@ -174,11 +216,12 @@ export const AuditChat = () => {
     }
   };
   return <>
-    <ContactModal 
-      isOpen={showContactModal}
-      onClose={() => setShowContactModal(false)}
-      sessionId={sessionId}
-    />
+      <ContactModal 
+        isOpen={showContactModal}
+        onClose={() => setShowContactModal(false)}
+        sessionId={sessionId}
+        reportUrl={reportUrl}
+      />
     
     <div className="w-full max-w-4xl mx-auto space-y-4">
       {/* Messages */}
@@ -211,14 +254,21 @@ export const AuditChat = () => {
                 </div>
               </div>}
 
-            {showReportButton && !isLoading && (
+            {isGeneratingReport && (
+              <div className="flex items-center justify-center gap-3 p-4 bg-purple-500/10 rounded-lg border border-purple-500/20 animate-fade-in">
+                <Loader2 className="h-5 w-5 animate-spin text-purple-400" />
+                <span className="text-sm text-gray-300">Se generează raportul...</span>
+              </div>
+            )}
+
+            {showReportButton && !isLoading && !isGeneratingReport && (
               <div className="flex justify-center animate-fade-in py-4">
                 <Button
                   onClick={() => setShowContactModal(true)}
                   className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl text-white px-8 py-6 text-lg font-semibold rounded-xl"
                 >
                   <FileText className="mr-2 h-5 w-5" />
-                  Da, vreau raportul complet! 📊
+                  Raportul este gata
                 </Button>
               </div>
             )}

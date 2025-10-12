@@ -32,9 +32,10 @@ interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
   sessionId: string;
+  reportUrl?: string | null;
 }
 
-export function ContactModal({ isOpen, onClose, sessionId }: ContactModalProps) {
+export function ContactModal({ isOpen, onClose, sessionId, reportUrl }: ContactModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<ContactFormValues>({
@@ -49,19 +50,39 @@ export function ContactModal({ isOpen, onClose, sessionId }: ContactModalProps) 
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.functions.invoke('generate-word-report', {
-        body: {
-          sessionId,
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-        }
-      });
+      // If report is already generated, just send the email
+      if (reportUrl) {
+        const { error } = await supabase.functions.invoke('send-audit-report', {
+          body: {
+            sessionId,
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            downloadUrl: reportUrl,
+          }
+        });
 
-      if (error) {
-        console.error('Error sending report:', error);
-        toast.error("A apărut o eroare la trimiterea raportului. Te rugăm să încerci din nou.");
-        return;
+        if (error) {
+          console.error('Error sending report:', error);
+          toast.error("A apărut o eroare la trimiterea raportului. Te rugăm să încerci din nou.");
+          return;
+        }
+      } else {
+        // Fallback: generate and send
+        const { error } = await supabase.functions.invoke('generate-word-report', {
+          body: {
+            sessionId,
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+          }
+        });
+
+        if (error) {
+          console.error('Error sending report:', error);
+          toast.error("A apărut o eroare la trimiterea raportului. Te rugăm să încerci din nou.");
+          return;
+        }
       }
 
       toast.success("🎉 Raportul tău Word este pe drum!", {
