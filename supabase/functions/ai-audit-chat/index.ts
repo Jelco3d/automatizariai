@@ -221,6 +221,9 @@ Totuși, cel mai bine ar fi să primești raportul complet pe email unde îți d
     const decoder = new TextDecoder();
     let assistantMessage = "";
     let toolCallArgs = "";
+    let toolCallId = "";
+    let toolCallName = "";
+    let hasToolCall = false;
 
     const stream = new ReadableStream({
       async start(controller) {
@@ -248,6 +251,13 @@ Totuși, cel mai bine ar fi să primești raportul complet pe email unde îți d
                   // Check for tool calls
                   if (parsed.choices?.[0]?.delta?.tool_calls) {
                     const toolCall = parsed.choices[0].delta.tool_calls[0];
+                    hasToolCall = true;
+                    if (toolCall?.id) {
+                      toolCallId = toolCall.id;
+                    }
+                    if (toolCall?.function?.name) {
+                      toolCallName = toolCall.function.name;
+                    }
                     if (toolCall?.function?.arguments) {
                       toolCallArgs += toolCall.function.arguments;
                     }
@@ -286,8 +296,8 @@ Totuși, cel mai bine ar fi să primești raportul complet pe email unde îți d
             controller.enqueue(value);
           }
 
-          // Save complete assistant message
-          if (sessionId && assistantMessage) {
+          // Save complete assistant message if no tool call
+          if (sessionId && assistantMessage && !hasToolCall) {
             await supabase.from('audit_messages').insert({
               session_id: sessionId,
               role: 'assistant',
@@ -308,6 +318,121 @@ Totuși, cel mai bine ar fi să primești raportul complet pe email unde îți d
         }
       }
     });
+
+    // If there was a tool call, make a follow-up request with the tool result
+    if (hasToolCall && toolCallArgs) {
+      console.log("Tool call detected, making follow-up request...");
+      
+      // Consume the initial stream
+      await stream.pipeTo(new WritableStream());
+
+      // Make follow-up request with tool result
+      const followUpResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${LOVABLE_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "google/gemini-2.5-flash",
+          messages: [
+            { role: "system", content: systemPrompt },
+            ...messages,
+            {
+              role: "assistant",
+              content: null,
+              tool_calls: [{
+                id: toolCallId,
+                type: "function",
+                function: {
+                  name: toolCallName,
+                  arguments: toolCallArgs
+                }
+              }]
+            },
+            {
+              role: "tool",
+              tool_call_id: toolCallId,
+              name: toolCallName,
+              content: JSON.stringify({ 
+                success: true, 
+                message: "Informațiile au fost salvate cu succes. Continuă conversația și întreabă utilizatorul dacă dorește raportul." 
+              })
+            }
+          ],
+          stream: true
+        }),
+      });
+
+      if (!followUpResponse.ok) {
+        console.error("Follow-up request failed:", followUpResponse.status);
+        return new Response(stream, {
+          headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
+        });
+      }
+
+      // Stream the follow-up response
+      const followUpReader = followUpResponse.body?.getReader();
+      const followUpDecoder = new TextDecoder();
+      let followUpMessage = "";
+
+      const followUpStream = new ReadableStream({
+        async start(controller) {
+          try {
+            while (true) {
+              const { done, value } = await followUpReader!.read();
+              if (done) break;
+
+              const chunk = followUpDecoder.decode(value);
+              const lines = chunk.split('\n');
+
+              for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                  const data = line.slice(6);
+                  if (data === '[DONE]') continue;
+
+                  try {
+                    const parsed = JSON.parse(data);
+                    
+                    if (parsed.choices?.[0]?.delta?.content) {
+                      followUpMessage += parsed.choices[0].delta.content;
+                    }
+                  } catch (e) {
+                    // Ignore parse errors
+                  }
+                }
+              }
+
+              controller.enqueue(value);
+            }
+
+            // Save the follow-up assistant message
+            if (sessionId && followUpMessage) {
+              await supabase.from('audit_messages').insert({
+                session_id: sessionId,
+                role: 'assistant',
+                content: followUpMessage
+              });
+
+              // Update session status
+              await supabase.from('audit_sessions').update({
+                status: 'active',
+                updated_at: new Date().toISOString()
+              }).eq('id', sessionId);
+            }
+
+            controller.close();
+          } catch (error) {
+            console.error("Follow-up stream error:", error);
+            controller.error(error);
+          }
+        }
+      });
+
+      return new Response(followUpStream, {
+        headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
+      });
+    }
 
     return new Response(stream, {
       headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
