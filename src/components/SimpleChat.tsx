@@ -55,19 +55,57 @@ export const SimpleChat = () => {
 
       const data = await response.json();
       
-      // Extract the response from n8n
-      const assistantMessage = data.response || data.message || data.text || JSON.stringify(data);
+      // Logging pentru debugging
+      console.log("📩 Răspuns complet de la n8n:", data);
+      console.log("📊 Tipul răspunsului:", typeof data);
+      console.log("🔑 Chei disponibile:", Object.keys(data));
+      
+      // Extract the response from n8n - suportă multiple formate
+      let assistantMessage: string;
+      
+      if (data.response) {
+        assistantMessage = data.response;
+      } else if (data.message && data.message !== "Workflow was started") {
+        assistantMessage = data.message;
+      } else if (data.text) {
+        assistantMessage = data.text;
+      } else if (data.output) {
+        assistantMessage = data.output;
+      } else if (data.result) {
+        assistantMessage = data.result;
+      } else if (data.data) {
+        // Dacă există un obiect data, încearcă să extragi conținutul
+        assistantMessage = typeof data.data === 'string' 
+          ? data.data 
+          : JSON.stringify(data.data, null, 2);
+      } else {
+        // Fallback: afișează tot răspunsul formatat
+        console.warn("⚠️ Format de răspuns neașteptat de la n8n");
+        assistantMessage = JSON.stringify(data, null, 2);
+      }
+      
+      console.log("✅ Mesaj extras:", assistantMessage);
       
       // Add assistant response
       setMessages(prev => [...prev, { role: "assistant", content: assistantMessage }]);
 
     } catch (error) {
-      console.error("Chat error:", error);
+      console.error("❌ Chat error:", error);
+      
+      // Mesaj de eroare mai detaliat
+      const errorMessage = error instanceof Error ? error.message : "Eroare necunoscută";
+      
       toast({
-        title: "Eroare",
-        description: "A apărut o eroare la comunicarea cu n8n.",
+        title: "Eroare de comunicare",
+        description: `Nu am putut primi răspuns de la server: ${errorMessage}`,
         variant: "destructive",
       });
+      
+      // Adaugă un mesaj de eroare în chat pentru transparență
+      setMessages(prev => [...prev, { 
+        role: "assistant", 
+        content: "Scuze, am întâmpinat o problemă tehnică. Te rog încearcă din nou." 
+      }]);
     } finally {
       setIsLoading(false);
     }
