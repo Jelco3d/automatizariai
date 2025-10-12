@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Send, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { SimpleContactModal } from "@/components/SimpleContactModal";
 
 type Message = {
   role: "user" | "assistant";
@@ -20,6 +21,7 @@ export const SimpleChat = () => {
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
@@ -100,8 +102,11 @@ export const SimpleChat = () => {
       
       console.log("✅ Mesaj extras:", assistantMessage);
       
+      // Curăță mesajul de markeri interni
+      const cleanedMessage = assistantMessage.replace(/GENERATE_REPORT_NOW/g, '').trim();
+      
       // Add assistant response
-      setMessages(prev => [...prev, { role: "assistant", content: assistantMessage }]);
+      setMessages(prev => [...prev, { role: "assistant", content: cleanedMessage }]);
 
     } catch (error) {
       console.error("❌ Chat error:", error);
@@ -141,27 +146,48 @@ export const SimpleChat = () => {
     }
   };
 
+  const shouldShowReportButton = (content: string) => {
+    return content.includes("🎉 Excelent!") && content.includes("Raportul tău va include:");
+  };
+
   return (
-    <Card className="w-full max-w-4xl mx-auto bg-gradient-to-br from-[#1A1F2C]/95 via-[#1A1F2C]/90 to-[#2C1F3C]/95 border-purple-500/20 backdrop-blur-xl shadow-2xl shadow-purple-500/20 overflow-hidden">
-      <div className="flex flex-col h-[600px] relative">
-        {/* Decorative gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-pink-500/5 pointer-events-none" />
-        
-        {/* Messages */}
-        <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-6 space-y-4 relative z-10 scrollbar-thin scrollbar-thumb-purple-500/20 scrollbar-track-transparent">
-          {messages.map((message, index) => (
+    <>
+      <SimpleContactModal 
+        isOpen={showContactModal} 
+        onClose={() => setShowContactModal(false)} 
+      />
+      
+      <Card className="w-full max-w-4xl mx-auto bg-gradient-to-br from-[#1A1F2C]/95 via-[#1A1F2C]/90 to-[#2C1F3C]/95 border-purple-500/20 backdrop-blur-xl shadow-2xl shadow-purple-500/20 overflow-hidden">
+        <div className="flex flex-col h-[600px] relative">
+          {/* Decorative gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-pink-500/5 pointer-events-none" />
+          
+          {/* Messages */}
+          <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-6 space-y-4 relative z-10 scrollbar-thin scrollbar-thumb-purple-500/20 scrollbar-track-transparent">
+            {messages.map((message, index) => (
             <div
               key={index}
               className={`flex ${message.role === "user" ? "justify-end" : "justify-start"} animate-fade-in`}
             >
-              <div
-                className={`max-w-[80%] rounded-2xl p-4 transition-all duration-300 ${
-                  message.role === "user"
-                    ? "bg-gradient-to-br from-purple-500 via-purple-600 to-pink-500 text-white shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40"
-                    : "bg-gradient-to-br from-[#2C1F3C]/90 to-[#1A1F2C]/90 text-gray-100 border border-purple-500/30 backdrop-blur-sm shadow-lg shadow-black/20 hover:border-purple-500/50"
-                }`}
-              >
-                <p className="whitespace-pre-wrap leading-relaxed text-sm">{message.content}</p>
+              <div className="flex flex-col gap-3 max-w-[80%]">
+                <div
+                  className={`rounded-2xl p-4 transition-all duration-300 ${
+                    message.role === "user"
+                      ? "bg-gradient-to-br from-purple-500 via-purple-600 to-pink-500 text-white shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40"
+                      : "bg-gradient-to-br from-[#2C1F3C]/90 to-[#1A1F2C]/90 text-gray-100 border border-purple-500/30 backdrop-blur-sm shadow-lg shadow-black/20 hover:border-purple-500/50"
+                  }`}
+                >
+                  <p className="whitespace-pre-wrap leading-relaxed text-sm">{message.content}</p>
+                </div>
+                
+                {message.role === "assistant" && shouldShowReportButton(message.content) && (
+                  <Button
+                    onClick={() => setShowContactModal(true)}
+                    className="bg-gradient-to-br from-purple-500 via-purple-600 to-pink-500 hover:from-purple-600 hover:via-purple-700 hover:to-pink-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300"
+                  >
+                    Obține Auditul
+                  </Button>
+                )}
               </div>
             </div>
           ))}
@@ -175,10 +201,10 @@ export const SimpleChat = () => {
               </div>
             </div>
           )}
-        </div>
+          </div>
 
-        {/* Input */}
-        <form onSubmit={handleSubmit} className="p-6 border-t border-purple-500/20 backdrop-blur-sm bg-[#1A1F2C]/50 relative z-10">
+          {/* Input */}
+          <form onSubmit={handleSubmit} className="p-6 border-t border-purple-500/20 backdrop-blur-sm bg-[#1A1F2C]/50 relative z-10">
           <div className="flex gap-3">
             <Textarea
               value={input}
@@ -204,8 +230,9 @@ export const SimpleChat = () => {
             <span className="text-purple-400">💡</span>
             Apasă Enter pentru a trimite, Shift+Enter pentru linie nouă
           </p>
-        </form>
-      </div>
-    </Card>
+          </form>
+        </div>
+      </Card>
+    </>
   );
 };
