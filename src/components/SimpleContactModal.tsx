@@ -49,8 +49,10 @@ export function SimpleContactModal({ isOpen, onClose }: SimpleContactModalProps)
     try {
       const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw5XrnKHh4q0D7TmMcot9gWdkkb1J-hZBI2GOnTzhb1Z0nEUtl8mUuvaC1OSFxqjqV6/exec';
       
-      // Send data to Google Sheets
-      await fetch(GOOGLE_SCRIPT_URL, {
+      console.log('📤 Trimit datele:', data);
+      
+      // Send data to Google Sheets (no-cors means we can't verify success)
+      fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: {
@@ -62,6 +64,10 @@ export function SimpleContactModal({ isOpen, onClose }: SimpleContactModalProps)
           phone: data.phone,
           timestamp: new Date().toISOString()
         }),
+      }).then(() => {
+        console.log('✅ Cerere trimisă către Google Sheets');
+      }).catch((err) => {
+        console.error('❌ Eroare trimitere Google Sheets:', err);
       });
       
       toast.success("🎉 Datele tale au fost trimise!", {
