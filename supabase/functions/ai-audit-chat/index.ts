@@ -76,7 +76,63 @@ serve(async (req) => {
             messages: [
               { 
                 role: "system", 
-                content: "Extract and classify business information from this conversation. Be thorough and analytical." 
+                content: `Analizează această conversație completă de consultanță business și extrage TOATE informațiile detaliate.
+
+TASK: Extrage sistematic fiecare detaliu menționat în conversație și clasifică informațiile astfel:
+
+1. **Business Type & Description**: 
+   - Identifică tipul de afacere din răspunsul la întrebarea 1
+   - Creează o descriere detaliată bazată pe tot contextul conversației
+   
+2. **Industry & Target Audience**:
+   - Clasifică industria (e.g., prelucrare lemn, IT, retail, servicii)
+   - Identifică cui se adresează afacerea
+   
+3. **Pain Points (Provocări)**:
+   - Extrage TOATE provocările menționate în răspunsul la întrebarea 2
+   - Include și alte probleme menționate în context
+   
+4. **Time Spent (Timp Consumat)**:
+   - Notează exact cât timp se pierde cu procesele actuale (răspuns la întrebarea 3)
+   
+5. **Goals (Obiective)**:
+   - Extrage obiectivul principal din răspunsul la întrebarea 4
+   - Include și alte obiective implicite
+   
+6. **Tools Used (Instrumente)**:
+   - Lista COMPLETĂ a tool-urilor menționate la întrebarea 5
+   - Notează și limitările acestora
+   
+7. **Desired Solutions & AI Expectations**:
+   - Din răspunsul la întrebarea 6, extrage ce așteaptă de la AI
+   - Identifică soluții concrete care i-ar ajuta
+   
+8. **Automation Readiness Score (1-10)**:
+   - Calculează scorul astfel:
+     * 1-3: Procese 100% manuale (doar Excel/email/hârtie)
+     * 4-5: Câteva tools de bază dar multe gaps (Excel + ceva CRM simplu)
+     * 6-7: Tools moderne dar fără integrare (diverse app-uri separate)
+     * 8-9: Stack tehnologic bun, lipsește doar automatizarea inteligentă
+     * 10: Deja folosesc AI/automatizare, vor să optimizeze
+   - Ia în calcul: tools actuale, complexitatea proceselor, timpul pierdut
+   
+9. **Company Maturity**:
+   - "startup" = sub 2 ani, echipă mică, încă validează piața
+   - "growth" = 2-5 ani, echipă în creștere, procese stabilite
+   - "established" = 5+ ani, echipă mare, piață consolidată
+   
+10. **Team Size**:
+    - Estimează din context sau întreabă implicit
+    
+11. **Priority Recommendations**:
+    - Bazat pe TOATE datele de mai sus, recomandă 3-5 soluții AI concrete
+    - Prioritizează după: impact, implementare ușoară, ROI rapid
+
+IMPORTANT: 
+- Dacă ceva nu e explicit menționat, INFEREAZĂ din context
+- TOATE câmpurile trebuie completate
+- Fii specific și detaliat în răspunsuri
+- Folosește limba română pentru toate textele extrase` 
               },
               ...messages
             ],
@@ -121,7 +177,8 @@ serve(async (req) => {
                         items: { type: "string" },
                         description: "Top 3-5 AI solutions that would help most based on their needs"
                       }
-                    }
+                    },
+                    required: ["business_type", "industry", "automation_readiness_score", "painpoints", "goals", "tools_used"]
                   }
                 }
               }
@@ -137,18 +194,39 @@ serve(async (req) => {
           
           if (toolCall?.function?.arguments) {
             const insights = JSON.parse(toolCall.function.arguments);
-            console.log("✅ Forced extraction successful:", insights);
+            console.log("✅ Forced extraction successful:", JSON.stringify(insights, null, 2));
+
+            // Validate required fields
+            const requiredFields = ['business_type', 'industry', 'automation_readiness_score', 'painpoints', 'goals', 'tools_used'];
+            const missingFields = requiredFields.filter(field => !insights[field] || (Array.isArray(insights[field]) && insights[field].length === 0));
+            
+            if (missingFields.length > 0) {
+              console.error("⚠️ Missing required fields:", missingFields);
+              console.log("📋 Partial data will be saved, but some fields are incomplete");
+            } else {
+              console.log("✅ All required fields present and valid");
+            }
+
+            // Log data quality metrics
+            console.log("📊 Extraction Quality Metrics:");
+            console.log(`   - Business Type: ${insights.business_type ? '✓' : '✗'}`);
+            console.log(`   - Industry: ${insights.industry ? '✓' : '✗'}`);
+            console.log(`   - Automation Score: ${insights.automation_readiness_score ? insights.automation_readiness_score + '/10' : '✗'}`);
+            console.log(`   - Pain Points: ${insights.painpoints?.length || 0} items`);
+            console.log(`   - Goals: ${insights.goals?.length || 0} items`);
+            console.log(`   - Tools: ${insights.tools_used?.length || 0} items`);
+            console.log(`   - Recommendations: ${insights.priority_recommendations?.length || 0} items`);
 
             // Save comprehensive insights to database
             const { error } = await supabase.from('audit_insights').upsert({
               session_id: sessionId,
-              business_type: insights.business_type,
-              business_description: insights.business_description,
-              target_audience: insights.target_audience,
-              team_size: insights.team_size,
-              industry: insights.industry,
-              company_maturity: insights.company_maturity,
-              automation_readiness_score: insights.automation_readiness_score,
+              business_type: insights.business_type || 'Not specified',
+              business_description: insights.business_description || '',
+              target_audience: insights.target_audience || '',
+              team_size: insights.team_size || '',
+              industry: insights.industry || 'General',
+              company_maturity: insights.company_maturity || 'growth',
+              automation_readiness_score: insights.automation_readiness_score || 5,
               painpoints: insights.painpoints || [],
               desired_solutions: insights.desired_solutions || [],
               tools_used: insights.tools_used || [],
@@ -157,13 +235,32 @@ serve(async (req) => {
             }, { onConflict: 'session_id' });
 
             if (error) {
-              console.error("❌ Failed to save insights:", error);
+              console.error("❌ Failed to save insights to database:", error);
+              
+              // Fallback: Try calling extract-audit-insights function
+              console.log("🔄 Attempting fallback extraction via extract-audit-insights function...");
+              try {
+                const { data: fallbackData, error: fallbackError } = await supabase.functions.invoke('extract-audit-insights', {
+                  body: { sessionId }
+                });
+                
+                if (fallbackError) {
+                  console.error("❌ Fallback extraction also failed:", fallbackError);
+                } else {
+                  console.log("✅ Fallback extraction successful:", fallbackData);
+                }
+              } catch (fallbackErr) {
+                console.error("❌ Fallback extraction error:", fallbackErr);
+              }
             } else {
-              console.log("✅ Insights saved to database");
+              console.log("✅ Insights successfully saved to database");
             }
+          } else {
+            console.error("❌ No tool call arguments found in extraction response");
           }
         } else {
-          console.error("❌ Forced extraction failed:", extractionResponse.status);
+          const errorText = await extractionResponse.text();
+          console.error("❌ Forced extraction failed:", extractionResponse.status, errorText);
         }
       } catch (error) {
         console.error("❌ Extraction error:", error);
