@@ -23,7 +23,7 @@ export const AuditChat = () => {
   const [showContactModal, setShowContactModal] = useState(false);
   const [showReportButton, setShowReportButton] = useState(false);
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
-  const [reportUrl, setReportUrl] = useState<string | null>(null);
+  const [generatedReport, setGeneratedReport] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
   useEffect(() => {
@@ -152,9 +152,9 @@ export const AuditChat = () => {
           content: cleanMessage
         }]);
         
-        // Generate the report in the background
+        // Generate the report text using ai-copywriter
         try {
-          const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-word-report`, {
+          const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-copywriter`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -165,15 +165,15 @@ export const AuditChat = () => {
           
           const data = await response.json();
           
-          if (data?.downloadUrl) {
-            setReportUrl(data.downloadUrl);
+          if (data?.report) {
+            setGeneratedReport(data.report);
             setShowReportButton(true);
             setIsGeneratingReport(false);
             
             // Add assistant message announcing the report is ready
             setMessages(prev => [...prev, {
               role: "assistant",
-              content: "✅ **Raportul tău personalizat este gata!** Am generat o analiză completă cu recomandări AI specifice pentru afacerea ta. Apasă butonul de mai jos pentru a-l descărca."
+              content: "✅ **Raportul tău personalizat este gata!** Am generat o analiză completă cu recomandări AI specifice pentru afacerea ta. Apasă butonul de mai jos pentru a-l primi pe email."
             }]);
           }
         } catch (error) {
@@ -226,7 +226,7 @@ export const AuditChat = () => {
         isOpen={showContactModal}
         onClose={() => setShowContactModal(false)}
         sessionId={sessionId}
-        reportUrl={reportUrl}
+        reportText={generatedReport}
       />
     
     <div className="w-full max-w-4xl mx-auto space-y-4">
@@ -267,21 +267,14 @@ export const AuditChat = () => {
               </div>
             )}
 
-            {showReportButton && reportUrl && !isLoading && !isGeneratingReport && (
+            {showReportButton && generatedReport && !isLoading && !isGeneratingReport && (
               <div className="flex flex-col gap-3 items-center animate-fade-in py-4">
                 <Button
-                  onClick={() => window.open(reportUrl, '_blank')}
+                  onClick={() => setShowContactModal(true)}
                   className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl text-white px-8 py-6 text-lg font-semibold rounded-xl"
                 >
                   <FileText className="mr-2 h-5 w-5" />
-                  Descarcă Raportul PDF
-                </Button>
-                <Button
-                  onClick={() => setShowContactModal(true)}
-                  variant="outline"
-                  className="text-sm"
-                >
-                  Sau trimite-mi pe email
+                  Primește Raportul PDF pe Email
                 </Button>
               </div>
             )}

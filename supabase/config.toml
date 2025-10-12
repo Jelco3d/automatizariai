@@ -3,8 +3,8 @@ project_id = "ututdskuykdosmbgjkzh"
 [functions.ai-audit-chat]
 verify_jwt = false
 
-[functions.send-audit-report]
+[functions.ai-copywriter]
 verify_jwt = false
 
-[functions.generate-word-report]
+[functions.send-report-pdf]
 verify_jwt = false
