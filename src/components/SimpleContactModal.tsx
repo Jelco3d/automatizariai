@@ -47,7 +47,7 @@ export function SimpleContactModal({ isOpen, onClose }: SimpleContactModalProps)
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
     try {
-      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxNBNMGJU853Zd0pGednDhtuetZyv03XyG7p2__TZcixFjCcQP9TFtBMgDszUzdG3Wm/exec';
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbypW4gfiE2utivthy3LKifT7drbDZBR5-5arCOTI2QEw52ap7s-fKCmLcVUqugU5vO8/exec';
       
       console.log('📤 Trimit datele:', data);
       
