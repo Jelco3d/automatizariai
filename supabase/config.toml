@@ -6,6 +6,9 @@ verify_jwt = false
 [functions.ai-copywriter]
 verify_jwt = false
 
+[functions.chat-stream]
+verify_jwt = false
+
 [functions.extract-audit-insights]
 verify_jwt = false
 

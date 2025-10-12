@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, ArrowRight, Lock, Zap, MessageCircle, Target, DollarSign, Rocket, TrendingUp, Clock, Phone } from "lucide-react";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
+import { SimpleChat } from "@/components/SimpleChat";
 
 const AuditGratuit = () => {
   const handleStartAnalysis = () => {
@@ -35,6 +36,10 @@ const AuditGratuit = () => {
         </div>
       </section>
 
+      {/* Chat Section */}
+      <section className="container mx-auto px-4 pb-16 relative z-10">
+        <SimpleChat />
+      </section>
 
       {/* How It Works Section */}
       <section className="container mx-auto px-4 py-16 relative z-10">
