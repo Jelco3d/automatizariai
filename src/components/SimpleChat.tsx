@@ -11,6 +11,12 @@ type Message = {
   content: string;
 };
 
+// Function to format markdown-style text to HTML
+const formatMessage = (text: string): string => {
+  // Convert **text** to <strong>text</strong>
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+};
+
 export const SimpleChat = () => {
   const [sessionId] = useState(() => crypto.randomUUID());
   const [messages, setMessages] = useState<Message[]>([
@@ -194,7 +200,14 @@ export const SimpleChat = () => {
                       : "bg-gradient-to-br from-[#2C1F3C]/90 to-[#1A1F2C]/90 text-gray-100 border border-purple-500/30 backdrop-blur-sm shadow-lg shadow-black/20 hover:border-purple-500/50"
                   }`}
                 >
-                  <p className="whitespace-pre-wrap leading-relaxed text-sm">{message.content}</p>
+                  {message.role === "assistant" ? (
+                    <div 
+                      className="whitespace-pre-wrap leading-relaxed text-sm"
+                      dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }}
+                    />
+                  ) : (
+                    <p className="whitespace-pre-wrap leading-relaxed text-sm">{message.content}</p>
+                  )}
                 </div>
                 
                 {message.role === "assistant" && shouldShowReportButton(message.content, index) && (
