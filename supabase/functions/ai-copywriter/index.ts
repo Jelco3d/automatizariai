@@ -140,6 +140,22 @@ Arată că înțelegi provocările lor și ai soluții concrete.`;
 
     console.log('Persuasive report generated successfully');
 
+    // Save the generated report back to audit_insights
+    const { error: updateError } = await supabase
+      .from('audit_insights')
+      .update({ 
+        generated_report: persuasiveReport,
+        updated_at: new Date().toISOString()
+      })
+      .eq('session_id', sessionId);
+
+    if (updateError) {
+      console.error('Error saving report to database:', updateError);
+      // Continue anyway - report was generated successfully
+    } else {
+      console.log('✅ Report saved to database successfully');
+    }
+
     return new Response(
       JSON.stringify({ 
         success: true,
