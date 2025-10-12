@@ -296,40 +296,7 @@ Când utilizatorul confirmă cu "da", "yes", "corect", "da corect", "perfect" sa
                         if (error) {
                           console.error("❌ Failed to save progressive insights:", error);
                         } else {
-                          console.log("✅ Progressive insights saved");
-                          
-                          // Send data to n8n webhook
-                          const N8N_WEBHOOK_URL = Deno.env.get('N8N_WEBHOOK_URL');
-                          if (N8N_WEBHOOK_URL) {
-                            try {
-                              console.log(`[${new Date().toISOString()}] 📤 Sending progressive insights to n8n...`);
-                              
-                              const n8nResponse = await fetch(N8N_WEBHOOK_URL, {
-                                method: 'POST',
-                                headers: {
-                                  'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({
-                                  session_id: sessionId,
-                                  insights: insights,
-                                  extraction_type: 'progressive',
-                                  timestamp: new Date().toISOString()
-                                })
-                              });
-
-                              if (n8nResponse.ok) {
-                                console.log(`[${new Date().toISOString()}] ✅ Progressive insights sent to n8n successfully`);
-                              } else {
-                                const errorText = await n8nResponse.text();
-                                console.error(`[${new Date().toISOString()}] ❌ n8n webhook failed:`, n8nResponse.status, errorText);
-                              }
-                            } catch (n8nError) {
-                              console.error(`[${new Date().toISOString()}] ❌ Error calling n8n:`, n8nError);
-                              // Continue anyway - insights were saved successfully
-                            }
-                          } else {
-                            console.log(`[${new Date().toISOString()}] ⚠️ N8N_WEBHOOK_URL not configured`);
-                          }
+                          console.log("✅ Progressive insights saved (trigger will notify n8n)");
                         }
                       }
                     } catch (e) {
@@ -581,47 +548,7 @@ IMPORTANT:
                           console.error(`[${new Date().toISOString()}] ❌ Fallback error:`, fallbackErr);
                         }
                       } else {
-                        console.log(`[${new Date().toISOString()}] ✅ All data complete and saved successfully`);
-                        
-                        // Send complete insights to n8n webhook
-                        const N8N_WEBHOOK_URL = Deno.env.get('N8N_WEBHOOK_URL');
-                        if (N8N_WEBHOOK_URL) {
-                          try {
-                            console.log(`[${new Date().toISOString()}] 📤 Sending post-stream insights to n8n...`);
-                            
-                            // Fetch the saved insights to send complete data
-                            const { data: savedInsights } = await supabase
-                              .from('audit_insights')
-                              .select('*')
-                              .eq('session_id', sessionId)
-                              .single();
-
-                            const n8nResponse = await fetch(N8N_WEBHOOK_URL, {
-                              method: 'POST',
-                              headers: {
-                                'Content-Type': 'application/json',
-                              },
-                              body: JSON.stringify({
-                                session_id: sessionId,
-                                insights: savedInsights,
-                                extraction_type: 'post-stream',
-                                timestamp: new Date().toISOString()
-                              })
-                            });
-
-                            if (n8nResponse.ok) {
-                              console.log(`[${new Date().toISOString()}] ✅ Post-stream insights sent to n8n successfully`);
-                            } else {
-                              const errorText = await n8nResponse.text();
-                              console.error(`[${new Date().toISOString()}] ❌ n8n webhook failed:`, n8nResponse.status, errorText);
-                            }
-                          } catch (n8nError) {
-                            console.error(`[${new Date().toISOString()}] ❌ Error calling n8n:`, n8nError);
-                            // Continue anyway - insights were saved successfully
-                          }
-                        } else {
-                          console.log(`[${new Date().toISOString()}] ⚠️ N8N_WEBHOOK_URL not configured`);
-                        }
+                        console.log(`[${new Date().toISOString()}] ✅ All data complete and saved (trigger will notify n8n)`);
                       }
                     } else {
                       console.error(`[${new Date().toISOString()}] ❌ No tool call arguments in extraction response`);
