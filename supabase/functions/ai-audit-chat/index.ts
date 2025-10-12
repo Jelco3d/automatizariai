@@ -93,7 +93,6 @@ Creează un răspuns personalizat structurat astfel:
 1. Rezumatul afacerii — o scurtă recapitulare a ceea ce ai înțeles (ca să confirmi empatia și claritatea).
 2. Analiza AI — identifică 2–4 zone unde inteligența artificială sau automatizarea pot aduce îmbunătățiri semnificative.
 3. Soluții și recomandări — sugerează idei concrete: tipuri de automatizări, instrumente, modele AI, integrări sau strategii de optimizare.
-4. Apel la acțiune (CTA) — invită utilizatorul, într-un ton cald și constructiv, să programeze un apel gratuit pentru a discuta implementarea practică a acestor soluții.
 
 💡 Tonul tău:
 
@@ -104,8 +103,7 @@ Creează un răspuns personalizat structurat astfel:
 🧠 Exemplu de final de răspuns:
 
 "Din ce îmi descrii, afacerea ta are un potențial excelent de a economisi timp și bani prin automatizarea [proces X].
-De exemplu, poți folosi AI pentru [soluție scurtă].
-Dacă vrei, putem programa un apel gratuit pentru a discuta exact cum poți implementa aceste idei pas cu pas, cu instrumente potrivite pentru tine."`;
+De exemplu, poți folosi AI pentru [soluție scurtă], și vei vedea rapid îmbunătățiri în eficiență și productivitate."`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
