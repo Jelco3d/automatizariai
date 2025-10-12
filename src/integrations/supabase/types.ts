@@ -117,7 +117,7 @@ export type Database = {
           {
             foreignKeyName: "audit_insights_session_id_fkey"
             columns: ["session_id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "audit_sessions"
             referencedColumns: ["id"]
           },
