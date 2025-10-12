@@ -85,8 +85,8 @@ export function ContactModal({ isOpen, onClose, sessionId, reportUrl }: ContactM
         }
       }
 
-      toast.success("🎉 Raportul tău Word este pe drum!", {
-        description: "Verifică inbox-ul pentru link-ul de download al raportului Word personalizat. Ar trebui să ajungă în câteva minute!",
+      toast.success("🎉 Raportul tău PDF este pe drum!", {
+        description: "Verifică inbox-ul pentru link-ul de download al raportului PDF personalizat. Ar trebui să ajungă în câteva minute!",
         duration: 6000,
       });
       

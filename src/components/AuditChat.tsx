@@ -169,6 +169,12 @@ export const AuditChat = () => {
             setReportUrl(data.downloadUrl);
             setShowReportButton(true);
             setIsGeneratingReport(false);
+            
+            // Add assistant message announcing the report is ready
+            setMessages(prev => [...prev, {
+              role: "assistant",
+              content: "✅ **Raportul tău personalizat este gata!** Am generat o analiză completă cu recomandări AI specifice pentru afacerea ta. Apasă butonul de mai jos pentru a-l descărca."
+            }]);
           }
         } catch (error) {
           console.error('Error generating report:', error);
@@ -261,14 +267,21 @@ export const AuditChat = () => {
               </div>
             )}
 
-            {showReportButton && !isLoading && !isGeneratingReport && (
-              <div className="flex justify-center animate-fade-in py-4">
+            {showReportButton && reportUrl && !isLoading && !isGeneratingReport && (
+              <div className="flex flex-col gap-3 items-center animate-fade-in py-4">
                 <Button
-                  onClick={() => setShowContactModal(true)}
+                  onClick={() => window.open(reportUrl, '_blank')}
                   className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl text-white px-8 py-6 text-lg font-semibold rounded-xl"
                 >
                   <FileText className="mr-2 h-5 w-5" />
-                  Raportul este gata
+                  Descarcă Raportul PDF
+                </Button>
+                <Button
+                  onClick={() => setShowContactModal(true)}
+                  variant="outline"
+                  className="text-sm"
+                >
+                  Sau trimite-mi pe email
                 </Button>
               </div>
             )}

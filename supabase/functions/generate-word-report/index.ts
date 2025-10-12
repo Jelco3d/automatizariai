@@ -556,7 +556,8 @@ Returnează DOAR JSON-ul cu cele 7 secțiuni, fără text suplimentar.`
     return new Response(
       JSON.stringify({ 
         success: true,
-        documentUrl: publicUrl 
+        documentUrl: publicUrl,
+        downloadUrl: publicUrl
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
