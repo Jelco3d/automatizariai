@@ -24,14 +24,15 @@ serve(async (req) => {
   try {
     const { sessionId, reportText, name, email, phone }: RequestBody = await req.json();
 
-    console.log("Starting PDF report generation for session:", sessionId);
+    console.log(`[${new Date().toISOString()}] 🚀 Starting PDF report generation for session: ${sessionId}`);
 
     // Initialize Supabase client
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Save contact to database
+    // FIX 3: Save contact with report_sent: false initially
+    console.log(`[${new Date().toISOString()}] 💾 Saving contact information for session: ${sessionId}`);
     const { error: contactError } = await supabase
       .from("audit_contacts")
       .insert({
@@ -39,15 +40,15 @@ serve(async (req) => {
         name,
         email,
         phone,
-        report_sent: true,
+        report_sent: false, // Will be updated to true after successful email send
       });
 
     if (contactError) {
-      console.error("Error saving contact:", contactError);
+      console.error(`[${new Date().toISOString()}] ❌ Error saving contact:`, contactError);
       throw new Error("Failed to save contact information");
     }
 
-    console.log("Contact saved successfully");
+    console.log(`[${new Date().toISOString()}] ✅ Contact saved successfully (report_sent: false)`);
 
     // Generate PDF from reportText with brand colors
     const doc = new jsPDF({
@@ -270,7 +271,7 @@ serve(async (req) => {
       doc.text('Jelco Consulting | AI Automatizari | aiautomatizari@gmail.com', 105, footerY + 14, { align: 'center' });
     }
 
-    console.log("PDF generated successfully with brand colors");
+    console.log(`[${new Date().toISOString()}] 📄 PDF generated successfully with brand colors (${pdfBuffer.byteLength} bytes)`);
 
     // Convert PDF to buffer
     const pdfBuffer = doc.output("arraybuffer");
@@ -286,18 +287,18 @@ serve(async (req) => {
       });
 
     if (uploadError) {
-      console.error("Error uploading PDF:", uploadError);
+      console.error(`[${new Date().toISOString()}] ❌ Error uploading PDF:`, uploadError);
       throw new Error("Failed to upload PDF to storage");
     }
 
-    console.log("PDF uploaded successfully:", fileName);
+    console.log(`[${new Date().toISOString()}] ✅ PDF uploaded successfully: ${fileName}`);
 
     // Get public URL
     const { data: { publicUrl } } = supabase.storage
       .from("audit-reports")
       .getPublicUrl(fileName);
 
-    console.log("Public URL generated:", publicUrl);
+    console.log(`[${new Date().toISOString()}] 🔗 Public URL generated: ${publicUrl}`);
 
     // Send email with Resend
     const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
@@ -384,11 +385,24 @@ serve(async (req) => {
     });
 
     if (emailError) {
-      console.error("Error sending email:", emailError);
+      console.error(`[${new Date().toISOString()}] ❌ Error sending email:`, emailError);
       throw new Error("Failed to send email");
     }
 
-    console.log("Email sent successfully to:", email);
+    console.log(`[${new Date().toISOString()}] ✅ Email sent successfully to: ${email}`);
+
+    // FIX 3: Update report_sent flag ONLY after successful email delivery
+    const { error: updateError } = await supabase
+      .from("audit_contacts")
+      .update({ report_sent: true })
+      .eq('session_id', sessionId)
+      .eq('email', email);
+
+    if (updateError) {
+      console.error(`[${new Date().toISOString()}] ⚠️ Warning: Failed to update report_sent flag:`, updateError);
+    } else {
+      console.log(`[${new Date().toISOString()}] ✅ Report status updated: report_sent = true`);
+    }
 
     return new Response(
       JSON.stringify({
@@ -402,7 +416,10 @@ serve(async (req) => {
       }
     );
   } catch (error) {
-    console.error("Error in send-report-pdf function:", error);
+    console.error(`[${new Date().toISOString()}] ❌ Error in send-report-pdf function:`, {
+      error: error instanceof Error ? error.message : "Unknown error",
+      stack: error instanceof Error ? error.stack : undefined
+    });
     return new Response(
       JSON.stringify({
         error: error instanceof Error ? error.message : "Unknown error occurred",

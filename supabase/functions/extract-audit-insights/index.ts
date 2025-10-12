@@ -14,7 +14,7 @@ serve(async (req) => {
 
   try {
     const { sessionId } = await req.json();
-    console.log("📊 Extracting insights for session:", sessionId);
+    console.log(`[${new Date().toISOString()}] 📊 Starting insights extraction for session: ${sessionId}`);
 
     if (!sessionId) {
       return new Response(
@@ -58,7 +58,7 @@ serve(async (req) => {
       );
     }
 
-    console.log(`📝 Found ${messages.length} messages to analyze`);
+    console.log(`[${new Date().toISOString()}] 📝 Found ${messages.length} messages to analyze`);
 
     // Format messages for AI
     const formattedMessages = messages.map(msg => ({
@@ -195,7 +195,7 @@ Fii exhaustiv și nu rata nicio informație importantă.`
     }
 
     const insights = JSON.parse(toolCall.function.arguments);
-    console.log("✅ Extracted insights:", insights);
+    console.log(`[${new Date().toISOString()}] ✅ Extracted insights:`, JSON.stringify(insights, null, 2));
 
     // Save insights to database
     const { data: savedInsights, error: saveError } = await supabase
@@ -226,7 +226,7 @@ Fii exhaustiv și nu rata nicio informație importantă.`
       throw new Error("Failed to save insights to database");
     }
 
-    console.log("✅ Insights saved successfully to audit_insights");
+    console.log(`[${new Date().toISOString()}] ✅ Insights saved successfully to audit_insights`);
 
     return new Response(
       JSON.stringify({ 
@@ -241,7 +241,10 @@ Fii exhaustiv și nu rata nicio informație importantă.`
     );
 
   } catch (error) {
-    console.error("❌ Error in extract-audit-insights:", error);
+    console.error(`[${new Date().toISOString()}] ❌ Error in extract-audit-insights:`, {
+      error: error instanceof Error ? error.message : "Unknown error",
+      stack: error instanceof Error ? error.stack : undefined
+    });
     return new Response(
       JSON.stringify({ 
         error: error instanceof Error ? error.message : "Unknown error" 
