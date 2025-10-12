@@ -58,13 +58,17 @@ export type Database = {
       audit_insights: {
         Row: {
           ai_recommendations: string | null
+          automation_readiness_score: number | null
           business_description: string | null
           business_type: string | null
+          company_maturity: string | null
           created_at: string
           desired_solutions: Json | null
           goals: Json | null
           id: string
+          industry: string | null
           painpoints: Json | null
+          priority_recommendations: Json | null
           session_id: string
           target_audience: string | null
           team_size: string | null
@@ -73,13 +77,17 @@ export type Database = {
         }
         Insert: {
           ai_recommendations?: string | null
+          automation_readiness_score?: number | null
           business_description?: string | null
           business_type?: string | null
+          company_maturity?: string | null
           created_at?: string
           desired_solutions?: Json | null
           goals?: Json | null
           id?: string
+          industry?: string | null
           painpoints?: Json | null
+          priority_recommendations?: Json | null
           session_id: string
           target_audience?: string | null
           team_size?: string | null
@@ -88,13 +96,17 @@ export type Database = {
         }
         Update: {
           ai_recommendations?: string | null
+          automation_readiness_score?: number | null
           business_description?: string | null
           business_type?: string | null
+          company_maturity?: string | null
           created_at?: string
           desired_solutions?: Json | null
           goals?: Json | null
           id?: string
+          industry?: string | null
           painpoints?: Json | null
+          priority_recommendations?: Json | null
           session_id?: string
           target_audience?: string | null
           team_size?: string | null

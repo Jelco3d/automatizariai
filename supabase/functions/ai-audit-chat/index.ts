@@ -51,6 +51,122 @@ serve(async (req) => {
           role: 'user',
           content: lastMessage.content
         });
+        console.log("✅ User message saved to DB:", lastMessage.content.substring(0, 50));
+      }
+    }
+
+    // Check if user is confirming the summary
+    const lastUserMessage = messages[messages.length - 1]?.content?.toLowerCase() || "";
+    const confirmationKeywords = ["corect", "da", "confirm", "exact", "perfect", "adevarat"];
+    const isConfirmation = confirmationKeywords.some(keyword => lastUserMessage.includes(keyword));
+
+    // If confirmation detected, force extraction before continuing
+    if (isConfirmation && sessionId) {
+      console.log("🎯 Confirmation detected, forcing extraction...");
+      
+      try {
+        const extractionResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${LOVABLE_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "google/gemini-2.5-flash",
+            messages: [
+              { 
+                role: "system", 
+                content: "Extract and classify business information from this conversation. Be thorough and analytical." 
+              },
+              ...messages
+            ],
+            tools: [
+              {
+                type: "function",
+                function: {
+                  name: "extract_business_insights",
+                  description: "Extract and classify comprehensive business information",
+                  parameters: {
+                    type: "object",
+                    properties: {
+                      business_type: { type: "string", description: "Type of business (e.g., e-commerce, services, education)" },
+                      business_description: { type: "string", description: "Detailed description of the business" },
+                      target_audience: { type: "string", description: "Target customers or audience" },
+                      team_size: { type: "string", description: "Size of the team" },
+                      industry: { type: "string", description: "Industry classification (e.g., tech services, e-commerce, education, healthcare)" },
+                      company_maturity: { type: "string", description: "Company maturity stage: startup, growth, or established" },
+                      automation_readiness_score: { type: "integer", description: "Score 1-10 based on current tools and pain points indicating readiness for automation" },
+                      painpoints: { 
+                        type: "array",
+                        items: { type: "string" },
+                        description: "List of problems and frustrations mentioned"
+                      },
+                      desired_solutions: {
+                        type: "array",
+                        items: { type: "string" },
+                        description: "List of solutions the user is interested in"
+                      },
+                      tools_used: {
+                        type: "array",
+                        items: { type: "string" },
+                        description: "Digital tools currently being used"
+                      },
+                      goals: {
+                        type: "array",
+                        items: { type: "string" },
+                        description: "Business goals and objectives"
+                      },
+                      priority_recommendations: {
+                        type: "array",
+                        items: { type: "string" },
+                        description: "Top 3-5 AI solutions that would help most based on their needs"
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            tool_choice: { type: "function", function: { name: "extract_business_insights" } },
+            stream: false
+          }),
+        });
+
+        if (extractionResponse.ok) {
+          const extractionData = await extractionResponse.json();
+          const toolCall = extractionData.choices?.[0]?.message?.tool_calls?.[0];
+          
+          if (toolCall?.function?.arguments) {
+            const insights = JSON.parse(toolCall.function.arguments);
+            console.log("✅ Forced extraction successful:", insights);
+
+            // Save comprehensive insights to database
+            const { error } = await supabase.from('audit_insights').upsert({
+              session_id: sessionId,
+              business_type: insights.business_type,
+              business_description: insights.business_description,
+              target_audience: insights.target_audience,
+              team_size: insights.team_size,
+              industry: insights.industry,
+              company_maturity: insights.company_maturity,
+              automation_readiness_score: insights.automation_readiness_score,
+              painpoints: insights.painpoints || [],
+              desired_solutions: insights.desired_solutions || [],
+              tools_used: insights.tools_used || [],
+              goals: insights.goals || [],
+              priority_recommendations: insights.priority_recommendations || []
+            }, { onConflict: 'session_id' });
+
+            if (error) {
+              console.error("❌ Failed to save insights:", error);
+            } else {
+              console.log("✅ Insights saved to database");
+            }
+          }
+        } else {
+          console.error("❌ Forced extraction failed:", extractionResponse.status);
+        }
+      } catch (error) {
+        console.error("❌ Extraction error:", error);
       }
     }
 
@@ -107,7 +223,7 @@ IMPORTANT RULES:
             type: "function",
             function: {
               name: "extract_business_insights",
-              description: "Extract structured business information from the conversation when enough details are provided",
+              description: "Extract and classify comprehensive business information from the conversation",
               parameters: {
                 type: "object",
                 properties: {
@@ -115,6 +231,9 @@ IMPORTANT RULES:
                   business_description: { type: "string", description: "Detailed description of the business" },
                   target_audience: { type: "string", description: "Target customers or audience" },
                   team_size: { type: "string", description: "Size of the team" },
+                  industry: { type: "string", description: "Industry classification (e.g., tech services, e-commerce, education, healthcare)" },
+                  company_maturity: { type: "string", description: "Company maturity stage: startup, growth, or established" },
+                  automation_readiness_score: { type: "integer", description: "Score 1-10 based on current tools and pain points" },
                   painpoints: { 
                     type: "array",
                     items: { type: "string" },
@@ -134,6 +253,11 @@ IMPORTANT RULES:
                     type: "array",
                     items: { type: "string" },
                     description: "Business goals and objectives"
+                  },
+                  priority_recommendations: {
+                    type: "array",
+                    items: { type: "string" },
+                    description: "Top 3-5 AI solutions that would help most"
                   }
                 }
               }
@@ -225,24 +349,34 @@ IMPORTANT RULES:
                   if (parsed.choices?.[0]?.finish_reason === 'tool_calls' && toolCallArgs) {
                     try {
                       const insights = JSON.parse(toolCallArgs);
-                      console.log("Extracted insights:", insights);
+                      console.log("📊 Progressive extraction - Insights:", insights);
 
-                      // Save insights to database
+                      // Save insights to database with all new fields
                       if (sessionId) {
-                        await supabase.from('audit_insights').upsert({
+                        const { error } = await supabase.from('audit_insights').upsert({
                           session_id: sessionId,
                           business_type: insights.business_type,
                           business_description: insights.business_description,
                           target_audience: insights.target_audience,
                           team_size: insights.team_size,
+                          industry: insights.industry,
+                          company_maturity: insights.company_maturity,
+                          automation_readiness_score: insights.automation_readiness_score,
                           painpoints: insights.painpoints || [],
                           desired_solutions: insights.desired_solutions || [],
                           tools_used: insights.tools_used || [],
-                          goals: insights.goals || []
+                          goals: insights.goals || [],
+                          priority_recommendations: insights.priority_recommendations || []
                         }, { onConflict: 'session_id' });
+
+                        if (error) {
+                          console.error("❌ Failed to save progressive insights:", error);
+                        } else {
+                          console.log("✅ Progressive insights saved");
+                        }
                       }
                     } catch (e) {
-                      console.error("Failed to parse tool call args:", e);
+                      console.error("❌ Failed to parse tool call args:", e);
                     }
                   }
                 } catch (e) {
