@@ -58,30 +58,33 @@ export const SimpleChat = () => {
       // Logging pentru debugging
       console.log("📩 Răspuns complet de la n8n:", data);
       console.log("📊 Tipul răspunsului:", typeof data);
-      console.log("🔑 Chei disponibile:", Object.keys(data));
+      console.log("🔑 Chei disponibile:", Array.isArray(data) ? "Array" : Object.keys(data));
+      
+      // Dacă data este un array, ia primul element
+      const responseData = Array.isArray(data) ? data[0] : data;
       
       // Extract the response from n8n - suportă multiple formate
       let assistantMessage: string;
       
-      if (data.response) {
-        assistantMessage = data.response;
-      } else if (data.message && data.message !== "Workflow was started") {
-        assistantMessage = data.message;
-      } else if (data.text) {
-        assistantMessage = data.text;
-      } else if (data.output) {
-        assistantMessage = data.output;
-      } else if (data.result) {
-        assistantMessage = data.result;
-      } else if (data.data) {
+      if (responseData.response) {
+        assistantMessage = responseData.response;
+      } else if (responseData.message && responseData.message !== "Workflow was started") {
+        assistantMessage = responseData.message;
+      } else if (responseData.text) {
+        assistantMessage = responseData.text;
+      } else if (responseData.output) {
+        assistantMessage = responseData.output;
+      } else if (responseData.result) {
+        assistantMessage = responseData.result;
+      } else if (responseData.data) {
         // Dacă există un obiect data, încearcă să extragi conținutul
-        assistantMessage = typeof data.data === 'string' 
-          ? data.data 
-          : JSON.stringify(data.data, null, 2);
+        assistantMessage = typeof responseData.data === 'string' 
+          ? responseData.data 
+          : JSON.stringify(responseData.data, null, 2);
       } else {
         // Fallback: afișează tot răspunsul formatat
         console.warn("⚠️ Format de răspuns neașteptat de la n8n");
-        assistantMessage = JSON.stringify(data, null, 2);
+        assistantMessage = JSON.stringify(responseData, null, 2);
       }
       
       console.log("✅ Mesaj extras:", assistantMessage);
