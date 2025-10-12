@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.send-audit-report]
 verify_jwt = false
+
+[functions.generate-word-report]
+verify_jwt = false

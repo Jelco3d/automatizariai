@@ -49,7 +49,7 @@ export function ContactModal({ isOpen, onClose, sessionId }: ContactModalProps) 
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.functions.invoke('send-audit-report', {
+      const { error } = await supabase.functions.invoke('generate-word-report', {
         body: {
           sessionId,
           name: data.name,
@@ -64,8 +64,8 @@ export function ContactModal({ isOpen, onClose, sessionId }: ContactModalProps) 
         return;
       }
 
-      toast.success("🎉 Raportul tău este pe drum!", {
-        description: "Verifică inbox-ul sau folderul de spam pentru a primi analiza completă personalizată. Ar trebui să ajungă în câteva minute!",
+      toast.success("🎉 Raportul tău Word este pe drum!", {
+        description: "Verifică inbox-ul pentru link-ul de download al raportului Word personalizat. Ar trebui să ajungă în câteva minute!",
         duration: 6000,
       });
       
