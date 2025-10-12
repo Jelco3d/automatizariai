@@ -47,8 +47,22 @@ export function SimpleContactModal({ isOpen, onClose }: SimpleContactModalProps)
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
     try {
-      // Here you can add logic to save contact info or send to an API
-      console.log("Contact form submitted:", data);
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw5XrnKHh4q0D7TmMcot9gWdkkb1J-hZBI2GOnTzhb1Z0nEUtl8mUuvaC1OSFxqjqV6/exec';
+      
+      // Send data to Google Sheets
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          timestamp: new Date().toISOString()
+        }),
+      });
       
       toast.success("🎉 Datele tale au fost trimise!", {
         description: "Vei fi contactat în curând de echipa noastră pentru a discuta despre audit.",
