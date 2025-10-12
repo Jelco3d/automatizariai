@@ -49,99 +49,228 @@ serve(async (req) => {
 
     console.log("Contact saved successfully");
 
-    // Generate PDF from reportText
+    // Generate PDF from reportText with brand colors
     const doc = new jsPDF({
       orientation: "portrait",
       unit: "mm",
       format: "a4",
     });
 
-    // Add branding header
-    doc.setFillColor(59, 130, 246); // blue
-    doc.rect(0, 0, 210, 30, "F");
+    // Brand colors
+    const purple = { r: 168, g: 85, b: 247 };      // #a855f7
+    const pink = { r: 236, g: 72, b: 153 };        // #ec4899
+    const lightPurple = { r: 192, g: 132, b: 252 }; // #c084fc
+    const lightPink = { r: 249, g: 168, b: 212 };  // #f9a8d4
+    const darkText = { r: 31, g: 41, b: 55 };      // #1f2937
+
+    // Enhanced header with gradient effect (purple-pink bands)
+    doc.setFillColor(purple.r, purple.g, purple.b);
+    doc.rect(0, 0, 210, 12, 'F');
+    doc.setFillColor(pink.r, pink.g, pink.b);
+    doc.rect(0, 12, 210, 12, 'F');
+    doc.setFillColor(lightPurple.r, lightPurple.g, lightPurple.b);
+    doc.rect(0, 24, 210, 6, 'F');
     
+    // Header text
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(24);
-    doc.text("Raport de Automatizare AI", 105, 15, { align: "center" });
-    doc.setFontSize(12);
-    doc.text(`Personalizat pentru ${name}`, 105, 22, { align: "center" });
+    doc.setFont('helvetica', 'bold');
+    doc.text('Raport de Automatizare AI', 105, 10, { align: 'center' });
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Personalizat pentru ${name}`, 105, 20, { align: 'center' });
 
-    // Reset text color
-    doc.setTextColor(0, 0, 0);
-    
-    // Add content
-    doc.setFontSize(11);
-    let yPosition = 40;
+    // Add decorative line separator
+    doc.setDrawColor(lightPurple.r, lightPurple.g, lightPurple.b);
+    doc.setLineWidth(0.5);
+    doc.line(20, 34, 190, 34);
+
+    // Parse and style content
+    doc.setTextColor(darkText.r, darkText.g, darkText.b);
+    const lines = reportText.split('\n');
+    let yPosition = 42;
     const pageHeight = 297;
-    const marginBottom = 20;
-    const lineHeight = 7;
-    const maxWidth = 170;
+    const margin = 20;
+    const contentWidth = 170;
 
-    // Split report text into paragraphs and add to PDF
-    const paragraphs = reportText.split("\n\n");
-    
-    for (const paragraph of paragraphs) {
-      if (!paragraph.trim()) continue;
-
-      // Check for headers (lines starting with #)
-      if (paragraph.startsWith("# ")) {
-        doc.setFontSize(16);
-        doc.setFont(undefined, "bold");
-        const headerText = paragraph.replace("# ", "");
-        doc.text(headerText, 20, yPosition, { maxWidth });
-        yPosition += lineHeight + 2;
-        doc.setFontSize(11);
-        doc.setFont(undefined, "normal");
-      } else if (paragraph.startsWith("## ")) {
-        doc.setFontSize(14);
-        doc.setFont(undefined, "bold");
-        const headerText = paragraph.replace("## ", "");
-        doc.text(headerText, 20, yPosition, { maxWidth });
-        yPosition += lineHeight;
-        doc.setFontSize(11);
-        doc.setFont(undefined, "normal");
-      } else if (paragraph.startsWith("### ")) {
-        doc.setFontSize(12);
-        doc.setFont(undefined, "bold");
-        const headerText = paragraph.replace("### ", "");
-        doc.text(headerText, 20, yPosition, { maxWidth });
-        yPosition += lineHeight;
-        doc.setFontSize(11);
-        doc.setFont(undefined, "normal");
-      } else {
-        // Regular paragraph
-        const lines = doc.splitTextToSize(paragraph, maxWidth);
-        
-        for (const line of lines) {
-          if (yPosition > pageHeight - marginBottom) {
-            doc.addPage();
-            yPosition = 20;
-          }
-          doc.text(line, 20, yPosition);
-          yPosition += lineHeight;
-        }
-        yPosition += 3; // Extra space between paragraphs
-      }
-
-      // Check if we need a new page
-      if (yPosition > pageHeight - marginBottom) {
+    lines.forEach((line: string) => {
+      if (yPosition > pageHeight - 30) {
         doc.addPage();
         yPosition = 20;
       }
+
+      // Style headers (###)
+      if (line.startsWith('###')) {
+        yPosition += 3;
+        
+        // Draw colored background box for section header
+        doc.setFillColor(lightPurple.r, lightPurple.g, lightPurple.b, 0.2);
+        doc.roundedRect(18, yPosition - 5, 174, 10, 2, 2, 'F');
+        
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(purple.r, purple.g, purple.b);
+        const headerText = line.replace('###', '').trim();
+        doc.text(headerText, 20, yPosition + 2);
+        
+        doc.setTextColor(darkText.r, darkText.g, darkText.b);
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'normal');
+        yPosition += 12;
+      }
+      // Style subheaders (##)
+      else if (line.startsWith('##')) {
+        yPosition += 2;
+        doc.setFontSize(16);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(pink.r, pink.g, pink.b);
+        const subheaderText = line.replace('##', '').trim();
+        doc.text(subheaderText, 20, yPosition);
+        
+        // Add decorative line under subheader
+        doc.setDrawColor(pink.r, pink.g, pink.b);
+        doc.setLineWidth(0.3);
+        doc.line(20, yPosition + 2, 190, yPosition + 2);
+        
+        doc.setTextColor(darkText.r, darkText.g, darkText.b);
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'normal');
+        yPosition += 10;
+      }
+      // Style main headers (#)
+      else if (line.startsWith('# ')) {
+        yPosition += 3;
+        doc.setFontSize(18);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(purple.r, purple.g, purple.b);
+        const mainHeaderText = line.replace('# ', '').trim();
+        doc.text(mainHeaderText, 20, yPosition);
+        
+        // Add decorative line
+        doc.setDrawColor(purple.r, purple.g, purple.b);
+        doc.setLineWidth(0.5);
+        doc.line(20, yPosition + 2, 100, yPosition + 2);
+        
+        doc.setTextColor(darkText.r, darkText.g, darkText.b);
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'normal');
+        yPosition += 12;
+      }
+      // Style bullet points
+      else if (line.trim().startsWith('-')) {
+        const bulletText = line.replace(/^-\s*/, '').trim();
+        const wrappedLines = doc.splitTextToSize(bulletText, contentWidth - 10);
+        
+        // Draw custom bullet (circle)
+        doc.setFillColor(pink.r, pink.g, pink.b);
+        doc.circle(22, yPosition - 1.5, 1, 'F');
+        
+        // Draw text
+        wrappedLines.forEach((wrappedLine: string) => {
+          if (yPosition > pageHeight - 30) {
+            doc.addPage();
+            yPosition = 20;
+          }
+          doc.text(wrappedLine, 27, yPosition);
+          yPosition += 5;
+        });
+        yPosition += 1;
+      }
+      // Style numbered lists
+      else if (line.trim().match(/^\d+\./)) {
+        const match = line.trim().match(/^(\d+)\.\s*(.+)$/);
+        if (match) {
+          const number = match[1];
+          const text = match[2];
+          const wrappedLines = doc.splitTextToSize(text, contentWidth - 12);
+          
+          // Draw colored circle with number
+          doc.setFillColor(purple.r, purple.g, purple.b);
+          doc.circle(23, yPosition - 1.5, 2.5, 'F');
+          doc.setTextColor(255, 255, 255);
+          doc.setFontSize(9);
+          doc.setFont('helvetica', 'bold');
+          doc.text(number, 23, yPosition, { align: 'center' });
+          
+          // Draw text
+          doc.setTextColor(darkText.r, darkText.g, darkText.b);
+          doc.setFontSize(11);
+          doc.setFont('helvetica', 'normal');
+          wrappedLines.forEach((wrappedLine: string) => {
+            if (yPosition > pageHeight - 30) {
+              doc.addPage();
+              yPosition = 20;
+            }
+            doc.text(wrappedLine, 29, yPosition);
+            yPosition += 5;
+          });
+          yPosition += 1;
+        }
+      }
+      // Style bold text (**text**)
+      else if (line.includes('**')) {
+        const wrappedLines = doc.splitTextToSize(line, contentWidth);
+        wrappedLines.forEach((wrappedLine: string) => {
+          if (yPosition > pageHeight - 30) {
+            doc.addPage();
+            yPosition = 20;
+          }
+          
+          if (wrappedLine.includes('**')) {
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(purple.r, purple.g, purple.b);
+            const cleanText = wrappedLine.replace(/\*\*/g, '');
+            doc.text(cleanText, 20, yPosition);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(darkText.r, darkText.g, darkText.b);
+          } else {
+            doc.text(wrappedLine, 20, yPosition);
+          }
+          yPosition += 5;
+        });
+      }
+      // Regular text
+      else if (line.trim()) {
+        const wrappedLines = doc.splitTextToSize(line, contentWidth);
+        wrappedLines.forEach((wrappedLine: string) => {
+          if (yPosition > pageHeight - 30) {
+            doc.addPage();
+            yPosition = 20;
+          }
+          doc.text(wrappedLine, 20, yPosition);
+          yPosition += 5;
+        });
+      } else {
+        // Empty line - add spacing
+        yPosition += 3;
+      }
+    });
+
+    // Enhanced footer with brand colors on all pages
+    const totalPages = doc.getNumberOfPages();
+    for (let i = 1; i <= totalPages; i++) {
+      doc.setPage(i);
+      
+      // Footer gradient bands
+      const footerY = pageHeight - 20;
+      doc.setFillColor(lightPurple.r, lightPurple.g, lightPurple.b, 0.3);
+      doc.rect(0, footerY, 210, 8, 'F');
+      doc.setFillColor(lightPink.r, lightPink.g, lightPink.b, 0.3);
+      doc.rect(0, footerY + 8, 210, 12, 'F');
+      
+      // Page number
+      doc.setFontSize(9);
+      doc.setTextColor(purple.r, purple.g, purple.b);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`Pagina ${i} din ${totalPages}`, 105, footerY + 5, { align: 'center' });
+      
+      // Contact info
+      doc.setFontSize(8);
+      doc.setTextColor(darkText.r, darkText.g, darkText.b);
+      doc.text('Jelco Consulting | AI Automatizari | aiautomatizari@gmail.com', 105, footerY + 14, { align: 'center' });
     }
 
-    // Add footer to last page
-    const pageCount = doc.internal.pages.length - 1;
-    doc.setFontSize(10);
-    doc.setTextColor(128, 128, 128);
-    doc.text(
-      `Generat pentru ${name} | © ${new Date().getFullYear()} Jelco Consulting`,
-      105,
-      pageHeight - 10,
-      { align: "center" }
-    );
-
-    console.log("PDF generated successfully");
+    console.log("PDF generated successfully with brand colors");
 
     // Convert PDF to buffer
     const pdfBuffer = doc.output("arraybuffer");
@@ -188,7 +317,7 @@ serve(async (req) => {
               padding: 20px;
             }
             .header {
-              background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+              background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
               color: white;
               padding: 30px;
               border-radius: 10px 10px 0 0;
@@ -201,7 +330,7 @@ serve(async (req) => {
             }
             .button {
               display: inline-block;
-              background: #3b82f6;
+              background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
               color: white !important;
               padding: 15px 30px;
               text-decoration: none;
