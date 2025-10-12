@@ -75,32 +75,58 @@ Trebuie să parcurgi EXACT aceste 6 întrebări, în ordine:
 
 6/6: După răspuns → "**Cum crezi că inteligența artificială** te-ar putea ajuta să-ți atingi mai repede acest obiectiv?"
 
-📋 DUPĂ ÎNTREBAREA 6 (OBLIGATORIU):
+📋 DUPĂ ÎNTREBAREA 6 (OBLIGATORIU - PASUL 1: REZUMAT):
 
 Imediat ce primești răspunsul la întrebarea 6/6, trebuie să:
 
-1. Confirmă empatic răspunsul utilizatorului
-2. Anunță că generezi raportul:
-   "✨ Perfect! Am toate informațiile necesare. **Îți generez acum raportul personalizat** cu analiza completă și recomandări concrete pentru [their main goal]. 
-   
-   📊 Raportul tău va include:
-   - Analiza afacerii tale
-   - Provocările identificate și soluții
-   - Recomandări concrete de automatizare AI
-   - Plan de acțiune prioritizat
-   
-   **Raportul este gata!** GENERATE_REPORT_NOW"
+1. Confirmă empatic răspunsul utilizatorului la întrebarea 6
+2. Creezi un REZUMAT COMPLET structurat cu tot ce ai înțeles din conversație:
 
-3. Sistemul va genera automat raportul și va afișa butonul pentru descărcare
+"✨ Perfect! Mulțumesc pentru toate informațiile! Iată ce am înțeles despre afacerea ta:
+
+📊 **Rezumat Conversație:**
+
+**Afacere:** [tipul afacerii din răspunsul 1]
+
+**Provocări Principale:** [provocările din răspunsul 2]
+
+**Timp Investit:** [timpul din răspunsul 3] 
+
+**Obiectiv Principal:** [obiectivul din răspunsul 4]
+
+**Instrumente Actuale:** [instrumentele din răspunsul 5]
+
+**Viziune Automatizare:** [viziunea din răspunsul 6]
+
+---
+
+✅ **Am înțeles corect aceste aspecte despre afacerea ta?** 
+
+Răspunde cu **DA** pentru a continua și a primi raportul personalizat, sau poți corecta orice detaliu."
+
+📋 DUPĂ CONFIRMARE (OBLIGATORIU - PASUL 2: GENERARE RAPORT):
+
+Când utilizatorul confirmă cu "da", "yes", "corect", "da corect", "perfect" sau similar:
+
+"🎉 Excelent! **Îți generez acum raportul personalizat** cu analiza completă și recomandări concrete pentru [their main goal]. 
+
+📊 Raportul tău va include:
+- Analiza afacerii tale
+- Provocările identificate și soluții
+- Recomandări concrete de automatizare AI
+- Plan de acțiune prioritizat
+
+**Raportul este gata!** GENERATE_REPORT_NOW"
 
 ⚠️ REGULI CRITICE:
 - TREBUIE să numerotezi întrebările: "întrebarea X/6" sau să incluzi **bold** pe textul cheie
 - După fiecare răspuns, confirmi cu empatie apoi treci la următoarea întrebare
 - NU sări peste nicio întrebare din cele 6
 - NU pune mai mult de o întrebare pe rând
-- După întrebarea 6, OBLIGATORIU faci rezumatul
+- După întrebarea 6, OBLIGATORIU faci rezumatul COMPLET cu toate cele 6 informații
+- Aștepți confirmarea utilizatorului înainte de a trimite GENERATE_REPORT_NOW
 - Păstrează tonul prietenos, natural, în română
-- Răspunsuri scurte: 2-4 propoziții max per întrebare
+- Răspunsuri scurte: 2-4 propoziții per întrebare, REZUMAT: detaliat și structurat
 - NICIODATĂ nu menționezi modele AI, aspecte tehnice sau limitări`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
@@ -316,9 +342,10 @@ Imediat ce primești răspunsul la întrebarea 6/6, trebuie să:
               
               console.log(`[${new Date().toISOString()}] 📊 Message count: ${userMessageCount} user, ${assistantMessageCount} assistant`);
 
-              // Only extract when we have 6 complete Q&A pairs
-              if (userMessageCount >= 6 && assistantMessageCount >= 6) {
-                console.log(`[${new Date().toISOString()}] 🎯 6 complete Q&A pairs detected, forcing extraction...`);
+              // Only extract when we have 7+ user messages (6 answers + 1 confirmation)
+              // AND 7+ assistant messages (6 questions + 1 summary)
+              if (userMessageCount >= 7 && assistantMessageCount >= 7) {
+                console.log(`[${new Date().toISOString()}] 🎯 User confirmed summary (${userMessageCount} user msgs, ${assistantMessageCount} assistant msgs), forcing extraction...`);
                 
                 try {
                   const extractionResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
@@ -659,8 +686,8 @@ IMPORTANT:
                 
                 console.log(`[${new Date().toISOString()}] 📊 Follow-up message count: ${userMessageCount} user, ${assistantMessageCount} assistant`);
 
-                if (userMessageCount >= 6 && assistantMessageCount >= 6) {
-                  console.log(`[${new Date().toISOString()}] 🎯 Triggering post follow-up extraction...`);
+                if (userMessageCount >= 7 && assistantMessageCount >= 7) {
+                  console.log(`[${new Date().toISOString()}] 🎯 Triggering post follow-up extraction (after confirmation)...`);
                   // (Same extraction logic would be duplicated here or extracted to a helper function)
                   // For brevity, logging only - actual extraction happens on next user message
                 }
