@@ -146,8 +146,25 @@ export const SimpleChat = () => {
     }
   };
 
-  const shouldShowReportButton = (content: string) => {
-    return content.includes("🎉 Excelent!") && content.includes("Raportul tău va include:");
+  const shouldShowReportButton = (content: string, messageIndex: number) => {
+    // Logica existentă - verifică textele specifice
+    const hasReportMarkers = content.includes("🎉 Excelent!") && content.includes("Raportul tău va include:");
+    
+    // Verifică dacă mesajul anterior al utilizatorului a fost "da"
+    const previousUserMessage = messages[messageIndex - 1];
+    const isPreviousMessageDa = previousUserMessage?.role === "user" && 
+      previousUserMessage.content.toLowerCase().trim() === "da";
+    
+    // Verifică dacă mesajul curent pare să fie un răspuns de confirmare
+    const lowerContent = content.toLowerCase();
+    const isConfirmationResponse = isPreviousMessageDa && (
+      lowerContent.includes("excelent") || 
+      lowerContent.includes("genial") || 
+      lowerContent.includes("perfect") ||
+      lowerContent.includes("raport")
+    );
+    
+    return hasReportMarkers || isConfirmationResponse;
   };
 
   return (
@@ -180,7 +197,7 @@ export const SimpleChat = () => {
                   <p className="whitespace-pre-wrap leading-relaxed text-sm">{message.content}</p>
                 </div>
                 
-                {message.role === "assistant" && shouldShowReportButton(message.content) && (
+                {message.role === "assistant" && shouldShowReportButton(message.content, index) && (
                   <Button
                     onClick={() => setShowContactModal(true)}
                     className="bg-gradient-to-br from-purple-500 via-purple-600 to-pink-500 hover:from-purple-600 hover:via-purple-700 hover:to-pink-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300"
