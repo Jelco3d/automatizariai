@@ -36,7 +36,7 @@ export const SimpleChat = () => {
     setIsLoading(true);
 
     try {
-      const N8N_WEBHOOK = "https://n8n.srv1055552.hstgr.cloud/webhook-test/4365afb5-e39d-4ff0-a9c0-acc1cd5b21ef";
+      const N8N_WEBHOOK = "https://n8n.srv1055552.hstgr.cloud/webhook/4365afb5-e39d-4ff0-a9c0-acc1cd5b21ef";
       
       const response = await fetch(N8N_WEBHOOK, {
         method: "POST",
