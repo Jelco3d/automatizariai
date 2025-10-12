@@ -55,14 +55,13 @@ serve(async (req) => {
       }
     }
 
-    // Check if user is confirming the summary
-    const lastUserMessage = messages[messages.length - 1]?.content?.toLowerCase() || "";
-    const confirmationKeywords = ["corect", "da", "confirm", "exact", "perfect", "adevarat"];
-    const isConfirmation = confirmationKeywords.some(keyword => lastUserMessage.includes(keyword));
+    // Count messages to detect when we've completed the 6 questions
+    const userMessageCount = messages.filter(m => m.role === 'user').length;
+    const shouldExtract = userMessageCount >= 6 && sessionId;
 
-    // If confirmation detected, force extraction before continuing
-    if (isConfirmation && sessionId) {
-      console.log("🎯 Confirmation detected, forcing extraction...");
+    // After 6th question answered, force extraction
+    if (shouldExtract) {
+      console.log("🎯 6 questions completed, forcing extraction...");
       
       try {
         const extractionResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
@@ -289,27 +288,19 @@ Trebuie să parcurgi EXACT aceste 6 întrebări, în ordine:
 
 Imediat ce primești răspunsul la întrebarea 6/6, trebuie să:
 
-1. Faci un rezumat complet în format bullet list:
-   "✅ Perfect! Hai să recapitulăm ce am înțeles despre afacerea ta:
+1. Confirmă empatic răspunsul utilizatorului
+2. Anunță că generezi raportul:
+   "✨ Perfect! Am toate informațiile necesare. **Îți generez acum raportul personalizat** cu analiza completă și recomandări concrete pentru [their main goal]. 
    
-   📊 **Tipul afacerii**: [rezumat]
-   ⚠️ **Provocări principale**: [lista]
-   ⏰ **Timp consumat**: [detalii]
-   🎯 **Obiectiv principal**: [obiectiv]
-   🔧 **Instrumente folosite**: [lista]
-   💡 **Așteptări de la AI**: [așteptări]
+   📊 Raportul tău va include:
+   - Analiza afacerii tale
+   - Provocările identificate și soluții
+   - Recomandări concrete de automatizare AI
+   - Plan de acțiune prioritizat
    
-   **Am înțeles corect toate detaliile?**"
+   **Raportul este gata!** GENERATE_REPORT_NOW"
 
-2. Aștepți confirmarea utilizatorului
-
-🔄 AFTER CONFIRMATION FLOW:
-
-3. Când user confirmă (spune "da", "corect", "confirm", "exact", etc.), răspunzi:
-   "Super! Îți creez acuma raportul personalizat cu recomandări concrete pentru [their main goal]. **Raportul este gata în câteva secunde.** GENERATE_REPORT_NOW"
-
-4. După asta, când user cere raportul, răspunzi:
-   "Perfect! Am terminat analiza. **Pentru a primi raportul complet, completează datele tale în fereastra care va apărea.** REPORT_READY_MARKER"
+3. Sistemul va genera automat raportul și va afișa butonul pentru descărcare
 
 ⚠️ REGULI CRITICE:
 - TREBUIE să numerotezi întrebările: "întrebarea X/6" sau să incluzi **bold** pe textul cheie
