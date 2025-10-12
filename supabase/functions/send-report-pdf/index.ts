@@ -271,11 +271,11 @@ serve(async (req) => {
       doc.text('Jelco Consulting | AI Automatizari | aiautomatizari@gmail.com', 105, footerY + 14, { align: 'center' });
     }
 
-    console.log(`[${new Date().toISOString()}] 📄 PDF generated successfully with brand colors (${pdfBuffer.byteLength} bytes)`);
-
     // Convert PDF to buffer
     const pdfBuffer = doc.output("arraybuffer");
     const pdfBlob = new Uint8Array(pdfBuffer);
+
+    console.log(`[${new Date().toISOString()}] 📄 PDF generated successfully with brand colors (${pdfBuffer.byteLength} bytes)`);
 
     // Upload to Supabase Storage
     const fileName = `report-${sessionId}-${Date.now()}.pdf`;
