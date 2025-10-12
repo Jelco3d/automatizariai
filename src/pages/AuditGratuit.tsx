@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, ArrowRight, Lock, Zap, MessageCircle, Target, DollarSign, Rocket, TrendingUp, Clock, Phone } from "lucide-react";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
-import { AuditChat } from "@/components/AuditChat";
+
 const AuditGratuit = () => {
   const handleStartAnalysis = () => {
     window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
@@ -35,10 +35,6 @@ const AuditGratuit = () => {
         </div>
       </section>
 
-      {/* Chat Section */}
-      <section className="container mx-auto px-4 pb-16 relative z-10">
-        <AuditChat />
-      </section>
 
       {/* How It Works Section */}
       <section className="container mx-auto px-4 py-16 relative z-10">
