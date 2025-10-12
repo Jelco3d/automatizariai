@@ -1,20 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
 import { Resend } from "npm:resend@2.0.0";
-import { 
-  Document, 
-  Paragraph, 
-  TextRun, 
-  HeadingLevel, 
-  AlignmentType, 
-  Packer,
-  ImageRun,
-  Table,
-  TableRow,
-  TableCell,
-  WidthType,
-  convertInchesToTwip
-} from "npm:docx@8.5.0";
+import PDFDocument from "npm:pdfkit@0.15.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -192,415 +179,163 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
     const logoResponse = await fetch(`${Deno.env.get('SUPABASE_URL')}/storage/v1/object/public/lovable-uploads/new-logo.png`);
     const logoBuffer = await logoResponse.arrayBuffer();
 
-    // Build Word document
-    console.log("Building Word document...");
-    const doc = new Document({
-      sections: [{
-        properties: {
-          page: {
-            margin: {
-              top: convertInchesToTwip(1),
-              right: convertInchesToTwip(1),
-              bottom: convertInchesToTwip(1),
-              left: convertInchesToTwip(1),
-            },
-          },
-        },
-        children: [
-          // Cover Page - Logo
-          new Paragraph({
-            children: [
-              new ImageRun({
-                data: logoBuffer,
-                transformation: {
-                  width: 150,
-                  height: 150,
-                },
-              }),
-            ],
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 400 },
-          }),
-          
-          // Cover Page - Title
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "RAPORT ANALIZA AI",
-                size: 48,
-                bold: true,
-                color: "667eea",
-              }),
-            ],
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 200 },
-          }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: `Pentru ${finalInsights?.business_type || "Afacerea Ta"}`,
-                size: 28,
-                color: "764ba2",
-              }),
-            ],
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 400 },
-          }),
-          
-          // Info table
-          new Table({
-            width: { size: 100, type: WidthType.PERCENTAGE },
-            rows: [
-              new TableRow({
-                children: [
-                  new TableCell({
-                    children: [new Paragraph({ children: [new TextRun({ text: "Client:", bold: true })] })],
-                    width: { size: 30, type: WidthType.PERCENTAGE },
-                  }),
-                  new TableCell({
-                    children: [new Paragraph(name)],
-                    width: { size: 70, type: WidthType.PERCENTAGE },
-                  }),
-                ],
-              }),
-              new TableRow({
-                children: [
-                  new TableCell({
-                    children: [new Paragraph({ children: [new TextRun({ text: "Email:", bold: true })] })],
-                  }),
-                  new TableCell({
-                    children: [new Paragraph(email)],
-                  }),
-                ],
-              }),
-              new TableRow({
-                children: [
-                  new TableCell({
-                    children: [new Paragraph({ children: [new TextRun({ text: "Data:", bold: true })] })],
-                  }),
-                  new TableCell({
-                    children: [new Paragraph(new Date().toLocaleDateString('ro-RO'))],
-                  }),
-                ],
-              }),
-            ],
-          }),
-          
-          // Page Break
-          new Paragraph({ pageBreakBefore: true }),
-          
-          // Executive Summary
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "REZUMAT EXECUTIV",
-                size: 36,
-                bold: true,
-                color: "667eea",
-              }),
-            ],
-            spacing: { after: 400 },
-          }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: aiGeneratedSummary,
-                size: 24,
-              }),
-            ],
-            spacing: { after: 600, line: 360 },
-          }),
-          
-          // Business Profile
-          new Paragraph({ pageBreakBefore: true }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "PROFILUL AFACERII",
-                size: 36,
-                bold: true,
-                color: "667eea",
-              }),
-            ],
-            spacing: { after: 400 },
-          }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "Tip Afacere",
-                size: 28,
-                bold: true,
-                color: "764ba2",
-              }),
-            ],
-            spacing: { before: 240, after: 120 },
-          }),
-          new Paragraph({
-            text: finalInsights?.business_type || "N/A",
-            spacing: { after: 240 },
-          }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "Descriere Afacere",
-                size: 28,
-                bold: true,
-                color: "764ba2",
-              }),
-            ],
-            spacing: { before: 240, after: 120 },
-          }),
-          new Paragraph({
-            text: finalInsights?.business_description || "N/A",
-            spacing: { after: 240 },
-          }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "Public Țintă",
-                size: 28,
-                bold: true,
-                color: "764ba2",
-              }),
-            ],
-            spacing: { before: 240, after: 120 },
-          }),
-          new Paragraph({
-            text: finalInsights?.target_audience || "N/A",
-            spacing: { after: 240 },
-          }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "Mărime Echipă",
-                size: 28,
-                bold: true,
-                color: "764ba2",
-              }),
-            ],
-            spacing: { before: 240, after: 120 },
-          }),
-          new Paragraph({
-            text: finalInsights?.team_size || "N/A",
-            spacing: { after: 240 },
-          }),
-          
-          // Situation Analysis
-          new Paragraph({ pageBreakBefore: true }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "ANALIZA SITUAȚIEI",
-                size: 36,
-                bold: true,
-                color: "667eea",
-              }),
-            ],
-            spacing: { after: 400 },
-          }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "⚠️ Provocări Identificate",
-                size: 28,
-                bold: true,
-                color: "764ba2",
-              }),
-            ],
-            spacing: { before: 240, after: 120 },
-          }),
-          
-          ...(finalInsights?.painpoints || []).map((painPoint: string) => 
-            new Paragraph({
-              text: `• ${painPoint}`,
-              spacing: { after: 120 },
-              bullet: { level: 0 },
-            })
-          ),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "🎯 Obiective",
-                size: 28,
-                bold: true,
-                color: "764ba2",
-              }),
-            ],
-            spacing: { before: 360, after: 120 },
-          }),
-          
-          ...(finalInsights?.goals || []).map((goal: string) => 
-            new Paragraph({
-              text: `• ${goal}`,
-              spacing: { after: 120 },
-              bullet: { level: 0 },
-            })
-          ),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "🛠️ Instrumente Actuale",
-                size: 28,
-                bold: true,
-                color: "764ba2",
-              }),
-            ],
-            spacing: { before: 360, after: 120 },
-          }),
-          
-          ...(finalInsights?.tools_used || []).map((tool: string) => 
-            new Paragraph({
-              text: `• ${tool}`,
-              spacing: { after: 120 },
-              bullet: { level: 0 },
-            })
-          ),
-          
-          // Recommended Solutions
-          new Paragraph({ pageBreakBefore: true }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "SOLUȚII RECOMANDATE",
-                size: 36,
-                bold: true,
-                color: "667eea",
-              }),
-            ],
-            spacing: { after: 400 },
-          }),
-          
-          ...(finalInsights?.desired_solutions || []).map((solution: string) => 
-            new Paragraph({
-              text: `✅ ${solution}`,
-              spacing: { after: 120 },
-              bullet: { level: 0 },
-            })
-          ),
-          
-          // Next Steps
-          new Paragraph({ pageBreakBefore: true }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "PAȘI URMĂTORI",
-                size: 36,
-                bold: true,
-                color: "667eea",
-              }),
-            ],
-            spacing: { after: 400 },
-          }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "🎯 Consultație Strategică GRATUITĂ",
-                size: 28,
-                bold: true,
-                color: "764ba2",
-              }),
-            ],
-            spacing: { before: 240, after: 240 },
-          }),
-          
-          new Paragraph({
-            text: "Pregătit să transformi aceste insights în rezultate concrete? Programează o consultație strategică de 30 de minute pentru a discuta implementarea soluțiilor personalizate pentru afacerea ta!",
-            spacing: { after: 360 },
-          }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "📅 Programează aici:",
-                bold: true,
-              }),
-            ],
-            spacing: { after: 120 },
-          }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "https://calendly.com/aiautomatizari/automatizariai",
-                color: "667eea",
-                underline: {},
-              }),
-            ],
-            spacing: { after: 600 },
-          }),
-          
-          // Footer
-          new Paragraph({
-            text: "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-            alignment: AlignmentType.CENTER,
-            spacing: { before: 600, after: 240 },
-          }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "AI AUTOMATIZĂRI",
-                size: 24,
-                bold: true,
-                color: "667eea",
-              }),
-            ],
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 120 },
-          }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: "Transformăm afaceri prin automatizare inteligentă și soluții AI personalizate.",
-                size: 20,
-                color: "666666",
-              }),
-            ],
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 120 },
-          }),
-          
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: `© ${new Date().getFullYear()} AI Automatizări. Toate drepturile rezervate.`,
-                size: 18,
-                color: "999999",
-              }),
-            ],
-            alignment: AlignmentType.CENTER,
-          }),
-        ],
-      }],
+    // Build PDF document
+    console.log("Building PDF document...");
+    
+    const doc = new PDFDocument({
+      size: 'A4',
+      margins: { top: 50, bottom: 50, left: 50, right: 50 },
+      bufferPages: true,
+      info: {
+        Title: 'Raport Analiza AI',
+        Author: 'AI Automatizări',
+        Subject: `Analiză pentru ${finalInsights?.business_type || "Afacerea Ta"}`,
+      }
     });
 
-    // Generate buffer
-    console.log("Converting to buffer...");
-    const buffer = await Packer.toBuffer(doc);
+    const chunks: Uint8Array[] = [];
+    doc.on('data', (chunk: Uint8Array) => chunks.push(chunk));
+    
+    const pdfPromise = new Promise<Uint8Array>((resolve, reject) => {
+      doc.on('end', () => {
+        const result = new Uint8Array(chunks.reduce((acc, chunk) => acc + chunk.length, 0));
+        let offset = 0;
+        for (const chunk of chunks) {
+          result.set(chunk, offset);
+          offset += chunk.length;
+        }
+        resolve(result);
+      });
+      doc.on('error', reject);
+    });
+
+    // Helper functions
+    const addTitle = (text: string, size = 24, color = '#667eea') => {
+      doc.fontSize(size).fillColor(color).font('Helvetica-Bold').text(text, { align: 'left' });
+      doc.moveDown(0.5);
+    };
+
+    const addSubtitle = (text: string) => {
+      doc.fontSize(16).fillColor('#764ba2').font('Helvetica-Bold').text(text);
+      doc.moveDown(0.3);
+    };
+
+    const addText = (text: string, fontSize = 11) => {
+      doc.fontSize(fontSize).fillColor('#333333').font('Helvetica').text(text, { align: 'justify' });
+      doc.moveDown(0.5);
+    };
+
+    const addBullet = (text: string) => {
+      doc.fontSize(11).fillColor('#333333').font('Helvetica').text(`• ${text}`, { indent: 20 });
+      doc.moveDown(0.3);
+    };
+
+    // Cover Page
+    try {
+      doc.image(logoBuffer, (doc.page.width - 150) / 2, 100, { width: 150 });
+    } catch (e) {
+      console.error("Error adding logo:", e);
+    }
+    
+    doc.moveDown(10);
+    doc.fontSize(32).fillColor('#667eea').font('Helvetica-Bold').text('RAPORT ANALIZA AI', { align: 'center' });
+    doc.moveDown(1);
+    doc.fontSize(18).fillColor('#764ba2').font('Helvetica').text(`Pentru ${finalInsights?.business_type || "Afacerea Ta"}`, { align: 'center' });
+    doc.moveDown(3);
+
+    // Info Box
+    doc.rect(100, doc.y, doc.page.width - 200, 100).fillAndStroke('#f8f9fa', '#667eea');
+    const infoY = doc.y - 85;
+    doc.fontSize(11).fillColor('#333333').font('Helvetica-Bold').text('Client:', 120, infoY);
+    doc.font('Helvetica').text(name || 'N/A', 200, infoY);
+    doc.font('Helvetica-Bold').text('Email:', 120, infoY + 25);
+    doc.font('Helvetica').text(email || 'N/A', 200, infoY + 25);
+    doc.font('Helvetica-Bold').text('Data:', 120, infoY + 50);
+    doc.font('Helvetica').text(new Date().toLocaleDateString('ro-RO'), 200, infoY + 50);
+    doc.moveDown(4);
+
+    // Executive Summary
+    doc.addPage();
+    addTitle('REZUMAT EXECUTIV');
+    addText(aiGeneratedSummary, 12);
+    doc.moveDown(1);
+
+    // Business Profile
+    doc.addPage();
+    addTitle('PROFILUL AFACERII');
+    
+    addSubtitle('Tip Afacere');
+    addText(finalInsights?.business_type || 'N/A');
+    
+    addSubtitle('Descriere Afacere');
+    addText(finalInsights?.business_description || 'N/A');
+    
+    addSubtitle('Public Țintă');
+    addText(finalInsights?.target_audience || 'N/A');
+    
+    addSubtitle('Mărime Echipă');
+    addText(finalInsights?.team_size || 'N/A');
+
+    // Situation Analysis
+    doc.addPage();
+    addTitle('ANALIZA SITUAȚIEI');
+    
+    addSubtitle('⚠️ Provocări Identificate');
+    (finalInsights?.painpoints || []).forEach((painPoint: string) => {
+      addBullet(painPoint);
+    });
+    doc.moveDown(1);
+    
+    addSubtitle('🎯 Obiective');
+    (finalInsights?.goals || []).forEach((goal: string) => {
+      addBullet(goal);
+    });
+    doc.moveDown(1);
+    
+    addSubtitle('🛠️ Instrumente Actuale');
+    (finalInsights?.tools_used || []).forEach((tool: string) => {
+      addBullet(tool);
+    });
+
+    // Recommended Solutions
+    doc.addPage();
+    addTitle('SOLUȚII RECOMANDATE');
+    (finalInsights?.desired_solutions || []).forEach((solution: string) => {
+      addBullet(`✅ ${solution}`);
+    });
+
+    // Next Steps
+    doc.addPage();
+    addTitle('PAȘI URMĂTORI');
+    
+    addSubtitle('🎯 Consultație Strategică GRATUITĂ');
+    addText('Pregătit să transformi aceste insights în rezultate concrete? Programează o consultație strategică de 30 de minute pentru a discuta implementarea soluțiilor personalizate pentru afacerea ta!');
+    
+    doc.fontSize(11).fillColor('#333333').font('Helvetica-Bold').text('📅 Programează aici:');
+    doc.fontSize(11).fillColor('#667eea').font('Helvetica').text('https://calendly.com/aiautomatizari/automatizariai', { link: 'https://calendly.com/aiautomatizari/automatizariai' });
+    doc.moveDown(2);
+
+    // Footer
+    doc.fontSize(10).fillColor('#cccccc').font('Helvetica').text('━'.repeat(80), { align: 'center' });
+    doc.moveDown(0.5);
+    doc.fontSize(14).fillColor('#667eea').font('Helvetica-Bold').text('AI AUTOMATIZĂRI', { align: 'center' });
+    doc.moveDown(0.3);
+    doc.fontSize(10).fillColor('#666666').font('Helvetica').text('Transformăm afaceri prin automatizare inteligentă și soluții AI personalizate.', { align: 'center' });
+    doc.moveDown(0.3);
+    doc.fontSize(9).fillColor('#999999').text(`© ${new Date().getFullYear()} AI Automatizări. Toate drepturile rezervate.`, { align: 'center' });
+
+    // Finalize PDF
+    doc.end();
+    const buffer = await pdfPromise;
 
     // Upload to storage
-    const fileName = `raport-${sessionId}-${Date.now()}.docx`;
+    const fileName = `raport-${sessionId}-${Date.now()}.pdf`;
     console.log("Uploading to storage:", fileName);
     
     const { data: uploadData, error: uploadError } = await supabaseClient.storage
       .from('audit-reports')
       .upload(fileName, buffer, {
-        contentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        contentType: 'application/pdf',
         upsert: false
       });
 
@@ -614,7 +349,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
       .from('audit-reports')
       .getPublicUrl(fileName);
 
-    console.log("Document Word generat:", publicUrl);
+    console.log("Document PDF generat:", publicUrl);
 
     // Save contact
     await supabaseClient.from('audit_contacts').insert({
@@ -631,7 +366,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
     const { data: emailData, error: emailError } = await resend.emails.send({
       from: "AI Automatizări <onboarding@resend.dev>",
       to: [email],
-      subject: `🚀 Raportul Tău Word - Analiza AI pentru ${finalInsights?.business_type || "Afacerea Ta"}`,
+      subject: `🚀 Raportul Tău PDF - Analiza AI pentru ${finalInsights?.business_type || "Afacerea Ta"}`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -722,13 +457,13 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
         <body>
           <div class="container">
             <div class="header">
-              <h1>🎉 Raportul Tău Word Este Gata!</h1>
+              <h1>🎉 Raportul Tău PDF Este Gata!</h1>
             </div>
             
             <div class="content">
               <p>Salut <strong>${name}</strong>! 👋</p>
               
-              <p>Raportul tău personalizat Word este gata pentru download. Acest document include:</p>
+              <p>Raportul tău profesional în format PDF este gata pentru download. Acest document include:</p>
               
               <ul>
                 <li>✅ <strong>Rezumat executiv generat de AI</strong> - Analiză profesională personalizată</li>
@@ -739,7 +474,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
               </ul>
               
               <div style="text-align: center;">
-                <a href="${publicUrl}" class="button">📄 Descarcă Raportul Word</a>
+                <a href="${publicUrl}" class="button">📄 Descarcă Raportul PDF</a>
               </div>
               
               <div class="info-box">
