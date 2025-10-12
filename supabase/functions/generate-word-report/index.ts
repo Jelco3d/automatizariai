@@ -13,11 +13,12 @@ import {
   TableRow,
   TableCell,
   WidthType,
+  convertInchesToTwip
 } from "npm:docx@8.5.0";
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
 interface RequestBody {
@@ -28,7 +29,7 @@ interface RequestBody {
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  if (req.method === "OPTIONS") {
+  if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
@@ -37,20 +38,18 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Generating report for session:", sessionId);
 
     const supabaseClient = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const resend = new Resend(Deno.env.get("RESEND_API_KEY") as string);
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-
-    // 1. Fetch insights and messages
+    // Fetch insights
     const { data: insights, error: insightsError } = await supabaseClient
       .from('audit_insights')
       .select('*')
       .eq('session_id', sessionId)
       .maybeSingle();
 
+    // Fetch messages
     const { data: messages, error: messagesError } = await supabaseClient
       .from('audit_messages')
       .select('*')
@@ -62,12 +61,12 @@ const handler = async (req: Request): Promise<Response> => {
       throw messagesError;
     }
 
-    // 2. If no insights, extract from conversation
-    let extractedInsights = insights;
-    if (!extractedInsights) {
+    // If no insights, extract from conversation
+    let finalInsights = insights;
+    if (!insights) {
       console.log("No insights found, extracting from conversation...");
       
-      const conversationText = messages
+      const conversationText = (messages || [])
         .filter((m: any) => m.role === 'user' || m.role === 'assistant')
         .map((m: any) => `${m.role}: ${m.content}`)
         .join('\n');
@@ -75,15 +74,23 @@ const handler = async (req: Request): Promise<Response> => {
       const extractResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${LOVABLE_API_KEY}`,
+          Authorization: `Bearer ${Deno.env.get('LOVABLE_API_KEY')}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           model: "google/gemini-2.5-flash",
           messages: [
-            { 
-              role: "system", 
-              content: "Extrage informații structurate despre afacere din conversație." 
+            {
+              role: "system",
+              content: `Extrage următoarele informații din conversație în format JSON:
+- business_type: tipul de afacere
+- business_description: descriere scurtă
+- target_audience: publicul țintă
+- team_size: mărimea echipei
+- painpoints: array de provocări
+- goals: array de obiective
+- tools_used: array de instrumente folosite
+- desired_solutions: array de soluții dorite`
             },
             { role: "user", content: conversationText }
           ],
@@ -91,19 +98,20 @@ const handler = async (req: Request): Promise<Response> => {
             type: "function",
             function: {
               name: "extract_business_insights",
-              description: "Extract structured business information from conversation",
+              description: "Extract business insights from conversation",
               parameters: {
                 type: "object",
                 properties: {
                   business_type: { type: "string" },
                   business_description: { type: "string" },
+                  target_audience: { type: "string" },
+                  team_size: { type: "string" },
                   painpoints: { type: "array", items: { type: "string" } },
                   goals: { type: "array", items: { type: "string" } },
                   tools_used: { type: "array", items: { type: "string" } },
-                  desired_solutions: { type: "array", items: { type: "string" } },
-                  target_audience: { type: "string" },
-                  team_size: { type: "string" }
-                }
+                  desired_solutions: { type: "array", items: { type: "string" } }
+                },
+                required: ["business_type", "painpoints", "goals"]
               }
             }
           }],
@@ -113,23 +121,30 @@ const handler = async (req: Request): Promise<Response> => {
 
       const extractData = await extractResponse.json();
       const toolCall = extractData.choices[0].message.tool_calls?.[0];
+      
       if (toolCall) {
-        extractedInsights = JSON.parse(toolCall.function.arguments);
+        const extractedData = JSON.parse(toolCall.function.arguments);
         
         // Save to database
-        await supabaseClient.from('audit_insights').insert({
-          session_id: sessionId,
-          ...extractedInsights
-        });
+        const { data: savedInsights } = await supabaseClient
+          .from('audit_insights')
+          .insert({
+            session_id: sessionId,
+            ...extractedData
+          })
+          .select()
+          .single();
+        
+        finalInsights = savedInsights;
       }
     }
 
-    // 3. Generate AI Summary
+    // Generate AI Summary
     console.log("Generating AI summary...");
     const summaryResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        Authorization: `Bearer ${Deno.env.get('LOVABLE_API_KEY')}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -148,17 +163,17 @@ Generează un rezumat executiv PROFESIONAL și ACȚIONABIL de 200-300 cuvinte ca
 5. **Pași următori recomandați** - Acțiuni concrete pe care clientul le poate face
 
 TON: Profesional, empatic, orientat pe soluții concrete și rezultate măsurabile.
-FORMAT: Scrie în paragrafe scurte (3-4 propoziții), folosește bullets pentru clarity.` 
+FORMAT: Scrie în paragrafe scurte (3-4 propoziții), folosește structură clară.` 
           },
           { 
             role: "user", 
             content: `Analizează următoarea conversație și insights-uri extrase pentru a genera rezumatul executiv:
 
 **Insights Structurate:**
-${JSON.stringify(extractedInsights, null, 2)}
+${JSON.stringify(finalInsights, null, 2)}
 
 **Conversație Completă:**
-${messages.map((m: any) => `${m.role}: ${m.content}`).join('\n\n')}
+${(messages || []).map((m: any) => `${m.role}: ${m.content}`).join('\n\n')}
 
 Generează un rezumat executiv profesional, acționabil și personalizat pentru această afacere.` 
           }
@@ -169,31 +184,29 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
 
     const summaryData = await summaryResponse.json();
     const aiGeneratedSummary = summaryData.choices[0].message.content;
-
     console.log("AI summary generated successfully");
 
-    // 4. Download logo
-    const logoUrl = `${Deno.env.get('SUPABASE_URL')}/storage/v1/object/public/lovable-uploads/new-logo.png`;
-    const logoResponse = await fetch(logoUrl);
+    // Download logo
+    console.log("Downloading logo...");
+    const logoResponse = await fetch(`${Deno.env.get('SUPABASE_URL')}/storage/v1/object/public/lovable-uploads/new-logo.png`);
     const logoBuffer = await logoResponse.arrayBuffer();
 
-    // 5. Build Word document
+    // Build Word document
     console.log("Building Word document...");
-
     const doc = new Document({
       sections: [{
         properties: {
           page: {
             margin: {
-              top: 1440,
-              right: 1440,
-              bottom: 1440,
-              left: 1440,
+              top: convertInchesToTwip(1),
+              right: convertInchesToTwip(1),
+              bottom: convertInchesToTwip(1),
+              left: convertInchesToTwip(1),
             },
           },
         },
         children: [
-          // Cover Page
+          // Cover Page - Logo
           new Paragraph({
             children: [
               new ImageRun({
@@ -208,6 +221,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
             spacing: { after: 400 },
           }),
           
+          // Cover Page - Title
           new Paragraph({
             children: [
               new TextRun({
@@ -224,7 +238,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
           new Paragraph({
             children: [
               new TextRun({
-                text: `Pentru ${extractedInsights?.business_type || "Afacerea Ta"}`,
+                text: `Pentru ${finalInsights?.business_type || "Afacerea Ta"}`,
                 size: 28,
                 color: "764ba2",
               }),
@@ -325,7 +339,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
             spacing: { before: 240, after: 120 },
           }),
           new Paragraph({
-            text: extractedInsights?.business_type || "N/A",
+            text: finalInsights?.business_type || "N/A",
             spacing: { after: 240 },
           }),
           
@@ -341,7 +355,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
             spacing: { before: 240, after: 120 },
           }),
           new Paragraph({
-            text: extractedInsights?.business_description || "N/A",
+            text: finalInsights?.business_description || "N/A",
             spacing: { after: 240 },
           }),
           
@@ -357,7 +371,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
             spacing: { before: 240, after: 120 },
           }),
           new Paragraph({
-            text: extractedInsights?.target_audience || "N/A",
+            text: finalInsights?.target_audience || "N/A",
             spacing: { after: 240 },
           }),
           
@@ -373,7 +387,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
             spacing: { before: 240, after: 120 },
           }),
           new Paragraph({
-            text: extractedInsights?.team_size || "N/A",
+            text: finalInsights?.team_size || "N/A",
             spacing: { after: 240 },
           }),
           
@@ -404,7 +418,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
             spacing: { before: 240, after: 120 },
           }),
           
-          ...(extractedInsights?.painpoints || []).map((painPoint: string) => 
+          ...(finalInsights?.painpoints || []).map((painPoint: string) => 
             new Paragraph({
               text: `• ${painPoint}`,
               spacing: { after: 120 },
@@ -424,7 +438,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
             spacing: { before: 360, after: 120 },
           }),
           
-          ...(extractedInsights?.goals || []).map((goal: string) => 
+          ...(finalInsights?.goals || []).map((goal: string) => 
             new Paragraph({
               text: `• ${goal}`,
               spacing: { after: 120 },
@@ -444,7 +458,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
             spacing: { before: 360, after: 120 },
           }),
           
-          ...(extractedInsights?.tools_used || []).map((tool: string) => 
+          ...(finalInsights?.tools_used || []).map((tool: string) => 
             new Paragraph({
               text: `• ${tool}`,
               spacing: { after: 120 },
@@ -467,7 +481,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
             spacing: { after: 400 },
           }),
           
-          ...(extractedInsights?.desired_solutions || []).map((solution: string) => 
+          ...(finalInsights?.desired_solutions || []).map((solution: string) => 
             new Paragraph({
               text: `✅ ${solution}`,
               spacing: { after: 120 },
@@ -530,12 +544,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
           
           // Footer
           new Paragraph({
-            children: [
-              new TextRun({
-                text: "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-                color: "cccccc",
-              }),
-            ],
+            text: "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
             alignment: AlignmentType.CENTER,
             spacing: { before: 600, after: 240 },
           }),
@@ -579,13 +588,15 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
       }],
     });
 
-    // 6. Generate buffer
+    // Generate buffer
+    console.log("Converting to buffer...");
     const buffer = await Packer.toBuffer(doc);
-    console.log("Word document generated, buffer size:", buffer.byteLength);
 
-    // 7. Upload to Supabase Storage
+    // Upload to storage
     const fileName = `raport-${sessionId}-${Date.now()}.docx`;
-    const { error: uploadError } = await supabaseClient.storage
+    console.log("Uploading to storage:", fileName);
+    
+    const { data: uploadData, error: uploadError } = await supabaseClient.storage
       .from('audit-reports')
       .upload(fileName, buffer, {
         contentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -597,28 +608,29 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
       throw uploadError;
     }
 
-    // 8. Get public URL
+    // Get public URL
     const { data: { publicUrl } } = supabaseClient.storage
       .from('audit-reports')
       .getPublicUrl(fileName);
 
-    console.log("Document uploaded successfully:", publicUrl);
+    console.log("Document Word generat:", publicUrl);
 
-    // 9. Save contact info
+    // Save contact
     await supabaseClient.from('audit_contacts').insert({
       session_id: sessionId,
       name,
       email,
       phone,
-      report_sent: true
+      report_sent: true,
     });
 
-    // 10. Send email
-    console.log("Sending email...");
-    const { error: emailError } = await resend.emails.send({
+    // Send email
+    const resend = new Resend(Deno.env.get('RESEND_API_KEY'));
+    
+    const { data: emailData, error: emailError } = await resend.emails.send({
       from: "AI Automatizări <onboarding@resend.dev>",
       to: [email],
-      subject: `🚀 Raportul Tău Word - Analiza AI pentru ${extractedInsights?.business_type || 'Afacerea Ta'}`,
+      subject: `🚀 Raportul Tău Word - Analiza AI pentru ${finalInsights?.business_type || "Afacerea Ta"}`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -771,7 +783,7 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
       throw emailError;
     }
 
-    console.log("Email sent successfully!");
+    console.log("Email trimis cu succes!");
 
     return new Response(
       JSON.stringify({ 
@@ -784,10 +796,10 @@ Generează un rezumat executiv profesional, acționabil și personalizat pentru 
       }
     );
 
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error in generate-word-report function:", error);
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : "Unknown error" }),
+      JSON.stringify({ error: error.message }),
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
