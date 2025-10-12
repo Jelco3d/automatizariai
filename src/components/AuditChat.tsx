@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Send, Loader2, Bot, User, Plus, Mic, Globe, Zap } from "lucide-react";
+import { Send, Loader2, Bot, User, Plus, Mic, Globe, Zap, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { ContactModal } from "./ContactModal";
 
 interface Message {
   role: "user" | "assistant";
@@ -19,10 +20,10 @@ export const AuditChat = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId] = useState(() => crypto.randomUUID());
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [showReportButton, setShowReportButton] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
   useEffect(() => {
     // Welcome message
     setMessages([{
@@ -72,6 +73,8 @@ export const AuditChat = () => {
         role: "assistant",
         content: ""
       }]);
+
+      let fullAssistantMessage = "";
       while (!streamDone) {
         const {
           done,
@@ -98,6 +101,7 @@ export const AuditChat = () => {
             const content = parsed.choices?.[0]?.delta?.content as string | undefined;
             if (content) {
               assistantMessage += content;
+              fullAssistantMessage += content;
               setMessages([...newMessages, {
                 role: "assistant",
                 content: assistantMessage
@@ -124,6 +128,7 @@ export const AuditChat = () => {
             const content = parsed.choices?.[0]?.delta?.content as string | undefined;
             if (content) {
               assistantMessage += content;
+              fullAssistantMessage += content;
               setMessages([...newMessages, {
                 role: "assistant",
                 content: assistantMessage
@@ -133,6 +138,16 @@ export const AuditChat = () => {
             /* ignore */
           }
         }
+      }
+
+      // Check if AI is asking for report confirmation
+      const lowerContent = fullAssistantMessage.toLowerCase();
+      if (
+        (lowerContent.includes('raport') && lowerContent.includes('email')) ||
+        lowerContent.includes('îți trimit raportul') || 
+        lowerContent.includes('iti trimit raportul')
+      ) {
+        setShowReportButton(true);
       }
     } catch (error) {
       console.error("Chat error:", error);
@@ -158,7 +173,14 @@ export const AuditChat = () => {
       handleSubmit(e);
     }
   };
-  return <div className="w-full max-w-4xl mx-auto space-y-4">
+  return <>
+    <ContactModal 
+      isOpen={showContactModal}
+      onClose={() => setShowContactModal(false)}
+      sessionId={sessionId}
+    />
+    
+    <div className="w-full max-w-4xl mx-auto space-y-4">
       {/* Messages */}
       {messages.length > 1 && <Card className="bg-[#1A1F2C]/80 border-purple-500/30 backdrop-blur-sm overflow-hidden">
           <div className="max-h-[600px] overflow-y-auto p-6 space-y-4">
@@ -188,6 +210,19 @@ export const AuditChat = () => {
                   <Loader2 className="w-5 h-5 animate-spin text-purple-400" />
                 </div>
               </div>}
+
+            {showReportButton && !isLoading && (
+              <div className="flex justify-center animate-fade-in py-4">
+                <Button
+                  onClick={() => setShowContactModal(true)}
+                  className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl text-white px-8 py-6 text-lg font-semibold rounded-xl"
+                >
+                  <FileText className="mr-2 h-5 w-5" />
+                  Da, vreau raportul complet! 📊
+                </Button>
+              </div>
+            )}
+
             <div ref={messagesEndRef} />
           </div>
         </Card>}
@@ -220,5 +255,6 @@ export const AuditChat = () => {
           </div>
         </div>
       </form>
-    </div>;
+    </div>
+  </>;
 };
