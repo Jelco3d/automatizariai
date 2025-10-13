@@ -121,35 +121,6 @@ const AuditGratuit = () => {
         </div>
       </section>
 
-      {/* Bonus Section */}
-      <section className="container mx-auto px-4 py-8 md:py-12 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
-            💡 Bonus
-          </h3>
-          
-          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
-            <div className="flex flex-col items-center text-center p-4 md:p-6 bg-[#1A1F2C]/60 rounded-lg border border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
-              <Lock className="w-10 h-10 md:w-12 md:h-12 text-purple-400 mb-3 md:mb-4" />
-              <h4 className="text-white font-semibold mb-2 text-sm md:text-base">100% confidențial</h4>
-              <p className="text-gray-400 text-xs md:text-sm">Informațiile tale rămân private</p>
-            </div>
-
-            <div className="flex flex-col items-center text-center p-4 md:p-6 bg-[#1A1F2C]/60 rounded-lg border border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
-              <Zap className="w-10 h-10 md:w-12 md:h-12 text-yellow-400 mb-3 md:mb-4" />
-              <h4 className="text-white font-semibold mb-2 text-sm md:text-base">Rezultate instantanee</h4>
-              <p className="text-gray-400 text-xs md:text-sm">Fără formulare complicate</p>
-            </div>
-
-            <div className="flex flex-col items-center text-center p-4 md:p-6 bg-[#1A1F2C]/60 rounded-lg border border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
-              <CheckCircle className="w-10 h-10 md:w-12 md:h-12 text-green-400 mb-3 md:mb-4" />
-              <h4 className="text-white font-semibold mb-2 text-sm md:text-base">De încredere</h4>
-              <p className="text-gray-400 text-xs md:text-sm">Pentru antreprenori, consultanți și creatori</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <Footer />
     </div>;
 };
