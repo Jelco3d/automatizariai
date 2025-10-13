@@ -3,9 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, ArrowRight, Lock, Zap, MessageCircle, Target, DollarSign, Rocket, TrendingUp, Clock, Phone } from "lucide-react";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
-import { SimpleChat } from "@/components/SimpleChat";
-import { BenefitsSection } from "@/components/website/BenefitsSection";
-
+import { AuditChat } from "@/components/AuditChat";
 const AuditGratuit = () => {
   const handleStartAnalysis = () => {
     window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
@@ -39,11 +37,8 @@ const AuditGratuit = () => {
 
       {/* Chat Section */}
       <section className="container mx-auto px-4 pb-16 relative z-10">
-        <SimpleChat />
+        <AuditChat />
       </section>
-
-      {/* Benefits Section */}
-      <BenefitsSection />
 
       {/* How It Works Section */}
       <section className="container mx-auto px-4 py-16 relative z-10">
@@ -96,31 +91,7 @@ const AuditGratuit = () => {
           ❤️ De ce o să-ți placă
         </h2>
         
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          <div className="flex items-start gap-4 bg-[#1A1F2C]/60 p-6 rounded-lg border border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
-            <DollarSign className="w-8 h-8 text-green-400 flex-shrink-0" />
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-2">100% gratuit</h3>
-              <p className="text-gray-300">Fără obligații, doar informații valoroase.</p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4 bg-[#1A1F2C]/60 p-6 rounded-lg border border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
-            <Target className="w-8 h-8 text-purple-400 flex-shrink-0" />
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-2">Creat special pentru tine</h3>
-              <p className="text-gray-300">Nu o listă generică, ci idei reale și aplicabile.</p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4 bg-[#1A1F2C]/60 p-6 rounded-lg border border-purple-500/30 backdrop-blur-sm hover:border-purple-500/50 transition-all">
-            <Rocket className="w-8 h-8 text-pink-400 flex-shrink-0" />
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-2">Dezvăluie-ți potențialul</h3>
-              <p className="text-gray-300">Află ce poți automatiza, optimiza sau transforma complet.</p>
-            </div>
-          </div>
-        </div>
+        
       </section>
 
       {/* Next Steps Section */}
