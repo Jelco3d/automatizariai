@@ -5,16 +5,23 @@ import { Textarea } from "@/components/ui/textarea";
 import { Send, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { SimpleContactModal } from "@/components/SimpleContactModal";
+import DOMPurify from 'dompurify';
 
 type Message = {
   role: "user" | "assistant";
   content: string;
 };
 
-// Function to format markdown-style text to HTML
+// Function to format markdown-style text to HTML with sanitization
 const formatMessage = (text: string): string => {
   // Convert **text** to <strong>text</strong>
-  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  const formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  
+  // Sanitize HTML to prevent XSS attacks
+  return DOMPurify.sanitize(formatted, {
+    ALLOWED_TAGS: ['strong', 'em', 'p', 'br', 'ul', 'ol', 'li'],
+    ALLOWED_ATTR: []
+  });
 };
 
 export const SimpleChat = () => {

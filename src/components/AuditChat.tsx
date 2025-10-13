@@ -4,15 +4,23 @@ import { Card } from "@/components/ui/card";
 import { Send, Loader2, Bot, User, Plus, Mic, Globe, Zap, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { ContactModal } from "./ContactModal";
+import DOMPurify from 'dompurify';
+
 interface Message {
   role: "user" | "assistant";
   content: string;
 }
 
-// Function to format markdown-style text to HTML
+// Function to format markdown-style text to HTML with sanitization
 const formatMessage = (text: string): string => {
   // Convert **text** to <strong>text</strong>
-  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  const formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  
+  // Sanitize HTML to prevent XSS attacks
+  return DOMPurify.sanitize(formatted, {
+    ALLOWED_TAGS: ['strong', 'em', 'p', 'br', 'ul', 'ol', 'li'],
+    ALLOWED_ATTR: []
+  });
 };
 export const AuditChat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
