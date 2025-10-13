@@ -4,6 +4,7 @@ import { CheckCircle, ArrowRight, Lock, Zap, MessageCircle, Target, DollarSign, 
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { SimpleChat } from "@/components/SimpleChat";
+import { BenefitsSection } from "@/components/website/BenefitsSection";
 
 const AuditGratuit = () => {
   const handleStartAnalysis = () => {
@@ -40,6 +41,9 @@ const AuditGratuit = () => {
       <section className="container mx-auto px-4 pb-16 relative z-10">
         <SimpleChat />
       </section>
+
+      {/* Benefits Section */}
+      <BenefitsSection />
 
       {/* How It Works Section */}
       <section className="container mx-auto px-4 py-16 relative z-10">
