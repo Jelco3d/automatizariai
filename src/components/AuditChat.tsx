@@ -4,7 +4,6 @@ import { Card } from "@/components/ui/card";
 import { Send, Loader2, Bot, User, Plus, Mic, Globe, Zap, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { ContactModal } from "./ContactModal";
-
 interface Message {
   role: "user" | "assistant";
   content: string;
@@ -25,7 +24,9 @@ export const AuditChat = () => {
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
   const [generatedReport, setGeneratedReport] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   useEffect(() => {
     // Welcome message
     setMessages([{
@@ -75,7 +76,6 @@ export const AuditChat = () => {
         role: "assistant",
         content: ""
       }]);
-
       let fullAssistantMessage = "";
       while (!streamDone) {
         const {
@@ -151,7 +151,7 @@ export const AuditChat = () => {
           role: "assistant",
           content: cleanMessage
         }]);
-        
+
         // Generate the report text using ai-copywriter
         try {
           const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-copywriter`, {
@@ -160,16 +160,16 @@ export const AuditChat = () => {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`
             },
-            body: JSON.stringify({ sessionId })
+            body: JSON.stringify({
+              sessionId
+            })
           });
-          
           const data = await response.json();
-          
           if (data?.report) {
             setGeneratedReport(data.report);
             setShowReportButton(true);
             setIsGeneratingReport(false);
-            
+
             // Add assistant message announcing the report is ready
             setMessages(prev => [...prev, {
               role: "assistant",
@@ -186,7 +186,7 @@ export const AuditChat = () => {
           setIsGeneratingReport(false);
         }
       }
-      
+
       // Check if AI wants to show the report button (fallback for old flow)
       if (fullAssistantMessage.includes('REPORT_READY_MARKER')) {
         // Remove the marker from display
@@ -222,12 +222,7 @@ export const AuditChat = () => {
     }
   };
   return <>
-      <ContactModal 
-        isOpen={showContactModal}
-        onClose={() => setShowContactModal(false)}
-        sessionId={sessionId}
-        reportText={generatedReport}
-      />
+      <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} sessionId={sessionId} reportText={generatedReport} />
     
     <div className="w-full max-w-4xl mx-auto space-y-4">
       {/* Messages */}
@@ -238,14 +233,9 @@ export const AuditChat = () => {
                     <Bot className="w-5 h-5 text-white" />
                   </div>}
                 <div className={`max-w-[80%] rounded-2xl px-4 py-3 ${message.role === "user" ? "bg-gradient-to-br from-purple-500 to-pink-500 text-white" : "bg-[#2C1F3C]/60 text-gray-200 border border-purple-500/20"}`}>
-                  {message.role === "assistant" ? (
-                    <div 
-                      className="whitespace-pre-wrap text-base leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }}
-                    />
-                  ) : (
-                    <p className="whitespace-pre-wrap text-base">{message.content}</p>
-                  )}
+                  {message.role === "assistant" ? <div className="whitespace-pre-wrap text-base leading-relaxed" dangerouslySetInnerHTML={{
+                __html: formatMessage(message.content)
+              }} /> : <p className="whitespace-pre-wrap text-base">{message.content}</p>}
                 </div>
                 {message.role === "user" && <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
                     <User className="w-5 h-5 text-white" />
@@ -260,24 +250,17 @@ export const AuditChat = () => {
                 </div>
               </div>}
 
-            {isGeneratingReport && (
-              <div className="flex items-center justify-center gap-3 p-4 bg-purple-500/10 rounded-lg border border-purple-500/20 animate-fade-in">
+            {isGeneratingReport && <div className="flex items-center justify-center gap-3 p-4 bg-purple-500/10 rounded-lg border border-purple-500/20 animate-fade-in">
                 <Loader2 className="h-5 w-5 animate-spin text-purple-400" />
                 <span className="text-sm text-gray-300">Se generează raportul...</span>
-              </div>
-            )}
+              </div>}
 
-            {showReportButton && generatedReport && !isLoading && !isGeneratingReport && (
-              <div className="flex flex-col gap-3 items-center animate-fade-in py-4">
-                <Button
-                  onClick={() => setShowContactModal(true)}
-                  className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl text-white px-8 py-6 text-lg font-semibold rounded-xl"
-                >
+            {showReportButton && generatedReport && !isLoading && !isGeneratingReport && <div className="flex flex-col gap-3 items-center animate-fade-in py-4">
+                <Button onClick={() => setShowContactModal(true)} className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl text-white px-8 py-6 text-lg font-semibold rounded-xl">
                   <FileText className="mr-2 h-5 w-5" />
                   Primește Raportul PDF pe Email
                 </Button>
-              </div>
-            )}
+              </div>}
 
             <div ref={messagesEndRef} />
           </div>
@@ -285,9 +268,9 @@ export const AuditChat = () => {
 
       {/* Input - Lovable Style */}
       <form onSubmit={handleSubmit}>
-        <div className="bg-[#2C2D2E] rounded-[32px] p-4 shadow-2xl">
+        <div className="bg-[#2C2D2E] p-4 shadow-2xl rounded-sm">
           <div className="mb-3">
-            <input type="text" value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Scrie despre afacerea ta..." className="w-full bg-transparent text-white text-lg placeholder:text-gray-400 outline-none" disabled={isLoading} />
+            <input type="text" value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Scrie despre afacerea ta..." disabled={isLoading} className="w-full bg-transparent text-white text-lg placeholder:text-gray-400 outline-none rounded-sm" />
           </div>
           
           <div className="flex items-center justify-between">
