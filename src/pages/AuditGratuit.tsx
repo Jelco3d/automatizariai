@@ -86,13 +86,7 @@ const AuditGratuit = () => {
       </section>
 
       {/* Why You'll Love It Section */}
-      <section className="container mx-auto px-4 py-16 relative z-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
-          ❤️ De ce o să-ți placă
-        </h2>
-        
-        
-      </section>
+      
 
       {/* Next Steps Section */}
       <section className="container mx-auto px-4 py-16 relative z-10">
