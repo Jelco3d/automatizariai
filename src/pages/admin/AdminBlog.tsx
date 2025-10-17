@@ -15,7 +15,7 @@ export default function AdminBlog() {
       {/* Sidebar Navigation */}
       <aside className="w-64 bg-[#1A1F2C] border-r border-purple-500/20 p-4 hidden md:block">
         <Link to="/admin" className="flex items-center mb-8">
-          <img src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" alt="Logo" className="h-12 w-auto rounded-xl" />
+          <img src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" alt="Logo" className="h-16 w-auto rounded-xl" />
         </Link>
 
         <nav className="space-y-2">
