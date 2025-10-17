@@ -17,7 +17,7 @@ export const TestimonialsSection = () => {
               <Star className="w-4 h-4 fill-current animate-pulse delay-200" />
               <Star className="w-4 h-4 fill-current animate-pulse delay-300" />
             </div>
-            <p className="text-white font-semibold mt-2">Sarah Johnson</p>
+            <p className="text-white font-semibold mt-2">Ana Maria Popescu</p>
             <p className="text-sm text-gray-400">Manager Operațiuni</p>
           </CardContent>
         </Card>
@@ -32,7 +32,7 @@ export const TestimonialsSection = () => {
               <Star className="w-4 h-4 fill-current animate-pulse delay-200" />
               <Star className="w-4 h-4 fill-current animate-pulse delay-300" />
             </div>
-            <p className="text-white font-semibold mt-2">Michael Chen</p>
+            <p className="text-white font-semibold mt-2">Mihai Ionescu</p>
             <p className="text-sm text-gray-400">Director Tehnic</p>
           </CardContent>
         </Card>
@@ -47,7 +47,7 @@ export const TestimonialsSection = () => {
               <Star className="w-4 h-4 fill-current animate-pulse delay-200" />
               <Star className="w-4 h-4 fill-current animate-pulse delay-300" />
             </div>
-            <p className="text-white font-semibold mt-2">Emily Rodriguez</p>
+            <p className="text-white font-semibold mt-2">Elena Dumitrescu</p>
             <p className="text-sm text-gray-400">Lead Analiză Date</p>
           </CardContent>
         </Card>
