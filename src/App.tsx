@@ -5,7 +5,6 @@ import Website from './pages/Website';
 import Services from './pages/Services';
 import AboutUs from './pages/AboutUs';
 import Portfolio from './pages/Portfolio';
-import Search from './pages/Search';
 import Terms from './pages/Terms';
 import GDPR from './pages/GDPR';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -35,7 +34,6 @@ const App = () => {
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/search" element={<Search />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/gdpr" element={<GDPR />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
