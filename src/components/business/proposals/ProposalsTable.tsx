@@ -13,9 +13,10 @@ interface ProposalsTableProps {
   proposals: Proposal[];
   onDelete: (id: string) => void;
   onEdit: (proposal: Proposal) => void;
+  onUpdateProposal: any;
 }
 
-export function ProposalsTable({ proposals, onDelete, onEdit }: ProposalsTableProps) {
+export function ProposalsTable({ proposals, onDelete, onEdit, onUpdateProposal }: ProposalsTableProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedProposal, setSelectedProposal] = useState<Proposal | null>(null);
@@ -144,11 +145,7 @@ export function ProposalsTable({ proposals, onDelete, onEdit }: ProposalsTablePr
         open={previewDialogOpen}
         onOpenChange={setPreviewDialogOpen}
         proposal={previewProposal}
-        onUpdate={(id, generatedProposal) => {
-          if (previewProposal) {
-            onEdit({ ...previewProposal, generated_proposal: generatedProposal });
-          }
-        }}
+        onUpdateProposal={onUpdateProposal}
       />
     </div>
   );

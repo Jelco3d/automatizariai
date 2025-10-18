@@ -12,10 +12,10 @@ interface ProposalPreviewDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   proposal: Proposal | null;
-  onUpdate: (id: string, generatedProposal: string) => void;
+  onUpdateProposal: any;
 }
 
-export function ProposalPreviewDialog({ open, onOpenChange, proposal, onUpdate }: ProposalPreviewDialogProps) {
+export function ProposalPreviewDialog({ open, onOpenChange, proposal, onUpdateProposal }: ProposalPreviewDialogProps) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState('');
@@ -66,7 +66,18 @@ export function ProposalPreviewDialog({ open, onOpenChange, proposal, onUpdate }
       return;
     }
 
-    onUpdate(proposal.id, editedText);
+    onUpdateProposal.mutate({
+      id: proposal.id,
+      data: {
+        business_name: proposal.business_name,
+        business_description: proposal.business_description,
+        automation_needs: proposal.automation_needs,
+        timeframe: proposal.timeframe,
+        price: proposal.price,
+        generated_proposal: editedText,
+      }
+    });
+    
     setIsEditing(false);
     toast({
       title: 'Succes',

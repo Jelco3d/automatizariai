@@ -123,6 +123,7 @@ export default function Proposals() {
             proposals={proposals}
             onDelete={handleDeleteProposal}
             onEdit={handleEdit}
+            onUpdateProposal={updateProposal}
           />
         </Card>
 
