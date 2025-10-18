@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contractSchema, ContractFormData, contractTypes } from "@/schemas/contractSchema";
@@ -16,7 +16,7 @@ import { formatDateForInput } from "@/utils/dateFormatters";
 
 interface ContractFormProps {
   onSubmit: (data: ContractFormData & { generated_contract?: string; proposal_id?: string }) => void;
-  initialData?: Partial<ContractFormData>;
+  initialData?: Partial<ContractFormData> & { generated_contract?: string };
 }
 
 export function ContractForm({ onSubmit, initialData }: ContractFormProps) {
@@ -37,6 +37,12 @@ export function ContractForm({ onSubmit, initialData }: ContractFormProps) {
       clauses: initialData?.clauses || "",
     },
   });
+
+  useEffect(() => {
+    if (initialData?.generated_contract) {
+      setGeneratedContract(initialData.generated_contract);
+    }
+  }, [initialData]);
 
   const { data: proposals } = useQuery({
     queryKey: ['proposals'],

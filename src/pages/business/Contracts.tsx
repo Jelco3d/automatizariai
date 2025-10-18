@@ -217,6 +217,7 @@ export default function Contracts() {
                 total_value: Number(editingContract.total_value),
                 terms: editingContract.terms,
                 clauses: editingContract.clauses,
+                generated_contract: editingContract.generated_contract,
               } : undefined}
             />
           </DialogContent>
