@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { invoiceSchema, type InvoiceFormData } from '@/schemas/invoiceSchema';
@@ -11,6 +12,8 @@ import { ClientSelector } from '@/components/business/shared/ClientSelector';
 import { InvoiceItemsManager } from './InvoiceItemsManager';
 import { addDays } from 'date-fns';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Plus } from 'lucide-react';
+import { ClientForm } from '@/components/business/clients/ClientForm';
 
 interface InvoiceFormProps {
   open: boolean;
@@ -19,6 +22,7 @@ interface InvoiceFormProps {
 
 export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
   const { createInvoice } = useInvoices();
+  const [clientFormOpen, setClientFormOpen] = useState(false);
 
   const form = useForm<InvoiceFormData>({
     resolver: zodResolver(invoiceSchema),
@@ -76,7 +80,20 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Client *</FormLabel>
-                      <ClientSelector value={field.value} onChange={field.onChange} />
+                      <div className="flex gap-2">
+                        <div className="flex-1">
+                          <ClientSelector value={field.value} onChange={field.onChange} />
+                        </div>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="icon"
+                          onClick={() => setClientFormOpen(true)}
+                          className="bg-purple-600 hover:bg-purple-700 text-white border-0 shrink-0"
+                        >
+                          <Plus className="h-4 w-4" />
+                        </Button>
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -172,6 +189,12 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
           </Form>
         </ScrollArea>
       </DialogContent>
+
+      <ClientForm 
+        open={clientFormOpen} 
+        onOpenChange={setClientFormOpen}
+        client={null}
+      />
     </Dialog>
   );
 }
