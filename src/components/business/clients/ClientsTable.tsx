@@ -6,6 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Edit, Trash2, Search } from 'lucide-react';
 import { useClients } from '@/hooks/useClients';
 import { DeleteDialog } from '@/components/business/shared/DeleteDialog';
+import { Badge } from '@/components/ui/badge';
 import type { Tables } from '@/integrations/supabase/types';
 
 type Client = Tables<'clients'>;
@@ -24,6 +25,17 @@ export function ClientsTable({ onEdit }: ClientsTableProps) {
       client.name.toLowerCase().includes(search.toLowerCase()) ||
       client.email.toLowerCase().includes(search.toLowerCase())
   );
+
+  const getStatusBadge = (status: string) => {
+    const config = {
+      active: { label: 'Client Activ', variant: 'default' as const },
+      prospect: { label: 'Potențial Client', variant: 'secondary' as const },
+      inactive: { label: 'Client Inactiv', variant: 'outline' as const },
+    };
+    
+    const statusConfig = config[status as keyof typeof config] || config.active;
+    return <Badge variant={statusConfig.variant}>{statusConfig.label}</Badge>;
+  };
 
   return (
     <>
@@ -50,19 +62,20 @@ export function ClientsTable({ onEdit }: ClientsTableProps) {
                     <TableHead className="text-gray-400 text-xs md:text-sm">Email</TableHead>
                     <TableHead className="text-gray-400 text-xs md:text-sm">Telefon</TableHead>
                     <TableHead className="text-gray-400 text-xs md:text-sm">CUI</TableHead>
+                    <TableHead className="text-gray-400 text-xs md:text-sm">Status</TableHead>
                     <TableHead className="text-gray-400 text-xs md:text-sm text-right">Acțiuni</TableHead>
                   </TableRow>
                 </TableHeader>
             <TableBody>
               {isLoading ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center text-gray-400">
+                  <TableCell colSpan={6} className="text-center text-gray-400">
                     Se încarcă...
                   </TableCell>
                 </TableRow>
               ) : filteredClients.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center text-gray-400">
+                  <TableCell colSpan={6} className="text-center text-gray-400">
                     Nu există clienți
                   </TableCell>
                 </TableRow>
@@ -73,6 +86,7 @@ export function ClientsTable({ onEdit }: ClientsTableProps) {
                     <TableCell className="text-gray-300 text-xs md:text-sm">{client.email}</TableCell>
                     <TableCell className="text-gray-300 text-xs md:text-sm">{client.phone || '-'}</TableCell>
                     <TableCell className="text-gray-300 text-xs md:text-sm">{client.cui || '-'}</TableCell>
+                    <TableCell>{getStatusBadge(client.status || 'active')}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
                         <Button

@@ -6,6 +6,7 @@ export const clientSchema = z.object({
   phone: z.string().optional(),
   cui: z.string().optional(),
   address: z.string().max(500, 'Adresa este prea lungă').optional(),
+  status: z.enum(['active', 'prospect', 'inactive']).default('active'),
 });
 
 export type ClientFormData = z.infer<typeof clientSchema>;

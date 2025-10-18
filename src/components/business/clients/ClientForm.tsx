@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useClients } from '@/hooks/useClients';
 import type { Tables } from '@/integrations/supabase/types';
@@ -30,12 +31,14 @@ export function ClientForm({ open, onOpenChange, client, onClientCreated }: Clie
       phone: client.phone || undefined,
       cui: client.cui || undefined,
       address: client.address || undefined,
+      status: (client.status as 'active' | 'prospect' | 'inactive') || 'active',
     } : {
       name: '',
       email: '',
       phone: undefined,
       cui: undefined,
       address: undefined,
+      status: 'active',
     },
   });
 
@@ -46,6 +49,7 @@ export function ClientForm({ open, onOpenChange, client, onClientCreated }: Clie
       phone: data.phone || null,
       cui: data.cui || null,
       address: data.address || null,
+      status: data.status,
     };
 
     if (isEditing && client) {
@@ -138,6 +142,29 @@ export function ClientForm({ open, onOpenChange, client, onClientCreated }: Clie
                   <FormControl>
                     <Textarea {...field} className="bg-[#0F1117] border-gray-700 text-white" rows={3} />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="status"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Status *</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white">
+                        <SelectValue />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-[#1A1F2C] border-gray-700 text-white">
+                      <SelectItem value="active">Client Activ</SelectItem>
+                      <SelectItem value="prospect">Potențial Client</SelectItem>
+                      <SelectItem value="inactive">Client Inactiv</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
