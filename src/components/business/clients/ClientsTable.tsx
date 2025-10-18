@@ -62,20 +62,74 @@ export function ClientsTable({ onEdit }: ClientsTableProps) {
           </div>
         </div>
 
-        <div className="overflow-x-auto -mx-3 md:mx-0">
-          <div className="inline-block min-w-full align-middle">
-            <div className="overflow-hidden">
-              <Table className="min-w-[600px]">
-                <TableHeader>
-                  <TableRow className="border-gray-700 hover:bg-transparent">
-                    <TableHead className="text-gray-400 text-xs md:text-sm">Nume</TableHead>
-                    <TableHead className="text-gray-400 text-xs md:text-sm">Email</TableHead>
-                    <TableHead className="text-gray-400 text-xs md:text-sm">Telefon</TableHead>
-                    <TableHead className="text-gray-400 text-xs md:text-sm">CUI</TableHead>
-                    <TableHead className="text-gray-400 text-xs md:text-sm">Status</TableHead>
-                    <TableHead className="text-gray-400 text-xs md:text-sm text-right">Acțiuni</TableHead>
-                  </TableRow>
-                </TableHeader>
+        {/* Mobile Card View */}
+        <div className="md:hidden space-y-3">
+          {isLoading ? (
+            <div className="text-center text-gray-400 py-8">Se încarcă...</div>
+          ) : filteredClients.length === 0 ? (
+            <div className="text-center text-gray-400 py-8">Nu există clienți</div>
+          ) : (
+            filteredClients.map((client) => (
+              <Card key={client.id} className="bg-[#0F1117] border-gray-700 p-3">
+                <div className="space-y-2">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="text-white font-semibold text-sm">{client.name}</p>
+                      <p className="text-gray-400 text-xs">{client.email}</p>
+                    </div>
+                    {getStatusBadge(client.status || 'active')}
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-2 text-xs pt-2">
+                    <div>
+                      <p className="text-gray-400">Telefon</p>
+                      <p className="text-white">{client.phone || '-'}</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-400">CUI</p>
+                      <p className="text-white">{client.cui || '-'}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-2 pt-2 border-t border-gray-700">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => onEdit(client)}
+                      className="flex-1 text-purple-400 hover:text-purple-300 hover:bg-purple-500/10 text-xs"
+                    >
+                      <Edit className="h-3 w-3 mr-1" />
+                      Editează
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setDeleteId(client.id)}
+                      className="flex-1 text-red-400 hover:text-red-300 hover:bg-red-500/10 text-xs"
+                    >
+                      <Trash2 className="h-3 w-3 mr-1" />
+                      Șterge
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            ))
+          )}
+        </div>
+
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow className="border-gray-700 hover:bg-transparent">
+                <TableHead className="text-gray-400">Nume</TableHead>
+                <TableHead className="text-gray-400">Email</TableHead>
+                <TableHead className="text-gray-400">Telefon</TableHead>
+                <TableHead className="text-gray-400">CUI</TableHead>
+                <TableHead className="text-gray-400">Status</TableHead>
+                <TableHead className="text-gray-400 text-right">Acțiuni</TableHead>
+              </TableRow>
+            </TableHeader>
             <TableBody>
               {isLoading ? (
                 <TableRow>
@@ -92,10 +146,10 @@ export function ClientsTable({ onEdit }: ClientsTableProps) {
               ) : (
                 filteredClients.map((client) => (
                   <TableRow key={client.id} className="border-gray-700 hover:bg-gray-800/50">
-                    <TableCell className="text-white font-medium text-xs md:text-sm">{client.name}</TableCell>
-                    <TableCell className="text-gray-300 text-xs md:text-sm">{client.email}</TableCell>
-                    <TableCell className="text-gray-300 text-xs md:text-sm">{client.phone || '-'}</TableCell>
-                    <TableCell className="text-gray-300 text-xs md:text-sm">{client.cui || '-'}</TableCell>
+                    <TableCell className="text-white font-medium">{client.name}</TableCell>
+                    <TableCell className="text-gray-300">{client.email}</TableCell>
+                    <TableCell className="text-gray-300">{client.phone || '-'}</TableCell>
+                    <TableCell className="text-gray-300">{client.cui || '-'}</TableCell>
                     <TableCell>{getStatusBadge(client.status || 'active')}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
@@ -120,10 +174,8 @@ export function ClientsTable({ onEdit }: ClientsTableProps) {
                   </TableRow>
                 ))
               )}
-              </TableBody>
-            </Table>
-          </div>
-        </div>
+            </TableBody>
+          </Table>
         </div>
       </Card>
 

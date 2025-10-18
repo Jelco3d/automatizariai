@@ -68,23 +68,23 @@ export function ClientForm({ open, onOpenChange, client, onClientCreated }: Clie
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white max-w-2xl">
+      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto p-4 md:p-6">
         <DialogHeader>
-          <DialogTitle>{isEditing ? 'Editează client' : 'Client nou'}</DialogTitle>
+          <DialogTitle className="text-lg md:text-xl">{isEditing ? 'Editează client' : 'Client nou'}</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 md:space-y-4">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nume *</FormLabel>
+                  <FormLabel className="text-sm">Nume *</FormLabel>
                   <FormControl>
-                    <Input {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                    <Input {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
@@ -94,26 +94,26 @@ export function ClientForm({ open, onOpenChange, client, onClientCreated }: Clie
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email *</FormLabel>
+                  <FormLabel className="text-sm">Email *</FormLabel>
                   <FormControl>
-                    <Input {...field} type="email" className="bg-[#0F1117] border-gray-700 text-white" />
+                    <Input {...field} type="email" className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               <FormField
                 control={form.control}
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Telefon</FormLabel>
+                    <FormLabel className="text-sm">Telefon</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -123,11 +123,11 @@ export function ClientForm({ open, onOpenChange, client, onClientCreated }: Clie
                 name="cui"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>CUI</FormLabel>
+                    <FormLabel className="text-sm">CUI</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -138,11 +138,11 @@ export function ClientForm({ open, onOpenChange, client, onClientCreated }: Clie
               name="address"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Adresă</FormLabel>
+                  <FormLabel className="text-sm">Adresă</FormLabel>
                   <FormControl>
-                    <Textarea {...field} className="bg-[#0F1117] border-gray-700 text-white" rows={3} />
+                    <Textarea {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm min-h-[80px]" rows={3} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
@@ -152,37 +152,37 @@ export function ClientForm({ open, onOpenChange, client, onClientCreated }: Clie
               name="status"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Status *</FormLabel>
+                  <FormLabel className="text-sm">Status *</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value || 'active'}>
                     <FormControl>
-                      <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white">
+                      <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white text-sm h-9">
                         <SelectValue />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent className="bg-[#1A1F2C] border-gray-700 text-white">
-                      <SelectItem value="active">Client</SelectItem>
-                      <SelectItem value="prospect">Prospect</SelectItem>
-                      <SelectItem value="inactive">Inactiv</SelectItem>
+                      <SelectItem value="active" className="text-sm">Client</SelectItem>
+                      <SelectItem value="prospect" className="text-sm">Prospect</SelectItem>
+                      <SelectItem value="inactive" className="text-sm">Inactiv</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
 
-            <div className="flex justify-end gap-2 pt-4">
+            <div className="flex flex-col md:flex-row justify-end gap-2 pt-2 md:pt-4">
               <Button
                 type="button"
                 variant="outline"
                 onClick={() => onOpenChange(false)}
-                className="bg-[#0F1117] text-white border-gray-700 hover:bg-gray-800"
+                className="bg-[#0F1117] text-white border-gray-700 hover:bg-gray-800 text-sm h-9 w-full md:w-auto"
               >
                 Anulează
               </Button>
               <Button
                 type="submit"
                 disabled={createClient.isPending || updateClient.isPending}
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-purple-600 hover:bg-purple-700 text-sm h-9 w-full md:w-auto"
               >
                 {isEditing ? 'Salvează' : 'Adaugă'}
               </Button>
