@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { FileText, Pencil, Trash2, Download, RefreshCw } from "lucide-react";
+import { FileText, Pencil, Trash2, Download, RefreshCw, Share2 } from "lucide-react";
 import { Contract } from "@/hooks/useContracts";
 import { StatusBadge } from "@/components/business/shared/StatusBadge";
 import { formatDate } from "@/utils/dateFormatters";
@@ -13,6 +13,7 @@ interface ContractsTableProps {
   onDownloadPDF: (contract: Contract) => void;
   onView: (contract: Contract) => void;
   onChangeStatus: (contract: Contract) => void;
+  onGenerateSignatureLink: (contract: Contract) => void;
 }
 
 export function ContractsTable({
@@ -22,6 +23,7 @@ export function ContractsTable({
   onDownloadPDF,
   onView,
   onChangeStatus,
+  onGenerateSignatureLink,
 }: ContractsTableProps) {
   return (
     <div className="rounded-md border">
@@ -76,6 +78,16 @@ export function ContractsTable({
                   >
                     <Download className="h-4 w-4" />
                   </Button>
+                  {contract.generated_contract && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => onGenerateSignatureLink(contract)}
+                      title="Generează link pentru semnare"
+                    >
+                      <Share2 className="h-4 w-4" />
+                    </Button>
+                  )}
                   <Button
                     variant="ghost"
                     size="sm"

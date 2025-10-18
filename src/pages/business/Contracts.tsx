@@ -11,6 +11,7 @@ import { useContracts, Contract } from "@/hooks/useContracts";
 import { ContractForm } from "@/components/business/contracts/ContractForm";
 import { ContractsTable } from "@/components/business/contracts/ContractsTable";
 import { ContractStatusDialog } from "@/components/business/contracts/ContractStatusDialog";
+import { SignatureLinkDialog } from "@/components/business/contracts/SignatureLinkDialog";
 import { ContractFormData } from "@/schemas/contractSchema";
 import { generateContractPDF } from "@/utils/generateContractPDF";
 import { generateDocumentNumber } from "@/utils/documentNumbers";
@@ -24,10 +25,11 @@ export default function Contracts() {
   const [editingContract, setEditingContract] = useState<Contract | null>(null);
   const [viewContract, setViewContract] = useState<Contract | null>(null);
   const [statusContract, setStatusContract] = useState<Contract | null>(null);
+  const [signatureLinkContract, setSignatureLinkContract] = useState<Contract | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const { contracts, isLoading, createContract, updateContract, deleteContract, updateStatus } = useContracts();
+  const { contracts, isLoading, createContract, updateContract, deleteContract, updateStatus, generateSignatureLink } = useContracts();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -136,6 +138,15 @@ export default function Contracts() {
     updateStatus({ id: contractId, status });
   };
 
+  const handleGenerateSignatureLink = async (contract: Contract) => {
+    try {
+      await generateSignatureLink(contract.id);
+      setSignatureLinkContract(contract);
+    } catch (error) {
+      console.error('Error generating signature link:', error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0F1117] text-white flex">
       <Sidebar />
@@ -191,6 +202,7 @@ export default function Contracts() {
             onDownloadPDF={handleDownloadPDF}
             onView={setViewContract}
             onChangeStatus={handleChangeStatus}
+            onGenerateSignatureLink={handleGenerateSignatureLink}
           />
         ) : (
           <Card className="bg-[#1A1F2C] border-purple-500/20 p-8">
@@ -247,6 +259,12 @@ export default function Contracts() {
           open={!!statusContract}
           onOpenChange={(open) => !open && setStatusContract(null)}
           onStatusChange={handleStatusChange}
+        />
+
+        <SignatureLinkDialog
+          open={!!signatureLinkContract}
+          onOpenChange={(open) => !open && setSignatureLinkContract(null)}
+          contract={signatureLinkContract}
         />
       </div>
     </div>

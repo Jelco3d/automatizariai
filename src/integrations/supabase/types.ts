@@ -237,13 +237,22 @@ export type Database = {
         Row: {
           clauses: string | null
           client_id: string
+          client_signature_data: string | null
+          client_signature_name: string | null
+          client_signed_at: string | null
           contract_number: string
           contract_type: string
           created_at: string | null
           end_date: string | null
+          fully_signed_at: string | null
           generated_contract: string | null
           id: string
           proposal_id: string | null
+          provider_signature_data: string | null
+          provider_signature_name: string | null
+          provider_signed_at: string | null
+          signature_link_expires_at: string | null
+          signature_token: string | null
           start_date: string
           status: Database["public"]["Enums"]["contract_status"]
           terms: string | null
@@ -253,13 +262,22 @@ export type Database = {
         Insert: {
           clauses?: string | null
           client_id: string
+          client_signature_data?: string | null
+          client_signature_name?: string | null
+          client_signed_at?: string | null
           contract_number: string
           contract_type: string
           created_at?: string | null
           end_date?: string | null
+          fully_signed_at?: string | null
           generated_contract?: string | null
           id?: string
           proposal_id?: string | null
+          provider_signature_data?: string | null
+          provider_signature_name?: string | null
+          provider_signed_at?: string | null
+          signature_link_expires_at?: string | null
+          signature_token?: string | null
           start_date: string
           status?: Database["public"]["Enums"]["contract_status"]
           terms?: string | null
@@ -269,13 +287,22 @@ export type Database = {
         Update: {
           clauses?: string | null
           client_id?: string
+          client_signature_data?: string | null
+          client_signature_name?: string | null
+          client_signed_at?: string | null
           contract_number?: string
           contract_type?: string
           created_at?: string | null
           end_date?: string | null
+          fully_signed_at?: string | null
           generated_contract?: string | null
           id?: string
           proposal_id?: string | null
+          provider_signature_data?: string | null
+          provider_signature_name?: string | null
+          provider_signed_at?: string | null
+          signature_link_expires_at?: string | null
+          signature_token?: string | null
           start_date?: string
           status?: Database["public"]["Enums"]["contract_status"]
           terms?: string | null
@@ -796,7 +823,13 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
-      contract_status: "draft" | "active" | "pending" | "expired" | "terminated"
+      contract_status:
+        | "draft"
+        | "active"
+        | "pending"
+        | "expired"
+        | "terminated"
+        | "signed"
       invoice_status: "draft" | "sent" | "paid" | "overdue" | "cancelled"
       quote_status: "draft" | "sent" | "accepted" | "rejected" | "expired"
     }
@@ -927,7 +960,14 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
-      contract_status: ["draft", "active", "pending", "expired", "terminated"],
+      contract_status: [
+        "draft",
+        "active",
+        "pending",
+        "expired",
+        "terminated",
+        "signed",
+      ],
       invoice_status: ["draft", "sent", "paid", "overdue", "cancelled"],
       quote_status: ["draft", "sent", "accepted", "rejected", "expired"],
     },

@@ -11,10 +11,19 @@ export interface Contract {
   start_date: string;
   end_date?: string;
   total_value: number;
-  status: 'draft' | 'pending' | 'active' | 'expired' | 'terminated';
+  status: 'draft' | 'pending' | 'active' | 'expired' | 'terminated' | 'signed';
   terms?: string;
   clauses?: string;
   generated_contract?: string;
+  signature_token?: string;
+  signature_link_expires_at?: string;
+  provider_signed_at?: string;
+  provider_signature_data?: string;
+  provider_signature_name?: string;
+  client_signed_at?: string;
+  client_signature_data?: string;
+  client_signature_name?: string;
+  fully_signed_at?: string;
   created_at: string;
   updated_at: string;
   clients?: {
@@ -156,6 +165,39 @@ export const useContracts = () => {
     },
   });
 
+  const generateSignatureLink = useMutation({
+    mutationFn: async (contractId: string) => {
+      const expiresAt = new Date();
+      expiresAt.setDate(expiresAt.getDate() + 30); // 30 days from now
+
+      const { data, error } = await supabase
+        .from('contracts')
+        .update({
+          signature_link_expires_at: expiresAt.toISOString(),
+        })
+        .eq('id', contractId)
+        .select('signature_token')
+        .single();
+
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['contracts'] });
+      toast({
+        title: 'Link generat',
+        description: 'Link-ul pentru semnare a fost generat cu succes.',
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: 'Eroare',
+        description: `Nu s-a putut genera link-ul: ${error.message}`,
+        variant: 'destructive',
+      });
+    },
+  });
+
   return {
     contracts,
     isLoading,
@@ -163,5 +205,6 @@ export const useContracts = () => {
     updateContract: updateContract.mutate,
     deleteContract: deleteContract.mutate,
     updateStatus: updateStatus.mutate,
+    generateSignatureLink: generateSignatureLink.mutateAsync,
   };
 };
