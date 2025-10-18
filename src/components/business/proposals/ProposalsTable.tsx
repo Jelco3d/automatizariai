@@ -45,7 +45,7 @@ export function ProposalsTable({ proposals, onDelete, onEdit, onUpdateProposal, 
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 md:space-y-4">
       <div className="flex items-center gap-2">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
@@ -58,7 +58,87 @@ export function ProposalsTable({ proposals, onDelete, onEdit, onUpdateProposal, 
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* Mobile Card View */}
+      <div className="md:hidden space-y-3">
+        {filteredProposals.length === 0 ? (
+          <div className="text-center text-gray-400 py-8">Nu există propuneri</div>
+        ) : (
+          filteredProposals.map((proposal) => (
+            <div key={proposal.id} className="bg-[#0F1117] border border-gray-700 rounded-lg p-4">
+              <div className="space-y-3">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1 min-w-0">
+                    <div className="font-semibold text-white text-sm">{proposal.business_name}</div>
+                    <div className="text-xs text-gray-400 mt-1 line-clamp-2">{proposal.automation_needs}</div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setStatusProposal(proposal);
+                      setStatusDialogOpen(true);
+                    }}
+                    className="ml-2 flex-shrink-0"
+                  >
+                    <StatusBadge status={proposal.status} type="proposal" />
+                  </button>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div>
+                    <span className="text-gray-500">Timeframe:</span>
+                    <div className="text-gray-300 mt-0.5">{proposal.timeframe}</div>
+                  </div>
+                  <div>
+                    <span className="text-gray-500">Data:</span>
+                    <div className="text-gray-300 mt-0.5">{formatDate(proposal.created_at)}</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-2 border-t border-gray-700">
+                  <div className="font-semibold text-white">{formatCurrency(proposal.price)}</div>
+                  <div className="flex gap-1">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        setPreviewProposal(proposal);
+                        setPreviewDialogOpen(true);
+                      }}
+                      className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10 h-8 w-8 p-0"
+                      title="Vezi propunere"
+                    >
+                      <Eye className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => onEdit(proposal)}
+                      className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10 h-8 w-8 p-0"
+                      title="Editează"
+                    >
+                      <Pencil className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        setSelectedProposal(proposal);
+                        setDeleteDialogOpen(true);
+                      }}
+                      className="text-red-400 hover:text-red-300 hover:bg-red-500/10 h-8 w-8 p-0"
+                      title="Șterge"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Desktop Table View */}
+      <div className="hidden md:block overflow-x-auto">
         <div className="min-w-[800px]">
           <Table>
             <TableHeader>

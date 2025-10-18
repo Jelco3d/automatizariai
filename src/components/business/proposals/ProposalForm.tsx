@@ -78,57 +78,57 @@ export function ProposalForm({ onSubmit, initialData, isSubmitting }: ProposalFo
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-3 md:space-y-4">
       <div>
-        <Label className="text-white">Nume Business *</Label>
+        <Label className="text-white text-xs md:text-sm">Nume Business *</Label>
         <Input
           {...register('business_name')}
           placeholder="Numele companiei..."
-          className="bg-[#0F1117] border-gray-700 text-white mt-1"
+          className="bg-[#0F1117] border-gray-700 text-white mt-1 text-sm h-9 md:h-10"
         />
         {errors.business_name && (
-          <p className="text-red-500 text-sm mt-1">{errors.business_name.message}</p>
+          <p className="text-red-500 text-xs md:text-sm mt-1">{errors.business_name.message}</p>
         )}
       </div>
 
       <div>
-        <Label className="text-white">Descriere Business *</Label>
+        <Label className="text-white text-xs md:text-sm">Descriere Business *</Label>
         <Textarea
           {...register('business_description')}
           placeholder="Descrieți businessul..."
-          className="bg-[#0F1117] border-gray-700 text-white mt-1 min-h-[100px]"
+          className="bg-[#0F1117] border-gray-700 text-white mt-1 min-h-[80px] md:min-h-[100px] text-sm"
         />
         {errors.business_description && (
-          <p className="text-red-500 text-sm mt-1">{errors.business_description.message}</p>
+          <p className="text-red-500 text-xs md:text-sm mt-1">{errors.business_description.message}</p>
         )}
       </div>
 
       <div>
-        <Label className="text-white">Ce doresc să automatizeze *</Label>
+        <Label className="text-white text-xs md:text-sm">Ce doresc să automatizeze *</Label>
         <Textarea
           {...register('automation_needs')}
           placeholder="Specificați procesele care trebuie automatizate..."
-          className="bg-[#0F1117] border-gray-700 text-white mt-1 min-h-[120px]"
+          className="bg-[#0F1117] border-gray-700 text-white mt-1 min-h-[90px] md:min-h-[120px] text-sm"
         />
         {errors.automation_needs && (
-          <p className="text-red-500 text-sm mt-1">{errors.automation_needs.message}</p>
+          <p className="text-red-500 text-xs md:text-sm mt-1">{errors.automation_needs.message}</p>
         )}
       </div>
 
       <div>
-        <Label className="text-white">Timeframe Implementare *</Label>
+        <Label className="text-white text-xs md:text-sm">Timeframe Implementare *</Label>
         <Input
           {...register('timeframe')}
-          placeholder="Ex: 2-3 luni, 4-6 săptămâni..."
-          className="bg-[#0F1117] border-gray-700 text-white mt-1"
+          placeholder="Ex: 2-3 luni..."
+          className="bg-[#0F1117] border-gray-700 text-white mt-1 text-sm h-9 md:h-10"
         />
         {errors.timeframe && (
-          <p className="text-red-500 text-sm mt-1">{errors.timeframe.message}</p>
+          <p className="text-red-500 text-xs md:text-sm mt-1">{errors.timeframe.message}</p>
         )}
       </div>
 
       <div>
-        <Label className="text-white">Preț (RON) *</Label>
+        <Label className="text-white text-xs md:text-sm">Preț (RON) *</Label>
         <Input
           type="number"
           step="0.01"
@@ -136,30 +136,31 @@ export function ProposalForm({ onSubmit, initialData, isSubmitting }: ProposalFo
             setValueAs: (v) => v === '' ? 0 : parseFloat(v),
           })}
           placeholder="0.00"
-          className="bg-[#0F1117] border-gray-700 text-white mt-1"
+          className="bg-[#0F1117] border-gray-700 text-white mt-1 text-sm h-9 md:h-10"
         />
         {errors.price && (
-          <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>
+          <p className="text-red-500 text-xs md:text-sm mt-1">{errors.price.message}</p>
         )}
       </div>
 
-      <div className="flex gap-3 justify-end pt-4">
+      <div className="flex gap-3 justify-end pt-3 md:pt-4">
         <Button
           type="submit"
           disabled={isSubmitting || isGenerating}
-          className="bg-purple-600 hover:bg-purple-700 w-full md:w-auto"
+          className="bg-purple-600 hover:bg-purple-700 w-full md:w-auto text-sm h-9 md:h-10"
         >
           {isGenerating ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin mr-2" />
-              Generez propunerea...
+              <span className="hidden md:inline">Generez propunerea...</span>
+              <span className="md:hidden">Generez...</span>
             </>
           ) : isSubmitting ? (
             'Se salvează...'
           ) : initialData ? (
-            'Actualizează Propunerea'
+            'Actualizează'
           ) : (
-            'Creează Propunerea'
+            'Creează'
           )}
         </Button>
       </div>
