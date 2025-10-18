@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
-import { Download } from 'lucide-react';
+import { Download, Edit } from 'lucide-react';
 import { generateProposalPDF } from '@/utils/generateProposalPDF';
 import { useState } from 'react';
 import { toast } from '@/hooks/use-toast';
@@ -11,9 +11,10 @@ interface ProposalPreviewDialogProps {
   onOpenChange: (open: boolean) => void;
   proposal: string | null;
   businessName: string;
+  onEdit?: () => void;
 }
 
-export function ProposalPreviewDialog({ open, onOpenChange, proposal, businessName }: ProposalPreviewDialogProps) {
+export function ProposalPreviewDialog({ open, onOpenChange, proposal, businessName, onEdit }: ProposalPreviewDialogProps) {
   const [isGenerating, setIsGenerating] = useState(false);
 
   const handleDownloadPDF = async () => {
@@ -51,15 +52,28 @@ export function ProposalPreviewDialog({ open, onOpenChange, proposal, businessNa
         <DialogHeader className="flex-shrink-0">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-white">Propunere pentru {businessName}</DialogTitle>
-            <Button
-              onClick={handleDownloadPDF}
-              disabled={!proposal || isGenerating}
-              className="bg-purple-600 hover:bg-purple-700"
-              size="sm"
-            >
-              <Download className="h-4 w-4 mr-2" />
-              {isGenerating ? 'Generez...' : 'Descarcă PDF'}
-            </Button>
+            <div className="flex gap-2">
+              {onEdit && (
+                <Button
+                  onClick={onEdit}
+                  disabled={!proposal}
+                  variant="outline"
+                  size="sm"
+                >
+                  <Edit className="h-4 w-4 mr-2" />
+                  Editează
+                </Button>
+              )}
+              <Button
+                onClick={handleDownloadPDF}
+                disabled={!proposal || isGenerating}
+                className="bg-purple-600 hover:bg-purple-700"
+                size="sm"
+              >
+                <Download className="h-4 w-4 mr-2" />
+                {isGenerating ? 'Generez...' : 'Descarcă PDF'}
+              </Button>
+            </div>
           </div>
         </DialogHeader>
         <ScrollArea className="flex-1 mt-4">
