@@ -142,10 +142,93 @@ export function useInvoices() {
     },
   });
 
+  const updateInvoice = useMutation({
+    mutationFn: async (data: {
+      id: string;
+      data: {
+        client_id: string;
+        issue_date: Date;
+        due_date: Date;
+        payment_terms?: string;
+        notes?: string;
+        items: Array<{
+          description: string;
+          quantity: number;
+          unit_price: number;
+          vat_rate: number;
+        }>;
+      };
+    }) => {
+      // Calculate totals
+      const items = data.data.items;
+      const subtotal = items.reduce((sum, item) => sum + (item.quantity * item.unit_price), 0);
+      const vatAmount = items.reduce((sum, item) => {
+        const itemTotal = item.quantity * item.unit_price;
+        return sum + (itemTotal * item.vat_rate / 100);
+      }, 0);
+      const total = subtotal + vatAmount;
+
+      // Update invoice
+      const { error: invoiceError } = await supabase
+        .from('invoices')
+        .update({
+          client_id: data.data.client_id,
+          issue_date: data.data.issue_date.toISOString().split('T')[0],
+          due_date: data.data.due_date.toISOString().split('T')[0],
+          payment_terms: data.data.payment_terms,
+          notes: data.data.notes,
+          subtotal,
+          vat_amount: vatAmount,
+          total,
+        })
+        .eq('id', data.id);
+
+      if (invoiceError) throw invoiceError;
+
+      // Delete existing items
+      const { error: deleteError } = await supabase
+        .from('invoice_items')
+        .delete()
+        .eq('invoice_id', data.id);
+
+      if (deleteError) throw deleteError;
+
+      // Insert new items
+      const itemsWithInvoiceId = items.map(item => ({
+        invoice_id: data.id,
+        description: item.description,
+        quantity: item.quantity,
+        unit_price: item.unit_price,
+        vat_rate: item.vat_rate,
+        total: item.quantity * item.unit_price,
+      }));
+
+      const { error: itemsError } = await supabase
+        .from('invoice_items')
+        .insert(itemsWithInvoiceId);
+
+      if (itemsError) throw itemsError;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['invoices'] });
+      toast({
+        title: 'Factură actualizată cu succes',
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: 'Eroare la actualizarea facturii',
+        description: error.message,
+        variant: 'destructive',
+      });
+    },
+  });
+
   return {
     invoices,
     isLoading,
     createInvoice,
+    updateInvoice,
     updateInvoiceStatus,
     deleteInvoice,
   };

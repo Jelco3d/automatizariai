@@ -361,7 +361,10 @@ export type Database = {
       }
       invoice_templates: {
         Row: {
+          bank_account: string | null
+          bank_name: string | null
           company_address: string | null
+          company_city: string | null
           company_cui: string | null
           company_name: string | null
           company_registration: string | null
@@ -375,7 +378,10 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          bank_account?: string | null
+          bank_name?: string | null
           company_address?: string | null
+          company_city?: string | null
           company_cui?: string | null
           company_name?: string | null
           company_registration?: string | null
@@ -389,7 +395,10 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          bank_account?: string | null
+          bank_name?: string | null
           company_address?: string | null
+          company_city?: string | null
           company_cui?: string | null
           company_name?: string | null
           company_registration?: string | null
@@ -416,6 +425,7 @@ export type Database = {
           payment_terms: string | null
           status: Database["public"]["Enums"]["invoice_status"]
           subtotal: number
+          template_id: string | null
           total: number
           updated_at: string | null
           vat_amount: number
@@ -431,6 +441,7 @@ export type Database = {
           payment_terms?: string | null
           status?: Database["public"]["Enums"]["invoice_status"]
           subtotal: number
+          template_id?: string | null
           total: number
           updated_at?: string | null
           vat_amount: number
@@ -446,6 +457,7 @@ export type Database = {
           payment_terms?: string | null
           status?: Database["public"]["Enums"]["invoice_status"]
           subtotal?: number
+          template_id?: string | null
           total?: number
           updated_at?: string | null
           vat_amount?: number
@@ -456,6 +468,13 @@ export type Database = {
             columns: ["client_id"]
             isOneToOne: false
             referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoices_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "invoice_templates"
             referencedColumns: ["id"]
           },
         ]

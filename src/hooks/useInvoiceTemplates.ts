@@ -52,6 +52,9 @@ export const useCreateInvoiceTemplate = () => {
           company_cui: data.company_cui,
           company_registration: data.company_registration,
           company_address: data.company_address,
+          company_city: data.company_city,
+          bank_name: data.bank_name,
+          bank_account: data.bank_account,
           logo_url: data.logo_url,
         })
         .select()
@@ -109,6 +112,9 @@ export const useUpdateInvoiceTemplate = () => {
           company_cui: data.company_cui,
           company_registration: data.company_registration,
           company_address: data.company_address,
+          company_city: data.company_city,
+          bank_name: data.bank_name,
+          bank_account: data.bank_account,
           logo_url: data.logo_url,
         })
         .eq("id", id);
