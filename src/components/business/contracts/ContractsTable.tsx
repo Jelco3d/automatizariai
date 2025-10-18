@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { FileText, Pencil, Trash2, Download } from "lucide-react";
+import { FileText, Pencil, Trash2, Download, RefreshCw } from "lucide-react";
 import { Contract } from "@/hooks/useContracts";
 import { StatusBadge } from "@/components/business/shared/StatusBadge";
 import { formatDate } from "@/utils/dateFormatters";
@@ -12,6 +12,7 @@ interface ContractsTableProps {
   onDelete: (id: string) => void;
   onDownloadPDF: (contract: Contract) => void;
   onView: (contract: Contract) => void;
+  onChangeStatus: (contract: Contract) => void;
 }
 
 export function ContractsTable({
@@ -20,6 +21,7 @@ export function ContractsTable({
   onDelete,
   onDownloadPDF,
   onView,
+  onChangeStatus,
 }: ContractsTableProps) {
   return (
     <div className="rounded-md border">
@@ -57,6 +59,14 @@ export function ContractsTable({
                     title="Vizualizează"
                   >
                     <FileText className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => onChangeStatus(contract)}
+                    title="Schimbă Status"
+                  >
+                    <RefreshCw className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="ghost"

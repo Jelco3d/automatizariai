@@ -10,6 +10,7 @@ import { Session } from "@supabase/supabase-js";
 import { useContracts, Contract } from "@/hooks/useContracts";
 import { ContractForm } from "@/components/business/contracts/ContractForm";
 import { ContractsTable } from "@/components/business/contracts/ContractsTable";
+import { ContractStatusDialog } from "@/components/business/contracts/ContractStatusDialog";
 import { ContractFormData } from "@/schemas/contractSchema";
 import { generateContractPDF } from "@/utils/generateContractPDF";
 import { generateDocumentNumber } from "@/utils/documentNumbers";
@@ -22,10 +23,11 @@ export default function Contracts() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingContract, setEditingContract] = useState<Contract | null>(null);
   const [viewContract, setViewContract] = useState<Contract | null>(null);
+  const [statusContract, setStatusContract] = useState<Contract | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const { contracts, isLoading, createContract, updateContract, deleteContract } = useContracts();
+  const { contracts, isLoading, createContract, updateContract, deleteContract, updateStatus } = useContracts();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -126,6 +128,14 @@ export default function Contracts() {
     setEditingContract(null);
   };
 
+  const handleChangeStatus = (contract: Contract) => {
+    setStatusContract(contract);
+  };
+
+  const handleStatusChange = (contractId: string, status: Contract['status']) => {
+    updateStatus({ id: contractId, status });
+  };
+
   return (
     <div className="min-h-screen bg-[#0F1117] text-white flex">
       <Sidebar />
@@ -180,6 +190,7 @@ export default function Contracts() {
             onDelete={handleDelete}
             onDownloadPDF={handleDownloadPDF}
             onView={setViewContract}
+            onChangeStatus={handleChangeStatus}
           />
         ) : (
           <Card className="bg-[#1A1F2C] border-purple-500/20 p-8">
@@ -229,6 +240,13 @@ export default function Contracts() {
             )}
           </DialogContent>
         </Dialog>
+
+        <ContractStatusDialog
+          contract={statusContract}
+          open={!!statusContract}
+          onOpenChange={(open) => !open && setStatusContract(null)}
+          onStatusChange={handleStatusChange}
+        />
       </div>
     </div>
   );
