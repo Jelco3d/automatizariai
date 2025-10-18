@@ -76,14 +76,14 @@ export default function Quotes() {
     <div className="min-h-screen bg-[#0F1117] text-white flex">
       <Sidebar />
       <div className="flex-1 p-4 md:p-6 pt-20 md:pt-6">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-3">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 md:mb-6 gap-3">
           <h1 className="text-2xl md:text-3xl font-bold text-white">Oferte</h1>
           <Button 
             onClick={() => setNewQuoteDialogOpen(true)}
-            className="bg-purple-600 hover:bg-purple-700 w-full md:w-auto"
+            className="bg-purple-600 hover:bg-purple-700 w-full md:w-auto text-sm md:text-base px-4"
           >
-            <Plus className="h-4 w-4 mr-2" />
-            Ofertă Nouă
+            <Plus className="h-4 w-4 mr-2 flex-shrink-0" />
+            <span>Ofertă Nouă</span>
           </Button>
         </div>
 
@@ -132,9 +132,9 @@ export default function Quotes() {
         </Card>
 
         <Dialog open={newQuoteDialogOpen} onOpenChange={setNewQuoteDialogOpen}>
-          <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto p-4 md:p-6">
             <DialogHeader>
-              <DialogTitle className="text-xl md:text-2xl">Ofertă Nouă</DialogTitle>
+              <DialogTitle className="text-lg md:text-2xl">Ofertă Nouă</DialogTitle>
             </DialogHeader>
             <QuoteForm onSubmit={handleCreateQuote} isSubmitting={createQuote.isPending} />
           </DialogContent>
