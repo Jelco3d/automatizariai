@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { useState, useEffect } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -22,14 +22,15 @@ const statusOptions = [
 export function ProposalStatusDialog({ open, onOpenChange, proposal, onUpdateStatus }: ProposalStatusDialogProps) {
   const [status, setStatus] = useState(proposal?.status || 'draft');
 
-  // Update local state when proposal changes
-  if (proposal && status !== proposal.status) {
-    setStatus(proposal.status);
-  }
+  // Sync when proposal changes (avoid resetting on every render)
+  useEffect(() => {
+    setStatus(proposal?.status || 'draft');
+  }, [proposal?.id, proposal?.status, open]);
 
   const handleSubmit = () => {
     if (proposal) {
       onUpdateStatus(proposal.id, status);
+      onOpenChange(false);
     }
   };
 
@@ -38,6 +39,7 @@ export function ProposalStatusDialog({ open, onOpenChange, proposal, onUpdateSta
       <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white">
         <DialogHeader>
           <DialogTitle>Schimbă Status Propunere</DialogTitle>
+          <DialogDescription>Alege statusul propunerii și salvează.</DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
           <div>
