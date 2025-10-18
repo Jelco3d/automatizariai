@@ -45,9 +45,16 @@ INSTRUCȚIUNI CRITICE:
 STRUCTURA OBLIGATORIE A CONTRACTULUI:
 
 1. PĂRȚILE CONTRACTANTE
-   - Date complete furnizor (din invoice_templates)
-   - Date complete client (din clients)
-   - Reprezentanți legali și calitatea acestora
+
+FURNIZOR:
+- Denumire: Unison Loge Fx SRL
+- Contact: +40754274528
+- Email: contact@aiautomatizari.ro
+- Reprezentant legal: Jelco, având funcția de Administrator
+
+CLIENT:
+- Date complete client (din clientData)
+- Reprezentanți legali și calitatea acestora (dacă sunt disponibile)
 
 2. OBIECTUL CONTRACTULUI
    - Descriere detaliată a serviciilor (bazată pe proposal și contract_type)
@@ -107,7 +114,18 @@ STRUCTURA OBLIGATORIE A CONTRACTULUI:
     - Modificări ale contractului
     - Anexe
     - Număr de exemplare
-    - Semnături
+    
+ÎNCHEIAT astăzi, [DATA CONTRACTULUI]
+
+FURNIZOR:                                    CLIENT:
+Unison Loge Fx SRL                          [Nume Client]
+Reprezentant legal: Jelco                   Reprezentant legal: [Nume]
+Administrator                               [Funcție]
+
+Semnătură și ștampilă:                      Semnătură și ștampilă:
+
+
+_____________________                       _____________________
 
 IMPORTANT:
 - Folosește articolul în loc de paragraful: "Art. 1", "Art. 2", etc.
@@ -117,6 +135,12 @@ IMPORTANT:
 - Folosește limbaj juridic profesional dar clar`;
 
     const userPrompt = `Generează un contract comercial complet pentru:
+
+INFORMAȚII FURNIZOR (OBLIGATORIU - folosește exact aceste date):
+Denumire: Unison Loge Fx SRL
+Contact: +40754274528
+Email: contact@aiautomatizari.ro
+Reprezentant legal: Jelco, având funcția de Administrator
 
 INFORMAȚII CLIENT:
 Nume: ${clientData.name}
@@ -139,7 +163,16 @@ Data început: ${contractData.start_date}
 ${contractData.end_date ? `Data încheiere: ${contractData.end_date}` : 'Contract pe durată nedeterminată'}
 Valoare totală: ${contractData.total_value} RON
 
-Generează un contract complet, profesional, conform cu legislația română, care include toate clauzele menționate în instrucțiuni. Asigură-te că folosești NUMAI diacriticele corecte cu virgulă (ș, ț) și NU sedilă (ş, ţ).`;
+DATA CONTRACT: ${contractData.start_date}
+
+Generează un contract complet, profesional, conform cu legislația română, care include toate clauzele menționate în instrucțiuni. 
+
+Asigură-te că:
+1. Folosești NUMAI diacriticele corecte cu virgulă (ș, ț) și NU sedilă (ş, ţ)
+2. La finalul contractului incluzi secțiunea de semnături cu:
+   - Data curentă: ${contractData.start_date}
+   - Numele complet al firmei furnizor: Unison Loge Fx SRL
+   - Spații pentru semnături și ștampile pentru ambele părți`;
 
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
