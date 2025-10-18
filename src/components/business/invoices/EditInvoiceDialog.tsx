@@ -9,6 +9,10 @@ import { invoiceSchema, type InvoiceFormData } from '@/schemas/invoiceSchema';
 import { useInvoices } from '@/hooks/useInvoices';
 import { InvoiceItemsManager } from './InvoiceItemsManager';
 import { ClientSelector } from '../shared/ClientSelector';
+import { useInvoiceTemplates } from '@/hooks/useInvoiceTemplates';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { FileText } from 'lucide-react';
+import { useState } from 'react';
 
 interface EditInvoiceDialogProps {
   open: boolean;
@@ -20,6 +24,7 @@ interface EditInvoiceDialogProps {
     due_date: string;
     payment_terms?: string | null;
     notes?: string | null;
+    template_id?: string | null;
     items: Array<{
       id: string;
       description: string;
@@ -32,6 +37,8 @@ interface EditInvoiceDialogProps {
 
 export function EditInvoiceDialog({ open, onOpenChange, invoice }: EditInvoiceDialogProps) {
   const { updateInvoice } = useInvoices();
+  const { data: templates } = useInvoiceTemplates();
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(invoice.template_id || null);
 
   const form = useForm<InvoiceFormData>({
     resolver: zodResolver(invoiceSchema),
@@ -50,6 +57,24 @@ export function EditInvoiceDialog({ open, onOpenChange, invoice }: EditInvoiceDi
     },
   });
 
+  const handleTemplateSelect = (templateId: string) => {
+    const template = templates?.find(t => t.id === templateId);
+    if (!template) return;
+
+    setSelectedTemplateId(templateId);
+    form.setValue('payment_terms', template.payment_terms || '');
+    form.setValue('notes', template.notes || '');
+    
+    if (template.items && template.items.length > 0) {
+      form.setValue('items', template.items.map((item: any) => ({
+        description: item.description,
+        quantity: item.quantity,
+        unit_price: item.unit_price,
+        vat_rate: item.vat_rate,
+      })));
+    }
+  };
+
   const onSubmit = (data: InvoiceFormData) => {
     updateInvoice.mutate(
       { 
@@ -60,6 +85,7 @@ export function EditInvoiceDialog({ open, onOpenChange, invoice }: EditInvoiceDi
           due_date: data.due_date,
           payment_terms: data.payment_terms || '',
           notes: data.notes || '',
+          template_id: selectedTemplateId,
           items: data.items.map(item => ({
             description: item.description,
             quantity: item.quantity,
@@ -86,6 +112,27 @@ export function EditInvoiceDialog({ open, onOpenChange, invoice }: EditInvoiceDi
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            {templates && templates.length > 0 && (
+              <div className="bg-purple-500/10 border border-purple-500/20 p-4 rounded-lg">
+                <div className="flex items-center gap-2 mb-2">
+                  <FileText className="h-4 w-4 text-purple-400" />
+                  <span className="text-sm font-medium text-purple-300">Asociază cu un template</span>
+                </div>
+                <Select value={selectedTemplateId || undefined} onValueChange={handleTemplateSelect}>
+                  <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white">
+                    <SelectValue placeholder="Selectează un template..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {templates.map((template) => (
+                      <SelectItem key={template.id} value={template.id}>
+                        {template.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+
             <FormField
               control={form.control}
               name="client_id"

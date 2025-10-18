@@ -27,6 +27,7 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
   const { data: templates } = useInvoiceTemplates();
   const [clientFormOpen, setClientFormOpen] = useState(false);
   const [newClientId, setNewClientId] = useState<string | null>(null);
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
 
   const form = useForm<InvoiceFormData>({
     resolver: zodResolver(invoiceSchema),
@@ -50,22 +51,12 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
     const template = templates?.find(t => t.id === templateId);
     if (!template) return;
 
+    // Save the selected template ID
+    setSelectedTemplateId(templateId);
+
     // Pre-fill payment terms and notes
     form.setValue('payment_terms', template.payment_terms || '');
-    
-    // Add company data to notes
-    let notesContent = template.notes || '';
-    if (template.company_name) {
-      notesContent += `\n\n--- Date Companie ---\n`;
-      notesContent += `${template.company_name}\n`;
-      notesContent += `CUI: ${template.company_cui || ''}\n`;
-      notesContent += `Nr. Reg: ${template.company_registration || ''}\n`;
-      notesContent += `Adresă: ${template.company_address || ''}`;
-      if (template.logo_url) {
-        notesContent += `\nLogo: ${template.logo_url}`;
-      }
-    }
-    form.setValue('notes', notesContent);
+    form.setValue('notes', template.notes || '');
     
     // Pre-fill invoice items
     if (template.items && template.items.length > 0) {
@@ -94,6 +85,7 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
         due_date: data.due_date.toISOString().split('T')[0],
         payment_terms: data.payment_terms || null,
         notes: data.notes || null,
+        template_id: selectedTemplateId,
         status: 'draft' as const,
         subtotal: 0, // Will be calculated in the mutation
         vat_amount: 0,
@@ -103,6 +95,7 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
     });
     onOpenChange(false);
     form.reset();
+    setSelectedTemplateId(null);
   };
 
   return (

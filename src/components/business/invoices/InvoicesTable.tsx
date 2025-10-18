@@ -12,8 +12,6 @@ import { formatCurrency } from '@/utils/numberFormatters';
 import { EditInvoiceDialog } from './EditInvoiceDialog';
 import { InvoiceStatusDialog } from './InvoiceStatusDialog';
 import { downloadInvoicePDF } from '@/utils/generateInvoicePDF';
-import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 
 export function InvoicesTable() {
@@ -23,21 +21,6 @@ export function InvoicesTable() {
   const [statusInvoice, setStatusInvoice] = useState<any>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
-  // Fetch invoice templates for PDF generation
-  const { data: templates } = useQuery({
-    queryKey: ['invoice-templates'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('invoice_templates')
-        .select('*')
-        .limit(1)
-        .single();
-      
-      if (error) throw error;
-      return data;
-    },
-  });
-
   const filteredInvoices = invoices.filter(
     (invoice) =>
       invoice.invoice_number.toLowerCase().includes(search.toLowerCase()) ||
@@ -46,7 +29,15 @@ export function InvoicesTable() {
 
   const handleDownloadPDF = async (invoice: any) => {
     try {
-      await downloadInvoicePDF(invoice, templates);
+      if (!invoice.template) {
+        toast({
+          title: 'Template lipsă',
+          description: 'Această factură nu are un template asociat. Te rog să editezi factura și să asociezi un template.',
+          variant: 'destructive',
+        });
+        return;
+      }
+      await downloadInvoicePDF(invoice, invoice.template);
       toast({
         title: 'PDF descărcat cu succes',
       });

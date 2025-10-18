@@ -11,6 +11,7 @@ type InvoiceItem = Tables<'invoice_items'>;
 interface InvoiceWithItems extends Invoice {
   client?: Tables<'clients'>;
   items?: InvoiceItem[];
+  template?: Tables<'invoice_templates'>;
 }
 
 export function useInvoices() {
@@ -25,7 +26,8 @@ export function useInvoices() {
         .select(`
           *,
           client:clients(*),
-          items:invoice_items(*)
+          items:invoice_items(*),
+          template:invoice_templates(*)
         `)
         .order('created_at', { ascending: false });
       
@@ -151,6 +153,7 @@ export function useInvoices() {
         due_date: Date;
         payment_terms?: string;
         notes?: string;
+        template_id?: string | null;
         items: Array<{
           description: string;
           quantity: number;
@@ -177,6 +180,7 @@ export function useInvoices() {
           due_date: data.data.due_date.toISOString().split('T')[0],
           payment_terms: data.data.payment_terms,
           notes: data.data.notes,
+          template_id: data.data.template_id,
           subtotal,
           vat_amount: vatAmount,
           total,
