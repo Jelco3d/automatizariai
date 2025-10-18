@@ -8,7 +8,7 @@ export const proposalTemplateSchema = z.object({
   timeframe_template: z.string().max(200).optional(),
   default_price: z.number().min(0).optional(),
   proposal_structure: z.string().max(5000).optional(),
-  code_snippets: z.string().max(10000).optional(),
+  code_snippets: z.string().max(50000).optional(),
 });
 
 export type ProposalTemplateFormData = z.infer<typeof proposalTemplateSchema>;
