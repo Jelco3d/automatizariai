@@ -6,7 +6,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Edit, Trash2, Search } from 'lucide-react';
 import { useClients } from '@/hooks/useClients';
 import { DeleteDialog } from '@/components/business/shared/DeleteDialog';
-import { Badge } from '@/components/ui/badge';
 import type { Tables } from '@/integrations/supabase/types';
 
 type Client = Tables<'clients'>;
@@ -26,15 +25,26 @@ export function ClientsTable({ onEdit }: ClientsTableProps) {
       client.email.toLowerCase().includes(search.toLowerCase())
   );
 
-  const getStatusBadge = (status: string) => {
-    const config = {
-      active: { label: 'Client Activ', variant: 'default' as const },
-      prospect: { label: 'Potențial Client', variant: 'secondary' as const },
-      inactive: { label: 'Client Inactiv', variant: 'outline' as const },
+  const getStatusBadge = (status: string | null) => {
+    if (!status) return <span className="text-gray-500">-</span>;
+    
+    const styles = {
+      active: 'bg-green-500/20 text-green-400 border-green-500/30',
+      prospect: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
+      inactive: 'bg-gray-500/20 text-gray-400 border-gray-500/30',
     };
     
-    const statusConfig = config[status as keyof typeof config] || config.active;
-    return <Badge variant={statusConfig.variant}>{statusConfig.label}</Badge>;
+    const labels = {
+      active: 'Client',
+      prospect: 'Prospect',
+      inactive: 'Inactiv',
+    };
+    
+    return (
+      <span className={`px-2 py-1 rounded-full text-xs border ${styles[status as keyof typeof styles] || styles.inactive}`}>
+        {labels[status as keyof typeof labels] || status}
+      </span>
+    );
   };
 
   return (

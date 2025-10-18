@@ -153,16 +153,16 @@ export function ClientForm({ open, onOpenChange, client, onClientCreated }: Clie
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Status *</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select onValueChange={field.onChange} defaultValue={field.value || 'active'}>
                     <FormControl>
                       <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white">
                         <SelectValue />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent className="bg-[#1A1F2C] border-gray-700 text-white">
-                      <SelectItem value="active">Client Activ</SelectItem>
-                      <SelectItem value="prospect">Potențial Client</SelectItem>
-                      <SelectItem value="inactive">Client Inactiv</SelectItem>
+                      <SelectItem value="active">Client</SelectItem>
+                      <SelectItem value="prospect">Prospect</SelectItem>
+                      <SelectItem value="inactive">Inactiv</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
