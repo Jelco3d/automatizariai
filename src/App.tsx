@@ -22,6 +22,12 @@ import AuditGratuit from './pages/AuditGratuit';
 import Contact from './pages/Contact';
 import BusinessCard from './pages/BusinessCard';
 import LinkTree from './pages/LinkTree';
+import Auth from './pages/Auth';
+import BusinessDashboard from './pages/business/BusinessDashboard';
+import Invoices from './pages/business/Invoices';
+import Quotes from './pages/business/Quotes';
+import Contracts from './pages/business/Contracts';
+import Clients from './pages/business/Clients';
 import { CookieConsent } from './components/CookieConsent';
 
 const App = () => {
@@ -51,6 +57,12 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/business-card" element={<BusinessCard />} />
         <Route path="/linktree" element={<LinkTree />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/business-dashboard" element={<BusinessDashboard />} />
+        <Route path="/business-dashboard/invoices" element={<Invoices />} />
+        <Route path="/business-dashboard/quotes" element={<Quotes />} />
+        <Route path="/business-dashboard/contracts" element={<Contracts />} />
+        <Route path="/business-dashboard/clients" element={<Clients />} />
       </Routes>
       <CookieConsent />
     </Router>
