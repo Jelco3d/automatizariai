@@ -37,7 +37,12 @@ export function SignatureLinkDialog({ open, onOpenChange, contract, onRefresh }:
         contract.contract_number,
         contract.contract_type || 'PRESTĂRI SERVICII',
         contract.clients?.name || 'N/A',
-        contract.generated_contract || ''
+        contract.generated_contract || '',
+        contract.provider_signature_data || undefined,
+        contract.provider_signature_name || undefined,
+        contract.client_signature_data || undefined,
+        contract.client_signature_name || undefined,
+        contract.provider_name || undefined
       );
       
       toast({

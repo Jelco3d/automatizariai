@@ -1,4 +1,4 @@
-import { Document, Page, Text, View, StyleSheet, Font, pdf } from '@react-pdf/renderer';
+import { Document, Page, Text, View, StyleSheet, Font, Image, pdf } from '@react-pdf/renderer';
 
 Font.register({
   family: 'Noto Sans',
@@ -65,6 +65,11 @@ interface ContractPDFProps {
   contractType: string;
   clientName: string;
   contractText: string;
+  providerSignatureData?: string;
+  providerSignatureName?: string;
+  clientSignatureData?: string;
+  clientSignatureName?: string;
+  providerName?: string;
 }
 
 interface ParsedSegment {
@@ -94,7 +99,17 @@ const parseLine = (line: string): { type: 'header' | 'text'; content: string } =
   return { type: 'text', content: line };
 };
 
-const ContractPDF = ({ contractNumber, contractType, clientName, contractText }: ContractPDFProps) => {
+const ContractPDF = ({ 
+  contractNumber, 
+  contractType, 
+  clientName, 
+  contractText,
+  providerSignatureData,
+  providerSignatureName,
+  clientSignatureData,
+  clientSignatureName,
+  providerName = 'Unison Loge Fx SRL'
+}: ContractPDFProps) => {
   const sections = contractText.split('\n\n');
 
   return (
@@ -145,13 +160,36 @@ const ContractPDF = ({ contractNumber, contractType, clientName, contractText }:
         <View style={styles.signatures}>
           <View style={styles.signatureBlock}>
             <Text style={styles.text}>FURNIZOR</Text>
-            <Text style={styles.text}>_____________________</Text>
+            <Text style={styles.text}>{providerName}</Text>
+            {providerSignatureData ? (
+              <Image 
+                src={providerSignatureData} 
+                style={{ width: 150, height: 50, marginTop: 8, marginBottom: 8 }}
+              />
+            ) : providerSignatureName ? (
+              <Text style={{ ...styles.text, fontSize: 16, fontStyle: 'italic', marginTop: 8, marginBottom: 8 }}>
+                {providerSignatureName}
+              </Text>
+            ) : (
+              <Text style={styles.text}>_____________________</Text>
+            )}
             <Text style={styles.text}>Semnătură și ștampilă</Text>
           </View>
           <View style={styles.signatureBlock}>
             <Text style={styles.text}>CLIENT</Text>
             <Text style={styles.text}>{clientName}</Text>
-            <Text style={styles.text}>_____________________</Text>
+            {clientSignatureData ? (
+              <Image 
+                src={clientSignatureData} 
+                style={{ width: 150, height: 50, marginTop: 8, marginBottom: 8 }}
+              />
+            ) : clientSignatureName ? (
+              <Text style={{ ...styles.text, fontSize: 16, fontStyle: 'italic', marginTop: 8, marginBottom: 8 }}>
+                {clientSignatureName}
+              </Text>
+            ) : (
+              <Text style={styles.text}>_____________________</Text>
+            )}
             <Text style={styles.text}>Semnătură și ștampilă</Text>
           </View>
         </View>
@@ -164,7 +202,12 @@ export const generateContractPDF = async (
   contractNumber: string,
   contractType: string,
   clientName: string,
-  contractText: string
+  contractText: string,
+  providerSignatureData?: string,
+  providerSignatureName?: string,
+  clientSignatureData?: string,
+  clientSignatureName?: string,
+  providerName?: string
 ) => {
   const safeContractText = normalizeRomanian(contractText);
   
@@ -174,6 +217,11 @@ export const generateContractPDF = async (
       contractType={contractType}
       clientName={clientName}
       contractText={safeContractText}
+      providerSignatureData={providerSignatureData}
+      providerSignatureName={providerSignatureName}
+      clientSignatureData={clientSignatureData}
+      clientSignatureName={clientSignatureName}
+      providerName={providerName}
     />
   ).toBlob();
 
