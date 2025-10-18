@@ -247,7 +247,7 @@ export default function ContractSignature() {
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Client:</span>
-              <span className="font-medium">{contract.clients?.name}</span>
+              <span className="font-medium">{contract.clients?.name || 'N/A'}</span>
             </div>
           </div>
         </Card>
@@ -256,35 +256,65 @@ export default function ContractSignature() {
         <Card className="p-6">
           <h2 className="text-xl font-semibold mb-4">Status Semnare</h2>
           <div className="grid gap-3">
-            <div className="flex items-center justify-between p-3 border rounded-lg">
-              <div>
+            <div className="p-4 border rounded-lg">
+              <div className="flex items-center justify-between mb-2">
                 <p className="font-medium">Furnizor (Unison Loge Fx SRL)</p>
-                {providerSigned && (
-                  <p className="text-xs text-muted-foreground">
-                    Semnat: {new Date(contract.provider_signed_at).toLocaleString('ro-RO')}
-                  </p>
+                {providerSigned ? (
+                  <CheckCircle2 className="h-6 w-6 text-green-600" />
+                ) : (
+                  <div className="h-6 w-6 border-2 border-muted-foreground rounded-full" />
                 )}
               </div>
-              {providerSigned ? (
-                <CheckCircle2 className="h-6 w-6 text-green-600" />
-              ) : (
-                <div className="h-6 w-6 border-2 border-muted-foreground rounded-full" />
+              {providerSigned && (
+                <>
+                  <p className="text-xs text-muted-foreground mb-3">
+                    Semnat: {new Date(contract.provider_signed_at).toLocaleString('ro-RO')}
+                  </p>
+                  <div className="p-3 border rounded-lg bg-muted/30">
+                    {contract.provider_signature_data ? (
+                      <img 
+                        src={contract.provider_signature_data} 
+                        alt="Semnătura furnizorului"
+                        className="h-12 w-auto object-contain"
+                      />
+                    ) : contract.provider_signature_name ? (
+                      <p className="text-2xl font-serif italic">
+                        {contract.provider_signature_name}
+                      </p>
+                    ) : null}
+                  </div>
+                </>
               )}
             </div>
 
-            <div className="flex items-center justify-between p-3 border rounded-lg">
-              <div>
-                <p className="font-medium">Client ({contract.clients?.name})</p>
-                {clientSigned && (
-                  <p className="text-xs text-muted-foreground">
-                    Semnat: {new Date(contract.client_signed_at).toLocaleString('ro-RO')}
-                  </p>
+            <div className="p-4 border rounded-lg">
+              <div className="flex items-center justify-between mb-2">
+                <p className="font-medium">Client ({contract.clients?.name || 'N/A'})</p>
+                {clientSigned ? (
+                  <CheckCircle2 className="h-6 w-6 text-green-600" />
+                ) : (
+                  <div className="h-6 w-6 border-2 border-muted-foreground rounded-full" />
                 )}
               </div>
-              {clientSigned ? (
-                <CheckCircle2 className="h-6 w-6 text-green-600" />
-              ) : (
-                <div className="h-6 w-6 border-2 border-muted-foreground rounded-full" />
+              {clientSigned && (
+                <>
+                  <p className="text-xs text-muted-foreground mb-3">
+                    Semnat: {new Date(contract.client_signed_at).toLocaleString('ro-RO')}
+                  </p>
+                  <div className="p-3 border rounded-lg bg-muted/30">
+                    {contract.client_signature_data ? (
+                      <img 
+                        src={contract.client_signature_data} 
+                        alt="Semnătura clientului"
+                        className="h-12 w-auto object-contain"
+                      />
+                    ) : contract.client_signature_name ? (
+                      <p className="text-2xl font-serif italic">
+                        {contract.client_signature_name}
+                      </p>
+                    ) : null}
+                  </div>
+                </>
               )}
             </div>
           </div>
