@@ -26,6 +26,7 @@ import Auth from './pages/Auth';
 import BusinessDashboard from './pages/business/BusinessDashboard';
 import Invoices from './pages/business/Invoices';
 import Quotes from './pages/business/Quotes';
+import Proposals from './pages/business/Proposals';
 import Contracts from './pages/business/Contracts';
 import Clients from './pages/business/Clients';
 import { CookieConsent } from './components/CookieConsent';
@@ -61,6 +62,7 @@ const App = () => {
         <Route path="/business-dashboard" element={<BusinessDashboard />} />
         <Route path="/business-dashboard/invoices" element={<Invoices />} />
         <Route path="/business-dashboard/quotes" element={<Quotes />} />
+        <Route path="/business-dashboard/proposals" element={<Proposals />} />
         <Route path="/business-dashboard/contracts" element={<Contracts />} />
         <Route path="/business-dashboard/clients" element={<Clients />} />
       </Routes>

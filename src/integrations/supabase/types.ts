@@ -548,6 +548,42 @@ export type Database = {
         }
         Relationships: []
       }
+      proposals: {
+        Row: {
+          automation_needs: string
+          business_description: string
+          business_name: string
+          created_at: string
+          id: string
+          price: number
+          status: string
+          timeframe: string
+          updated_at: string
+        }
+        Insert: {
+          automation_needs: string
+          business_description: string
+          business_name: string
+          created_at?: string
+          id?: string
+          price: number
+          status?: string
+          timeframe: string
+          updated_at?: string
+        }
+        Update: {
+          automation_needs?: string
+          business_description?: string
+          business_name?: string
+          created_at?: string
+          id?: string
+          price?: number
+          status?: string
+          timeframe?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       quote_items: {
         Row: {
           description: string

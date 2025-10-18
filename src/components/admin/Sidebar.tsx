@@ -4,6 +4,7 @@ import {
   LayoutDashboard, 
   FileText, 
   FileSpreadsheet, 
+  Lightbulb,
   FileCheck, 
   Users, 
   LogOut,
@@ -71,6 +72,18 @@ export function Sidebar() {
       >
         <FileSpreadsheet className="h-5 w-5" />
         Oferte
+      </Link>
+      <Link 
+        to="/business-dashboard/proposals" 
+        onClick={() => setOpen(false)}
+        className={`flex items-center gap-2 p-2 rounded-lg ${
+          isActive("/business-dashboard/proposals") 
+            ? "text-purple-400 bg-purple-500/10" 
+            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
+        }`}
+      >
+        <Lightbulb className="h-5 w-5" />
+        Propuneri
       </Link>
       <Link 
         to="/business-dashboard/contracts" 
