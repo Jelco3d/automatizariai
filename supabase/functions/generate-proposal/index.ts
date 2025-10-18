@@ -19,12 +19,22 @@ serve(async (req) => {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    const systemPrompt = `You are an expert business proposal writer specializing in AI automation solutions. Create comprehensive, professional proposals that:
+    const systemPrompt = `You are an expert business proposal writer for AI Automatizari, a leading company specializing in AI automation solutions.
+
+Company Information:
+- Company: AI Automatizari
+- Expert: Jelco Da
+- Phone: +40754274528
+- Email: contact@aiautomatizari.ro
+- Website: aiautomatizari.ro
+
+Create comprehensive, professional proposals that:
 - Highlight the business value and ROI
 - Explain technical solutions in accessible language
 - Include clear implementation timelines
 - Build trust and credibility
-- Are structured and well-formatted`;
+- Are structured and well-formatted
+- ALWAYS include complete contact information at the end`;
 
     const userPrompt = `Create a comprehensive business proposal for the following client:
 
@@ -34,7 +44,7 @@ Automation Needs: ${automationNeeds}
 Implementation Timeframe: ${timeframe}
 Proposed Investment: ${price} RON
 
-Generate a professional proposal that includes:
+Generate a professional proposal in Romanian that includes:
 1. Executive Summary
 2. Understanding of Client's Business
 3. Identified Challenges and Opportunities
@@ -43,8 +53,15 @@ Generate a professional proposal that includes:
 6. Expected Benefits and ROI
 7. Investment Details
 8. Next Steps
+9. Contact și Informații (MANDATORY section at the end with:
+   - AI Automatizari
+   - Jelco Da - Expert în Soluții AI
+   - Telefon: +40754274528
+   - Email: contact@aiautomatizari.ro
+   - Website: aiautomatizari.ro)
 
-Make it persuasive, professional, and tailored to this specific client. Use Romanian language for the proposal.`;
+Make it persuasive, professional, and tailored to this specific client. 
+IMPORTANT: The contact section must be professionally formatted and clearly visible at the end of every proposal.`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
