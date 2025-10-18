@@ -47,8 +47,8 @@ export function ProposalPreviewDialog({ open, onOpenChange, proposal, businessNa
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl h-[80vh] bg-[#1A1F2C] border-purple-500/20">
-        <DialogHeader>
+      <DialogContent className="max-w-5xl h-[85vh] bg-[#1A1F2C] border-purple-500/20 flex flex-col">
+        <DialogHeader className="flex-shrink-0">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-white">Propunere pentru {businessName}</DialogTitle>
             <Button
@@ -62,12 +62,23 @@ export function ProposalPreviewDialog({ open, onOpenChange, proposal, businessNa
             </Button>
           </div>
         </DialogHeader>
-        <ScrollArea className="h-full pr-4">
-          <div className="prose prose-invert max-w-none">
+        <ScrollArea className="flex-1 mt-4">
+          <div className="space-y-4 pr-4">
             {proposal ? (
-              <div className="whitespace-pre-wrap text-gray-300">{proposal}</div>
+              <div className="bg-white/5 border border-purple-500/20 rounded-lg p-6">
+                <pre className="whitespace-pre-wrap font-sans text-gray-100 leading-relaxed text-sm">
+                  {proposal}
+                </pre>
+              </div>
             ) : (
-              <p className="text-gray-400">Nu există propunere generată pentru acest client.</p>
+              <div className="text-center py-12">
+                <p className="text-gray-400 text-lg">
+                  Nu există propunere generată pentru acest client.
+                </p>
+                <p className="text-gray-500 text-sm mt-2">
+                  Creați o nouă propunere pentru a genera conținut.
+                </p>
+              </div>
             )}
           </div>
         </ScrollArea>
