@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import * as pdfjsLib from "https://esm.sh/pdfjs-dist@4.0.379/build/pdf.mjs";
+import pdfParse from "npm:pdf-parse@1.1.1";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -42,24 +42,18 @@ serve(async (req) => {
       throw new Error('Failed to download PDF file');
     }
 
-    // Convert file to array buffer for PDF.js
+    // Convert file to buffer for pdf-parse
     const arrayBuffer = await fileData.arrayBuffer();
-    console.log('File downloaded, extracting text...');
-
-    // Extract text from PDF using PDF.js
-    const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
-    const pdf = await loadingTask.promise;
+    const buffer = new Uint8Array(arrayBuffer);
     
-    let fullText = '';
-    // Extract text from all pages
-    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-      const page = await pdf.getPage(pageNum);
-      const textContent = await page.getTextContent();
-      const pageText = textContent.items.map((item: any) => item.str).join(' ');
-      fullText += pageText + '\n';
-    }
+    console.log('File downloaded, extracting text with pdf-parse...');
+
+    // Extract text from PDF using pdf-parse
+    const pdfData = await pdfParse(buffer);
+    const fullText = pdfData.text;
 
     console.log('Text extracted from PDF, length:', fullText.length);
+    console.log('PDF info - Pages:', pdfData.numpages, 'Version:', pdfData.version);
 
     // Prepare the AI request with tool calling for structured extraction
     const aiPayload = {
