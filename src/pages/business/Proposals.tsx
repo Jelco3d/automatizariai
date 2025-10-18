@@ -242,6 +242,7 @@ export default function Proposals() {
                 timeframe_template: editingTemplate.timeframe_template,
                 default_price: editingTemplate.default_price,
                 proposal_structure: editingTemplate.proposal_structure,
+                code_snippets: editingTemplate.code_snippets,
               } : undefined}
               isSubmitting={createTemplate.isPending || updateTemplate.isPending}
             />

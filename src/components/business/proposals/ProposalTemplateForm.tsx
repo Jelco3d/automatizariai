@@ -27,6 +27,7 @@ export function ProposalTemplateForm({ onSubmit, initialData, isSubmitting }: Pr
       timeframe_template: "",
       default_price: 0,
       proposal_structure: "",
+      code_snippets: "",
     },
   });
 
@@ -120,6 +121,22 @@ export function ProposalTemplateForm({ onSubmit, initialData, isSubmitting }: Pr
         {errors.proposal_structure && (
           <p className="text-red-500 text-sm mt-1">{errors.proposal_structure.message}</p>
         )}
+      </div>
+
+      <div>
+        <Label htmlFor="code_snippets">Cod / Snippet-uri Tehnice</Label>
+        <Textarea
+          id="code_snippets"
+          {...register("code_snippets")}
+          className="bg-[#1A1F2C] border-purple-500/20 text-white min-h-[200px] font-mono text-sm"
+          placeholder="Exemplu:&#10;```javascript&#10;const example = () => {&#10;  console.log('Hello');&#10;};&#10;```"
+        />
+        {errors.code_snippets && (
+          <p className="text-red-500 text-sm mt-1">{errors.code_snippets.message}</p>
+        )}
+        <p className="text-xs text-gray-400 mt-1">
+          Poți adăuga cod formatat cu markdown. Folosește ``` pentru blocuri de cod.
+        </p>
       </div>
 
       <div className="flex justify-end gap-2 pt-4">

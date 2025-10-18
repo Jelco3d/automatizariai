@@ -12,6 +12,7 @@ export interface ProposalTemplate {
   timeframe_template?: string;
   default_price?: number;
   proposal_structure?: string;
+  code_snippets?: string;
   created_at: string;
   updated_at: string;
 }
@@ -44,6 +45,7 @@ export const useProposalTemplates = () => {
           timeframe_template: data.timeframe_template,
           default_price: data.default_price,
           proposal_structure: data.proposal_structure,
+          code_snippets: data.code_snippets,
         }]);
 
       if (error) throw error;
@@ -76,6 +78,7 @@ export const useProposalTemplates = () => {
           timeframe_template: data.timeframe_template,
           default_price: data.default_price,
           proposal_structure: data.proposal_structure,
+          code_snippets: data.code_snippets,
         })
         .eq("id", id);
 

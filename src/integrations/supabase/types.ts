@@ -552,6 +552,7 @@ export type Database = {
         Row: {
           automation_needs_template: string | null
           business_type: string | null
+          code_snippets: string | null
           created_at: string
           default_price: number | null
           description: string | null
@@ -564,6 +565,7 @@ export type Database = {
         Insert: {
           automation_needs_template?: string | null
           business_type?: string | null
+          code_snippets?: string | null
           created_at?: string
           default_price?: number | null
           description?: string | null
@@ -576,6 +578,7 @@ export type Database = {
         Update: {
           automation_needs_template?: string | null
           business_type?: string | null
+          code_snippets?: string | null
           created_at?: string
           default_price?: number | null
           description?: string | null
