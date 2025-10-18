@@ -37,7 +37,7 @@ export const useContracts = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const { data: contracts, isLoading } = useQuery({
+  const { data: contracts, isLoading, refetch } = useQuery({
     queryKey: ['contracts'],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -201,6 +201,7 @@ export const useContracts = () => {
   return {
     contracts,
     isLoading,
+    refetch,
     createContract: createContract.mutate,
     updateContract: updateContract.mutate,
     deleteContract: deleteContract.mutate,

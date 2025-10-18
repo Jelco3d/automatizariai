@@ -29,7 +29,7 @@ export default function Contracts() {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const { contracts, isLoading, createContract, updateContract, deleteContract, updateStatus, generateSignatureLink } = useContracts();
+  const { contracts, isLoading, refetch, createContract, updateContract, deleteContract, updateStatus, generateSignatureLink } = useContracts();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -265,6 +265,7 @@ export default function Contracts() {
           open={!!signatureLinkContract}
           onOpenChange={(open) => !open && setSignatureLinkContract(null)}
           contract={signatureLinkContract}
+          onRefresh={refetch}
         />
       </div>
     </div>

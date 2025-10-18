@@ -1,20 +1,32 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Copy, CheckCircle2, XCircle, Clock } from "lucide-react";
+import { Copy, CheckCircle2, XCircle, Clock, RefreshCw } from "lucide-react";
 import { Contract } from "@/hooks/useContracts";
 import { formatDate } from "@/utils/dateFormatters";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "@/hooks/use-toast";
 
 interface SignatureLinkDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   contract: Contract | null;
+  onRefresh?: () => void;
 }
 
-export function SignatureLinkDialog({ open, onOpenChange, contract }: SignatureLinkDialogProps) {
+export function SignatureLinkDialog({ open, onOpenChange, contract, onRefresh }: SignatureLinkDialogProps) {
   const [copied, setCopied] = useState(false);
+
+  // Auto-refresh every 5 seconds when dialog is open
+  useEffect(() => {
+    if (!open || !onRefresh) return;
+
+    const interval = setInterval(() => {
+      onRefresh();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [open, onRefresh]);
 
   if (!contract) return null;
 
@@ -44,7 +56,19 @@ export function SignatureLinkDialog({ open, onOpenChange, contract }: SignatureL
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
-          <DialogTitle>Link pentru Semnare - Contract {contract.contract_number}</DialogTitle>
+          <DialogTitle className="flex items-center justify-between">
+            <span>Link pentru Semnare - Contract {contract.contract_number}</span>
+            {onRefresh && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={onRefresh}
+                className="h-8 w-8"
+              >
+                <RefreshCw className="h-4 w-4" />
+              </Button>
+            )}
+          </DialogTitle>
         </DialogHeader>
 
         <div className="space-y-6">
