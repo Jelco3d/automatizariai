@@ -324,6 +324,71 @@ export type Database = {
           },
         ]
       }
+      invoice_template_items: {
+        Row: {
+          description: string
+          id: string
+          quantity: number
+          template_id: string
+          unit_price: number
+          vat_rate: number
+        }
+        Insert: {
+          description: string
+          id?: string
+          quantity?: number
+          template_id: string
+          unit_price?: number
+          vat_rate?: number
+        }
+        Update: {
+          description?: string
+          id?: string
+          quantity?: number
+          template_id?: string
+          unit_price?: number
+          vat_rate?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoice_template_items_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "invoice_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      invoice_templates: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          notes: string | null
+          payment_terms: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          payment_terms?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          payment_terms?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       invoices: {
         Row: {
           client_id: string
