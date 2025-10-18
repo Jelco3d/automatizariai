@@ -125,6 +125,7 @@ export default function Contracts() {
           : "Contractul a fost descărcat.",
       });
     } catch (error) {
+      console.error('Error generating contract PDF:', error);
       toast({
         title: "Eroare",
         description: "Nu s-a putut genera PDF-ul.",

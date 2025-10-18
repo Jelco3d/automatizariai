@@ -1,10 +1,12 @@
 import { Document, Page, Text, View, StyleSheet, Font, Image, pdf } from '@react-pdf/renderer';
 
 Font.register({
-  family: 'Noto Sans',
+  family: 'Roboto',
   fonts: [
-    { src: 'https://fonts.gstatic.com/s/notosans/v36/o-0IIpQlx3QUlC5A4PNjhg.ttf', fontWeight: 400 },
-    { src: 'https://fonts.gstatic.com/s/notosans/v36/o-0NIpQlx3QUlC5A4PZcZ8G0.ttf', fontWeight: 700 }
+    { src: 'https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-light-webfont.ttf', fontWeight: 300 },
+    { src: 'https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-regular-webfont.ttf', fontWeight: 400 },
+    { src: 'https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-medium-webfont.ttf', fontWeight: 500 },
+    { src: 'https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-bold-webfont.ttf', fontWeight: 700 },
   ]
 });
 
@@ -17,10 +19,10 @@ const normalizeRomanian = (text: string): string => {
     .normalize("NFC");
 };
 
-const styles = StyleSheet.create({
+const makeStyles = (fontFamily: string) => StyleSheet.create({
   page: {
     padding: 40,
-    fontFamily: 'Noto Sans',
+    fontFamily,
     fontSize: 11,
     lineHeight: 1.6,
   },
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     textAlign: 'center',
     marginBottom: 20,
-    fontFamily: 'Noto Sans',
+    fontFamily,
   },
   section: {
     marginBottom: 15,
@@ -38,17 +40,17 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: 700,
     marginBottom: 8,
-    fontFamily: 'Noto Sans',
+    fontFamily,
   },
   text: {
     fontSize: 11,
     marginBottom: 6,
-    fontFamily: 'Noto Sans',
+    fontFamily,
     textAlign: 'justify',
   },
   bold: {
     fontWeight: 700,
-    fontFamily: 'Noto Sans',
+    fontFamily,
   },
   signatures: {
     marginTop: 40,
@@ -70,6 +72,7 @@ interface ContractPDFProps {
   clientSignatureData?: string;
   clientSignatureName?: string;
   providerName?: string;
+  fontFamily?: string;
 }
 
 interface ParsedSegment {
@@ -99,17 +102,21 @@ const parseLine = (line: string): { type: 'header' | 'text'; content: string } =
   return { type: 'text', content: line };
 };
 
-const ContractPDF = ({ 
-  contractNumber, 
-  contractType, 
-  clientName, 
+const isValidDataUrl = (src?: string) => !!src && /^data:image\//.test(src);
+
+const ContractPDF = ({
+  contractNumber,
+  contractType,
+  clientName,
   contractText,
   providerSignatureData,
   providerSignatureName,
   clientSignatureData,
   clientSignatureName,
-  providerName = 'Unison Loge Fx SRL'
+  providerName = 'Unison Loge Fx SRL',
+  fontFamily = 'Roboto',
 }: ContractPDFProps) => {
+  const styles = makeStyles(fontFamily);
   const sections = contractText.split('\n\n');
 
   return (
@@ -161,13 +168,13 @@ const ContractPDF = ({
           <View style={styles.signatureBlock}>
             <Text style={styles.text}>FURNIZOR</Text>
             <Text style={styles.text}>{providerName}</Text>
-            {providerSignatureData ? (
+            {isValidDataUrl(providerSignatureData) ? (
               <Image 
-                src={providerSignatureData} 
+                src={providerSignatureData!} 
                 style={{ width: 150, height: 50, marginTop: 8, marginBottom: 8 }}
               />
             ) : providerSignatureName ? (
-              <Text style={{ ...styles.text, fontSize: 16, fontStyle: 'italic', marginTop: 8, marginBottom: 8 }}>
+              <Text style={{ ...styles.text, fontSize: 16, marginTop: 8, marginBottom: 8 }}>
                 {providerSignatureName}
               </Text>
             ) : (
@@ -178,13 +185,13 @@ const ContractPDF = ({
           <View style={styles.signatureBlock}>
             <Text style={styles.text}>CLIENT</Text>
             <Text style={styles.text}>{clientName}</Text>
-            {clientSignatureData ? (
+            {isValidDataUrl(clientSignatureData) ? (
               <Image 
-                src={clientSignatureData} 
+                src={clientSignatureData!} 
                 style={{ width: 150, height: 50, marginTop: 8, marginBottom: 8 }}
               />
             ) : clientSignatureName ? (
-              <Text style={{ ...styles.text, fontSize: 16, fontStyle: 'italic', marginTop: 8, marginBottom: 8 }}>
+              <Text style={{ ...styles.text, fontSize: 16, marginTop: 8, marginBottom: 8 }}>
                 {clientSignatureName}
               </Text>
             ) : (
@@ -211,19 +218,39 @@ export const generateContractPDF = async (
 ) => {
   const safeContractText = normalizeRomanian(contractText);
   
-  const blob = await pdf(
-    <ContractPDF
-      contractNumber={contractNumber}
-      contractType={contractType}
-      clientName={clientName}
-      contractText={safeContractText}
-      providerSignatureData={providerSignatureData}
-      providerSignatureName={providerSignatureName}
-      clientSignatureData={clientSignatureData}
-      clientSignatureName={clientSignatureName}
-      providerName={providerName}
-    />
-  ).toBlob();
+  let blob: Blob;
+  try {
+    blob = await pdf(
+      <ContractPDF
+        contractNumber={contractNumber}
+        contractType={contractType}
+        clientName={clientName}
+        contractText={safeContractText}
+        providerSignatureData={providerSignatureData}
+        providerSignatureName={providerSignatureName}
+        clientSignatureData={clientSignatureData}
+        clientSignatureName={clientSignatureName}
+        providerName={providerName}
+        fontFamily="Roboto"
+      />
+    ).toBlob();
+  } catch (err) {
+    console.warn('PDF generation with Roboto failed, retrying with Helvetica', err);
+    blob = await pdf(
+      <ContractPDF
+        contractNumber={contractNumber}
+        contractType={contractType}
+        clientName={clientName}
+        contractText={safeContractText}
+        providerSignatureData={providerSignatureData}
+        providerSignatureName={providerSignatureName}
+        clientSignatureData={clientSignatureData}
+        clientSignatureName={clientSignatureName}
+        providerName={providerName}
+        fontFamily="Helvetica"
+      />
+    ).toBlob();
+  }
 
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
