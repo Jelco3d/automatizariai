@@ -9,6 +9,7 @@ import { formatCurrency } from '@/utils/numberFormatters';
 import { DeleteDialog } from '@/components/business/shared/DeleteDialog';
 import { ProposalPreviewDialog } from './ProposalPreviewDialog';
 import { StatusBadge } from '@/components/business/shared/StatusBadge';
+import { ProposalStatusDialog } from './ProposalStatusDialog';
 
 interface ProposalsTableProps {
   proposals: Proposal[];
@@ -23,6 +24,8 @@ export function ProposalsTable({ proposals, onDelete, onEdit, onUpdateProposal }
   const [selectedProposal, setSelectedProposal] = useState<Proposal | null>(null);
   const [previewDialogOpen, setPreviewDialogOpen] = useState(false);
   const [previewProposal, setPreviewProposal] = useState<Proposal | null>(null);
+  const [statusDialogOpen, setStatusDialogOpen] = useState(false);
+  const [statusProposal, setStatusProposal] = useState<Proposal | null>(null);
 
   const filteredProposals = proposals.filter(proposal =>
     proposal.business_name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -34,6 +37,13 @@ export function ProposalsTable({ proposals, onDelete, onEdit, onUpdateProposal }
       setDeleteDialogOpen(false);
       setSelectedProposal(null);
     }
+  };
+
+  const handleUpdateStatus = (id: string, status: string) => {
+    onUpdateProposal.mutate({ 
+      id, 
+      data: { status } 
+    });
   };
 
   return (
@@ -81,7 +91,15 @@ export function ProposalsTable({ proposals, onDelete, onEdit, onUpdateProposal }
                     {formatCurrency(proposal.price)}
                   </TableCell>
                   <TableCell>
-                    <StatusBadge status={proposal.status} type="proposal" />
+                    <button
+                      onClick={() => {
+                        setStatusProposal(proposal);
+                        setStatusDialogOpen(true);
+                      }}
+                      className="cursor-pointer hover:opacity-80"
+                    >
+                      <StatusBadge status={proposal.status} type="proposal" />
+                    </button>
                   </TableCell>
                   <TableCell className="text-gray-400 text-xs md:text-sm">
                     {formatDate(proposal.created_at)}
@@ -151,6 +169,13 @@ export function ProposalsTable({ proposals, onDelete, onEdit, onUpdateProposal }
         onOpenChange={setPreviewDialogOpen}
         proposal={previewProposal}
         onUpdateProposal={onUpdateProposal}
+      />
+
+      <ProposalStatusDialog
+        open={statusDialogOpen}
+        onOpenChange={setStatusDialogOpen}
+        proposal={statusProposal}
+        onUpdateStatus={handleUpdateStatus}
       />
     </div>
   );
