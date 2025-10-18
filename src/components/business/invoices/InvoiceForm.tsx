@@ -23,6 +23,7 @@ interface InvoiceFormProps {
 export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
   const { createInvoice } = useInvoices();
   const [clientFormOpen, setClientFormOpen] = useState(false);
+  const [newClientId, setNewClientId] = useState<string | null>(null);
 
   const form = useForm<InvoiceFormData>({
     resolver: zodResolver(invoiceSchema),
@@ -35,6 +36,12 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
       items: [{ description: '', quantity: 1, unit_price: 0, vat_rate: 19 }],
     },
   });
+
+  const handleClientCreated = (clientId: string) => {
+    setNewClientId(clientId);
+    form.setValue('client_id', clientId);
+    setClientFormOpen(false);
+  };
 
   const onSubmit = async (data: InvoiceFormData) => {
     const itemsWithTotal = data.items.map(item => ({
@@ -194,6 +201,7 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
         open={clientFormOpen} 
         onOpenChange={setClientFormOpen}
         client={null}
+        onClientCreated={handleClientCreated}
       />
     </Dialog>
   );

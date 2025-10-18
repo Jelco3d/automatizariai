@@ -15,9 +15,10 @@ interface ClientFormProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   client?: Client | null;
+  onClientCreated?: (clientId: string) => void;
 }
 
-export function ClientForm({ open, onOpenChange, client }: ClientFormProps) {
+export function ClientForm({ open, onOpenChange, client, onClientCreated }: ClientFormProps) {
   const { createClient, updateClient } = useClients();
   const isEditing = !!client;
 
@@ -49,10 +50,15 @@ export function ClientForm({ open, onOpenChange, client }: ClientFormProps) {
 
     if (isEditing && client) {
       await updateClient.mutateAsync({ id: client.id, ...clientData });
+      onOpenChange(false);
     } else {
-      await createClient.mutateAsync(clientData);
+      const result = await createClient.mutateAsync(clientData);
+      if (onClientCreated && result) {
+        onClientCreated(result.id);
+      } else {
+        onOpenChange(false);
+      }
     }
-    onOpenChange(false);
     form.reset();
   };
 
