@@ -100,21 +100,21 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white max-w-4xl max-h-[90vh]">
+      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white w-[95vw] max-w-4xl max-h-[90vh] md:w-full">
         <DialogHeader>
-          <DialogTitle className="text-2xl">Factură nouă</DialogTitle>
+          <DialogTitle className="text-xl md:text-2xl">Factură nouă</DialogTitle>
         </DialogHeader>
 
-        <ScrollArea className="max-h-[calc(90vh-120px)] pr-4">
+        <ScrollArea className="max-h-[calc(90vh-120px)] pr-2 md:pr-4">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
               {templates && templates.length > 0 && (
-                <div className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border-2 border-purple-500/30 p-5 rounded-lg shadow-lg">
-                  <div className="flex items-center gap-2 mb-3">
-                    <FileText className="h-5 w-5 text-purple-400" />
+                <div className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border-2 border-purple-500/30 p-3 md:p-5 rounded-lg shadow-lg">
+                  <div className="flex items-center gap-2 mb-2 md:mb-3">
+                    <FileText className="h-4 w-4 md:h-5 md:w-5 text-purple-400" />
                     <div>
-                      <span className="text-base font-semibold text-purple-300">Folosește un template</span>
-                      <p className="text-xs text-gray-400 mt-0.5">
+                      <span className="text-sm md:text-base font-semibold text-purple-300">Folosește un template</span>
+                      <p className="text-xs text-gray-400 mt-0.5 hidden md:block">
                         Pre-completează factura cu date și articole salvate ({templates.length} template{templates.length !== 1 ? '-uri' : ''} disponibil{templates.length !== 1 ? 'e' : ''})
                       </p>
                     </div>
@@ -139,13 +139,13 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
                 </div>
               )}
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                 <FormField
                   control={form.control}
                   name="client_id"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Client *</FormLabel>
+                      <FormLabel className="text-sm">Client *</FormLabel>
                       <div className="flex gap-2">
                         <div className="flex-1">
                           <ClientSelector value={field.value} onChange={field.onChange} />
@@ -170,7 +170,7 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
                   name="issue_date"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Data emiterii *</FormLabel>
+                      <FormLabel className="text-sm">Data emiterii *</FormLabel>
                       <FormControl>
                         <Input
                           type="date"
@@ -189,7 +189,7 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
                   name="due_date"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Data scadentă *</FormLabel>
+                      <FormLabel className="text-sm">Data scadentă *</FormLabel>
                       <FormControl>
                         <Input
                           type="date"
@@ -208,7 +208,7 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
                   name="payment_terms"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Termeni de plată</FormLabel>
+                      <FormLabel className="text-sm">Termeni de plată</FormLabel>
                       <FormControl>
                         <Input {...field} className="bg-[#0F1117] border-gray-700 text-white" placeholder="Ex: 30 zile" />
                       </FormControl>
@@ -223,10 +223,10 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
               <FormField
                 control={form.control}
                 name="notes"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Notițe</FormLabel>
-                    <FormControl>
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm">Notițe</FormLabel>
+                      <FormControl>
                       <Textarea {...field} className="bg-[#0F1117] border-gray-700 text-white" rows={3} />
                     </FormControl>
                     <FormMessage />
@@ -234,19 +234,19 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
                 )}
               />
 
-              <div className="flex justify-end gap-2 pt-4 sticky bottom-0 bg-[#1A1F2C] pb-2">
+              <div className="flex flex-col sm:flex-row justify-end gap-2 pt-4 sticky bottom-0 bg-[#1A1F2C] pb-2">
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => onOpenChange(false)}
-                  className="bg-[#0F1117] text-white border-gray-700 hover:bg-gray-800"
+                  className="bg-[#0F1117] text-white border-gray-700 hover:bg-gray-800 w-full sm:w-auto"
                 >
                   Anulează
                 </Button>
                 <Button
                   type="submit"
                   disabled={createInvoice.isPending}
-                  className="bg-purple-600 hover:bg-purple-700"
+                  className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto"
                 >
                   {createInvoice.isPending ? 'Se creează...' : 'Creează factură'}
                 </Button>
