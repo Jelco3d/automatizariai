@@ -8,11 +8,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash2, FileText } from "lucide-react";
+import { Pencil, Trash2, FileText, FilePlus } from "lucide-react";
 import { format } from "date-fns";
 import { useInvoiceTemplates, useDeleteInvoiceTemplate } from "@/hooks/useInvoiceTemplates";
 import { InvoiceTemplateForm } from "./InvoiceTemplateForm";
 import { DeleteDialog } from "../shared/DeleteDialog";
+import { InvoiceForm } from "./InvoiceForm";
+import { useToast } from "@/hooks/use-toast";
 
 interface InvoiceTemplatesTableProps {
   onUseTemplate?: (template: any) => void;
@@ -21,8 +23,11 @@ interface InvoiceTemplatesTableProps {
 export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTableProps) {
   const { data: templates, isLoading } = useInvoiceTemplates();
   const deleteTemplate = useDeleteInvoiceTemplate();
+  const { toast } = useToast();
   const [editTemplate, setEditTemplate] = useState<any>(null);
   const [deleteTemplateId, setDeleteTemplateId] = useState<string | null>(null);
+  const [invoiceFormOpen, setInvoiceFormOpen] = useState(false);
+  const [selectedTemplateForInvoice, setSelectedTemplateForInvoice] = useState<any>(null);
 
   if (isLoading) {
     return (
@@ -45,6 +50,15 @@ export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTablePr
       await deleteTemplate.mutateAsync(deleteTemplateId);
       setDeleteTemplateId(null);
     }
+  };
+
+  const handleCreateInvoiceFromTemplate = (template: any) => {
+    setSelectedTemplateForInvoice(template);
+    setInvoiceFormOpen(true);
+    toast({
+      title: "Template selectat!",
+      description: `Creezi o factură nouă folosind template-ul "${template.name}"`,
+    });
   };
 
   return (
@@ -80,12 +94,22 @@ export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTablePr
                 </TableCell>
                 <TableCell className="text-right">
                   <div className="flex justify-end gap-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleCreateInvoiceFromTemplate(template)}
+                      className="text-green-400 hover:text-green-300 hover:bg-green-500/10"
+                      title="Creează factură din acest template"
+                    >
+                      <FilePlus className="h-4 w-4" />
+                    </Button>
                     {onUseTemplate && (
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => onUseTemplate(template)}
-                        className="text-green-400 hover:text-green-300 hover:bg-green-500/10"
+                        className="text-blue-400 hover:text-blue-300 hover:bg-blue-500/10"
+                        title="Folosește template"
                       >
                         <FileText className="h-4 w-4" />
                       </Button>
@@ -94,7 +118,8 @@ export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTablePr
                       variant="ghost"
                       size="sm"
                       onClick={() => setEditTemplate(template)}
-                      className="text-blue-400 hover:text-blue-300 hover:bg-blue-500/10"
+                      className="text-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/10"
+                      title="Editează template"
                     >
                       <Pencil className="h-4 w-4" />
                     </Button>
@@ -103,6 +128,7 @@ export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTablePr
                       size="sm"
                       onClick={() => setDeleteTemplateId(template.id)}
                       className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                      title="Șterge template"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -126,6 +152,11 @@ export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTablePr
         onConfirm={handleDelete}
         title="Șterge Template"
         description="Sigur vrei să ștergi acest template? Această acțiune nu poate fi anulată."
+      />
+
+      <InvoiceForm
+        open={invoiceFormOpen}
+        onOpenChange={setInvoiceFormOpen}
       />
     </>
   );

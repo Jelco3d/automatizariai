@@ -6,6 +6,8 @@ import type { InvoiceTemplateFormData } from "@/schemas/invoiceTemplateSchema";
 export const useInvoiceTemplates = () => {
   return useQuery({
     queryKey: ["invoice-templates"],
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
     queryFn: async () => {
       const { data: templates, error: templatesError } = await supabase
         .from("invoice_templates")

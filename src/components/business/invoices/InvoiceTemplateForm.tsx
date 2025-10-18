@@ -163,6 +163,16 @@ export function InvoiceTemplateForm({ open, onOpenChange, template }: InvoiceTem
       } else {
         await createTemplate.mutateAsync(templateData);
       }
+      
+      // Success feedback
+      toast({
+        title: "✅ Succes!",
+        description: template 
+          ? "Template-ul a fost actualizat și este gata de folosit!" 
+          : "Template-ul a fost creat și îl poți folosi la crearea de facturi!",
+        duration: 5000,
+      });
+      
       onOpenChange(false);
       form.reset();
       setLogoFile(null);

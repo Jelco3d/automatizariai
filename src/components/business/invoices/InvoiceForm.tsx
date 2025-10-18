@@ -109,19 +109,29 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               {templates && templates.length > 0 && (
-                <div className="bg-purple-500/10 border border-purple-500/20 p-4 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <FileText className="h-4 w-4 text-purple-400" />
-                    <span className="text-sm font-medium text-purple-300">Folosește un template</span>
+                <div className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border-2 border-purple-500/30 p-5 rounded-lg shadow-lg">
+                  <div className="flex items-center gap-2 mb-3">
+                    <FileText className="h-5 w-5 text-purple-400" />
+                    <div>
+                      <span className="text-base font-semibold text-purple-300">Folosește un template</span>
+                      <p className="text-xs text-gray-400 mt-0.5">
+                        Pre-completează factura cu date și articole salvate ({templates.length} template{templates.length !== 1 ? '-uri' : ''} disponibil{templates.length !== 1 ? 'e' : ''})
+                      </p>
+                    </div>
                   </div>
-                  <Select onValueChange={handleTemplateSelect}>
-                    <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white">
-                      <SelectValue placeholder="Selectează un template..." />
+                  <Select onValueChange={handleTemplateSelect} value={selectedTemplateId || undefined}>
+                    <SelectTrigger className="bg-[#0F1117] border-purple-500/30 text-white hover:border-purple-500/50 transition-colors">
+                      <SelectValue placeholder="Selectează un template pentru a începe..." />
                     </SelectTrigger>
                     <SelectContent>
                       {templates.map((template) => (
                         <SelectItem key={template.id} value={template.id}>
-                          {template.name}
+                          <div className="flex flex-col">
+                            <span className="font-medium">{template.name}</span>
+                            {template.description && (
+                              <span className="text-xs text-gray-400">{template.description}</span>
+                            )}
+                          </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
