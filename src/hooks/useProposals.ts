@@ -13,6 +13,7 @@ export interface Proposal {
   status: string;
   created_at: string;
   updated_at: string;
+  generated_proposal: string | null;
 }
 
 export function useProposals() {
@@ -32,7 +33,7 @@ export function useProposals() {
   });
 
   const createProposal = useMutation({
-    mutationFn: async (proposalData: ProposalFormData) => {
+    mutationFn: async (proposalData: ProposalFormData & { generated_proposal?: string }) => {
       const { data, error } = await supabase
         .from('proposals')
         .insert({
@@ -41,6 +42,7 @@ export function useProposals() {
           automation_needs: proposalData.automation_needs,
           timeframe: proposalData.timeframe,
           price: proposalData.price,
+          generated_proposal: proposalData.generated_proposal || null,
         })
         .select()
         .single();

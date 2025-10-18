@@ -5,14 +5,19 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { ProposalFormData, proposalSchema } from '@/schemas/proposalSchema';
+import { supabase } from '@/integrations/supabase/client';
+import { useState } from 'react';
+import { Loader2 } from 'lucide-react';
 
 interface ProposalFormProps {
-  onSubmit: (data: ProposalFormData) => void;
+  onSubmit: (data: ProposalFormData & { generated_proposal?: string }) => void;
   initialData?: ProposalFormData;
   isSubmitting?: boolean;
 }
 
 export function ProposalForm({ onSubmit, initialData, isSubmitting }: ProposalFormProps) {
+  const [isGenerating, setIsGenerating] = useState(false);
+  
   const {
     register,
     handleSubmit,
@@ -28,8 +33,38 @@ export function ProposalForm({ onSubmit, initialData, isSubmitting }: ProposalFo
     },
   });
 
+  const handleFormSubmit = async (data: ProposalFormData) => {
+    setIsGenerating(true);
+    try {
+      // Generate AI proposal
+      const { data: functionData, error: functionError } = await supabase.functions.invoke('generate-proposal', {
+        body: {
+          businessName: data.business_name,
+          businessDescription: data.business_description,
+          automationNeeds: data.automation_needs,
+          timeframe: data.timeframe,
+          price: data.price,
+        }
+      });
+
+      if (functionError) throw functionError;
+
+      // Pass the generated proposal along with form data
+      onSubmit({
+        ...data,
+        generated_proposal: functionData.generatedProposal,
+      });
+    } catch (error) {
+      console.error('Error generating proposal:', error);
+      // Still submit without generated proposal if AI fails
+      onSubmit(data);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
       <div>
         <Label className="text-white">Nume Business *</Label>
         <Input
@@ -97,10 +132,21 @@ export function ProposalForm({ onSubmit, initialData, isSubmitting }: ProposalFo
       <div className="flex gap-3 justify-end pt-4">
         <Button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || isGenerating}
           className="bg-purple-600 hover:bg-purple-700 w-full md:w-auto"
         >
-          {isSubmitting ? 'Se salvează...' : initialData ? 'Actualizează Propunerea' : 'Creează Propunerea'}
+          {isGenerating ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin mr-2" />
+              Generez propunerea...
+            </>
+          ) : isSubmitting ? (
+            'Se salvează...'
+          ) : initialData ? (
+            'Actualizează Propunerea'
+          ) : (
+            'Creează Propunerea'
+          )}
         </Button>
       </div>
     </form>

@@ -554,6 +554,7 @@ export type Database = {
           business_description: string
           business_name: string
           created_at: string
+          generated_proposal: string | null
           id: string
           price: number
           status: string
@@ -565,6 +566,7 @@ export type Database = {
           business_description: string
           business_name: string
           created_at?: string
+          generated_proposal?: string | null
           id?: string
           price: number
           status?: string
@@ -576,6 +578,7 @@ export type Database = {
           business_description?: string
           business_name?: string
           created_at?: string
+          generated_proposal?: string | null
           id?: string
           price?: number
           status?: string
