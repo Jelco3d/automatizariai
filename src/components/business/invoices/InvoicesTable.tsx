@@ -88,7 +88,7 @@ export function InvoicesTable() {
               <TableHead className="text-gray-400">Număr factură</TableHead>
               <TableHead className="text-gray-400">Client</TableHead>
               <TableHead className="text-gray-400">Data emiterii</TableHead>
-              <TableHead className="text-gray-400">Data scadentă</TableHead>
+              <TableHead className="text-gray-400">Data scadență</TableHead>
               <TableHead className="text-gray-400">Total</TableHead>
               <TableHead className="text-gray-400">Status</TableHead>
               <TableHead className="text-gray-400 text-center">PDF</TableHead>
