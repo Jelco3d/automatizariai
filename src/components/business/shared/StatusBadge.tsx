@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 interface StatusBadgeProps {
   status: string;
-  type: 'invoice' | 'quote' | 'contract';
+  type: 'invoice' | 'quote' | 'contract' | 'proposal';
 }
 const statusConfig = {
   invoice: {
@@ -67,6 +67,24 @@ const statusConfig = {
     },
     terminated: {
       label: 'Reziliat',
+      variant: 'destructive' as const
+    }
+  },
+  proposal: {
+    draft: {
+      label: 'Ciornă',
+      variant: 'secondary' as const
+    },
+    sent: {
+      label: 'Trimisă',
+      variant: 'default' as const
+    },
+    accepted: {
+      label: 'Acceptată',
+      variant: 'default' as const
+    },
+    rejected: {
+      label: 'Respinsă',
       variant: 'destructive' as const
     }
   }

@@ -8,6 +8,7 @@ import { formatDate } from '@/utils/dateFormatters';
 import { formatCurrency } from '@/utils/numberFormatters';
 import { DeleteDialog } from '@/components/business/shared/DeleteDialog';
 import { ProposalPreviewDialog } from './ProposalPreviewDialog';
+import { StatusBadge } from '@/components/business/shared/StatusBadge';
 
 interface ProposalsTableProps {
   proposals: Proposal[];
@@ -58,6 +59,7 @@ export function ProposalsTable({ proposals, onDelete, onEdit, onUpdateProposal }
                 <TableHead className="text-gray-400 text-xs md:text-sm">Automatizare</TableHead>
                 <TableHead className="text-gray-400 text-xs md:text-sm">Timeframe</TableHead>
                 <TableHead className="text-gray-400 text-xs md:text-sm">Preț</TableHead>
+                <TableHead className="text-gray-400 text-xs md:text-sm">Status</TableHead>
                 <TableHead className="text-gray-400 text-xs md:text-sm">Data</TableHead>
                 <TableHead className="text-gray-400 text-center text-xs md:text-sm">Propunere</TableHead>
                 <TableHead className="text-gray-400 text-right text-xs md:text-sm">Acțiuni</TableHead>
@@ -77,6 +79,9 @@ export function ProposalsTable({ proposals, onDelete, onEdit, onUpdateProposal }
                   </TableCell>
                   <TableCell className="text-white font-medium text-xs md:text-sm">
                     {formatCurrency(proposal.price)}
+                  </TableCell>
+                  <TableCell>
+                    <StatusBadge status={proposal.status} type="proposal" />
                   </TableCell>
                   <TableCell className="text-gray-400 text-xs md:text-sm">
                     {formatDate(proposal.created_at)}
@@ -121,7 +126,7 @@ export function ProposalsTable({ proposals, onDelete, onEdit, onUpdateProposal }
               ))}
               {filteredProposals.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center text-gray-400 py-8">
+                  <TableCell colSpan={8} className="text-center text-gray-400 py-8">
                     Nu există propuneri
                   </TableCell>
                 </TableRow>
