@@ -380,6 +380,51 @@ export type Database = {
           },
         ]
       }
+      payable_invoices: {
+        Row: {
+          created_at: string | null
+          due_date: string
+          id: string
+          invoice_number: string
+          issue_date: string
+          notes: string | null
+          payment_date: string | null
+          status: string
+          supplier_cui: string | null
+          supplier_name: string
+          total: number
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          due_date: string
+          id?: string
+          invoice_number: string
+          issue_date?: string
+          notes?: string | null
+          payment_date?: string | null
+          status?: string
+          supplier_cui?: string | null
+          supplier_name: string
+          total: number
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          due_date?: string
+          id?: string
+          invoice_number?: string
+          issue_date?: string
+          notes?: string | null
+          payment_date?: string | null
+          status?: string
+          supplier_cui?: string | null
+          supplier_name?: string
+          total?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string | null
