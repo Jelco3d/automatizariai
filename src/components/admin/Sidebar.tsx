@@ -84,7 +84,7 @@ export function Sidebar() {
         }`}
       >
         <FileText className="h-5 w-5" />
-        Facturi
+        Încasări
       </Link>
       <Link 
         to="/business-dashboard/quotes" 
