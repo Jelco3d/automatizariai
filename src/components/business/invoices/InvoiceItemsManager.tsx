@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Trash2, Plus } from 'lucide-react';
 import { UseFormReturn } from 'react-hook-form';
 import { InvoiceFormData } from '@/schemas/invoiceSchema';
@@ -127,15 +128,22 @@ export function InvoiceItemsManager({ form }: InvoiceItemsManagerProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-xs">TVA %</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="number"
-                        step="1"
-                        onChange={(e) => field.onChange(parseFloat(e.target.value) || 19)}
-                        className="bg-[#1A1F2C] border-gray-700 text-white"
-                      />
-                    </FormControl>
+                    <Select
+                      value={field.value?.toString()}
+                      onValueChange={(value) => field.onChange(parseFloat(value))}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="bg-[#1A1F2C] border-gray-700 text-white">
+                          <SelectValue placeholder="Selectează TVA" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="19">19% TVA</SelectItem>
+                        <SelectItem value="9">9% TVA</SelectItem>
+                        <SelectItem value="5">5% TVA</SelectItem>
+                        <SelectItem value="0">Neplatitor TVA</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
