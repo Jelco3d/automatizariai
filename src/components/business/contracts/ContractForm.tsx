@@ -251,8 +251,7 @@ export function ContractForm({ onSubmit, initialData }: ContractFormProps) {
             type="button"
             onClick={handleGenerateContract}
             disabled={isGenerating}
-            variant="outline"
-            className="w-full"
+            className="w-full bg-purple-600 hover:bg-purple-700"
           >
             {isGenerating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Generează Contract cu AI
