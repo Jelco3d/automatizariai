@@ -30,6 +30,7 @@ import Quotes from './pages/business/Quotes';
 import Proposals from './pages/business/Proposals';
 import Contracts from './pages/business/Contracts';
 import Clients from './pages/business/Clients';
+import Payments from './pages/business/Payments';
 import ContractSignature from './pages/ContractSignature';
 import { CookieConsent } from './components/CookieConsent';
 
@@ -66,6 +67,7 @@ const App = () => {
           <Route path="/business-dashboard/proposals" element={<Proposals />} />
           <Route path="/business-dashboard/contracts" element={<Contracts />} />
           <Route path="/business-dashboard/clients" element={<Clients />} />
+          <Route path="/business-dashboard/plati" element={<Payments />} />
           <Route path="/contract-signature/:token" element={<ContractSignature />} />
         </Routes>
         <CookieConsent />

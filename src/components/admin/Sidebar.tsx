@@ -9,7 +9,8 @@ import {
   Users, 
   LogOut,
   Menu,
-  X
+  X,
+  CreditCard
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
@@ -96,6 +97,18 @@ export function Sidebar() {
       >
         <FileSpreadsheet className="h-5 w-5" />
         Oferte
+      </Link>
+      <Link 
+        to="/business-dashboard/plati" 
+        onClick={() => setOpen(false)}
+        className={`flex items-center gap-2 p-2 rounded-lg ${
+          isActive("/business-dashboard/plati") 
+            ? "text-purple-400 bg-purple-500/10" 
+            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
+        }`}
+      >
+        <CreditCard className="h-5 w-5" />
+        Plăți
       </Link>
       <Link 
         to="/business-dashboard/clients" 

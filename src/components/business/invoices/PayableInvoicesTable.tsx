@@ -12,18 +12,20 @@ import { EditPayableInvoiceDialog } from './EditPayableInvoiceDialog';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-export function PayableInvoicesTable() {
+export function PayableInvoicesTable({ statusFilter }: { statusFilter?: string }) {
   const { payableInvoices, isLoading, deletePayableInvoice } = usePayableInvoices();
   const [search, setSearch] = useState('');
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [editInvoice, setEditInvoice] = useState<typeof payableInvoices[0] | null>(null);
   const { toast } = useToast();
 
-  const filteredInvoices = payableInvoices.filter(
-    (invoice) =>
-      invoice.invoice_number.toLowerCase().includes(search.toLowerCase()) ||
-      invoice.supplier_name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredInvoices = payableInvoices
+    .filter((invoice) => !statusFilter || invoice.status === statusFilter)
+    .filter(
+      (invoice) =>
+        invoice.invoice_number.toLowerCase().includes(search.toLowerCase()) ||
+        invoice.supplier_name.toLowerCase().includes(search.toLowerCase())
+    );
 
   const getStatusBadge = (status: string) => {
     const styles = {

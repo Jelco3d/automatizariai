@@ -8,8 +8,6 @@ import { Session } from "@supabase/supabase-js";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { InvoicesTable } from "@/components/business/invoices/InvoicesTable";
 import { InvoiceForm } from "@/components/business/invoices/InvoiceForm";
-import { PayableInvoicesTable } from "@/components/business/invoices/PayableInvoicesTable";
-import { PayableInvoiceForm } from "@/components/business/invoices/PayableInvoiceForm";
 import { InvoiceTemplatesTable } from "@/components/business/invoices/InvoiceTemplatesTable";
 import { InvoiceTemplateForm } from "@/components/business/invoices/InvoiceTemplateForm";
 import { PaidInvoicesTable } from "@/components/business/invoices/PaidInvoicesTable";
@@ -18,7 +16,6 @@ export default function Invoices() {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [issuedFormOpen, setIssuedFormOpen] = useState(false);
-  const [payableFormOpen, setPayableFormOpen] = useState(false);
   const [templateFormOpen, setTemplateFormOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('issued');
   const navigate = useNavigate();
@@ -58,13 +55,12 @@ export default function Invoices() {
             <Button 
               onClick={() => {
                 if (activeTab === 'issued') setIssuedFormOpen(true);
-                else if (activeTab === 'payable') setPayableFormOpen(true);
                 else setTemplateFormOpen(true);
               }} 
               className="bg-purple-600 hover:bg-purple-700 w-full md:w-auto"
             >
               <Plus className="h-4 w-4 mr-2" />
-              <span className="truncate">{activeTab === 'issued' ? 'Factură Nouă' : activeTab === 'payable' ? 'Factură de Plată' : 'Template Nou'}</span>
+              <span className="truncate">{activeTab === 'issued' ? 'Factură Nouă' : 'Template Nou'}</span>
             </Button>
           )}
         </div>
@@ -77,9 +73,6 @@ export default function Invoices() {
               </TabsTrigger>
               <TabsTrigger value="paid" className="data-[state=active]:bg-green-600 whitespace-nowrap">
                 Facturi Încasate
-              </TabsTrigger>
-              <TabsTrigger value="payable" className="data-[state=active]:bg-purple-600 whitespace-nowrap">
-                Facturi de Plată
               </TabsTrigger>
               <TabsTrigger value="templates" className="data-[state=active]:bg-purple-600 whitespace-nowrap">
                 Template-uri
@@ -95,17 +88,12 @@ export default function Invoices() {
             <PaidInvoicesTable />
           </TabsContent>
 
-          <TabsContent value="payable">
-            <PayableInvoicesTable />
-          </TabsContent>
-
           <TabsContent value="templates">
             <InvoiceTemplatesTable />
           </TabsContent>
         </Tabs>
 
         <InvoiceForm open={issuedFormOpen} onOpenChange={setIssuedFormOpen} />
-        <PayableInvoiceForm open={payableFormOpen} onOpenChange={setPayableFormOpen} />
         <InvoiceTemplateForm open={templateFormOpen} onOpenChange={setTemplateFormOpen} />
       </div>
     </div>
