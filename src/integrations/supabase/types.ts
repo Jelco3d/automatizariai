@@ -548,48 +548,6 @@ export type Database = {
         }
         Relationships: []
       }
-      proposal_templates: {
-        Row: {
-          automation_needs_template: string | null
-          business_type: string | null
-          code_snippets: string | null
-          created_at: string
-          default_price: number | null
-          description: string | null
-          id: string
-          name: string
-          proposal_structure: string | null
-          timeframe_template: string | null
-          updated_at: string
-        }
-        Insert: {
-          automation_needs_template?: string | null
-          business_type?: string | null
-          code_snippets?: string | null
-          created_at?: string
-          default_price?: number | null
-          description?: string | null
-          id?: string
-          name: string
-          proposal_structure?: string | null
-          timeframe_template?: string | null
-          updated_at?: string
-        }
-        Update: {
-          automation_needs_template?: string | null
-          business_type?: string | null
-          code_snippets?: string | null
-          created_at?: string
-          default_price?: number | null
-          description?: string | null
-          id?: string
-          name?: string
-          proposal_structure?: string | null
-          timeframe_template?: string | null
-          updated_at?: string
-        }
-        Relationships: []
-      }
       proposals: {
         Row: {
           automation_needs: string
