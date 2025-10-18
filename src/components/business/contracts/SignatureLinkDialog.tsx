@@ -1,11 +1,12 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Copy, CheckCircle2, XCircle, Clock, RefreshCw } from "lucide-react";
+import { Copy, CheckCircle2, XCircle, Clock, RefreshCw, Download } from "lucide-react";
 import { Contract } from "@/hooks/useContracts";
 import { formatDate } from "@/utils/dateFormatters";
 import { useState, useEffect } from "react";
 import { toast } from "@/hooks/use-toast";
+import { generateContractPDF } from "@/utils/generateContractPDF";
 
 interface SignatureLinkDialogProps {
   open: boolean;
@@ -29,6 +30,29 @@ export function SignatureLinkDialog({ open, onOpenChange, contract, onRefresh }:
   }, [open, onRefresh]);
 
   if (!contract) return null;
+
+  const handleDownloadPDF = async () => {
+    try {
+      await generateContractPDF(
+        contract.contract_number,
+        contract.contract_type || 'PRESTĂRI SERVICII',
+        contract.clients?.name || 'N/A',
+        contract.generated_contract || ''
+      );
+      
+      toast({
+        title: "PDF descărcat!",
+        description: "Contractul a fost descărcat cu succes.",
+      });
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      toast({
+        title: "Eroare",
+        description: "Nu s-a putut genera PDF-ul.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const signatureUrl = contract.signature_token
     ? `${window.location.origin}/contract-signature/${contract.signature_token}`
@@ -154,11 +178,22 @@ export function SignatureLinkDialog({ open, onOpenChange, contract, onRefresh }:
 
             {/* Fully Signed Message */}
             {fullySigned && (
-              <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
-                <p className="text-sm text-green-800 font-medium flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4" />
-                  Contract semnat complet la {formatDate(contract.fully_signed_at!)}
-                </p>
+              <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm text-green-800 font-medium flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4" />
+                    Contract semnat complet la {formatDate(contract.fully_signed_at!)}
+                  </p>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleDownloadPDF}
+                    className="gap-2"
+                  >
+                    <Download className="h-4 w-4" />
+                    Descarcă PDF
+                  </Button>
+                </div>
               </div>
             )}
           </div>

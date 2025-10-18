@@ -248,6 +248,7 @@ export type Database = {
           generated_contract: string | null
           id: string
           proposal_id: string | null
+          provider_name: string | null
           provider_signature_data: string | null
           provider_signature_name: string | null
           provider_signed_at: string | null
@@ -273,6 +274,7 @@ export type Database = {
           generated_contract?: string | null
           id?: string
           proposal_id?: string | null
+          provider_name?: string | null
           provider_signature_data?: string | null
           provider_signature_name?: string | null
           provider_signed_at?: string | null
@@ -298,6 +300,7 @@ export type Database = {
           generated_contract?: string | null
           id?: string
           proposal_id?: string | null
+          provider_name?: string | null
           provider_signature_data?: string | null
           provider_signature_name?: string | null
           provider_signed_at?: string | null

@@ -6,8 +6,9 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { CheckCircle2, Loader2, AlertCircle, Download } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { generateContractPDF } from "@/utils/generateContractPDF";
 
 type SignatureType = 'provider' | 'client';
 
@@ -41,7 +42,7 @@ export default function ContractSignature() {
         .from('contracts')
         .select(`
           *,
-          clients (
+          clients!inner (
             id,
             name,
             email,
@@ -51,7 +52,7 @@ export default function ContractSignature() {
           )
         `)
         .eq('signature_token', token)
-        .maybeSingle();
+        .single();
 
       if (error) throw error;
 
@@ -230,12 +231,48 @@ export default function ContractSignature() {
   const clientSigned = !!contract.client_signed_at;
   const fullySigned = !!contract.fully_signed_at;
 
+  const handleDownloadPDF = async () => {
+    if (!contract) return;
+    
+    try {
+      await generateContractPDF(
+        contract.contract_number,
+        contract.contract_type || 'PRESTĂRI SERVICII',
+        contract.clients?.name || 'N/A',
+        contract.generated_contract || ''
+      );
+      
+      toast({
+        title: "PDF descărcat!",
+        description: "Contractul a fost descărcat cu succes.",
+      });
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      toast({
+        title: "Eroare",
+        description: "Nu s-a putut genera PDF-ul. Vă rugăm încercați din nou.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <Card className="p-6">
-          <h1 className="text-3xl font-bold mb-4">Semnare Contract</h1>
+          <div className="flex items-start justify-between mb-4">
+            <h1 className="text-3xl font-bold">Semnare Contract</h1>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleDownloadPDF}
+              className="gap-2"
+            >
+              <Download className="h-4 w-4" />
+              Descarcă PDF
+            </Button>
+          </div>
           <div className="grid gap-2 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Număr Contract:</span>
@@ -243,7 +280,7 @@ export default function ContractSignature() {
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Furnizor:</span>
-              <span className="font-medium">Unison Loge Fx SRL</span>
+              <span className="font-medium">{contract.provider_name || 'Unison Loge Fx SRL'}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Client:</span>

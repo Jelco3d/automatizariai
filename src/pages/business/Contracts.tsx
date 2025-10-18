@@ -67,6 +67,7 @@ export default function Contracts() {
     createContract({
       ...data,
       contract_number: contractNumber,
+      provider_name: 'Unison Loge Fx SRL',
       start_date: data.start_date.toISOString().split('T')[0],
       end_date: data.end_date ? data.end_date.toISOString().split('T')[0] : undefined,
       status: 'draft',

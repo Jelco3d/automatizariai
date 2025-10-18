@@ -15,6 +15,7 @@ export interface Contract {
   terms?: string;
   clauses?: string;
   generated_contract?: string;
+  provider_name?: string;
   signature_token?: string;
   signature_link_expires_at?: string;
   provider_signed_at?: string;
