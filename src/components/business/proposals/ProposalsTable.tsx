@@ -143,12 +143,10 @@ export function ProposalsTable({ proposals, onDelete, onEdit }: ProposalsTablePr
       <ProposalPreviewDialog
         open={previewDialogOpen}
         onOpenChange={setPreviewDialogOpen}
-        proposal={previewProposal?.generated_proposal || null}
-        businessName={previewProposal?.business_name || ''}
-        onEdit={() => {
+        proposal={previewProposal}
+        onUpdate={(id, generatedProposal) => {
           if (previewProposal) {
-            setPreviewDialogOpen(false);
-            onEdit(previewProposal);
+            onEdit({ ...previewProposal, generated_proposal: generatedProposal });
           }
         }}
       />
