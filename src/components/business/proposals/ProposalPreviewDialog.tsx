@@ -8,6 +8,16 @@ import { useState, useEffect } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { Proposal } from '@/hooks/useProposals';
 
+// Normalize Romanian diacritics to correct comma-below forms
+const normalizeRomanian = (text: string): string => {
+  return text
+    .replace(/\u015F/g, "ș") // ş → ș (s with comma below)
+    .replace(/\u015E/g, "Ș") // Ş → Ș
+    .replace(/\u0163/g, "ț") // ţ → ț (t with comma below)
+    .replace(/\u0162/g, "Ț") // Ţ → Ț
+    .normalize("NFC");
+};
+
 interface ProposalPreviewDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -75,10 +85,13 @@ export function ProposalPreviewDialog({ open, onOpenChange, proposal, onUpdatePr
       return;
     }
 
+    // Normalize diacritics before saving
+    const normalizedText = normalizeRomanian(editedText);
+
     // Update local state immediately
     setCurrentProposal({
       ...currentProposal,
-      generated_proposal: editedText,
+      generated_proposal: normalizedText,
     });
 
     onUpdateProposal.mutate({
@@ -89,7 +102,7 @@ export function ProposalPreviewDialog({ open, onOpenChange, proposal, onUpdatePr
         automation_needs: currentProposal.automation_needs,
         timeframe: currentProposal.timeframe,
         price: currentProposal.price,
-        generated_proposal: editedText,
+        generated_proposal: normalizedText,
       }
     });
     

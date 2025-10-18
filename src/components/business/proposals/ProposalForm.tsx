@@ -9,6 +9,16 @@ import { supabase } from '@/integrations/supabase/client';
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 
+// Normalize Romanian diacritics to correct comma-below forms
+const normalizeRomanian = (text: string): string => {
+  return text
+    .replace(/\u015F/g, "ș") // ş → ș (s with comma below)
+    .replace(/\u015E/g, "Ș") // Ş → Ș
+    .replace(/\u0163/g, "ț") // ţ → ț (t with comma below)
+    .replace(/\u0162/g, "Ț") // Ţ → Ț
+    .normalize("NFC");
+};
+
 interface ProposalFormProps {
   onSubmit: (data: ProposalFormData & { generated_proposal?: string }) => void;
   initialData?: ProposalFormData;
@@ -49,10 +59,14 @@ export function ProposalForm({ onSubmit, initialData, isSubmitting }: ProposalFo
 
       if (functionError) throw functionError;
 
-      // Pass the generated proposal along with form data
+      // Normalize and pass the generated proposal along with form data
+      const normalizedProposal = functionData.generatedProposal 
+        ? normalizeRomanian(functionData.generatedProposal) 
+        : undefined;
+      
       onSubmit({
         ...data,
-        generated_proposal: functionData.generatedProposal,
+        generated_proposal: normalizedProposal,
       });
     } catch (error) {
       console.error('Error generating proposal:', error);

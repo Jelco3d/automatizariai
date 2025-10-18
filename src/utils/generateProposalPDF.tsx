@@ -1,26 +1,36 @@
 import { Document, Page, Text, View, StyleSheet, pdf, Font } from '@react-pdf/renderer';
 
-// Register Roboto font for Romanian character support
+// Register Noto Sans font for full Romanian diacritics support (comma-below ț/ș)
 Font.register({
-  family: 'Roboto',
+  family: 'Noto Sans',
   fonts: [
-    { src: 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxK.woff2', fontWeight: 400 },
-    { src: 'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc4.woff2', fontWeight: 700 }
+    { src: 'https://fonts.gstatic.com/s/notosans/v36/o-0IIpQlx3QUlC5A4PNjhg.ttf', fontWeight: 400 },
+    { src: 'https://fonts.gstatic.com/s/notosans/v36/o-0NIpQlx3QUlC5A4PZcZ8G0.ttf', fontWeight: 700 }
   ]
 });
+
+// Normalize Romanian diacritics to correct comma-below forms
+const normalizeRomanian = (text: string): string => {
+  return text
+    .replace(/\u015F/g, "ș") // ş → ș (s with comma below)
+    .replace(/\u015E/g, "Ș") // Ş → Ș
+    .replace(/\u0163/g, "ț") // ţ → ț (t with comma below)
+    .replace(/\u0162/g, "Ț") // Ţ → Ț
+    .normalize("NFC");
+};
 
 const styles = StyleSheet.create({
   page: {
     padding: 40,
     backgroundColor: '#ffffff',
-    fontFamily: 'Roboto',
+    fontFamily: 'Noto Sans',
   },
   title: {
     fontSize: 24,
     marginBottom: 20,
     color: '#1A1F2C',
     fontWeight: 700,
-    fontFamily: 'Roboto',
+    fontFamily: 'Noto Sans',
   },
   section: {
     marginBottom: 12,
@@ -30,7 +40,7 @@ const styles = StyleSheet.create({
     lineHeight: 1.6,
     color: '#333333',
     textAlign: 'justify',
-    fontFamily: 'Roboto',
+    fontFamily: 'Noto Sans',
   },
   header: {
     fontSize: 14,
@@ -38,11 +48,11 @@ const styles = StyleSheet.create({
     marginTop: 12,
     color: '#6366F1',
     fontWeight: 700,
-    fontFamily: 'Roboto',
+    fontFamily: 'Noto Sans',
   },
   bold: {
     fontWeight: 700,
-    fontFamily: 'Roboto',
+    fontFamily: 'Noto Sans',
   },
 });
 
@@ -127,7 +137,9 @@ const ProposalPDF = ({ businessName, proposal }: ProposalPDFProps) => {
 };
 
 export const generateProposalPDF = async (businessName: string, proposal: string) => {
-  const blob = await pdf(<ProposalPDF businessName={businessName} proposal={proposal} />).toBlob();
+  // Normalize diacritics before generating PDF
+  const safeProposal = normalizeRomanian(proposal);
+  const blob = await pdf(<ProposalPDF businessName={businessName} proposal={safeProposal} />).toBlob();
   
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');

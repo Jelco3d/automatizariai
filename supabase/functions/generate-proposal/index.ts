@@ -6,6 +6,16 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Normalize Romanian diacritics to correct comma-below forms
+const normalizeRomanian = (text: string): string => {
+  return text
+    .replace(/\u015F/g, "ș") // ş → ș (s with comma below)
+    .replace(/\u015E/g, "Ș") // Ş → Ș
+    .replace(/\u0163/g, "ț") // ţ → ț (t with comma below)
+    .replace(/\u0162/g, "Ț") // Ţ → Ț
+    .normalize("NFC");
+};
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -99,7 +109,8 @@ CRITICAL: Use ONLY proper Romanian language with ALL diacritics (ă, â, î, ț,
     }
 
     const data = await response.json();
-    const generatedProposal = data.choices[0].message.content;
+    const generatedProposalRaw = data.choices[0].message.content || "";
+    const generatedProposal = normalizeRomanian(generatedProposalRaw);
 
     return new Response(JSON.stringify({ generatedProposal }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
