@@ -130,25 +130,6 @@ export default function ContractSignature() {
   const handleSubmitSignature = async () => {
     if (!contract || !token) return;
 
-    // Check if this party already signed
-    if (signatureType === 'provider' && contract.provider_signed_at) {
-      toast({
-        title: "Atenție",
-        description: "Furnizorul a semnat deja acest contract",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (signatureType === 'client' && contract.client_signed_at) {
-      toast({
-        title: "Atenție",
-        description: "Clientul a semnat deja acest contract",
-        variant: "destructive",
-      });
-      return;
-    }
-
     let signatureData = '';
     let signatureName = '';
 
@@ -187,41 +168,20 @@ export default function ContractSignature() {
     setSubmitting(true);
 
     try {
-      const updateData: any = {};
-      const now = new Date().toISOString();
-
-      if (signatureType === 'provider') {
-        updateData.provider_signed_at = now;
-        updateData.provider_signature_data = signatureData;
-        updateData.provider_signature_name = signatureName;
-        
-        // If client already signed, mark as fully signed
-        if (contract.client_signed_at) {
-          updateData.fully_signed_at = now;
-          updateData.status = 'signed';
+      const { data, error } = await supabase.functions.invoke('submit-contract-signature', {
+        body: {
+          token: token,
+          signatureType: signatureType,
+          signatureData: signatureData || undefined,
+          signatureName: signatureName || undefined,
         }
-      } else {
-        updateData.client_signed_at = now;
-        updateData.client_signature_data = signatureData;
-        updateData.client_signature_name = signatureName;
-        
-        // If provider already signed, mark as fully signed
-        if (contract.provider_signed_at) {
-          updateData.fully_signed_at = now;
-          updateData.status = 'signed';
-        }
-      }
-
-      const { error } = await supabase
-        .from('contracts')
-        .update(updateData)
-        .eq('signature_token', token);
+      });
 
       if (error) throw error;
 
       toast({
         title: "Succes!",
-        description: "Semnătura a fost salvată cu succes",
+        description: data.message || "Semnătura a fost salvată cu succes",
       });
 
       // Reload contract to show updated status
@@ -231,11 +191,11 @@ export default function ContractSignature() {
       clearCanvas();
       setTypedName('');
 
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error submitting signature:', err);
       toast({
         title: "Eroare",
-        description: "Nu s-a putut salva semnătura",
+        description: err.message || "Nu s-a putut salva semnătura. Vă rugăm încercați din nou.",
         variant: "destructive",
       });
     } finally {
