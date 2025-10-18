@@ -134,8 +134,8 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Mobile Menu Button */}
-      <div className="md:hidden fixed top-4 left-4 z-50">
+      {/* Mobile Menu Button and Logo */}
+      <div className="md:hidden fixed top-4 left-0 right-0 z-50 flex items-center justify-between px-4">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <Button
@@ -157,6 +157,16 @@ export function Sidebar() {
             {navLinks}
           </SheetContent>
         </Sheet>
+        
+        <Link to="/business-dashboard" className="flex items-center">
+          <img 
+            src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" 
+            alt="AI Automatizari" 
+            className="h-12 w-auto rounded-lg" 
+          />
+        </Link>
+        
+        <div className="w-10"></div>
       </div>
 
       {/* Desktop Sidebar */}
