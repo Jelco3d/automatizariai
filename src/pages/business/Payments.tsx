@@ -57,46 +57,46 @@ export default function Payments() {
           <h1 className="text-2xl md:text-3xl font-bold text-white">Plăți</h1>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <Card className="bg-[#1A1F2C] border-red-500/20 p-4 md:p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-4 md:mb-6">
+          <Card className="bg-[#1A1F2C] border-red-500/20 p-3 md:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-400 text-sm">Facturi de Plată</p>
-                <p className="text-2xl md:text-3xl font-bold text-white mt-2">{unpaidInvoices.length}</p>
-                <p className="text-red-400 text-sm mt-1">{formatCurrency(unpaidInvoices.reduce((sum, inv) => sum + inv.total, 0))}</p>
+                <p className="text-gray-400 text-xs md:text-sm">Facturi de Plată</p>
+                <p className="text-xl md:text-3xl font-bold text-white mt-1 md:mt-2">{unpaidInvoices.length}</p>
+                <p className="text-red-400 text-xs md:text-sm mt-1">{formatCurrency(unpaidInvoices.reduce((sum, inv) => sum + inv.total, 0))}</p>
               </div>
-              <FileText className="h-8 w-8 md:h-10 md:w-10 text-red-400" />
+              <FileText className="h-6 w-6 md:h-10 md:w-10 text-red-400" />
             </div>
           </Card>
 
-          <Card className="bg-[#1A1F2C] border-green-500/20 p-4 md:p-6">
+          <Card className="bg-[#1A1F2C] border-green-500/20 p-3 md:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-400 text-sm">Facturi Plătite</p>
-                <p className="text-2xl md:text-3xl font-bold text-white mt-2">{paidInvoices.length}</p>
-                <p className="text-green-400 text-sm mt-1">{formatCurrency(paidInvoices.reduce((sum, inv) => sum + inv.total, 0))}</p>
+                <p className="text-gray-400 text-xs md:text-sm">Facturi Plătite</p>
+                <p className="text-xl md:text-3xl font-bold text-white mt-1 md:mt-2">{paidInvoices.length}</p>
+                <p className="text-green-400 text-xs md:text-sm mt-1">{formatCurrency(paidInvoices.reduce((sum, inv) => sum + inv.total, 0))}</p>
               </div>
-              <CheckCircle2 className="h-8 w-8 md:h-10 md:w-10 text-green-400" />
+              <CheckCircle2 className="h-6 w-6 md:h-10 md:w-10 text-green-400" />
             </div>
           </Card>
         </div>
 
-        <Card className="bg-[#1A1F2C] border-purple-500/20 p-4 md:p-6">
+        <Card className="bg-[#1A1F2C] border-purple-500/20 p-3 md:p-6">
           <Tabs defaultValue="unpaid" className="w-full">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 md:mb-4 gap-2 md:gap-3">
               <TabsList className="bg-[#0F1117] w-full md:w-auto">
-                <TabsTrigger value="unpaid" className="flex-1 md:flex-none">
+                <TabsTrigger value="unpaid" className="flex-1 md:flex-none text-xs md:text-sm">
                   Facturi de Plată
                 </TabsTrigger>
-                <TabsTrigger value="paid" className="flex-1 md:flex-none">
+                <TabsTrigger value="paid" className="flex-1 md:flex-none text-xs md:text-sm">
                   Facturi Plătite
                 </TabsTrigger>
               </TabsList>
               <Button 
                 onClick={() => setShowPayableForm(true)}
-                className="bg-purple-600 hover:bg-purple-700 w-full md:w-auto"
+                className="bg-purple-600 hover:bg-purple-700 w-full md:w-auto text-xs md:text-sm h-9"
               >
-                <Plus className="h-4 w-4 mr-2" />
+                <Plus className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
                 Adaugă Factură de Plată
               </Button>
             </div>

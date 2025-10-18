@@ -161,29 +161,29 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto p-4 md:p-6">
         <DialogHeader>
-          <DialogTitle>Adaugă Factură de Plată</DialogTitle>
+          <DialogTitle className="text-lg md:text-xl">Adaugă Factură de Plată</DialogTitle>
         </DialogHeader>
 
         {/* PDF Upload Section */}
-        <div className="space-y-4 p-4 border border-purple-500/20 rounded-lg bg-[#0F1117]">
+        <div className="space-y-3 p-3 md:p-4 border border-purple-500/20 rounded-lg bg-[#0F1117]">
           <div className="flex items-center gap-2">
-            <FileText className="h-5 w-5 text-purple-400" />
-            <h3 className="font-medium">Import PDF și Extragere Automată</h3>
+            <FileText className="h-4 w-4 md:h-5 md:w-5 text-purple-400" />
+            <h3 className="font-medium text-sm md:text-base">Import PDF și Extragere Automată</h3>
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col md:flex-row items-stretch md:items-center gap-2 md:gap-4">
             <div className="flex-1">
               <Input
                 type="file"
                 accept=".pdf"
                 onChange={handleFileSelect}
                 disabled={isExtracting}
-                className="bg-[#1A1F2C] border-gray-700 text-white"
+                className="bg-[#1A1F2C] border-gray-700 text-white text-sm h-9"
               />
               {selectedFile && (
-                <p className="text-sm text-gray-400 mt-1">
+                <p className="text-xs text-gray-400 mt-1 truncate">
                   {selectedFile.name}
                 </p>
               )}
@@ -192,17 +192,17 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
               type="button"
               onClick={handleExtractData}
               disabled={!selectedFile || isExtracting}
-              className="whitespace-nowrap bg-purple-600 hover:bg-purple-700"
+              className="whitespace-nowrap bg-purple-600 hover:bg-purple-700 text-sm h-9 w-full md:w-auto"
             >
               {isExtracting ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Se extrag...
+                  <Loader2 className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4 animate-spin" />
+                  <span className="text-xs md:text-sm">Se extrag...</span>
                 </>
               ) : (
                 <>
-                  <Upload className="mr-2 h-4 w-4" />
-                  Extrage Date
+                  <Upload className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+                  <span className="text-xs md:text-sm">Extrage Date</span>
                 </>
               )}
             </Button>
@@ -210,18 +210,18 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
         </div>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 md:space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               <FormField
                 control={form.control}
                 name="supplier_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Nume Furnizor *</FormLabel>
+                    <FormLabel className="text-sm">Nume Furnizor *</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -231,11 +231,11 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
                 name="supplier_cui"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>CUI Furnizor</FormLabel>
+                    <FormLabel className="text-sm">CUI Furnizor</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -246,26 +246,26 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
               name="invoice_number"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Număr Factură *</FormLabel>
+                  <FormLabel className="text-sm">Număr Factură *</FormLabel>
                   <FormControl>
-                    <Input {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                    <Input {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               <FormField
                 control={form.control}
                 name="issue_date"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Data Emiterii *</FormLabel>
+                    <FormLabel className="text-sm">Data Emiterii *</FormLabel>
                     <FormControl>
-                      <Input type="date" {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                      <Input type="date" {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -275,11 +275,11 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
                 name="due_date"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Data Scadentă *</FormLabel>
+                    <FormLabel className="text-sm">Data Scadentă *</FormLabel>
                     <FormControl>
-                      <Input type="date" {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                      <Input type="date" {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -290,41 +290,41 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
               name="total"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Total (RON) *</FormLabel>
+                  <FormLabel className="text-sm">Total (RON) *</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
                       step="0.01"
                       {...field}
                       onChange={(e) => field.onChange(parseFloat(e.target.value))}
-                      className="bg-[#0F1117] border-gray-700 text-white"
+                      className="bg-[#0F1117] border-gray-700 text-white text-sm h-9"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               <FormField
                 control={form.control}
                 name="status"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Status *</FormLabel>
+                    <FormLabel className="text-sm">Status *</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white">
+                        <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white text-sm h-9">
                           <SelectValue />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="bg-[#1A1F2C] border-gray-700 text-white">
-                        <SelectItem value="unpaid">Neplătită</SelectItem>
-                        <SelectItem value="paid">Plătită</SelectItem>
-                        <SelectItem value="overdue">Restanță</SelectItem>
+                        <SelectItem value="unpaid" className="text-sm">Neplătită</SelectItem>
+                        <SelectItem value="paid" className="text-sm">Plătită</SelectItem>
+                        <SelectItem value="overdue" className="text-sm">Restanță</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -334,11 +334,11 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
                 name="payment_date"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Data Plății</FormLabel>
+                    <FormLabel className="text-sm">Data Plății</FormLabel>
                     <FormControl>
-                      <Input type="date" {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                      <Input type="date" {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -349,16 +349,16 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
               name="notes"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Notițe</FormLabel>
+                  <FormLabel className="text-sm">Notițe</FormLabel>
                   <FormControl>
-                    <Textarea {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                    <Textarea {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm min-h-[80px]" />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
 
-            <div className="flex justify-end gap-2">
+            <div className="flex flex-col md:flex-row justify-end gap-2 pt-2">
               <Button
                 type="button"
                 variant="outline"
@@ -368,11 +368,11 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
                   setUploadedFilePath(null);
                   onOpenChange(false);
                 }}
-                className="border-gray-700 text-white hover:bg-gray-800"
+                className="border-gray-700 text-white hover:bg-gray-800 text-sm h-9 w-full md:w-auto"
               >
                 Anulează
               </Button>
-              <Button type="submit" disabled={createPayableInvoice.isPending} className="bg-purple-600 hover:bg-purple-700">
+              <Button type="submit" disabled={createPayableInvoice.isPending} className="bg-purple-600 hover:bg-purple-700 text-sm h-9 w-full md:w-auto">
                 {createPayableInvoice.isPending ? "Se adaugă..." : "Adaugă Factură"}
               </Button>
             </div>

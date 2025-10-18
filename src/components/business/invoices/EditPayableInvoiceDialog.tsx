@@ -60,24 +60,24 @@ export function EditPayableInvoiceDialog({ open, onOpenChange, invoice }: EditPa
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto p-4 md:p-6">
         <DialogHeader>
-          <DialogTitle>Editează factura de plată</DialogTitle>
+          <DialogTitle className="text-lg md:text-xl">Editează factura de plată</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 md:space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               <FormField
                 control={form.control}
                 name="supplier_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Nume furnizor *</FormLabel>
+                    <FormLabel className="text-sm">Nume furnizor *</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -87,27 +87,27 @@ export function EditPayableInvoiceDialog({ open, onOpenChange, invoice }: EditPa
                 name="supplier_cui"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>CUI furnizor</FormLabel>
+                    <FormLabel className="text-sm">CUI furnizor</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               <FormField
                 control={form.control}
                 name="invoice_number"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Număr factură *</FormLabel>
+                    <FormLabel className="text-sm">Număr factură *</FormLabel>
                     <FormControl>
-                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                      <Input {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -117,33 +117,33 @@ export function EditPayableInvoiceDialog({ open, onOpenChange, invoice }: EditPa
                 name="total"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Total (RON) *</FormLabel>
+                    <FormLabel className="text-sm">Total (RON) *</FormLabel>
                     <FormControl>
                       <Input
                         type="number"
                         step="0.01"
                         {...field}
                         onChange={(e) => field.onChange(parseFloat(e.target.value))}
-                        className="bg-[#0F1117] border-gray-700 text-white"
+                        className="bg-[#0F1117] border-gray-700 text-white text-sm h-9"
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               <FormField
                 control={form.control}
                 name="issue_date"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Data emiterii *</FormLabel>
+                    <FormLabel className="text-sm">Data emiterii *</FormLabel>
                     <FormControl>
-                      <Input type="date" {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                      <Input type="date" {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -153,36 +153,36 @@ export function EditPayableInvoiceDialog({ open, onOpenChange, invoice }: EditPa
                 name="due_date"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Data scadentă *</FormLabel>
+                    <FormLabel className="text-sm">Data scadentă *</FormLabel>
                     <FormControl>
-                      <Input type="date" {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                      <Input type="date" {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               <FormField
                 control={form.control}
                 name="status"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Status *</FormLabel>
+                    <FormLabel className="text-sm">Status *</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
-                        <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white">
+                        <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white text-sm h-9">
                           <SelectValue placeholder="Selectează status" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="bg-[#1A1F2C] border-gray-700">
-                        <SelectItem value="unpaid">Neplătită</SelectItem>
-                        <SelectItem value="paid">Plătită</SelectItem>
-                        <SelectItem value="overdue">Restantă</SelectItem>
+                        <SelectItem value="unpaid" className="text-sm">Neplătită</SelectItem>
+                        <SelectItem value="paid" className="text-sm">Plătită</SelectItem>
+                        <SelectItem value="overdue" className="text-sm">Restantă</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -192,11 +192,11 @@ export function EditPayableInvoiceDialog({ open, onOpenChange, invoice }: EditPa
                 name="payment_date"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Data plății</FormLabel>
+                    <FormLabel className="text-sm">Data plății</FormLabel>
                     <FormControl>
-                      <Input type="date" {...field} className="bg-[#0F1117] border-gray-700 text-white" />
+                      <Input type="date" {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm h-9" />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -207,28 +207,28 @@ export function EditPayableInvoiceDialog({ open, onOpenChange, invoice }: EditPa
               name="notes"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Notițe</FormLabel>
+                  <FormLabel className="text-sm">Notițe</FormLabel>
                   <FormControl>
-                    <Textarea {...field} className="bg-[#0F1117] border-gray-700 text-white" rows={3} />
+                    <Textarea {...field} className="bg-[#0F1117] border-gray-700 text-white text-sm min-h-[80px]" rows={3} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
 
-            <div className="flex justify-end gap-2 pt-4">
+            <div className="flex flex-col md:flex-row justify-end gap-2 pt-2 md:pt-4">
               <Button
                 type="button"
                 variant="outline"
                 onClick={() => onOpenChange(false)}
-                className="border-gray-700 text-white hover:bg-gray-800"
+                className="border-gray-700 text-white hover:bg-gray-800 text-sm h-9 w-full md:w-auto"
               >
                 Anulează
               </Button>
               <Button
                 type="submit"
                 disabled={updatePayableInvoice.isPending}
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-purple-600 hover:bg-purple-700 text-sm h-9 w-full md:w-auto"
               >
                 {updatePayableInvoice.isPending ? 'Se salvează...' : 'Salvează modificările'}
               </Button>
