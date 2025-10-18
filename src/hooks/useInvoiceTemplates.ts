@@ -48,6 +48,11 @@ export const useCreateInvoiceTemplate = () => {
           description: data.description,
           payment_terms: data.payment_terms,
           notes: data.notes,
+          company_name: data.company_name,
+          company_cui: data.company_cui,
+          company_registration: data.company_registration,
+          company_address: data.company_address,
+          logo_url: data.logo_url,
         })
         .select()
         .single();
@@ -100,6 +105,11 @@ export const useUpdateInvoiceTemplate = () => {
           description: data.description,
           payment_terms: data.payment_terms,
           notes: data.notes,
+          company_name: data.company_name,
+          company_cui: data.company_cui,
+          company_registration: data.company_registration,
+          company_address: data.company_address,
+          logo_url: data.logo_url,
         })
         .eq("id", id);
 
@@ -151,6 +161,24 @@ export const useDeleteInvoiceTemplate = () => {
 
   return useMutation({
     mutationFn: async (id: string) => {
+      // Get template to check if it has a logo
+      const { data: template } = await supabase
+        .from('invoice_templates')
+        .select('logo_url')
+        .eq('id', id)
+        .single();
+
+      // Delete logo from storage if it exists
+      if (template?.logo_url) {
+        const logoPath = template.logo_url.split('/').pop();
+        if (logoPath) {
+          await supabase.storage
+            .from('invoice-logos')
+            .remove([logoPath]);
+        }
+      }
+
+      // Delete template
       const { error } = await supabase
         .from("invoice_templates")
         .delete()

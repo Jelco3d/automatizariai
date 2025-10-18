@@ -12,6 +12,11 @@ export const invoiceTemplateSchema = z.object({
   description: z.string().max(1000).optional(),
   payment_terms: z.string().max(1000).optional(),
   notes: z.string().max(1000).optional(),
+  company_name: z.string().min(1, 'Numele companiei este obligatoriu').max(200),
+  company_cui: z.string().min(1, 'CUI-ul este obligatoriu').max(50),
+  company_registration: z.string().min(1, 'Nr. înmatriculare este obligatoriu').max(100),
+  company_address: z.string().min(1, 'Adresa este obligatorie').max(500),
+  logo_url: z.string().optional(),
   items: z.array(invoiceTemplateItemSchema).min(1, 'Adăugați cel puțin un articol'),
 });
 

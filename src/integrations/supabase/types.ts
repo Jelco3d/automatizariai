@@ -361,27 +361,42 @@ export type Database = {
       }
       invoice_templates: {
         Row: {
+          company_address: string | null
+          company_cui: string | null
+          company_name: string | null
+          company_registration: string | null
           created_at: string
           description: string | null
           id: string
+          logo_url: string | null
           name: string
           notes: string | null
           payment_terms: string | null
           updated_at: string
         }
         Insert: {
+          company_address?: string | null
+          company_cui?: string | null
+          company_name?: string | null
+          company_registration?: string | null
           created_at?: string
           description?: string | null
           id?: string
+          logo_url?: string | null
           name: string
           notes?: string | null
           payment_terms?: string | null
           updated_at?: string
         }
         Update: {
+          company_address?: string | null
+          company_cui?: string | null
+          company_name?: string | null
+          company_registration?: string | null
           created_at?: string
           description?: string | null
           id?: string
+          logo_url?: string | null
           name?: string
           notes?: string | null
           payment_terms?: string | null

@@ -48,17 +48,33 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
 
   const handleTemplateSelect = (templateId: string) => {
     const template = templates?.find(t => t.id === templateId);
-    if (template) {
-      form.setValue('payment_terms', template.payment_terms || '');
-      form.setValue('notes', template.notes || '');
-      if (template.items && template.items.length > 0) {
-        form.setValue('items', template.items.map((item: any) => ({
-          description: item.description,
-          quantity: item.quantity,
-          unit_price: item.unit_price,
-          vat_rate: item.vat_rate,
-        })));
+    if (!template) return;
+
+    // Pre-fill payment terms and notes
+    form.setValue('payment_terms', template.payment_terms || '');
+    
+    // Add company data to notes
+    let notesContent = template.notes || '';
+    if (template.company_name) {
+      notesContent += `\n\n--- Date Companie ---\n`;
+      notesContent += `${template.company_name}\n`;
+      notesContent += `CUI: ${template.company_cui || ''}\n`;
+      notesContent += `Nr. Reg: ${template.company_registration || ''}\n`;
+      notesContent += `Adresă: ${template.company_address || ''}`;
+      if (template.logo_url) {
+        notesContent += `\nLogo: ${template.logo_url}`;
       }
+    }
+    form.setValue('notes', notesContent);
+    
+    // Pre-fill invoice items
+    if (template.items && template.items.length > 0) {
+      form.setValue('items', template.items.map((item: any) => ({
+        description: item.description,
+        quantity: item.quantity,
+        unit_price: item.unit_price,
+        vat_rate: item.vat_rate,
+      })));
     }
   };
 
