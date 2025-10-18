@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import DOMPurify from 'dompurify';
-import html2pdf from 'html2pdf.js';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
+import html2pdf from 'html2pdf.js';
 import { toast } from '@/hooks/use-toast';
 
 interface ProposalHTMLPreviewProps {
@@ -11,19 +11,48 @@ interface ProposalHTMLPreviewProps {
 }
 
 export function ProposalHTMLPreview({ htmlContent, businessName }: ProposalHTMLPreviewProps) {
-  const contentRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
+  useEffect(() => {
+    if (iframeRef.current && htmlContent) {
+      const iframe = iframeRef.current;
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+      
+      if (iframeDoc) {
+        // Sanitize HTML for security
+        const sanitizedHTML = DOMPurify.sanitize(htmlContent, {
+          ADD_TAGS: ['style', 'script'],
+          ADD_ATTR: ['target'],
+        });
+        
+        iframeDoc.open();
+        iframeDoc.write(sanitizedHTML);
+        iframeDoc.close();
+      }
+    }
+  }, [htmlContent]);
+
   const handleDownloadPDF = async () => {
-    if (!contentRef.current) return;
+    if (!iframeRef.current?.contentDocument?.body) {
+      toast({
+        title: 'Eroare',
+        description: 'Nu s-a putut încărca conținutul propunerii',
+        variant: 'destructive',
+      });
+      return;
+    }
 
     setIsGenerating(true);
+    
     try {
-      const element = contentRef.current;
+      // Get the body content from iframe
+      const element = iframeRef.current.contentDocument.body;
       
+      // Configure PDF options
       const opt = {
         margin: 0,
-        filename: `Propunere-${businessName}-${new Date().toISOString().split('T')[0]}.pdf`,
+        filename: `Propunere_${businessName.replace(/[^a-z0-9]/gi, '_')}_${new Date().toISOString().split('T')[0]}.pdf`,
         image: { type: 'jpeg' as const, quality: 0.98 },
         html2canvas: { 
           scale: 2,
@@ -38,6 +67,7 @@ export function ProposalHTMLPreview({ htmlContent, businessName }: ProposalHTMLP
         }
       };
 
+      // Generate and download PDF
       await html2pdf().set(opt).from(element).save();
       
       toast({
@@ -56,14 +86,10 @@ export function ProposalHTMLPreview({ htmlContent, businessName }: ProposalHTMLP
     }
   };
 
-  const sanitizedHTML = DOMPurify.sanitize(htmlContent, {
-    ADD_TAGS: ['style'],
-    ADD_ATTR: ['target'],
-  });
-
   return (
-    <div className="space-y-4">
-      <div className="flex justify-end">
+    <div className="flex flex-col h-full">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-semibold text-white">Previzualizare Propunere - {businessName}</h3>
         <Button
           onClick={handleDownloadPDF}
           disabled={isGenerating}
@@ -75,11 +101,14 @@ export function ProposalHTMLPreview({ htmlContent, businessName }: ProposalHTMLP
         </Button>
       </div>
       
-      <div 
-        ref={contentRef}
-        dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
-        className="bg-white"
-      />
+      <div className="flex-1 bg-white rounded-lg overflow-hidden">
+        <iframe
+          ref={iframeRef}
+          title={`Proposal for ${businessName}`}
+          className="w-full h-full border-0"
+          sandbox="allow-same-origin allow-scripts"
+        />
+      </div>
     </div>
   );
 }

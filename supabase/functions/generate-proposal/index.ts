@@ -19,34 +19,24 @@ serve(async (req) => {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    const systemPrompt = `You are an expert business proposal writer specializing in AI automation solutions. Create comprehensive, professional proposals that:
-- Highlight the business value and ROI
-- Explain technical solutions in accessible language
-- Include clear implementation timelines
-- Build trust and credibility
-- Are structured and well-formatted`;
+    const systemPrompt = `You are an expert business proposal writer specializing in AI automation solutions. You generate complete HTML documents using a specific template format.`;
 
-    const userPrompt = `Generează un document HTML COMPLET pentru o propunere profesională de automatizare AI.
+    const userPrompt = `Generate a complete HTML proposal document using this EXACT template structure. Fill in all dynamic sections with relevant, professional content based on the client data.
 
-IMPORTANT: Returnează DOAR codul HTML complet, fără markdown, fără explicații, fără \`\`\`html tags.
-
-Date Client:
+CLIENT DATA:
 - Business Name: ${businessName}
 - Business Description: ${businessDescription}
 - Automation Needs: ${automationNeeds}
 - Implementation Timeframe: ${timeframe}
 - Proposed Investment: ${price} RON
 
-TEMPLATE HTML:
-Folosește EXACT structura de mai jos, păstrează toate clasele CSS și elementele HTML.
-Completează doar secțiunile marcate cu [PLACEHOLDER] cu conținut relevant și profesional.
-
+TEMPLATE TO USE (preserve ALL HTML structure, CSS, and classes):
 <!DOCTYPE html>
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Propunere Automatizare AI - ${businessName}</title>
+    <title>Propunere Automatizare AI</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         @page { size: A4; margin: 0; }
@@ -97,167 +87,96 @@ Completează doar secțiunile marcate cu [PLACEHOLDER] cu conținut relevant și
 <body>
     <div class="page">
         <div class="header">
-            <img src="/lovable-uploads/new-logo.png" alt="AIAutomatizari Logo" class="logo">
+            <img src="https://ututdskuykdosmbgjkzh.supabase.co/storage/v1/object/public/invoice-logos/new-logo.png" alt="AI Automatizari Logo" class="logo">
             <div class="header-text">
-                <div class="company-name">AIAutomatizari</div>
+                <div class="company-name">AI Automatizări</div>
                 <div class="tagline">Soluții inteligente pentru afaceri moderne</div>
             </div>
         </div>
-        
         <div class="proposal-title">Propunere de Soluție de Automatizare AI</div>
-        
         <div class="meta-info">
-            <div class="meta-row">
-                <span class="meta-label">Data:</span>
-                <span id="currentDate"></span>
-            </div>
-            <div class="meta-row">
-                <span class="meta-label">Către:</span>
-                <span>${businessName}</span>
-            </div>
-            <div class="meta-row">
-                <span class="meta-label">De la:</span>
-                <span>AIAutomatizari - Jelco - Expert în Soluții AI</span>
-            </div>
-            <div class="meta-row">
-                <span class="meta-label">Subiect:</span>
-                <span>[GENEREAZĂ TITLU SCURT RELEVANT PENTRU ${automationNeeds}]</span>
-            </div>
+            <div class="meta-row"><span class="meta-label">Data:</span><span id="currentDate"></span></div>
+            <div class="meta-row"><span class="meta-label">Către:</span><span>${businessName}</span></div>
+            <div class="meta-row"><span class="meta-label">De la:</span><span>AI Automatizări - Jelco</span></div>
+            <div class="meta-row"><span class="meta-label">Subiect:</span><span>[REPLACE: Titlu scurt descriptiv bazat pe automation needs]</span></div>
         </div>
-        
         <div class="section">
             <h2 class="section-title"><span class="section-number">1.</span>Rezumat Executiv</h2>
-            <div class="content">
-                [GENEREAZĂ REZUMAT EXECUTIV: 2-3 paragrafe despre propunere, obiectiv principal, și beneficii cheie pentru ${businessName}]
-            </div>
-            <div class="highlight-box">
-                <strong>Beneficii principale:</strong> [LISTEAZĂ 3-4 BENEFICII CHEIE SPECIFICE]
-            </div>
+            <div class="content">[REPLACE: 2-3 paragrafe despre soluție, obiective, beneficii principale]</div>
+            <div class="highlight-box"><strong>Beneficii principale:</strong> [REPLACE: 3-4 beneficii cheie]</div>
         </div>
-        
         <div class="section">
             <h2 class="section-title"><span class="section-number">2.</span>Înțelegerea Afacerii Clientului</h2>
-            <div class="content">
-                [GENEREAZĂ ANALIZĂ: Descrie afacerea ${businessName} bazat pe ${businessDescription}. Arată că înțelegi provocările specifice industriei lor și contextul în care operează.]
-            </div>
+            <div class="content">[REPLACE: Descriere business client, provocări specifice industriei, context]</div>
         </div>
-        
         <div class="section">
             <h2 class="section-title"><span class="section-number">3.</span>Provocări și Oportunități</h2>
             <h3 class="subsection-title">Provocări Actuale:</h3>
             <ul class="challenge-list">
-                [GENEREAZĂ 4-5 PROVOCĂRI SPECIFICE pentru ${automationNeeds}. Format: <li><strong>Titlu:</strong> Descriere</li>]
+                [REPLACE: 4-5 <li> cu provocări specifice]
             </ul>
             <h3 class="subsection-title">Oportunități AI:</h3>
             <ul class="opportunity-list">
-                [GENEREAZĂ 4-5 OPORTUNITĂȚI SPECIFICE cum AI rezolvă provocările. Format: <li><strong>Titlu:</strong> Descriere</li>]
+                [REPLACE: 4-5 <li> cu oportunități]
             </ul>
         </div>
     </div>
-    
     <div class="page">
         <div class="section">
             <h2 class="section-title"><span class="section-number">4.</span>Soluția Propusă de Automatizare AI</h2>
-            <div class="content">
-                [GENEREAZĂ DESCRIERE SOLUȚIE: 2-3 paragrafe despre soluția AI propusă pentru ${automationNeeds}]
-            </div>
+            <div class="content">[REPLACE: Descriere soluție, arhitectură, tehnologii]</div>
             <h3 class="subsection-title">Arhitectura Soluției:</h3>
-            <div class="content">
-                [GENEREAZĂ 5 PAȘI TEHNICI ai soluției. Format: <strong>1. Titlu:</strong> Descriere tehnică accesibilă<br><br>]
-            </div>
-            <div class="highlight-box">
-                <strong>Tehnologii:</strong> [LISTEAZĂ TEHNOLOGIILE RELEVANTE]
-            </div>
+            <div class="content">[REPLACE: 5-6 componente cu descrieri]</div>
+            <div class="highlight-box"><strong>Tehnologii:</strong> [REPLACE: listă tehnologii]</div>
         </div>
-        
         <div class="section">
             <h2 class="section-title"><span class="section-number">5.</span>Plan de Implementare</h2>
             <div class="timeline">
-                [GENEREAZĂ TIMELINE bazat pe ${timeframe}. Împarte în 4 faze (Săptămână 1-4 sau echivalent). 
-                Format pentru fiecare:
-                <div class="timeline-item">
-                    <div class="timeline-week">Săptămâna X: Titlu Fază</div>
-                    <div>• Task 1<br>• Task 2<br>• Task 3</div>
-                </div>]
+                [REPLACE: 4 timeline-item cu săptămâni, bazat pe timeframe]
             </div>
         </div>
-        
         <div class="section">
             <h2 class="section-title"><span class="section-number">6.</span>Beneficii și ROI</h2>
             <div class="benefits-grid">
-                [GENEREAZĂ 4 CARDURI DE BENEFICII. Format pentru fiecare:
-                <div class="benefit-card">
-                    <div class="benefit-title">📊 Titlu</div>
-                    <div>Descriere beneficiu concret</div>
-                </div>]
+                [REPLACE: 4 benefit-card cu titlu și descriere]
             </div>
-            <div class="highlight-box">
-                <strong>Perioada de Recuperare:</strong> [ESTIMEAZĂ ROI și perioadă recuperare investiție]
-            </div>
+            <div class="highlight-box"><strong>Perioada de Recuperare:</strong> [REPLACE: estimare ROI]</div>
         </div>
     </div>
-    
     <div class="page">
         <div class="section">
             <h2 class="section-title"><span class="section-number">7.</span>Detalii Investiție</h2>
             <div class="price-box">
                 <div class="price-label">Investiție Totală</div>
-                <div class="price-amount">${price} RON</div>
+                <div class="price-amount">${price.toLocaleString('ro-RO')} RON</div>
                 <div class="price-timeframe">Implementare în ${timeframe}</div>
             </div>
-            <div class="content">
-                <strong>Pachetul include:</strong>
-                <ul style="margin: 15px 0 15px 20px;">
-                    <li>Analiza inițială și colectarea cerințelor</li>
-                    <li>Dezvoltarea și implementarea soluției software</li>
-                    <li>Instalarea și configurarea completă</li>
-                    <li>Testarea exhaustivă a sistemului</li>
-                    <li>Instruirea personalului cheie</li>
-                    <li>Documentație tehnică detaliată</li>
-                    <li>Suport tehnic 30 zile post-implementare</li>
-                </ul>
-            </div>
-            <div class="payment-terms">
-                <strong>Termeni de Plată:</strong><br><br>
-                <strong>50% Avans (${Math.round(price * 0.5)} RON):</strong> La semnarea contractului<br>
-                <strong>50% Final (${Math.round(price * 0.5)} RON):</strong> La finalizare și acceptanță
-            </div>
+            <div class="content"><strong>Pachetul include:</strong><ul style="margin: 15px 0 15px 20px;">[REPLACE: 7-8 <li> cu ce include]</ul></div>
+            <div class="payment-terms"><strong>Termeni de Plată:</strong><br><br>[REPLACE: Detalii plată]</div>
         </div>
-        
         <div class="section">
             <h2 class="section-title"><span class="section-number">8.</span>Pași Următori</h2>
             <div class="cta-section">
                 <div class="cta-title">Haideți să transformăm împreună afacerea dumneavoastră!</div>
-                <div class="steps-list">
-                    <ol>
-                        <li><strong>Discuție Inițială:</strong> Întâlnire pentru clarificări</li>
-                        <li><strong>Ajustări:</strong> Adaptăm propunerea pe baza feedback-ului</li>
-                        <li><strong>Semnare Contract:</strong> Formalizarea parteneriatului</li>
-                        <li><strong>Începere Proiect:</strong> Start implementare</li>
-                    </ol>
-                </div>
+                <div class="steps-list"><ol>[REPLACE: 4 <li> cu pași următori]</ol></div>
             </div>
         </div>
-        
         <div class="signature-section">
             <div class="signature-box">
-                <div class="signature-label">Pentru AIAutomatizari:</div>
-                <div class="signature-line">Jelco - Expert în Soluții AI<br>Semnătură și Dată</div>
+                <div class="signature-label">Pentru AI Automatizări (Jelco):</div>
+                <div class="signature-line">Semnătură și Dată</div>
             </div>
             <div class="signature-box">
                 <div class="signature-label">Pentru ${businessName}:</div>
                 <div class="signature-line">Semnătură și Dată</div>
             </div>
         </div>
-        
         <div class="footer">
-            <strong>Cu stimă,</strong><br><br>
-            <strong>AIAutomatizari.ro</strong><br>
-            Jelco - expert în soluții AI<br>
-            Telefon: +40754274528
+            <strong>AI Automatizări</strong><br>
+            Jelco | Email: contact@aiautomatizari.ro | Tel: +40 XXX XXX XXX<br>
+            www.aiautomatizari.ro
         </div>
     </div>
-    
     <script>
         const today = new Date();
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -266,13 +185,14 @@ Completează doar secțiunile marcate cu [PLACEHOLDER] cu conținut relevant și
 </body>
 </html>
 
-INSTRUCȚIUNI FINALE:
-1. Înlocuiește TOATE secțiunile [PLACEHOLDER] cu conținut profesional, relevant și personalizat
-2. Păstrează EXACT structura HTML, clasele CSS și toate elementele
-3. Folosește limba română pentru tot conținutul generat
-4. Fii specific și concret pentru nevoile clientului ${businessName}
-5. Returnează DOAR HTML-ul complet, fără markdown sau explicații
-`;
+INSTRUCTIONS:
+1. Replace ALL [REPLACE: ...] sections with relevant, professional content based on client data
+2. Keep ALL HTML structure, CSS classes, and styling EXACTLY as shown
+3. Write in Romanian language, professional and persuasive tone
+4. Adapt timeline based on the timeframe provided (${timeframe})
+5. Make sure all content is specific to client's automation needs
+6. Return ONLY the complete HTML document, no markdown or explanations
+7. Ensure proper HTML escaping for special characters`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
