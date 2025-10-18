@@ -22,10 +22,14 @@ const statusOptions = [
 export function ProposalStatusDialog({ open, onOpenChange, proposal, onUpdateStatus }: ProposalStatusDialogProps) {
   const [status, setStatus] = useState(proposal?.status || 'draft');
 
+  // Update local state when proposal changes
+  if (proposal && status !== proposal.status) {
+    setStatus(proposal.status);
+  }
+
   const handleSubmit = () => {
     if (proposal) {
       onUpdateStatus(proposal.id, status);
-      onOpenChange(false);
     }
   };
 

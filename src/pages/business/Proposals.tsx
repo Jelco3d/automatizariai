@@ -19,7 +19,7 @@ export default function Proposals() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingProposal, setEditingProposal] = useState<Proposal | null>(null);
   const navigate = useNavigate();
-  const { proposals, isLoading, createProposal, updateProposal, deleteProposal } = useProposals();
+  const { proposals, isLoading, createProposal, updateProposal, deleteProposal, updateStatus } = useProposals();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -124,6 +124,7 @@ export default function Proposals() {
             onDelete={handleDeleteProposal}
             onEdit={handleEdit}
             onUpdateProposal={updateProposal}
+            onUpdateStatus={updateStatus}
           />
         </Card>
 
