@@ -10,6 +10,9 @@ import { StatusBadge } from '@/components/business/shared/StatusBadge';
 import { DeleteDialog } from '@/components/business/shared/DeleteDialog';
 import { EditQuoteDialog } from './EditQuoteDialog';
 import { QuoteStatusDialog } from './QuoteStatusDialog';
+import { generateQuotePDF } from '@/utils/generateQuotePDF';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from '@/hooks/use-toast';
 
 interface QuotesTableProps {
   quotes: Quote[];
@@ -35,6 +38,31 @@ export function QuotesTable({ quotes, onDelete, onUpdate, onStatusChange }: Quot
       onDelete(selectedQuote.id);
       setDeleteDialogOpen(false);
       setSelectedQuote(null);
+    }
+  };
+
+  const handleDownloadPDF = async (quote: Quote) => {
+    try {
+      const { data: items, error } = await supabase
+        .from('quote_items')
+        .select('*')
+        .eq('quote_id', quote.id);
+
+      if (error) throw error;
+
+      await generateQuotePDF(quote, items);
+      
+      toast({
+        title: 'Succes',
+        description: 'PDF-ul a fost descărcat',
+      });
+    } catch (error) {
+      console.error('Error downloading PDF:', error);
+      toast({
+        title: 'Eroare',
+        description: 'A apărut o eroare la descărcarea PDF-ului',
+        variant: 'destructive',
+      });
     }
   };
 
@@ -89,6 +117,15 @@ export function QuotesTable({ quotes, onDelete, onUpdate, onStatusChange }: Quot
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center justify-end gap-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleDownloadPDF(quote)}
+                        className="text-green-400 hover:text-green-300 hover:bg-green-500/10"
+                        title="Descarcă PDF"
+                      >
+                        <Download className="h-4 w-4" />
+                      </Button>
                       <Button
                         variant="ghost"
                         size="sm"
