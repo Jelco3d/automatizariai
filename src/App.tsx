@@ -1,6 +1,5 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
 import Index from './pages/Index';
 import Website from './pages/Website';
@@ -34,13 +33,9 @@ import Clients from './pages/business/Clients';
 import ContractSignature from './pages/ContractSignature';
 import { CookieConsent } from './components/CookieConsent';
 
-const queryClient = new QueryClient();
-
 const App = () => {
-  console.log("Rendering App component");
   return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
+    <Router>
         <Routes>
           <Route path="/acasă" element={<Index />} />
           <Route path="/" element={<Website />} />
@@ -76,7 +71,6 @@ const App = () => {
         <CookieConsent />
         <Toaster />
       </Router>
-    </QueryClientProvider>
   );
 };
 
