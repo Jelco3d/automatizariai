@@ -1,6 +1,5 @@
 import { useClients } from '@/hooks/useClients';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { FormControl } from '@/components/ui/form';
 
 interface ClientSelectorProps {
   value: string;
@@ -12,11 +11,9 @@ export function ClientSelector({ value, onChange }: ClientSelectorProps) {
 
   return (
     <Select value={value} onValueChange={onChange}>
-      <FormControl>
-        <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white">
-          <SelectValue placeholder="Selectează client" />
-        </SelectTrigger>
-      </FormControl>
+      <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white">
+        <SelectValue placeholder="Selectează client" />
+      </SelectTrigger>
       <SelectContent className="bg-[#1A1F2C] border-gray-700 text-white">
         {isLoading ? (
           <SelectItem value="loading" disabled>Se încarcă...</SelectItem>
