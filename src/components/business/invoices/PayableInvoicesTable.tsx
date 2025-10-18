@@ -78,33 +78,35 @@ export function PayableInvoicesTable() {
 
   return (
     <>
-      <Card className="bg-[#1A1F2C] border-purple-500/20 p-6">
-        <div className="mb-4">
+      <Card className="bg-[#1A1F2C] border-purple-500/20 p-3 md:p-6">
+        <div className="mb-3 md:mb-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
               placeholder="Caută factură..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-10 bg-[#0F1117] border-gray-700 text-white"
+              className="pl-10 bg-[#0F1117] border-gray-700 text-white text-sm"
             />
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow className="border-gray-700 hover:bg-transparent">
-                <TableHead className="text-gray-400">Număr factură</TableHead>
-                <TableHead className="text-gray-400">Furnizor</TableHead>
-                <TableHead className="text-gray-400">Data emiterii</TableHead>
-                <TableHead className="text-gray-400">Data scadentă</TableHead>
-                <TableHead className="text-gray-400">Total</TableHead>
-                <TableHead className="text-gray-400">Status</TableHead>
-                <TableHead className="text-gray-400">PDF</TableHead>
-                <TableHead className="text-gray-400">Acțiuni</TableHead>
-              </TableRow>
-            </TableHeader>
+        <div className="overflow-x-auto -mx-3 md:mx-0">
+          <div className="inline-block min-w-full align-middle">
+            <div className="overflow-hidden">
+              <Table className="min-w-[800px]">
+                <TableHeader>
+                  <TableRow className="border-gray-700 hover:bg-transparent">
+                    <TableHead className="text-gray-400 text-xs md:text-sm">Număr</TableHead>
+                    <TableHead className="text-gray-400 text-xs md:text-sm">Furnizor</TableHead>
+                    <TableHead className="text-gray-400 text-xs md:text-sm">Emisă</TableHead>
+                    <TableHead className="text-gray-400 text-xs md:text-sm">Scadență</TableHead>
+                    <TableHead className="text-gray-400 text-xs md:text-sm">Total</TableHead>
+                    <TableHead className="text-gray-400 text-xs md:text-sm">Status</TableHead>
+                    <TableHead className="text-gray-400 text-xs md:text-sm">PDF</TableHead>
+                    <TableHead className="text-gray-400 text-xs md:text-sm">Acțiuni</TableHead>
+                  </TableRow>
+                </TableHeader>
             <TableBody>
               {isLoading ? (
                 <TableRow>
@@ -121,11 +123,11 @@ export function PayableInvoicesTable() {
               ) : (
                 filteredInvoices.map((invoice) => (
                   <TableRow key={invoice.id} className="border-gray-700 hover:bg-gray-800/50">
-                    <TableCell className="text-white font-medium">{invoice.invoice_number}</TableCell>
-                    <TableCell className="text-gray-300">{invoice.supplier_name}</TableCell>
-                    <TableCell className="text-gray-300">{formatDate(invoice.issue_date)}</TableCell>
-                    <TableCell className="text-gray-300">{formatDate(invoice.due_date)}</TableCell>
-                    <TableCell className="text-white font-semibold">{formatCurrency(invoice.total)}</TableCell>
+                    <TableCell className="text-white font-medium text-xs md:text-sm">{invoice.invoice_number}</TableCell>
+                    <TableCell className="text-gray-300 text-xs md:text-sm">{invoice.supplier_name}</TableCell>
+                    <TableCell className="text-gray-300 text-xs md:text-sm">{formatDate(invoice.issue_date)}</TableCell>
+                    <TableCell className="text-gray-300 text-xs md:text-sm">{formatDate(invoice.due_date)}</TableCell>
+                    <TableCell className="text-white font-semibold text-xs md:text-sm">{formatCurrency(invoice.total)}</TableCell>
                     <TableCell>{getStatusBadge(invoice.status)}</TableCell>
                     <TableCell>
                       {invoice.pdf_file_path ? (
@@ -167,8 +169,10 @@ export function PayableInvoicesTable() {
                   </TableRow>
                 ))
               )}
-            </TableBody>
-          </Table>
+              </TableBody>
+            </Table>
+          </div>
+        </div>
         </div>
       </Card>
 

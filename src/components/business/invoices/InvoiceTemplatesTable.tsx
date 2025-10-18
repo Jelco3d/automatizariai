@@ -63,35 +63,37 @@ export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTablePr
 
   return (
     <>
-      <div className="rounded-md border border-purple-500/20">
-        <Table>
-          <TableHeader>
-            <TableRow className="border-purple-500/20 hover:bg-purple-500/5">
-              <TableHead className="text-purple-300">Nume</TableHead>
-              <TableHead className="text-purple-300">Descriere</TableHead>
-              <TableHead className="text-purple-300 text-center">Articole</TableHead>
-              <TableHead className="text-purple-300">Data Creării</TableHead>
-              <TableHead className="text-purple-300 text-right">Acțiuni</TableHead>
-            </TableRow>
-          </TableHeader>
+      <div className="rounded-md border border-purple-500/20 overflow-hidden">
+        <div className="overflow-x-auto -mx-3 md:mx-0">
+          <div className="inline-block min-w-full align-middle">
+            <Table className="min-w-[700px]">
+              <TableHeader>
+                <TableRow className="border-purple-500/20 hover:bg-purple-500/5">
+                  <TableHead className="text-purple-300 text-xs md:text-sm">Nume</TableHead>
+                  <TableHead className="text-purple-300 text-xs md:text-sm">Descriere</TableHead>
+                  <TableHead className="text-purple-300 text-xs md:text-sm text-center">Articole</TableHead>
+                  <TableHead className="text-purple-300 text-xs md:text-sm">Data</TableHead>
+                  <TableHead className="text-purple-300 text-xs md:text-sm text-right">Acțiuni</TableHead>
+                </TableRow>
+              </TableHeader>
           <TableBody>
-            {templates.map((template) => (
-              <TableRow
-                key={template.id}
-                className="border-purple-500/20 hover:bg-purple-500/5"
-              >
-                <TableCell className="font-medium text-white">
-                  {template.name}
-                </TableCell>
-                <TableCell className="text-gray-300 max-w-md truncate">
-                  {template.description || '-'}
-                </TableCell>
-                <TableCell className="text-center text-gray-300">
-                  {template.items?.length || 0}
-                </TableCell>
-                <TableCell className="text-gray-300">
-                  {format(new Date(template.created_at), "dd.MM.yyyy")}
-                </TableCell>
+              {templates.map((template) => (
+                <TableRow
+                  key={template.id}
+                  className="border-purple-500/20 hover:bg-purple-500/5"
+                >
+                  <TableCell className="font-medium text-white text-xs md:text-sm">
+                    {template.name}
+                  </TableCell>
+                  <TableCell className="text-gray-300 max-w-md truncate text-xs md:text-sm">
+                    {template.description || '-'}
+                  </TableCell>
+                  <TableCell className="text-center text-gray-300 text-xs md:text-sm">
+                    {template.items?.length || 0}
+                  </TableCell>
+                  <TableCell className="text-gray-300 text-xs md:text-sm">
+                    {format(new Date(template.created_at), "dd.MM.yyyy")}
+                  </TableCell>
                 <TableCell className="text-right">
                   <div className="flex justify-end gap-2">
                     <Button
@@ -134,10 +136,12 @@ export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTablePr
                     </Button>
                   </div>
                 </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
       </div>
 
       <InvoiceTemplateForm

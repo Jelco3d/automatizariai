@@ -39,8 +39,8 @@ export default function BusinessDashboard() {
   return (
     <div className="min-h-screen bg-[#0F1117] text-white flex">
       <Sidebar />
-      <div className="flex-1 p-6">
-        <h1 className="text-3xl font-bold mb-6 text-white">Dashboard Business</h1>
+      <div className="flex-1 p-4 md:p-6 pt-20 md:pt-6">
+        <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-white">Dashboard Business</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           <Card className="bg-[#1A1F2C] border-purple-500/20">

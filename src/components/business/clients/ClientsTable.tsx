@@ -27,30 +27,32 @@ export function ClientsTable({ onEdit }: ClientsTableProps) {
 
   return (
     <>
-      <Card className="bg-[#1A1F2C] border-purple-500/20 p-6">
-        <div className="mb-4">
+      <Card className="bg-[#1A1F2C] border-purple-500/20 p-3 md:p-6">
+        <div className="mb-3 md:mb-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
               placeholder="Caută client..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-10 bg-[#0F1117] border-gray-700 text-white"
+              className="pl-10 bg-[#0F1117] border-gray-700 text-white text-sm"
             />
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow className="border-gray-700 hover:bg-transparent">
-                <TableHead className="text-gray-400">Nume</TableHead>
-                <TableHead className="text-gray-400">Email</TableHead>
-                <TableHead className="text-gray-400">Telefon</TableHead>
-                <TableHead className="text-gray-400">CUI</TableHead>
-                <TableHead className="text-gray-400 text-right">Acțiuni</TableHead>
-              </TableRow>
-            </TableHeader>
+        <div className="overflow-x-auto -mx-3 md:mx-0">
+          <div className="inline-block min-w-full align-middle">
+            <div className="overflow-hidden">
+              <Table className="min-w-[600px]">
+                <TableHeader>
+                  <TableRow className="border-gray-700 hover:bg-transparent">
+                    <TableHead className="text-gray-400 text-xs md:text-sm">Nume</TableHead>
+                    <TableHead className="text-gray-400 text-xs md:text-sm">Email</TableHead>
+                    <TableHead className="text-gray-400 text-xs md:text-sm">Telefon</TableHead>
+                    <TableHead className="text-gray-400 text-xs md:text-sm">CUI</TableHead>
+                    <TableHead className="text-gray-400 text-xs md:text-sm text-right">Acțiuni</TableHead>
+                  </TableRow>
+                </TableHeader>
             <TableBody>
               {isLoading ? (
                 <TableRow>
@@ -67,10 +69,10 @@ export function ClientsTable({ onEdit }: ClientsTableProps) {
               ) : (
                 filteredClients.map((client) => (
                   <TableRow key={client.id} className="border-gray-700 hover:bg-gray-800/50">
-                    <TableCell className="text-white font-medium">{client.name}</TableCell>
-                    <TableCell className="text-gray-300">{client.email}</TableCell>
-                    <TableCell className="text-gray-300">{client.phone || '-'}</TableCell>
-                    <TableCell className="text-gray-300">{client.cui || '-'}</TableCell>
+                    <TableCell className="text-white font-medium text-xs md:text-sm">{client.name}</TableCell>
+                    <TableCell className="text-gray-300 text-xs md:text-sm">{client.email}</TableCell>
+                    <TableCell className="text-gray-300 text-xs md:text-sm">{client.phone || '-'}</TableCell>
+                    <TableCell className="text-gray-300 text-xs md:text-sm">{client.cui || '-'}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
                         <Button
@@ -94,8 +96,10 @@ export function ClientsTable({ onEdit }: ClientsTableProps) {
                   </TableRow>
                 ))
               )}
-            </TableBody>
-          </Table>
+              </TableBody>
+            </Table>
+          </div>
+        </div>
         </div>
       </Card>
 

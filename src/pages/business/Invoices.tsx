@@ -50,34 +50,36 @@ export default function Invoices() {
   return (
     <div className="min-h-screen bg-[#0F1117] text-white flex">
       <Sidebar />
-      <div className="flex-1 p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-white">Facturi</h1>
+      <div className="flex-1 p-4 md:p-6 pt-20 md:pt-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 md:mb-6 gap-3">
+          <h1 className="text-2xl md:text-3xl font-bold text-white">Facturi</h1>
           <Button 
             onClick={() => {
               if (activeTab === 'issued') setIssuedFormOpen(true);
               else if (activeTab === 'payable') setPayableFormOpen(true);
               else setTemplateFormOpen(true);
             }} 
-            className="bg-purple-600 hover:bg-purple-700"
+            className="bg-purple-600 hover:bg-purple-700 w-full md:w-auto"
           >
             <Plus className="h-4 w-4 mr-2" />
-            {activeTab === 'issued' ? 'Factură Nouă' : activeTab === 'payable' ? 'Adaugă Factură de Plată' : 'Template Nou'}
+            <span className="truncate">{activeTab === 'issued' ? 'Factură Nouă' : activeTab === 'payable' ? 'Factură de Plată' : 'Template Nou'}</span>
           </Button>
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="bg-[#1A1F2C] border-purple-500/20 mb-6">
-            <TabsTrigger value="issued" className="data-[state=active]:bg-purple-600">
-              Facturi Emise
-            </TabsTrigger>
-            <TabsTrigger value="payable" className="data-[state=active]:bg-purple-600">
-              Facturi de Plată
-            </TabsTrigger>
-            <TabsTrigger value="templates" className="data-[state=active]:bg-purple-600">
-              Template Facturi
-            </TabsTrigger>
-          </TabsList>
+          <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+            <TabsList className="bg-[#1A1F2C] border-purple-500/20 mb-4 md:mb-6 inline-flex w-auto min-w-full md:min-w-0">
+              <TabsTrigger value="issued" className="data-[state=active]:bg-purple-600 whitespace-nowrap">
+                Facturi Emise
+              </TabsTrigger>
+              <TabsTrigger value="payable" className="data-[state=active]:bg-purple-600 whitespace-nowrap">
+                Facturi de Plată
+              </TabsTrigger>
+              <TabsTrigger value="templates" className="data-[state=active]:bg-purple-600 whitespace-nowrap">
+                Template-uri
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
           <TabsContent value="issued">
             <InvoicesTable />
