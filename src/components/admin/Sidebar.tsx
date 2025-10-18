@@ -50,30 +50,6 @@ export function Sidebar() {
         Dashboard
       </Link>
       <Link 
-        to="/business-dashboard/invoices" 
-        onClick={() => setOpen(false)}
-        className={`flex items-center gap-2 p-2 rounded-lg ${
-          isActive("/business-dashboard/invoices") 
-            ? "text-purple-400 bg-purple-500/10" 
-            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
-        }`}
-      >
-        <FileText className="h-5 w-5" />
-        Facturi
-      </Link>
-      <Link 
-        to="/business-dashboard/quotes" 
-        onClick={() => setOpen(false)}
-        className={`flex items-center gap-2 p-2 rounded-lg ${
-          isActive("/business-dashboard/quotes") 
-            ? "text-purple-400 bg-purple-500/10" 
-            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
-        }`}
-      >
-        <FileSpreadsheet className="h-5 w-5" />
-        Oferte
-      </Link>
-      <Link 
         to="/business-dashboard/proposals" 
         onClick={() => setOpen(false)}
         className={`flex items-center gap-2 p-2 rounded-lg ${
@@ -96,6 +72,30 @@ export function Sidebar() {
       >
         <FileCheck className="h-5 w-5" />
         Contracte
+      </Link>
+      <Link 
+        to="/business-dashboard/invoices" 
+        onClick={() => setOpen(false)}
+        className={`flex items-center gap-2 p-2 rounded-lg ${
+          isActive("/business-dashboard/invoices") 
+            ? "text-purple-400 bg-purple-500/10" 
+            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
+        }`}
+      >
+        <FileText className="h-5 w-5" />
+        Facturi
+      </Link>
+      <Link 
+        to="/business-dashboard/quotes" 
+        onClick={() => setOpen(false)}
+        className={`flex items-center gap-2 p-2 rounded-lg ${
+          isActive("/business-dashboard/quotes") 
+            ? "text-purple-400 bg-purple-500/10" 
+            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
+        }`}
+      >
+        <FileSpreadsheet className="h-5 w-5" />
+        Oferte
       </Link>
       <Link 
         to="/business-dashboard/clients" 
