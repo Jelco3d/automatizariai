@@ -83,6 +83,13 @@ export default function Proposals() {
       <div className="flex-1 p-4 md:p-6 pt-20 md:pt-6">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 md:mb-6 gap-3">
           <h1 className="text-2xl md:text-3xl font-bold text-white">Propuneri</h1>
+          <div className="flex md:hidden justify-center w-full">
+            <img 
+              src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" 
+              alt="AI Automatizari" 
+              className="h-12 w-auto rounded-lg" 
+            />
+          </div>
           <Button 
             onClick={() => {
               setEditingProposal(null);
