@@ -59,7 +59,7 @@ export default function Contracts() {
   }
 
   const totalValue = contracts?.reduce((sum, contract) => sum + Number(contract.total_value), 0) || 0;
-  const activeContracts = contracts?.filter(c => c.status === 'active').length || 0;
+  const activeContracts = contracts?.filter(c => c.fully_signed_at !== null).length || 0;
 
   const handleCreateContract = async (data: ContractFormData & { generated_contract?: string; proposal_id?: string }) => {
     const contractNumber = await generateDocumentNumber('CONTRACT');

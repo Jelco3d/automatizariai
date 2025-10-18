@@ -42,7 +42,10 @@ export function ContractsTable({
         </TableHeader>
         <TableBody>
           {contracts.map((contract) => (
-            <TableRow key={contract.id}>
+            <TableRow 
+              key={contract.id}
+              className={contract.fully_signed_at ? "bg-green-500/10 hover:bg-green-500/20" : ""}
+            >
               <TableCell className="font-medium">{contract.contract_number}</TableCell>
               <TableCell>{contract.clients?.name}</TableCell>
               <TableCell>{contract.contract_type}</TableCell>
