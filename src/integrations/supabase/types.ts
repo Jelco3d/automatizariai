@@ -556,6 +556,7 @@ export type Database = {
           quote_id: string
           total: number
           unit_price: number
+          vat_rate: number
         }
         Insert: {
           description: string
@@ -564,6 +565,7 @@ export type Database = {
           quote_id: string
           total: number
           unit_price: number
+          vat_rate?: number
         }
         Update: {
           description?: string
@@ -572,6 +574,7 @@ export type Database = {
           quote_id?: string
           total?: number
           unit_price?: number
+          vat_rate?: number
         }
         Relationships: [
           {
