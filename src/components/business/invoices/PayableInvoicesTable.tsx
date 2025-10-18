@@ -3,11 +3,12 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { Search, Trash2, FileDown } from 'lucide-react';
+import { Search, Trash2, FileDown, Pencil } from 'lucide-react';
 import { usePayableInvoices } from '@/hooks/usePayableInvoices';
 import { formatDate } from '@/utils/dateFormatters';
 import { formatCurrency } from '@/utils/numberFormatters';
 import { DeleteDialog } from '@/components/business/shared/DeleteDialog';
+import { EditPayableInvoiceDialog } from './EditPayableInvoiceDialog';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -15,6 +16,7 @@ export function PayableInvoicesTable() {
   const { payableInvoices, isLoading, deletePayableInvoice } = usePayableInvoices();
   const [search, setSearch] = useState('');
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [editInvoice, setEditInvoice] = useState<typeof payableInvoices[0] | null>(null);
   const { toast } = useToast();
 
   const filteredInvoices = payableInvoices.filter(
@@ -141,14 +143,26 @@ export function PayableInvoicesTable() {
                       )}
                     </TableCell>
                     <TableCell>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => setDeleteId(invoice.id)}
-                        className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                      <div className="flex gap-1">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => setEditInvoice(invoice)}
+                          className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10"
+                          title="Editează"
+                        >
+                          <Pencil className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => setDeleteId(invoice.id)}
+                          className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                          title="Șterge"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))
@@ -157,6 +171,14 @@ export function PayableInvoicesTable() {
           </Table>
         </div>
       </Card>
+
+      {editInvoice && (
+        <EditPayableInvoiceDialog
+          open={!!editInvoice}
+          onOpenChange={(open) => !open && setEditInvoice(null)}
+          invoice={editInvoice}
+        />
+      )}
 
       <DeleteDialog
         open={deleteId !== null}
