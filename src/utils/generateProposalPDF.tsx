@@ -1,31 +1,48 @@
-import { Document, Page, Text, View, StyleSheet, pdf } from '@react-pdf/renderer';
+import { Document, Page, Text, View, StyleSheet, pdf, Font } from '@react-pdf/renderer';
+
+// Register Roboto font for Romanian character support
+Font.register({
+  family: 'Roboto',
+  fonts: [
+    { src: 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxK.woff2', fontWeight: 400 },
+    { src: 'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc4.woff2', fontWeight: 700 }
+  ]
+});
 
 const styles = StyleSheet.create({
   page: {
     padding: 40,
     backgroundColor: '#ffffff',
+    fontFamily: 'Roboto',
   },
   title: {
     fontSize: 24,
     marginBottom: 20,
     color: '#1A1F2C',
-    fontWeight: 'bold',
+    fontWeight: 700,
+    fontFamily: 'Roboto',
   },
   section: {
-    marginBottom: 15,
+    marginBottom: 12,
   },
   text: {
     fontSize: 11,
     lineHeight: 1.6,
     color: '#333333',
     textAlign: 'justify',
+    fontFamily: 'Roboto',
   },
   header: {
     fontSize: 14,
-    marginBottom: 10,
-    marginTop: 10,
+    marginBottom: 8,
+    marginTop: 12,
     color: '#6366F1',
-    fontWeight: 'bold',
+    fontWeight: 700,
+    fontFamily: 'Roboto',
+  },
+  bold: {
+    fontWeight: 700,
+    fontFamily: 'Roboto',
   },
 });
 
@@ -34,8 +51,38 @@ interface ProposalPDFProps {
   proposal: string;
 }
 
+interface ParsedSegment {
+  text: string;
+  bold: boolean;
+}
+
+// Parse inline bold markers (**text**)
+const parseInlineBold = (text: string): ParsedSegment[] => {
+  const segments: ParsedSegment[] = [];
+  const parts = text.split('**');
+  
+  parts.forEach((part, index) => {
+    if (part) {
+      segments.push({
+        text: part,
+        bold: index % 2 === 1, // Odd indices are bold (between **)
+      });
+    }
+  });
+  
+  return segments;
+};
+
+// Parse a line to determine if it's a header
+const parseLine = (line: string): { type: 'header' | 'text'; content: string } => {
+  const headerMatch = line.match(/^#+\s+(.+)$/);
+  if (headerMatch) {
+    return { type: 'header', content: headerMatch[1] };
+  }
+  return { type: 'text', content: line };
+};
+
 const ProposalPDF = ({ businessName, proposal }: ProposalPDFProps) => {
-  // Split the proposal into sections and paragraphs
   const sections = proposal.split('\n\n').filter(section => section.trim());
 
   return (
@@ -43,11 +90,37 @@ const ProposalPDF = ({ businessName, proposal }: ProposalPDFProps) => {
       <Page size="A4" style={styles.page}>
         <Text style={styles.title}>Propunere pentru {businessName}</Text>
         
-        {sections.map((section, index) => (
-          <View key={index} style={styles.section}>
-            <Text style={styles.text}>{section}</Text>
-          </View>
-        ))}
+        {sections.map((section, sectionIndex) => {
+          const lines = section.split('\n').filter(line => line.trim());
+          
+          return (
+            <View key={sectionIndex} style={styles.section}>
+              {lines.map((line, lineIndex) => {
+                const parsed = parseLine(line);
+                
+                if (parsed.type === 'header') {
+                  return (
+                    <Text key={lineIndex} style={styles.header}>
+                      {parsed.content}
+                    </Text>
+                  );
+                }
+                
+                const segments = parseInlineBold(parsed.content);
+                
+                return (
+                  <Text key={lineIndex} style={styles.text}>
+                    {segments.map((segment, segIndex) => (
+                      <Text key={segIndex} style={segment.bold ? styles.bold : {}}>
+                        {segment.text}
+                      </Text>
+                    ))}
+                  </Text>
+                );
+              })}
+            </View>
+          );
+        })}
       </Page>
     </Document>
   );
