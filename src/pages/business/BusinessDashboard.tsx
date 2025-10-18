@@ -5,11 +5,21 @@ import { Sidebar } from "@/components/admin/Sidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, FileSpreadsheet, FileCheck, Users, TrendingUp, DollarSign } from "lucide-react";
 import { Session } from "@supabase/supabase-js";
+import { useInvoices } from "@/hooks/useInvoices";
+import { useQuotes } from "@/hooks/useQuotes";
+import { useContracts } from "@/hooks/useContracts";
+import { useClients } from "@/hooks/useClients";
+import { formatCurrency } from "@/utils/numberFormatters";
 
 export default function BusinessDashboard() {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const { invoices, isLoading: invoicesLoading } = useInvoices();
+  const { quotes, isLoading: quotesLoading } = useQuotes();
+  const { contracts, isLoading: contractsLoading } = useContracts();
+  const { clients, isLoading: clientsLoading } = useClients();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -30,11 +40,43 @@ export default function BusinessDashboard() {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  if (loading) {
+  if (loading || invoicesLoading || quotesLoading || contractsLoading || clientsLoading) {
     return <div className="min-h-screen bg-[#0F1117] flex items-center justify-center">
       <p className="text-white">Se încarcă...</p>
     </div>;
   }
+
+  // Calculate current month invoices
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
+  
+  const currentMonthInvoices = invoices.filter(inv => {
+    const invoiceDate = new Date(inv.issue_date);
+    return invoiceDate.getMonth() === currentMonth && invoiceDate.getFullYear() === currentYear;
+  });
+
+  const currentMonthQuotes = quotes.filter(q => {
+    const quoteDate = new Date(q.issue_date);
+    return quoteDate.getMonth() === currentMonth && quoteDate.getFullYear() === currentYear;
+  });
+
+  // Calculate active contracts (not expired)
+  const activeContracts = contracts?.filter(c => {
+    if (!c.end_date) return true;
+    return new Date(c.end_date) >= currentDate;
+  }) || [];
+
+  // Calculate revenue from paid invoices
+  const paidInvoices = invoices.filter(inv => inv.status === 'paid');
+  const currentMonthRevenue = paidInvoices
+    .filter(inv => {
+      const invoiceDate = new Date(inv.issue_date);
+      return invoiceDate.getMonth() === currentMonth && invoiceDate.getFullYear() === currentYear;
+    })
+    .reduce((sum, inv) => sum + Number(inv.total), 0);
+
+  const totalRevenue = paidInvoices.reduce((sum, inv) => sum + Number(inv.total), 0);
 
   return (
     <div className="min-h-screen bg-[#0F1117] text-white flex">
@@ -49,7 +91,7 @@ export default function BusinessDashboard() {
               <FileText className="h-4 w-4 text-purple-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">0</div>
+              <div className="text-2xl font-bold text-white">{currentMonthInvoices.length}</div>
               <p className="text-xs text-gray-400 mt-1">Luna curentă</p>
             </CardContent>
           </Card>
@@ -60,7 +102,7 @@ export default function BusinessDashboard() {
               <FileSpreadsheet className="h-4 w-4 text-purple-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">0</div>
+              <div className="text-2xl font-bold text-white">{currentMonthQuotes.length}</div>
               <p className="text-xs text-gray-400 mt-1">Luna curentă</p>
             </CardContent>
           </Card>
@@ -71,7 +113,7 @@ export default function BusinessDashboard() {
               <FileCheck className="h-4 w-4 text-purple-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">0</div>
+              <div className="text-2xl font-bold text-white">{activeContracts.length}</div>
               <p className="text-xs text-gray-400 mt-1">Active acum</p>
             </CardContent>
           </Card>
@@ -82,7 +124,7 @@ export default function BusinessDashboard() {
               <Users className="h-4 w-4 text-purple-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">0</div>
+              <div className="text-2xl font-bold text-white">{clients.length}</div>
               <p className="text-xs text-gray-400 mt-1">Clienți înregistrați</p>
             </CardContent>
           </Card>
@@ -93,7 +135,7 @@ export default function BusinessDashboard() {
               <DollarSign className="h-4 w-4 text-purple-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">0 RON</div>
+              <div className="text-2xl font-bold text-white">{formatCurrency(currentMonthRevenue)}</div>
               <p className="text-xs text-gray-400 mt-1">Facturi plătite</p>
             </CardContent>
           </Card>
@@ -104,7 +146,7 @@ export default function BusinessDashboard() {
               <TrendingUp className="h-4 w-4 text-purple-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">0 RON</div>
+              <div className="text-2xl font-bold text-white">{formatCurrency(totalRevenue)}</div>
               <p className="text-xs text-gray-400 mt-1">Toate perioadele</p>
             </CardContent>
           </Card>
