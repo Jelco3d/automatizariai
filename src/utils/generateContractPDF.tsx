@@ -229,6 +229,17 @@ export const generateContractPDF = async (
   const link = document.createElement('a');
   link.href = url;
   link.download = `Contract_${contractNumber}_${clientName}.pdf`;
+  document.body.appendChild(link);
   link.click();
-  URL.revokeObjectURL(url);
+  document.body.removeChild(link);
+
+  // iOS/Safari fallback: open in a new tab if download may be blocked
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  if (isIOS || isSafari) {
+    window.open(url, '_blank');
+  }
+
+  // Give the browser time to start the download before revoking
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
 };

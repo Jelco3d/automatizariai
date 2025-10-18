@@ -108,14 +108,21 @@ export default function Contracts() {
       
       await generateContractPDF(
         contract.contract_number,
-        contract.contract_type,
+        contract.contract_type || 'PRESTĂRI SERVICII',
         contract.clients?.name || 'Client',
-        contractText
+        contractText,
+        contract.provider_signature_data || undefined,
+        contract.provider_signature_name || undefined,
+        contract.client_signature_data || undefined,
+        contract.client_signature_name || undefined,
+        contract.provider_name || undefined
       );
       
       toast({
-        title: "PDF generat",
-        description: "Contractul a fost descărcat cu succes.",
+        title: contract.fully_signed_at ? "PDF semnat descărcat" : "PDF generat",
+        description: contract.fully_signed_at
+          ? "Varianta semnată a contractului a fost descărcată."
+          : "Contractul a fost descărcat.",
       });
     } catch (error) {
       toast({
