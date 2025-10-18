@@ -63,7 +63,80 @@ export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTablePr
 
   return (
     <>
-      <div className="rounded-md border border-purple-500/20 overflow-hidden">
+      {/* Mobile Card View */}
+      <div className="md:hidden space-y-3">
+        {templates.map((template) => (
+          <div key={template.id} className="bg-[#1A1F2C] border border-purple-500/20 rounded-lg p-4">
+            <div className="space-y-3">
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <div className="font-semibold text-white text-sm">{template.name}</div>
+                  <div className="text-xs text-gray-400 mt-1 line-clamp-2">
+                    {template.description || 'Fără descriere'}
+                  </div>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div>
+                  <span className="text-gray-500">Articole:</span>
+                  <div className="text-gray-300 mt-0.5">{template.items?.length || 0}</div>
+                </div>
+                <div>
+                  <span className="text-gray-500">Data:</span>
+                  <div className="text-gray-300 mt-0.5">
+                    {format(new Date(template.created_at), "dd.MM.yyyy")}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-1 pt-2 border-t border-purple-500/20">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => handleCreateInvoiceFromTemplate(template)}
+                  className="text-green-400 hover:text-green-300 hover:bg-green-500/10 h-8 w-8 p-0"
+                  title="Creează factură"
+                >
+                  <FilePlus className="h-4 w-4" />
+                </Button>
+                {onUseTemplate && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => onUseTemplate(template)}
+                    className="text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 h-8 w-8 p-0"
+                    title="Folosește"
+                  >
+                    <FileText className="h-4 w-4" />
+                  </Button>
+                )}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setEditTemplate(template)}
+                  className="text-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/10 h-8 w-8 p-0"
+                  title="Editează"
+                >
+                  <Pencil className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setDeleteTemplateId(template.id)}
+                  className="text-red-400 hover:text-red-300 hover:bg-red-500/10 h-8 w-8 p-0"
+                  title="Șterge"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop Table View */}
+      <div className="hidden md:block rounded-md border border-purple-500/20 overflow-hidden">
         <div className="overflow-x-auto -mx-3 md:mx-0">
           <div className="inline-block min-w-full align-middle">
             <Table className="min-w-[700px]">

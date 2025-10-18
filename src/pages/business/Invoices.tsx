@@ -57,10 +57,10 @@ export default function Invoices() {
                 if (activeTab === 'issued') setIssuedFormOpen(true);
                 else setTemplateFormOpen(true);
               }} 
-              className="bg-purple-600 hover:bg-purple-700 w-full md:w-auto"
+              className="bg-purple-600 hover:bg-purple-700 w-full md:w-auto text-sm md:text-base px-4"
             >
-              <Plus className="h-4 w-4 mr-2" />
-              <span className="truncate">{activeTab === 'issued' ? 'Factură Nouă' : 'Template Nou'}</span>
+              <Plus className="h-4 w-4 mr-2 flex-shrink-0" />
+              <span>{activeTab === 'issued' ? 'Factură Nouă' : 'Template Nou'}</span>
             </Button>
           )}
         </div>

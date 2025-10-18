@@ -61,7 +61,58 @@ export function PaidInvoicesTable() {
         </div>
       </div>
 
-      <div className="overflow-x-auto -mx-3 md:mx-0">
+      {/* Mobile Card View */}
+      <div className="md:hidden space-y-3">
+        {isLoading ? (
+          <div className="text-center text-gray-400 py-8">Se încarcă...</div>
+        ) : filteredInvoices.length === 0 ? (
+          <div className="text-center text-gray-400 py-8">
+            {paidInvoices.length === 0 
+              ? 'Nu există facturi încasate încă' 
+              : 'Nu s-au găsit facturi pentru căutarea ta'}
+          </div>
+        ) : (
+          filteredInvoices.map((invoice) => (
+            <Card key={invoice.id} className="bg-[#0F1117] border-green-500/20 p-4">
+              <div className="space-y-3">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <div className="font-semibold text-white text-sm">{invoice.invoice_number}</div>
+                    <div className="text-xs text-gray-400 mt-0.5">{invoice.client?.name || '-'}</div>
+                  </div>
+                  <StatusBadge status={invoice.status} type="invoice" />
+                </div>
+                
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div>
+                    <span className="text-gray-500">Emisă:</span>
+                    <div className="text-gray-300 mt-0.5">{formatDate(invoice.issue_date)}</div>
+                  </div>
+                  <div>
+                    <span className="text-gray-500">Data Plății:</span>
+                    <div className="text-green-400 mt-0.5">{formatDate(invoice.due_date)}</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-2 border-t border-gray-700">
+                  <div className="font-semibold text-white">{formatCurrency(invoice.total)}</div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleDownloadPDF(invoice)}
+                    className="text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 h-8 w-8 p-0"
+                  >
+                    <FileText className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          ))
+        )}
+      </div>
+
+      {/* Desktop Table View */}
+      <div className="hidden md:block overflow-x-auto -mx-3 md:mx-0">
         <div className="inline-block min-w-full align-middle">
           <div className="overflow-hidden">
             <Table className="min-w-[800px]">
