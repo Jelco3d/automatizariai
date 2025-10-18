@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import * as pdfjsLib from "https://esm.sh/pdfjs-dist@4.0.379/build/pdf.mjs";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -41,11 +42,24 @@ serve(async (req) => {
       throw new Error('Failed to download PDF file');
     }
 
-    // Convert file to base64
+    // Convert file to array buffer for PDF.js
     const arrayBuffer = await fileData.arrayBuffer();
-    const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+    console.log('File downloaded, extracting text...');
 
-    console.log('File downloaded and converted to base64');
+    // Extract text from PDF using PDF.js
+    const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+    const pdf = await loadingTask.promise;
+    
+    let fullText = '';
+    // Extract text from all pages
+    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+      const page = await pdf.getPage(pageNum);
+      const textContent = await page.getTextContent();
+      const pageText = textContent.items.map((item: any) => item.str).join(' ');
+      fullText += pageText + '\n';
+    }
+
+    console.log('Text extracted from PDF, length:', fullText.length);
 
     // Prepare the AI request with tool calling for structured extraction
     const aiPayload = {
@@ -53,14 +67,14 @@ serve(async (req) => {
       messages: [
         {
           role: "system",
-          content: `You are an expert at extracting structured data from Romanian invoices (facturi). 
-Extract the following information accurately:
-- Supplier name (Furnizor/Vânzător)
-- Supplier CUI/CIF (Tax registration number)
-- Invoice number (Număr factură)
-- Issue date (Data emiterii)
-- Due date (Data scadentă/Data plății)
-- Total amount (Total de plată)
+          content: `You are an expert at extracting structured data from invoices. 
+Extract the following information accurately from the provided invoice text:
+- Supplier name (Furnizor/Vânzător/From/Vendor)
+- Supplier CUI/CIF (Tax registration number/VAT ID/Tax ID)
+- Invoice number (Număr factură/Invoice number/Invoice #)
+- Issue date (Data emiterii/Invoice date/Date)
+- Due date (Data scadentă/Data plății/Due date/Payment due)
+- Total amount (Total de plată/Amount due/Total)
 
 Return the data in the specified format. If a field is not found, return null for that field.
 For dates, use YYYY-MM-DD format.
@@ -68,18 +82,7 @@ For total amount, extract only the numeric value without currency symbols.`
         },
         {
           role: "user",
-          content: [
-            {
-              type: "text",
-              text: "Please extract the invoice data from this PDF document."
-            },
-            {
-              type: "image_url",
-              image_url: {
-                url: `data:application/pdf;base64,${base64}`
-              }
-            }
-          ]
+          content: `Please extract the invoice data from this invoice text:\n\n${fullText}`
         }
       ],
       tools: [
