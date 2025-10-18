@@ -12,5 +12,8 @@ verify_jwt = false
 [functions.extract-audit-insights]
 verify_jwt = false
 
+[functions.extract-invoice-data]
+verify_jwt = false
+
 [functions.send-report-pdf]
 verify_jwt = false

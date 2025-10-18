@@ -3,16 +3,19 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { Search, Trash2 } from 'lucide-react';
+import { Search, Trash2, FileDown } from 'lucide-react';
 import { usePayableInvoices } from '@/hooks/usePayableInvoices';
 import { formatDate } from '@/utils/dateFormatters';
 import { formatCurrency } from '@/utils/numberFormatters';
 import { DeleteDialog } from '@/components/business/shared/DeleteDialog';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 export function PayableInvoicesTable() {
   const { payableInvoices, isLoading, deletePayableInvoice } = usePayableInvoices();
   const [search, setSearch] = useState('');
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const { toast } = useToast();
 
   const filteredInvoices = payableInvoices.filter(
     (invoice) =>
@@ -40,6 +43,37 @@ export function PayableInvoicesTable() {
     );
   };
 
+  const handleDownloadPDF = async (filePath: string, invoiceNumber: string) => {
+    try {
+      const { data, error } = await supabase.storage
+        .from('payable-invoices-pdfs')
+        .download(filePath);
+
+      if (error) throw error;
+
+      const url = URL.createObjectURL(data);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `factura-${invoiceNumber}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      toast({
+        title: "PDF descărcat",
+        description: "Factura a fost descărcată cu succes",
+      });
+    } catch (error) {
+      console.error('Error downloading PDF:', error);
+      toast({
+        title: "Eroare",
+        description: "Nu s-a putut descărca PDF-ul",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <>
       <Card className="bg-[#1A1F2C] border-purple-500/20 p-6">
@@ -65,19 +99,20 @@ export function PayableInvoicesTable() {
                 <TableHead className="text-gray-400">Data scadentă</TableHead>
                 <TableHead className="text-gray-400">Total</TableHead>
                 <TableHead className="text-gray-400">Status</TableHead>
+                <TableHead className="text-gray-400">PDF</TableHead>
                 <TableHead className="text-gray-400">Acțiuni</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {isLoading ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center text-gray-400">
+                  <TableCell colSpan={8} className="text-center text-gray-400">
                     Se încarcă...
                   </TableCell>
                 </TableRow>
               ) : filteredInvoices.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center text-gray-400">
+                  <TableCell colSpan={8} className="text-center text-gray-400">
                     Nu există facturi de plată
                   </TableCell>
                 </TableRow>
@@ -90,6 +125,21 @@ export function PayableInvoicesTable() {
                     <TableCell className="text-gray-300">{formatDate(invoice.due_date)}</TableCell>
                     <TableCell className="text-white font-semibold">{formatCurrency(invoice.total)}</TableCell>
                     <TableCell>{getStatusBadge(invoice.status)}</TableCell>
+                    <TableCell>
+                      {invoice.pdf_file_path ? (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDownloadPDF(invoice.pdf_file_path!, invoice.invoice_number)}
+                          className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10"
+                          title="Descarcă PDF"
+                        >
+                          <FileDown className="h-4 w-4" />
+                        </Button>
+                      ) : (
+                        <span className="text-gray-500 text-sm">-</span>
+                      )}
+                    </TableCell>
                     <TableCell>
                       <Button
                         variant="ghost"

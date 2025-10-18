@@ -10,6 +10,7 @@ export const payableInvoiceSchema = z.object({
   status: z.enum(['unpaid', 'paid', 'overdue']),
   payment_date: z.string().optional(),
   notes: z.string().optional(),
+  pdf_file_path: z.string().optional(),
 });
 
 export type PayableInvoiceFormData = z.infer<typeof payableInvoiceSchema>;

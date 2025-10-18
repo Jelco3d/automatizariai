@@ -389,6 +389,7 @@ export type Database = {
           issue_date: string
           notes: string | null
           payment_date: string | null
+          pdf_file_path: string | null
           status: string
           supplier_cui: string | null
           supplier_name: string
@@ -403,6 +404,7 @@ export type Database = {
           issue_date?: string
           notes?: string | null
           payment_date?: string | null
+          pdf_file_path?: string | null
           status?: string
           supplier_cui?: string | null
           supplier_name: string
@@ -417,6 +419,7 @@ export type Database = {
           issue_date?: string
           notes?: string | null
           payment_date?: string | null
+          pdf_file_path?: string | null
           status?: string
           supplier_cui?: string | null
           supplier_name?: string
