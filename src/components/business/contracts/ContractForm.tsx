@@ -136,13 +136,13 @@ export function ContractForm({ onSubmit, initialData }: ContractFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-2.5 md:space-y-4">
         <FormField
           control={form.control}
           name="client_id"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-white">Client</FormLabel>
+              <FormLabel className="text-white text-xs md:text-sm">Client</FormLabel>
               <FormControl>
                 <ClientSelector value={field.value} onChange={field.onChange} />
               </FormControl>
@@ -152,14 +152,14 @@ export function ContractForm({ onSubmit, initialData }: ContractFormProps) {
         />
 
         <div className="space-y-2">
-          <FormLabel className="text-white">Propunere (opțional)</FormLabel>
+          <FormLabel className="text-white text-xs md:text-sm">Propunere (opțional)</FormLabel>
           <Select value={selectedProposalId} onValueChange={handleProposalChange}>
-            <SelectTrigger className="bg-white text-gray-900 border-gray-300">
-              <SelectValue placeholder="Selectează o propunere" />
+            <SelectTrigger className="bg-white text-gray-900 border-gray-300 text-xs md:text-sm h-8 md:h-10">
+              <SelectValue placeholder="Selectează propunere" />
             </SelectTrigger>
             <SelectContent className="bg-white z-50">
               {proposals?.map((proposal) => (
-                <SelectItem key={proposal.id} value={proposal.id} className="text-gray-900">
+                <SelectItem key={proposal.id} value={proposal.id} className="text-gray-900 text-xs md:text-sm">
                   {proposal.business_name} - {proposal.price} RON
                 </SelectItem>
               ))}
@@ -172,16 +172,16 @@ export function ContractForm({ onSubmit, initialData }: ContractFormProps) {
           name="contract_type"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-white">Tip Contract</FormLabel>
+              <FormLabel className="text-white text-xs md:text-sm">Tip Contract</FormLabel>
               <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
-                  <SelectTrigger className="bg-white text-gray-900 border-gray-300">
+                  <SelectTrigger className="bg-white text-gray-900 border-gray-300 text-xs md:text-sm h-8 md:h-10">
                     <SelectValue placeholder="Selectează tipul" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className="bg-white z-50">
                   {contractTypes.map((type) => (
-                    <SelectItem key={type} value={type} className="text-gray-900">
+                    <SelectItem key={type} value={type} className="text-gray-900 text-xs md:text-sm">
                       {type}
                     </SelectItem>
                   ))}
@@ -192,17 +192,17 @@ export function ContractForm({ onSubmit, initialData }: ContractFormProps) {
           )}
         />
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 md:gap-4">
           <FormField
             control={form.control}
             name="start_date"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-white">Data Început</FormLabel>
+                <FormLabel className="text-white text-xs md:text-sm">Data Început</FormLabel>
                 <FormControl>
                   <Input
                     type="date"
-                    className="bg-white text-gray-900 border-gray-300"
+                    className="bg-white text-gray-900 border-gray-300 text-xs md:text-sm h-8 md:h-10"
                     value={formatDateForInput(field.value)}
                     onChange={(e) => field.onChange(new Date(e.target.value))}
                   />
@@ -217,11 +217,11 @@ export function ContractForm({ onSubmit, initialData }: ContractFormProps) {
             name="end_date"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-white">Data Încheiere (opțional)</FormLabel>
+                <FormLabel className="text-white text-xs md:text-sm">Încheiere (opțional)</FormLabel>
                 <FormControl>
                   <Input
                     type="date"
-                    className="bg-white text-gray-900 border-gray-300"
+                    className="bg-white text-gray-900 border-gray-300 text-xs md:text-sm h-8 md:h-10"
                     value={field.value ? formatDateForInput(field.value) : ''}
                     onChange={(e) => field.onChange(e.target.value ? new Date(e.target.value) : undefined)}
                   />
@@ -237,12 +237,12 @@ export function ContractForm({ onSubmit, initialData }: ContractFormProps) {
           name="total_value"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-white">Valoare Totală (RON)</FormLabel>
+              <FormLabel className="text-white text-xs md:text-sm">Valoare Totală (RON)</FormLabel>
               <FormControl>
                 <Input
                   type="number"
                   step="0.01"
-                  className="bg-white text-gray-900 border-gray-300"
+                  className="bg-white text-gray-900 border-gray-300 text-xs md:text-sm h-8 md:h-10"
                   {...field}
                   onChange={(e) => field.onChange(parseFloat(e.target.value))}
                 />
@@ -252,25 +252,25 @@ export function ContractForm({ onSubmit, initialData }: ContractFormProps) {
           )}
         />
 
-        <div className="flex justify-center">
+        <div className="flex justify-center pt-1">
           <Button
             type="button"
             onClick={handleGenerateContract}
             disabled={isGenerating}
-            className="w-full bg-purple-600 hover:bg-purple-700"
+            className="w-full bg-purple-600 hover:bg-purple-700 text-xs md:text-sm h-8 md:h-10"
           >
-            {isGenerating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {isGenerating && <Loader2 className="mr-2 h-3.5 w-3.5 md:h-4 md:w-4 animate-spin" />}
             Generează Contract cu AI
           </Button>
         </div>
 
         {generatedContract && (
-          <div className="space-y-2">
-            <FormLabel className="text-white">Contract Generat</FormLabel>
+          <div className="space-y-1.5 md:space-y-2">
+            <FormLabel className="text-white text-xs md:text-sm">Contract Generat</FormLabel>
             <Textarea
               value={generatedContract}
               onChange={(e) => setGeneratedContract(e.target.value)}
-              className="min-h-[400px] font-mono text-sm bg-white text-gray-900 border-gray-300"
+              className="min-h-[250px] md:min-h-[400px] font-mono text-xs md:text-sm bg-white text-gray-900 border-gray-300"
             />
           </div>
         )}
@@ -280,9 +280,9 @@ export function ContractForm({ onSubmit, initialData }: ContractFormProps) {
           name="terms"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-white">Termeni și Condiții</FormLabel>
+              <FormLabel className="text-white text-xs md:text-sm">Termeni și Condiții</FormLabel>
               <FormControl>
-                <Textarea {...field} rows={4} className="bg-white text-gray-900 border-gray-300" />
+                <Textarea {...field} rows={3} className="bg-white text-gray-900 border-gray-300 text-xs md:text-sm" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -294,16 +294,16 @@ export function ContractForm({ onSubmit, initialData }: ContractFormProps) {
           name="clauses"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-white">Clauze Speciale</FormLabel>
+              <FormLabel className="text-white text-xs md:text-sm">Clauze Speciale</FormLabel>
               <FormControl>
-                <Textarea {...field} rows={4} className="bg-white text-gray-900 border-gray-300" />
+                <Textarea {...field} rows={3} className="bg-white text-gray-900 border-gray-300 text-xs md:text-sm" />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full text-xs md:text-sm h-8 md:h-10">
           Salvează Contract
         </Button>
       </form>
