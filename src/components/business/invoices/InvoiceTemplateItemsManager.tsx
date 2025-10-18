@@ -24,7 +24,7 @@ export function InvoiceTemplateItemsManager({ form }: InvoiceTemplateItemsManage
     const currentItems = form.getValues('items');
     form.setValue('items', [
       ...currentItems,
-      { description: '', quantity: 1, unit_price: 0, vat_rate: 19 },
+      { description: '', quantity: 1, unit_price: 0, vat_rate: 21 },
     ]);
   };
 
@@ -149,6 +149,7 @@ export function InvoiceTemplateItemsManager({ form }: InvoiceTemplateItemsManage
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
+                        <SelectItem value="21">21% TVA (Standard)</SelectItem>
                         <SelectItem value="19">19% TVA</SelectItem>
                         <SelectItem value="9">9% TVA</SelectItem>
                         <SelectItem value="5">5% TVA</SelectItem>

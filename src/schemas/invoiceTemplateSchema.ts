@@ -4,7 +4,7 @@ export const invoiceTemplateItemSchema = z.object({
   description: z.string().min(1, 'Descrierea este obligatorie').max(500),
   quantity: z.number().min(0.01, 'Cantitatea trebuie să fie pozitivă'),
   unit_price: z.number().min(0, 'Prețul trebuie să fie pozitiv'),
-  vat_rate: z.number().default(19),
+  vat_rate: z.number().default(21),
 });
 
 export const invoiceTemplateSchema = z.object({
