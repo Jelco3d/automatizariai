@@ -4,13 +4,28 @@ import { supabase } from "@/integrations/supabase/client";
 import { Sidebar } from "@/components/admin/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Plus } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Plus, FileText } from "lucide-react";
 import { Session } from "@supabase/supabase-js";
+import { useContracts, Contract } from "@/hooks/useContracts";
+import { ContractForm } from "@/components/business/contracts/ContractForm";
+import { ContractsTable } from "@/components/business/contracts/ContractsTable";
+import { ContractFormData } from "@/schemas/contractSchema";
+import { generateContractPDF } from "@/utils/generateContractPDF";
+import { generateDocumentNumber } from "@/utils/documentNumbers";
+import { useToast } from "@/hooks/use-toast";
+import { formatCurrency } from "@/utils/numberFormatters";
 
 export default function Contracts() {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [editingContract, setEditingContract] = useState<Contract | null>(null);
+  const [viewContract, setViewContract] = useState<Contract | null>(null);
   const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const { contracts, isLoading, createContract, updateContract, deleteContract } = useContracts();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -31,11 +46,85 @@ export default function Contracts() {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  if (loading) {
-    return <div className="min-h-screen bg-[#0F1117] flex items-center justify-center">
-      <p className="text-white">Se încarcă...</p>
-    </div>;
+  if (loading || isLoading) {
+    return (
+      <div className="min-h-screen bg-[#0F1117] flex items-center justify-center">
+        <p className="text-white">Se încarcă...</p>
+      </div>
+    );
   }
+
+  const totalValue = contracts?.reduce((sum, contract) => sum + Number(contract.total_value), 0) || 0;
+  const activeContracts = contracts?.filter(c => c.status === 'active').length || 0;
+
+  const handleCreateContract = async (data: ContractFormData & { generated_contract?: string; proposal_id?: string }) => {
+    const contractNumber = await generateDocumentNumber('CONTRACT');
+    
+    createContract({
+      ...data,
+      contract_number: contractNumber,
+      start_date: data.start_date.toISOString().split('T')[0],
+      end_date: data.end_date ? data.end_date.toISOString().split('T')[0] : undefined,
+      status: 'draft',
+    });
+    
+    setIsDialogOpen(false);
+  };
+
+  const handleUpdateContract = async (data: ContractFormData & { generated_contract?: string; proposal_id?: string }) => {
+    if (!editingContract) return;
+
+    updateContract({
+      id: editingContract.id,
+      ...data,
+      start_date: data.start_date.toISOString().split('T')[0],
+      end_date: data.end_date ? data.end_date.toISOString().split('T')[0] : undefined,
+    });
+
+    setIsDialogOpen(false);
+    setEditingContract(null);
+  };
+
+  const handleEdit = (contract: Contract) => {
+    setEditingContract(contract);
+    setIsDialogOpen(true);
+  };
+
+  const handleDelete = (id: string) => {
+    if (window.confirm('Sigur doriți să ștergeți acest contract?')) {
+      deleteContract(id);
+    }
+  };
+
+  const handleDownloadPDF = async (contract: Contract) => {
+    try {
+      const contractText = contract.generated_contract || 
+        `${contract.terms || ''}\n\n${contract.clauses || ''}`;
+      
+      await generateContractPDF(
+        contract.contract_number,
+        contract.contract_type,
+        contract.clients?.name || 'Client',
+        contractText
+      );
+      
+      toast({
+        title: "PDF generat",
+        description: "Contractul a fost descărcat cu succes.",
+      });
+    } catch (error) {
+      toast({
+        title: "Eroare",
+        description: "Nu s-a putut genera PDF-ul.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    setEditingContract(null);
+  };
 
   return (
     <div className="min-h-screen bg-[#0F1117] text-white flex">
@@ -43,17 +132,103 @@ export default function Contracts() {
       <div className="flex-1 p-6">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold text-white">Contracte</h1>
-          <Button className="bg-purple-600 hover:bg-purple-700">
+          <Button 
+            className="bg-purple-600 hover:bg-purple-700"
+            onClick={() => setIsDialogOpen(true)}
+          >
             <Plus className="h-4 w-4 mr-2" />
             Contract Nou
           </Button>
         </div>
 
-        <Card className="bg-[#1A1F2C] border-purple-500/20 p-8">
-          <p className="text-gray-400 text-center">
-            Nu ai niciun contract încă. Creează primul tău contract!
-          </p>
-        </Card>
+        <div className="grid gap-4 md:grid-cols-3 mb-6">
+          <Card className="bg-[#1A1F2C] border-purple-500/20 p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Total Contracte</p>
+                <p className="text-2xl font-bold text-white">{contracts?.length || 0}</p>
+              </div>
+              <FileText className="h-8 w-8 text-purple-500" />
+            </div>
+          </Card>
+
+          <Card className="bg-[#1A1F2C] border-purple-500/20 p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Contracte Active</p>
+                <p className="text-2xl font-bold text-white">{activeContracts}</p>
+              </div>
+              <FileText className="h-8 w-8 text-green-500" />
+            </div>
+          </Card>
+
+          <Card className="bg-[#1A1F2C] border-purple-500/20 p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-400">Valoare Totală</p>
+                <p className="text-2xl font-bold text-white">{formatCurrency(totalValue)}</p>
+              </div>
+              <FileText className="h-8 w-8 text-blue-500" />
+            </div>
+          </Card>
+        </div>
+
+        {contracts && contracts.length > 0 ? (
+          <ContractsTable
+            contracts={contracts}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            onDownloadPDF={handleDownloadPDF}
+            onView={setViewContract}
+          />
+        ) : (
+          <Card className="bg-[#1A1F2C] border-purple-500/20 p-8">
+            <p className="text-gray-400 text-center">
+              Nu ai niciun contract încă. Creează primul tău contract!
+            </p>
+          </Card>
+        )}
+
+        <Dialog open={isDialogOpen} onOpenChange={handleCloseDialog}>
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-[#1A1F2C] text-white">
+            <DialogHeader>
+              <DialogTitle>
+                {editingContract ? 'Editează Contract' : 'Contract Nou'}
+              </DialogTitle>
+            </DialogHeader>
+            <ContractForm
+              onSubmit={editingContract ? handleUpdateContract : handleCreateContract}
+              initialData={editingContract ? {
+                contract_type: editingContract.contract_type,
+                client_id: editingContract.client_id,
+                start_date: new Date(editingContract.start_date),
+                end_date: editingContract.end_date ? new Date(editingContract.end_date) : undefined,
+                total_value: Number(editingContract.total_value),
+                terms: editingContract.terms,
+                clauses: editingContract.clauses,
+              } : undefined}
+            />
+          </DialogContent>
+        </Dialog>
+
+        <Dialog open={!!viewContract} onOpenChange={() => setViewContract(null)}>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-[#1A1F2C] text-white">
+            <DialogHeader>
+              <DialogTitle>Contract {viewContract?.contract_number}</DialogTitle>
+            </DialogHeader>
+            {viewContract && (
+              <div className="space-y-4">
+                <div className="whitespace-pre-wrap font-mono text-sm">
+                  {viewContract.generated_contract || 
+                    `${viewContract.terms || ''}\n\n${viewContract.clauses || ''}`}
+                </div>
+                <Button onClick={() => handleDownloadPDF(viewContract)} className="w-full">
+                  Descarcă PDF
+                </Button>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );

@@ -241,7 +241,9 @@ export type Database = {
           contract_type: string
           created_at: string | null
           end_date: string | null
+          generated_contract: string | null
           id: string
+          proposal_id: string | null
           start_date: string
           status: Database["public"]["Enums"]["contract_status"]
           terms: string | null
@@ -255,7 +257,9 @@ export type Database = {
           contract_type: string
           created_at?: string | null
           end_date?: string | null
+          generated_contract?: string | null
           id?: string
+          proposal_id?: string | null
           start_date: string
           status?: Database["public"]["Enums"]["contract_status"]
           terms?: string | null
@@ -269,7 +273,9 @@ export type Database = {
           contract_type?: string
           created_at?: string | null
           end_date?: string | null
+          generated_contract?: string | null
           id?: string
+          proposal_id?: string | null
           start_date?: string
           status?: Database["public"]["Enums"]["contract_status"]
           terms?: string | null
@@ -282,6 +288,13 @@ export type Database = {
             columns: ["client_id"]
             isOneToOne: false
             referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contracts_proposal_id_fkey"
+            columns: ["proposal_id"]
+            isOneToOne: false
+            referencedRelation: "proposals"
             referencedColumns: ["id"]
           },
         ]
@@ -545,6 +558,48 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id?: string
+        }
+        Relationships: []
+      }
+      proposal_templates: {
+        Row: {
+          automation_needs_template: string | null
+          business_type: string | null
+          code_snippets: string | null
+          created_at: string
+          default_price: number | null
+          description: string | null
+          id: string
+          name: string
+          proposal_structure: string | null
+          timeframe_template: string | null
+          updated_at: string
+        }
+        Insert: {
+          automation_needs_template?: string | null
+          business_type?: string | null
+          code_snippets?: string | null
+          created_at?: string
+          default_price?: number | null
+          description?: string | null
+          id?: string
+          name: string
+          proposal_structure?: string | null
+          timeframe_template?: string | null
+          updated_at?: string
+        }
+        Update: {
+          automation_needs_template?: string | null
+          business_type?: string | null
+          code_snippets?: string | null
+          created_at?: string
+          default_price?: number | null
+          description?: string | null
+          id?: string
+          name?: string
+          proposal_structure?: string | null
+          timeframe_template?: string | null
+          updated_at?: string
         }
         Relationships: []
       }
