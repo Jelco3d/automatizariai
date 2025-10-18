@@ -34,7 +34,8 @@ Create comprehensive, professional proposals that:
 - Include clear implementation timelines
 - Build trust and credibility
 - Are structured and well-formatted
-- ALWAYS include complete contact information at the end`;
+- ALWAYS include complete contact information at the end
+- CRITICAL: Use proper Romanian diacritics (ă, â, î, ț, ș) throughout the entire text`;
 
     const userPrompt = `Create a comprehensive business proposal for the following client:
 
@@ -61,7 +62,8 @@ Generate a professional proposal in Romanian that includes:
    - Website: aiautomatizari.ro)
 
 Make it persuasive, professional, and tailored to this specific client. 
-IMPORTANT: The contact section must be professionally formatted and clearly visible at the end of every proposal.`;
+IMPORTANT: The contact section must be professionally formatted and clearly visible at the end of every proposal.
+CRITICAL: Use ONLY proper Romanian language with ALL diacritics (ă, â, î, ț, ș). Never write Romanian text without diacritics.`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
