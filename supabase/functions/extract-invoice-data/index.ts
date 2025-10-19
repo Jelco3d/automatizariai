@@ -32,36 +32,130 @@ serve(async (req) => {
     // Initialize Supabase client
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-    // Download the PDF file from storage
+    // Download the file from storage
     const { data: fileData, error: downloadError } = await supabase.storage
       .from('payable-invoices-pdfs')
       .download(filePath);
 
     if (downloadError) {
       console.error('Error downloading file:', downloadError);
-      throw new Error('Failed to download PDF file');
+      throw new Error('Failed to download file');
     }
 
-    // Convert file to buffer for pdf-parse
-    const arrayBuffer = await fileData.arrayBuffer();
-    const buffer = new Uint8Array(arrayBuffer);
-    
-    console.log('File downloaded, extracting text with pdf-parse...');
+    // Determine if it's a PDF or image based on file extension
+    const fileExt = filePath.split('.').pop()?.toLowerCase();
+    const isImage = ['jpg', 'jpeg', 'png'].includes(fileExt || '');
 
-    // Extract text from PDF using pdf-parse
-    const pdfData = await pdfParse(buffer);
-    const fullText = pdfData.text;
+    let aiPayload;
 
-    console.log('Text extracted from PDF, length:', fullText.length);
-    console.log('PDF info - Pages:', pdfData.numpages, 'Version:', pdfData.version);
+    if (isImage) {
+      console.log('Processing image file...');
+      // Convert image to base64 for AI vision
+      const arrayBuffer = await fileData.arrayBuffer();
+      const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+      const mimeType = fileExt === 'png' ? 'image/png' : 'image/jpeg';
+      
+      aiPayload = {
+        model: "google/gemini-2.5-flash",
+        messages: [
+          {
+            role: "system",
+            content: `You are an expert at extracting structured data from invoice images. 
+Extract the following information accurately:
+- Supplier name (Furnizor/Vânzător/From/Vendor)
+- Supplier CUI/CIF (Tax registration number/VAT ID/Tax ID)
+- Invoice number (Număr factură/Invoice number/Invoice #)
+- Issue date (Data emiterii/Invoice date/Date)
+- Due date (Data scadentă/Data plății/Due date/Payment due)
+- Total amount (Total de plată/Amount due/Total)
 
-    // Prepare the AI request with tool calling for structured extraction
-    const aiPayload = {
-      model: "google/gemini-2.5-flash",
-      messages: [
-        {
-          role: "system",
-          content: `You are an expert at extracting structured data from invoices. 
+Return the data in the specified format. If a field is not found, return null.
+For dates, use YYYY-MM-DD format.
+For total amount, extract only the numeric value without currency symbols.`
+          },
+          {
+            role: "user",
+            content: [
+              {
+                type: "text",
+                text: "Please extract the invoice data from this invoice image:"
+              },
+              {
+                type: "image_url",
+                image_url: {
+                  url: `data:${mimeType};base64,${base64}`
+                }
+              }
+            ]
+          }
+        ],
+        tools: [
+          {
+            type: "function",
+            function: {
+              name: "extract_invoice_data",
+              description: "Extract structured invoice data from the image",
+              parameters: {
+                type: "object",
+                properties: {
+                  supplier_name: {
+                    type: "string",
+                    description: "The name of the supplier/vendor"
+                  },
+                  supplier_cui: {
+                    type: "string",
+                    description: "The CUI/CIF tax registration number"
+                  },
+                  invoice_number: {
+                    type: "string",
+                    description: "The invoice number"
+                  },
+                  issue_date: {
+                    type: "string",
+                    description: "The issue date in YYYY-MM-DD format"
+                  },
+                  due_date: {
+                    type: "string",
+                    description: "The due date in YYYY-MM-DD format"
+                  },
+                  total: {
+                    type: "number",
+                    description: "The total amount to pay (numeric value only)"
+                  }
+                },
+                required: ["supplier_name", "invoice_number", "issue_date", "due_date", "total"],
+                additionalProperties: false
+              }
+            }
+          }
+        ],
+        tool_choice: {
+          type: "function",
+          function: { name: "extract_invoice_data" }
+        }
+      };
+    } else {
+      console.log('Processing PDF file...');
+      // Convert file to buffer for pdf-parse
+      const arrayBuffer = await fileData.arrayBuffer();
+      const buffer = new Uint8Array(arrayBuffer);
+      
+      console.log('File downloaded, extracting text with pdf-parse...');
+
+      // Extract text from PDF using pdf-parse
+      const pdfData = await pdfParse(buffer);
+      const fullText = pdfData.text;
+
+      console.log('Text extracted from PDF, length:', fullText.length);
+      console.log('PDF info - Pages:', pdfData.numpages, 'Version:', pdfData.version);
+
+      // Prepare the AI request with tool calling for structured extraction
+      aiPayload = {
+        model: "google/gemini-2.5-flash",
+        messages: [
+          {
+            role: "system",
+            content: `You are an expert at extracting structured data from invoices. 
 Extract the following information accurately from the provided invoice text:
 - Supplier name (Furnizor/Vânzător/From/Vendor)
 - Supplier CUI/CIF (Tax registration number/VAT ID/Tax ID)
@@ -73,57 +167,58 @@ Extract the following information accurately from the provided invoice text:
 Return the data in the specified format. If a field is not found, return null for that field.
 For dates, use YYYY-MM-DD format.
 For total amount, extract only the numeric value without currency symbols.`
-        },
-        {
-          role: "user",
-          content: `Please extract the invoice data from this invoice text:\n\n${fullText}`
-        }
-      ],
-      tools: [
-        {
-          type: "function",
-          function: {
-            name: "extract_invoice_data",
-            description: "Extract structured invoice data from the document",
-            parameters: {
-              type: "object",
-              properties: {
-                supplier_name: {
-                  type: "string",
-                  description: "The name of the supplier/vendor"
+          },
+          {
+            role: "user",
+            content: `Please extract the invoice data from this invoice text:\n\n${fullText}`
+          }
+        ],
+        tools: [
+          {
+            type: "function",
+            function: {
+              name: "extract_invoice_data",
+              description: "Extract structured invoice data from the document",
+              parameters: {
+                type: "object",
+                properties: {
+                  supplier_name: {
+                    type: "string",
+                    description: "The name of the supplier/vendor"
+                  },
+                  supplier_cui: {
+                    type: "string",
+                    description: "The CUI/CIF tax registration number"
+                  },
+                  invoice_number: {
+                    type: "string",
+                    description: "The invoice number"
+                  },
+                  issue_date: {
+                    type: "string",
+                    description: "The issue date in YYYY-MM-DD format"
+                  },
+                  due_date: {
+                    type: "string",
+                    description: "The due date in YYYY-MM-DD format"
+                  },
+                  total: {
+                    type: "number",
+                    description: "The total amount to pay (numeric value only)"
+                  }
                 },
-                supplier_cui: {
-                  type: "string",
-                  description: "The CUI/CIF tax registration number"
-                },
-                invoice_number: {
-                  type: "string",
-                  description: "The invoice number"
-                },
-                issue_date: {
-                  type: "string",
-                  description: "The issue date in YYYY-MM-DD format"
-                },
-                due_date: {
-                  type: "string",
-                  description: "The due date in YYYY-MM-DD format"
-                },
-                total: {
-                  type: "number",
-                  description: "The total amount to pay (numeric value only)"
-                }
-              },
-              required: ["supplier_name", "invoice_number", "issue_date", "due_date", "total"],
-              additionalProperties: false
+                required: ["supplier_name", "invoice_number", "issue_date", "due_date", "total"],
+                additionalProperties: false
+              }
             }
           }
+        ],
+        tool_choice: {
+          type: "function",
+          function: { name: "extract_invoice_data" }
         }
-      ],
-      tool_choice: {
-        type: "function",
-        function: { name: "extract_invoice_data" }
-      }
-    };
+      };
+    }
 
     console.log('Calling Lovable AI for extraction...');
 

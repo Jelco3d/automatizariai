@@ -43,13 +43,14 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file && file.type === "application/pdf") {
+    const validTypes = ["application/pdf", "image/jpeg", "image/jpg", "image/png"];
+    if (file && validTypes.includes(file.type)) {
       setSelectedFile(file);
       setUploadedFilePath(null);
     } else {
       toast({
         title: "Fișier invalid",
-        description: "Te rugăm să selectezi un fișier PDF",
+        description: "Te rugăm să selectezi un PDF sau o imagine (JPG, PNG)",
         variant: "destructive",
       });
     }
@@ -59,7 +60,7 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
     if (!selectedFile) {
       toast({
         title: "Niciun fișier selectat",
-        description: "Te rugăm să selectezi un PDF mai întâi",
+        description: "Te rugăm să selectezi un fișier mai întâi",
         variant: "destructive",
       });
       return;
@@ -68,8 +69,8 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
     setIsExtracting(true);
 
     try {
-      // Upload PDF to storage
-      const fileExt = 'pdf';
+      // Upload file to storage (PDF or image)
+      const fileExt = selectedFile.type === 'application/pdf' ? 'pdf' : selectedFile.name.split('.').pop() || 'jpg';
       const fileName = `${crypto.randomUUID()}.${fileExt}`;
       const filePath = fileName;
 
@@ -84,7 +85,7 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
       setUploadedFilePath(filePath);
 
       toast({
-        title: "PDF încărcat",
+        title: "Fișier încărcat",
         description: "Se extrag datele...",
       });
 
@@ -170,14 +171,14 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
         <div className="space-y-3 p-3 md:p-4 border border-purple-500/20 rounded-lg bg-[#0F1117]">
           <div className="flex items-center gap-2">
             <FileText className="h-4 w-4 md:h-5 md:w-5 text-purple-400" />
-            <h3 className="font-medium text-sm md:text-base">Import PDF și Extragere Automată</h3>
+            <h3 className="font-medium text-sm md:text-base">Import Document și Extragere Automată</h3>
           </div>
           
           <div className="flex flex-col md:flex-row items-stretch md:items-center gap-2 md:gap-4">
             <div className="flex-1">
               <Input
                 type="file"
-                accept=".pdf"
+                accept=".pdf,.jpg,.jpeg,.png"
                 onChange={handleFileSelect}
                 disabled={isExtracting}
                 className="bg-[#1A1F2C] border-gray-700 text-white text-sm h-9"
