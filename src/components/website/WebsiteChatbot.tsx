@@ -134,24 +134,32 @@ export const WebsiteChatbot = () => {
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse z-50"
+          className="fixed bottom-4 right-4 md:bottom-6 md:right-6 h-12 w-12 md:h-14 md:w-14 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse z-50 p-0"
           aria-label="Open chat"
         >
-          <MessageCircle className="h-6 w-6 text-white" />
+          <img 
+            src="/lovable-uploads/new-logo.png" 
+            alt="AI Automatizari Logo" 
+            className="h-8 w-8 md:h-10 md:w-10 object-contain"
+          />
         </Button>
       )}
 
       {/* Chat Window */}
       {isOpen && (
-        <Card className="fixed bottom-6 right-6 w-[380px] h-[600px] flex flex-col bg-[#1A1F2C] border-purple-500/50 shadow-2xl z-50 animate-scale-in">
+        <Card className="fixed bottom-0 right-0 md:bottom-4 md:right-4 w-full md:w-[380px] h-[100dvh] md:h-[600px] md:rounded-lg flex flex-col bg-[#1A1F2C] border-purple-500/50 shadow-2xl z-50 animate-scale-in">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-purple-500/30 bg-gradient-to-r from-purple-500/20 to-pink-500/20">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                <MessageCircle className="h-5 w-5 text-white" />
+          <div className="flex items-center justify-between p-3 md:p-4 border-b border-purple-500/30 bg-gradient-to-r from-purple-500/20 to-pink-500/20">
+            <div className="flex items-center gap-2 md:gap-3">
+              <div className="h-10 w-10 rounded-full bg-white/10 p-1.5 flex items-center justify-center">
+                <img 
+                  src="/lovable-uploads/new-logo.png" 
+                  alt="AI Automatizari Logo" 
+                  className="h-full w-full object-contain"
+                />
               </div>
               <div>
-                <h3 className="font-semibold text-white">AI Automatizari</h3>
+                <h3 className="font-semibold text-white text-sm md:text-base">AI Automatizari</h3>
                 <p className="text-xs text-gray-400">Asistent AI</p>
               </div>
             </div>
@@ -159,34 +167,34 @@ export const WebsiteChatbot = () => {
               onClick={() => setIsOpen(false)}
               variant="ghost"
               size="icon"
-              className="text-gray-400 hover:text-white"
+              className="text-gray-400 hover:text-white h-8 w-8 md:h-10 md:w-10"
             >
-              <X className="h-5 w-5" />
+              <X className="h-4 w-4 md:h-5 md:w-5" />
             </Button>
           </div>
 
           {/* Messages */}
-          <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
-            <div className="space-y-4">
+          <ScrollArea className="flex-1 p-3 md:p-4" ref={scrollAreaRef}>
+            <div className="space-y-3 md:space-y-4">
               {messages.map((message, index) => (
                 <div
                   key={index}
                   className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[80%] rounded-lg p-3 ${
+                    className={`max-w-[85%] md:max-w-[80%] rounded-lg p-2.5 md:p-3 ${
                       message.role === "user"
                         ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
                         : "bg-purple-900/30 text-white border border-purple-500/30"
                     }`}
                   >
-                    <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                    <p className="text-sm md:text-sm whitespace-pre-wrap break-words">{message.content}</p>
                   </div>
                 </div>
               ))}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
+                  <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-2.5 md:p-3">
                     <Loader2 className="h-4 w-4 animate-spin text-purple-400" />
                   </div>
                 </div>
@@ -197,22 +205,22 @@ export const WebsiteChatbot = () => {
 
           {/* Quick Actions */}
           {messages.length === 1 && (
-            <div className="px-4 pb-2 space-y-2">
+            <div className="px-3 md:px-4 pb-2 space-y-2">
               <p className="text-xs text-gray-400">Acțiuni rapide:</p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 md:gap-2">
                 <Button
                   onClick={() => handleQuickAction("Vreau să programez o consultație")}
                   size="sm"
                   variant="outline"
-                  className="text-xs border-purple-500/30 hover:border-purple-400"
+                  className="text-[10px] md:text-xs border-purple-500/30 hover:border-purple-400 px-2 md:px-3 h-7 md:h-8"
                 >
-                  📅 Programează consultație
+                  📅 Programează
                 </Button>
                 <Button
                   onClick={() => handleQuickAction("Ce servicii oferiți?")}
                   size="sm"
                   variant="outline"
-                  className="text-xs border-purple-500/30 hover:border-purple-400"
+                  className="text-[10px] md:text-xs border-purple-500/30 hover:border-purple-400 px-2 md:px-3 h-7 md:h-8"
                 >
                   🔧 Servicii
                 </Button>
@@ -220,7 +228,7 @@ export const WebsiteChatbot = () => {
                   onClick={() => handleQuickAction("Cum mă puteți ajuta cu AI?")}
                   size="sm"
                   variant="outline"
-                  className="text-xs border-purple-500/30 hover:border-purple-400"
+                  className="text-[10px] md:text-xs border-purple-500/30 hover:border-purple-400 px-2 md:px-3 h-7 md:h-8"
                 >
                   💡 Despre AI
                 </Button>
@@ -229,7 +237,7 @@ export const WebsiteChatbot = () => {
           )}
 
           {/* Input */}
-          <div className="p-4 border-t border-purple-500/30">
+          <div className="p-3 md:p-4 border-t border-purple-500/30 safe-area-bottom">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -242,12 +250,12 @@ export const WebsiteChatbot = () => {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Scrie mesajul tău..."
                 disabled={isLoading}
-                className="bg-purple-900/20 border-purple-500/30 text-white placeholder:text-gray-500"
+                className="bg-purple-900/20 border-purple-500/30 text-white placeholder:text-gray-500 text-sm h-10 md:h-10"
               />
               <Button
                 type="submit"
                 disabled={isLoading || !input.trim()}
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 h-10 w-10 md:h-10 md:w-10 p-0 flex-shrink-0"
               >
                 <Send className="h-4 w-4" />
               </Button>
