@@ -8,6 +8,7 @@ import { CaseStudies } from "@/components/website/services/CaseStudies";
 import { TechnicalCapabilities } from "@/components/website/services/TechnicalCapabilities";
 import { IntegrationOptions } from "@/components/website/services/IntegrationOptions";
 import { CTASection } from "@/components/website/services/CTASection";
+import { WebsiteChatbot } from "@/components/website/WebsiteChatbot";
 
 const Services = () => {
   console.log("Rendering Services page");
@@ -35,6 +36,7 @@ const Services = () => {
       <CTASection handleBooking={handleBooking} />
 
       <Footer />
+      <WebsiteChatbot />
     </div>
   );
 };

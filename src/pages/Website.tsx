@@ -8,6 +8,7 @@ import { BenefitsSection } from "@/components/website/BenefitsSection";
 import { TestimonialsSection } from "@/components/website/TestimonialsSection";
 import { CTASection } from "@/components/website/CTASection";
 import { TechStackSection } from "@/components/website/TechStackSection";
+import { WebsiteChatbot } from "@/components/website/WebsiteChatbot";
 
 const Website = () => {
   console.log("Rendering Website page");
@@ -35,6 +36,8 @@ const Website = () => {
           ← Către Cartea de Vizită
         </Link>
       </div>
+      
+      <WebsiteChatbot />
     </div>
   );
 };

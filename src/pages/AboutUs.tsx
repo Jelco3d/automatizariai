@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { User } from "lucide-react";
+import { WebsiteChatbot } from "@/components/website/WebsiteChatbot";
 
 const AboutUs = () => {
   console.log("Rendering AboutUs page");
@@ -151,6 +152,7 @@ const AboutUs = () => {
       </motion.section>
 
       <Footer />
+      <WebsiteChatbot />
     </div>
   );
 };

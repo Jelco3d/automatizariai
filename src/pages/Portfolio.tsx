@@ -7,6 +7,7 @@ import { CategoryFilters } from "@/components/portfolio/CategoryFilters";
 import { PortfolioHero } from "@/components/portfolio/PortfolioHero";
 import { CaseStudiesGrid } from "@/components/portfolio/CaseStudiesGrid";
 import { categories, caseStudies } from "@/data/caseStudies";
+import { WebsiteChatbot } from "@/components/website/WebsiteChatbot";
 
 const Portfolio = () => {
   console.log("Rendering Portfolio page");
@@ -27,6 +28,7 @@ const Portfolio = () => {
       <CaseStudiesGrid caseStudies={filteredCaseStudies} />
       <CTASection />
       <Footer />
+      <WebsiteChatbot />
     </div>
   );
 };

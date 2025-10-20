@@ -2,6 +2,7 @@ import { Navigation } from '@/components/website/Navigation';
 import { Footer } from '@/components/website/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Phone, Mail, MapPin } from 'lucide-react';
+import { WebsiteChatbot } from '@/components/website/WebsiteChatbot';
 
 const Contact = () => {
   return (
@@ -86,6 +87,7 @@ const Contact = () => {
       </main>
 
       <Footer />
+      <WebsiteChatbot />
     </div>
   );
 };

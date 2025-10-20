@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Briefcase, Globe, Mail, Phone, User, Facebook, Instagram, Video, Twitter } from "lucide-react";
+import { WebsiteChatbot } from "@/components/website/WebsiteChatbot";
 
 const Index = () => {
   console.log("Rendering Index page");
@@ -68,9 +69,9 @@ const Index = () => {
                 <Phone className="w-3 h-3 md:w-5 md:h-5" />
                 <span>0754274528</span>
               </a>
-              <a href="mailto:automationaisolution@gmail.com" className="flex items-center gap-2 md:gap-3 text-white hover:text-purple-300 transition-colors text-xs md:text-base">
+              <a href="mailto:contact@aiautomatizari.ro" className="flex items-center gap-2 md:gap-3 text-white hover:text-purple-300 transition-colors text-xs md:text-base">
                 <Mail className="w-3 h-3 md:w-5 md:h-5" />
-                <span>automationaisolution@gmail.com</span>
+                <span>contact@aiautomatizari.ro</span>
               </a>
               <Link to="/website" className="flex items-center gap-2 md:gap-3 text-white hover:text-purple-300 transition-colors text-xs md:text-base">
                 <Globe className="w-3 h-3 md:w-5 md:h-5" />
@@ -115,6 +116,7 @@ const Index = () => {
         </CardContent>
       </Card>
       <Toaster />
+      <WebsiteChatbot />
     </div>;
 };
 export default Index;
