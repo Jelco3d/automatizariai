@@ -6,10 +6,10 @@ import { Footer } from "@/components/website/Footer";
 import { AuditChat } from "@/components/AuditChat";
 const AuditGratuit = () => {
   const handleStartAnalysis = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
+    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
   };
   const handleBookCall = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
+    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
   };
   return <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] relative overflow-hidden">
       {/* Animated background elements */}

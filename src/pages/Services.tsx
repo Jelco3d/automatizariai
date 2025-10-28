@@ -14,7 +14,7 @@ const Services = () => {
   console.log("Rendering Services page");
 
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
+    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
   };
 
   return (

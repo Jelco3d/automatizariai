@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export function Navigation() {
   console.log("Rendering Navigation component");
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
+    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
   };
   return <div className="fixed top-0 left-0 right-0 z-50 flex md:justify-center justify-center items-center py-2 relative fixed ">
       <Link to="/" className="flex items-center">

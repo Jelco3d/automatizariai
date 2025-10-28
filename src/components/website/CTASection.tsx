@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 export const CTASection = () => {
 
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
+    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
   };
 
   return (

@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export const HeroSection = () => {
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
+    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
   };
   return <div className="container mx-auto px-4 py-16 text-center relative">
       <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 animate-[fade-in_1s_ease-out]">Automatizare Inteligentă Cu AI Pentru Afaceri</h1>

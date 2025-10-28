@@ -7,7 +7,7 @@ export const CTASection = () => {
   console.log("Rendering CTASection");
   
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizariai', '_blank');
+    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
   };
   
   return (
