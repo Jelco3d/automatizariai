@@ -57,6 +57,7 @@ const App = () => {
           <Route path="/admin/blog/settings" element={<BlogSettings />} />
           <Route path="/whatsapp-demo" element={<WhatsAppDemo />} />
           <Route path="/audit-gratuit" element={<AuditGratuit />} />
+          <Route path="/AI" element={<AuditGratuit />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/business-card" element={<BusinessCard />} />
           <Route path="/linktree" element={<LinkTree />} />
