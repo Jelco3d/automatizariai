@@ -32,6 +32,7 @@ import Contracts from './pages/business/Contracts';
 import Clients from './pages/business/Clients';
 import Payments from './pages/business/Payments';
 import ContractSignature from './pages/ContractSignature';
+import FidelizarePacienti from './pages/FidelizarePacienti';
 import { CookieConsent } from './components/CookieConsent';
 
 const App = () => {
@@ -70,6 +71,7 @@ const App = () => {
           <Route path="/business-dashboard/clients" element={<Clients />} />
           <Route path="/business-dashboard/plati" element={<Payments />} />
           <Route path="/contract-signature/:token" element={<ContractSignature />} />
+          <Route path="/fidelizare-pacienti" element={<FidelizarePacienti />} />
         </Routes>
         <CookieConsent />
         <Toaster />
