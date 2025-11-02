@@ -377,8 +377,89 @@ Când utilizatorul confirmă cu "da", "yes", "corect", "da corect", "perfect" sa
               
               console.log(`[${new Date().toISOString()}] 📊 Message count: ${userMessageCount} user, ${assistantMessageCount} assistant`);
 
-              // Only extract when we have 7+ user messages (6 answers + 1 confirmation)
-              // AND 7+ assistant messages (6 questions + 1 summary)
+              // Check if we just completed the 6th question (6 Q&A pairs)
+              if (userMessageCount === 6 && assistantMessageCount === 6) {
+                console.log(`[${new Date().toISOString()}] 🎯 Completed 6 Q&A pairs, checking if summary is needed...`);
+                
+                // Check if the last assistant message contains a summary
+                const lastAssistantMessage = allMessages.filter(m => m.role === 'assistant').pop();
+                const hasSummary = lastAssistantMessage?.content?.includes('Rezumat Conversație') || 
+                                   lastAssistantMessage?.content?.includes('Am înțeles corect');
+                
+                if (!hasSummary) {
+                  console.log(`[${new Date().toISOString()}] 📝 No summary detected, forcing summary generation...`);
+                  
+                  // Force summary generation by making explicit AI call
+                  try {
+                    const summaryPrompt = `Utilizatorul tocmai a răspuns la toate cele 6 întrebări. ACUM TREBUIE să generezi un REZUMAT COMPLET.
+
+Iată conversația completă:
+${allMessages.map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`).join('\n\n')}
+
+Generează ACUM rezumatul în formatul EXACT:
+
+"✨ Perfect! Mulțumesc pentru toate informațiile! Iată ce am înțeles despre afacerea ta:
+
+📊 **Rezumat Conversație:**
+
+**Afacere:** [extrage din răspunsul 1]
+
+**Provocări Principale:** [extrage din răspunsul 2]
+
+**Timp Investit:** [extrage din răspunsul 3]
+
+**Obiectiv Principal:** [extrage din răspunsul 4]
+
+**Instrumente Actuale:** [extrage din răspunsul 5]
+
+**Viziune Automatizare:** [extrage din răspunsul 6]
+
+---
+
+✅ **Am înțeles corect aceste aspecte despre afacerea ta?**
+
+Răspunde cu **DA** pentru a continua și a primi raportul personalizat, sau poți corecta orice detaliu."`;
+
+                    const summaryResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+                      method: "POST",
+                      headers: {
+                        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        model: "google/gemini-2.5-flash",
+                        messages: [
+                          { role: "system", content: "You are a helpful assistant. Generate the summary EXACTLY as requested in the user prompt." },
+                          { role: "user", content: summaryPrompt }
+                        ],
+                        stream: false
+                      }),
+                    });
+
+                    if (summaryResponse.ok) {
+                      const summaryData = await summaryResponse.json();
+                      const summaryText = summaryData.choices?.[0]?.message?.content;
+                      
+                      if (summaryText) {
+                        console.log(`[${new Date().toISOString()}] ✅ Summary generated successfully`);
+                        
+                        // Save the summary as a new assistant message
+                        await supabase.from('audit_messages').insert({
+                          session_id: sessionId,
+                          role: 'assistant',
+                          content: summaryText
+                        });
+                        
+                        console.log(`[${new Date().toISOString()}] ✅ Summary saved to database`);
+                      }
+                    }
+                  } catch (summaryError) {
+                    console.error(`[${new Date().toISOString()}] ❌ Summary generation error:`, summaryError);
+                  }
+                }
+              }
+
+              // Extract insights when we have 7+ messages (6 Q&A + 1 confirmation)
               if (userMessageCount >= 7 && assistantMessageCount >= 7) {
                 console.log(`[${new Date().toISOString()}] 🎯 User confirmed summary (${userMessageCount} user msgs, ${assistantMessageCount} assistant msgs), forcing extraction...`);
                 
@@ -720,6 +801,17 @@ IMPORTANT:
                 const assistantMessageCount = allMessages.filter(m => m.role === 'assistant').length;
                 
                 console.log(`[${new Date().toISOString()}] 📊 Follow-up message count: ${userMessageCount} user, ${assistantMessageCount} assistant`);
+
+                // Check for summary generation trigger after follow-up
+                if (userMessageCount === 6 && assistantMessageCount === 6) {
+                  const lastAssistantMessage = allMessages.filter(m => m.role === 'assistant').pop();
+                  const hasSummary = lastAssistantMessage?.content?.includes('Rezumat Conversație') || 
+                                     lastAssistantMessage?.content?.includes('Am înțeles corect');
+                  
+                  if (!hasSummary) {
+                    console.log(`[${new Date().toISOString()}] 📝 Follow-up: No summary detected after 6 Q&A pairs`);
+                  }
+                }
 
                 if (userMessageCount >= 7 && assistantMessageCount >= 7) {
                   console.log(`[${new Date().toISOString()}] 🎯 Triggering post follow-up extraction (after confirmation)...`);
