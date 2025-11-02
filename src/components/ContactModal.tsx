@@ -55,7 +55,7 @@ export function ContactModal({ isOpen, onClose, sessionId, reportText }: Contact
 
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.functions.invoke('send-report-pdf', {
+      const { data: responseData, error } = await supabase.functions.invoke('generate-report-pdf', {
         body: {
           sessionId,
           reportText,
@@ -66,13 +66,37 @@ export function ContactModal({ isOpen, onClose, sessionId, reportText }: Contact
       });
 
       if (error) {
-        console.error('Error sending report:', error);
-        toast.error("A apărut o eroare la trimiterea raportului. Te rugăm să încerci din nou.");
+        console.error('Error generating report:', error);
+        toast.error("A apărut o eroare la generarea raportului. Te rugăm să încerci din nou.");
         return;
       }
 
-      toast.success("🎉 Raportul tău PDF este pe drum!", {
-        description: "Verifică inbox-ul pentru link-ul de download al raportului PDF personalizat. Ar trebui să ajungă în câteva minute!",
+      if (!responseData?.pdfBase64) {
+        toast.error("Nu s-a putut genera PDF-ul. Te rugăm să încerci din nou.");
+        return;
+      }
+
+      // Convert base64 to blob and trigger download
+      const byteCharacters = atob(responseData.pdfBase64);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'application/pdf' });
+      
+      // Create download link and trigger download
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = responseData.fileName || `Raport-AI-${Date.now()}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      toast.success("🎉 Raportul tău a fost descărcat!", {
+        description: "Verifică folderul de descărcări pentru raportul PDF personalizat.",
         duration: 6000,
       });
       
@@ -91,10 +115,10 @@ export function ContactModal({ isOpen, onClose, sessionId, reportText }: Contact
       <DialogContent className="sm:max-w-[500px] bg-gradient-to-br from-background via-background to-primary/5">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Primește Raportul Tău Complet 📊
+            Descarcă Raportul Tău Complet 📊
           </DialogTitle>
           <DialogDescription className="text-base">
-            Completează datele tale și îți vom trimite imediat un raport personalizat cu analiza completă și recomandările AI pentru afacerea ta.
+            Completează datele tale pentru a descărca raportul personalizat cu analiza completă și recomandările AI pentru afacerea ta.
           </DialogDescription>
         </DialogHeader>
 
@@ -185,10 +209,10 @@ export function ContactModal({ isOpen, onClose, sessionId, reportText }: Contact
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Se trimite...
+                    Se generează...
                   </>
                 ) : (
-                  "Trimite Raportul"
+                  "Descarcă Raportul Acum"
                 )}
               </Button>
             </div>
