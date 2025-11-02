@@ -160,6 +160,9 @@ export const AuditChat = () => {
           content: cleanMessage
         }]);
 
+        // Wait a bit for backend to finish saving insights before generating report
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
         // Generate the report text using ai-copywriter
         try {
           const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-copywriter`, {
@@ -172,6 +175,11 @@ export const AuditChat = () => {
               sessionId
             })
           });
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
           const data = await response.json();
           if (data?.report) {
             setGeneratedReport(data.report);
@@ -181,14 +189,14 @@ export const AuditChat = () => {
             // Add assistant message announcing the report is ready
             setMessages(prev => [...prev, {
               role: "assistant",
-              content: "✅ **Raportul tău personalizat este gata!** Am generat o analiză completă cu recomandări AI specifice pentru afacerea ta. Apasă butonul de mai jos pentru a-l primi pe email."
+              content: "✅ **Raportul tău personalizat este gata!** Am generat o analiză completă cu recomandări AI specifice pentru afacerea ta. Apasă butonul de mai jos pentru a descărca raportul."
             }]);
           }
         } catch (error) {
           console.error('Error generating report:', error);
           toast({
             title: "Eroare",
-            description: "A apărut o eroare la generarea raportului",
+            description: "A apărut o eroare la generarea raportului. Te rugăm să încerci din nou.",
             variant: "destructive"
           });
           setIsGeneratingReport(false);
