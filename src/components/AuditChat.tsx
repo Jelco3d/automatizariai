@@ -45,7 +45,6 @@ export const AuditChat = () => {
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
   useEffect(() => {
     // Welcome message with first question
@@ -54,10 +53,6 @@ export const AuditChat = () => {
       content: `👋 Bună! Sunt aici să-ți analizez afacerea și să-ți arăt cum AI poate să te ajute să economisești timp și să crești mai rapid. Hai să începem!\n\n**1/6: ${QUESTIONS[0]}**`
     }]);
   }, []);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
   const generateSummary = (answers: string[]): string => {
     return `## 📊 Rezumatul conversației tale
 
@@ -229,8 +224,6 @@ ${answers[5] || 'N/A'}`;
                 </Button>
               </div>
             )}
-
-            <div ref={messagesEndRef} />
           </div>
         </Card>
       )}
