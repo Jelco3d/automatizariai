@@ -200,6 +200,42 @@ export type Database = {
         }
         Relationships: []
       }
+      business_insights: {
+        Row: {
+          created_at: string
+          id: string
+          insights: Json
+          metrics: Json | null
+          period_end: string
+          period_start: string
+          recommendations: string[] | null
+          summary: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          insights: Json
+          metrics?: Json | null
+          period_end: string
+          period_start: string
+          recommendations?: string[] | null
+          summary: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          insights?: Json
+          metrics?: Json | null
+          period_end?: string
+          period_start?: string
+          recommendations?: string[] | null
+          summary?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       clients: {
         Row: {
           address: string | null

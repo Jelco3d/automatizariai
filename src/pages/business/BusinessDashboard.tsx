@@ -10,6 +10,7 @@ import { useQuotes } from "@/hooks/useQuotes";
 import { useContracts } from "@/hooks/useContracts";
 import { useClients } from "@/hooks/useClients";
 import { formatCurrency } from "@/utils/numberFormatters";
+import { AIInsights } from "@/components/business/AIInsights";
 
 export default function BusinessDashboard() {
   const [session, setSession] = useState<Session | null>(null);
@@ -150,6 +151,11 @@ export default function BusinessDashboard() {
               <p className="text-xs text-gray-400 mt-1">Toate perioadele</p>
             </CardContent>
           </Card>
+        </div>
+
+        {/* AI Insights Section */}
+        <div className="mb-8">
+          <AIInsights />
         </div>
 
         <Card className="bg-[#1A1F2C] border-purple-500/20">

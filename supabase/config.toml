@@ -1,5 +1,8 @@
 project_id = "ututdskuykdosmbgjkzh"
 
+[functions.generate-business-insights]
+verify_jwt = false
+
 [functions.extract-audit-insights]
 verify_jwt = false
 
