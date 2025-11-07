@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { CheckCircle2, Loader2, Send } from "lucide-react";
 
 const auditSchema = z.object({
   fullName: z.string().trim().min(1, "Numele complet este obligatoriu").max(100, "Numele este prea lung"),
@@ -99,7 +99,16 @@ export function AuditRequestModal({ isOpen, onClose, conversationData }: AuditRe
             </DialogHeader>
 
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4 relative">
+                {isSubmitting && (
+                  <div className="absolute inset-0 bg-background/80 backdrop-blur-sm z-10 rounded-lg flex items-center justify-center">
+                    <div className="flex flex-col items-center gap-3">
+                      <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                      <p className="text-sm text-muted-foreground animate-pulse">Se trimite auditul...</p>
+                    </div>
+                  </div>
+                )}
+                
                 <FormField
                   control={form.control}
                   name="fullName"
@@ -107,7 +116,7 @@ export function AuditRequestModal({ isOpen, onClose, conversationData }: AuditRe
                     <FormItem>
                       <FormLabel>Nume complet</FormLabel>
                       <FormControl>
-                        <Input placeholder="Ion Popescu" {...field} />
+                        <Input placeholder="Ion Popescu" {...field} disabled={isSubmitting} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -121,7 +130,7 @@ export function AuditRequestModal({ isOpen, onClose, conversationData }: AuditRe
                     <FormItem>
                       <FormLabel>Adresă de email</FormLabel>
                       <FormControl>
-                        <Input type="email" placeholder="ion.popescu@exemplu.ro" {...field} />
+                        <Input type="email" placeholder="ion.popescu@exemplu.ro" {...field} disabled={isSubmitting} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -135,7 +144,7 @@ export function AuditRequestModal({ isOpen, onClose, conversationData }: AuditRe
                     <FormItem>
                       <FormLabel>Număr de telefon</FormLabel>
                       <FormControl>
-                        <Input type="tel" placeholder="+40 712 345 678" {...field} />
+                        <Input type="tel" placeholder="+40 712 345 678" {...field} disabled={isSubmitting} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -149,11 +158,14 @@ export function AuditRequestModal({ isOpen, onClose, conversationData }: AuditRe
                   <Button type="submit" disabled={isSubmitting} className="flex-1">
                     {isSubmitting ? (
                       <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        <Loader2 className="h-4 w-4 animate-spin" />
                         Se trimite...
                       </>
                     ) : (
-                      "Obține Audit!"
+                      <>
+                        <Send className="h-4 w-4" />
+                        Obține Audit!
+                      </>
                     )}
                   </Button>
                 </div>
