@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Send, Loader2, Bot, User, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { AuditRequestModal } from "./AuditRequestModal";
 import DOMPurify from 'dompurify';
 
 interface Message {
@@ -45,6 +46,7 @@ export const AuditChat = () => {
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
+  const [showAuditModal, setShowAuditModal] = useState(false);
   const { toast } = useToast();
   useEffect(() => {
     // Welcome message with first question
@@ -215,7 +217,7 @@ ${answers[5] || 'N/A'}`;
             {showSummary && !isLoading && (
               <div className="flex flex-col gap-3 items-center animate-fade-in py-4">
                 <Button
-                  onClick={sendDataToWebhook}
+                  onClick={() => setShowAuditModal(true)}
                   disabled={isLoading}
                   className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl text-white px-8 py-6 text-lg font-semibold rounded-xl"
                 >
@@ -259,6 +261,12 @@ ${answers[5] || 'N/A'}`;
           </div>
         </div>
       </form>
+
+      <AuditRequestModal 
+        isOpen={showAuditModal}
+        onClose={() => setShowAuditModal(false)}
+        conversationData={{ sessionId, messages, userAnswers }}
+      />
     </div>
   );
 };
