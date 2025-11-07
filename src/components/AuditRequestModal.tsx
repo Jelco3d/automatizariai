@@ -20,6 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 const auditSchema = z.object({
   fullName: z.string().trim().min(1, "Numele complet este obligatoriu").max(100, "Numele este prea lung"),
@@ -73,8 +74,17 @@ export function AuditRequestModal({ isOpen, onClose, conversationData }: AuditRe
       }
       
       setStep(2);
+      toast({
+        title: "Succes!",
+        description: "Auditul tău a fost trimis cu succes. Verifică email-ul în curând.",
+      });
     } catch (error) {
       console.error("Error submitting audit request:", error);
+      toast({
+        title: "Eroare",
+        description: "A apărut o eroare la trimiterea auditului. Te rugăm să încerci din nou.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
