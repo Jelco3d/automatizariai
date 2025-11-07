@@ -51,11 +51,26 @@ export function AuditRequestModal({ isOpen, onClose, conversationData }: AuditRe
   const onSubmit = async (data: AuditFormValues) => {
     setIsSubmitting(true);
     try {
-      // TODO: Send data to backend/webhook
-      console.log("Audit request data:", { ...data, conversationData });
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const payload = {
+        userId: conversationData?.sessionId,
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        messages: conversationData?.messages || [],
+        userAnswers: conversationData?.userAnswers || []
+      };
+
+      const response = await fetch('https://n8n.srv1055552.hstgr.cloud/webhook/efb0c72e-16c3-4b8c-bddf-6089d48d9781', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send audit request');
+      }
       
       setStep(2);
     } catch (error) {
@@ -138,7 +153,7 @@ export function AuditRequestModal({ isOpen, onClose, conversationData }: AuditRe
                         Se trimite...
                       </>
                     ) : (
-                      "Trimite cererea"
+                      "Obține Audit!"
                     )}
                   </Button>
                 </div>
