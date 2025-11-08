@@ -1,8 +1,10 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Brain, TrendingUp, AlertCircle, Info, Lightbulb, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Brain, TrendingUp, AlertCircle, Info, Lightbulb, Loader2, RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 interface Insight {
   title: string;
@@ -24,10 +26,48 @@ interface BusinessInsight {
 export const AIInsights = () => {
   const [insights, setInsights] = useState<BusinessInsight | null>(null);
   const [loading, setLoading] = useState(true);
+  const [generating, setGenerating] = useState(false);
 
   useEffect(() => {
     fetchLatestInsights();
   }, []);
+
+  const generateNewInsights = async () => {
+    setGenerating(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-business-insights');
+      
+      if (error) {
+        console.error('Error generating insights:', error);
+        toast({
+          title: "Eroare",
+          description: "Nu s-au putut genera insights-urile. Te rugăm să încerci din nou.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Wait a bit for the data to be written to the database
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Refresh the insights
+      await fetchLatestInsights();
+      
+      toast({
+        title: "Succes!",
+        description: "Insights-urile au fost generate cu succes.",
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Eroare",
+        description: "A apărut o eroare la generarea insights-urilor.",
+        variant: "destructive",
+      });
+    } finally {
+      setGenerating(false);
+    }
+  };
 
   const fetchLatestInsights = async () => {
     try {
@@ -86,13 +126,27 @@ export const AIInsights = () => {
   if (loading) {
     return (
       <Card className="bg-[#1A1F2C] border-purple-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-white">
-            <Brain className="h-5 w-5 text-purple-400" />
-            AI Business Insights
-          </CardTitle>
-          <CardDescription>Analiză automată generată de AI</CardDescription>
-        </CardHeader>
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="flex items-center gap-2 text-white">
+              <Brain className="h-5 w-5 text-purple-400" />
+              AI Business Insights
+            </CardTitle>
+            <CardDescription>Analiză automată generată de AI</CardDescription>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={generateNewInsights}
+            disabled={generating}
+            className="gap-2"
+          >
+            <RefreshCw className={`h-4 w-4 ${generating ? 'animate-spin' : ''}`} />
+            {generating ? 'Se generează...' : 'Actualizează'}
+          </Button>
+        </div>
+      </CardHeader>
         <CardContent className="flex items-center justify-center py-8">
           <Loader2 className="h-8 w-8 animate-spin text-purple-400" />
         </CardContent>
@@ -103,13 +157,27 @@ export const AIInsights = () => {
   if (!insights) {
     return (
       <Card className="bg-[#1A1F2C] border-purple-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-white">
-            <Brain className="h-5 w-5 text-purple-400" />
-            AI Business Insights
-          </CardTitle>
-          <CardDescription>Analiză automată generată de AI</CardDescription>
-        </CardHeader>
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="flex items-center gap-2 text-white">
+              <Brain className="h-5 w-5 text-purple-400" />
+              AI Business Insights
+            </CardTitle>
+            <CardDescription>Analiză automată generată de AI</CardDescription>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={generateNewInsights}
+            disabled={generating}
+            className="gap-2"
+          >
+            <RefreshCw className={`h-4 w-4 ${generating ? 'animate-spin' : ''}`} />
+            {generating ? 'Se generează...' : 'Generează'}
+          </Button>
+        </div>
+      </CardHeader>
         <CardContent>
           <p className="text-gray-400 text-center py-8">
             Nu există insights disponibile încă. Sistemul va genera automat rapoarte periodic.
@@ -125,13 +193,27 @@ export const AIInsights = () => {
   return (
     <Card className="bg-[#1A1F2C] border-purple-500/20">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-white">
-          <Brain className="h-5 w-5 text-purple-400" />
-          AI Business Insights
-        </CardTitle>
-        <CardDescription>
-          Analiză automată pentru perioada {periodStart} - {periodEnd}
-        </CardDescription>
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="flex items-center gap-2 text-white">
+              <Brain className="h-5 w-5 text-purple-400" />
+              AI Business Insights
+            </CardTitle>
+            <CardDescription>
+              Analiză automată pentru perioada {periodStart} - {periodEnd}
+            </CardDescription>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={generateNewInsights}
+            disabled={generating}
+            className="gap-2"
+          >
+            <RefreshCw className={`h-4 w-4 ${generating ? 'animate-spin' : ''}`} />
+            {generating ? 'Se generează...' : 'Actualizează'}
+          </Button>
+        </div>
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Summary */}
