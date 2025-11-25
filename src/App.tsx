@@ -31,6 +31,7 @@ import Proposals from './pages/business/Proposals';
 import Contracts from './pages/business/Contracts';
 import Clients from './pages/business/Clients';
 import Payments from './pages/business/Payments';
+import Calendar from './pages/business/Calendar';
 import ContractSignature from './pages/ContractSignature';
 import FidelizarePacienti from './pages/FidelizarePacienti';
 import { CookieConsent } from './components/CookieConsent';
@@ -70,6 +71,7 @@ const App = () => {
           <Route path="/business-dashboard/contracts" element={<Contracts />} />
           <Route path="/business-dashboard/clients" element={<Clients />} />
           <Route path="/business-dashboard/plati" element={<Payments />} />
+          <Route path="/business-dashboard/calendar" element={<Calendar />} />
           <Route path="/contract-signature/:token" element={<ContractSignature />} />
           <Route path="/fidelizare-pacienti" element={<FidelizarePacienti />} />
         </Routes>
