@@ -236,6 +236,63 @@ export type Database = {
         }
         Relationships: []
       }
+      calendar_bookings: {
+        Row: {
+          attendees: Json | null
+          booking_id: string
+          booking_uid: string
+          created_at: string
+          description: string | null
+          duration: number
+          end_time: string
+          id: string
+          location: string | null
+          meeting_url: string | null
+          metadata: Json | null
+          start_time: string
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attendees?: Json | null
+          booking_id: string
+          booking_uid: string
+          created_at?: string
+          description?: string | null
+          duration: number
+          end_time: string
+          id?: string
+          location?: string | null
+          meeting_url?: string | null
+          metadata?: Json | null
+          start_time: string
+          status?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attendees?: Json | null
+          booking_id?: string
+          booking_uid?: string
+          created_at?: string
+          description?: string | null
+          duration?: number
+          end_time?: string
+          id?: string
+          location?: string | null
+          meeting_url?: string | null
+          metadata?: Json | null
+          start_time?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       clients: {
         Row: {
           address: string | null
