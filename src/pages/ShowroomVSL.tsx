@@ -23,22 +23,22 @@ const ShowroomVSL = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] text-foreground relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-40 right-10 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/5 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-4 md:left-10 w-48 md:w-72 h-48 md:h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-40 right-4 md:right-10 w-64 md:w-96 h-64 md:h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-purple-600/5 rounded-full blur-3xl" />
       </div>
 
       <Navigation />
 
       <main className="relative z-10">
         {/* Hero Section */}
-        <section className="container mx-auto px-4 pt-32 pb-16 text-center">
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-full px-4 py-2 mb-8">
-            <Car className="w-4 h-4 text-purple-400" />
-            <span className="text-sm text-purple-300">Pentru Showroom-uri Auto</span>
+        <section className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-12 sm:pb-16 text-center">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 mb-6 sm:mb-8">
+            <Car className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />
+            <span className="text-xs sm:text-sm text-purple-300">Pentru Showroom-uri Auto</span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight px-2">
             <span className="text-white">Showroom-ul tău pierde între </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">5.000 și 20.000€</span>
             <span className="text-white"> pe lună…</span>
@@ -46,43 +46,43 @@ const ShowroomVSL = () => {
             <span className="text-gray-400">fără să-ți dai seama.</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12">
+          <p className="text-base sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8 sm:mb-12 px-2">
             Află cum un simplu <span className="text-purple-400 font-semibold">QR</span> și un <span className="text-pink-400 font-semibold">sistem automat</span> pot crește vânzările cu <span className="text-green-400 font-bold">20–40%</span> în 90 de zile.
           </p>
 
           {/* 3 Key Benefits */}
-          <div className="flex flex-wrap justify-center gap-6 mb-12">
-            <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-5 py-3">
-              <Users className="w-5 h-5 text-purple-400" />
-              <span className="text-gray-300">Fără angajați în plus</span>
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-6 mb-8 sm:mb-12 px-2">
+            <div className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 sm:px-5 sm:py-3">
+              <Users className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400 flex-shrink-0" />
+              <span className="text-sm sm:text-base text-gray-300">Fără angajați în plus</span>
             </div>
-            <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-5 py-3">
-              <Settings className="w-5 h-5 text-pink-400" />
-              <span className="text-gray-300">Fără schimbări complicate</span>
+            <div className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 sm:px-5 sm:py-3">
+              <Settings className="w-4 h-4 sm:w-5 sm:h-5 text-pink-400 flex-shrink-0" />
+              <span className="text-sm sm:text-base text-gray-300">Fără schimbări complicate</span>
             </div>
-            <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-5 py-3">
-              <Shield className="w-5 h-5 text-green-400" />
-              <span className="text-gray-300">Fără riscuri</span>
+            <div className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 sm:px-5 sm:py-3">
+              <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0" />
+              <span className="text-sm sm:text-base text-gray-300">Fără riscuri</span>
             </div>
           </div>
 
           <Button 
             onClick={handleBooking}
             size="lg"
-            className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-10 py-7 text-lg rounded-xl transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
+            className="w-full sm:w-auto bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 sm:px-10 py-6 sm:py-7 text-base sm:text-lg rounded-xl transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
           >
-            Programează Sesiune de Strategie Gratuită
-            <ArrowRight className="ml-2 w-5 h-5" />
+            <span className="text-sm sm:text-base">Programează Sesiune Gratuită</span>
+            <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
           </Button>
         </section>
 
         {/* Video Section */}
-        <section className="container mx-auto px-4 py-12">
+        <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center text-white mb-6 sm:mb-8">
               Vezi cum funcționează sistemul
             </h2>
-            <div className="relative rounded-2xl overflow-hidden border-2 border-purple-500/30 shadow-2xl shadow-purple-500/20">
+            <div className="relative rounded-xl sm:rounded-2xl overflow-hidden border-2 border-purple-500/30 shadow-2xl shadow-purple-500/20">
               <div className="aspect-video">
                 <iframe 
                   src="https://www.veed.io/embed/a5102854-01e9-4bfc-ba1e-249e3931cdd6"
@@ -100,15 +100,15 @@ const ShowroomVSL = () => {
         </section>
 
         {/* How It Works Section */}
-        <section className="container mx-auto px-4 py-20">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-4">
+        <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-white mb-3 sm:mb-4">
             Cum Funcționează?
           </h2>
-          <p className="text-gray-400 text-center mb-16 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-gray-400 text-center mb-10 sm:mb-16 max-w-2xl mx-auto px-2">
             Un sistem simplu care transformă vizitatorii în clienți, fără efort din partea ta.
           </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {[
               {
                 icon: QrCode,
@@ -137,81 +137,81 @@ const ShowroomVSL = () => {
             ].map((item, index) => (
               <div 
                 key={index}
-                className="relative bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all group"
+                className="relative bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-5 sm:p-6 hover:bg-white/10 transition-all group"
               >
-                <div className="absolute -top-4 -left-4 w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm">
                   {item.step}
                 </div>
-                <div className="w-14 h-14 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <item.icon className="w-7 h-7 text-purple-400" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform">
+                  <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-purple-400" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
-                <p className="text-gray-400">{item.description}</p>
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-1.5 sm:mb-2">{item.title}</h3>
+                <p className="text-sm sm:text-base text-gray-400">{item.description}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* ROI Section */}
-        <section className="container mx-auto px-4 py-20">
-          <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-3xl p-8 md:p-12">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="flex items-center justify-center mb-4">
-                  <TrendingUp className="w-10 h-10 text-green-400" />
+        <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
+          <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
+              <div className="py-4 sm:py-0">
+                <div className="flex items-center justify-center mb-3 sm:mb-4">
+                  <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 text-green-400" />
                 </div>
-                <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400 mb-2">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400 mb-1 sm:mb-2">
                   20-40%
                 </div>
-                <p className="text-gray-400">Creștere Vânzări</p>
+                <p className="text-sm sm:text-base text-gray-400">Creștere Vânzări</p>
               </div>
-              <div>
-                <div className="flex items-center justify-center mb-4">
-                  <Clock className="w-10 h-10 text-purple-400" />
+              <div className="py-4 sm:py-0 border-y sm:border-y-0 sm:border-x border-white/10">
+                <div className="flex items-center justify-center mb-3 sm:mb-4">
+                  <Clock className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400" />
                 </div>
-                <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-2">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-1 sm:mb-2">
                   90 zile
                 </div>
-                <p className="text-gray-400">Timp de Implementare</p>
+                <p className="text-sm sm:text-base text-gray-400">Timp de Implementare</p>
               </div>
-              <div>
-                <div className="flex items-center justify-center mb-4">
-                  <Shield className="w-10 h-10 text-blue-400" />
+              <div className="py-4 sm:py-0">
+                <div className="flex items-center justify-center mb-3 sm:mb-4">
+                  <Shield className="w-8 h-8 sm:w-10 sm:h-10 text-blue-400" />
                 </div>
-                <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-2">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-1 sm:mb-2">
                   0€
                 </div>
-                <p className="text-gray-400">Risc pentru Tine</p>
+                <p className="text-sm sm:text-base text-gray-400">Risc pentru Tine</p>
               </div>
             </div>
           </div>
         </section>
 
         {/* Urgency & CTA Section */}
-        <section className="container mx-auto px-4 py-20 text-center">
-          <div className="inline-flex items-center gap-2 bg-red-500/20 border border-red-500/30 rounded-full px-4 py-2 mb-8 animate-pulse">
-            <Clock className="w-4 h-4 text-red-400" />
-            <span className="text-sm text-red-300 font-semibold">3 locuri disponibile luna aceasta</span>
+        <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 text-center">
+          <div className="inline-flex items-center gap-2 bg-red-500/20 border border-red-500/30 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 mb-6 sm:mb-8 animate-pulse">
+            <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-400" />
+            <span className="text-xs sm:text-sm text-red-300 font-semibold">3 locuri disponibile luna aceasta</span>
           </div>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6 px-2">
             Aplică Acum pentru o Sesiune de Strategie Gratuită
           </h2>
           
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-10">
+          <p className="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto mb-8 sm:mb-10 px-2">
             Descoperă exact cum poți implementa acest sistem în showroom-ul tău și câți bani pierzi în fiecare lună.
           </p>
 
           <Button 
             onClick={handleBooking}
             size="lg"
-            className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-12 py-8 text-xl rounded-xl transform transition-all hover:scale-105 hover:shadow-xl hover:shadow-purple-500/30"
+            className="w-full sm:w-auto bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 sm:px-12 py-6 sm:py-8 text-lg sm:text-xl rounded-xl transform transition-all hover:scale-105 hover:shadow-xl hover:shadow-purple-500/30"
           >
             Programează Sesiune Gratuită
-            <ArrowRight className="ml-2 w-6 h-6 animate-bounce" />
+            <ArrowRight className="ml-2 w-5 h-5 sm:w-6 sm:h-6 animate-bounce" />
           </Button>
 
-          <p className="mt-6 text-gray-500 text-sm">
+          <p className="mt-4 sm:mt-6 text-gray-500 text-xs sm:text-sm">
             Fără obligații. Fără costuri ascunse. 100% gratuit.
           </p>
         </section>
