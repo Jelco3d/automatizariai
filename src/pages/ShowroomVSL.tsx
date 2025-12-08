@@ -110,39 +110,7 @@ sistem automat pot crește vânzările cu 20–40% în 90 de zile.<span classNam
         </section>
 
         {/* ROI Section */}
-        <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
-          <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
-              <div className="py-4 sm:py-0">
-                <div className="flex items-center justify-center mb-3 sm:mb-4">
-                  <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 text-green-400" />
-                </div>
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400 mb-1 sm:mb-2">
-                  20-40%
-                </div>
-                <p className="text-sm sm:text-base text-gray-400">Creștere Vânzări</p>
-              </div>
-              <div className="py-4 sm:py-0 border-y sm:border-y-0 sm:border-x border-white/10">
-                <div className="flex items-center justify-center mb-3 sm:mb-4">
-                  <Clock className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400" />
-                </div>
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-1 sm:mb-2">
-                  90 zile
-                </div>
-                <p className="text-sm sm:text-base text-gray-400">Timp de Implementare</p>
-              </div>
-              <div className="py-4 sm:py-0">
-                <div className="flex items-center justify-center mb-3 sm:mb-4">
-                  <Shield className="w-8 h-8 sm:w-10 sm:h-10 text-blue-400" />
-                </div>
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-1 sm:mb-2">
-                  0€
-                </div>
-                <p className="text-sm sm:text-base text-gray-400">Risc pentru Tine</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        
 
         {/* Urgency & CTA Section */}
         <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 text-center">
