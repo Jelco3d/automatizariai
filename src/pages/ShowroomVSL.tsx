@@ -1,30 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
-import { 
-  QrCode, 
-  Car, 
-  TrendingUp, 
-  Users, 
-  Settings, 
-  Shield, 
-  Clock, 
-  ArrowRight,
-  Bell,
-  CheckCircle2
-} from "lucide-react";
-
+import { QrCode, Car, TrendingUp, Users, Settings, Shield, Clock, ArrowRight, Bell, CheckCircle2 } from "lucide-react";
 const ShowroomVSL = () => {
   const handleBooking = () => {
     window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] text-foreground relative overflow-hidden">
+  return <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] text-foreground relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-4 md:left-10 w-48 md:w-72 h-48 md:h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-40 right-4 md:right-10 w-64 md:w-96 h-64 md:h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-40 right-4 md:right-10 w-64 md:w-96 h-64 md:h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse" style={{
+        animationDelay: '1s'
+      }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-purple-600/5 rounded-full blur-3xl" />
       </div>
 
@@ -32,7 +20,7 @@ const ShowroomVSL = () => {
 
       <main className="relative z-10">
         {/* Hero Section */}
-        <section className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-12 sm:pb-16 text-center">
+        <section className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-12 sm:pb-16 text-center py-[10px]">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 mb-6 sm:mb-8">
             <Car className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />
             <span className="text-xs sm:text-sm text-purple-300">Pentru Showroom-uri Auto</span>
@@ -52,25 +40,12 @@ const ShowroomVSL = () => {
 
           {/* 3 Key Benefits */}
           <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-6 mb-8 sm:mb-12 px-2">
-            <div className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 sm:px-5 sm:py-3">
-              <Users className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400 flex-shrink-0" />
-              <span className="text-sm sm:text-base text-gray-300">Fără angajați în plus</span>
-            </div>
-            <div className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 sm:px-5 sm:py-3">
-              <Settings className="w-4 h-4 sm:w-5 sm:h-5 text-pink-400 flex-shrink-0" />
-              <span className="text-sm sm:text-base text-gray-300">Fără schimbări complicate</span>
-            </div>
-            <div className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 sm:px-5 sm:py-3">
-              <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0" />
-              <span className="text-sm sm:text-base text-gray-300">Fără riscuri</span>
-            </div>
+            
+            
+            
           </div>
 
-          <Button 
-            onClick={handleBooking}
-            size="lg"
-            className="w-full sm:w-auto bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 sm:px-10 py-6 sm:py-7 text-base sm:text-lg rounded-xl transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
-          >
+          <Button onClick={handleBooking} size="lg" className="w-full sm:w-auto bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 sm:px-10 py-6 sm:py-7 text-base sm:text-lg rounded-xl transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
             <span className="text-sm sm:text-base">Programează Sesiune Gratuită</span>
             <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
           </Button>
@@ -78,22 +53,13 @@ const ShowroomVSL = () => {
 
         {/* Video Section */}
         <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto rounded-sm shadow-md opacity-100 border">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center text-white mb-6 sm:mb-8">
               Vezi cum funcționează sistemul
             </h2>
             <div className="relative rounded-xl sm:rounded-2xl overflow-hidden border-2 border-purple-500/30 shadow-2xl shadow-purple-500/20">
               <div className="aspect-video">
-                <iframe 
-                  src="https://www.veed.io/embed/a5102854-01e9-4bfc-ba1e-249e3931cdd6"
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  title="Showroom VSL Video"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
+                <iframe src="https://www.veed.io/embed/a5102854-01e9-4bfc-ba1e-249e3931cdd6" width="100%" height="100%" frameBorder="0" title="Showroom VSL Video" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen className="w-full h-full" />
               </div>
             </div>
           </div>
@@ -109,36 +75,27 @@ const ShowroomVSL = () => {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {[
-              {
-                icon: QrCode,
-                step: "01",
-                title: "Scanare QR",
-                description: "Clientul scanează QR-ul de lângă mașină cu telefonul"
-              },
-              {
-                icon: Car,
-                step: "02", 
-                title: "Informații Instant",
-                description: "Primește toate detaliile + ofertă personalizată pe loc"
-              },
-              {
-                icon: Bell,
-                step: "03",
-                title: "Urmărire Automată",
-                description: "Sistemul urmărește automat lead-urile și le reamintește"
-              },
-              {
-                icon: CheckCircle2,
-                step: "04",
-                title: "Notificare Vânzare",
-                description: "Primești notificare când clientul e gata să cumpere"
-              }
-            ].map((item, index) => (
-              <div 
-                key={index}
-                className="relative bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-5 sm:p-6 hover:bg-white/10 transition-all group"
-              >
+            {[{
+            icon: QrCode,
+            step: "01",
+            title: "Scanare QR",
+            description: "Clientul scanează QR-ul de lângă mașină cu telefonul"
+          }, {
+            icon: Car,
+            step: "02",
+            title: "Informații Instant",
+            description: "Primește toate detaliile + ofertă personalizată pe loc"
+          }, {
+            icon: Bell,
+            step: "03",
+            title: "Urmărire Automată",
+            description: "Sistemul urmărește automat lead-urile și le reamintește"
+          }, {
+            icon: CheckCircle2,
+            step: "04",
+            title: "Notificare Vânzare",
+            description: "Primești notificare când clientul e gata să cumpere"
+          }].map((item, index) => <div key={index} className="relative bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-5 sm:p-6 hover:bg-white/10 transition-all group">
                 <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm">
                   {item.step}
                 </div>
@@ -147,8 +104,7 @@ const ShowroomVSL = () => {
                 </div>
                 <h3 className="text-lg sm:text-xl font-semibold text-white mb-1.5 sm:mb-2">{item.title}</h3>
                 <p className="text-sm sm:text-base text-gray-400">{item.description}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </section>
 
@@ -202,11 +158,7 @@ const ShowroomVSL = () => {
             Descoperă exact cum poți implementa acest sistem în showroom-ul tău și câți bani pierzi în fiecare lună.
           </p>
 
-          <Button 
-            onClick={handleBooking}
-            size="lg"
-            className="w-full sm:w-auto bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 sm:px-12 py-6 sm:py-8 text-lg sm:text-xl rounded-xl transform transition-all hover:scale-105 hover:shadow-xl hover:shadow-purple-500/30"
-          >
+          <Button onClick={handleBooking} size="lg" className="w-full sm:w-auto bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 sm:px-12 py-6 sm:py-8 text-lg sm:text-xl rounded-xl transform transition-all hover:scale-105 hover:shadow-xl hover:shadow-purple-500/30">
             Programează Sesiune Gratuită
             <ArrowRight className="ml-2 w-5 h-5 sm:w-6 sm:h-6 animate-bounce" />
           </Button>
@@ -218,8 +170,6 @@ const ShowroomVSL = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default ShowroomVSL;
