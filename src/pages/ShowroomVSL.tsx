@@ -27,15 +27,16 @@ const ShowroomVSL = () => {
           </div>
           
           <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight px-2">
-            <span className="text-white">Showroom-ul tău pierde între </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">5.000 și 20.000€</span>
-            <span className="text-white"> pe lună…</span>
+            <span className="text-white">Showroom-ul Tău Pierde  Lunar Între </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
+5.000 și 20.000€</span>
+            <span className="text-white"></span>
             <br />
-            <span className="text-gray-400">fără să-ți dai seama.</span>
+            <span className="text-gray-400">Fără Să-ți Dai Seama.</span>
           </h1>
           
-          <p className="text-base sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8 sm:mb-12 px-2">
-            Află cum un simplu <span className="text-purple-400 font-semibold">QR</span> și un <span className="text-pink-400 font-semibold">sistem automat</span> pot crește vânzările cu <span className="text-green-400 font-bold">20–40%</span> în 90 de zile.
+          <p className="text-base sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8 sm:mb-12 px-2">Află cum Un Simplu QR Cod Și Un
+sistem automat pot crește vânzările cu 20–40% în 90 de zile.<span className="text-purple-400 font-semibold">QR</span> și un <span className="text-pink-400 font-semibold">sistem automat</span> pot crește vânzările cu <span className="text-green-400 font-bold">20–40%</span> în 90 de zile.
           </p>
 
           {/* 3 Key Benefits */}
