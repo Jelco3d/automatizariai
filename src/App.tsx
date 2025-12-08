@@ -19,6 +19,7 @@ import BlogAnalytics from './pages/admin/BlogAnalytics';
 import BlogSettings from './pages/admin/BlogSettings';
 import Dashboard from './pages/admin/Dashboard';
 import WhatsAppDemo from './pages/WhatsAppDemo';
+import ShowroomVSL from './pages/ShowroomVSL';
 import AuditGratuit from './pages/AuditGratuit';
 import Contact from './pages/Contact';
 import BusinessCard from './pages/BusinessCard';
@@ -74,6 +75,7 @@ const App = () => {
           <Route path="/business-dashboard/calendar" element={<Calendar />} />
           <Route path="/contract-signature/:token" element={<ContractSignature />} />
           <Route path="/fidelizare-pacienti" element={<FidelizarePacienti />} />
+          <Route path="/showroom-vsl" element={<ShowroomVSL />} />
         </Routes>
         <CookieConsent />
         <Toaster />
