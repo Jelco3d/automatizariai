@@ -53,7 +53,7 @@ const ShowroomVSL = () => {
 
         {/* Video Section */}
         <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
-          <div className="max-w-4xl mx-auto rounded-sm shadow-md opacity-100 border">
+          <div className="max-w-4xl mx-auto rounded-sm shadow-md opacity-100 border-0">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center text-white mb-6 sm:mb-8">
               Vezi cum funcționează sistemul
             </h2>
