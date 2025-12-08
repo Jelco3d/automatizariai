@@ -76,6 +76,29 @@ const ShowroomVSL = () => {
           </Button>
         </section>
 
+        {/* Video Section */}
+        <section className="container mx-auto px-4 py-12">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-8">
+              Vezi cum funcționează sistemul
+            </h2>
+            <div className="relative rounded-2xl overflow-hidden border-2 border-purple-500/30 shadow-2xl shadow-purple-500/20">
+              <div className="aspect-video">
+                <iframe 
+                  src="https://www.veed.io/embed/a5102854-01e9-4bfc-ba1e-249e3931cdd6"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  title="Showroom VSL Video"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* How It Works Section */}
         <section className="container mx-auto px-4 py-20">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-4">
