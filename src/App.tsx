@@ -35,6 +35,7 @@ import Payments from './pages/business/Payments';
 import Calendar from './pages/business/Calendar';
 import ContractSignature from './pages/ContractSignature';
 import FidelizarePacienti from './pages/FidelizarePacienti';
+import CerereOferta from './pages/CerereOferta';
 import { CookieConsent } from './components/CookieConsent';
 
 const App = () => {
@@ -76,6 +77,7 @@ const App = () => {
           <Route path="/contract-signature/:token" element={<ContractSignature />} />
           <Route path="/fidelizare-pacienti" element={<FidelizarePacienti />} />
           <Route path="/showroom-vsl" element={<ShowroomVSL />} />
+          <Route path="/cerere-oferta" element={<CerereOferta />} />
         </Routes>
         <CookieConsent />
         <Toaster />
