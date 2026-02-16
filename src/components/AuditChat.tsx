@@ -120,6 +120,11 @@ ${answers[5] || 'N/A'}`;
     const userMessage = input.trim();
     setInput("");
 
+    // Track first interaction as Contact event
+    if (userAnswers.length === 0 && typeof fbq === 'function') {
+      fbq('track', 'Contact');
+    }
+
     // Add user message
     const newMessages = [...messages, { role: "user" as const, content: userMessage }];
     setMessages(newMessages);

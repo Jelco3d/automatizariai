@@ -86,6 +86,9 @@ const CerereOferta = () => {
       }
 
       setIsSubmitted(true);
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead');
+      }
       toast({
         title: "Cerere trimisă cu succes!",
         description: "Te vom contacta în cel mai scurt timp posibil.",
