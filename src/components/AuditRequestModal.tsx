@@ -74,6 +74,9 @@ export function AuditRequestModal({ isOpen, onClose, conversationData }: AuditRe
       }
       
       setStep(2);
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead');
+      }
       toast({
         title: "Succes!",
         description: "Auditul tău a fost trimis cu succes. Verifică email-ul în curând.",
