@@ -53,9 +53,9 @@ const AuditGratuit = () => {
                 <MessageCircle className="w-6 h-6 md:w-8 md:h-8 text-white" />
               </div>
               <h3 className="text-lg md:text-xl font-semibold text-white mb-2 md:mb-3">Descrie-ți afacerea</h3>
-              <p className="text-gray-300 text-sm md:text-base">
-                Ce faci, cui te adresezi și care sunt provocările tale zilnice.
-              </p>
+              <p className="text-gray-300 text-sm md:text-base">Ce Faci, Cui te adresezi Și Care Sunt Provocările Tale Zilnice.
+
+            </p>
             </CardContent>
           </Card>
 
@@ -65,9 +65,9 @@ const AuditGratuit = () => {
                 <Target className="w-6 h-6 md:w-8 md:h-8 text-white" />
               </div>
               <h3 className="text-lg md:text-xl font-semibold text-white mb-2 md:mb-3">AI-ul analizează</h3>
-              <p className="text-gray-300 text-sm md:text-base">
-                Răspunsurile tale sunt analizate și identificăm oportunități de automatizare și soluții inteligente.
-              </p>
+              <p className="text-gray-300 text-sm md:text-base">Răspunsurile Tale Sunt Analizate Și Identificăm Oportunități De Automatizare Și Soluții Inteligente.
+
+            </p>
             </CardContent>
           </Card>
 
@@ -77,9 +77,9 @@ const AuditGratuit = () => {
                 <TrendingUp className="w-6 h-6 md:w-8 md:h-8 text-white" />
               </div>
               <h3 className="text-lg md:text-xl font-semibold text-white mb-2 md:mb-3">Primești raportul</h3>
-              <p className="text-gray-300 text-sm md:text-base">
-                Raport personalizat instant — cu recomandări clare despre cum să începi și să scalezi cu AI.
-              </p>
+              <p className="text-gray-300 text-sm md:text-base">Raport personalizat instant 
+cu recomandări clare despre cum să începi să scalezi cu AI.
+            </p>
             </CardContent>
           </Card>
         </div>
