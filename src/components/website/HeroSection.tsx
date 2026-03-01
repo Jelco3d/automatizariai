@@ -43,13 +43,13 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col items-center gap-4">
 
-          <Button
-            onClick={handleBooking}
-            className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-base md:text-lg px-8 py-6 h-auto rounded-xl transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
+          
 
-            Rezervă-ți Auditul Strategic Gratuit de 20 minute
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
+
+
+
+
+
           <p className="text-sm text-gray-400">
             Doar 8 locuri disponibile în această lună • Fără vânzare • Fără obligații
           </p>
