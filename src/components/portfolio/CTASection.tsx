@@ -22,11 +22,12 @@ export const CTASection = () => {
       </h2>
       <Button
         onClick={handleBooking}
-        className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+        className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-semibold animate-glow-pulse"
       >
         Programează o Consultație
         <ArrowRight className="ml-2" />
       </Button>
+      <p className="text-white/30 text-sm mt-4">Fără costuri ascunse. Fără obligații.</p>
     </motion.section>
   );
 };

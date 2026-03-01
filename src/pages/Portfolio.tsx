@@ -18,16 +18,24 @@ const Portfolio = () => {
     : caseStudies.filter(study => study.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-[#1A1F2C] text-white overflow-hidden">
-      <Navigation />
-      <PortfolioHero />
-      <CategoryFilters 
-        activeCategory={activeCategory}
-        onCategoryChange={setActiveCategory}
-      />
-      <CaseStudiesGrid caseStudies={filteredCaseStudies} />
-      <CTASection />
-      <Footer />
+    <div className="min-h-screen bg-[#0a0e1a] text-white overflow-hidden">
+      {/* Animated background orbs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-yellow-500/[0.07] rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 -left-40 w-[400px] h-[400px] bg-amber-500/[0.05] rounded-full blur-3xl animate-pulse delay-1000"></div>
+      </div>
+
+      <div className="relative z-10">
+        <Navigation />
+        <PortfolioHero />
+        <CategoryFilters 
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
+        />
+        <CaseStudiesGrid caseStudies={filteredCaseStudies} />
+        <CTASection />
+        <Footer />
+      </div>
       <WebsiteChatbot />
     </div>
   );
