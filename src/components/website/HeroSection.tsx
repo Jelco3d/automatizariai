@@ -30,10 +30,10 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="space-y-2 mb-10">
 
-          <p className="text-lg md:text-xl text-gray-300">Fără developeri scumpi.</p>
+          
           <p className="text-lg md:text-xl text-gray-300">Fără proiecte care durează luni de zile.</p>
           <p className="text-lg md:text-xl text-purple-300 font-semibold">
-            Platformă internă custom, gata în doar 7–14 zile.
+
           </p>
         </motion.div>
 
