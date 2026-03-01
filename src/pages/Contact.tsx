@@ -58,7 +58,7 @@ const Contact = () => {
                 </p>
                 <button 
                   onClick={() => window.open('https://calendly.com/cosmincatalin-ai/30min', '_blank')}
-                  className="w-full bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-semibold px-6 py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-yellow-500/25 animate-glow-pulse"
+                  className="w-full btn-3d-gold px-6 py-3 rounded-lg animate-glow-pulse"
                 >
                   Programează Consultație Gratuită
                 </button>

@@ -78,7 +78,7 @@ export const HeroSection = () => {
           <Button
             onClick={handleBooking}
             size="lg"
-            className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-bold text-base md:text-lg px-10 py-7 h-auto rounded-xl shadow-lg shadow-yellow-500/20 hover:shadow-yellow-500/30 transition-all hover:scale-105 animate-glow-pulse"
+            className="btn-3d-gold text-base md:text-lg px-10 py-7 h-auto rounded-xl animate-glow-pulse"
           >
             Programează o discuție gratuită
             <ArrowRight className="ml-2 w-5 h-5" />

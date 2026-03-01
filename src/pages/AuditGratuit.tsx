@@ -81,7 +81,7 @@ const AuditGratuit = () => {
       {/* CTA Section */}
       <section className="container mx-auto px-4 py-8 md:py-12 relative z-10">
         <div className="max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
-          <Button onClick={handleStartAnalysis} size="lg" className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-semibold px-6 md:px-8 py-5 md:py-6 text-base md:text-lg rounded-lg transform transition-all hover:scale-105 animate-glow-pulse w-full md:w-auto">
+          <Button onClick={handleStartAnalysis} size="lg" className="btn-3d-gold px-6 md:px-8 py-5 md:py-6 text-base md:text-lg rounded-lg animate-glow-pulse w-full md:w-auto">
             Vreau AI În Afacerea Mea
             <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
           </Button>

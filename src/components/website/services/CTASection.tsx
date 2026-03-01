@@ -13,7 +13,7 @@ export const CTASection = ({ handleBooking }: { handleBooking: () => void }) => 
       </p>
       <Button 
         onClick={handleBooking}
-        className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-semibold px-8 py-4 text-base rounded-lg transform transition-all hover:scale-105 animate-glow-pulse"
+        className="btn-3d-gold px-8 py-4 text-base rounded-lg animate-glow-pulse"
       >
         Programează Consultația Gratuită
         <ArrowRight className="ml-2" />

@@ -25,7 +25,7 @@ export const CTASection = () => {
         <div className="flex flex-col items-center gap-3">
           <Button
             onClick={handleBooking}
-            className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-bold px-10 py-7 h-auto text-lg rounded-xl shadow-lg shadow-yellow-500/20 transition-all hover:scale-105 animate-glow-pulse"
+            className="btn-3d-gold px-10 py-7 h-auto text-lg rounded-xl animate-glow-pulse"
           >
             Programează Audit AI Gratuit
             <ArrowRight className="ml-2 w-5 h-5" />
