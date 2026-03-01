@@ -17,9 +17,10 @@ export const VSLSection = () => {
           transition={{ duration: 0.6 }}
           className="text-2xl text-white mb-10 leading-tight py-[15px] mx-px font-extrabold text-center md:text-4xl">
 
-          Cum am ajutat antreprenori ca tine să recupereze zeci de ore pe săptămână…{" "}
+          Cum Am Ajutat Antreprenori Ca Tine Să Recupereze Zeci De Ore Pe Săptămână…{" "}
+          <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
-
+            În Mai Puțin De 30 De zile
           </span>
         </motion.h2>
 
