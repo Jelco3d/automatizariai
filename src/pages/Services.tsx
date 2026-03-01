@@ -18,24 +18,30 @@ const Services = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] relative overflow-hidden">
+    <div className="min-h-screen bg-[#0a0e1a] relative overflow-hidden">
       <Navigation />
       
-      {/* Animated background elements */}
+      {/* Animated background elements - gold/amber like Homepage */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-yellow-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       <ServicesHero handleBooking={handleBooking} />
+      <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
       <DetailedServices />
+      <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
       <PricingPlans handleBooking={handleBooking} />
+      <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
       <CaseStudies />
+      <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
       <TechnicalCapabilities />
+      <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
       <IntegrationOptions />
+      <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
       <CTASection handleBooking={handleBooking} />
 
-      
+      <Footer />
       <WebsiteChatbot />
     </div>);
 
