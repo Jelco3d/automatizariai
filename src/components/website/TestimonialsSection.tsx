@@ -1,57 +1,69 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Quote, Star } from "lucide-react";
+import { Quote } from "lucide-react";
+import { motion } from "framer-motion";
+
+const testimonials = [
+  {
+    quote: "Am recuperat 28 de ore pe săptămână în primele 30 de zile",
+    name: "Cristinel I.",
+    industry: "Distribuție materiale construcții",
+    location: "Timișoara",
+  },
+  {
+    quote: "Predicția stocului ne-a redus pierderile cu 27% în doar 3 săptămâni",
+    name: "Ioana M.",
+    industry: "Distribuție lactate",
+    location: "",
+  },
+  {
+    quote: "Răspundem instant la clienți și am crescut conversia cu 35%",
+    name: "Mihai D.",
+    industry: "Magazin cosmetice & seturi cadou",
+    location: "",
+  },
+];
 
 export const TestimonialsSection = () => {
   return (
-    <div className="container mx-auto px-4 py-8 relative">
-      <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 text-center mb-12">Ce Spun Clienții Noștri</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
-          <CardContent className="p-6">
-            <Quote className="w-8 h-8 text-purple-400 mb-4" />
-            <p className="text-gray-300 mb-4">"Soluțiile de automatizare AI implementate au redus timpul nostru de procesare cu 70%. Rezultate incredibile!"</p>
-            <div className="flex items-center gap-2 text-purple-400">
-              <Star className="w-4 h-4 fill-current animate-pulse" />
-              <Star className="w-4 h-4 fill-current animate-pulse delay-75" />
-              <Star className="w-4 h-4 fill-current animate-pulse delay-150" />
-              <Star className="w-4 h-4 fill-current animate-pulse delay-200" />
-              <Star className="w-4 h-4 fill-current animate-pulse delay-300" />
-            </div>
-            <p className="text-white font-semibold mt-2">Ana Maria Popescu</p>
-            <p className="text-sm text-gray-400">Manager Operațiuni</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
-          <CardContent className="p-6">
-            <Quote className="w-8 h-8 text-purple-400 mb-4" />
-            <p className="text-gray-300 mb-4">"Optimizarea fluxului de lucru ne-a transformat operațiunile de afaceri. Suntem mai eficienți ca niciodată."</p>
-            <div className="flex items-center gap-2 text-purple-400">
-              <Star className="w-4 h-4 fill-current animate-pulse" />
-              <Star className="w-4 h-4 fill-current animate-pulse delay-75" />
-              <Star className="w-4 h-4 fill-current animate-pulse delay-150" />
-              <Star className="w-4 h-4 fill-current animate-pulse delay-200" />
-              <Star className="w-4 h-4 fill-current animate-pulse delay-300" />
-            </div>
-            <p className="text-white font-semibold mt-2">Mihai Ionescu</p>
-            <p className="text-sm text-gray-400">Director Tehnic</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-[#1A1F2C]/80 backdrop-blur-xl border-purple-500/50 hover:border-purple-400 transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
-          <CardContent className="p-6">
-            <Quote className="w-8 h-8 text-purple-400 mb-4" />
-            <p className="text-gray-300 mb-4">"Automatizarea analizei datelor ne-a oferit perspective pe care nu le-am avut niciodată înainte. A schimbat complet modul în care luăm decizii."</p>
-            <div className="flex items-center gap-2 text-purple-400">
-              <Star className="w-4 h-4 fill-current animate-pulse" />
-              <Star className="w-4 h-4 fill-current animate-pulse delay-75" />
-              <Star className="w-4 h-4 fill-current animate-pulse delay-150" />
-              <Star className="w-4 h-4 fill-current animate-pulse delay-200" />
-              <Star className="w-4 h-4 fill-current animate-pulse delay-300" />
-            </div>
-            <p className="text-white font-semibold mt-2">Elena Dumitrescu</p>
-            <p className="text-sm text-gray-400">Lead Analiză Date</p>
-          </CardContent>
-        </Card>
+    <section className="py-16 md:py-24 px-4">
+      <div className="max-w-4xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-2xl md:text-4xl font-bold text-center text-white mb-12"
+        >
+          Nu mă crede pe cuvânt –{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+            uite ce au obținut alții
+          </span>
+        </motion.h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {testimonials.map((t, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              className="bg-white/5 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-6 hover:border-purple-400/40 transition-colors"
+            >
+              <Quote className="w-8 h-8 text-purple-400/60 mb-4" />
+              <p className="text-white text-lg font-medium leading-relaxed mb-6">
+                „{t.quote}"
+              </p>
+              <div className="border-t border-purple-500/20 pt-4">
+                <p className="text-purple-300 font-semibold">{t.name}</p>
+                <p className="text-gray-400 text-sm">{t.industry}</p>
+                {t.location && (
+                  <p className="text-gray-500 text-sm">{t.location}</p>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
