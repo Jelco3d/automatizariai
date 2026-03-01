@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -8,7 +9,10 @@ interface NavigationProps {
 }
 
 export function Navigation({ onOpenAuditModal }: NavigationProps) {
+  const [sheetOpen, setSheetOpen] = useState(false);
+
   const handleBooking = () => {
+    setSheetOpen(false);
     onOpenAuditModal?.();
   };
 
@@ -27,7 +31,7 @@ export function Navigation({ onOpenAuditModal }: NavigationProps) {
           AUTOMATIZĂRI
         </span>
       </Link>
-      <Sheet>
+      <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetTrigger asChild>
           <Button
             variant="outline"
