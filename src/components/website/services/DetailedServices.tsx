@@ -4,7 +4,7 @@ import { ArrowRight, Building2, Bot, Cog } from "lucide-react";
 
 export const DetailedServices = () => {
   return (
-    <div className="container mx-auto px-4 py-16">
+    <div className="container mx-auto px-4 py-10 md:py-16">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {[
           {
@@ -39,7 +39,7 @@ export const DetailedServices = () => {
           },
         ].map(({ icon: Icon, title, desc, items }, i) => (
           <Card key={i} className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] hover:border-yellow-400/30 transition-all hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/[0.05]">
-            <CardContent className="p-6">
+            <CardContent className="p-4 md:p-6">
               <Icon className="w-12 h-12 text-yellow-400 mb-4" />
               <h3 className="text-2xl font-bold text-white mb-4">{title}</h3>
               <p className="text-white/60 mb-4">{desc}</p>

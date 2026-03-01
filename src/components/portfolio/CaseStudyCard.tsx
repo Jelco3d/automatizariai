@@ -39,7 +39,7 @@ export const CaseStudyCard = ({
       className="bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:border-yellow-400/30 transition-all cursor-pointer hover:shadow-lg hover:shadow-yellow-500/[0.05]"
       onClick={() => navigate('/portfolio')}
     >
-      <CardContent className="p-6">
+      <CardContent className="p-4 md:p-6">
         <h3 className="text-2xl font-bold text-yellow-400 mb-4">{client}</h3>
         <p className="text-white/60 mb-4">{industry}</p>
         

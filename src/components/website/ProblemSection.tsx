@@ -26,7 +26,7 @@ const problems = [
 
 export const ProblemSection = () => {
   return (
-    <section className="py-10 md:py-14 px-4">
+    <section className="py-6 md:py-14 px-4">
       <div className="max-w-3xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -41,7 +41,7 @@ export const ProblemSection = () => {
           </span>
         </motion.h2>
 
-        <div className="space-y-5">
+        <div className="space-y-3 md:space-y-5">
           {problems.map((problem, index) => (
             <motion.div
               key={index}
@@ -49,7 +49,7 @@ export const ProblemSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex items-start gap-4 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-xl p-5 hover:border-yellow-400/30 transition-all duration-300"
+              className="flex items-start gap-4 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-xl p-3.5 md:p-5 hover:border-yellow-400/30 transition-all duration-300"
             >
               <div className="flex-shrink-0 flex items-center gap-3">
                 <span className="text-yellow-400/40 font-bold text-lg">{index + 1}</span>
@@ -67,7 +67,7 @@ export const ProblemSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center text-xl md:text-2xl text-yellow-300 font-semibold mt-12"
+          className="text-center text-lg md:text-2xl text-yellow-300 font-semibold mt-12"
         >
           „Nu ești singurul. Și nu trebuie să mai continui așa."
         </motion.p>

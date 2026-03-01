@@ -175,7 +175,7 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
-      <DialogContent className="max-w-2xl max-h-[90vh] p-0 bg-[#0a0e1a] border border-yellow-500/30 overflow-hidden">
+      <DialogContent className="w-full h-full max-w-none max-h-none rounded-none md:w-auto md:h-auto md:max-w-2xl md:max-h-[90vh] md:rounded-lg p-0 bg-[#0a0e1a] border border-yellow-500/30 overflow-hidden">
         <DialogTitle className="sr-only">Audit Strategic Gratuit</DialogTitle>
 
         {isSubmitted ? (
@@ -193,7 +193,7 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
         ) : (
           <div className="flex flex-col h-full max-h-[90vh]">
             {/* Header + Progress */}
-            <div className="p-6 pb-0">
+            <div className="p-4 md:p-6 pb-0">
               <h2 className="text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400 mb-4 leading-tight">
                 Audit Strategic Gratuit
               </h2>
@@ -204,7 +204,7 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
                   <div key={label} className="flex items-center flex-1 last:flex-none">
                     <div className="flex flex-col items-center">
                       <div
-                        className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-all duration-300 ${
+                        className={`w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center text-[9px] md:text-xs font-bold border-2 transition-all duration-300 ${
                           i < currentStep
                             ? "bg-yellow-500 border-yellow-500 text-black"
                             : i === currentStep
@@ -239,7 +239,7 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
             {/* Step content */}
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col flex-1 overflow-hidden">
-                <div className="flex-1 overflow-y-auto px-6 py-4">
+                <div className="flex-1 overflow-y-auto px-4 py-3 md:px-6 md:py-4">
                   <AnimatePresence mode="wait" custom={direction}>
                     <motion.div
                       key={currentStep}
@@ -260,7 +260,7 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
                 </div>
 
                 {/* Navigation footer */}
-                <div className="p-4 border-t border-yellow-500/10 flex justify-between items-center">
+                <div className="p-3 md:p-4 border-t border-yellow-500/10 flex justify-between items-center">
                   {currentStep > 0 ? (
                     <Button type="button" variant="outline" onClick={handleBack} className="border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/10">
                       <ArrowLeft className="w-4 h-4 mr-2" /> Înapoi

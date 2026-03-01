@@ -12,14 +12,14 @@ export const VSLSection = ({ onOpenAuditModal }: VSLSectionProps) => {
   };
 
   return (
-    <section className="py-10 md:py-14 px-4">
+    <section className="py-6 md:py-14 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-2xl md:text-4xl font-extrabold text-center text-white/90 mb-10 leading-tight max-w-3xl mx-auto"
+          className="text-xl md:text-4xl font-extrabold text-center text-white/90 mb-10 leading-tight max-w-3xl mx-auto"
         >
           Cum Am Ajutat Antreprenori Ca Tine Să Recupereze{" "}
           <span className="text-yellow-400">Zeci De Ore</span> Pe Săptămână
