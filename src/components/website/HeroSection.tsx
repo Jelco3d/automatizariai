@@ -9,7 +9,7 @@ export const HeroSection = () => {
 
   return (
     <section className="flex items-center justify-center relative px-4 pt-32 pb-16 md:pt-40 md:pb-24">
-      <div className="max-w-5xl mx-auto text-center">
+      <div className="max-w-5xl mx-auto text-center py-0 my-0">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
