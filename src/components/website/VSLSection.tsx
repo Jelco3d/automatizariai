@@ -56,7 +56,7 @@ export const VSLSection = ({ onOpenAuditModal }: VSLSectionProps) => {
             onClick={handleBooking}
             className="btn-3d-gold text-base md:text-lg px-8 py-6 h-auto rounded-xl"
           >
-            Vreau să aflu cum poți face și tu la fel
+            Programează AI Audit Gratuit!
             <ArrowRight className="ml-2 w-5 h-5" />
           </Button>
         </motion.div>
