@@ -8,9 +8,13 @@ const points = [
   "Fără proiecte care durează luni de zile",
 ];
 
-export const SolutionSection = () => {
+interface SolutionSectionProps {
+  onOpenAuditModal?: () => void;
+}
+
+export const SolutionSection = ({ onOpenAuditModal }: SolutionSectionProps) => {
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
+    onOpenAuditModal?.();
   };
 
   return (

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { HeroSection } from "@/components/website/HeroSection";
@@ -7,8 +8,12 @@ import { SolutionSection } from "@/components/website/SolutionSection";
 import { TestimonialsSection } from "@/components/website/TestimonialsSection";
 import { WebsiteChatbot } from "@/components/website/WebsiteChatbot";
 import { CTASection } from "@/components/website/CTASection";
+import { AuditFormModal } from "@/components/website/AuditFormModal";
 
 const Website = () => {
+  const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
+  const openAuditModal = () => setIsAuditModalOpen(true);
+
   return (
     <div className="min-h-screen bg-[#0a0e1a] relative overflow-hidden">
       <Navigation />
@@ -21,9 +26,8 @@ const Website = () => {
         <div className="absolute top-1/4 left-1/3 w-[200px] h-[200px] bg-amber-400/[0.03] rounded-full blur-[60px] animate-pulse delay-700" />
       </div>
 
-      <HeroSection />
+      <HeroSection onOpenAuditModal={openAuditModal} />
 
-      {/* Divider */}
       <div className="max-w-4xl mx-auto h-px bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent" />
 
       <VSLSection />
@@ -34,7 +38,7 @@ const Website = () => {
 
       <div className="max-w-4xl mx-auto h-px bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent" />
 
-      <SolutionSection />
+      <SolutionSection onOpenAuditModal={openAuditModal} />
 
       <div className="max-w-4xl mx-auto h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
@@ -42,11 +46,13 @@ const Website = () => {
 
       <div className="max-w-4xl mx-auto h-px bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent" />
 
-      <CTASection />
+      <CTASection onOpenAuditModal={openAuditModal} />
 
       <Footer />
 
       <WebsiteChatbot />
+
+      <AuditFormModal isOpen={isAuditModalOpen} onClose={() => setIsAuditModalOpen(false)} />
     </div>
   );
 };
