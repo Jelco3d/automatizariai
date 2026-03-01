@@ -1,137 +1,148 @@
 
 
-# Optimizare Completa Landing Page - UI/UX Premium
+# Redesign Complet - Aliniere Vizuala cu Pagina Acasa
 
 ## Obiectiv
-Redesign complet al paginii principale pentru un look premium, modern, cu focus pe conversie ridicata. Fiecare sectiune va fi imbunatatita vizual cu gradient-uri rafinate, glow effects, micro-animatii si o paleta de culori mai coerenta (gold/amber ca accent principal, fundal dark consistent).
+Toate paginile secundare (Servicii, Audit Gratuit, Despre Noi, Portofoliu, Contact) folosesc inca tema veche purple/pink. Le aliniem la tema premium gold/amber de pe pagina principala.
 
 ---
 
-## 1. Website.tsx - Background si Layout Global
+## Schimbari Globale pe Toate Paginile
 
-**Ce se schimba:**
-- Background gradient mai sofisticat cu tonuri mai deep (navy/indigo in loc de purple murdar)
-- Adaugare grain/noise texture subtil via CSS pseudo-element
-- Background orbs mai mari, cu culori gold/amber in loc de purple/blue/pink (coerenta cu brand)
-- Adaugare gradient dividers subtile intre sectiuni
-- Adaugare CTA Section finala inainte de Footer (re-folosind pattern-ul existent)
+**Background**: `bg-[#0a0e1a]` in loc de `bg-[#1A1F2C]` sau `bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C]`
 
----
+**Orbs animate**: Gold/amber (`bg-yellow-500/[0.07]`, `bg-amber-500/[0.05]`) in loc de purple/blue
 
-## 2. Navigation.tsx - Nav Premium
+**Gradient-uri text**: `from-yellow-300 to-amber-400` in loc de `from-purple-400 to-pink-300/600`
 
-**Ce se schimba:**
-- Fix: remove duplicate `relative fixed` classes
-- Adaugare `backdrop-blur-xl` si `bg-black/20` pe nav bar pentru glass effect
-- Buton hamburger cu border gold in loc de purple
-- Sheet menu cu hover transitions mai smooth si accent gold
+**Accent culori**: `text-yellow-400` in loc de `text-purple-400`
 
----
+**Borders**: `border-white/[0.06]`, hover `border-yellow-400/30` in loc de `border-purple-500/20-50`
 
-## 3. HeroSection.tsx - Hero cu Impact Maxim
+**Cards**: `bg-white/[0.03]` cu `border-white/[0.08]` in loc de `bg-[#1A1F2C]/80 border-purple-500/50`
 
-**Ce se schimba:**
-- Badge-ul de sus: adaugare glow subtil pe punctul verde, border mai vizibil
-- Headline: font size mai mare pe desktop (`lg:text-6xl`), letter-spacing tight
-- Gradient pe "infrastructura interna" mai vibrant (from-yellow-200 via-amber-400 to-orange-500)
-- Sub-text: text-white/60 in loc de /50 pentru citibilitate
-- Metric cards: adaugare `hover:scale-105` transition, `shadow-lg shadow-yellow-500/10`, border mai vizibil pe hover
-- CTA buton: adaugare animatie glow pulsating via box-shadow animation, text mai mare
-- Adaugare micro-text sub CTA: "Fara costuri ascunse. Fara obligatii." in text-white/30
+**Butoane CTA**: `from-yellow-400 to-amber-500 text-black` in loc de `from-purple-500 to-pink-500 text-white`
+
+**Dividers** intre sectiuni: `via-yellow-400/20` pattern din homepage
 
 ---
 
-## 4. VSLSection.tsx - Video Section Premium
+## 1. Services.tsx (pagina principala)
+- Background: `bg-[#0a0e1a]`
+- Orbs: gold/amber, pointer-events-none
+- Adaugare dividers intre sectiuni
 
-**Ce se schimba:**
-- Video placeholder: border gold gradient in loc de orange, background subtle gradient
-- Play button: gradient gold (from-yellow-400 to-amber-500) in loc de purple/pink, cu shadow glow
-- Text "Video in curand" cu font-medium
-- CTA buton: gradient gold consistent cu hero (from-yellow-400 to-amber-500, text-black)
-- Container max-width si spacing optimizat
+## 2. ServicesHero.tsx
+- Gradient heading: `from-yellow-300 to-amber-400`
+- Adaugare motion animations (fade-in)
+- Padding ajustat `pt-32`
 
----
+## 3. DetailedServices.tsx
+- Cards: `bg-white/[0.03] border-white/[0.08]` cu hover `border-yellow-400/30`
+- Icons: `text-yellow-400` in loc de `text-purple-400`
+- Arrow icons: `text-yellow-400/60`
+- Adaugare hover shadow `shadow-yellow-500/[0.05]`
 
-## 5. ProblemSection.tsx - Problem Cards Premium
+## 4. PricingPlans.tsx
+- Heading gradient: gold
+- Cards: aceeasi tema `bg-white/[0.03]`
+- Preturi: `text-yellow-400` in loc de `text-purple-400`
+- "Cel Mai Popular" badge: `from-yellow-400 to-amber-500 text-black`
+- Butoane: `from-yellow-400 to-amber-500 text-black`
+- Arrow icons: `text-yellow-400/60`
 
-**Ce se schimba:**
-- Heading gradient actualizat: from-yellow-300 to-amber-400 (gold theme consistent)
-- Problem cards: `bg-white/[0.03]` mai subtil, border `border-white/[0.08]`, hover cu `border-yellow-400/30`
-- Icon containers: gradient gold subtil in loc de purple
-- Icon color: text-yellow-400/80 in loc de text-purple-400
-- Adaugare numar de ordine vizual (1-5) pe fiecare card
-- Quote final: text-yellow-300 in loc de text-purple-300
+## 5. CaseStudies.tsx (services)
+- Heading + accent colors: gold
+- Cards tema consistenta
 
----
+## 6. TechnicalCapabilities.tsx
+- Heading, icons, cards: gold theme
 
-## 6. SolutionSection.tsx - Solution cu Urgenta
+## 7. IntegrationOptions.tsx
+- Heading: gold
+- Grid items: `bg-white/[0.04] border border-white/[0.08]` cu hover effects
 
-**Ce se schimba:**
-- Heading gradient: gold consistent
-- Check marks: text-yellow-400 in loc de green
-- Points layout: cards individuale cu border subtil in loc de simple flex items
-- Result card: gradient gold (`from-yellow-400/10 to-amber-500/5`), border `border-yellow-400/20`
-- Zap icon: animatie rotate subtila
-- Adaugare CTA buton la finalul sectiunii
+## 8. CTASection.tsx (services)
+- Heading + buton: gold theme
 
----
+## 9. AuditGratuit.tsx
+- Background: `bg-[#0a0e1a]`
+- Orbs: gold/amber
+- Hero heading: "AUDIT GRATUIT!" ramane alb, gradient text devine gold
+- "Cum functioneaza" heading: gold
+- Step cards: `bg-white/[0.03] border-white/[0.08]`, icon circles `from-yellow-400 to-amber-500`
+- "Next Steps" card: `from-yellow-400/10 to-amber-500/5`, border `border-yellow-400/20`
+- CTA buton: gold theme cu glow
 
-## 7. TestimonialsSection.tsx - Social Proof Premium
+## 10. AboutUs.tsx
+- Background: `bg-[#0a0e1a]`
+- Adaugare orbs animate gold
+- Founder card: `bg-white/[0.03] border-white/[0.08]`, name `text-yellow-400`
+- Button: gold CTA
+- "Povestea Noastra" heading: gold gradient
+- Mission/Values cards: gold accents
+- Culture badges: `bg-yellow-400/10`
+- Final CTA: gold button cu glow
 
-**Ce se schimba:**
-- Heading gradient: gold consistent
-- Cards: `bg-gradient-to-b from-white/[0.06] to-white/[0.02]`, border mai vizibil pe hover
-- Quote icon: text-yellow-400/40
-- Adaugare rating stars (5 stele) pe fiecare testimonial
-- Adaugare metric highlight in fiecare quote (numarul bold cu gold)
-- Bottom border: `border-yellow-400/20`
-- Name: text-yellow-300
+## 11. Portfolio.tsx
+- Background: `bg-[#0a0e1a]`
+- Adaugare orbs animate
 
----
+## 12. PortfolioHero.tsx
+- Heading gradient: gold
 
-## 8. Footer.tsx - Footer Curat
+## 13. CategoryFilters.tsx
+- Active: `bg-yellow-400 text-black` in loc de `bg-purple-500 text-white`
+- Inactive: `border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/10`
 
-**Ce se schimba:**
-- Gradient headings: gold in loc de purple/pink
-- Hover links: hover:text-yellow-400 in loc de hover:text-purple-400
-- Border top: `border-white/10` mai subtil
-- Social icons hover: gold
+## 14. CaseStudyCard.tsx
+- Card: `bg-white/[0.03] border-white/[0.08]` hover `border-yellow-400/30`
+- Client name: `text-yellow-400`
+- Before/After bg: `bg-yellow-400/5`
+- Sub-headings: `text-yellow-400`
+- Icons: `text-yellow-400`
 
----
+## 15. CTASection.tsx (portfolio)
+- Heading alb, buton gold
 
-## 9. CSS Global (src/index.css)
-
-**Ce se schimba:**
-- Adaugare keyframe `glow-pulse` pentru butonul CTA principal
-- Adaugare utility class `.glass` pentru glass morphism consistent
+## 16. Contact.tsx
+- Background: `bg-[#0a0e1a]`
+- Orbs: gold/amber
+- Heading gradient: gold
+- Cards: `bg-white/[0.03] border-white/[0.08]`
+- Icon containers: `bg-yellow-400/10`
+- Icons: `text-yellow-400`
+- Hover links: `hover:text-yellow-400`
+- Buton consultatie: gold CTA
 
 ---
 
 ## Detalii Tehnice
 
-**Fisiere modificate:**
-1. `src/pages/Website.tsx` - background, layout, CTA section
-2. `src/components/website/Navigation.tsx` - glass nav, fix classes
-3. `src/components/website/HeroSection.tsx` - hero premium cu glow CTA
-4. `src/components/website/VSLSection.tsx` - video gold theme
-5. `src/components/website/ProblemSection.tsx` - problem cards gold
-6. `src/components/website/SolutionSection.tsx` - solution cu CTA
-7. `src/components/website/TestimonialsSection.tsx` - testimonials cu stars
-8. `src/components/website/Footer.tsx` - footer gold theme
-9. `src/index.css` - glow animation keyframes
+**Fisiere modificate (16 fisiere):**
+1. `src/pages/Services.tsx`
+2. `src/components/website/services/ServicesHero.tsx`
+3. `src/components/website/services/DetailedServices.tsx`
+4. `src/components/website/services/PricingPlans.tsx`
+5. `src/components/website/services/CaseStudies.tsx`
+6. `src/components/website/services/TechnicalCapabilities.tsx`
+7. `src/components/website/services/IntegrationOptions.tsx`
+8. `src/components/website/services/CTASection.tsx`
+9. `src/pages/AuditGratuit.tsx`
+10. `src/pages/AboutUs.tsx`
+11. `src/pages/Portfolio.tsx`
+12. `src/components/portfolio/PortfolioHero.tsx`
+13. `src/components/portfolio/CategoryFilters.tsx`
+14. `src/components/portfolio/CaseStudyCard.tsx`
+15. `src/components/portfolio/CTASection.tsx`
+16. `src/pages/Contact.tsx`
 
-**Paleta de culori unificata:**
-- Primary accent: yellow-400 / amber-500 (gold)
-- Background: #0a0e1a (deep navy) → #12101f (dark indigo)
-- Text: white, white/60, white/40
-- Borders: white/[0.06], white/[0.08]
-- Hover accent: yellow-400/30
-
-**Principii de conversie aplicate:**
-- CTA vizibil si repetitiv (Hero, VSL, Solution, Final CTA)
-- Contrast puternic pe butoane (gold pe dark)
-- Social proof prominent
-- Urgenta si specificitate in metrici
-- Micro-copy de incredere sub CTA-uri
-- Animatii care ghideaza ochiul catre CTA
+**Paleta unificata (identica cu homepage):**
+- Background: `#0a0e1a`
+- Accent primar: `yellow-400` / `amber-500`
+- Text: `white`, `white/60`, `white/40`, `white/50`
+- Borders: `white/[0.06]`, `white/[0.08]`
+- Card bg: `white/[0.03]`
+- CTA buttons: `from-yellow-400 to-amber-500`, text negru, glow pulse
+- Orbs: `yellow-500/[0.07]`, `amber-500/[0.05]`
 
