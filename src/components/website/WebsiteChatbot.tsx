@@ -132,17 +132,23 @@ export const WebsiteChatbot = () => {
     <>
       {/* Chat Bubble */}
       {!isOpen && (
-        <Button
+        <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-4 right-4 md:bottom-6 md:right-6 h-12 w-12 md:h-14 md:w-14 rounded-full btn-3d-gold shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse z-50 p-0"
+          className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex flex-col items-center gap-1 group cursor-pointer"
           aria-label="Open chat"
         >
-          <img 
-            src="/lovable-uploads/new-logo.png" 
-            alt="AI Automatizari Logo" 
-            className="h-8 w-8 md:h-10 md:w-10 object-contain"
-          />
-        </Button>
+          <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 flex items-center justify-center border border-yellow-300/50 logo-3d overflow-hidden transition-transform duration-300 group-hover:scale-110">
+            <span
+              className="relative z-10 text-black font-extrabold text-2xl md:text-3xl"
+              style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2), 0 -1px 0 rgba(255,255,255,0.3)' }}
+            >
+              AI
+            </span>
+          </div>
+          <span className="text-[8px] md:text-[10px] font-bold tracking-[0.15em] bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
+            AUTOMATIZĂRI
+          </span>
+        </button>
       )}
 
       {/* Chat Window */}
