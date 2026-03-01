@@ -1,4 +1,5 @@
 
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import Index from './pages/Index';
@@ -39,6 +40,14 @@ import CerereOferta from './pages/CerereOferta';
 import { CookieConsent } from './components/CookieConsent';
 
 const App = () => {
+  useEffect(() => {
+    const handler = (event: PromiseRejectionEvent) => {
+      event.preventDefault();
+    };
+    window.addEventListener("unhandledrejection", handler);
+    return () => window.removeEventListener("unhandledrejection", handler);
+  }, []);
+
   return (
     <Router>
         <Routes>
