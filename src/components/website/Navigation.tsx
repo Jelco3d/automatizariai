@@ -9,16 +9,12 @@ export function Navigation() {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center items-center py-2 bg-black/20 backdrop-blur-xl border-b border-white/[0.06]">
-      <Link to="/" className="flex items-center">
-        <img
-          alt="AI Automatizari Logo"
-          src="/lovable-uploads/new-logo.png"
-          width="96"
-          height="96"
-          className="h-20 md:h-32 w-auto rounded-3xl object-contain"
-          fetchPriority="high"
-        />
+    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center items-center py-2">
+      <Link to="/" className="flex flex-col items-center gap-0.5">
+        <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center shadow-lg shadow-yellow-500/20">
+          <span className="text-black font-bold text-lg md:text-xl">AI</span>
+        </div>
+        <span className="text-white text-[10px] md:text-xs font-semibold tracking-wider">AUTOMATIZĂRI</span>
       </Link>
       <Sheet>
         <SheetTrigger asChild>
