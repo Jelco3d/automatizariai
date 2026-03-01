@@ -19,8 +19,8 @@ const Website = () => {
         <div className="absolute bottom-40 right-1/4 w-60 h-60 bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-500" />
       </div>
 
-      <HeroSection />
-      <VSLSection />
+      <HeroSection className="py-[30px]" />
+      <VSLSection className="bg-black/0" />
       <ProblemSection />
       <SolutionSection />
       <TestimonialsSection />
