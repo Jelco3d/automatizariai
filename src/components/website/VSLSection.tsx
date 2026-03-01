@@ -17,8 +17,8 @@ export const VSLSection = () => {
           transition={{ duration: 0.6 }}
           className="text-2xl md:text-4xl font-extrabold text-center text-white/90 mb-10 leading-tight max-w-3xl mx-auto"
         >
-          Cum am ajutat antreprenori ca tine să recupereze{" "}
-          <span className="text-yellow-400">zeci de ore</span> pe săptămână
+          Cum Am Ajutat Antreprenori Ca Tine Să Recupereze{" "}
+          <span className="text-yellow-400">Zeci De Ore</span> Pe Săptămână
           <br />
           <span className="text-white/50 text-lg md:text-2xl font-medium mt-2 block">
             în mai puțin de{" "}
