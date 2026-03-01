@@ -36,7 +36,7 @@ export const ProblemSection = () => {
           className="text-2xl md:text-4xl font-bold text-center text-white mb-12 leading-tight"
         >
           Dacă te regăsești în oricare din situațiile de mai jos,{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
             continuă să citești…
           </span>
         </motion.h2>
@@ -49,12 +49,15 @@ export const ProblemSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex items-start gap-4 bg-white/5 backdrop-blur-sm border border-purple-500/20 rounded-xl p-5 hover:border-purple-400/40 transition-colors"
+              className="flex items-start gap-4 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] rounded-xl p-5 hover:border-yellow-400/30 transition-all duration-300"
             >
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
-                <problem.icon className="w-5 h-5 text-purple-400" />
+              <div className="flex-shrink-0 flex items-center gap-3">
+                <span className="text-yellow-400/40 font-bold text-lg">{index + 1}</span>
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400/15 to-amber-500/10 flex items-center justify-center">
+                  <problem.icon className="w-5 h-5 text-yellow-400/80" />
+                </div>
               </div>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed">{problem.text}</p>
+              <p className="text-white/70 text-base md:text-lg leading-relaxed">{problem.text}</p>
             </motion.div>
           ))}
         </div>
@@ -64,7 +67,7 @@ export const ProblemSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center text-xl md:text-2xl text-purple-300 font-semibold mt-12"
+          className="text-center text-xl md:text-2xl text-yellow-300 font-semibold mt-12"
         >
           „Nu ești singurul. Și nu trebuie să mai continui așa."
         </motion.p>
