@@ -10,11 +10,18 @@ export function Navigation() {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-center items-center py-2">
-      <Link to="/" className="flex flex-col items-center gap-0.5">
-        <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center shadow-lg shadow-yellow-500/20">
-          <span className="text-black font-bold text-lg md:text-xl">AI</span>
+      <Link to="/" className="flex flex-col items-center gap-1 group">
+        <div className="relative w-14 h-14 md:w-[4.5rem] md:h-[4.5rem] rounded-full bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 flex items-center justify-center border border-yellow-300/50 logo-3d overflow-hidden transition-transform duration-300 group-hover:scale-110">
+          <span
+            className="relative z-10 text-black font-extrabold text-xl md:text-2xl"
+            style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2), 0 -1px 0 rgba(255,255,255,0.3)' }}
+          >
+            AI
+          </span>
         </div>
-        <span className="text-white text-[10px] md:text-xs font-semibold tracking-wider">AUTOMATIZĂRI</span>
+        <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
+          AUTOMATIZĂRI
+        </span>
       </Link>
       <Sheet>
         <SheetTrigger asChild>
