@@ -1,32 +1,88 @@
 
-# Pagina Servicii - Aliniere Culori + Servicii Noi
+# Modal Formular Audit Strategic - Plan de Implementare
 
-## 1. Aliniere culori cu Homepage
+## Obiectiv
+Inlocuirea tuturor link-urilor Calendly din butoanele CTA cu un modal care contine un formular complex de audit strategic, stilizat in tema gold/amber a brandului.
 
-Pagina Services foloseste `bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C]` (mov), iar Homepage-ul foloseste `bg-[#0a0e1a]` (negru inchis) cu orb-uri gold subtile.
+## Ce se va crea
 
-### Modificari in `src/pages/Services.tsx`:
-- Inlocuire background mov cu `bg-[#0a0e1a]` (identic cu Homepage)
-- Inlocuire orb-urile mov/blue cu orb-uri gold/amber subtile (identice cu cele din Homepage)
-- Adaugare dividers gold intre sectiuni (ca pe Homepage)
+### 1. Componenta noua: `src/components/website/AuditFormModal.tsx`
+Un modal full-featured cu formular multi-sectiune, construit cu Dialog (Radix), react-hook-form + zod.
 
-## 2. Servicii noi in DetailedServices
+**Layout-ul modalului:**
+- Background dark (#0a0e1a) cu border gold
+- Header mare cu titlul "Audit Strategic Gratuit -- Recupereaza-ti timpul pierdut cu Excel-urile si platformele separate"
+- Text introductiv sub titlu
+- Formular scrollabil cu 4 sectiuni vizuale separate
 
-### Modificari in `src/components/website/services/DetailedServices.tsx`:
-Inlocuire cele 6 servicii generice cu cele 3 servicii specifice cerute:
+**Campuri obligatorii (sus):**
+- Nume complet, Telefon, Email, Nume firma
 
-1. **Creare Platforme Interne Personalizate** - Platforme custom construite pe nevoile afacerii, de la CRM-uri la dashboarduri interne
-2. **Integrare Agenti AI Personalizati** - Agenti AI antrenati pe datele si procesele specifice ale afacerii
-3. **Automatizari Personalizate** - Fluxuri de lucru automatizate adaptate proceselor unice ale companiei
+**Sectiunea 1 - Contextul afacerii:**
+- Q1: Dropdown tipul afacerii (7 optiuni + camp "Altceva")
+- Q2: Dropdown marime echipa (5 optiuni)
+- Q3: Dropdown cifra de afaceri (5 optiuni)
 
-Fiecare card va avea iconita, titlu, descriere si 3 bullet points cu beneficii concrete. Se pastreaza stilul vizual existent (cards cu glass effect, hover gold border).
+**Sectiunea 2 - Fragmentarea actuala:**
+- Q4: Dropdown nr. fisiere Excel (4 optiuni)
+- Q5: Checkbox-uri multiple platforme (8 optiuni + camp "Altceva")
+- Q6: Dropdown timp pierdut saptamanal (5 optiuni)
+- Q7: Textarea frustrari (cu placeholder)
 
-## 3. Eliminare Footer duplicat
+**Sectiunea 3 - Impact & Volum:**
+- Q8: Slider/Radio 1-10 (scala impact)
+- Q9: Input numeric oferte/saptamana
+- Q10: Input numeric interactiuni zilnice
 
-Pagina Services nu include `<Footer />` -- se adauga pentru consistenta cu Homepage.
+**Sectiunea 4 - Motivatie & Disponibilitate:**
+- Q11: Textarea motivatie investitie
+- Q12: Embed Calendly iframe sau dropdown date/ore
+- Q13: Dropdown buget (5 optiuni)
 
----
+**Buton submit:** "Trimite raspunsurile si rezerva-ti auditul gratuit" - stilizat btn-3d-gold
 
-## Fisiere modificate
-1. `src/pages/Services.tsx` - background + orb-uri + dividers + Footer
-2. `src/components/website/services/DetailedServices.tsx` - cele 3 servicii noi
+**Dupa submit:** Ecran de confirmare cu mesaj de multumire, trimite datele catre webhook-ul n8n existent + Facebook Pixel Lead event
+
+### 2. Modificari in componentele CTA existente
+
+Toate butoanele CTA care deschideau Calendly vor deschide modalul:
+
+- **`src/components/website/HeroSection.tsx`** - butonul "Programeaza o discutie gratuita"
+- **`src/components/website/CTASection.tsx`** - butonul "Programeaza Audit AI Gratuit"
+- **`src/components/website/SolutionSection.tsx`** - butonul "Vreau sa automatizez si eu"
+
+Abordare: Se va adauga state management in `src/pages/Website.tsx` pentru `isAuditModalOpen` si se va pasa callback-ul `onOpenAuditModal` catre fiecare sectiune prin props.
+
+### 3. Pagina Website.tsx - orchestrare
+
+- Import `AuditFormModal`
+- State: `const [isAuditModalOpen, setIsAuditModalOpen] = useState(false)`
+- Render `<AuditFormModal>` la nivel de pagina
+- Transmite `onOpenModal` ca prop catre HeroSection, CTASection, SolutionSection
+
+## Detalii tehnice
+
+**Validare (Zod):**
+- Campuri obligatorii: fullName, phone, email, companyName
+- Email valid, telefon min 6 caractere
+- Restul campurilor optionale dar recomandate
+
+**Submit:**
+- POST catre webhook-ul n8n existent (sau un endpoint nou daca se doreste)
+- Payload: toate raspunsurile + metadata (timestamp, sessionId)
+- Facebook Pixel: `fbq('track', 'Lead')` la submit reusit
+
+**Stilizare:**
+- Modal mare `max-w-3xl` cu ScrollArea pentru scroll intern
+- Sectiuni separate cu titluri gold gradient
+- Inputuri cu background `bg-yellow-900/10`, border `border-yellow-500/30`
+- Labels in `text-white/80`
+- Sectiune headers cu gold gradient text
+- Buton submit `btn-3d-gold` cu `animate-glow-pulse`
+
+## Fisiere afectate
+1. **NOU** - `src/components/website/AuditFormModal.tsx` (componenta principala)
+2. **EDIT** - `src/pages/Website.tsx` (state + render modal + props)
+3. **EDIT** - `src/components/website/HeroSection.tsx` (primeste prop onOpenModal)
+4. **EDIT** - `src/components/website/CTASection.tsx` (primeste prop onOpenModal)
+5. **EDIT** - `src/components/website/SolutionSection.tsx` (primeste prop onOpenModal)
