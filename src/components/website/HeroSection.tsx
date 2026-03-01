@@ -28,11 +28,11 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.15 }}
           className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 max-w-4xl mx-auto text-white tracking-tight"
         >
-          Ajut antreprenorii din România să construiască{" "}
+          Ajut Antreprenorii Din România Să Implementeze{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-amber-400 to-orange-500">
-            infrastructura internă
+            Infrastructura Internă, Agenți AI
           </span>{" "}
-          cu agenți AI și automatizări inteligente
+          Și Automatizări Inteligente
         </motion.h1>
 
         <motion.p
