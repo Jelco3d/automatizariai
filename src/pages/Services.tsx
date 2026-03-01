@@ -18,42 +18,27 @@ const Services = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0e1a] relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] relative overflow-hidden">
       <Navigation />
       
-      {/* Animated background orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-yellow-500/[0.07] rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/2 -left-40 w-[400px] h-[400px] bg-amber-500/[0.05] rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-yellow-400/[0.04] rounded-full blur-3xl animate-pulse delay-500"></div>
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
-      <div className="relative z-10">
-        <ServicesHero handleBooking={handleBooking} />
-        
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent" />
-        <DetailedServices />
-        
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent" />
-        <PricingPlans handleBooking={handleBooking} />
-        
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent" />
-        <CaseStudies />
-        
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent" />
-        <TechnicalCapabilities />
-        
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent" />
-        <IntegrationOptions />
-        
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent" />
-        <CTASection handleBooking={handleBooking} />
+      <ServicesHero handleBooking={handleBooking} />
+      <DetailedServices />
+      <PricingPlans handleBooking={handleBooking} />
+      <CaseStudies />
+      <TechnicalCapabilities />
+      <IntegrationOptions />
+      <CTASection handleBooking={handleBooking} />
 
-        <Footer />
-      </div>
+      
       <WebsiteChatbot />
-    </div>
-  );
+    </div>);
+
 };
 
 export default Services;
