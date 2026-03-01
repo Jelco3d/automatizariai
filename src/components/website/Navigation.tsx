@@ -3,9 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link } from "react-router-dom";
 
-export function Navigation() {
+interface NavigationProps {
+  onOpenAuditModal?: () => void;
+}
+
+export function Navigation({ onOpenAuditModal }: NavigationProps) {
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
+    onOpenAuditModal?.();
   };
 
   return (

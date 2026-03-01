@@ -16,7 +16,7 @@ const Website = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0e1a] relative overflow-hidden">
-      <Navigation />
+      <Navigation onOpenAuditModal={openAuditModal} />
 
       {/* Animated background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -30,7 +30,7 @@ const Website = () => {
 
       <div className="max-w-4xl mx-auto h-px bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent" />
 
-      <VSLSection />
+      <VSLSection onOpenAuditModal={openAuditModal} />
 
       <div className="max-w-4xl mx-auto h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
