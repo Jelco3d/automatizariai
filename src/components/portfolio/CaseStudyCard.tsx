@@ -36,64 +36,47 @@ export const CaseStudyCard = ({
   
   return (
     <Card 
-      className="bg-[#2A2F3C]/50 border-purple-500/20 backdrop-blur-sm hover:border-purple-500/40 transition-all cursor-pointer"
+      className="bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:border-yellow-400/30 transition-all cursor-pointer hover:shadow-lg hover:shadow-yellow-500/[0.05]"
       onClick={() => navigate('/portfolio')}
     >
       <CardContent className="p-6">
-        <h3 className="text-2xl font-bold text-purple-400 mb-4">{client}</h3>
-        <p className="text-gray-300 mb-4">{industry}</p>
+        <h3 className="text-2xl font-bold text-yellow-400 mb-4">{client}</h3>
+        <p className="text-white/60 mb-4">{industry}</p>
         
         <div className="space-y-6">
-          {/* Challenge & Solution */}
           <div>
             <h4 className="text-lg font-semibold mb-2 text-white">Provocare:</h4>
-            <p className="text-gray-300">{challenge}</p>
+            <p className="text-white/60">{challenge}</p>
             <h4 className="text-lg font-semibold mt-4 mb-2 text-white">Soluție:</h4>
-            <p className="text-gray-300">{solution}</p>
+            <p className="text-white/60">{solution}</p>
           </div>
 
-          {/* Before/After */}
-          <div className="grid grid-cols-2 gap-4 bg-purple-500/5 p-4 rounded-lg text-white">
+          <div className="grid grid-cols-2 gap-4 bg-yellow-400/5 p-4 rounded-lg text-white">
             <div>
-              <h5 className="font-semibold text-purple-400 mb-2">Înainte</h5>
-              <p className="text-gray-300">{beforeAfter.before}</p>
+              <h5 className="font-semibold text-yellow-400 mb-2">Înainte</h5>
+              <p className="text-white/60">{beforeAfter.before}</p>
             </div>
             <div>
-              <h5 className="font-semibold text-purple-400 mb-2">După</h5>
-              <p className="text-gray-300">{beforeAfter.after}</p>
+              <h5 className="font-semibold text-yellow-400 mb-2">După</h5>
+              <p className="text-white/60">{beforeAfter.after}</p>
             </div>
           </div>
 
-          {/* Results */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="flex items-center gap-2">
-              <Clock className="text-purple-400" />
-              <div>
-                <p className="text-sm text-gray-300">Timp Economisit</p>
-                <p className="font-semibold text-white">{results.timeReduction}</p>
+            {[
+              { icon: Clock, label: "Timp Economisit", value: results.timeReduction },
+              { icon: DollarSign, label: "Economii", value: results.costSaving },
+              { icon: LineChart, label: "ROI", value: results.roi },
+              { icon: Zap, label: "Durată", value: results.timeline },
+            ].map(({ icon: Icon, label, value }, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <Icon className="text-yellow-400" />
+                <div>
+                  <p className="text-sm text-white/40">{label}</p>
+                  <p className="font-semibold text-white">{value}</p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <DollarSign className="text-purple-400" />
-              <div>
-                <p className="text-sm text-gray-300">Economii</p>
-                <p className="font-semibold text-white">{results.costSaving}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <LineChart className="text-purple-400" />
-              <div>
-                <p className="text-sm text-gray-300">ROI</p>
-                <p className="font-semibold text-white">{results.roi}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <Zap className="text-purple-400" />
-              <div>
-                <p className="text-sm text-gray-300">Durată</p>
-                <p className="font-semibold text-white">{results.timeline}</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </CardContent>
