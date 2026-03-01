@@ -16,7 +16,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="text-3xl md:text-5xl font-bold leading-tight mb-8 max-w-7xl text-primary lg:text-2xl">
 
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">Ajut Antreprenori Din Romania Să Recupereze 20–40 De Ore Pe Săptămână Să 
+          <span className="bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 text-4xl bg-[#f0f7ff]/0 text-white">Ajut antreprenorii din România Să Își Construiască Infrastructura Internă Cu Agenți AI Și Automatizări, Recuperând 20–40 De Ore Pe Săptămână Și Crescând Cu Până La 30% În Mai Puțin De 30 De Zile....
 
           </span>{" "}
           <span className="text-white">
