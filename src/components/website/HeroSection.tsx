@@ -14,13 +14,13 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-8"
+          className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight mb-8 max-w-7xl"
         >
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
-            Ajut antreprenori din construcții, distribuție și cosmetice să recupereze 20–40 de ore pe săptămână
+            Ajut Antreprenori din Romania Să Recupereze 20–40 De Ore Pe Săptămână
           </span>{" "}
           <span className="text-white">
-            în mai puțin de 30 de zile, folosind agenți AI și automatizări inteligente.
+            În Mai Puțin De 30 De Zile, Creând Platforme Interne Custom Cu Agenți AI Și Automatizări Inteligente.
           </span>
         </motion.h1>
 
