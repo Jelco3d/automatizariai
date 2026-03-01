@@ -50,7 +50,7 @@ export const VSLSection = () => {
         >
           <Button
             onClick={handleBooking}
-            className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-bold text-base md:text-lg px-8 py-6 h-auto rounded-xl transform transition-all hover:scale-105 shadow-lg shadow-yellow-500/20"
+            className="btn-3d-gold text-base md:text-lg px-8 py-6 h-auto rounded-xl"
           >
             Vreau să aflu cum poți face și tu la fel
             <ArrowRight className="ml-2 w-5 h-5" />

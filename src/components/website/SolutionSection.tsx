@@ -88,7 +88,7 @@ export const SolutionSection = () => {
         >
           <Button
             onClick={handleBooking}
-            className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-bold text-base px-8 py-6 h-auto rounded-xl shadow-lg shadow-yellow-500/20 transition-all hover:scale-105"
+            className="btn-3d-gold text-base px-8 py-6 h-auto rounded-xl"
           >
             Vreau să automatizez și eu
             <ArrowRight className="ml-2 w-5 h-5" />

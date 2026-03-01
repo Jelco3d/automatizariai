@@ -22,7 +22,7 @@ export const CTASection = () => {
       </h2>
       <Button
         onClick={handleBooking}
-        className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-semibold animate-glow-pulse"
+        className="btn-3d-gold animate-glow-pulse"
       >
         Programează o Consultație
         <ArrowRight className="ml-2" />

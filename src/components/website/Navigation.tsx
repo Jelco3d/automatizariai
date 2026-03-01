@@ -55,7 +55,7 @@ export function Navigation() {
             </Link>
             <Button
               onClick={handleBooking}
-              className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-bold mt-4 transition-all duration-300"
+              className="btn-3d-gold mt-4"
             >
               Programează Consultație
             </Button>

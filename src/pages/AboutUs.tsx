@@ -53,7 +53,7 @@ const AboutUs = () => {
                   <div className="pt-4 flex justify-center">
                     <Button 
                       onClick={handleBooking}
-                      className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-semibold"
+                      className="btn-3d-gold"
                     >
                       Programează o Consultație
                     </Button>
@@ -156,7 +156,7 @@ const AboutUs = () => {
         <h2 className="text-2xl md:text-3xl font-bold mb-6">Gata să-ți Transformi Afacerea?</h2>
         <Button 
           onClick={handleBooking}
-          className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-semibold animate-glow-pulse"
+          className="btn-3d-gold animate-glow-pulse"
         >
           Programează o Consultație
           <ArrowRight className="ml-2" />

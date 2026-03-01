@@ -22,7 +22,7 @@ export const PricingPlans = ({
               <li className="flex items-center gap-2"><ArrowRight className="w-4 h-4 text-yellow-400/60" />5 fluxuri de lucru automatizate</li>
               <li className="flex items-center gap-2"><ArrowRight className="w-4 h-4 text-yellow-400/60" />Suport prin email</li>
             </ul>
-            <Button onClick={handleBooking} className="w-full bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-semibold">
+            <Button onClick={handleBooking} className="w-full btn-3d-gold">
               Începe Acum
             </Button>
           </CardContent>
@@ -41,7 +41,7 @@ export const PricingPlans = ({
               <li className="flex items-center gap-2"><ArrowRight className="w-4 h-4 text-yellow-400/60" />Suport prioritar</li>
               <li className="flex items-center gap-2"><ArrowRight className="w-4 h-4 text-yellow-400/60" />Integrări personalizate</li>
             </ul>
-            <Button onClick={handleBooking} className="w-full bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-semibold">
+            <Button onClick={handleBooking} className="w-full btn-3d-gold">
               Începe Acum
             </Button>
           </CardContent>
@@ -57,7 +57,7 @@ export const PricingPlans = ({
               <li className="flex items-center gap-2"><ArrowRight className="w-4 h-4 text-yellow-400/60" />Suport 24/7</li>
               <li className="flex items-center gap-2"><ArrowRight className="w-4 h-4 text-yellow-400/60" />Manager de cont dedicat</li>
             </ul>
-            <Button onClick={handleBooking} className="w-full bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-semibold">
+            <Button onClick={handleBooking} className="w-full btn-3d-gold">
               Contactează-ne
             </Button>
           </CardContent>
