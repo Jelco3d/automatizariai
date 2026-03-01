@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export const CTASection = ({ handleBooking }: { handleBooking: () => void }) => {
   return (
-    <div className="container mx-auto px-4 py-16 text-center">
+    <div className="container mx-auto px-4 py-10 md:py-16 text-center">
       <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
         Pregătiți să Vă Transformați Afacerea?
       </h2>

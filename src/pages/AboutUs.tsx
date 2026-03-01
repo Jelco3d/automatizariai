@@ -30,14 +30,14 @@ const AboutUs = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="container mx-auto px-4 pt-32 pb-16 relative z-10"
+        className="container mx-auto px-4 pt-24 md:pt-32 pb-16 relative z-10"
       >
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">Despre Mine</h2>
         <div className="max-w-4xl mx-auto">
           <Card className="bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
-            <CardContent className="p-8">
+            <CardContent className="p-5 md:p-8">
               <div className="flex flex-col md:flex-row gap-8 items-center">
-                <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-yellow-400/20">
+                <div className="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-yellow-400/20">
                   <img 
                     src="/lovable-uploads/18adcde2-6fef-4f80-9177-96ee902a301b.png"
                     alt="Erdelean Jelco"
@@ -72,9 +72,9 @@ const AboutUs = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="container mx-auto px-4 py-16 relative z-10"
+        className="container mx-auto px-4 py-10 md:py-16 relative z-10"
       >
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-amber-400">
+        <h1 className="text-3xl md:text-5xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-amber-400">
           Povestea Noastră
         </h1>
         <div className="max-w-3xl mx-auto text-white/60 space-y-4">
@@ -94,7 +94,7 @@ const AboutUs = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="container mx-auto px-4 py-16 relative z-10"
+        className="container mx-auto px-4 py-10 md:py-16 relative z-10"
       >
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">Misiune & Valori</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -127,7 +127,7 @@ const AboutUs = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.6 }}
-        className="container mx-auto px-4 py-16 relative z-10"
+        className="container mx-auto px-4 py-10 md:py-16 relative z-10"
       >
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">Cultura Noastră</h2>
         <div className="max-w-3xl mx-auto text-white/60 space-y-6">
@@ -136,7 +136,7 @@ const AboutUs = () => {
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             {["Remote-First", "Program Flexibil", "Buget pentru Învățare", "Evenimente de Echipă"].map((item, i) => (
-              <div key={i} className="p-4 bg-yellow-400/10 rounded-lg border border-yellow-400/20">
+              <div key={i} className="p-3 md:p-4 bg-yellow-400/10 rounded-lg border border-yellow-400/20">
                 <p className="font-semibold text-white">{item}</p>
               </div>
             ))}
@@ -151,7 +151,7 @@ const AboutUs = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 1 }}
-        className="container mx-auto px-4 py-16 text-center relative z-10"
+        className="container mx-auto px-4 py-10 md:py-16 text-center relative z-10"
       >
         <h2 className="text-2xl md:text-3xl font-bold mb-6">Gata să-ți Transformi Afacerea?</h2>
         <Button 

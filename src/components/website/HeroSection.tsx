@@ -12,7 +12,7 @@ export const HeroSection = ({ onOpenAuditModal }: HeroSectionProps) => {
   };
 
   return (
-    <section className="flex items-center justify-center relative px-6 pt-32 pb-16 md:pt-44 md:pb-20">
+    <section className="flex items-center justify-center relative px-4 md:px-6 pt-24 pb-12 md:pt-44 md:pb-20">
       <div className="max-w-5xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -61,8 +61,8 @@ export const HeroSection = ({ onOpenAuditModal }: HeroSectionProps) => {
           ].map((metric, i) => (
             <div key={i} className="relative group">
               <div className="absolute inset-0 bg-gradient-to-b from-yellow-400/[0.08] to-transparent rounded-2xl transition-all duration-300 group-hover:from-yellow-400/[0.15]" />
-              <div className="relative flex flex-col items-center py-5 px-3 rounded-2xl border border-white/[0.06] group-hover:border-yellow-400/30 transition-all duration-300 group-hover:scale-105 shadow-lg shadow-yellow-500/[0.05]">
-                <span className="text-yellow-400 text-3xl md:text-4xl font-black leading-none">
+               <div className="relative flex flex-col items-center py-3 px-2 md:py-5 md:px-3 rounded-2xl border border-white/[0.06] group-hover:border-yellow-400/30 transition-all duration-300 group-hover:scale-105 shadow-lg shadow-yellow-500/[0.05]">
+                <span className="text-yellow-400 text-2xl md:text-3xl lg:text-4xl font-black leading-none">
                   {metric.value}
                 </span>
                 <span className="text-white/40 text-xs md:text-sm mt-1.5 font-medium">
@@ -82,7 +82,7 @@ export const HeroSection = ({ onOpenAuditModal }: HeroSectionProps) => {
           <Button
             onClick={handleBooking}
             size="lg"
-            className="btn-3d-gold text-base md:text-lg px-10 py-7 h-auto rounded-xl animate-glow-pulse"
+            className="btn-3d-gold text-sm md:text-base lg:text-lg px-6 py-5 md:px-10 md:py-7 h-auto rounded-xl animate-glow-pulse"
           >
             Programează o discuție gratuită
             <ArrowRight className="ml-2 w-5 h-5" />

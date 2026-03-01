@@ -18,7 +18,7 @@ export const SolutionSection = ({ onOpenAuditModal }: SolutionSectionProps) => {
   };
 
   return (
-    <section className="py-10 md:py-14 px-4">
+    <section className="py-6 md:py-14 px-4">
       <div className="max-w-3xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -64,7 +64,7 @@ export const SolutionSection = ({ onOpenAuditModal }: SolutionSectionProps) => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="bg-gradient-to-r from-yellow-400/[0.08] to-amber-500/[0.04] border border-yellow-400/20 rounded-2xl p-8 mb-10"
+          className="bg-gradient-to-r from-yellow-400/[0.08] to-amber-500/[0.04] border border-yellow-400/20 rounded-2xl p-5 md:p-8 mb-10"
         >
           <div className="flex items-center justify-center gap-3 mb-3">
             <motion.div

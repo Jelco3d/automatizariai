@@ -15,10 +15,10 @@ const Contact = () => {
       
       <Navigation />
       
-      <main className="container mx-auto px-4 py-32 relative z-10">
+      <main className="container mx-auto px-4 py-24 md:py-32 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
+            <h1 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
               Contactează-ne
             </h1>
             <p className="text-xl text-white/60">
@@ -27,7 +27,7 @@ const Contact = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="p-8 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-yellow-400/30 transition-all">
+            <Card className="p-5 md:p-8 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-yellow-400/30 transition-all">
               <CardContent className="p-0 space-y-6">
                 <h2 className="text-2xl font-semibold mb-6 text-white">Informații de Contact</h2>
                 
@@ -49,7 +49,7 @@ const Contact = () => {
               </CardContent>
             </Card>
 
-            <Card className="p-8 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-yellow-400/30 transition-all">
+            <Card className="p-5 md:p-8 bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-yellow-400/30 transition-all">
               <CardContent className="p-0">
                 <h2 className="text-2xl font-semibold mb-6 text-white">Programează o Consultație</h2>
                 <p className="text-white/60 mb-6">

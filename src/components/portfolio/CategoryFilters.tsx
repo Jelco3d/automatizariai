@@ -11,7 +11,7 @@ export const CategoryFilters = ({ activeCategory, onCategoryChange }: CategoryFi
   console.log("Rendering CategoryFilters with activeCategory:", activeCategory);
   
   return (
-    <div className="flex flex-wrap justify-center md:justify-center gap-2 mb-6">
+    <div className="flex flex-wrap justify-center md:justify-center gap-1.5 md:gap-2 mb-6">
       <Button
         variant={activeCategory === "all" ? "default" : "outline"}
         onClick={() => onCategoryChange("all")}

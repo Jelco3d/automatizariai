@@ -27,7 +27,7 @@ const testimonials = [
 
 export const TestimonialsSection = () => {
   return (
-    <section className="py-10 md:py-14 px-4">
+    <section className="py-6 md:py-14 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -50,7 +50,7 @@ export const TestimonialsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-6 hover:border-yellow-400/30 transition-all duration-300"
+              className="bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-4 md:p-6 hover:border-yellow-400/30 transition-all duration-300"
             >
               <Quote className="w-8 h-8 text-yellow-400/40 mb-4" />
 

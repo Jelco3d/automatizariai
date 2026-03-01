@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
-    <div className="container mx-auto px-4 py-16 border-t border-white/[0.08]">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+    <div className="container mx-auto px-4 py-10 md:py-16 border-t border-white/[0.08]">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
         <div className="space-y-4">
           <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
             Soluții de Automatizare AI

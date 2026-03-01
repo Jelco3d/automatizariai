@@ -12,7 +12,7 @@ export const CTASection = ({ onOpenAuditModal }: CTASectionProps) => {
   };
 
   return (
-    <section className="py-16 md:py-20 px-4">
+    <section className="py-10 md:py-20 px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ export const CTASection = ({ onOpenAuditModal }: CTASectionProps) => {
         <div className="flex flex-col items-center gap-3">
           <Button
             onClick={handleBooking}
-            className="btn-3d-gold px-10 py-7 h-auto text-lg rounded-xl animate-glow-pulse"
+            className="btn-3d-gold px-6 py-5 md:px-10 md:py-7 h-auto text-base md:text-lg rounded-xl animate-glow-pulse"
           >
             Programează Audit AI Gratuit
             <ArrowRight className="ml-2 w-5 h-5" />

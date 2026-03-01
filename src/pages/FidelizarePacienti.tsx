@@ -73,7 +73,7 @@ export default function FidelizarePacienti() {
       </section>
 
       {/* Problem Section */}
-      <section className="py-16 md:py-24 relative z-10">
+      <section className="py-10 md:py-24 relative z-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-12">
             <div className="text-center space-y-4">
@@ -105,8 +105,8 @@ export default function FidelizarePacienti() {
             {/* Comparison Chart */}
             <div className="grid md:grid-cols-2 gap-8 mt-12">
               <Card className="bg-gradient-to-br from-red-900/30 to-red-800/20 backdrop-blur-sm border-2 border-red-500/30">
-                <CardContent className="p-8 text-center space-y-4">
-                  <TrendingUp className="w-12 h-12 mx-auto text-red-400 rotate-180" />
+                  <CardContent className="p-5 md:p-8 text-center space-y-4">
+                   <TrendingUp className="w-12 h-12 mx-auto text-red-400 rotate-180" />
                   <h3 className="text-xl font-bold text-red-400">Fără Fidelizare</h3>
                   <p className="text-4xl font-bold text-red-400">-40%</p>
                   <p className="text-sm text-gray-400">Venit pierdut lunar</p>
@@ -114,8 +114,8 @@ export default function FidelizarePacienti() {
               </Card>
 
               <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/20 backdrop-blur-sm border-2 border-purple-500/30">
-                <CardContent className="p-8 text-center space-y-4">
-                  <TrendingUp className="w-12 h-12 mx-auto text-purple-400" />
+                <CardContent className="p-5 md:p-8 text-center space-y-4">
+                   <TrendingUp className="w-12 h-12 mx-auto text-purple-400" />
                   <h3 className="text-xl font-bold text-purple-400">Cu Fidelizare</h3>
                   <p className="text-4xl font-bold text-purple-400">+200%</p>
                   <p className="text-sm text-gray-400">Creștere venit</p>
@@ -131,7 +131,7 @@ export default function FidelizarePacienti() {
       </section>
 
       {/* Solution Section */}
-      <section className="py-16 md:py-24 relative z-10">
+      <section className="py-10 md:py-24 relative z-10">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center space-y-4">
@@ -165,7 +165,7 @@ export default function FidelizarePacienti() {
                 }
               ].map((step, idx) => (
                 <Card key={idx} className="relative overflow-hidden bg-gray-900/50 backdrop-blur-sm border-2 border-purple-500/20 hover:border-purple-400/50 transition-all hover:shadow-xl hover:shadow-purple-500/20 hover:scale-105">
-                  <CardContent className="p-8 space-y-4">
+                  <CardContent className="p-5 md:p-8 space-y-4">
                     <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-xl" />
                     <div className="relative">
                       <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-purple-500/50">
@@ -182,7 +182,7 @@ export default function FidelizarePacienti() {
 
             <div className="grid md:grid-cols-2 gap-8 mt-12">
               <Card className="bg-gray-900/30 backdrop-blur-sm border-2 border-gray-700/50">
-                <CardContent className="p-8 text-center space-y-4">
+                <CardContent className="p-5 md:p-8 text-center space-y-4">
                   <h3 className="text-xl font-bold text-gray-300">Fără Sistem</h3>
                   <p className="text-lg text-gray-400">Program gol, venit instabil</p>
                   <div className="h-32 flex items-end justify-around gap-2">
@@ -194,7 +194,7 @@ export default function FidelizarePacienti() {
               </Card>
 
               <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm border-2 border-purple-500/30">
-                <CardContent className="p-8 text-center space-y-4">
+                <CardContent className="p-5 md:p-8 text-center space-y-4">
                   <h3 className="text-xl font-bold text-purple-400">Cu Sistem</h3>
                   <p className="text-lg text-gray-300">Calendar plin automat</p>
                   <div className="h-32 flex items-end justify-around gap-2">
@@ -214,7 +214,7 @@ export default function FidelizarePacienti() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 md:py-24 relative z-10">
+      <section className="py-10 md:py-24 relative z-10">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center space-y-4">
@@ -245,7 +245,7 @@ export default function FidelizarePacienti() {
                 }
               ].map((testimonial, idx) => (
                 <Card key={idx} className="relative bg-gray-900/50 backdrop-blur-sm border-2 border-purple-500/20 hover:border-purple-400/50 transition-all hover:shadow-lg hover:shadow-purple-500/20">
-                  <CardContent className="p-8 space-y-4">
+                  <CardContent className="p-5 md:p-8 space-y-4">
                     <div className="flex gap-1 mb-2">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} className="w-5 h-5 fill-purple-400 text-purple-400" />
@@ -266,7 +266,7 @@ export default function FidelizarePacienti() {
       </section>
 
       {/* Offer Stack Section */}
-      <section className="py-16 md:py-24 relative z-10">
+      <section className="py-10 md:py-24 relative z-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-12">
             <div className="text-center space-y-4">
@@ -276,7 +276,7 @@ export default function FidelizarePacienti() {
             </div>
 
             <Card className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 backdrop-blur-sm border-4 border-purple-500/50 shadow-2xl shadow-purple-500/20">
-              <CardContent className="p-8 md:p-12 space-y-6">
+              <CardContent className="p-5 md:p-12 space-y-6">
                 {[
                   "Instalare completă sistem",
                   "Automatizări SMS/Email + vouchere digitale",
@@ -303,9 +303,9 @@ export default function FidelizarePacienti() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-16 md:py-24 relative z-10">
+      <section className="py-10 md:py-24 relative z-10">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8 bg-gradient-to-r from-purple-900/40 to-pink-900/40 backdrop-blur-sm rounded-2xl p-12 border-2 border-purple-500/30">
+          <div className="max-w-4xl mx-auto text-center space-y-8 bg-gradient-to-r from-purple-900/40 to-pink-900/40 backdrop-blur-sm rounded-2xl p-6 md:p-12 border-2 border-purple-500/30">
             <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
               Află cât profit pierzi lunar din lipsa fidelizării
             </h2>
@@ -315,7 +315,7 @@ export default function FidelizarePacienti() {
             <Button 
               onClick={handleBookCall}
               size="lg"
-              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-xl px-12 py-8 h-auto shadow-2xl shadow-purple-500/30 hover:shadow-purple-500/50 transition-all hover:scale-105"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-lg md:text-xl px-6 py-5 md:px-12 md:py-8 h-auto shadow-2xl shadow-purple-500/30 hover:shadow-purple-500/50 transition-all hover:scale-105"
             >
               <Calendar className="mr-2 w-6 h-6" />
               Book a Call Gratuit
