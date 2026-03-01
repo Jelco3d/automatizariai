@@ -9,7 +9,7 @@ const points = [
 
 export const SolutionSection = () => {
   return (
-    <section className="py-16 md:py-24 px-4">
+    <section className="py-10 md:py-14 px-4">
       <div className="max-w-3xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
