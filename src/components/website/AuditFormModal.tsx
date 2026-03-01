@@ -164,7 +164,7 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
   const progressPercent = ((currentStep + 1) / TOTAL_STEPS) * 100;
 
   const inputClass =
-    "bg-yellow-900/10 border-yellow-500/30 text-white placeholder:text-white/30 focus:border-yellow-400/60";
+    "bg-white/[0.07] border border-yellow-500/40 text-white placeholder:text-white/40 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/30 focus:bg-white/[0.1] transition-all duration-200";
   const labelClass = "text-white/80";
 
   const variants = {
