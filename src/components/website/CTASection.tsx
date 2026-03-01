@@ -2,9 +2,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-export const CTASection = () => {
+interface CTASectionProps {
+  onOpenAuditModal?: () => void;
+}
+
+export const CTASection = ({ onOpenAuditModal }: CTASectionProps) => {
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
+    onOpenAuditModal?.();
   };
 
   return (
