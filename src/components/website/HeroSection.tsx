@@ -50,9 +50,9 @@ export const HeroSection = () => {
 
 
 
-          <p className="text-sm text-gray-400">
-            Doar 8 locuri disponibile în această lună • Fără vânzare • Fără obligații
-          </p>
+          
+
+
         </motion.div>
       </div>
     </section>);
