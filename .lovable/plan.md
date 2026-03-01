@@ -1,88 +1,74 @@
 
-# Modal Formular Audit Strategic - Plan de Implementare
+# Formular Progresiv (Multi-Step Wizard) - Audit Strategic
 
 ## Obiectiv
-Inlocuirea tuturor link-urilor Calendly din butoanele CTA cu un modal care contine un formular complex de audit strategic, stilizat in tema gold/amber a brandului.
+Transformarea formularului curent dintr-un formular lung cu scroll intr-un wizard progresiv cu 5 pasi, progress bar vizual si navigare inainte/inapoi.
 
-## Ce se va crea
+## Structura pasilor
 
-### 1. Componenta noua: `src/components/website/AuditFormModal.tsx`
-Un modal full-featured cu formular multi-sectiune, construit cu Dialog (Radix), react-hook-form + zod.
+```text
+[Pas 1] --> [Pas 2] --> [Pas 3] --> [Pas 4] --> [Pas 5] --> [Confirmare]
+ Date      Context    Fragment.   Impact     Motivatie    Multumim!
+ contact   afacere    actuala     & Volum    & Budget
+```
 
-**Layout-ul modalului:**
-- Background dark (#0a0e1a) cu border gold
-- Header mare cu titlul "Audit Strategic Gratuit -- Recupereaza-ti timpul pierdut cu Excel-urile si platformele separate"
-- Text introductiv sub titlu
-- Formular scrollabil cu 4 sectiuni vizuale separate
-
-**Campuri obligatorii (sus):**
+**Pas 1 - Date de contact (obligatorii)**
 - Nume complet, Telefon, Email, Nume firma
+- Validare zod inainte de a putea trece la pasul urmator
 
-**Sectiunea 1 - Contextul afacerii:**
-- Q1: Dropdown tipul afacerii (7 optiuni + camp "Altceva")
-- Q2: Dropdown marime echipa (5 optiuni)
-- Q3: Dropdown cifra de afaceri (5 optiuni)
+**Pas 2 - Contextul afacerii tale**
+- Tipul afacerii (dropdown + camp "Altceva")
+- Marimea echipei
+- Cifra de afaceri
 
-**Sectiunea 2 - Fragmentarea actuala:**
-- Q4: Dropdown nr. fisiere Excel (4 optiuni)
-- Q5: Checkbox-uri multiple platforme (8 optiuni + camp "Altceva")
-- Q6: Dropdown timp pierdut saptamanal (5 optiuni)
-- Q7: Textarea frustrari (cu placeholder)
+**Pas 3 - Fragmentarea actuala**
+- Nr. fisiere Excel
+- Platforme folosite (checkbox-uri)
+- Timp pierdut saptamanal
+- Frustrari (textarea)
 
-**Sectiunea 3 - Impact & Volum:**
-- Q8: Slider/Radio 1-10 (scala impact)
-- Q9: Input numeric oferte/saptamana
-- Q10: Input numeric interactiuni zilnice
+**Pas 4 - Impact & Volum**
+- Scala impact 1-10 (slider)
+- Oferte pe saptamana
+- Interactiuni zilnice
 
-**Sectiunea 4 - Motivatie & Disponibilitate:**
-- Q11: Textarea motivatie investitie
-- Q12: Embed Calendly iframe sau dropdown date/ore
-- Q13: Dropdown buget (5 optiuni)
+**Pas 5 - Motivatie & Disponibilitate**
+- Motivatie investitie (textarea)
+- Calendly embed
+- Buget aproximativ
+- Butonul final de submit
 
-**Buton submit:** "Trimite raspunsurile si rezerva-ti auditul gratuit" - stilizat btn-3d-gold
+## Elemente UI noi
 
-**Dupa submit:** Ecran de confirmare cu mesaj de multumire, trimite datele catre webhook-ul n8n existent + Facebook Pixel Lead event
-
-### 2. Modificari in componentele CTA existente
-
-Toate butoanele CTA care deschideau Calendly vor deschide modalul:
-
-- **`src/components/website/HeroSection.tsx`** - butonul "Programeaza o discutie gratuita"
-- **`src/components/website/CTASection.tsx`** - butonul "Programeaza Audit AI Gratuit"
-- **`src/components/website/SolutionSection.tsx`** - butonul "Vreau sa automatizez si eu"
-
-Abordare: Se va adauga state management in `src/pages/Website.tsx` pentru `isAuditModalOpen` si se va pasa callback-ul `onOpenAuditModal` catre fiecare sectiune prin props.
-
-### 3. Pagina Website.tsx - orchestrare
-
-- Import `AuditFormModal`
-- State: `const [isAuditModalOpen, setIsAuditModalOpen] = useState(false)`
-- Render `<AuditFormModal>` la nivel de pagina
-- Transmite `onOpenModal` ca prop catre HeroSection, CTASection, SolutionSection
+1. **Progress bar** - bara gold animata in header care arata progresul (ex. "Pas 2 din 5")
+2. **Butoane navigare** - "Inapoi" (stanga, outline gold) si "Continua" (dreapta, btn-3d-gold) in footer-ul fiecarui pas
+3. **Animatie tranzitie** - fade + slide horizontal la schimbarea pasilor folosind framer-motion (deja instalat)
+4. **Indicator pasi** - cercuri numerotate conectate cu linie, pasul activ gold, cele completate cu check
 
 ## Detalii tehnice
 
-**Validare (Zod):**
-- Campuri obligatorii: fullName, phone, email, companyName
-- Email valid, telefon min 6 caractere
-- Restul campurilor optionale dar recomandate
+### Fisier modificat
+- `src/components/website/AuditFormModal.tsx` - refactorizare completa
 
-**Submit:**
-- POST catre webhook-ul n8n existent (sau un endpoint nou daca se doreste)
-- Payload: toate raspunsurile + metadata (timestamp, sessionId)
-- Facebook Pixel: `fbq('track', 'Lead')` la submit reusit
+### Logica de navigare
+- State: `const [currentStep, setCurrentStep] = useState(0)`
+- La Pas 1: validare campuri obligatorii cu `form.trigger(["fullName", "phone", "email", "companyName"])` inainte de a avansa
+- Pasii 2-4: navigare libera inainte/inapoi
+- Pas 5: butonul "Trimite" face submit-ul final
+- La inchidere modal: reset step la 0
 
-**Stilizare:**
-- Modal mare `max-w-3xl` cu ScrollArea pentru scroll intern
-- Sectiuni separate cu titluri gold gradient
-- Inputuri cu background `bg-yellow-900/10`, border `border-yellow-500/30`
-- Labels in `text-white/80`
-- Sectiune headers cu gold gradient text
-- Buton submit `btn-3d-gold` cu `animate-glow-pulse`
+### Progress bar
+- Componenta `Progress` existenta din `@radix-ui/react-progress` va fi utilizata
+- Valoare calculata: `((currentStep + 1) / totalSteps) * 100`
+- Stilizata cu gradient gold
 
-## Fisiere afectate
-1. **NOU** - `src/components/website/AuditFormModal.tsx` (componenta principala)
-2. **EDIT** - `src/pages/Website.tsx` (state + render modal + props)
-3. **EDIT** - `src/components/website/HeroSection.tsx` (primeste prop onOpenModal)
-4. **EDIT** - `src/components/website/CTASection.tsx` (primeste prop onOpenModal)
-5. **EDIT** - `src/components/website/SolutionSection.tsx` (primeste prop onOpenModal)
+### Animatii
+- `framer-motion` `AnimatePresence` + `motion.div` pentru tranzitii intre pasi
+- Slide la dreapta cand avanseaza, slide la stanga cand se intoarce
+- Fade in/out pe fiecare pas
+
+### Indicator vizual pasi (step dots)
+- 5 cercuri cu numere, conectate cu linie
+- Pas curent: border gold + glow
+- Pas completat: background gold + iconita check
+- Pas viitor: border subtle, text muted
