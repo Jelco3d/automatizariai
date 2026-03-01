@@ -15,12 +15,14 @@ export const VSLSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-2xl text-white mb-10 leading-tight py-[15px] mx-px font-extrabold text-center md:text-4xl">
-
-          Cum Am Ajutat Antreprenori Ca Tine Să Recupereze Zeci De Ore Pe Săptămână…{" "}
+          className="text-2xl md:text-4xl font-extrabold text-center text-white/90 mb-10 leading-tight max-w-3xl mx-auto">
+          Cum am ajutat antreprenori ca tine să recupereze{" "}
+          <span className="text-yellow-400">zeci de ore</span>{" "}
+          pe săptămână
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
-            În Mai Puțin De 30 De zile
+          <span className="text-white/50 text-lg md:text-2xl font-medium mt-2 block">
+            în mai puțin de{" "}
+            <span className="text-yellow-400 font-bold">30 de zile</span>
           </span>
         </motion.h2>
 
