@@ -3,7 +3,7 @@ import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { ServicesHero } from "@/components/website/services/ServicesHero";
 import { DetailedServices } from "@/components/website/services/DetailedServices";
-import { PricingPlans } from "@/components/website/services/PricingPlans";
+
 import { CaseStudies } from "@/components/website/services/CaseStudies";
 import { TechnicalCapabilities } from "@/components/website/services/TechnicalCapabilities";
 import { IntegrationOptions } from "@/components/website/services/IntegrationOptions";
@@ -30,8 +30,6 @@ const Services = () => {
       <ServicesHero handleBooking={handleBooking} />
       <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
       <DetailedServices />
-      <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
-      <PricingPlans handleBooking={handleBooking} />
       <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
       <CaseStudies />
       <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />

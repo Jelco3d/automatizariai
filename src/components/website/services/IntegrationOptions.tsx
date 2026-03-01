@@ -1,5 +1,5 @@
 export const IntegrationOptions = () => {
-  const techs = ["Make (Integromat)", "n8n", "Relevance AI", "Zapier", "OpenAI", "Langchain", "AutoGPT", "Power Automate"];
+  const techs = ["Make (Integromat)", "n8n", "Relevance AI", "Zapier", "OpenAI", "Langchain", "AutoGPT", "Power Automate", "React", "Supabase", "AWS"];
   
   return (
     <div className="container mx-auto px-4 py-16">
