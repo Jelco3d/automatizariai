@@ -342,9 +342,9 @@ function Step2({ form, inputClass, labelClass }: StepProps) {
           <FormLabel className={labelClass}>Care este tipul principal al afacerii tale?</FormLabel>
           <Select onValueChange={field.onChange} value={field.value}>
             <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
-            <SelectContent className="bg-[#0a0e1a] border-yellow-500/30">
+            <SelectContent className="bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]">
               {["Construcții / Amenajări interioare", "Distribuție (alimentară, materiale, etc.)", "Cosmetice / Parfumuri / Seturi cadou", "Retail / Magazin fizic sau online", "Producție", "Servicii", "Altceva"].map((opt) => (
-                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-yellow-500/20">{opt}</SelectItem>
+                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_1px_3px_rgba(0,0,0,0.3)] cursor-pointer transition-all duration-150">{opt}</SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -362,9 +362,9 @@ function Step2({ form, inputClass, labelClass }: StepProps) {
           <FormLabel className={labelClass}>Câte persoane are echipa ta activă?</FormLabel>
           <Select onValueChange={field.onChange} value={field.value}>
             <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
-            <SelectContent className="bg-[#0a0e1a] border-yellow-500/30">
+            <SelectContent className="bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]">
               {["1–5", "6–10", "11–20", "21–40", "Peste 40"].map((opt) => (
-                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-yellow-500/20">{opt}</SelectItem>
+                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_1px_3px_rgba(0,0,0,0.3)] cursor-pointer transition-all duration-150">{opt}</SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -375,9 +375,9 @@ function Step2({ form, inputClass, labelClass }: StepProps) {
           <FormLabel className={labelClass}>Cifra de afaceri aproximativă anuală?</FormLabel>
           <Select onValueChange={field.onChange} value={field.value}>
             <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
-            <SelectContent className="bg-[#0a0e1a] border-yellow-500/30">
+            <SelectContent className="bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]">
               {["Sub 2 mil. lei", "2–5 mil. lei", "5–15 mil. lei", "15–30 mil. lei", "Peste 30 mil. lei"].map((opt) => (
-                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-yellow-500/20">{opt}</SelectItem>
+                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_1px_3px_rgba(0,0,0,0.3)] cursor-pointer transition-all duration-150">{opt}</SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -398,9 +398,9 @@ function Step3({ form, inputClass, labelClass }: StepProps) {
           <FormLabel className={labelClass}>Câte fișiere Excel diferite folosești regulat?</FormLabel>
           <Select onValueChange={field.onChange} value={field.value}>
             <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
-            <SelectContent className="bg-[#0a0e1a] border-yellow-500/30">
+            <SelectContent className="bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]">
               {["1–2", "3–4", "5–7", "8 sau mai multe"].map((opt) => (
-                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-yellow-500/20">{opt}</SelectItem>
+                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_1px_3px_rgba(0,0,0,0.3)] cursor-pointer transition-all duration-150">{opt}</SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -440,9 +440,9 @@ function Step3({ form, inputClass, labelClass }: StepProps) {
           <FormLabel className={labelClass}>Cât timp pierzi pe săptămână căutând informații?</FormLabel>
           <Select onValueChange={field.onChange} value={field.value}>
             <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
-            <SelectContent className="bg-[#0a0e1a] border-yellow-500/30">
+            <SelectContent className="bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]">
               {["Sub 5 ore", "5–10 ore", "10–20 ore", "20–30 ore", "Peste 30 ore"].map((opt) => (
-                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-yellow-500/20">{opt}</SelectItem>
+                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_1px_3px_rgba(0,0,0,0.3)] cursor-pointer transition-all duration-150">{opt}</SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -531,9 +531,9 @@ function Step5({ form, inputClass, labelClass, isSubmitting }: StepProps & { isS
           <FormLabel className={labelClass}>Bugetul aproximativ pentru o soluție?</FormLabel>
           <Select onValueChange={field.onChange} value={field.value}>
             <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
-            <SelectContent className="bg-[#0a0e1a] border-yellow-500/30">
+            <SelectContent className="bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]">
               {["Sub 10.000 €", "10.000 – 25.000 €", "25.000 – 50.000 €", "Peste 50.000 €", "Nu știu încă"].map((opt) => (
-                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-yellow-500/20">{opt}</SelectItem>
+                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_1px_3px_rgba(0,0,0,0.3)] cursor-pointer transition-all duration-150">{opt}</SelectItem>
               ))}
             </SelectContent>
           </Select>
