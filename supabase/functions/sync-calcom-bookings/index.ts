@@ -10,10 +10,10 @@ interface CalcomBooking {
   uid: string;
   title: string;
   description?: string;
-  startTime: string;
-  endTime: string;
+  start: string;
+  end: string;
   duration: number;
-  status: 'ACCEPTED' | 'PENDING' | 'CANCELLED';
+  status: string;
   location?: string;
   meetingUrl?: string;
   attendees?: Array<{
@@ -44,7 +44,6 @@ Deno.serve(async (req) => {
 
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Get user from JWT
     const token = authHeader.replace('Bearer ', '');
     const { data: { user }, error: userError } = await supabase.auth.getUser(token);
 
@@ -53,47 +52,44 @@ Deno.serve(async (req) => {
     }
 
     const { date } = await req.json();
-    
-    // Default to today if no date provided
     const targetDate = date ? new Date(date) : new Date();
-    const startOfDay = new Date(targetDate.setHours(0, 0, 0, 0));
-    const endOfDay = new Date(targetDate.setHours(23, 59, 59, 999));
+    const startOfDay = new Date(targetDate);
+    startOfDay.setHours(0, 0, 0, 0);
+    const endOfDay = new Date(targetDate);
+    endOfDay.setHours(23, 59, 59, 999);
 
-    console.log(`Fetching Cal.com bookings for ${startOfDay.toISOString()} to ${endOfDay.toISOString()}`);
+    // Fetch ALL bookings from Cal.com (no date filter - Cal.com v2 date filters may not match)
+    const calcomUrl = 'https://api.cal.com/v2/bookings';
+    console.log('Fetching all Cal.com bookings from:', calcomUrl);
 
-    // Fetch bookings from Cal.com API
-    const calcomResponse = await fetch(
-      `https://api.cal.com/v2/bookings?afterStart=${startOfDay.toISOString()}&beforeEnd=${endOfDay.toISOString()}`,
-      {
-        headers: {
-          'Authorization': `Bearer ${calcomApiKey}`,
-          'Content-Type': 'application/json',
-          'cal-api-version': '2024-08-13',
-        },
-      }
-    );
+    const calcomResponse = await fetch(calcomUrl, {
+      headers: {
+        'Authorization': `Bearer ${calcomApiKey}`,
+        'Content-Type': 'application/json',
+        'cal-api-version': '2024-08-13',
+      },
+    });
 
     if (!calcomResponse.ok) {
       const errorText = await calcomResponse.text();
-      console.error('Cal.com API error:', errorText);
-      throw new Error(`Cal.com API error: ${calcomResponse.status}`);
+      console.error('Cal.com API error:', calcomResponse.status, errorText);
+      throw new Error(`Cal.com API error: ${calcomResponse.status} - ${errorText}`);
     }
 
     const calcomData = await calcomResponse.json();
-    const bookings: CalcomBooking[] = calcomData.data?.bookings || [];
+    const allBookings: CalcomBooking[] = calcomData.data || [];
+    console.log(`Cal.com returned ${allBookings.length} total bookings`);
 
-    console.log(`Found ${bookings.length} bookings from Cal.com`);
-
-    // Upsert bookings into database
-    const upsertPromises = bookings.map(async (booking) => {
+    // Upsert ALL bookings into database
+    for (const booking of allBookings) {
       const bookingData = {
         user_id: user.id,
         booking_id: String(booking.id),
         booking_uid: booking.uid,
         title: booking.title,
         description: booking.description || null,
-        start_time: new Date(booking.startTime).toISOString(),
-        end_time: new Date(booking.endTime).toISOString(),
+        start_time: new Date(booking.start).toISOString(),
+        end_time: new Date(booking.end).toISOString(),
         duration: booking.duration,
         status: booking.status.toLowerCase(),
         meeting_url: booking.meetingUrl || null,
@@ -105,20 +101,17 @@ Deno.serve(async (req) => {
 
       const { error } = await supabase
         .from('calendar_bookings')
-        .upsert(bookingData, { 
+        .upsert(bookingData, {
           onConflict: 'user_id,booking_uid',
-          ignoreDuplicates: false 
+          ignoreDuplicates: false
         });
 
       if (error) {
         console.error('Error upserting booking:', error);
-        throw error;
       }
-    });
+    }
 
-    await Promise.all(upsertPromises);
-
-    // Fetch updated bookings from database
+    // Return bookings for the requested date
     const { data: dbBookings, error: dbError } = await supabase
       .from('calendar_bookings')
       .select('*')
@@ -127,15 +120,16 @@ Deno.serve(async (req) => {
       .lte('end_time', endOfDay.toISOString())
       .order('start_time', { ascending: true });
 
-    if (dbError) {
-      throw dbError;
-    }
+    if (dbError) throw dbError;
+
+    console.log(`Returning ${dbBookings?.length || 0} bookings for ${startOfDay.toISOString()}`);
 
     return new Response(
-      JSON.stringify({ 
-        success: true, 
+      JSON.stringify({
+        success: true,
         bookings: dbBookings,
-        count: dbBookings?.length || 0 
+        count: dbBookings?.length || 0,
+        totalSynced: allBookings.length,
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
@@ -143,14 +137,8 @@ Deno.serve(async (req) => {
   } catch (error) {
     console.error('Error syncing bookings:', error);
     return new Response(
-      JSON.stringify({ 
-        error: error.message,
-        success: false 
-      }),
-      { 
-        status: 400,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-      }
+      JSON.stringify({ error: error.message, success: false }),
+      { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
 });
