@@ -19,6 +19,34 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+
+const navSections = [
+  {
+    label: "Principal",
+    links: [
+      { to: "/business-dashboard", icon: LayoutDashboard, label: "Dashboard" },
+      { to: "/business-dashboard/leads", icon: UserPlus, label: "Leads" },
+      { to: "/business-dashboard/calendar", icon: CalendarDays, label: "Calendar" },
+    ],
+  },
+  {
+    label: "Documente",
+    links: [
+      { to: "/business-dashboard/proposals", icon: Lightbulb, label: "Propuneri" },
+      { to: "/business-dashboard/contracts", icon: FileCheck, label: "Contracte" },
+      { to: "/business-dashboard/quotes", icon: FileSpreadsheet, label: "Oferte" },
+    ],
+  },
+  {
+    label: "Financiar",
+    links: [
+      { to: "/business-dashboard/invoices", icon: FileText, label: "Încasări" },
+      { to: "/business-dashboard/plati", icon: CreditCard, label: "Plăți" },
+      { to: "/business-dashboard/clients", icon: Users, label: "Clienți" },
+    ],
+  },
+];
 
 export function Sidebar() {
   const location = useLocation();
@@ -30,181 +58,81 @@ export function Sidebar() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    toast({
-      title: "Deconectat",
-      description: "Ai fost deconectat cu succes.",
-    });
+    toast({ title: "Deconectat", description: "Ai fost deconectat cu succes." });
     navigate("/auth");
     setOpen(false);
   };
 
-  const navLinks = (
-    <nav className="space-y-2">
-      <Link 
-        to="/business-dashboard" 
-        onClick={() => setOpen(false)}
-        className={`flex items-center gap-2 p-2 rounded-lg ${
-          isActive("/business-dashboard") 
-            ? "text-purple-400 bg-purple-500/10" 
-            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
-        }`}
-      >
-        <LayoutDashboard className="h-5 w-5" />
-        Dashboard
+  const NavContent = () => (
+    <div className="flex flex-col h-full">
+      <Link to="/business-dashboard" className="flex items-center justify-center mb-8 mt-2" onClick={() => setOpen(false)}>
+        <img 
+          src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" 
+          alt="AI Automatizari" 
+          className="h-14 w-auto rounded-xl opacity-90 hover:opacity-100 transition-opacity" 
+        />
       </Link>
-      <Link 
-        to="/business-dashboard/leads" 
-        onClick={() => setOpen(false)}
-        className={`flex items-center gap-2 p-2 rounded-lg ${
-          isActive("/business-dashboard/leads") 
-            ? "text-purple-400 bg-purple-500/10" 
-            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
-        }`}
-      >
-        <UserPlus className="h-5 w-5" />
-        Leads
-      </Link>
-      <Link 
-        to="/business-dashboard/proposals" 
-        onClick={() => setOpen(false)}
-        className={`flex items-center gap-2 p-2 rounded-lg ${
-          isActive("/business-dashboard/proposals") 
-            ? "text-purple-400 bg-purple-500/10" 
-            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
-        }`}
-      >
-        <Lightbulb className="h-5 w-5" />
-        Propuneri
-      </Link>
-      <Link 
-        to="/business-dashboard/contracts" 
-        onClick={() => setOpen(false)}
-        className={`flex items-center gap-2 p-2 rounded-lg ${
-          isActive("/business-dashboard/contracts") 
-            ? "text-purple-400 bg-purple-500/10" 
-            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
-        }`}
-      >
-        <FileCheck className="h-5 w-5" />
-        Contracte
-      </Link>
-      <Link 
-        to="/business-dashboard/invoices" 
-        onClick={() => setOpen(false)}
-        className={`flex items-center gap-2 p-2 rounded-lg ${
-          isActive("/business-dashboard/invoices") 
-            ? "text-purple-400 bg-purple-500/10" 
-            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
-        }`}
-      >
-        <FileText className="h-5 w-5" />
-        Încasări
-      </Link>
-      <Link 
-        to="/business-dashboard/quotes" 
-        onClick={() => setOpen(false)}
-        className={`flex items-center gap-2 p-2 rounded-lg ${
-          isActive("/business-dashboard/quotes") 
-            ? "text-purple-400 bg-purple-500/10" 
-            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
-        }`}
-      >
-        <FileSpreadsheet className="h-5 w-5" />
-        Oferte
-      </Link>
-      <Link 
-        to="/business-dashboard/plati" 
-        onClick={() => setOpen(false)}
-        className={`flex items-center gap-2 p-2 rounded-lg ${
-          isActive("/business-dashboard/plati") 
-            ? "text-purple-400 bg-purple-500/10" 
-            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
-        }`}
-      >
-        <CreditCard className="h-5 w-5" />
-        Plăți
-      </Link>
-      <Link 
-        to="/business-dashboard/calendar" 
-        onClick={() => setOpen(false)}
-        className={`flex items-center gap-2 p-2 rounded-lg ${
-          isActive("/business-dashboard/calendar") 
-            ? "text-purple-400 bg-purple-500/10" 
-            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
-        }`}
-      >
-        <CalendarDays className="h-5 w-5" />
-        Calendar
-      </Link>
-      <Link 
-        to="/business-dashboard/clients" 
-        onClick={() => setOpen(false)}
-        className={`flex items-center gap-2 p-2 rounded-lg ${
-          isActive("/business-dashboard/clients") 
-            ? "text-purple-400 bg-purple-500/10" 
-            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
-        }`}
-      >
-        <Users className="h-5 w-5" />
-        Clienți
-      </Link>
-      <button 
-        onClick={handleLogout}
-        className="flex items-center gap-2 text-gray-400 hover:text-purple-400 p-2 rounded-lg hover:bg-purple-500/10 w-full"
-      >
-        <LogOut className="h-5 w-5" />
-        Deconectare
-      </button>
-    </nav>
+
+      <nav className="flex-1 space-y-5">
+        {navSections.map((section) => (
+          <div key={section.label}>
+            <p className="sidebar-section-label">{section.label}</p>
+            <div className="space-y-0.5">
+              {section.links.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "sidebar-link",
+                    isActive(link.to) ? "sidebar-link-active" : "sidebar-link-inactive"
+                  )}
+                >
+                  <link.icon className="h-4 w-4 flex-shrink-0" />
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
+      </nav>
+
+      <div className="border-t border-white/[0.06] pt-3 mt-4">
+        <button 
+          onClick={handleLogout}
+          className="sidebar-link sidebar-link-inactive w-full text-red-400/70 hover:text-red-400 hover:bg-red-500/[0.06]"
+        >
+          <LogOut className="h-4 w-4 flex-shrink-0" />
+          Deconectare
+        </button>
+      </div>
+    </div>
   );
 
   return (
     <>
-      {/* Mobile Menu Button and Logo */}
+      {/* Mobile */}
       <div className="md:hidden fixed top-4 left-0 right-0 z-50 flex items-center justify-between px-4">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="bg-[#1A1F2C] border border-purple-500/20 hover:bg-purple-500/10"
-            >
-              {open ? <X className="h-5 w-5 text-purple-400" /> : <Menu className="h-5 w-5 text-purple-400" />}
+            <Button variant="ghost" size="icon" className="glass-card border border-white/10 hover:bg-white/[0.06]">
+              {open ? <X className="h-5 w-5 text-gray-300" /> : <Menu className="h-5 w-5 text-gray-300" />}
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="bg-[#1A1F2C] border-purple-500/20 p-4 w-64">
-            <Link to="/business-dashboard" className="flex items-center justify-center mb-8" onClick={() => setOpen(false)}>
-              <img 
-                src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" 
-                alt="AI Automatizari" 
-                className="h-16 w-auto rounded-xl" 
-              />
-            </Link>
-            {navLinks}
+          <SheetContent side="left" className="sidebar-premium border-white/[0.06] p-4 w-64">
+            <NavContent />
           </SheetContent>
         </Sheet>
         
         <Link to="/business-dashboard" className="flex items-center">
-          <img 
-            src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" 
-            alt="AI Automatizari" 
-            className="h-12 w-auto rounded-lg" 
-          />
+          <img src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" alt="AI Automatizari" className="h-10 w-auto rounded-lg" />
         </Link>
-        
-        <div className="w-10"></div>
+        <div className="w-10" />
       </div>
 
-      {/* Desktop Sidebar */}
-      <aside className="w-64 bg-[#1A1F2C] border-r border-purple-500/20 p-4 hidden md:block">
-        <Link to="/business-dashboard" className="flex items-center justify-center mb-8">
-          <img 
-            src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" 
-            alt="AI Automatizari" 
-            className="h-16 w-auto rounded-xl" 
-          />
-        </Link>
-        {navLinks}
+      {/* Desktop */}
+      <aside className="w-60 sidebar-premium border-r border-white/[0.06] p-4 hidden md:flex md:flex-col flex-shrink-0">
+        <NavContent />
       </aside>
     </>
   );
