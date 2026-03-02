@@ -618,6 +618,78 @@ export type Database = {
           },
         ]
       }
+      "leadmagnet-audit-strategic": {
+        Row: {
+          budget: string | null
+          business_type: string | null
+          business_type_other: string | null
+          company_name: string
+          created_at: string
+          daily_interactions: string | null
+          email: string
+          excel_count: string | null
+          frustrations: string | null
+          full_name: string
+          id: string
+          impact_scale: number | null
+          motivation: string | null
+          phone: string
+          platforms: Json | null
+          platforms_other: string | null
+          revenue: string | null
+          source: string | null
+          team_size: string | null
+          time_lost: string | null
+          weekly_quotes: string | null
+        }
+        Insert: {
+          budget?: string | null
+          business_type?: string | null
+          business_type_other?: string | null
+          company_name: string
+          created_at?: string
+          daily_interactions?: string | null
+          email: string
+          excel_count?: string | null
+          frustrations?: string | null
+          full_name: string
+          id?: string
+          impact_scale?: number | null
+          motivation?: string | null
+          phone: string
+          platforms?: Json | null
+          platforms_other?: string | null
+          revenue?: string | null
+          source?: string | null
+          team_size?: string | null
+          time_lost?: string | null
+          weekly_quotes?: string | null
+        }
+        Update: {
+          budget?: string | null
+          business_type?: string | null
+          business_type_other?: string | null
+          company_name?: string
+          created_at?: string
+          daily_interactions?: string | null
+          email?: string
+          excel_count?: string | null
+          frustrations?: string | null
+          full_name?: string
+          id?: string
+          impact_scale?: number | null
+          motivation?: string | null
+          phone?: string
+          platforms?: Json | null
+          platforms_other?: string | null
+          revenue?: string | null
+          source?: string | null
+          team_size?: string | null
+          time_lost?: string | null
+          weekly_quotes?: string | null
+        }
+        Relationships: []
+      }
       payable_invoices: {
         Row: {
           created_at: string | null
