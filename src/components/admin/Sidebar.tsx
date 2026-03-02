@@ -11,7 +11,8 @@ import {
   Menu,
   X,
   CreditCard,
-  CalendarDays
+  CalendarDays,
+  UserPlus
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
@@ -50,6 +51,18 @@ export function Sidebar() {
       >
         <LayoutDashboard className="h-5 w-5" />
         Dashboard
+      </Link>
+      <Link 
+        to="/business-dashboard/leads" 
+        onClick={() => setOpen(false)}
+        className={`flex items-center gap-2 p-2 rounded-lg ${
+          isActive("/business-dashboard/leads") 
+            ? "text-purple-400 bg-purple-500/10" 
+            : "text-gray-400 hover:text-purple-400 hover:bg-purple-500/10"
+        }`}
+      >
+        <UserPlus className="h-5 w-5" />
+        Leads
       </Link>
       <Link 
         to="/business-dashboard/proposals" 

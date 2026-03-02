@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { supabase } from "@/integrations/supabase/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
@@ -121,6 +122,33 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
           mode: "no-cors",
         }
       );
+
+      // Save to database
+      try {
+        await supabase.from("leadmagnet-audit-strategic" as any).insert({
+          full_name: data.fullName,
+          phone: data.phone,
+          email: data.email,
+          company_name: data.companyName,
+          business_type: data.businessType || null,
+          business_type_other: data.businessTypeOther || null,
+          team_size: data.teamSize || null,
+          revenue: data.revenue || null,
+          excel_count: data.excelCount || null,
+          platforms: data.platforms && data.platforms.length > 0 ? data.platforms : null,
+          platforms_other: data.platformsOther || null,
+          time_lost: data.timeLost || null,
+          frustrations: data.frustrations || null,
+          impact_scale: data.impactScale || null,
+          weekly_quotes: data.weeklyQuotes || null,
+          daily_interactions: data.dailyInteractions || null,
+          motivation: data.motivation || null,
+          budget: data.budget || null,
+          source: "audit-form-modal",
+        } as any);
+      } catch (dbErr) {
+        console.error("DB insert error:", dbErr);
+      }
 
       if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
         (window as any).fbq("track", "Lead");
