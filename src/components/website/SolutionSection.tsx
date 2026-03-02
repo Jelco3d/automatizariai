@@ -2,11 +2,7 @@ import { CheckCircle, Zap, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
-const points = [
-  "Gata în mai puțin de 30 de zile",
-  "Fără developeri scumpi",
-  "Fără proiecte care durează luni de zile",
-];
+const points = ["Gata în mai puțin de 30 de zile", "Fără developeri scumpi", "Fără proiecte care durează luni de zile"];
 
 interface SolutionSectionProps {
   onOpenAuditModal?: () => void;
@@ -27,7 +23,7 @@ export const SolutionSection = ({ onOpenAuditModal }: SolutionSectionProps) => {
           transition={{ duration: 0.6 }}
           className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400 mb-8"
         >
-          „Există o cale mult mai inteligentă."
+          Există o Cale Mult Mai Simplă.
         </motion.h2>
 
         <motion.p
@@ -37,9 +33,8 @@ export const SolutionSection = ({ onOpenAuditModal }: SolutionSectionProps) => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg md:text-xl text-white/70 leading-relaxed mb-10"
         >
-          Creăm pentru tine o{" "}
-          <span className="text-white font-semibold">platformă internă custom</span>{" "}
-          care preia automat cele mai consumatoare task-uri repetitive, folosind{" "}
+          Creăm pentru tine o <span className="text-white font-semibold">platformă internă custom</span> care preia
+          automat cele mai consumatoare task-uri repetitive, folosind{" "}
           <span className="text-white font-semibold">agenți AI și automatizări inteligente</span>.
         </motion.p>
 
@@ -90,10 +85,7 @@ export const SolutionSection = ({ onOpenAuditModal }: SolutionSectionProps) => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <Button
-            onClick={handleBooking}
-            className="btn-3d-gold text-base px-8 py-6 h-auto rounded-xl"
-          >
+          <Button onClick={handleBooking} className="btn-3d-gold text-base px-8 py-6 h-auto rounded-xl">
             Vreau să automatizez și eu
             <ArrowRight className="ml-2 w-5 h-5" />
           </Button>
