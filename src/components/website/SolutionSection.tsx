@@ -23,7 +23,7 @@ export const SolutionSection = ({ onOpenAuditModal }: SolutionSectionProps) => {
           transition={{ duration: 0.6 }}
           className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400 mb-8"
         >
-          Există o Cale Mult Mai Simplă.
+          Există o Cale Mult Mai Simplă...
         </motion.h2>
 
         <motion.p
