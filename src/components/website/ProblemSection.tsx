@@ -68,9 +68,7 @@ export const ProblemSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center text-lg md:text-2xl text-yellow-300 font-semibold mt-12"
-        >
-          „Nu ești singurul. Și nu trebuie să mai continui așa."
-        </motion.p>
+        ></motion.p>
       </div>
     </section>
   );
