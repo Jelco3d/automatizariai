@@ -37,12 +37,12 @@ export const VSLSection = ({ onOpenAuditModal }: VSLSectionProps) => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="relative aspect-video rounded-2xl overflow-hidden border border-yellow-400/20 bg-white/[0.02] mb-8 shadow-lg shadow-yellow-500/[0.05]"
         >
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform shadow-lg shadow-yellow-500/30">
-              <Play className="w-8 h-8 text-black ml-1" />
-            </div>
-            <p className="text-white/40 text-sm font-medium">Video în curând</p>
-          </div>
+          <iframe
+            src="https://www.loom.com/embed/1e8e609e6b73490ba33fa5a4b0c091aa"
+            frameBorder="0"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full"
+          />
         </motion.div>
 
         <motion.div
