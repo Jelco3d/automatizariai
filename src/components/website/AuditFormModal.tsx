@@ -52,7 +52,7 @@ const auditSchema = z.object({
 
 type AuditFormValues = z.infer<typeof auditSchema>;
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 6;
 
 const stepFields: (keyof AuditFormValues)[][] = [
   ["fullName", "phone", "email", "companyName"],
@@ -60,6 +60,7 @@ const stepFields: (keyof AuditFormValues)[][] = [
   ["excelCount", "platforms", "timeLost", "frustrations"],
   ["impactScale", "weeklyQuotes", "dailyInteractions"],
   ["motivation", "budget"],
+  [],
 ];
 
 const stepLabels = [
@@ -68,6 +69,7 @@ const stepLabels = [
   "Fragmentare",
   "Impact",
   "Motivație",
+  "Rezervare",
 ];
 
 const platformOptions = [
@@ -154,8 +156,9 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
         (window as any).fbq("track", "Lead");
       }
 
-      setIsSubmitted(true);
-      toast({ title: "Formularul a fost trimis cu succes!" });
+      setDirection(1);
+      setCurrentStep(TOTAL_STEPS - 1);
+      toast({ title: "Formularul a fost trimis cu succes! Rezervă-ți consultația." });
     } catch {
       toast({
         title: "Eroare la trimitere",
@@ -283,6 +286,7 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
                       {currentStep === 2 && <Step3 form={form} inputClass={inputClass} labelClass={labelClass} />}
                       {currentStep === 3 && <Step4 form={form} inputClass={inputClass} labelClass={labelClass} />}
                       {currentStep === 4 && <Step5 form={form} inputClass={inputClass} labelClass={labelClass} isSubmitting={isSubmitting} />}
+                      {currentStep === 5 && <Step6 />}
                     </motion.div>
                   </AnimatePresence>
                 </div>
@@ -297,14 +301,18 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
                     <div />
                   )}
 
-                  {currentStep < TOTAL_STEPS - 1 ? (
+                  {currentStep < TOTAL_STEPS - 2 ? (
                     <Button type="button" onClick={handleNext} className="btn-3d-gold px-6 py-3 h-auto rounded-xl">
                       Continuă <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
-                  ) : (
+                  ) : currentStep === TOTAL_STEPS - 2 ? (
                     <Button type="submit" disabled={isSubmitting} className="btn-3d-gold px-6 py-3 h-auto rounded-xl animate-glow-pulse">
                       {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : <ArrowRight className="w-5 h-5 mr-2" />}
                       Trimite și rezervă auditul
+                    </Button>
+                  ) : (
+                    <Button type="button" onClick={handleClose} className="btn-3d-gold px-6 py-3 h-auto rounded-xl">
+                      Închide
                     </Button>
                   )}
                 </div>
@@ -544,16 +552,6 @@ function Step5({ form, inputClass, labelClass, isSubmitting }: StepProps & { isS
           </FormControl>
         </FormItem>
       )} />
-      <div>
-        <Label className={labelClass}>Când ai timp pentru un audit strategic de max 20 de minute?</Label>
-        <div className="mt-2 rounded-xl overflow-hidden border border-yellow-500/20">
-          <iframe
-            src="https://calendly.com/aiautomatizari/automatizari-ai"
-            className="w-full h-[350px] border-0"
-            title="Calendly"
-          />
-        </div>
-      </div>
       <FormField control={form.control} name="budget" render={({ field }) => (
         <FormItem>
           <FormLabel className={labelClass}>Bugetul aproximativ pentru o soluție?</FormLabel>
@@ -567,6 +565,27 @@ function Step5({ form, inputClass, labelClass, isSubmitting }: StepProps & { isS
           </Select>
         </FormItem>
       )} />
+    </div>
+  );
+}
+
+function Step6() {
+  return (
+    <div className="space-y-4">
+      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+        Rezervă consultația
+      </h3>
+      <p className="text-white/50 text-sm">
+        Alege un slot disponibil pentru auditul tău strategic gratuit de 20 de minute.
+      </p>
+      <div className="rounded-xl overflow-hidden border border-yellow-500/20" style={{ height: "450px" }}>
+        <iframe
+          src="https://cal.com/ai-automatizari-zjwxgt/rezervare-consultatie?embed=true&theme=dark&layout=month_view"
+          className="w-full h-full border-0"
+          title="Rezervare consultație"
+          allow="payment"
+        />
+      </div>
     </div>
   );
 }
