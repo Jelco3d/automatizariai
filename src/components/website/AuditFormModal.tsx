@@ -311,8 +311,8 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
                       Trimite și rezervă auditul
                     </Button>
                   ) : (
-                    <Button type="button" onClick={handleClose} className="btn-3d-gold px-6 py-3 h-auto rounded-xl">
-                      Închide
+                    <Button type="button" onClick={() => { toast({ title: "Programare realizată cu succes!", description: "Vei primi confirmarea pe email în câteva minute." }); handleClose(); }} className="btn-3d-gold px-6 py-3 h-auto rounded-xl">
+                      <CheckCircle className="w-5 h-5 mr-2" /> Finalizare
                     </Button>
                   )}
                 </div>
