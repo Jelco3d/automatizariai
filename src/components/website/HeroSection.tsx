@@ -73,24 +73,24 @@ export const HeroSection = ({ onOpenAuditModal }: HeroSectionProps) => {
           )}
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col items-center gap-3">
-          
-          
+        
 
 
 
 
 
 
-          
-          <span className="text-white/30 text-sm">
-            Fără costuri ascunse. Fără obligații.
-          </span>
-        </motion.div>
+
+
+
+
+
+
+
+
+
+
+        
       </div>
     </section>);
 
