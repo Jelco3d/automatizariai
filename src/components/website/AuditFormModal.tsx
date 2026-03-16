@@ -7,9 +7,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Slider } from "@/components/ui/slider";
 import {
   Select,
   SelectContent,
@@ -29,58 +27,88 @@ import { ArrowRight, ArrowLeft, CheckCircle, Loader2, Check } from "lucide-react
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 
+// ── Schema ──
 const auditSchema = z.object({
+  // Step 1 — obligatorii
+  cui: z.string().min(2, "CUI-ul este obligatoriu"),
   fullName: z.string().min(2, "Numele este obligatoriu"),
-  phone: z.string().min(6, "Numărul de telefon este obligatoriu"),
   email: z.string().email("Email invalid"),
-  companyName: z.string().min(1, "Numele firmei este obligatoriu"),
-  businessType: z.string().optional(),
-  businessTypeOther: z.string().optional(),
-  teamSize: z.string().optional(),
-  revenue: z.string().optional(),
-  excelCount: z.string().optional(),
-  platforms: z.array(z.string()).optional(),
-  platformsOther: z.string().optional(),
-  timeLost: z.string().optional(),
-  frustrations: z.string().optional(),
-  impactScale: z.number().min(1).max(10).optional(),
-  weeklyQuotes: z.string().optional(),
-  dailyInteractions: z.string().optional(),
-  motivation: z.string().optional(),
-  budget: z.string().optional(),
+  phone: z.string().min(6, "Numărul de telefon este obligatoriu"),
+  roleInCompany: z.string().min(1, "Selectează rolul tău"),
+  // Step 2 — opționale
+  orderChannels: z.array(z.string()).optional(),
+  orderChannelsOther: z.string().optional(),
+  dailyOrders: z.string().optional(),
+  backofficeEmployees: z.string().optional(),
+  mainOperationalProblem: z.string().optional(),
+  weeklyRepetitiveHours: z.string().optional(),
+  // Step 3 — opționale
+  erpSoftware: z.string().optional(),
+  erpSoftwareOther: z.string().optional(),
+  hasCrm: z.string().optional(),
+  stockTracking: z.string().optional(),
+  hasWebsite: z.string().optional(),
+  websiteUrl: z.string().optional(),
+  automationTools: z.array(z.string()).optional(),
+  automationToolsOther: z.string().optional(),
+  // Step 4 — opționale
+  yearlyObjective: z.string().optional(),
+  investmentRecovery: z.string().optional(),
+  previousDigitalization: z.string().optional(),
+  employeesAvoidable: z.string().optional(),
+  // Step 5 — opționale, industrie
+  industryType: z.string().optional(),
+  industryQ1: z.string().optional(),
+  industryQ2: z.string().optional(),
+  industryQ3: z.string().optional(),
 });
 
 type AuditFormValues = z.infer<typeof auditSchema>;
 
 const TOTAL_STEPS = 6;
 
-const stepFields: (keyof AuditFormValues)[][] = [
-  ["fullName", "phone", "email", "companyName"],
-  ["businessType", "teamSize", "revenue"],
-  ["excelCount", "platforms", "timeLost", "frustrations"],
-  ["impactScale", "weeklyQuotes", "dailyInteractions"],
-  ["motivation", "budget"],
-  [],
-];
+const stepLabels = ["Contact", "Operațiuni", "Tech Stack", "Financiar", "Industrie", "Rezervare"];
 
-const stepLabels = [
-  "Contact",
-  "Afacere",
-  "Fragmentare",
-  "Impact",
-  "Motivație",
-  "Rezervare",
-];
+const selectContentClass = "bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]";
+const selectItemClass = "text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 cursor-pointer transition-all duration-150";
 
-const platformOptions = [
-  "Excel pentru stoc/inventar",
-  "Excel pentru oferte / comenzi",
-  "Excel pentru facturi / proforme",
-  "Excel pentru clienți / istoric",
-  "WhatsApp Business",
-  "SmartBill / Saga / alt ERP",
-  "Google Sheets",
-];
+const orderChannelOptions = ["Telefon", "WhatsApp", "Email", "Formular online", "Marketplace (eMAG etc.)", "Reprezentanți pe teren", "Altul"];
+const automationToolOptions = ["ChatGPT / Claude", "Zapier / Make", "Power Automate", "Niciun tool", "Altul"];
+
+const industryGroups: Record<string, { label: string; questions: { label: string; options: string[] }[] }> = {
+  distributie: {
+    label: "Distribuție & Comerț",
+    questions: [
+      { label: "Câți furnizori gestionați manual?", options: ["Sub 10", "10–30", "30–100", "Peste 100"] },
+      { label: "Aveți flotă proprie de livrare?", options: ["Da", "Nu", "Parțial externalizată"] },
+      { label: "Câte SKU-uri aveți în portofoliu?", options: ["Sub 100", "100–500", "500–2000", "Peste 2000"] },
+    ],
+  },
+  constructii: {
+    label: "Construcții & Instalații",
+    questions: [
+      { label: "Câte șantiere / proiecte simultane?", options: ["1–2", "3–5", "6–10", "Peste 10"] },
+      { label: "Cum faceți devizele și ofertele?", options: ["Excel", "Soft dedicat", "Manual (hârtie)", "Altul"] },
+      { label: "Urmăriți costurile per proiect în timp real?", options: ["Da", "Nu", "Parțial"] },
+    ],
+  },
+  servicii: {
+    label: "Servicii Profesionale",
+    questions: [
+      { label: "Cum gestionați programările / agenda?", options: ["Calendar digital", "Excel / foi", "Telefon", "Soft dedicat"] },
+      { label: "Facturați pe bază de ore sau proiect?", options: ["Ore", "Proiect", "Mixt", "Abonament"] },
+      { label: "Cum urmăriți satisfacția clienților?", options: ["Sondaje", "Feedback verbal", "NPS", "Nu urmărim"] },
+    ],
+  },
+  productie: {
+    label: "Producție & Manufacturing",
+    questions: [
+      { label: "Urmăriți producția / randamentul pe schimb?", options: ["Da, automatizat", "Da, manual", "Nu"] },
+      { label: "Cum planificați producția?", options: ["Soft MRP/MES", "Excel", "Manual", "Altul"] },
+      { label: "Aveți probleme de calitate / rebuturi?", options: ["Da, frecvent", "Ocazional", "Rar", "Nu"] },
+    ],
+  },
+};
 
 interface AuditFormModalProps {
   isOpen: boolean;
@@ -97,20 +125,54 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
   const form = useForm<AuditFormValues>({
     resolver: zodResolver(auditSchema),
     defaultValues: {
+      cui: "",
       fullName: "",
-      phone: "",
       email: "",
-      companyName: "",
-      platforms: [],
-      impactScale: 5,
+      phone: "",
+      roleInCompany: "",
+      orderChannels: [],
+      automationTools: [],
+      industryType: "",
     },
   });
 
   const onSubmit = async (data: AuditFormValues) => {
     setIsSubmitting(true);
     try {
+      const industryQuestions: Record<string, string> = {};
+      if (data.industryType && industryGroups[data.industryType]) {
+        const qs = industryGroups[data.industryType].questions;
+        if (data.industryQ1) industryQuestions[qs[0].label] = data.industryQ1;
+        if (data.industryQ2) industryQuestions[qs[1].label] = data.industryQ2;
+        if (data.industryQ3 && qs[2]) industryQuestions[qs[2].label] = data.industryQ3;
+      }
+
       const payload = {
-        ...data,
+        cui: data.cui,
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        roleInCompany: data.roleInCompany,
+        orderChannels: data.orderChannels,
+        orderChannelsOther: data.orderChannelsOther,
+        dailyOrders: data.dailyOrders,
+        backofficeEmployees: data.backofficeEmployees,
+        mainOperationalProblem: data.mainOperationalProblem,
+        weeklyRepetitiveHours: data.weeklyRepetitiveHours,
+        erpSoftware: data.erpSoftware,
+        erpSoftwareOther: data.erpSoftwareOther,
+        hasCrm: data.hasCrm,
+        stockTracking: data.stockTracking,
+        hasWebsite: data.hasWebsite,
+        websiteUrl: data.websiteUrl,
+        automationTools: data.automationTools,
+        automationToolsOther: data.automationToolsOther,
+        yearlyObjective: data.yearlyObjective,
+        investmentRecovery: data.investmentRecovery,
+        previousDigitalization: data.previousDigitalization,
+        employeesAvoidable: data.employeesAvoidable,
+        industryType: data.industryType,
+        industryQuestions,
         timestamp: new Date().toISOString(),
         source: "audit-form-modal",
       };
@@ -125,27 +187,33 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
         }
       );
 
-      // Save to database
       try {
         await supabase.from("leadmagnet-audit-strategic" as any).insert({
           full_name: data.fullName,
           phone: data.phone,
           email: data.email,
-          company_name: data.companyName,
-          business_type: data.businessType || null,
-          business_type_other: data.businessTypeOther || null,
-          team_size: data.teamSize || null,
-          revenue: data.revenue || null,
-          excel_count: data.excelCount || null,
-          platforms: data.platforms && data.platforms.length > 0 ? data.platforms : null,
-          platforms_other: data.platformsOther || null,
-          time_lost: data.timeLost || null,
-          frustrations: data.frustrations || null,
-          impact_scale: data.impactScale || null,
-          weekly_quotes: data.weeklyQuotes || null,
-          daily_interactions: data.dailyInteractions || null,
-          motivation: data.motivation || null,
-          budget: data.budget || null,
+          company_name: data.cui,
+          cui: data.cui,
+          role_in_company: data.roleInCompany,
+          order_channels: data.orderChannels?.length ? data.orderChannels : null,
+          order_channels_other: data.orderChannelsOther || null,
+          daily_orders: data.dailyOrders || null,
+          backoffice_employees: data.backofficeEmployees || null,
+          main_operational_problem: data.mainOperationalProblem || null,
+          weekly_repetitive_hours: data.weeklyRepetitiveHours || null,
+          erp_software: data.erpSoftware || null,
+          erp_software_other: data.erpSoftwareOther || null,
+          has_crm: data.hasCrm || null,
+          stock_tracking: data.stockTracking || null,
+          has_website: data.hasWebsite || null,
+          website_url: data.websiteUrl || null,
+          automation_tools: data.automationTools?.length ? data.automationTools : null,
+          automation_tools_other: data.automationToolsOther || null,
+          yearly_objective: data.yearlyObjective || null,
+          investment_recovery: data.investmentRecovery || null,
+          previous_digitalization: data.previousDigitalization || null,
+          employees_avoidable: data.employeesAvoidable || null,
+          industry_questions: Object.keys(industryQuestions).length ? industryQuestions : null,
           source: "audit-form-modal",
         } as any);
       } catch (dbErr) {
@@ -180,7 +248,7 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
 
   const handleNext = async () => {
     if (currentStep === 0) {
-      const valid = await form.trigger(["fullName", "phone", "email", "companyName"]);
+      const valid = await form.trigger(["cui", "fullName", "email", "phone", "roleInCompany"]);
       if (!valid) return;
     }
     setDirection(1);
@@ -214,12 +282,9 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
             <CheckCircle className="w-16 h-16 text-emerald-400 mb-6" />
             <h2 className="text-2xl font-bold text-white mb-4">Mulțumim!</h2>
             <p className="text-white/60 text-lg max-w-md">
-              Îți rezervăm locul pentru audit. Vei primi confirmarea pe email și
-              WhatsApp în maxim 60 de minute.
+              Îți rezervăm locul pentru audit. Vei primi confirmarea pe email și WhatsApp în maxim 60 de minute.
             </p>
-            <Button onClick={handleClose} className="btn-3d-gold mt-8 px-8 py-4 h-auto rounded-xl">
-              Închide
-            </Button>
+            <Button onClick={handleClose} className="btn-3d-gold mt-8 px-8 py-4 h-auto rounded-xl">Închide</Button>
           </div>
         ) : (
           <div className="flex flex-col h-full max-h-[90vh]">
@@ -228,8 +293,6 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
               <h2 className="text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400 mb-4 leading-tight">
                 Audit Strategic Gratuit
               </h2>
-
-              {/* Step indicators */}
               <div className="flex items-center justify-between mb-3">
                 {stepLabels.map((label, i) => (
                   <div key={label} className="flex items-center flex-1 last:flex-none">
@@ -255,8 +318,6 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
                   </div>
                 ))}
               </div>
-
-              {/* Progress bar */}
               <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
                 <motion.div
                   className="h-full bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full"
@@ -327,239 +388,353 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
 
 /* ── Step Components ── */
 
+interface StepProps {
+  form: ReturnType<typeof useForm<AuditFormValues>>;
+  inputClass: string;
+  labelClass: string;
+}
+
+// ── STEP 1: Identificare și contact (obligatorii) ──
 function Step1({ form, inputClass, labelClass }: StepProps) {
   return (
     <div className="space-y-4">
       <p className="text-white/50 text-sm leading-relaxed mb-4">
-        Completează datele de contact pentru a-ți rezerva auditul gratuit de 20 de minute.
+        Completează datele de identificare — CUI-ul ne permite să preluăm automat informații din ANAF.
       </p>
+      <FormField control={form.control} name="cui" render={({ field }) => (
+        <FormItem>
+          <FormLabel className={labelClass}>CUI (Cod Unic de Înregistrare) *</FormLabel>
+          <FormControl><Input {...field} className={inputClass} placeholder="ex. RO12345678" /></FormControl>
+          <FormMessage />
+        </FormItem>
+      )} />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <FormField control={form.control} name="fullName" render={({ field }) => (
           <FormItem>
-            <FormLabel className={labelClass}>Nume complet *</FormLabel>
+            <FormLabel className={labelClass}>Prenume + Nume *</FormLabel>
             <FormControl><Input {...field} className={inputClass} placeholder="Ion Popescu" /></FormControl>
             <FormMessage />
           </FormItem>
         )} />
         <FormField control={form.control} name="phone" render={({ field }) => (
           <FormItem>
-            <FormLabel className={labelClass}>Telefon *</FormLabel>
+            <FormLabel className={labelClass}>Telefon / WhatsApp *</FormLabel>
             <FormControl><Input {...field} className={inputClass} placeholder="07xx xxx xxx" /></FormControl>
             <FormMessage />
           </FormItem>
         )} />
-        <FormField control={form.control} name="email" render={({ field }) => (
-          <FormItem>
-            <FormLabel className={labelClass}>Email *</FormLabel>
-            <FormControl><Input {...field} type="email" className={inputClass} placeholder="email@firma.ro" /></FormControl>
-            <FormMessage />
-          </FormItem>
-        )} />
-        <FormField control={form.control} name="companyName" render={({ field }) => (
-          <FormItem>
-            <FormLabel className={labelClass}>Nume firmă *</FormLabel>
-            <FormControl><Input {...field} className={inputClass} placeholder="SC Exemplu SRL" /></FormControl>
-            <FormMessage />
-          </FormItem>
-        )} />
       </div>
+      <FormField control={form.control} name="email" render={({ field }) => (
+        <FormItem>
+          <FormLabel className={labelClass}>Email profesional *</FormLabel>
+          <FormControl><Input {...field} type="email" className={inputClass} placeholder="email@firma.ro" /></FormControl>
+          <FormMessage />
+        </FormItem>
+      )} />
+      <FormField control={form.control} name="roleInCompany" render={({ field }) => (
+        <FormItem>
+          <FormLabel className={labelClass}>Rolul tău în firmă *</FormLabel>
+          <Select onValueChange={field.onChange} value={field.value}>
+            <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
+            <SelectContent className={selectContentClass}>
+              {["Fondator / CEO / Administrator", "Director operațional", "Director financiar", "Manager", "Alt rol"].map((opt) => (
+                <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <FormMessage />
+        </FormItem>
+      )} />
     </div>
   );
 }
 
+// ── STEP 2: Cum funcționează firma azi (opționale) ──
 function Step2({ form, inputClass, labelClass }: StepProps) {
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
-        Contextul afacerii tale
+        Cum funcționează firma azi
       </h3>
-      <FormField control={form.control} name="businessType" render={({ field }) => (
-        <FormItem>
-          <FormLabel className={labelClass}>Care este tipul principal al afacerii tale?</FormLabel>
-          <Select onValueChange={field.onChange} value={field.value}>
-            <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
-            <SelectContent className="bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]">
-              {["Construcții / Amenajări interioare", "Distribuție (alimentară, materiale, etc.)", "Cosmetice / Parfumuri / Seturi cadou", "Retail / Magazin fizic sau online", "Producție", "Servicii", "Altceva"].map((opt) => (
-                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_1px_3px_rgba(0,0,0,0.3)] cursor-pointer transition-all duration-150">{opt}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </FormItem>
-      )} />
-      {form.watch("businessType") === "Altceva" && (
-        <FormField control={form.control} name="businessTypeOther" render={({ field }) => (
-          <FormItem>
-            <FormControl><Input {...field} className={inputClass} placeholder="Descrie tipul afacerii..." /></FormControl>
-          </FormItem>
-        )} />
-      )}
-      <FormField control={form.control} name="teamSize" render={({ field }) => (
-        <FormItem>
-          <FormLabel className={labelClass}>Câte persoane are echipa ta activă?</FormLabel>
-          <Select onValueChange={field.onChange} value={field.value}>
-            <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
-            <SelectContent className="bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]">
-              {["1–5", "6–10", "11–20", "21–40", "Peste 40"].map((opt) => (
-                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_1px_3px_rgba(0,0,0,0.3)] cursor-pointer transition-all duration-150">{opt}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </FormItem>
-      )} />
-      <FormField control={form.control} name="revenue" render={({ field }) => (
-        <FormItem>
-          <FormLabel className={labelClass}>Cifra de afaceri aproximativă anuală?</FormLabel>
-          <Select onValueChange={field.onChange} value={field.value}>
-            <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
-            <SelectContent className="bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]">
-              {["Sub 2 mil. lei", "2–5 mil. lei", "5–15 mil. lei", "15–30 mil. lei", "Peste 30 mil. lei"].map((opt) => (
-                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_1px_3px_rgba(0,0,0,0.3)] cursor-pointer transition-all duration-150">{opt}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </FormItem>
-      )} />
-    </div>
-  );
-}
+      <p className="text-white/40 text-xs">Toate câmpurile sunt opționale dar îmbunătățesc calitatea auditului.</p>
 
-function Step3({ form, inputClass, labelClass }: StepProps) {
-  return (
-    <div className="space-y-4">
-      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
-        Fragmentarea actuală
-      </h3>
-      <FormField control={form.control} name="excelCount" render={({ field }) => (
+      {/* Order channels - multi-select */}
+      <FormField control={form.control} name="orderChannels" render={() => (
         <FormItem>
-          <FormLabel className={labelClass}>Câte fișiere Excel diferite folosești regulat?</FormLabel>
-          <Select onValueChange={field.onChange} value={field.value}>
-            <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
-            <SelectContent className="bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]">
-              {["1–2", "3–4", "5–7", "8 sau mai multe"].map((opt) => (
-                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_1px_3px_rgba(0,0,0,0.3)] cursor-pointer transition-all duration-150">{opt}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </FormItem>
-      )} />
-      <FormField control={form.control} name="platforms" render={() => (
-        <FormItem>
-          <FormLabel className={labelClass}>Fișiere/platforme folosite zilnic</FormLabel>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
-            {platformOptions.map((platform) => (
-              <FormField key={platform} control={form.control} name="platforms" render={({ field }) => (
+          <FormLabel className={labelClass}>Cum primiți comenzile acum?</FormLabel>
+          <div className="grid grid-cols-2 gap-2 mt-2">
+            {orderChannelOptions.map((ch) => (
+              <FormField key={ch} control={form.control} name="orderChannels" render={({ field }) => (
                 <FormItem className="flex items-center gap-2 space-y-0">
                   <FormControl>
                     <Checkbox
                       className="border-yellow-500/50 data-[state=checked]:bg-yellow-500 data-[state=checked]:border-yellow-500"
-                      checked={field.value?.includes(platform)}
+                      checked={field.value?.includes(ch)}
                       onCheckedChange={(checked) => {
-                        const current = field.value || [];
-                        field.onChange(checked ? [...current, platform] : current.filter((v) => v !== platform));
+                        const cur = field.value || [];
+                        field.onChange(checked ? [...cur, ch] : cur.filter((v) => v !== ch));
                       }}
                     />
                   </FormControl>
-                  <Label className="text-white/70 text-sm font-normal cursor-pointer">{platform}</Label>
+                  <Label className="text-white/70 text-sm font-normal cursor-pointer">{ch}</Label>
                 </FormItem>
               )} />
             ))}
           </div>
-          <FormField control={form.control} name="platformsOther" render={({ field }) => (
-            <FormItem className="mt-2">
-              <FormControl><Input {...field} className={inputClass} placeholder="Altceva..." /></FormControl>
-            </FormItem>
-          )} />
+          {form.watch("orderChannels")?.includes("Altul") && (
+            <FormField control={form.control} name="orderChannelsOther" render={({ field }) => (
+              <FormItem className="mt-2">
+                <FormControl><Input {...field} className={inputClass} placeholder="Specifică..." /></FormControl>
+              </FormItem>
+            )} />
+          )}
         </FormItem>
       )} />
-      <FormField control={form.control} name="timeLost" render={({ field }) => (
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <FormField control={form.control} name="dailyOrders" render={({ field }) => (
+          <FormItem>
+            <FormLabel className={labelClass}>Câte comenzi procesați zilnic?</FormLabel>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
+              <SelectContent className={selectContentClass}>
+                {["Sub 10", "10–50", "50–200", "200–500", "Peste 500"].map((opt) => (
+                  <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </FormItem>
+        )} />
+        <FormField control={form.control} name="backofficeEmployees" render={({ field }) => (
+          <FormItem>
+            <FormLabel className={labelClass}>Angajați în administrare / back-office?</FormLabel>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
+              <SelectContent className={selectContentClass}>
+                {["1–2", "3–5", "6–10", "Peste 10"].map((opt) => (
+                  <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </FormItem>
+        )} />
+      </div>
+
+      <FormField control={form.control} name="mainOperationalProblem" render={({ field }) => (
         <FormItem>
-          <FormLabel className={labelClass}>Cât timp pierzi pe săptămână căutând informații?</FormLabel>
+          <FormLabel className={labelClass}>Cea mai mare problemă operațională acum?</FormLabel>
           <Select onValueChange={field.onChange} value={field.value}>
             <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
-            <SelectContent className="bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]">
-              {["Sub 5 ore", "5–10 ore", "10–20 ore", "20–30 ore", "Peste 30 ore"].map((opt) => (
-                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_1px_3px_rgba(0,0,0,0.3)] cursor-pointer transition-all duration-150">{opt}</SelectItem>
+            <SelectContent className={selectContentClass}>
+              {[
+                "Comenzi procesate greșit sau lent",
+                "Stoc gestionat din ochi",
+                "Facturare manuală / întârziată",
+                "Nu știu ce profit am în timp real",
+                "Angajați ocupați cu sarcini repetitive",
+                "Clienți pierduți fără să știu de ce",
+              ].map((opt) => (
+                <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
               ))}
             </SelectContent>
           </Select>
         </FormItem>
       )} />
-      <FormField control={form.control} name="frustrations" render={({ field }) => (
+
+      <FormField control={form.control} name="weeklyRepetitiveHours" render={({ field }) => (
         <FormItem>
-          <FormLabel className={labelClass}>Cea mai mare frustrare?</FormLabel>
-          <FormControl>
-            <Textarea {...field} className={`${inputClass} min-h-[70px]`} placeholder="ex. Cine are ultima versiune? Trebuie să copiez date manual..." />
-          </FormControl>
+          <FormLabel className={labelClass}>Ore/săptămână pe sarcini repetitive (total echipă)?</FormLabel>
+          <Select onValueChange={field.onChange} value={field.value}>
+            <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
+            <SelectContent className={selectContentClass}>
+              {["Sub 5h", "5–15h", "15–30h", "30–60h", "Peste 60h"].map((opt) => (
+                <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </FormItem>
       )} />
     </div>
   );
 }
 
+// ── STEP 3: Tech Stack actual (opționale) ──
+function Step3({ form, inputClass, labelClass }: StepProps) {
+  return (
+    <div className="space-y-4">
+      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+        Tech Stack actual
+      </h3>
+      <p className="text-white/40 text-xs">Opțional — ne ajută să personalizăm recomandările din audit.</p>
+
+      <FormField control={form.control} name="erpSoftware" render={({ field }) => (
+        <FormItem>
+          <FormLabel className={labelClass}>Ce soft de gestiune / ERP folosiți?</FormLabel>
+          <Select onValueChange={field.onChange} value={field.value}>
+            <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
+            <SelectContent className={selectContentClass}>
+              {["Saga", "WinMentor", "SmartBill", "Oblio", "Odoo", "SAP", "Niciunul (Excel)", "Altul"].map((opt) => (
+                <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </FormItem>
+      )} />
+      {form.watch("erpSoftware") === "Altul" && (
+        <FormField control={form.control} name="erpSoftwareOther" render={({ field }) => (
+          <FormItem>
+            <FormControl><Input {...field} className={inputClass} placeholder="Specifică ERP-ul..." /></FormControl>
+          </FormItem>
+        )} />
+      )}
+
+      <FormField control={form.control} name="hasCrm" render={({ field }) => (
+        <FormItem>
+          <FormLabel className={labelClass}>Aveți un CRM (gestiune clienți)?</FormLabel>
+          <Select onValueChange={field.onChange} value={field.value}>
+            <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
+            <SelectContent className={selectContentClass}>
+              {["Da, folosim activ", "Da, dar nu îl folosim bine", "Nu, gestionăm în Excel / foi", "Nu știu ce e un CRM"].map((opt) => (
+                <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </FormItem>
+      )} />
+
+      <FormField control={form.control} name="stockTracking" render={({ field }) => (
+        <FormItem>
+          <FormLabel className={labelClass}>Cum urmăriți stocul?</FormLabel>
+          <Select onValueChange={field.onChange} value={field.value}>
+            <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
+            <SelectContent className={selectContentClass}>
+              {["Sistem dedicat (WMS)", "În ERP-ul existent", "Excel / foi fizice", "Din ochi / memorie", "Nu avem stoc"].map((opt) => (
+                <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </FormItem>
+      )} />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <FormField control={form.control} name="hasWebsite" render={({ field }) => (
+          <FormItem>
+            <FormLabel className={labelClass}>Aveți un website activ?</FormLabel>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
+              <SelectContent className={selectContentClass}>
+                {["Da, cu vânzări online", "Da, fără vânzări online", "Nu"].map((opt) => (
+                  <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </FormItem>
+        )} />
+        {form.watch("hasWebsite")?.startsWith("Da") && (
+          <FormField control={form.control} name="websiteUrl" render={({ field }) => (
+            <FormItem>
+              <FormLabel className={labelClass}>URL website</FormLabel>
+              <FormControl><Input {...field} className={inputClass} placeholder="https://..." /></FormControl>
+            </FormItem>
+          )} />
+        )}
+      </div>
+
+      {/* Automation tools multi-select */}
+      <FormField control={form.control} name="automationTools" render={() => (
+        <FormItem>
+          <FormLabel className={labelClass}>Folosiți tool-uri de automatizare sau AI?</FormLabel>
+          <div className="grid grid-cols-2 gap-2 mt-2">
+            {automationToolOptions.map((tool) => (
+              <FormField key={tool} control={form.control} name="automationTools" render={({ field }) => (
+                <FormItem className="flex items-center gap-2 space-y-0">
+                  <FormControl>
+                    <Checkbox
+                      className="border-yellow-500/50 data-[state=checked]:bg-yellow-500 data-[state=checked]:border-yellow-500"
+                      checked={field.value?.includes(tool)}
+                      onCheckedChange={(checked) => {
+                        const cur = field.value || [];
+                        field.onChange(checked ? [...cur, tool] : cur.filter((v) => v !== tool));
+                      }}
+                    />
+                  </FormControl>
+                  <Label className="text-white/70 text-sm font-normal cursor-pointer">{tool}</Label>
+                </FormItem>
+              )} />
+            ))}
+          </div>
+          {form.watch("automationTools")?.includes("Altul") && (
+            <FormField control={form.control} name="automationToolsOther" render={({ field }) => (
+              <FormItem className="mt-2">
+                <FormControl><Input {...field} className={inputClass} placeholder="Specifică tool-ul..." /></FormControl>
+              </FormItem>
+            )} />
+          )}
+        </FormItem>
+      )} />
+    </div>
+  );
+}
+
+// ── STEP 4: Context financiar (opționale) ──
 function Step4({ form, inputClass, labelClass }: StepProps) {
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
-        Impact & Volum
+        Context financiar & ambiție
       </h3>
-      <FormField control={form.control} name="impactScale" render={({ field }) => (
-        <FormItem>
-          <FormLabel className={labelClass}>
-            Cât de mult te afectează haosul de fișiere? ({field.value}/10)
-          </FormLabel>
-          <FormControl>
-            <Slider
-              min={1} max={10} step={1}
-              value={[field.value || 5]}
-              onValueChange={(vals) => field.onChange(vals[0])}
-              className="mt-2 [&_[role=slider]]:bg-yellow-400 [&_[role=slider]]:border-yellow-500"
-            />
-          </FormControl>
-          <div className="flex justify-between text-xs text-white/30 mt-1">
-            <span>1 – Deloc</span><span>10 – Foarte mult</span>
-          </div>
-        </FormItem>
-      )} />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <FormField control={form.control} name="weeklyQuotes" render={({ field }) => (
-          <FormItem>
-            <FormLabel className={labelClass}>Oferte/cereri de preț pe săptămână?</FormLabel>
-            <FormControl><Input {...field} type="number" className={inputClass} placeholder="ex. 15" /></FormControl>
-          </FormItem>
-        )} />
-        <FormField control={form.control} name="dailyInteractions" render={({ field }) => (
-          <FormItem>
-            <FormLabel className={labelClass}>Interacțiuni repetitive zilnice?</FormLabel>
-            <FormControl><Input {...field} type="number" className={inputClass} placeholder="ex. 30–50" /></FormControl>
-          </FormItem>
-        )} />
-      </div>
-    </div>
-  );
-}
+      <p className="text-white/40 text-xs">Opțional — calibrează recomandările și pachetul propus.</p>
 
-function Step5({ form, inputClass, labelClass, isSubmitting }: StepProps & { isSubmitting: boolean }) {
-  return (
-    <div className="space-y-4">
-      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
-        Motivație & Disponibilitate
-      </h3>
-      <FormField control={form.control} name="motivation" render={({ field }) => (
+      <FormField control={form.control} name="yearlyObjective" render={({ field }) => (
         <FormItem>
-          <FormLabel className={labelClass}>Ce te-ar convinge să investești într-o soluție care unifică totul?</FormLabel>
-          <FormControl>
-            <Textarea {...field} className={`${inputClass} min-h-[60px]`} placeholder="Descrie pe scurt..." />
-          </FormControl>
-        </FormItem>
-      )} />
-      <FormField control={form.control} name="budget" render={({ field }) => (
-        <FormItem>
-          <FormLabel className={labelClass}>Bugetul aproximativ pentru o soluție?</FormLabel>
+          <FormLabel className={labelClass}>Care este obiectivul principal pentru acest an?</FormLabel>
           <Select onValueChange={field.onChange} value={field.value}>
             <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
-            <SelectContent className="bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]">
-              {["Sub 10.000 €", "10.000 – 25.000 €", "25.000 – 50.000 €", "Peste 50.000 €", "Nu știu încă"].map((opt) => (
-                <SelectItem key={opt} value={opt} className="text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 focus:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_1px_3px_rgba(0,0,0,0.3)] cursor-pointer transition-all duration-150">{opt}</SelectItem>
+            <SelectContent className={selectContentClass}>
+              {["Creștere cifră de afaceri", "Creștere profit / marjă", "Reducere costuri operaționale", "Scalare fără angajări", "Pregătire pentru vânzarea firmei"].map((opt) => (
+                <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </FormItem>
+      )} />
+
+      <FormField control={form.control} name="investmentRecovery" render={({ field }) => (
+        <FormItem>
+          <FormLabel className={labelClass}>Câte luni ați putea recupera o investiție de 15.000–50.000 €?</FormLabel>
+          <Select onValueChange={field.onChange} value={field.value}>
+            <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
+            <SelectContent className={selectContentClass}>
+              {["Sub 3 luni", "3–6 luni", "6–12 luni", "Peste 12 luni", "Nu știu"].map((opt) => (
+                <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </FormItem>
+      )} />
+
+      <FormField control={form.control} name="previousDigitalization" render={({ field }) => (
+        <FormItem>
+          <FormLabel className={labelClass}>Ați mai investit în digitalizare / software înainte?</FormLabel>
+          <Select onValueChange={field.onChange} value={field.value}>
+            <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
+            <SelectContent className={selectContentClass}>
+              {["Nu, niciodată", "Da, cu rezultate bune", "Da, și nu a funcționat cum speram", "Da, dar echipa nu l-a adoptat"].map((opt) => (
+                <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </FormItem>
+      )} />
+
+      <FormField control={form.control} name="employeesAvoidable" render={({ field }) => (
+        <FormItem>
+          <FormLabel className={labelClass}>Câți angajați noi ați putea evita prin automatizare?</FormLabel>
+          <Select onValueChange={field.onChange} value={field.value}>
+            <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
+            <SelectContent className={selectContentClass}>
+              {["0", "1–2", "3–5", "Peste 5"].map((opt) => (
+                <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -569,6 +744,65 @@ function Step5({ form, inputClass, labelClass, isSubmitting }: StepProps & { isS
   );
 }
 
+// ── STEP 5: Specific industrie (opționale, condiționate) ──
+function Step5({ form, inputClass, labelClass }: StepProps & { isSubmitting: boolean }) {
+  const selectedIndustry = form.watch("industryType");
+  const group = selectedIndustry ? industryGroups[selectedIndustry] : null;
+
+  return (
+    <div className="space-y-4">
+      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+        Specific pe industria ta
+      </h3>
+      <p className="text-white/40 text-xs">Selectează industria pentru întrebări personalizate — opțional.</p>
+
+      <FormField control={form.control} name="industryType" render={({ field }) => (
+        <FormItem>
+          <FormLabel className={labelClass}>Selectează industria ta</FormLabel>
+          <Select onValueChange={(val) => {
+            field.onChange(val);
+            form.setValue("industryQ1", "");
+            form.setValue("industryQ2", "");
+            form.setValue("industryQ3", "");
+          }} value={field.value}>
+            <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
+            <SelectContent className={selectContentClass}>
+              {Object.entries(industryGroups).map(([key, g]) => (
+                <SelectItem key={key} value={key} className={selectItemClass}>{g.label}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </FormItem>
+      )} />
+
+      {group && (
+        <div className="space-y-4 pt-2 border-t border-yellow-500/10">
+          <p className="text-yellow-400/70 text-sm font-medium">{group.label}</p>
+          {group.questions.map((q, idx) => {
+            const fieldName = `industryQ${idx + 1}` as "industryQ1" | "industryQ2" | "industryQ3";
+            return (
+              <FormField key={idx} control={form.control} name={fieldName} render={({ field }) => (
+                <FormItem>
+                  <FormLabel className={labelClass}>{q.label}</FormLabel>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <FormControl><SelectTrigger className={inputClass}><SelectValue placeholder="Selectează..." /></SelectTrigger></FormControl>
+                    <SelectContent className={selectContentClass}>
+                      {q.options.map((opt) => (
+                        <SelectItem key={opt} value={opt} className={selectItemClass}>{opt}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )} />
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── STEP 6: Rezervare Cal.com ──
 function Step6() {
   return (
     <div className="space-y-4">
@@ -588,10 +822,4 @@ function Step6() {
       </div>
     </div>
   );
-}
-
-interface StepProps {
-  form: ReturnType<typeof useForm<AuditFormValues>>;
-  inputClass: string;
-  labelClass: string;
 }

@@ -620,73 +620,136 @@ export type Database = {
       }
       "leadmagnet-audit-strategic": {
         Row: {
+          automation_tools: Json | null
+          automation_tools_other: string | null
+          backoffice_employees: string | null
           budget: string | null
           business_type: string | null
           business_type_other: string | null
           company_name: string
           created_at: string
+          cui: string | null
           daily_interactions: string | null
+          daily_orders: string | null
           email: string
+          employees_avoidable: string | null
+          erp_software: string | null
+          erp_software_other: string | null
           excel_count: string | null
           frustrations: string | null
           full_name: string
+          has_crm: string | null
+          has_website: string | null
           id: string
           impact_scale: number | null
+          industry_questions: Json | null
+          investment_recovery: string | null
+          main_operational_problem: string | null
           motivation: string | null
+          order_channels: Json | null
+          order_channels_other: string | null
           phone: string
           platforms: Json | null
           platforms_other: string | null
+          previous_digitalization: string | null
           revenue: string | null
+          role_in_company: string | null
           source: string | null
+          stock_tracking: string | null
           team_size: string | null
           time_lost: string | null
+          website_url: string | null
           weekly_quotes: string | null
+          weekly_repetitive_hours: string | null
+          yearly_objective: string | null
         }
         Insert: {
+          automation_tools?: Json | null
+          automation_tools_other?: string | null
+          backoffice_employees?: string | null
           budget?: string | null
           business_type?: string | null
           business_type_other?: string | null
           company_name: string
           created_at?: string
+          cui?: string | null
           daily_interactions?: string | null
+          daily_orders?: string | null
           email: string
+          employees_avoidable?: string | null
+          erp_software?: string | null
+          erp_software_other?: string | null
           excel_count?: string | null
           frustrations?: string | null
           full_name: string
+          has_crm?: string | null
+          has_website?: string | null
           id?: string
           impact_scale?: number | null
+          industry_questions?: Json | null
+          investment_recovery?: string | null
+          main_operational_problem?: string | null
           motivation?: string | null
+          order_channels?: Json | null
+          order_channels_other?: string | null
           phone: string
           platforms?: Json | null
           platforms_other?: string | null
+          previous_digitalization?: string | null
           revenue?: string | null
+          role_in_company?: string | null
           source?: string | null
+          stock_tracking?: string | null
           team_size?: string | null
           time_lost?: string | null
+          website_url?: string | null
           weekly_quotes?: string | null
+          weekly_repetitive_hours?: string | null
+          yearly_objective?: string | null
         }
         Update: {
+          automation_tools?: Json | null
+          automation_tools_other?: string | null
+          backoffice_employees?: string | null
           budget?: string | null
           business_type?: string | null
           business_type_other?: string | null
           company_name?: string
           created_at?: string
+          cui?: string | null
           daily_interactions?: string | null
+          daily_orders?: string | null
           email?: string
+          employees_avoidable?: string | null
+          erp_software?: string | null
+          erp_software_other?: string | null
           excel_count?: string | null
           frustrations?: string | null
           full_name?: string
+          has_crm?: string | null
+          has_website?: string | null
           id?: string
           impact_scale?: number | null
+          industry_questions?: Json | null
+          investment_recovery?: string | null
+          main_operational_problem?: string | null
           motivation?: string | null
+          order_channels?: Json | null
+          order_channels_other?: string | null
           phone?: string
           platforms?: Json | null
           platforms_other?: string | null
+          previous_digitalization?: string | null
           revenue?: string | null
+          role_in_company?: string | null
           source?: string | null
+          stock_tracking?: string | null
           team_size?: string | null
           time_lost?: string | null
+          website_url?: string | null
           weekly_quotes?: string | null
+          weekly_repetitive_hours?: string | null
+          yearly_objective?: string | null
         }
         Relationships: []
       }

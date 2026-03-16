@@ -1,61 +1,75 @@
-# Plan: Restructurare completă formular Audit Strategic
 
-## Structura nouă — 6 pași
+# Redesign modern UI/UX pentru Business Dashboard
 
-### Pas 1 — Identificare și contact (toate obligatorii)
+## Rezumat
+Transformare completa a design-ului business dashboard-ului si a tuturor sub-paginilor cu un look premium, modern si distinctiv. Schimbarile includ: sidebar redesenat cu glassmorphism, stat cards cu gradient si animatii, loading skeleton, layout imbunatatit si consistenta vizuala pe toate paginile.
 
-- **CUI** (text)
-- **Prenume + Nume** (text)
-- **Email profesional** (email)
-- **Telefon / WhatsApp** (tel)
-- **Rolul tău în firmă** (dropdown): Fondator / CEO / Administrator, Director operațional, Director financiar, Manager, Alt rol
+## Ce se schimba
 
-### Pas 2 — Cum funcționează firma azi (opționale)
+### 1. Sidebar redesenat (`src/components/admin/Sidebar.tsx`)
+- Background cu efect glassmorphism (`backdrop-blur-xl`, gradient subtil)
+- Link-uri cu indicator activ pe stanga (bara colorata), nu doar culoare de fond
+- Iconite cu fundal gradient cand link-ul e activ
+- Grupare vizuala a link-urilor (sectiuni: "Principal", "Documente", "Financiar")
+- Hover animations cu tranzitii smooth
+- Logo-ul cu efect glow subtil
+- Buton de deconectare mutat la bottom cu separator
 
-- **Cum primiți comenzile?** (multi-select): Telefon, WhatsApp, Email, Formular online, Marketplace, Reprezentanți pe teren, Altul
-- **Comenzi zilnice** (dropdown): Sub 10, 10–50, 50–200, 200–500, Peste 500
-- **Angajați back-office** (dropdown): 1–2, 3–5, 6–10, Peste 10
-- **Cea mai mare problemă operațională** (single select): 6 opțiuni
-- **Ore/săpt pe sarcini repetitive** (dropdown): Sub 5h, 5–15h, 15–30h, 30–60h, Peste 60h
+### 2. Dashboard principal (`src/pages/business/BusinessDashboard.tsx`)
+- Greeting personalizat ("Buna dimineata/ziua/seara") cu data curenta
+- Stat cards cu gradient de fundal unic per card (nu toate la fel)
+- Iconite stat cards in cercuri colorate cu gradient
+- Micro-animatii la incarcare (staggered fade-in)
+- Sectiunea "Activitate Recenta" cu timeline vizual sau lista cu iconite
+- Layout mai aerisit cu spacing imbunatatit
 
-### Pas 3 — Tech Stack actual (opționale)
+### 3. Toate sub-paginile business (Invoices, Quotes, Proposals, Contracts, Clients, Payments, Leads, Calendar)
+- Header consistent cu breadcrumb subtil
+- Summary cards cu acelasi stil premium (gradient icons, hover lift effect)
+- Buton principal (CTA) cu stil gold/gradient conform identitatii vizuale
+- Card-urile cu `hover:border-purple-500/40` si `transition-all duration-300`
+- Loading state cu skeleton animated (inlocuieste textul "Se incarca...")
 
-- **ERP** (dropdown + câmp liber): Saga, WinMentor, SmartBill, Oblio, Odoo, SAP, Niciunul, Altul
-- **CRM** (single select): 4 opțiuni
-- **Urmărire stoc** (single select): 5 opțiuni
-- **Website activ** (URL + select): Da cu vânzări, Da fără vânzări, Nu
-- **Tool-uri automatizare/AI** (multi-select): ChatGPT/Claude, Zapier/Make, Power Automate, Niciun tool, Altul
+### 4. Componente globale noi
+- **`PageHeader`**: componenta reutilizabila cu titlu, subtitlu optional si actiune (buton)
+- **`StatCard`**: componenta reutilizabila cu gradient icon, valoare, label si trend indicator
+- **`PageShell`**: wrapper cu Sidebar + content area, elimina duplicarea layout-ului din fiecare pagina
 
-### Pas 4 — Context financiar (opționale)
+### 5. Stiluri noi
+- Adaugare clase utilitare in `index.css`:
+  - `.glass-card` - efect glassmorphism pentru carduri
+  - `.stat-gradient-*` - gradient-uri unice per tip de stat
+  - `.sidebar-glow` - efect glow pentru sidebar-ul activ
 
-- **Obiectiv an** (single select): 5 opțiuni
-- **Recuperare investiție 15k–50k €** (single select): 4 opțiuni
-- **Investiție anterioară digitalizare** (single select): 4 opțiuni
-- **Angajați evitabili prin automatizare** (dropdown): 0, 1–2, 3–5, Peste 5
+## Detalii tehnice
 
-### Pas 5 — Specific industrie (opționale, condiționate)
+### Fisiere noi create:
+- `src/components/business/shared/PageShell.tsx` -- layout wrapper (Sidebar + auth check + content)
+- `src/components/business/shared/PageHeader.tsx` -- header reutilizabil
+- `src/components/business/shared/StatCard.tsx` -- stat card premium
 
-Întrebări specifice afișate în funcție de tipul afacerii selectat la Pas 2/detectat din CAEN. Grupuri: Distribuție, Construcții, Servicii, Producție. Fiecare cu 2–3 întrebări dedicate.
+### Fisiere modificate:
+- `src/components/admin/Sidebar.tsx` -- redesign complet
+- `src/index.css` -- clase utilitare noi
+- `src/pages/business/BusinessDashboard.tsx` -- layout + cards premium
+- `src/pages/business/Invoices.tsx` -- adopt PageShell + StatCard
+- `src/pages/business/Quotes.tsx` -- adopt PageShell + StatCard
+- `src/pages/business/Proposals.tsx` -- adopt PageShell + StatCard
+- `src/pages/business/Contracts.tsx` -- adopt PageShell + StatCard
+- `src/pages/business/Clients.tsx` -- adopt PageShell
+- `src/pages/business/Payments.tsx` -- adopt PageShell + StatCard
+- `src/pages/business/Leads.tsx` -- adopt PageShell
+- `src/pages/business/Calendar.tsx` -- adopt PageShell
 
-### Pas 6 — Rezervare Cal.com (păstrat ca acum)
+### Identitate vizuala pastrata:
+- Background dark `#0F1117` / `#0a0e1a`
+- Accente purple/amber conform brandului
+- Fonturi Inter existente
+- Mobile-responsive cu prefixe `md:`
 
-## Modificări backend (migrație DB)
-
-Adăugare coloane noi în tabelul `leadmagnet-audit-strategic`:
-
-- `cui`, `role_in_company`, `order_channels` (jsonb), `order_channels_other`, `daily_orders`, `backoffice_employees`, `main_operational_problem`, `weekly_repetitive_hours`, `erp_software`, `erp_software_other`, `has_crm`, `stock_tracking`, `has_website`, `website_url`, `automation_tools` (jsonb), `automation_tools_other`, `yearly_objective`, `investment_recovery`, `previous_digitalization`, `employees_avoidable`, `industry_questions` (jsonb)
-
-Coloanele vechi rămân (backwards compatible) dar nu mai sunt utilizate activ.
-
-## Fișiere modificate
-
-1. `**src/components/website/AuditFormModal.tsx**` — rescrie schema Zod, stepFields, stepLabels, și toate cele 5 componente Step1–Step5
-2. **DB migration** — adaugă coloanele noi
-3. **Webhook payload** — actualizat cu noile câmpuri
-
-## Note
-
-- TOTAL_STEPS rămâne 6 (5 întrebări + 1 rezervare)
-- Validarea obligatorie doar pe Pas 1 (CUI, Nume, Email, Telefon, Rol)
-- Pașii 2–5 sunt opționali dar au mare impact asupra calității auditului
-- Pas 5 afișează întrebări condiționate pe baza selecției din câmpul „problemă operațională" sau tipul afacerii
+### Abordare:
+1. Creez componentele shared (PageShell, PageHeader, StatCard) cu stiluri premium
+2. Redesignez Sidebar-ul cu glassmorphism si grupari
+3. Refactorizez dashboard-ul principal cu noul design
+4. Actualizez fiecare sub-pagina sa foloseasca componentele noi
+5. Adaug animatii si clase CSS utilitare
