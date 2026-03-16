@@ -1,0 +1,23 @@
+
+ALTER TABLE public."leadmagnet-audit-strategic"
+  ADD COLUMN IF NOT EXISTS cui text,
+  ADD COLUMN IF NOT EXISTS role_in_company text,
+  ADD COLUMN IF NOT EXISTS order_channels jsonb,
+  ADD COLUMN IF NOT EXISTS order_channels_other text,
+  ADD COLUMN IF NOT EXISTS daily_orders text,
+  ADD COLUMN IF NOT EXISTS backoffice_employees text,
+  ADD COLUMN IF NOT EXISTS main_operational_problem text,
+  ADD COLUMN IF NOT EXISTS weekly_repetitive_hours text,
+  ADD COLUMN IF NOT EXISTS erp_software text,
+  ADD COLUMN IF NOT EXISTS erp_software_other text,
+  ADD COLUMN IF NOT EXISTS has_crm text,
+  ADD COLUMN IF NOT EXISTS stock_tracking text,
+  ADD COLUMN IF NOT EXISTS has_website text,
+  ADD COLUMN IF NOT EXISTS website_url text,
+  ADD COLUMN IF NOT EXISTS automation_tools jsonb,
+  ADD COLUMN IF NOT EXISTS automation_tools_other text,
+  ADD COLUMN IF NOT EXISTS yearly_objective text,
+  ADD COLUMN IF NOT EXISTS investment_recovery text,
+  ADD COLUMN IF NOT EXISTS previous_digitalization text,
+  ADD COLUMN IF NOT EXISTS employees_avoidable text,
+  ADD COLUMN IF NOT EXISTS industry_questions jsonb;
