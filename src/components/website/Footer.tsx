@@ -41,13 +41,13 @@ export const Footer = () => {
               <p>Email: contact@aiautomatizari.ro</p>
             </div>
             <div className="flex space-x-4">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">
                 <Github className="w-6 h-6" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">
                 <Linkedin className="w-6 h-6" />
               </a>
-              <a href="mailto:contact@aiautomatizari.ro" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">
+              <a href="mailto:contact@aiautomatizari.ro" aria-label="Trimite email" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">
                 <Mail className="w-6 h-6" />
               </a>
             </div>
