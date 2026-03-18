@@ -1,44 +1,45 @@
 
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
-import Index from './pages/Index';
 import Website from './pages/Website';
-import Services from './pages/Services';
-import AboutUs from './pages/AboutUs';
-import Portfolio from './pages/Portfolio';
-import Terms from './pages/Terms';
-import GDPR from './pages/GDPR';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import Cookies from './pages/Cookies';
-import Blog from './pages/Blog';
-import AdminBlog from './pages/admin/AdminBlog';
-import NewBlogPost from './pages/admin/NewBlogPost';
-import Categories from './pages/admin/Categories';
-import Comments from './pages/admin/Comments';
-import BlogAnalytics from './pages/admin/BlogAnalytics';
-import BlogSettings from './pages/admin/BlogSettings';
-import Dashboard from './pages/admin/Dashboard';
-import WhatsAppDemo from './pages/WhatsAppDemo';
-import ShowroomVSL from './pages/ShowroomVSL';
-import AuditGratuit from './pages/AuditGratuit';
-import Contact from './pages/Contact';
-import BusinessCard from './pages/BusinessCard';
-import LinkTree from './pages/LinkTree';
-import Auth from './pages/Auth';
-import BusinessDashboard from './pages/business/BusinessDashboard';
-import Invoices from './pages/business/Invoices';
-import Quotes from './pages/business/Quotes';
-import Proposals from './pages/business/Proposals';
-import Contracts from './pages/business/Contracts';
-import Clients from './pages/business/Clients';
-import Payments from './pages/business/Payments';
-import Calendar from './pages/business/Calendar';
-import ContractSignature from './pages/ContractSignature';
-import FidelizarePacienti from './pages/FidelizarePacienti';
-import CerereOferta from './pages/CerereOferta';
-import Leads from './pages/business/Leads';
 import { CookieConsent } from './components/CookieConsent';
+
+const Index = lazy(() => import('./pages/Index'));
+const Services = lazy(() => import('./pages/Services'));
+const AboutUs = lazy(() => import('./pages/AboutUs'));
+const Portfolio = lazy(() => import('./pages/Portfolio'));
+const Terms = lazy(() => import('./pages/Terms'));
+const GDPR = lazy(() => import('./pages/GDPR'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const Cookies = lazy(() => import('./pages/Cookies'));
+const Blog = lazy(() => import('./pages/Blog'));
+const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
+const AdminBlog = lazy(() => import('./pages/admin/AdminBlog'));
+const NewBlogPost = lazy(() => import('./pages/admin/NewBlogPost'));
+const Categories = lazy(() => import('./pages/admin/Categories'));
+const Comments = lazy(() => import('./pages/admin/Comments'));
+const BlogAnalytics = lazy(() => import('./pages/admin/BlogAnalytics'));
+const BlogSettings = lazy(() => import('./pages/admin/BlogSettings'));
+const WhatsAppDemo = lazy(() => import('./pages/WhatsAppDemo'));
+const ShowroomVSL = lazy(() => import('./pages/ShowroomVSL'));
+const AuditGratuit = lazy(() => import('./pages/AuditGratuit'));
+const Contact = lazy(() => import('./pages/Contact'));
+const BusinessCard = lazy(() => import('./pages/BusinessCard'));
+const LinkTree = lazy(() => import('./pages/LinkTree'));
+const Auth = lazy(() => import('./pages/Auth'));
+const BusinessDashboard = lazy(() => import('./pages/business/BusinessDashboard'));
+const Invoices = lazy(() => import('./pages/business/Invoices'));
+const Quotes = lazy(() => import('./pages/business/Quotes'));
+const Proposals = lazy(() => import('./pages/business/Proposals'));
+const Contracts = lazy(() => import('./pages/business/Contracts'));
+const Clients = lazy(() => import('./pages/business/Clients'));
+const Payments = lazy(() => import('./pages/business/Payments'));
+const Calendar = lazy(() => import('./pages/business/Calendar'));
+const ContractSignature = lazy(() => import('./pages/ContractSignature'));
+const FidelizarePacienti = lazy(() => import('./pages/FidelizarePacienti'));
+const CerereOferta = lazy(() => import('./pages/CerereOferta'));
+const Leads = lazy(() => import('./pages/business/Leads'));
 
 const App = () => {
   useEffect(() => {
@@ -51,6 +52,7 @@ const App = () => {
 
   return (
     <Router>
+      <Suspense fallback={null}>
         <Routes>
           <Route path="/acasă" element={<Index />} />
           <Route path="/" element={<Website />} />
@@ -90,11 +92,11 @@ const App = () => {
           <Route path="/showroom-vsl" element={<ShowroomVSL />} />
           <Route path="/cerere-oferta" element={<CerereOferta />} />
         </Routes>
-        <CookieConsent />
-        <Toaster />
-      </Router>
+      </Suspense>
+      <CookieConsent />
+      <Toaster />
+    </Router>
   );
 };
 
 export default App;
-
