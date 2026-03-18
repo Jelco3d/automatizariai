@@ -20,11 +20,11 @@ const Website = () => {
       <Navigation onOpenAuditModal={openAuditModal} />
 
       {/* Animated background orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-yellow-500/[0.07] rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute top-1/2 -left-40 w-[400px] h-[400px] bg-amber-500/[0.05] rounded-full blur-[100px] animate-pulse delay-1000" />
-        <div className="absolute bottom-40 right-1/4 w-[300px] h-[300px] bg-yellow-400/[0.04] rounded-full blur-[80px] animate-pulse delay-500" />
-        <div className="absolute top-1/4 left-1/3 w-[200px] h-[200px] bg-amber-400/[0.03] rounded-full blur-[60px] animate-pulse delay-700" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ contain: 'layout style paint' }}>
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-yellow-500/[0.07] rounded-full blur-[120px] animate-orb-pulse" style={{ willChange: 'transform' }} />
+        <div className="absolute top-1/2 -left-40 w-[400px] h-[400px] bg-amber-500/[0.05] rounded-full blur-[100px] animate-orb-pulse" style={{ willChange: 'transform', animationDelay: '1s' }} />
+        <div className="absolute bottom-40 right-1/4 w-[300px] h-[300px] bg-yellow-400/[0.04] rounded-full blur-[80px] animate-orb-pulse" style={{ willChange: 'transform', animationDelay: '0.5s' }} />
+        <div className="absolute top-1/4 left-1/3 w-[200px] h-[200px] bg-amber-400/[0.03] rounded-full blur-[60px] animate-orb-pulse" style={{ willChange: 'transform', animationDelay: '0.7s' }} />
       </div>
 
       <main>

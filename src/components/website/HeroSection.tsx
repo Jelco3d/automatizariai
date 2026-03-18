@@ -26,18 +26,13 @@ export const HeroSection = ({ onOpenAuditModal }: HeroSectionProps) => {
           </span>
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
-          className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 max-w-4xl mx-auto text-white tracking-tight">
-          
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 max-w-4xl mx-auto text-white tracking-tight">
           Ajut Antreprenorii Din România Să Implementeze{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-amber-400 to-orange-500">
             Infrastructura Internă, Agenți AI
           </span>{" "}
           Și Automatizări Inteligente
-        </motion.h1>
+        </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
