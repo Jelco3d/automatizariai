@@ -36,6 +36,7 @@ export function Navigation({ onOpenAuditModal }: NavigationProps) {
           <Button
             variant="outline"
             size="icon"
+            aria-label="Deschide meniu navigare"
             className="bg-white/[0.05] backdrop-blur-sm border-yellow-400/30 hover:bg-yellow-400/10 hover:border-yellow-400/50 absolute right-4 top-1/2 -translate-y-1/2 transition-all duration-300"
           >
             <Menu className="h-5 w-5 text-yellow-400" />

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* Fonts loaded async in index.html */
 
 @tailwind base;
 @tailwind components;
@@ -79,15 +79,16 @@
 
 @keyframes glow-pulse {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(250, 204, 21, 0.3), 0 0 40px rgba(250, 204, 21, 0.1);
+    filter: drop-shadow(0 0 20px rgba(250, 204, 21, 0.3)) drop-shadow(0 0 40px rgba(250, 204, 21, 0.1));
   }
   50% {
-    box-shadow: 0 0 30px rgba(250, 204, 21, 0.5), 0 0 60px rgba(250, 204, 21, 0.2);
+    filter: drop-shadow(0 0 30px rgba(250, 204, 21, 0.5)) drop-shadow(0 0 60px rgba(250, 204, 21, 0.2));
   }
 }
 
 .animate-glow-pulse {
   animation: glow-pulse 2s ease-in-out infinite;
+  will-change: filter;
 }
 
 .glass {
@@ -102,8 +103,8 @@
 }
 
 @keyframes logo-glow {
-  0%, 100% { box-shadow: 0 0 15px rgba(250, 204, 21, 0.3), 0 0 30px rgba(250, 204, 21, 0.1), inset 0 -3px 6px rgba(0,0,0,0.3), inset 0 3px 6px rgba(255,255,255,0.2); }
-  50% { box-shadow: 0 0 25px rgba(250, 204, 21, 0.5), 0 0 50px rgba(250, 204, 21, 0.2), inset 0 -3px 6px rgba(0,0,0,0.3), inset 0 3px 6px rgba(255,255,255,0.2); }
+  0%, 100% { filter: drop-shadow(0 0 15px rgba(250, 204, 21, 0.3)) drop-shadow(0 0 30px rgba(250, 204, 21, 0.1)); }
+  50% { filter: drop-shadow(0 0 25px rgba(250, 204, 21, 0.5)) drop-shadow(0 0 50px rgba(250, 204, 21, 0.2)); }
 }
 
 @keyframes logo-shimmer {
@@ -113,6 +114,7 @@
 
 .logo-3d {
   animation: logo-float 3s ease-in-out infinite, logo-glow 2s ease-in-out infinite;
+  will-change: filter, transform;
 }
 
 .logo-3d::after {
@@ -127,8 +129,8 @@
 
 /* 3D Gold Button */
 @keyframes btn-shimmer {
-  0%, 100% { left: -100%; }
-  50% { left: 100%; }
+  0%, 100% { transform: translateX(-200%); }
+  50% { transform: translateX(200%); }
 }
 
 .btn-3d-gold {
@@ -166,12 +168,13 @@
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
+  left: 0;
   width: 50%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
   animation: btn-shimmer 3s ease-in-out infinite;
   pointer-events: none;
+  will-change: transform;
 }
 
 /* Glass Card */
