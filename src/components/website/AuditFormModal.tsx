@@ -805,6 +805,20 @@ function Step5({ form, inputClass, labelClass }: StepProps & { isSubmitting: boo
 
 // ── STEP 6: Rezervare Cal.com ──
 function Step6() {
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({ namespace: "test" });
+      cal("ui", {
+        cssVarsPerTheme: {
+          light: { "cal-brand": "#292929" },
+          dark: { "cal-brand": "#de9f1b" },
+        },
+        hideEventTypeDetails: false,
+        layout: "month_view",
+      });
+    })();
+  }, []);
+
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
@@ -814,11 +828,11 @@ function Step6() {
         Alege un slot disponibil pentru auditul tău strategic gratuit de 20 de minute.
       </p>
       <div className="rounded-xl overflow-hidden border border-yellow-500/20" style={{ height: "450px" }}>
-        <iframe
-          src="https://cal.com/ai-automatizari-zjwxgt/rezervare-consultatie?embed=true&theme=dark&layout=month_view"
-          className="w-full h-full border-0"
-          title="Rezervare consultație"
-          allow="payment"
+        <Cal
+          namespace="test"
+          calLink="jelco-erdelean-ai-automatizari/test"
+          style={{ width: "100%", height: "100%", overflow: "scroll" }}
+          config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true" }}
         />
       </div>
     </div>
