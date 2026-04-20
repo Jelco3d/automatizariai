@@ -508,44 +508,6 @@ const ClientPortalSystem = () => {
           </motion.div>
         </section>
 
-        {/* ABOUT */}
-        <section className="container mx-auto px-4 py-12 md:py-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto"
-          >
-            <Card className="bg-white/[0.03] border border-white/[0.08]">
-              <CardContent className="p-6 md:p-10">
-                <h2 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400 mb-6">
-                  Despre mine
-                </h2>
-                <div className="space-y-4 text-white/70 leading-relaxed">
-                  <p>
-                    Sunt <span className="text-white font-semibold">Erdelean Jelco</span>. Am
-                    crescut cu tata și bunica. Am construit o afacere cu 20 de angajați în
-                    Spania — pierdută în pandemie. Ani întregi am încercat să găsesc o cale de
-                    a construi online fără să știu să scriu cod.
-                  </p>
-                  <p>
-                    Am găsit-o în <span className="text-yellow-400 font-semibold">AI</span>.
-                  </p>
-                  <p>
-                    Azi construiesc pentru ateliere românești exact ce mi-ar fi plăcut să am
-                    când aveam afacerea în Spania: sisteme care îți dau timp înapoi și opresc
-                    pierderea de comenzi.
-                  </p>
-                  <p className="text-white/90 italic">
-                    Nu sunt „AI guru.” Sunt antreprenor care a pierdut o afacere și nu vreau să
-                    pierzi tu una.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </section>
 
         {/* FINAL CTA */}
         <section className="container mx-auto px-4 py-16 md:py-24">
