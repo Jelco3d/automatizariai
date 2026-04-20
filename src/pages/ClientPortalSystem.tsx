@@ -507,61 +507,6 @@ const ClientPortalSystem = () => {
             </Accordion>
           </motion.div>
         </section>
-
-
-        {/* FINAL CTA */}
-        <section className="container mx-auto px-4 py-16 md:py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-400/10 border border-red-400/30 mb-6">
-              <AlertTriangle className="w-4 h-4 text-red-400" />
-              <span className="text-red-400 text-sm font-semibold">FINAL CTA</span>
-            </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Programează un apel{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
-                gratuit de 15 minute
-              </span>
-            </h2>
-            <p className="text-white/60 text-lg mb-10">
-              Aflăm dacă sistemul se potrivește afacerii tale. Dacă nu — îți recomand alte 3
-              soluții gratis.
-            </p>
-
-            <Button
-              onClick={openModal}
-              className="btn-3d-gold px-6 py-6 md:px-10 md:py-7 h-auto text-base md:text-lg rounded-xl animate-glow-pulse"
-            >
-              <Calendar className="mr-2 w-5 h-5" />
-              Rezervă slot acum
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <p className="text-white/30 text-sm mt-4">
-              Fără costuri ascunse. Fără obligații.
-            </p>
-
-            <div className="mt-12 p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] text-left">
-              <p className="text-white/70 leading-relaxed">
-                <span className="text-yellow-400 font-bold">P.S.</span> Dacă n-ai apelat încă,
-                calculează: câte apeluri ai primit azi cu „gata comanda mea?” Câte comenzi ai
-                pierdut săptămâna asta? Înmulțește cu 52. Acela e costul inacțiunii tale.{" "}
-                <span className="text-white font-semibold">€6.500 pare mult.</span>{" "}
-                <span className="text-yellow-400 font-semibold">Pierderea e mai mare.</span>
-              </p>
-            </div>
-
-            <div className="mt-10 flex items-center justify-center gap-2 text-white/50 text-sm">
-              <TrendingUp className="w-4 h-4 text-yellow-400" />
-              Ultimul client: <span className="text-yellow-400 font-semibold">€7K-€10K/lună</span>{" "}
-              recuperați în 30 zile
-            </div>
-          </motion.div>
-        </section>
       </main>
 
       <Suspense fallback={null}>
