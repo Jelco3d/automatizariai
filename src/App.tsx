@@ -94,6 +94,7 @@ const App = () => {
           <Route path="/fidelizare-pacienti" element={<FidelizarePacienti />} />
           <Route path="/showroom-vsl" element={<ShowroomVSL />} />
           <Route path="/cerere-oferta" element={<CerereOferta />} />
+          <Route path="/client-portal-system" element={<ClientPortalSystem />} />
         </Routes>
       </Suspense>
       <CookieConsent />
