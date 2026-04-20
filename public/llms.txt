@@ -1,0 +1,51 @@
+# AI Automatizări
+
+> Implementăm automatizări cu AI pentru IMM-uri din România în **5 zile sau mai puțin**. Recuperează 20+ ore pe săptămână din taskuri repetitive — emailuri, CRM, oferte, facturare, suport clienți.
+
+AI Automatizări este o companie din **Timișoara, România**, fondată de **Erdelean Jelco**. Proiectăm și implementăm fluxuri de automatizare cu inteligență artificială pentru afaceri mici și mijlocii. Lucrăm cu founderi, operations managers și agenții digitale care vor să scaleze fără angajări suplimentare.
+
+## Pentru cine
+
+- Founderi de IMM-uri (5-30 angajați) din servicii, e-commerce, consultanță
+- Operations managers din companii 30-150 angajați (logistică, contabilitate, HR, legal tech)
+- Agenții digitale care vor să adauge automatizare AI în portofoliu
+- Clinici medicale și cabinete care vor să-și fidelizeze pacienții
+
+## Ce facem
+
+- [Servicii de automatizare AI](https://aiautomatizari.ro/services): portofoliu complet
+- [Audit gratuit](https://aiautomatizari.ro/audit-gratuit): analiză gratuită a proceselor tale pentru a identifica oportunități de automatizare
+- [Cerere ofertă](https://aiautomatizari.ro/cerere-oferta): ofertă personalizată pentru proiectul tău
+- [WhatsApp AI Demo](https://aiautomatizari.ro/whatsapp-demo): demo chatbot WhatsApp Business cu AI
+- [Fidelizare pacienți](https://aiautomatizari.ro/fidelizare-pacienti): automatizare fidelizare pentru clinici și cabinete medicale
+
+## Companie
+
+- [Despre noi](https://aiautomatizari.ro/about): echipă, misiune, abordare
+- [Portofoliu](https://aiautomatizari.ro/portfolio): proiecte realizate și studii de caz
+- [Blog](https://aiautomatizari.ro/blog): articole despre automatizare AI, GEO/AEO, studii de caz
+- [Contact](https://aiautomatizari.ro/contact): formular contact
+
+## Diferențiatori
+
+- **Timp de implementare: 5 zile sau mai puțin** pentru prima automatizare
+- **Focus local**: servim piața din România, cunoaștem integrările locale (Smartbill, FacturaImm, RoMobil, etc.)
+- **Stack modern**: AI (Claude, GPT), n8n, Supabase, integrări custom
+- **Transparență**: audit gratuit înainte de orice angajament
+
+## Contact
+
+- **Email**: erdelean@aiautomatizari.ro
+- **Locație**: Timișoara, România
+- **Limba**: Română (engleza disponibilă la cerere)
+
+## Legal
+
+- [Termeni și condiții](https://aiautomatizari.ro/terms)
+- [Politică de confidențialitate](https://aiautomatizari.ro/privacy)
+- [GDPR](https://aiautomatizari.ro/gdpr)
+- [Politică cookies](https://aiautomatizari.ro/cookies)
+
+---
+
+Ultima actualizare: 2026-04-20
