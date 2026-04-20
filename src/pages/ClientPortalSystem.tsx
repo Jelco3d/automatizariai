@@ -123,17 +123,15 @@ const ClientPortalSystem = () => {
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
   const openModal = () => setIsAuditModalOpen(true);
 
+  useEffect(() => {
+    document.title = "Portal Clienți + WhatsApp Automation | 14 zile, ROI 60 zile";
+    const meta = document.querySelector('meta[name="description"]');
+    const desc = "Portal clienți + WhatsApp automation pentru ateliere cu producție la comandă. Livrat în 14 zile. ROI în mai puțin de 60 de zile sau returnez banii.";
+    if (meta) meta.setAttribute("content", desc);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#0a0e1a] text-white overflow-hidden relative">
-      <Helmet>
-        <title>Portal Clienți + WhatsApp Automation | 14 zile, ROI 60 zile</title>
-        <meta
-          name="description"
-          content="Portal clienți + WhatsApp automation pentru ateliere cu producție la comandă. Livrat în 14 zile. ROI în mai puțin de 60 de zile sau returnez banii."
-        />
-        <link rel="canonical" href="https://automatizariai.lovable.app/client-portal-system" />
-      </Helmet>
-
       <Navigation onOpenAuditModal={openModal} />
 
       {/* Background orbs */}
