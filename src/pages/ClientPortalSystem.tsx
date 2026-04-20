@@ -131,7 +131,7 @@ const ClientPortalSystem = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0a0e1a] text-white overflow-hidden relative">
+    <div className="dark min-h-screen bg-[#0a0e1a] text-white overflow-hidden relative">
       <Navigation onOpenAuditModal={openModal} />
 
       {/* Background orbs */}
