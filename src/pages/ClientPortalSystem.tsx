@@ -317,12 +317,12 @@ const ClientPortalSystem = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-yellow-400/10 to-amber-500/5 border border-yellow-400/40">
+              <Card className="bg-gradient-to-br from-yellow-400/20 to-amber-500/10 border border-yellow-400/50">
                 <CardContent className="p-6 md:p-8">
-                  <h3 className="text-xl font-bold text-yellow-400 mb-4 flex items-center gap-2">
+                  <h3 className="text-xl font-bold text-yellow-300 mb-4 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5" /> După (3 săptămâni)
                   </h3>
-                  <ul className="space-y-3 text-white/80">
+                  <ul className="space-y-3 text-white">
                     <li>✅ Apelurile „gata comanda?” au scăzut 100%</li>
                     <li>✅ Zero comenzi pierdute pe lună curentă</li>
                     <li>✅ €7.000-€10.000/lună recuperate în profit</li>
