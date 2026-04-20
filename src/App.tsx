@@ -41,6 +41,7 @@ const ContractSignature = lazy(() => import('./pages/ContractSignature'));
 const FidelizarePacienti = lazy(() => import('./pages/FidelizarePacienti'));
 const CerereOferta = lazy(() => import('./pages/CerereOferta'));
 const Leads = lazy(() => import('./pages/business/Leads'));
+const ClientPortalSystem = lazy(() => import('./pages/ClientPortalSystem'));
 
 const App = () => {
   useEffect(() => {
@@ -93,6 +94,7 @@ const App = () => {
           <Route path="/fidelizare-pacienti" element={<FidelizarePacienti />} />
           <Route path="/showroom-vsl" element={<ShowroomVSL />} />
           <Route path="/cerere-oferta" element={<CerereOferta />} />
+          <Route path="/client-portal-system" element={<ClientPortalSystem />} />
         </Routes>
       </Suspense>
       <CookieConsent />
