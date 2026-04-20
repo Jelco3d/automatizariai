@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import Website from './pages/Website';
 import { CookieConsent } from './components/CookieConsent';
+import { RouteSEO } from './components/seo/RouteSEO';
 
 const Index = lazy(() => import('./pages/Index'));
 const Services = lazy(() => import('./pages/Services'));
@@ -52,6 +53,7 @@ const App = () => {
 
   return (
     <Router>
+      <RouteSEO />
       <Suspense fallback={null}>
         <Routes>
           <Route path="/acasă" element={<Index />} />
