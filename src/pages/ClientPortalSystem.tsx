@@ -181,10 +181,10 @@ const ClientPortalSystem = () => {
             <div className="flex flex-col items-center gap-3">
               <Button
                 onClick={openModal}
-                className="btn-3d-gold px-6 py-5 md:px-10 md:py-7 h-auto text-base md:text-lg rounded-xl animate-glow-pulse"
+                className="btn-3d-gold px-4 py-3 md:px-10 md:py-7 h-auto text-sm md:text-lg rounded-xl animate-glow-pulse whitespace-normal text-center leading-tight max-w-full"
               >
-                Programează un apel de 15 minute — Gratuit
-                <ArrowRight className="ml-2 w-5 h-5" />
+                <span className="block">Programează un apel de 15 minute — Gratuit</span>
+                <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 inline-block flex-shrink-0" />
               </Button>
               <p className="text-white/40 text-sm">
                 Ultimul client a recuperat{" "}
