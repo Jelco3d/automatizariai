@@ -49,7 +49,7 @@ const Calendar = () => {
     <PageShell>
       <PageHeader
         title="Calendar Apeluri"
-        subtitle="Gestionează apelurile programate prin Cal.com"
+        subtitle="Gestionează apelurile programate prin Google Calendar"
         action={
           <Button onClick={() => syncBookings(selectedDate)} disabled={isSyncing} className="gap-2 glass-card border border-white/[0.08] hover:bg-white/[0.04] text-gray-300">
             <RefreshCw className={`h-4 w-4 ${isSyncing ? "animate-spin" : ""}`} />
