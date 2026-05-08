@@ -54,7 +54,7 @@ const App = () => {
 
   return (
     <Router>
-      <Suspense fallback={null}>
+      <Suspense fallback={<div className="min-h-screen bg-[#0a0e1a]" />}>
         <Routes>
           <Route path="/acasă" element={<Index />} />
           <Route path="/" element={<Website />} />
