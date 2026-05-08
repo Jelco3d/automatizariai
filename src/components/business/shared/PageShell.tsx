@@ -9,21 +9,41 @@ interface PageShellProps {
   loading?: boolean;
 }
 
+// Module-level cache so navigations between pages don't re-trigger the auth skeleton.
+let authChecked = false;
+
 export function PageShell({ children, loading = false }: PageShellProps) {
-  const [authLoading, setAuthLoading] = useState(true);
+  const [authLoading, setAuthLoading] = useState(!authChecked);
   const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!session) navigate("/auth");
-      setAuthLoading(false);
-    });
+    let mounted = true;
+
+    if (!authChecked) {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (!mounted) return;
+        if (!session) {
+          navigate("/auth");
+          return;
+        }
+        authChecked = true;
+        setAuthLoading(false);
+      });
+    }
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (!session) navigate("/auth");
+      if (!session) {
+        authChecked = false;
+        navigate("/auth");
+      } else {
+        authChecked = true;
+      }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, [navigate]);
 
   if (authLoading || loading) {
