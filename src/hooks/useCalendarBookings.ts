@@ -53,7 +53,7 @@ export const useCalendarBookings = (date?: Date) => {
   const syncMutation = useMutation({
     mutationFn: async (syncDate?: Date) => {
       const { data, error } = await supabase.functions.invoke(
-        "sync-calcom-bookings",
+        "sync-google-calendar",
         {
           body: { date: (syncDate || targetDate).toISOString() },
         }
@@ -66,7 +66,7 @@ export const useCalendarBookings = (date?: Date) => {
       queryClient.invalidateQueries({ queryKey: ["calendar-bookings"] });
       toast({
         title: "Sincronizare reușită",
-        description: `${data.count || 0} apeluri sincronizate cu Cal.com`,
+        description: `${data.count || 0} apeluri sincronizate cu Google Calendar`,
       });
     },
     onError: (error: Error) => {
