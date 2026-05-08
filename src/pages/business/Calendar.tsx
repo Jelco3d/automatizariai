@@ -12,36 +12,14 @@ import { PageShell } from "@/components/business/shared/PageShell";
 import { PageHeader } from "@/components/business/shared/PageHeader";
 
 const Calendar = () => {
-  const navigate = useNavigate();
-  const [isInitLoading, setIsInitLoading] = useState(true);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  
+
   const { bookings, todaysBookings, activeBooking, upcomingBooking, isLoading: isLoadingBookings, syncBookings, isSyncing } = useCalendarBookings(selectedDate);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        navigate("/auth");
-      } else {
-        setIsInitLoading(false);
-        syncBookings(new Date());
-      }
-    };
-    checkAuth();
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (!session) navigate("/auth");
-    });
-    return () => subscription.unsubscribe();
-  }, [navigate, syncBookings]);
-
-  if (isInitLoading) {
-    return (
-      <PageShell loading={true}>
-        <div />
-      </PageShell>
-    );
-  }
+    syncBookings(new Date());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const bookingDates = bookings.map(b => new Date(b.start_time));
 
