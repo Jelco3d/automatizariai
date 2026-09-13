@@ -131,7 +131,7 @@ const Webinar = () => {
               AI Automatizări
             </a>
             <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
-              <span className="h-2 w-2 rounded-full bg-accent motion-safe:animate-pulse" />
+              <span className="h-2 w-2 rounded-full bg-accent" />
               Sesiune live
             </div>
           </div>
