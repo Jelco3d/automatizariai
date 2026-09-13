@@ -753,6 +753,39 @@ export type Database = {
         }
         Relationships: []
       }
+      page_leads: {
+        Row: {
+          created_at: string
+          email: string
+          extra: Json
+          full_name: string
+          id: string
+          phone: string | null
+          source: string
+          source_path: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          extra?: Json
+          full_name: string
+          id?: string
+          phone?: string | null
+          source?: string
+          source_path?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          extra?: Json
+          full_name?: string
+          id?: string
+          phone?: string | null
+          source?: string
+          source_path?: string | null
+        }
+        Relationships: []
+      }
       payable_invoices: {
         Row: {
           created_at: string | null
