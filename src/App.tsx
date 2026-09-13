@@ -42,6 +42,7 @@ const FidelizarePacienti = lazy(() => import('./pages/FidelizarePacienti'));
 const CerereOferta = lazy(() => import('./pages/CerereOferta'));
 const Leads = lazy(() => import('./pages/business/Leads'));
 const ClientPortalSystem = lazy(() => import('./pages/ClientPortalSystem'));
+const Webinar = lazy(() => import('./pages/Webinar'));
 
 const App = () => {
   useEffect(() => {
@@ -95,6 +96,7 @@ const App = () => {
           <Route path="/showroom-vsl" element={<ShowroomVSL />} />
           <Route path="/cerere-oferta" element={<CerereOferta />} />
           <Route path="/client-portal-system" element={<ClientPortalSystem />} />
+          <Route path="/webinar-afacere-autonoma" element={<Webinar />} />
         </Routes>
       </Suspense>
       <CookieConsent />

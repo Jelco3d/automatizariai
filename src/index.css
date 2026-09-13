@@ -225,3 +225,58 @@
 .sidebar-section-label {
   @apply text-[10px] uppercase tracking-[0.15em] font-semibold text-gray-600 px-3 mb-1.5;
 }
+
+@layer base {
+  .webinar-theme {
+    --background: 217 50% 12%;
+    --foreground: 40 30% 95%;
+    --card: 216 42% 15%;
+    --card-foreground: 40 30% 95%;
+    --popover: 216 42% 15%;
+    --popover-foreground: 40 30% 95%;
+    --primary: 36 87% 59%;
+    --primary-foreground: 217 50% 12%;
+    --secondary: 216 31% 20%;
+    --secondary-foreground: 40 30% 95%;
+    --muted: 216 31% 20%;
+    --muted-foreground: 215 20% 56%;
+    --accent: 188 76% 61%;
+    --accent-foreground: 217 50% 12%;
+    --destructive: 0 72% 65%;
+    --destructive-foreground: 217 50% 12%;
+    --border: 207 36% 28%;
+    --input: 207 36% 28%;
+    --ring: 188 76% 61%;
+  }
+}
+
+.webinar-grid {
+  background-image:
+    linear-gradient(hsl(var(--border) / 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.35) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+@keyframes webinar-entry {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.webinar-entry {
+  animation: webinar-entry 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .webinar-entry {
+    animation: none;
+  }
+
+  .webinar-theme *,
+  .webinar-theme *::before,
+  .webinar-theme *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
