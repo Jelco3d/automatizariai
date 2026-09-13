@@ -1,8 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Bot, Check, Loader2, Mail, MessageSquareText, Radio, Users } from "lucide-react";
+import {
+  Bot,
+  Check,
+  Loader2,
+  Mail,
+  MessageSquareText,
+  Radio,
+  Users,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -47,9 +56,9 @@ const learningPoints = [
   },
   {
     icon: Bot,
-    title: "Cum folosești un bot AI pentru clienți, comunicare și livrare",
+    title: "Cum folosești agenți AI pentru clienți, comunicare și livrare",
     description:
-      "Îți arăt live cum Grok găsește oportunități, poartă conversațiile și coordonează munca de la cap la coadă.",
+      "Îți arăt live cum agenții AI găsesc oportunități, poartă conversațiile și coordonează munca de la cap la coadă.",
   },
   {
     icon: Users,
@@ -61,6 +70,7 @@ const learningPoints = [
 
 const Webinar = () => {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const form = useForm<RegistrationValues>({
     resolver: zodResolver(registrationSchema),
@@ -75,7 +85,7 @@ const Webinar = () => {
     document.title = "Webinar gratuit | Afacere care rulează singură";
     description?.setAttribute(
       "content",
-      "Webinar live gratuit: construiește o afacere autonomă condusă de un bot AI care găsește clienți și coordonează livrarea."
+      "Webinar live gratuit: construiește o afacere autonomă condusă de agenți AI care găsesc clienți și coordonează livrarea."
     );
 
     return () => {
@@ -84,9 +94,27 @@ const Webinar = () => {
     };
   }, []);
 
-  const scrollToRegistration = () => {
-    document.getElementById("inscriere")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+  const openModal = useCallback(() => setIsModalOpen(true), []);
+  const closeModal = useCallback(() => {
+    if (status !== "sending") setIsModalOpen(false);
+  }, [status]);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isModalOpen) closeModal();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isModalOpen, closeModal]);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => document.body.classList.remove("overflow-hidden");
+  }, [isModalOpen]);
 
   const onSubmit = async (values: RegistrationValues) => {
     const validated = registrationSchema.safeParse(values);
@@ -118,6 +146,94 @@ const Webinar = () => {
     }
   };
 
+  const resetForm = () => {
+    setStatus("idle");
+    form.reset();
+  };
+
+  const renderForm = () => (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5" noValidate>
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="font-mono text-xs text-foreground">Nume</FormLabel>
+              <FormControl>
+                <Input
+                  autoComplete="name"
+                  maxLength={100}
+                  placeholder="Numele tău"
+                  className="h-12 rounded-sm border-border bg-background text-foreground placeholder:text-muted-foreground focus-visible:ring-accent"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="font-mono text-xs text-foreground">Email</FormLabel>
+              <FormControl>
+                <Input
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  maxLength={255}
+                  placeholder="nume@email.ro"
+                  className="h-12 rounded-sm border-border bg-background text-foreground placeholder:text-muted-foreground focus-visible:ring-accent"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="whatsapp"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="font-mono text-xs text-foreground">Număr WhatsApp</FormLabel>
+              <FormControl>
+                <Input
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  maxLength={20}
+                  placeholder="+40 7XX XXX XXX"
+                  className="h-12 rounded-sm border-border bg-background text-foreground placeholder:text-muted-foreground focus-visible:ring-accent"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {status === "error" && (
+          <p className="border-l-2 border-destructive bg-destructive/10 p-3 text-sm text-destructive" role="alert">
+            Înscrierea nu a putut fi trimisă. Te rugăm să încerci din nou în curând.
+          </p>
+        )}
+
+        <Button
+          type="submit"
+          disabled={status === "sending"}
+          className="h-12 w-full rounded-sm bg-primary text-base font-bold text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring"
+        >
+          {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
+          Rezervă-ți locul
+        </Button>
+      </form>
+    </Form>
+  );
+
   return (
     <div className="webinar-theme min-h-screen overflow-hidden bg-background text-foreground">
       <main className="webinar-entry">
@@ -146,12 +262,12 @@ const Webinar = () => {
                 Cum construiești o afacere care rulează singură
               </h1>
               <p className="mt-7 max-w-3xl text-base leading-relaxed text-muted-foreground md:text-xl">
-                Webinar live unde construiesc, chiar în timpul sesiunii, o afacere autonomă (agenție de marketing sau video editing) condusă de un bot AI — și îți arăt exact cum poți face același lucru.
+                Webinar live unde construiesc, chiar în timpul sesiunii, o afacere autonomă (agenție de marketing sau video editing) condusă de agenți AI — și îți arăt exact cum poți face același lucru.
               </p>
-              <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+              <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                 <Button
                   type="button"
-                  onClick={scrollToRegistration}
+                  onClick={openModal}
                   className="h-auto min-h-12 w-full rounded-sm bg-primary px-6 py-3.5 text-base font-bold text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring sm:w-auto"
                 >
                   Rezervă-ți locul gratuit
@@ -159,6 +275,13 @@ const Webinar = () => {
                 <p className="font-mono text-xs leading-relaxed text-muted-foreground sm:max-w-56">
                   Durează 45 de minute, e live, nu e o reluare.
                 </p>
+              </div>
+              <div className="mt-6 inline-flex items-center gap-3 border border-accent/30 bg-accent/10 px-4 py-2.5 font-mono text-xs text-accent">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
+                </span>
+                100 de locuri disponibile gratuit. Se ocupă în ordinea înscrierii.
               </div>
             </div>
 
@@ -176,7 +299,7 @@ const Webinar = () => {
                 <circle cx="72" cy="330" r="8" fill="currentColor" />
               </svg>
               <div className="absolute left-[8%] top-[18%] bg-background px-2 py-1 font-mono text-[11px] text-foreground">Cerere</div>
-              <div className="absolute left-[39%] top-[7%] bg-background px-2 py-1 font-mono text-[11px] text-foreground">Grok AI</div>
+              <div className="absolute left-[39%] top-[7%] bg-background px-2 py-1 font-mono text-[11px] text-foreground">Agent AI</div>
               <div className="absolute right-[5%] top-[7%] bg-background px-2 py-1 font-mono text-[11px] text-foreground">Client</div>
               <div className="absolute left-[37%] top-[58%] bg-background px-2 py-1 font-mono text-[11px] text-foreground">Coordonare</div>
               <div className="absolute right-[2%] top-[58%] bg-background px-2 py-1 font-mono text-[11px] text-foreground">Livrare</div>
@@ -232,99 +355,20 @@ const Webinar = () => {
               <p className="mt-5 leading-relaxed text-muted-foreground">
                 Detaliile de acces vor fi trimise pe WhatsApp înainte de sesiunea live.
               </p>
+              <div className="mt-6 inline-flex items-center gap-2 border border-accent/30 bg-accent/10 px-3 py-2 font-mono text-xs text-accent">
+                <span className="h-2 w-2 rounded-full bg-accent" />
+                100 de locuri disponibile gratuit
+              </div>
             </div>
 
             <div className="border border-border bg-card p-5 md:p-8">
-              {status === "success" ? (
-                <div className="flex min-h-72 flex-col items-center justify-center text-center" role="status" aria-live="polite">
-                  <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-accent-foreground">
-                    <Check className="h-7 w-7" aria-hidden="true" />
-                  </span>
-                  <h3 className="font-webinar-heading text-3xl font-bold uppercase">Ești înscris.</h3>
-                  <p className="mt-3 text-muted-foreground">Îți trimit detaliile pe WhatsApp în curând.</p>
-                </div>
-              ) : (
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5" noValidate>
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="font-mono text-xs text-foreground">Nume</FormLabel>
-                          <FormControl>
-                            <Input
-                              autoComplete="name"
-                              maxLength={100}
-                              placeholder="Numele tău"
-                              className="h-12 rounded-sm border-border bg-background text-foreground placeholder:text-muted-foreground focus-visible:ring-accent"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="font-mono text-xs text-foreground">Email</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="email"
-                              inputMode="email"
-                              autoComplete="email"
-                              maxLength={255}
-                              placeholder="nume@email.ro"
-                              className="h-12 rounded-sm border-border bg-background text-foreground placeholder:text-muted-foreground focus-visible:ring-accent"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="whatsapp"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="font-mono text-xs text-foreground">Număr WhatsApp</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="tel"
-                              inputMode="tel"
-                              autoComplete="tel"
-                              maxLength={20}
-                              placeholder="+40 7XX XXX XXX"
-                              className="h-12 rounded-sm border-border bg-background text-foreground placeholder:text-muted-foreground focus-visible:ring-accent"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    {status === "error" && (
-                      <p className="border-l-2 border-destructive bg-destructive/10 p-3 text-sm text-destructive" role="alert">
-                        Înscrierea nu a putut fi trimisă. Te rugăm să încerci din nou în curând.
-                      </p>
-                    )}
-
-                    <Button
-                      type="submit"
-                      disabled={status === "sending"}
-                      className="h-12 w-full rounded-sm bg-primary text-base font-bold text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring"
-                    >
-                      {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
-                      Rezervă-ți locul
-                    </Button>
-                  </form>
-                </Form>
-              )}
+              <Button
+                type="button"
+                onClick={openModal}
+                className="h-12 w-full rounded-sm bg-primary text-base font-bold text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring"
+              >
+                Deschide formularul de înscriere
+              </Button>
             </div>
           </div>
         </section>
@@ -342,6 +386,63 @@ const Webinar = () => {
           </a>
         </div>
       </footer>
+
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 p-4 backdrop-blur-sm sm:items-center"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="webinar-modal-title"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) closeModal();
+          }}
+        >
+          <div className="relative w-full max-w-lg border border-border bg-card p-5 shadow-2xl md:p-8">
+            <button
+              type="button"
+              onClick={closeModal}
+              disabled={status === "sending"}
+              className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card disabled:opacity-50"
+              aria-label="Închide formularul"
+            >
+              <X className="h-5 w-5" aria-hidden="true" />
+            </button>
+
+            {status === "success" ? (
+              <div className="flex min-h-64 flex-col items-center justify-center text-center" role="status" aria-live="polite">
+                <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                  <Check className="h-7 w-7" aria-hidden="true" />
+                </span>
+                <h3 id="webinar-modal-title" className="font-webinar-heading text-3xl font-bold uppercase">
+                  Ești înscris.
+                </h3>
+                <p className="mt-3 text-muted-foreground">Îți trimit detaliile pe WhatsApp în curând.</p>
+                <Button
+                  type="button"
+                  onClick={resetForm}
+                  variant="outline"
+                  className="mt-6 rounded-sm border-border text-foreground hover:bg-background hover:text-foreground focus-visible:ring-ring"
+                >
+                  Închide
+                </Button>
+              </div>
+            ) : (
+              <>
+                <div className="mb-6 pr-8">
+                  <p className="font-mono text-sm text-accent">Webinar gratuit live</p>
+                  <h3 id="webinar-modal-title" className="mt-2 font-webinar-heading text-3xl font-bold uppercase leading-none md:text-4xl">
+                    Rezervă-ți locul
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    Completează datele și primești confirmarea pe WhatsApp.
+                  </p>
+                </div>
+                {renderForm()}
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
