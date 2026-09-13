@@ -1,52 +1,45 @@
-## Obiectiv
+# Plan: Landing page webinar „Afacere care rulează singură”
 
-Înlocui sursa de date a paginii `/business-dashboard/calendar` din Cal.com cu **Google Calendar**, prin connector-ul Lovable Cloud (gateway).
+## Rezultat
+O pagină separată, single-page, pentru trafic din TikTok și Instagram, construită mobile-first și concentrată exclusiv pe înscrierea la webinar.
 
-## Pași
+Ruta propusă: `/webinar-afacere-autonoma`
 
-### 1. Conectare Google Calendar
-- Linkez conexiunea existentă **"Jelco Personal"** (`google_calendar`) la proiect prin connector gateway. Asta face disponibile `LOVABLE_API_KEY` și `GOOGLE_CALENDAR_API_KEY` în edge functions.
+## Structură și design
+- Hero asimetric: mesajul exact în stânga și o schemă operațională animată discret în dreapta.
+- Direcție vizuală „blueprint operațional / cameră de control”, fără imagini stock sau aspect generic de produs AI.
+- Paletă dedicată paginii: bleumarin cerneală, cyan tehnic, alb hârtie, chihlimbar pentru acțiuni și gri-albăstrui pentru text secundar.
+- Titluri cu font geometric-condensat și etichete de sistem monospace; fonturile vor fi încărcate fără blocarea afișării.
+- Secțiunea „Ce înveți” ca listă editorială ierarhizată, nu trei carduri identice.
+- Secțiune scurtă „Pentru cine e”, urmată de formular și footer minimal cu brandul AI Automatizări și contactul existent.
+- Copy-ul furnizat va fi păstrat exact.
 
-### 2. Edge function nouă: `sync-google-calendar`
-- Înlocuiește `sync-calcom-bookings` (păstrăm vechea funcție, doar nu mai e apelată).
-- Primește `{ date }` (ISO) și opțional `{ rangeDays }` pentru fereastra de sync.
-- Apelează gateway-ul:
-  - `GET https://connector-gateway.lovable.dev/google_calendar/calendar/v3/calendars/primary/events?timeMin=...&timeMax=...&singleEvents=true&orderBy=startTime`
-- Mapează fiecare event Google → schema `calendar_bookings`:
-  - `booking_id` / `booking_uid` ← `event.id` / `event.iCalUID`
-  - `title` ← `summary`
-  - `description` ← `description`
-  - `start_time` / `end_time` ← `start.dateTime` (sau `start.date` pentru all-day)
-  - `duration` ← diferența în minute
-  - `status` ← `confirmed | tentative | cancelled` din `event.status`
-  - `meeting_url` ← `event.hangoutLink` sau primul `entryPoint` cu `uri` din `conferenceData`
-  - `location` ← `event.location`
-  - `attendees` ← array `{ email, name, responseStatus }`
-  - `metadata` ← raw event JSON (pentru debugging)
-  - `user_id` ← user-ul autentificat (din JWT)
-- Upsert pe `(user_id, booking_uid)` ca să nu dubleze la re-sync.
-- Returnează `{ count }`.
+## Formular de înscriere
+- Câmpuri obligatorii: Nume, Email și Număr WhatsApp.
+- Validare clară, stare de trimitere, protecție împotriva trimiterii repetate și mesajul exact de confirmare.
+- Trimitere JSON către o constantă clar marcată `WEBHOOK_URL`, pregătită pentru URL-ul n8n care va fi adăugat ulterior.
+- Mesaj de eroare accesibil dacă webhook-ul nu este încă configurat sau trimiterea eșuează.
 
-### 3. Frontend (`useCalendarBookings.ts` + `Calendar.tsx`)
-- `syncMutation` apelează `sync-google-calendar` în loc de `sync-calcom-bookings`.
-- Mesaj toast: "X apeluri sincronizate cu Google Calendar".
-- Restul UI-ului (BookingCard, CalendarView, TodaysSummary) rămâne neschimbat — folosesc deja schema `calendar_bookings`.
+## Mișcare și accesibilitate
+- O singură animație orchestrată la încărcarea întregii pagini; fără animații separate la scroll.
+- Varianta fără mișcare pentru utilizatorii care au această preferință activată.
+- Focus foarte vizibil, etichete asociate câmpurilor, mesaje anunțate cititoarelor de ecran și contrast verificat.
+- Dimensiuni și spațiere optimizate pentru telefon, fără a sacrifica prezentarea desktop.
 
-### 4. DB
-- Niciun migration necesar — `calendar_bookings` are deja toate câmpurile.
-- Opțional: adaug constraint unique pe `(user_id, booking_uid)` dacă nu există, ca upsert să meargă curat. *(Verific întâi în migration.)*
+## Integrare
+- Componentă nouă dedicată paginii, încărcată la cerere prin ruta nouă din aplicație.
+- Tokenuri vizuale semantice izolate pentru această temă, fără a modifica aspectul celorlalte pagini.
+- Comentarii placeholder în `<head>` pentru Meta Pixel și TikTok Pixel, cu textul cerut: `// înlocuiește cu codul real de pixel`.
+- Titlu și descriere relevante pentru pagina webinarului în timpul navigării.
 
-### 5. Curățenie
-- Las `sync-calcom-bookings` și secret `CAL_COM_API_KEY` pe loc (le pot șterge după ce confirmi că nu mai vrei Cal.com deloc).
+## Verificare
+- Testarea formularului pentru validare, succes și eroare.
+- Verificare vizuală pe mobil și desktop, inclusiv lipsa depășirilor de ecran.
+- Verificarea navigării către ruta nouă, a focusului și a consolei.
+- Confirmarea că aplicația se construiește fără erori.
 
-## Detalii tehnice
-
-- **Auth în edge function**: validez JWT-ul user-ului ca să asociez evenimentele cu `user_id`-ul corect (`verify_jwt = false` în config, dar verificare manuală cu `supabase.auth.getUser(token)`).
-- **Fereastră sync**: default `timeMin = startOfDay(date - 1d)`, `timeMax = endOfDay(date + 30d)` ca să prind atât ziua selectată cât și apelurile viitoare afișate în dashboard.
-- **Recurring events**: `singleEvents=true` expandează seriile recurente în instanțe individuale.
-- **Token refresh**: gestionat automat de connector gateway — nu scriu logică custom.
-
-## Ce confirmi înainte să încep
-
-1. Folosim conexiunea **"Jelco Personal"** (calendarul tău primary), corect?
-2. Vrei să șterg complet integrarea Cal.com (funcție + secret) sau o las ca backup?
+## Fișiere vizate
+- Pagina nouă de webinar
+- Configurația rutei
+- Stilurile/tokenurile globale necesare temei dedicate
+- `<head>` pentru placeholder-ele pixelilor
