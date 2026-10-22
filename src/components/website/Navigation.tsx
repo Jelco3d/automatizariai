@@ -20,7 +20,7 @@ export function Navigation({ onOpenAuditModal }: NavigationProps) {
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-center items-center py-1.5 md:py-2">
       <Link to="/" className="flex items-center group" aria-label="AI Automatizări">
-        <img src={logoDark.url} alt="AI Automatizări" className="h-9 md:h-11 lg:h-12 w-auto transition-transform duration-300 group-hover:scale-105" />
+        <img src={logoDark.url} alt="AI Automatizări" className="h-12 md:h-16 lg:h-20 w-auto transition-transform duration-300 group-hover:scale-105" />
       </Link>
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetTrigger asChild>
