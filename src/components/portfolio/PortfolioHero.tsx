@@ -10,7 +10,7 @@ export const PortfolioHero = () => {
       transition={{ duration: 0.6 }}
       className="container mx-auto px-4 pt-24 md:pt-32 pb-16"
     >
-      <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-amber-400">
+      <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-teal-400">
         Povești de Succes
       </h1>
       <p className="text-base md:text-xl text-white/60 text-center max-w-3xl mx-auto mb-12">

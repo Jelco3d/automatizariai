@@ -63,7 +63,7 @@ export function RecentPosts() {
           {recentPosts.map(post => <TableRow key={post.id}>
               <TableCell className="font-medium">{post.title}</TableCell>
               <TableCell>
-                <span className={`px-2 py-1 rounded-full text-xs ${post.status === 'published' ? 'bg-green-500/20 text-green-400' : post.status === 'draft' ? 'bg-orange-500/20 text-orange-400' : 'bg-blue-500/20 text-blue-400'}`}>
+                <span className={`px-2 py-1 rounded-full text-xs ${post.status === 'published' ? 'bg-green-500/20 text-green-400' : post.status === 'draft' ? 'bg-cyan-500/20 text-cyan-400' : 'bg-blue-500/20 text-blue-400'}`}>
                   {post.status}
                 </span>
               </TableCell>

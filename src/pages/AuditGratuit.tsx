@@ -11,11 +11,11 @@ const AuditGratuit = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0e1a] relative overflow-hidden">
+    <div className="min-h-screen bg-[#051535] relative overflow-hidden">
       {/* Animated background orbs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-yellow-500/[0.07] rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/2 -left-40 w-[400px] h-[400px] bg-amber-500/[0.05] rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-cyan-500/[0.07] rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 -left-40 w-[400px] h-[400px] bg-teal-500/[0.05] rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
       
       <Navigation />
@@ -25,7 +25,7 @@ const AuditGratuit = () => {
         <div className="max-w-4xl mx-auto relative z-10">
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
             <span className="text-white font-bold">AUDIT GRATUIT!</span>{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400">
               Descoperă cum poate AI să-ți transforme afacerea — în doar câteva minute!
             </span>
           </h1>
@@ -42,8 +42,8 @@ const AuditGratuit = () => {
 
       {/* How It Works Section */}
       <section className="container mx-auto px-4 py-8 md:py-12 relative z-10">
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent mb-12" />
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent mb-12" />
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12 text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400">
           💬 Cum funcționează
         </h2>
         
@@ -53,9 +53,9 @@ const AuditGratuit = () => {
             { icon: Target, title: "AI-ul analizează", desc: "Răspunsurile Tale Sunt Analizate Și Identificăm Oportunități De Automatizare Și Soluții Inteligente." },
             { icon: TrendingUp, title: "Primești raportul", desc: "Raport personalizat instant cu recomandări clare despre cum să începi să scalezi cu AI." },
           ].map(({ icon: Icon, title, desc }, i) => (
-            <Card key={i} className="bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:border-yellow-400/30 transition-all">
+            <Card key={i} className="bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:border-cyan-400/30 transition-all">
               <CardContent className="p-4 md:p-6 text-center">
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 shadow-lg shadow-yellow-500/25">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-cyan-400 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 shadow-lg shadow-cyan-500/25">
                   <Icon className="w-6 h-6 md:w-8 md:h-8 text-black" />
                 </div>
                 <h3 className="text-lg md:text-xl font-semibold text-white mb-2 md:mb-3">{title}</h3>
@@ -68,7 +68,7 @@ const AuditGratuit = () => {
 
       {/* Next Steps Section */}
       <section className="container mx-auto px-4 py-8 md:py-12 relative z-10">
-        <div className="max-w-4xl mx-auto bg-gradient-to-br from-yellow-400/10 to-amber-500/5 p-6 md:p-8 lg:p-12 rounded-2xl border border-yellow-400/20 backdrop-blur-sm shadow-lg shadow-yellow-500/10">
+        <div className="max-w-4xl mx-auto bg-gradient-to-br from-cyan-400/10 to-teal-500/5 p-6 md:p-8 lg:p-12 rounded-2xl border border-cyan-400/20 backdrop-blur-sm shadow-lg shadow-cyan-500/10">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-4 md:mb-6 text-white">
             🤝 Vrei să mergem mai departe?
           </h2>

@@ -28,7 +28,7 @@ const ShowroomVSL = () => {
           
           <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight px-2">
             <span className="text-white">Showroom-ul Tău Pierde  Lunar Între </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-cyan-400">
 5.000 și 20.000€</span>
             <span className="text-white"></span>
             <br />

@@ -30,7 +30,7 @@ export function PayableInvoicesTable({ statusFilter }: { statusFilter?: string }
   const getStatusBadge = (status: string) => {
     const styles = {
       paid: 'bg-green-500/20 text-green-400 border-green-500/30',
-      unpaid: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
+      unpaid: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
       overdue: 'bg-red-500/20 text-red-400 border-red-500/30',
     };
     

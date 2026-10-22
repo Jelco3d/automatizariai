@@ -131,7 +131,7 @@ const ClientPortalSystem = () => {
   }, []);
 
   return (
-    <div className="dark min-h-screen bg-[#0a0e1a] text-white overflow-hidden relative">
+    <div className="dark min-h-screen bg-[#051535] text-white overflow-hidden relative">
       <Navigation onOpenAuditModal={openModal} />
 
       {/* Background orbs */}
@@ -139,9 +139,9 @@ const ClientPortalSystem = () => {
         className="absolute inset-0 overflow-hidden pointer-events-none"
         style={{ contain: "layout style paint" }}
       >
-        <div className="absolute top-20 left-10 w-72 h-72 bg-yellow-400/10 rounded-full blur-3xl animate-orb-pulse" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-400/10 rounded-full blur-3xl animate-orb-pulse" />
         <div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-orb-pulse"
+          className="absolute bottom-20 right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-orb-pulse"
           style={{ animationDelay: "1.5s" }}
         />
       </div>
@@ -155,27 +155,27 @@ const ClientPortalSystem = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-400/10 border border-yellow-400/30 mb-6">
-              <Sparkles className="w-4 h-4 text-yellow-400" />
-              <span className="text-yellow-400 text-sm font-semibold">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 mb-6">
+              <Sparkles className="w-4 h-4 text-cyan-400" />
+              <span className="text-cyan-400 text-sm font-semibold">
                 Pentru ateliere cu producție la comandă
               </span>
             </div>
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-tight">
               Clienții tăi te sună de{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400">
                 10 ori pe zi
               </span>{" "}
               să întrebe dacă e gata comanda.
             </h1>
             <p className="text-lg md:text-2xl text-white/70 mb-4 font-medium">
               Eu construiesc sistemul care îi face să nu mai sune{" "}
-              <span className="text-yellow-400 font-bold">niciodată</span>.
+              <span className="text-cyan-400 font-bold">niciodată</span>.
             </p>
             <p className="text-white/50 text-base md:text-lg max-w-3xl mx-auto mb-10">
               Portal clienți + WhatsApp automation pentru ateliere cu producție la comandă.
-              Livrat în <span className="text-yellow-400 font-semibold">14 zile</span>. ROI în
-              mai puțin de <span className="text-yellow-400 font-semibold">60 de zile</span> —
+              Livrat în <span className="text-cyan-400 font-semibold">14 zile</span>. ROI în
+              mai puțin de <span className="text-cyan-400 font-semibold">60 de zile</span> —
               sau îți returnez banii.
             </p>
             <div className="flex flex-col items-center gap-3">
@@ -188,7 +188,7 @@ const ClientPortalSystem = () => {
               </Button>
               <p className="text-white/40 text-sm">
                 Ultimul client a recuperat{" "}
-                <span className="text-yellow-400 font-semibold">€7.000-€10.000/lună</span> în
+                <span className="text-cyan-400 font-semibold">€7.000-€10.000/lună</span> în
                 primele 30 de zile.
               </p>
             </div>
@@ -205,7 +205,7 @@ const ClientPortalSystem = () => {
             className="max-w-4xl mx-auto"
           >
             <div className="flex items-center justify-center gap-3 mb-6">
-              <AlertTriangle className="w-8 h-8 text-yellow-400" />
+              <AlertTriangle className="w-8 h-8 text-cyan-400" />
               <h2 className="text-2xl md:text-4xl font-bold text-center">
                 Dacă ai fabrică care produce la comandă, recunoști asta:
               </h2>
@@ -226,10 +226,10 @@ const ClientPortalSystem = () => {
               ))}
             </div>
 
-            <div className="mt-10 p-6 md:p-8 rounded-2xl bg-gradient-to-br from-yellow-400/10 to-amber-500/5 border border-yellow-400/30">
+            <div className="mt-10 p-6 md:p-8 rounded-2xl bg-gradient-to-br from-cyan-400/10 to-teal-500/5 border border-cyan-400/30">
               <p className="text-lg md:text-xl text-white mb-3">
                 💡 Dacă ai dat din cap la 2 din 5 — pierzi{" "}
-                <span className="text-yellow-400 font-bold">€5.000-€15.000/lună</span>. Chiar
+                <span className="text-cyan-400 font-bold">€5.000-€15.000/lună</span>. Chiar
                 acum.
               </p>
               <p className="text-white/70">
@@ -251,7 +251,7 @@ const ClientPortalSystem = () => {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto mb-12"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400 mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400 mb-4">
               Soluția — Client Portal System
             </h2>
             <p className="text-white/60 text-lg">
@@ -268,13 +268,13 @@ const ClientPortalSystem = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
               >
-                <Card className="h-full bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] hover:border-yellow-400/40 transition-all group">
+                <Card className="h-full bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] hover:border-cyan-400/40 transition-all group">
                   <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-400/20 to-amber-500/10 border border-yellow-400/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <s.icon className="w-6 h-6 text-yellow-400" />
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400/20 to-teal-500/10 border border-cyan-400/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <s.icon className="w-6 h-6 text-cyan-400" />
                     </div>
                     <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+                      <CheckCircle2 className="w-5 h-5 text-cyan-400 flex-shrink-0" />
                       {s.title}
                     </h3>
                     <p className="text-white/60 text-sm leading-relaxed">{s.desc}</p>
@@ -295,7 +295,7 @@ const ClientPortalSystem = () => {
             className="max-w-5xl mx-auto"
           >
             <h2 className="text-3xl md:text-5xl font-bold text-center mb-3">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400">
                 Case Study
               </span>{" "}
               — Fabrică de mobilă, România
@@ -317,9 +317,9 @@ const ClientPortalSystem = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-yellow-400/20 to-amber-500/10 border border-yellow-400/50">
+              <Card className="bg-gradient-to-br from-cyan-400/20 to-teal-500/10 border border-cyan-400/50">
                 <CardContent className="p-6 md:p-8">
-                  <h3 className="text-xl font-bold text-yellow-300 mb-4 flex items-center gap-2">
+                  <h3 className="text-xl font-bold text-cyan-300 mb-4 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5" /> După (3 săptămâni)
                   </h3>
                   <ul className="space-y-3 text-white">
@@ -335,20 +335,20 @@ const ClientPortalSystem = () => {
             <div className="mt-8 grid md:grid-cols-3 gap-4">
               <div className="p-5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-center">
                 <p className="text-white/50 text-sm mb-1">Investiție</p>
-                <p className="text-2xl font-bold text-yellow-400">€3.500</p>
+                <p className="text-2xl font-bold text-cyan-400">€3.500</p>
                 <p className="text-white/40 text-xs mt-1">(preț vechi — acum €6.500)</p>
               </div>
               <div className="p-5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-center">
                 <p className="text-white/50 text-sm mb-1">Payback</p>
-                <p className="text-2xl font-bold text-yellow-400">2 săptămâni</p>
+                <p className="text-2xl font-bold text-cyan-400">2 săptămâni</p>
               </div>
               <div className="p-5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-center">
                 <p className="text-white/50 text-sm mb-1">ROI 12 luni</p>
-                <p className="text-2xl font-bold text-yellow-400">€84K-€120K</p>
+                <p className="text-2xl font-bold text-cyan-400">€84K-€120K</p>
               </div>
             </div>
 
-            <blockquote className="mt-10 p-6 md:p-8 rounded-2xl bg-white/[0.04] border-l-4 border-yellow-400 italic text-white/80 text-lg md:text-xl">
+            <blockquote className="mt-10 p-6 md:p-8 rounded-2xl bg-white/[0.04] border-l-4 border-cyan-400 italic text-white/80 text-lg md:text-xl">
               „Nu mai răspund la telefon toată ziua. Clienții văd singuri ce se întâmplă. A
               meritat de 20 de ori.”
               <footer className="mt-3 text-sm text-white/50 not-italic">
@@ -368,13 +368,13 @@ const ClientPortalSystem = () => {
             className="max-w-4xl mx-auto"
           >
             <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-400/10 border border-yellow-400/30 mb-4">
-                <Clock className="w-4 h-4 text-yellow-400" />
-                <span className="text-yellow-400 text-sm font-semibold">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 mb-4">
+                <Clock className="w-4 h-4 text-cyan-400" />
+                <span className="text-cyan-400 text-sm font-semibold">
                   14 zile de la contract la livrare
                 </span>
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+              <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400">
                 Cum funcționează
               </h2>
             </div>
@@ -389,12 +389,12 @@ const ClientPortalSystem = () => {
                   transition={{ duration: 0.4, delay: i * 0.06 }}
                   className="flex items-stretch gap-4 group"
                 >
-                  <div className="flex-shrink-0 w-28 md:w-36 px-3 py-4 rounded-xl bg-gradient-to-br from-yellow-400/15 to-amber-500/5 border border-yellow-400/30 flex items-center justify-center">
-                    <span className="text-yellow-400 font-bold text-sm md:text-base">
+                  <div className="flex-shrink-0 w-28 md:w-36 px-3 py-4 rounded-xl bg-gradient-to-br from-cyan-400/15 to-teal-500/5 border border-cyan-400/30 flex items-center justify-center">
+                    <span className="text-cyan-400 font-bold text-sm md:text-base">
                       {t.day}
                     </span>
                   </div>
-                  <div className="flex-1 px-4 py-4 rounded-xl bg-white/[0.03] border border-white/[0.06] group-hover:border-yellow-400/30 transition-all flex items-center">
+                  <div className="flex-1 px-4 py-4 rounded-xl bg-white/[0.03] border border-white/[0.06] group-hover:border-cyan-400/30 transition-all flex items-center">
                     <p className="text-white/80 text-sm md:text-base">{t.text}</p>
                   </div>
                 </motion.div>
@@ -413,14 +413,14 @@ const ClientPortalSystem = () => {
             className="max-w-3xl mx-auto"
           >
             <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400 mb-3">
+              <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400 mb-3">
                 Investiție
               </h2>
               <p className="text-white/60">Un preț. Tot inclus. Garanție de ROI.</p>
             </div>
 
-            <Card className="bg-gradient-to-br from-yellow-400/[0.08] to-amber-500/[0.03] border-2 border-yellow-400/40 overflow-hidden relative">
-              <div className="absolute top-0 right-0 px-4 py-1.5 bg-yellow-400 text-black text-xs font-bold rounded-bl-xl">
+            <Card className="bg-gradient-to-br from-cyan-400/[0.08] to-teal-500/[0.03] border-2 border-cyan-400/40 overflow-hidden relative">
+              <div className="absolute top-0 right-0 px-4 py-1.5 bg-cyan-400 text-black text-xs font-bold rounded-bl-xl">
                 DOAR 3 SLOTURI/LUNĂ
               </div>
               <CardContent className="p-6 md:p-10">
@@ -428,7 +428,7 @@ const ClientPortalSystem = () => {
                   Client Portal System
                 </h3>
                 <div className="flex items-baseline gap-3 mb-6">
-                  <span className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+                  <span className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400">
                     €6.500
                   </span>
                   <span className="text-white/40 text-sm">one-time</span>
@@ -437,7 +437,7 @@ const ClientPortalSystem = () => {
                 <ul className="space-y-3 mb-8">
                   {includes.map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-white/80">
-                      <CheckCircle2 className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
                       <span className="text-sm md:text-base">{item}</span>
                     </li>
                   ))}
@@ -465,10 +465,10 @@ const ClientPortalSystem = () => {
               </CardContent>
             </Card>
 
-            <div className="mt-6 p-5 rounded-xl bg-white/[0.03] border border-yellow-400/20 flex items-start gap-3">
-              <ShieldCheck className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-0.5" />
+            <div className="mt-6 p-5 rounded-xl bg-white/[0.03] border border-cyan-400/20 flex items-start gap-3">
+              <ShieldCheck className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-0.5" />
               <p className="text-white/70 text-sm">
-                <span className="text-yellow-400 font-semibold">
+                <span className="text-cyan-400 font-semibold">
                   Garanție ROI în 60 de zile
                 </span>{" "}
                 — dacă sistemul nu generează rezultate măsurabile, returnez banii integral.
@@ -486,7 +486,7 @@ const ClientPortalSystem = () => {
             transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400 mb-10">
+            <h2 className="text-3xl md:text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400 mb-10">
               Întrebări frecvente
             </h2>
             <Accordion type="single" collapsible className="space-y-3">
@@ -494,9 +494,9 @@ const ClientPortalSystem = () => {
                 <AccordionItem
                   key={i}
                   value={`item-${i}`}
-                  className="rounded-xl bg-white/[0.03] border border-white/[0.08] px-5 hover:border-yellow-400/30 transition-all"
+                  className="rounded-xl bg-white/[0.03] border border-white/[0.08] px-5 hover:border-cyan-400/30 transition-all"
                 >
-                  <AccordionTrigger className="text-left text-white hover:text-yellow-400 hover:no-underline">
+                  <AccordionTrigger className="text-left text-white hover:text-cyan-400 hover:no-underline">
                     {f.q}
                   </AccordionTrigger>
                   <AccordionContent className="text-white/70 leading-relaxed">

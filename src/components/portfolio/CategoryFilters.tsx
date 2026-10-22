@@ -17,8 +17,8 @@ export const CategoryFilters = ({ activeCategory, onCategoryChange }: CategoryFi
         onClick={() => onCategoryChange("all")}
         className={`${
           activeCategory === "all" 
-            ? "bg-yellow-400 hover:bg-yellow-500 text-black font-semibold" 
-            : "border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/10"
+            ? "bg-cyan-400 hover:bg-cyan-500 text-black font-semibold" 
+            : "border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/10"
         }`}
       >
         All
@@ -30,8 +30,8 @@ export const CategoryFilters = ({ activeCategory, onCategoryChange }: CategoryFi
           onClick={() => onCategoryChange(category.id)}
           className={`${
             activeCategory === category.id 
-              ? "bg-yellow-400 hover:bg-yellow-500 text-black font-semibold" 
-              : "border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/10"
+              ? "bg-cyan-400 hover:bg-cyan-500 text-black font-semibold" 
+              : "border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/10"
           }`}
         >
           {category.label}

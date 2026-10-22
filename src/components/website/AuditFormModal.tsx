@@ -70,8 +70,8 @@ const TOTAL_STEPS = 6;
 
 const stepLabels = ["Contact", "Operațiuni", "Tech Stack", "Financiar", "Industrie", "Rezervare"];
 
-const selectContentClass = "bg-[#0d1225] border border-yellow-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]";
-const selectItemClass = "text-white/80 focus:bg-gradient-to-r focus:from-yellow-600/40 focus:to-amber-500/30 focus:text-yellow-300 cursor-pointer transition-all duration-150";
+const selectContentClass = "bg-[#0d1225] border border-cyan-500/40 shadow-[0_8px_32px_rgba(234,179,8,0.15),0_2px_8px_rgba(0,0,0,0.5)]";
+const selectItemClass = "text-white/80 focus:bg-gradient-to-r focus:from-cyan-600/40 focus:to-teal-500/30 focus:text-cyan-300 cursor-pointer transition-all duration-150";
 
 const orderChannelOptions = ["Telefon", "WhatsApp", "Email", "Formular online", "Marketplace (eMAG etc.)", "Reprezentanți pe teren", "Altul"];
 const automationToolOptions = ["ChatGPT / Claude", "Zapier / Make", "Power Automate", "Niciun tool", "Altul"];
@@ -264,7 +264,7 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
   const progressPercent = ((currentStep + 1) / TOTAL_STEPS) * 100;
 
   const inputClass =
-    "bg-white/[0.07] border border-yellow-500/40 text-white placeholder:text-white/40 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/30 focus:bg-white/[0.1] transition-all duration-200";
+    "bg-white/[0.07] border border-cyan-500/40 text-white placeholder:text-white/40 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 focus:bg-white/[0.1] transition-all duration-200";
   const labelClass = "text-white/80";
 
   const variants = {
@@ -275,7 +275,7 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
-      <DialogContent className="w-full h-full max-w-none max-h-none rounded-none md:w-auto md:h-auto md:max-w-2xl md:max-h-[90vh] md:rounded-lg p-0 bg-[#0a0e1a] border border-yellow-500/30 overflow-hidden">
+      <DialogContent className="w-full h-full max-w-none max-h-none rounded-none md:w-auto md:h-auto md:max-w-2xl md:max-h-[90vh] md:rounded-lg p-0 bg-[#051535] border border-cyan-500/30 overflow-hidden">
         <DialogTitle className="sr-only">Audit Strategic Gratuit</DialogTitle>
 
         {isSubmitted ? (
@@ -291,7 +291,7 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
           <div className="flex flex-col h-full max-h-[90vh]">
             {/* Header + Progress */}
             <div className="p-4 md:p-6 pb-0">
-              <h2 className="text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400 mb-4 leading-tight">
+              <h2 className="text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400 mb-4 leading-tight">
                 Audit Strategic Gratuit
               </h2>
               <div className="flex items-center justify-between mb-3">
@@ -301,27 +301,27 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
                       <div
                         className={`w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center text-[9px] md:text-xs font-bold border-2 transition-all duration-300 ${
                           i < currentStep
-                            ? "bg-yellow-500 border-yellow-500 text-black"
+                            ? "bg-cyan-500 border-cyan-500 text-black"
                             : i === currentStep
-                            ? "border-yellow-400 text-yellow-400 shadow-[0_0_12px_rgba(234,179,8,0.4)]"
+                            ? "border-cyan-400 text-cyan-400 shadow-[0_0_12px_rgba(234,179,8,0.4)]"
                             : "border-white/20 text-white/30"
                         }`}
                       >
                         {i < currentStep ? <Check className="w-4 h-4" /> : i + 1}
                       </div>
-                      <span className={`text-[10px] mt-1 hidden md:block ${i <= currentStep ? "text-yellow-400/80" : "text-white/30"}`}>
+                      <span className={`text-[10px] mt-1 hidden md:block ${i <= currentStep ? "text-cyan-400/80" : "text-white/30"}`}>
                         {label}
                       </span>
                     </div>
                     {i < TOTAL_STEPS - 1 && (
-                      <div className={`flex-1 h-0.5 mx-1 transition-colors duration-300 ${i < currentStep ? "bg-yellow-500" : "bg-white/10"}`} />
+                      <div className={`flex-1 h-0.5 mx-1 transition-colors duration-300 ${i < currentStep ? "bg-cyan-500" : "bg-white/10"}`} />
                     )}
                   </div>
                 ))}
               </div>
               <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
                 <motion.div
-                  className="h-full bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full"
+                  className="h-full bg-gradient-to-r from-cyan-400 to-teal-500 rounded-full"
                   animate={{ width: `${progressPercent}%` }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                 />
@@ -354,9 +354,9 @@ export const AuditFormModal = ({ isOpen, onClose }: AuditFormModalProps) => {
                 </div>
 
                 {/* Navigation footer */}
-                <div className="p-3 md:p-4 border-t border-yellow-500/10 flex justify-between items-center">
+                <div className="p-3 md:p-4 border-t border-cyan-500/10 flex justify-between items-center">
                   {currentStep > 0 ? (
-                    <Button type="button" variant="outline" onClick={handleBack} className="border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/10">
+                    <Button type="button" variant="outline" onClick={handleBack} className="border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10">
                       <ArrowLeft className="w-4 h-4 mr-2" /> Înapoi
                     </Button>
                   ) : (
@@ -454,7 +454,7 @@ function Step1({ form, inputClass, labelClass }: StepProps) {
 function Step2({ form, inputClass, labelClass }: StepProps) {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400">
         Cum funcționează firma azi
       </h3>
       <p className="text-white/40 text-xs">Toate câmpurile sunt opționale dar îmbunătățesc calitatea auditului.</p>
@@ -469,7 +469,7 @@ function Step2({ form, inputClass, labelClass }: StepProps) {
                 <FormItem className="flex items-center gap-2 space-y-0">
                   <FormControl>
                     <Checkbox
-                      className="border-yellow-500/50 data-[state=checked]:bg-yellow-500 data-[state=checked]:border-yellow-500"
+                      className="border-cyan-500/50 data-[state=checked]:bg-cyan-500 data-[state=checked]:border-cyan-500"
                       checked={field.value?.includes(ch)}
                       onCheckedChange={(checked) => {
                         const cur = field.value || [];
@@ -563,7 +563,7 @@ function Step2({ form, inputClass, labelClass }: StepProps) {
 function Step3({ form, inputClass, labelClass }: StepProps) {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400">
         Tech Stack actual
       </h3>
       <p className="text-white/40 text-xs">Opțional — ne ajută să personalizăm recomandările din audit.</p>
@@ -651,7 +651,7 @@ function Step3({ form, inputClass, labelClass }: StepProps) {
                 <FormItem className="flex items-center gap-2 space-y-0">
                   <FormControl>
                     <Checkbox
-                      className="border-yellow-500/50 data-[state=checked]:bg-yellow-500 data-[state=checked]:border-yellow-500"
+                      className="border-cyan-500/50 data-[state=checked]:bg-cyan-500 data-[state=checked]:border-cyan-500"
                       checked={field.value?.includes(tool)}
                       onCheckedChange={(checked) => {
                         const cur = field.value || [];
@@ -681,7 +681,7 @@ function Step3({ form, inputClass, labelClass }: StepProps) {
 function Step4({ form, inputClass, labelClass }: StepProps) {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400">
         Context financiar & ambiție
       </h3>
       <p className="text-white/40 text-xs">Opțional — calibrează recomandările și pachetul propus.</p>
@@ -752,7 +752,7 @@ function Step5({ form, inputClass, labelClass }: StepProps & { isSubmitting: boo
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400">
         Specific pe industria ta
       </h3>
       <p className="text-white/40 text-xs">Selectează industria pentru întrebări personalizate — opțional.</p>
@@ -777,8 +777,8 @@ function Step5({ form, inputClass, labelClass }: StepProps & { isSubmitting: boo
       )} />
 
       {group && (
-        <div className="space-y-4 pt-2 border-t border-yellow-500/10">
-          <p className="text-yellow-400/70 text-sm font-medium">{group.label}</p>
+        <div className="space-y-4 pt-2 border-t border-cyan-500/10">
+          <p className="text-cyan-400/70 text-sm font-medium">{group.label}</p>
           {group.questions.map((q, idx) => {
             const fieldName = `industryQ${idx + 1}` as "industryQ1" | "industryQ2" | "industryQ3";
             return (
@@ -821,13 +821,13 @@ function Step6() {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+      <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400">
         Rezervă consultația
       </h3>
       <p className="text-white/50 text-sm">
         Alege un slot disponibil pentru auditul tău strategic gratuit de 20 de minute.
       </p>
-      <div className="rounded-xl overflow-hidden border border-yellow-500/20" style={{ height: "450px" }}>
+      <div className="rounded-xl overflow-hidden border border-cyan-500/20" style={{ height: "450px" }}>
         <Cal
           namespace="test"
           calLink="jelco-erdelean-ai-automatizari/test"

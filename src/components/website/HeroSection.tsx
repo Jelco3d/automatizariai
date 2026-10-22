@@ -18,7 +18,7 @@ export const HeroSection = ({ onOpenAuditModal }: HeroSectionProps) => {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] rounded-full px-5 py-2 mb-8 shadow-lg shadow-yellow-500/[0.03]"
+          className="inline-flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] rounded-full px-5 py-2 mb-8 shadow-lg shadow-cyan-500/[0.03]"
         >
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-sm shadow-emerald-400/50" />
           <span className="text-white/50 text-sm font-medium tracking-wide">
@@ -28,7 +28,7 @@ export const HeroSection = ({ onOpenAuditModal }: HeroSectionProps) => {
 
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 max-w-4xl mx-auto text-white tracking-tight">
           Ajut Antreprenorii Din România Să Implementeze{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-amber-400 to-orange-500">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-teal-400 to-cyan-500">
             Infrastructura Internă, Agenți AI
           </span>{" "}
           Și Automatizări Eficiente
@@ -55,9 +55,9 @@ export const HeroSection = ({ onOpenAuditModal }: HeroSectionProps) => {
             { value: "<30", label: "zile implementare" },
           ].map((metric, i) => (
             <div key={i} className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-b from-yellow-400/[0.08] to-transparent rounded-2xl transition-all duration-300 group-hover:from-yellow-400/[0.15]" />
-              <div className="relative flex flex-col items-center py-3 px-2 md:py-5 md:px-3 rounded-2xl border border-white/[0.06] group-hover:border-yellow-400/30 transition-all duration-300 group-hover:scale-105 shadow-lg shadow-yellow-500/[0.05]">
-                <span className="text-yellow-400 text-2xl md:text-3xl lg:text-4xl font-black leading-none">
+              <div className="absolute inset-0 bg-gradient-to-b from-cyan-400/[0.08] to-transparent rounded-2xl transition-all duration-300 group-hover:from-cyan-400/[0.15]" />
+              <div className="relative flex flex-col items-center py-3 px-2 md:py-5 md:px-3 rounded-2xl border border-white/[0.06] group-hover:border-cyan-400/30 transition-all duration-300 group-hover:scale-105 shadow-lg shadow-cyan-500/[0.05]">
+                <span className="text-cyan-400 text-2xl md:text-3xl lg:text-4xl font-black leading-none">
                   {metric.value}
                 </span>
                 <span className="text-white/40 text-xs md:text-sm mt-1.5 font-medium">{metric.label}</span>

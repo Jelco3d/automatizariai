@@ -44,7 +44,7 @@ export default function Comments() {
                 <CardDescription>Needs moderation</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-3xl font-bold text-yellow-500">23</p>
+                <p className="text-3xl font-bold text-cyan-500">23</p>
               </CardContent>
             </Card>
             <Card className="bg-[#1A1F2C] border-purple-500/20">
@@ -156,7 +156,7 @@ export default function Comments() {
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-1">
-                        <AlertTriangle className="h-4 w-4 text-yellow-500" />
+                        <AlertTriangle className="h-4 w-4 text-cyan-500" />
                         <span className="text-sm">Pending</span>
                       </div>
                     </TableCell>

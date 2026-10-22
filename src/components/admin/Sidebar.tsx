@@ -1,3 +1,4 @@
+import logoDark from "@/assets/logo-dark.png.asset.json";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { 
@@ -67,7 +68,7 @@ export function Sidebar() {
     <div className="flex flex-col h-full">
       <Link to="/business-dashboard" className="flex items-center justify-center mb-8 mt-2" onClick={() => setOpen(false)}>
         <img 
-          src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" 
+          src={logoDark.url} 
           alt="AI Automatizari" 
           className="h-14 w-auto rounded-xl opacity-90 hover:opacity-100 transition-opacity" 
         />
@@ -125,7 +126,7 @@ export function Sidebar() {
         </Sheet>
         
         <Link to="/business-dashboard" className="flex items-center">
-          <img src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" alt="AI Automatizari" className="h-10 w-auto rounded-lg" />
+          <img src={logoDark.url} alt="AI Automatizari" className="h-10 w-auto rounded-lg" />
         </Link>
         <div className="w-10" />
       </div>
