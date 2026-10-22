@@ -121,7 +121,7 @@ const faqs = [
 
 const ClientPortalSystem = () => {
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
-  const openModal = () => setIsAuditModalOpen(true);
+  const openModal = () => window.open("https://calendly.com/erdeleanjelco90/1-1-implementare-agen-i-ai?month=2026-10", "_blank", "noopener,noreferrer");
 
   useEffect(() => {
     document.title = "Portal Clienți + WhatsApp Automation | 14 zile, ROI 60 zile";

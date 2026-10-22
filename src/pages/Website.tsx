@@ -13,7 +13,7 @@ const WebsiteChatbot = lazy(() => import("@/components/website/WebsiteChatbot").
 
 const Website = () => {
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
-  const openAuditModal = () => setIsAuditModalOpen(true);
+  const openAuditModal = () => window.open("https://calendly.com/erdeleanjelco90/1-1-implementare-agen-i-ai?month=2026-10", "_blank", "noopener,noreferrer");
 
   return (
     <div className="min-h-screen bg-[#0a0e1a] relative overflow-hidden">
