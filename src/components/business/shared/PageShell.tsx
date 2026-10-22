@@ -48,7 +48,7 @@ export function PageShell({ children, loading = false }: PageShellProps) {
 
   if (authLoading || loading) {
     return (
-      <div className="min-h-screen bg-[#0a0e1a] text-white flex">
+      <div className="min-h-screen bg-[#051535] text-white flex">
         <Sidebar />
         <div className="flex-1 p-4 md:p-8 pt-20 md:pt-8">
           <Skeleton className="h-8 w-48 mb-8 bg-white/5" />
@@ -64,7 +64,7 @@ export function PageShell({ children, loading = false }: PageShellProps) {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0e1a] text-white flex">
+    <div className="min-h-screen bg-[#051535] text-white flex">
       <Sidebar />
       <div className="flex-1 p-4 md:p-8 pt-20 md:pt-8 overflow-auto">
         {children}

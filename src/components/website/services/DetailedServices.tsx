@@ -38,15 +38,15 @@ export const DetailedServices = () => {
             ],
           },
         ].map(({ icon: Icon, title, desc, items }, i) => (
-          <Card key={i} className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] hover:border-yellow-400/30 transition-all hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/[0.05]">
+          <Card key={i} className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] hover:border-cyan-400/30 transition-all hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/[0.05]">
             <CardContent className="p-4 md:p-6">
-              <Icon className="w-12 h-12 text-yellow-400 mb-4" />
+              <Icon className="w-12 h-12 text-cyan-400 mb-4" />
               <h3 className="text-2xl font-bold text-white mb-4">{title}</h3>
               <p className="text-white/60 mb-4">{desc}</p>
               <ul className="text-white/60 space-y-2">
                 {items.map((item, j) => (
                   <li key={j} className="flex items-center gap-2">
-                    <ArrowRight className="w-4 h-4 text-yellow-400/60 flex-shrink-0" />
+                    <ArrowRight className="w-4 h-4 text-cyan-400/60 flex-shrink-0" />
                     {item}
                   </li>
                 ))}

@@ -106,7 +106,7 @@ export const AIInsights = () => {
       case 'positive':
         return <TrendingUp className="h-4 w-4 text-green-400" />;
       case 'warning':
-        return <AlertCircle className="h-4 w-4 text-yellow-400" />;
+        return <AlertCircle className="h-4 w-4 text-cyan-400" />;
       default:
         return <Info className="h-4 w-4 text-blue-400" />;
     }
@@ -117,7 +117,7 @@ export const AIInsights = () => {
       case 'positive':
         return 'bg-green-500/20 text-green-400 border-green-500/30';
       case 'warning':
-        return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
+        return 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30';
       default:
         return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
     }
@@ -273,7 +273,7 @@ export const AIInsights = () => {
         {insights.recommendations && insights.recommendations.length > 0 && (
           <div className="space-y-3">
             <h4 className="text-sm font-semibold text-white flex items-center gap-2">
-              <Lightbulb className="h-4 w-4 text-yellow-400" />
+              <Lightbulb className="h-4 w-4 text-cyan-400" />
               Recomandări
             </h4>
             <ul className="space-y-2">

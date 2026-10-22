@@ -21,7 +21,7 @@ export const SolutionSection = ({ onOpenAuditModal }: SolutionSectionProps) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400 mb-8"
+          className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400 mb-8"
         >
           Există o Cale Mult Mai Simplă...
         </motion.h2>
@@ -46,9 +46,9 @@ export const SolutionSection = ({ onOpenAuditModal }: SolutionSectionProps) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              className="flex items-center gap-2 bg-white/[0.03] border border-white/[0.08] rounded-xl px-5 py-3 hover:border-yellow-400/20 transition-all duration-300"
+              className="flex items-center gap-2 bg-white/[0.03] border border-white/[0.08] rounded-xl px-5 py-3 hover:border-cyan-400/20 transition-all duration-300"
             >
-              <CheckCircle className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-cyan-400 flex-shrink-0" />
               <span className="text-white text-base md:text-lg">{point}</span>
             </motion.div>
           ))}
@@ -59,20 +59,20 @@ export const SolutionSection = ({ onOpenAuditModal }: SolutionSectionProps) => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="bg-gradient-to-r from-yellow-400/[0.08] to-amber-500/[0.04] border border-yellow-400/20 rounded-2xl p-5 md:p-8 mb-10"
+          className="bg-gradient-to-r from-cyan-400/[0.08] to-teal-500/[0.04] border border-cyan-400/20 rounded-2xl p-5 md:p-8 mb-10"
         >
           <div className="flex items-center justify-center gap-3 mb-3">
             <motion.div
               animate={{ rotate: [0, 10, -10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              <Zap className="w-6 h-6 text-yellow-400" />
+              <Zap className="w-6 h-6 text-cyan-400" />
             </motion.div>
             <h3 className="text-xl md:text-2xl font-bold text-white">Rezultatul?</h3>
           </div>
           <p className="text-lg md:text-xl text-white/70">
             Recuperezi{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400 font-bold">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400 font-bold">
               20–40 de ore pe săptămână
             </span>{" "}
             și poți să te concentrezi pe creșterea reală a afacerii.

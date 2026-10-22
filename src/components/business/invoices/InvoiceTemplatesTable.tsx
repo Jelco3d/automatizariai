@@ -115,7 +115,7 @@ export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTablePr
                   variant="ghost"
                   size="sm"
                   onClick={() => setEditTemplate(template)}
-                  className="text-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/10 h-8 w-8 p-0"
+                  className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 h-8 w-8 p-0"
                   title="Editează"
                 >
                   <Pencil className="h-4 w-4" />
@@ -193,7 +193,7 @@ export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTablePr
                       variant="ghost"
                       size="sm"
                       onClick={() => setEditTemplate(template)}
-                      className="text-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/10"
+                      className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10"
                       title="Editează template"
                     >
                       <Pencil className="h-4 w-4" />

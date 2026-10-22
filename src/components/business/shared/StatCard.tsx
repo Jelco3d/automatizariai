@@ -29,10 +29,10 @@ const variantStyles = {
     glow: "hover:border-emerald-500/30 hover:shadow-emerald-500/5",
   },
   amber: {
-    iconBg: "from-amber-500/20 to-amber-600/10",
-    iconColor: "text-amber-400",
-    border: "border-amber-500/15",
-    glow: "hover:border-amber-500/30 hover:shadow-amber-500/5",
+    iconBg: "from-teal-500/20 to-teal-600/10",
+    iconColor: "text-teal-400",
+    border: "border-teal-500/15",
+    glow: "hover:border-teal-500/30 hover:shadow-teal-500/5",
   },
   red: {
     iconBg: "from-red-500/20 to-red-600/10",

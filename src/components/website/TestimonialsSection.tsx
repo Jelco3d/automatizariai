@@ -37,7 +37,7 @@ export const TestimonialsSection = () => {
           className="text-2xl md:text-4xl font-bold text-center text-white mb-12"
         >
           Nu mă crede pe cuvânt –{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-400">
             uite ce au obținut alții
           </span>
         </motion.h2>
@@ -50,14 +50,14 @@ export const TestimonialsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-4 md:p-6 hover:border-yellow-400/30 transition-all duration-300"
+              className="bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-4 md:p-6 hover:border-cyan-400/30 transition-all duration-300"
             >
-              <Quote className="w-8 h-8 text-yellow-400/40 mb-4" />
+              <Quote className="w-8 h-8 text-cyan-400/40 mb-4" />
 
               {/* Stars */}
               <div className="flex gap-0.5 mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  <Star key={i} className="w-4 h-4 fill-cyan-400 text-cyan-400" />
                 ))}
               </div>
 
@@ -66,7 +66,7 @@ export const TestimonialsSection = () => {
                   i < arr.length - 1 ? (
                     <span key={i}>
                       {part}
-                      <span className="text-yellow-400 font-bold">{t.highlight}</span>
+                      <span className="text-cyan-400 font-bold">{t.highlight}</span>
                     </span>
                   ) : (
                     part
@@ -74,8 +74,8 @@ export const TestimonialsSection = () => {
                 )}"
               </p>
 
-              <div className="border-t border-yellow-400/20 pt-4">
-                <p className="text-yellow-300 font-semibold">{t.name}</p>
+              <div className="border-t border-cyan-400/20 pt-4">
+                <p className="text-cyan-300 font-semibold">{t.name}</p>
                 <p className="text-white/40 text-sm">{t.industry}</p>
                 {t.location && (
                   <p className="text-white/30 text-sm">{t.location}</p>

@@ -137,7 +137,7 @@ export const WebsiteChatbot = () => {
           className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex flex-col items-center gap-1 group cursor-pointer"
           aria-label="Open chat"
         >
-          <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 flex items-center justify-center border border-yellow-300/50 logo-3d overflow-hidden transition-transform duration-300 group-hover:scale-110">
+          <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-cyan-300 via-teal-400 to-cyan-600 flex items-center justify-center border border-cyan-300/50 logo-3d overflow-hidden transition-transform duration-300 group-hover:scale-110">
             <span
               className="relative z-10 text-black font-extrabold text-2xl md:text-3xl"
               style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2), 0 -1px 0 rgba(255,255,255,0.3)' }}
@@ -145,7 +145,7 @@ export const WebsiteChatbot = () => {
               AI
             </span>
           </div>
-          <span className="text-[8px] md:text-[10px] font-bold tracking-[0.15em] bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
+          <span className="text-[8px] md:text-[10px] font-bold tracking-[0.15em] bg-gradient-to-r from-cyan-300 to-teal-400 bg-clip-text text-transparent">
             AUTOMATIZĂRI
           </span>
         </button>
@@ -153,23 +153,23 @@ export const WebsiteChatbot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <Card className="fixed bottom-0 right-0 md:bottom-4 md:right-4 w-full md:w-[380px] h-[100dvh] md:h-[600px] md:rounded-lg flex flex-col bg-[#0a0e1a] border-yellow-500/30 shadow-2xl shadow-yellow-500/10 z-50 animate-scale-in">
+        <Card className="fixed bottom-0 right-0 md:bottom-4 md:right-4 w-full md:w-[380px] h-[100dvh] md:h-[600px] md:rounded-lg flex flex-col bg-[#051535] border-cyan-500/30 shadow-2xl shadow-cyan-500/10 z-50 animate-scale-in">
           {/* Header */}
-          <div className="flex items-center justify-between p-3 md:p-4 border-b border-yellow-500/30 bg-gradient-to-r from-yellow-500/10 to-amber-500/10">
+          <div className="flex items-center justify-between p-3 md:p-4 border-b border-cyan-500/30 bg-gradient-to-r from-cyan-500/10 to-teal-500/10">
             <div className="flex items-center gap-2 md:gap-3">
-              <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 flex items-center justify-center border border-yellow-300/50 logo-3d overflow-hidden">
+              <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-cyan-300 via-teal-400 to-cyan-600 flex items-center justify-center border border-cyan-300/50 logo-3d overflow-hidden">
                 <span className="relative z-10 text-black font-extrabold text-sm" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2), 0 -1px 0 rgba(255,255,255,0.3)' }}>AI</span>
               </div>
               <div>
                 <h3 className="font-semibold text-white text-sm md:text-base">AI Automatizari</h3>
-                <p className="text-xs text-yellow-400/60">Asistent AI</p>
+                <p className="text-xs text-cyan-400/60">Asistent AI</p>
               </div>
             </div>
             <Button
               onClick={() => setIsOpen(false)}
               variant="ghost"
               size="icon"
-              className="text-yellow-400/60 hover:text-yellow-400 h-8 w-8 md:h-10 md:w-10"
+              className="text-cyan-400/60 hover:text-cyan-400 h-8 w-8 md:h-10 md:w-10"
             >
               <X className="h-4 w-4 md:h-5 md:w-5" />
             </Button>
@@ -186,8 +186,8 @@ export const WebsiteChatbot = () => {
                   <div
                     className={`max-w-[85%] md:max-w-[80%] rounded-lg p-2.5 md:p-3 ${
                       message.role === "user"
-                        ? "bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-medium shadow-lg shadow-yellow-500/20"
-                        : "bg-yellow-900/10 text-white border border-yellow-500/20"
+                        ? "bg-gradient-to-r from-cyan-500 to-teal-600 text-black font-medium shadow-lg shadow-cyan-500/20"
+                        : "bg-cyan-900/10 text-white border border-cyan-500/20"
                     }`}
                   >
                     <p className="text-sm md:text-sm whitespace-pre-wrap break-words">{message.content}</p>
@@ -196,8 +196,8 @@ export const WebsiteChatbot = () => {
               ))}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-yellow-900/10 border border-yellow-500/20 rounded-lg p-2.5 md:p-3">
-                    <Loader2 className="h-4 w-4 animate-spin text-yellow-400" />
+                  <div className="bg-cyan-900/10 border border-cyan-500/20 rounded-lg p-2.5 md:p-3">
+                    <Loader2 className="h-4 w-4 animate-spin text-cyan-400" />
                   </div>
                 </div>
               )}
@@ -214,7 +214,7 @@ export const WebsiteChatbot = () => {
                   onClick={() => handleQuickAction("Vreau să programez o consultație")}
                   size="sm"
                   variant="outline"
-                  className="text-[10px] md:text-xs border-yellow-500/30 hover:border-yellow-400 hover:bg-yellow-500/10 text-yellow-400/80 px-2 md:px-3 h-7 md:h-8"
+                  className="text-[10px] md:text-xs border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-500/10 text-cyan-400/80 px-2 md:px-3 h-7 md:h-8"
                 >
                   📅 Programează
                 </Button>
@@ -222,7 +222,7 @@ export const WebsiteChatbot = () => {
                   onClick={() => handleQuickAction("Ce servicii oferiți?")}
                   size="sm"
                   variant="outline"
-                  className="text-[10px] md:text-xs border-yellow-500/30 hover:border-yellow-400 hover:bg-yellow-500/10 text-yellow-400/80 px-2 md:px-3 h-7 md:h-8"
+                  className="text-[10px] md:text-xs border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-500/10 text-cyan-400/80 px-2 md:px-3 h-7 md:h-8"
                 >
                   🔧 Servicii
                 </Button>
@@ -230,7 +230,7 @@ export const WebsiteChatbot = () => {
                   onClick={() => handleQuickAction("Cum mă puteți ajuta cu AI?")}
                   size="sm"
                   variant="outline"
-                  className="text-[10px] md:text-xs border-yellow-500/30 hover:border-yellow-400 hover:bg-yellow-500/10 text-yellow-400/80 px-2 md:px-3 h-7 md:h-8"
+                  className="text-[10px] md:text-xs border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-500/10 text-cyan-400/80 px-2 md:px-3 h-7 md:h-8"
                 >
                   💡 Despre AI
                 </Button>
@@ -239,7 +239,7 @@ export const WebsiteChatbot = () => {
           )}
 
           {/* Input */}
-          <div className="p-3 md:p-4 border-t border-yellow-500/30 safe-area-bottom">
+          <div className="p-3 md:p-4 border-t border-cyan-500/30 safe-area-bottom">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -252,7 +252,7 @@ export const WebsiteChatbot = () => {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Scrie mesajul tău..."
                 disabled={isLoading}
-                className="bg-yellow-900/10 border-yellow-500/30 text-white placeholder:text-gray-500 focus:border-yellow-400 text-sm h-10 md:h-10"
+                className="bg-cyan-900/10 border-cyan-500/30 text-white placeholder:text-gray-500 focus:border-cyan-400 text-sm h-10 md:h-10"
               />
               <Button
                 type="submit"

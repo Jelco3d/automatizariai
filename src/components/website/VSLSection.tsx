@@ -25,11 +25,11 @@ export const VSLSection = ({ onOpenAuditModal }: VSLSectionProps) => {
           className="text-xl md:text-4xl font-extrabold text-center text-white/90 mb-10 leading-tight max-w-3xl mx-auto"
         >
           Cum Am Ajutat Antreprenori Ca Tine Să Recupereze{" "}
-          <span className="text-yellow-400">Zeci De Ore</span> Pe Săptămână
+          <span className="text-cyan-400">Zeci De Ore</span> Pe Săptămână
           <br />
           <span className="text-white/50 text-lg md:text-2xl font-medium mt-2 block">
             în mai puțin de{" "}
-            <span className="text-yellow-400 font-bold">30 de zile</span>
+            <span className="text-cyan-400 font-bold">30 de zile</span>
           </span>
         </motion.h2>
 
@@ -38,7 +38,7 @@ export const VSLSection = ({ onOpenAuditModal }: VSLSectionProps) => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative aspect-video rounded-2xl overflow-hidden border border-yellow-400/20 bg-white/[0.02] mb-8 shadow-lg shadow-yellow-500/[0.05]"
+          className="relative aspect-video rounded-2xl overflow-hidden border border-cyan-400/20 bg-white/[0.02] mb-8 shadow-lg shadow-cyan-500/[0.05]"
         >
           {showVideo ? (
             <iframe
@@ -56,7 +56,7 @@ export const VSLSection = ({ onOpenAuditModal }: VSLSectionProps) => {
               className="absolute inset-0 w-full h-full flex items-center justify-center bg-gradient-to-br from-[#0a0e1a] to-[#1a1e2e] cursor-pointer group"
               aria-label="Pornește video prezentare"
             >
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-500/30 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-cyan-300 via-teal-400 to-cyan-600 flex items-center justify-center shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-300">
                 <Play className="w-8 h-8 md:w-10 md:h-10 text-black ml-1" />
               </div>
               <span className="absolute bottom-4 text-white/50 text-sm">Click pentru a vedea video</span>

@@ -1,3 +1,4 @@
+import logoDark from "@/assets/logo-dark.png.asset.json";
 import { useState } from "react";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,18 +19,8 @@ export function Navigation({ onOpenAuditModal }: NavigationProps) {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-center items-center py-1.5 md:py-2">
-      <Link to="/" className="flex flex-col items-center gap-1 group">
-        <div className="relative w-11 h-11 md:w-14 md:h-14 lg:w-[4.5rem] lg:h-[4.5rem] rounded-full bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 flex items-center justify-center border border-yellow-300/50 logo-3d overflow-hidden transition-transform duration-300 group-hover:scale-110">
-          <span
-            className="relative z-10 text-black font-extrabold text-lg md:text-xl lg:text-2xl"
-            style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2), 0 -1px 0 rgba(255,255,255,0.3)' }}
-          >
-            AI
-          </span>
-        </div>
-        <span className="text-[8px] md:text-[10px] lg:text-xs font-bold tracking-[0.2em] bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
-          AUTOMATIZĂRI
-        </span>
+      <Link to="/" className="flex items-center group" aria-label="AI Automatizări">
+        <img src={logoDark.url} alt="AI Automatizări" className="h-9 md:h-11 lg:h-12 w-auto transition-transform duration-300 group-hover:scale-105" />
       </Link>
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetTrigger asChild>
@@ -37,29 +28,29 @@ export function Navigation({ onOpenAuditModal }: NavigationProps) {
             variant="outline"
             size="icon"
             aria-label="Deschide meniu navigare"
-            className="bg-white/[0.05] backdrop-blur-sm border-yellow-400/30 hover:bg-yellow-400/10 hover:border-yellow-400/50 absolute right-4 top-1/2 -translate-y-1/2 transition-all duration-300"
+            className="bg-white/[0.05] backdrop-blur-sm border-cyan-400/30 hover:bg-cyan-400/10 hover:border-cyan-400/50 absolute right-4 top-1/2 -translate-y-1/2 transition-all duration-300"
           >
-            <Menu className="h-5 w-5 text-yellow-400" />
+            <Menu className="h-5 w-5 text-cyan-400" />
           </Button>
         </SheetTrigger>
-        <SheetContent className="w-[300px] bg-[#0a0e1a]/95 backdrop-blur-xl border-white/[0.08]">
+        <SheetContent className="w-[300px] bg-[#051535]/95 backdrop-blur-xl border-white/[0.08]">
           <nav className="flex flex-col gap-4 mt-8">
-            <Link to="/" className="text-white/70 hover:text-yellow-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-yellow-400/[0.06]">
+            <Link to="/" className="text-white/70 hover:text-cyan-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-cyan-400/[0.06]">
               Acasă
             </Link>
-            <Link to="/services" className="text-white/70 hover:text-yellow-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-yellow-400/[0.06]">
+            <Link to="/services" className="text-white/70 hover:text-cyan-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-cyan-400/[0.06]">
               Servicii
             </Link>
-            <Link to="/audit-gratuit" className="text-white/70 hover:text-yellow-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-yellow-400/[0.06]">
+            <Link to="/audit-gratuit" className="text-white/70 hover:text-cyan-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-cyan-400/[0.06]">
               Audit Gratuit
             </Link>
-            <Link to="/about" className="text-white/70 hover:text-yellow-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-yellow-400/[0.06]">
+            <Link to="/about" className="text-white/70 hover:text-cyan-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-cyan-400/[0.06]">
               Despre Noi
             </Link>
-            <Link to="/portfolio" className="text-white/70 hover:text-yellow-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-yellow-400/[0.06]">
+            <Link to="/portfolio" className="text-white/70 hover:text-cyan-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-cyan-400/[0.06]">
               Portofoliu
             </Link>
-            <Link to="/contact" className="text-white/70 hover:text-yellow-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-yellow-400/[0.06]">
+            <Link to="/contact" className="text-white/70 hover:text-cyan-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-cyan-400/[0.06]">
               Contact
             </Link>
             <Button

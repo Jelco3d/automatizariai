@@ -18,25 +18,25 @@ const Services = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0e1a] relative overflow-hidden">
+    <div className="min-h-screen bg-[#051535] relative overflow-hidden">
       <Navigation />
       
       {/* Animated background elements - gold/amber like Homepage */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-yellow-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       <ServicesHero handleBooking={handleBooking} />
-      <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
+      <div className="w-24 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent mx-auto" />
       <DetailedServices />
-      <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
+      <div className="w-24 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent mx-auto" />
       <CaseStudies />
-      <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
+      <div className="w-24 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent mx-auto" />
       <TechnicalCapabilities />
-      <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
+      <div className="w-24 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent mx-auto" />
       <IntegrationOptions />
-      <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent mx-auto" />
+      <div className="w-24 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent mx-auto" />
       <CTASection handleBooking={handleBooking} />
 
       <Footer />
