@@ -70,7 +70,7 @@ export function Sidebar() {
         <img 
           src={logoDark.url} 
           alt="AI Automatizari" 
-          className="h-14 w-auto rounded-xl opacity-90 hover:opacity-100 transition-opacity" 
+          className="h-16 w-auto opacity-90 hover:opacity-100 transition-opacity" 
         />
       </Link>
 
@@ -126,7 +126,7 @@ export function Sidebar() {
         </Sheet>
         
         <Link to="/business-dashboard" className="flex items-center">
-          <img src={logoDark.url} alt="AI Automatizari" className="h-10 w-auto rounded-lg" />
+          <img src={logoDark.url} alt="AI Automatizari" className="h-12 w-auto" />
         </Link>
         <div className="w-10" />
       </div>
