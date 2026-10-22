@@ -139,7 +139,7 @@ export const WebsiteChatbot = () => {
         >
           <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-cyan-300 via-teal-400 to-cyan-600 flex items-center justify-center border border-cyan-300/50 logo-3d overflow-hidden transition-transform duration-300 group-hover:scale-110">
             <span
-              className="relative z-10 text-black font-extrabold text-2xl md:text-3xl"
+              className="relative z-10 text-white font-extrabold text-2xl md:text-3xl"
               style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2), 0 -1px 0 rgba(255,255,255,0.3)' }}
             >
               AI
@@ -158,7 +158,7 @@ export const WebsiteChatbot = () => {
           <div className="flex items-center justify-between p-3 md:p-4 border-b border-cyan-500/30 bg-gradient-to-r from-cyan-500/10 to-teal-500/10">
             <div className="flex items-center gap-2 md:gap-3">
               <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-cyan-300 via-teal-400 to-cyan-600 flex items-center justify-center border border-cyan-300/50 logo-3d overflow-hidden">
-                <span className="relative z-10 text-black font-extrabold text-sm" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2), 0 -1px 0 rgba(255,255,255,0.3)' }}>AI</span>
+                <span className="relative z-10 text-white font-extrabold text-sm" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2), 0 -1px 0 rgba(255,255,255,0.3)' }}>AI</span>
               </div>
               <div>
                 <h3 className="font-semibold text-white text-sm md:text-base">AI Automatizari</h3>
@@ -186,7 +186,7 @@ export const WebsiteChatbot = () => {
                   <div
                     className={`max-w-[85%] md:max-w-[80%] rounded-lg p-2.5 md:p-3 ${
                       message.role === "user"
-                        ? "bg-gradient-to-r from-cyan-500 to-teal-600 text-black font-medium shadow-lg shadow-cyan-500/20"
+                        ? "bg-gradient-to-r from-cyan-500 to-teal-600 text-white font-medium shadow-lg shadow-cyan-500/20"
                         : "bg-cyan-900/10 text-white border border-cyan-500/20"
                     }`}
                   >
