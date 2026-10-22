@@ -1,4 +1,3 @@
-import logoDark from "@/assets/logo-dark.png.asset.json";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -86,7 +85,7 @@ export default function Auth() {
         <CardHeader>
           <div className="flex justify-center mb-4">
             <img 
-              src={logoDark.url} 
+              src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" 
               alt="AI Automatizari" 
               className="h-20 w-auto rounded-xl"
             />
