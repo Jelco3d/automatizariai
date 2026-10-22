@@ -28,7 +28,7 @@ export const HeroSection = ({ onOpenAuditModal }: HeroSectionProps) => {
 
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 max-w-4xl mx-auto text-white tracking-tight">
           Ajut Antreprenorii Din România Să Implementeze{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-teal-400 to-orange-500">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-teal-400 to-cyan-500">
             Infrastructura Internă, Agenți AI
           </span>{" "}
           Și Automatizări Eficiente

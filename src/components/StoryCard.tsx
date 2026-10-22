@@ -22,7 +22,7 @@ export const StoryCard = ({ story }: StoryCardProps) => {
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <Badge variant="secondary" className="flex items-center gap-1">
-          <ArrowUpCircle className="w-4 h-4 text-orange-500" />
+          <ArrowUpCircle className="w-4 h-4 text-cyan-500" />
           <span>{story.points}</span>
         </Badge>
         <a

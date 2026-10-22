@@ -84,7 +84,7 @@ export function QuoteStatusDialog({ open, onOpenChange, quote, onStatusChange }:
                     : action.color === 'red'
                     ? 'bg-red-600 hover:bg-red-700'
                     : action.color === 'orange'
-                    ? 'bg-orange-600 hover:bg-orange-700'
+                    ? 'bg-cyan-600 hover:bg-cyan-700'
                     : 'bg-gray-600 hover:bg-gray-700'
                 }`}
                 variant={isCurrentStatus ? 'secondary' : 'default'}
