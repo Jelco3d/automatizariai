@@ -40,7 +40,7 @@ export function InvoiceStatusDialog({ open, onOpenChange, invoice }: InvoiceStat
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white">
+      <DialogContent className="bg-[#1A1F2C] border-amber-500/20 text-white">
         <DialogHeader>
           <DialogTitle>Schimbă status</DialogTitle>
         </DialogHeader>
@@ -79,7 +79,7 @@ export function InvoiceStatusDialog({ open, onOpenChange, invoice }: InvoiceStat
           <Button
             onClick={handleSubmit}
             disabled={updateInvoiceStatus.isPending || selectedStatus === invoice.status}
-            className="bg-purple-600 hover:bg-purple-700"
+            className="bg-amber-600 hover:bg-amber-700"
           >
             {updateInvoiceStatus.isPending ? 'Se salvează...' : 'Salvează'}
           </Button>

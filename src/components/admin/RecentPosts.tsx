@@ -34,15 +34,15 @@ const recentPosts = [{
   trend: "neutral"
 }];
 export function RecentPosts() {
-  return <Card className="bg-[#1A1F2C]/50 border-purple-500/20">
-      <div className="p-4 border-b border-purple-500/20 flex justify-between items-center">
+  return <Card className="bg-[#1A1F2C]/50 border-amber-500/20">
+      <div className="p-4 border-b border-amber-500/20 flex justify-between items-center">
         <h2 className="text-xl text-slate-50 font-bold">Recent Posts</h2>
         <div className="flex gap-2">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <Input type="search" placeholder="Search posts..." className="pl-10 bg-[#1A1F2C]/50 border-purple-500/20" />
+            <Input type="search" placeholder="Search posts..." className="pl-10 bg-[#1A1F2C]/50 border-amber-500/20" />
           </div>
-          <Button variant="outline" className="gap-2 border-purple-500/20">
+          <Button variant="outline" className="gap-2 border-amber-500/20">
             <Filter className="h-4 w-4" />
             Filter
           </Button>
@@ -51,12 +51,12 @@ export function RecentPosts() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-purple-400">Title</TableHead>
-            <TableHead className="text-purple-400">Status</TableHead>
-            <TableHead className="text-purple-400">Date</TableHead>
-            <TableHead className="text-purple-400">Views</TableHead>
-            <TableHead className="text-purple-400">Trend</TableHead>
-            <TableHead className="text-purple-400">Actions</TableHead>
+            <TableHead className="text-amber-400">Title</TableHead>
+            <TableHead className="text-amber-400">Status</TableHead>
+            <TableHead className="text-amber-400">Date</TableHead>
+            <TableHead className="text-amber-400">Views</TableHead>
+            <TableHead className="text-amber-400">Trend</TableHead>
+            <TableHead className="text-amber-400">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

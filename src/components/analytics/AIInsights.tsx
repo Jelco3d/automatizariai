@@ -5,7 +5,7 @@ import { Users } from "lucide-react";
 
 export const AIInsights = () => {
   return (
-    <Card className="bg-[#1A1F2C] border-purple-500/20">
+    <Card className="bg-[#1A1F2C] border-amber-500/20">
       <CardHeader>
         <CardTitle>AI Insights</CardTitle>
         <CardDescription>Automated content recommendations</CardDescription>

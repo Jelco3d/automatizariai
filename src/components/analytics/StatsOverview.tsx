@@ -5,10 +5,10 @@ import { TrendingUp, Clock, Share2, MousePointerClick } from "lucide-react";
 export const StatsOverview = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <Card className="bg-[#1A1F2C] border-purple-500/20">
+      <Card className="bg-[#1A1F2C] border-amber-500/20">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <TrendingUp className="h-4 w-4 text-purple-400" />
+            <TrendingUp className="h-4 w-4 text-amber-400" />
             Total Views
           </CardTitle>
         </CardHeader>
@@ -17,10 +17,10 @@ export const StatsOverview = () => {
           <p className="text-sm text-green-400">+12% vs last week</p>
         </CardContent>
       </Card>
-      <Card className="bg-[#1A1F2C] border-purple-500/20">
+      <Card className="bg-[#1A1F2C] border-amber-500/20">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <Clock className="h-4 w-4 text-purple-400" />
+            <Clock className="h-4 w-4 text-amber-400" />
             Avg. Read Time
           </CardTitle>
         </CardHeader>
@@ -29,10 +29,10 @@ export const StatsOverview = () => {
           <p className="text-sm text-gray-400">minutes per visit</p>
         </CardContent>
       </Card>
-      <Card className="bg-[#1A1F2C] border-purple-500/20">
+      <Card className="bg-[#1A1F2C] border-amber-500/20">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <Share2 className="h-4 w-4 text-purple-400" />
+            <Share2 className="h-4 w-4 text-amber-400" />
             Engagement Rate
           </CardTitle>
         </CardHeader>
@@ -41,10 +41,10 @@ export const StatsOverview = () => {
           <p className="text-sm text-red-400">-2% vs last week</p>
         </CardContent>
       </Card>
-      <Card className="bg-[#1A1F2C] border-purple-500/20">
+      <Card className="bg-[#1A1F2C] border-amber-500/20">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <MousePointerClick className="h-4 w-4 text-purple-400" />
+            <MousePointerClick className="h-4 w-4 text-amber-400" />
             Bounce Rate
           </CardTitle>
         </CardHeader>

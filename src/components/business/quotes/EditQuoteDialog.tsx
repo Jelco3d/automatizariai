@@ -59,7 +59,7 @@ export function EditQuoteDialog({ open, onOpenChange, quote, onUpdate }: EditQuo
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="bg-[#1A1F2C] border-amber-500/20 text-white max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl">Editează Oferta {quote.quote_number}</DialogTitle>
         </DialogHeader>

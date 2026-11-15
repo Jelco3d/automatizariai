@@ -81,7 +81,7 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen bg-[#0F1117] flex items-center justify-center p-4">
-      <Card className="w-full max-w-md bg-[#1A1F2C] border-purple-500/20">
+      <Card className="w-full max-w-md bg-[#1A1F2C] border-amber-500/20">
         <CardHeader>
           <div className="flex justify-center mb-4">
             <img 
@@ -108,7 +108,7 @@ export default function Auth() {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required={!isLogin}
-                  className="bg-[#0F1117] border-purple-500/20 text-white"
+                  className="bg-[#0F1117] border-amber-500/20 text-white"
                 />
               </div>
             )}
@@ -120,7 +120,7 @@ export default function Auth() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-[#0F1117] border-purple-500/20 text-white"
+                className="bg-[#0F1117] border-amber-500/20 text-white"
               />
             </div>
             <div className="space-y-2">
@@ -131,12 +131,12 @@ export default function Auth() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="bg-[#0F1117] border-purple-500/20 text-white"
+                className="bg-[#0F1117] border-amber-500/20 text-white"
               />
             </div>
             <Button
               type="submit"
-              className="w-full bg-purple-600 hover:bg-purple-700"
+              className="w-full bg-amber-600 hover:bg-amber-700"
               disabled={loading}
             >
               {loading ? "Se procesează..." : isLogin ? "Autentificare" : "Creare Cont"}
@@ -145,7 +145,7 @@ export default function Auth() {
           <div className="mt-4 text-center">
             <button
               onClick={() => setIsLogin(!isLogin)}
-              className="text-purple-400 hover:text-purple-300 text-sm"
+              className="text-amber-400 hover:text-amber-300 text-sm"
             >
               {isLogin ? "Nu ai cont? Creează unul" : "Ai deja cont? Autentifică-te"}
             </button>

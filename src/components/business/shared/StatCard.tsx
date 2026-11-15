@@ -11,10 +11,10 @@ interface StatCardProps {
 
 const variantStyles = {
   purple: {
-    iconBg: "from-purple-500/20 to-purple-600/10",
-    iconColor: "text-purple-400",
-    border: "border-purple-500/15",
-    glow: "hover:border-purple-500/30 hover:shadow-purple-500/5",
+    iconBg: "from-amber-500/20 to-amber-600/10",
+    iconColor: "text-amber-400",
+    border: "border-amber-500/15",
+    glow: "hover:border-amber-500/30 hover:shadow-amber-500/5",
   },
   blue: {
     iconBg: "from-blue-500/20 to-blue-600/10",

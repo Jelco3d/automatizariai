@@ -36,7 +36,7 @@ export function ProposalStatusDialog({ open, onOpenChange, proposal, onUpdateSta
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white">
+      <DialogContent className="bg-[#1A1F2C] border-amber-500/20 text-white">
         <DialogHeader>
           <DialogTitle>Schimbă Status Propunere</DialogTitle>
           <DialogDescription>Alege statusul propunerii și salvează.</DialogDescription>
@@ -52,7 +52,7 @@ export function ProposalStatusDialog({ open, onOpenChange, proposal, onUpdateSta
               <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-[#1A1F2C] border-purple-500/20">
+              <SelectContent className="bg-[#1A1F2C] border-amber-500/20">
                 {statusOptions.map((option) => (
                   <SelectItem key={option.value} value={option.value} className="text-white">
                     {option.label}
@@ -71,7 +71,7 @@ export function ProposalStatusDialog({ open, onOpenChange, proposal, onUpdateSta
             </Button>
             <Button
               onClick={handleSubmit}
-              className="bg-purple-600 hover:bg-purple-700"
+              className="bg-amber-600 hover:bg-amber-700"
             >
               Salvează
             </Button>

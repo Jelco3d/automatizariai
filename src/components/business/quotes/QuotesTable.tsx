@@ -138,7 +138,7 @@ export function QuotesTable({ quotes, onDelete, onUpdate, onStatusChange }: Quot
                         setSelectedQuote(quote);
                         setEditDialogOpen(true);
                       }}
-                      className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10 h-8 w-8 p-0"
+                      className="text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 h-8 w-8 p-0"
                       title="Editează"
                     >
                       <Pencil className="h-4 w-4" />
@@ -229,7 +229,7 @@ export function QuotesTable({ quotes, onDelete, onUpdate, onStatusChange }: Quot
                           setSelectedQuote(quote);
                           setEditDialogOpen(true);
                         }}
-                        className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10"
+                        className="text-amber-400 hover:text-amber-300 hover:bg-amber-500/10"
                       >
                         <Pencil className="h-4 w-4" />
                       </Button>

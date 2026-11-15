@@ -114,7 +114,7 @@ export function ContactModal({ isOpen, onClose, sessionId, reportText }: Contact
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[500px] bg-gradient-to-br from-background via-background to-primary/5">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-primary via-amber-600 to-pink-600 bg-clip-text text-transparent">
             Descarcă Raportul Tău Complet 📊
           </DialogTitle>
           <DialogDescription className="text-base">
@@ -204,7 +204,7 @@ export function ContactModal({ isOpen, onClose, sessionId, reportText }: Contact
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:opacity-90 transition-opacity"
+                className="flex-1 bg-gradient-to-r from-primary via-amber-600 to-pink-600 hover:opacity-90 transition-opacity"
               >
                 {isSubmitting ? (
                   <>

@@ -16,7 +16,7 @@ const viewsData = [
 
 export const TrafficChart = () => {
   return (
-    <Card className="bg-[#1A1F2C] border-purple-500/20">
+    <Card className="bg-[#1A1F2C] border-amber-500/20">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle>Traffic Overview</CardTitle>
@@ -31,8 +31,8 @@ export const TrafficChart = () => {
             <AreaChart data={viewsData}>
               <defs>
                 <linearGradient id="colorViews" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.8}/>
-                  <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#D97706" stopOpacity={0.8}/>
+                  <stop offset="95%" stopColor="#D97706" stopOpacity={0}/>
                 </linearGradient>
               </defs>
               <XAxis dataKey="name" stroke="#6b7280" />
@@ -47,7 +47,7 @@ export const TrafficChart = () => {
               <Area 
                 type="monotone" 
                 dataKey="views" 
-                stroke="#8b5cf6" 
+                stroke="#D97706" 
                 fillOpacity={1} 
                 fill="url(#colorViews)" 
               />

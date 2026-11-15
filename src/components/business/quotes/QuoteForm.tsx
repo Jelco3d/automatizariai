@@ -38,7 +38,7 @@ export function QuoteForm({ onSubmit, initialData, isSubmitting }: QuoteFormProp
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2.5 md:space-y-6">
-      <Card className="bg-[#0F1117] md:bg-[#1A1F2C] border-purple-500/20 p-2.5 md:p-6">
+      <Card className="bg-[#0F1117] md:bg-[#1A1F2C] border-amber-500/20 p-2.5 md:p-6">
         <h3 className="text-sm md:text-xl font-semibold text-white mb-2 md:mb-4">Client</h3>
         <div>
           <Label className="text-white text-xs md:text-sm">Client *</Label>
@@ -52,7 +52,7 @@ export function QuoteForm({ onSubmit, initialData, isSubmitting }: QuoteFormProp
         </div>
       </Card>
 
-      <Card className="bg-[#0F1117] md:bg-[#1A1F2C] border-purple-500/20 p-2.5 md:p-6">
+      <Card className="bg-[#0F1117] md:bg-[#1A1F2C] border-amber-500/20 p-2.5 md:p-6">
         <h3 className="text-sm md:text-xl font-semibold text-white mb-2 md:mb-4">Detalii</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
           <div>
@@ -102,7 +102,7 @@ export function QuoteForm({ onSubmit, initialData, isSubmitting }: QuoteFormProp
         </div>
       </Card>
 
-      <Card className="bg-[#0F1117] md:bg-[#1A1F2C] border-purple-500/20 p-2.5 md:p-6">
+      <Card className="bg-[#0F1117] md:bg-[#1A1F2C] border-amber-500/20 p-2.5 md:p-6">
         <QuoteItemsManager
           items={items}
           onChange={(newItems) => setValue('items', newItems)}
@@ -110,7 +110,7 @@ export function QuoteForm({ onSubmit, initialData, isSubmitting }: QuoteFormProp
         />
       </Card>
 
-      <Card className="bg-[#0F1117] md:bg-[#1A1F2C] border-purple-500/20 p-2.5 md:p-6">
+      <Card className="bg-[#0F1117] md:bg-[#1A1F2C] border-amber-500/20 p-2.5 md:p-6">
         <h3 className="text-sm md:text-xl font-semibold text-white mb-2 md:mb-4">Termeni</h3>
         <div className="space-y-2 md:space-y-4">
           <div>
@@ -137,7 +137,7 @@ export function QuoteForm({ onSubmit, initialData, isSubmitting }: QuoteFormProp
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="bg-purple-600 hover:bg-purple-700 w-full md:w-auto text-xs md:text-sm h-8 md:h-10"
+          className="bg-amber-600 hover:bg-amber-700 w-full md:w-auto text-xs md:text-sm h-8 md:h-10"
         >
           {isSubmitting ? 'Se salvează...' : initialData ? 'Actualizează' : 'Creează'}
         </Button>

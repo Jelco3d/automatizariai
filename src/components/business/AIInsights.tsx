@@ -125,12 +125,12 @@ export const AIInsights = () => {
 
   if (loading) {
     return (
-      <Card className="bg-[#1A1F2C] border-purple-500/20">
+      <Card className="bg-[#1A1F2C] border-amber-500/20">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="flex items-center gap-2 text-white">
-              <Brain className="h-5 w-5 text-purple-400" />
+              <Brain className="h-5 w-5 text-amber-400" />
               AI Business Insights
             </CardTitle>
             <CardDescription>Analiză automată generată de AI</CardDescription>
@@ -148,7 +148,7 @@ export const AIInsights = () => {
         </div>
       </CardHeader>
         <CardContent className="flex items-center justify-center py-8">
-          <Loader2 className="h-8 w-8 animate-spin text-purple-400" />
+          <Loader2 className="h-8 w-8 animate-spin text-amber-400" />
         </CardContent>
       </Card>
     );
@@ -156,12 +156,12 @@ export const AIInsights = () => {
 
   if (!insights) {
     return (
-      <Card className="bg-[#1A1F2C] border-purple-500/20">
+      <Card className="bg-[#1A1F2C] border-amber-500/20">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="flex items-center gap-2 text-white">
-              <Brain className="h-5 w-5 text-purple-400" />
+              <Brain className="h-5 w-5 text-amber-400" />
               AI Business Insights
             </CardTitle>
             <CardDescription>Analiză automată generată de AI</CardDescription>
@@ -191,12 +191,12 @@ export const AIInsights = () => {
   const periodEnd = new Date(insights.period_end).toLocaleDateString('ro-RO');
 
   return (
-    <Card className="bg-[#1A1F2C] border-purple-500/20">
+    <Card className="bg-[#1A1F2C] border-amber-500/20">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="flex items-center gap-2 text-white">
-              <Brain className="h-5 w-5 text-purple-400" />
+              <Brain className="h-5 w-5 text-amber-400" />
               AI Business Insights
             </CardTitle>
             <CardDescription>
@@ -217,7 +217,7 @@ export const AIInsights = () => {
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Summary */}
-        <div className="p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg">
+        <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-lg">
           <p className="text-white text-sm leading-relaxed">{insights.summary}</p>
         </div>
 
@@ -225,7 +225,7 @@ export const AIInsights = () => {
         {insights.metrics && typeof insights.metrics === 'object' && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {Object.entries(insights.metrics).map(([key, value]) => (
-              <div key={key} className="bg-[#0F1117] p-3 rounded-lg border border-purple-500/10">
+              <div key={key} className="bg-[#0F1117] p-3 rounded-lg border border-amber-500/10">
                 <p className="text-xs text-gray-400 capitalize">
                   {key.replace(/([A-Z])/g, ' $1').trim()}
                 </p>
@@ -249,7 +249,7 @@ export const AIInsights = () => {
             {insights.insights.map((insight, index) => (
               <div
                 key={index}
-                className="p-3 bg-[#0F1117] border border-purple-500/10 rounded-lg"
+                className="p-3 bg-[#0F1117] border border-amber-500/10 rounded-lg"
               >
                 <div className="flex items-start gap-2">
                   {getInsightIcon(insight.type)}
@@ -280,9 +280,9 @@ export const AIInsights = () => {
               {insights.recommendations.map((rec, index) => (
                 <li
                   key={index}
-                  className="flex items-start gap-2 text-sm text-gray-300 p-2 bg-[#0F1117] rounded border border-purple-500/10"
+                  className="flex items-start gap-2 text-sm text-gray-300 p-2 bg-[#0F1117] rounded border border-amber-500/10"
                 >
-                  <span className="text-purple-400 mt-1">→</span>
+                  <span className="text-amber-400 mt-1">→</span>
                   <span>{rec}</span>
                 </li>
               ))}
@@ -291,7 +291,7 @@ export const AIInsights = () => {
         )}
 
         {/* Last updated */}
-        <p className="text-xs text-gray-500 text-center pt-4 border-t border-purple-500/10">
+        <p className="text-xs text-gray-500 text-center pt-4 border-t border-amber-500/10">
           Ultimul raport generat: {new Date(insights.created_at).toLocaleString('ro-RO')}
         </p>
       </CardContent>

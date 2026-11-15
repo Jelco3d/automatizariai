@@ -1,3 +1,4 @@
+import ScrollToTop from "@/components/ScrollToTop";
 
 import { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -57,6 +58,7 @@ const App = () => {
   return (
     <Router>
       <Suspense fallback={<div className="min-h-screen bg-[#0a0e1a]" />}>
+        <ScrollToTop />
         <Routes>
           <Route path="/acasă" element={<Index />} />
           <Route path="/" element={<Website />} />

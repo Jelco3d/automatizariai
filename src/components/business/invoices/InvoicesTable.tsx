@@ -59,7 +59,7 @@ export function InvoicesTable() {
   };
 
   return (
-    <Card className="bg-[#1A1F2C] border-purple-500/20 p-3 md:p-6">
+    <Card className="bg-[#1A1F2C] border-amber-500/20 p-3 md:p-6">
       <div className="mb-3 md:mb-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -116,7 +116,7 @@ export function InvoicesTable() {
                       variant="ghost"
                       size="sm"
                       onClick={() => setEditInvoice(invoice)}
-                      className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10 h-8 w-8 p-0"
+                      className="text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 h-8 w-8 p-0"
                     >
                       <Edit className="h-4 w-4" />
                     </Button>
@@ -201,7 +201,7 @@ export function InvoicesTable() {
                         variant="ghost"
                         size="sm"
                         onClick={() => setEditInvoice(invoice)}
-                        className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10"
+                        className="text-amber-400 hover:text-amber-300 hover:bg-amber-500/10"
                       >
                         <Edit className="h-4 w-4" />
                       </Button>

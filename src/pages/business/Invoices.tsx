@@ -38,13 +38,13 @@ export default function Invoices() {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
           <TabsList className="glass-card border border-white/[0.06] mb-6 inline-flex w-auto min-w-full md:min-w-0">
-            <TabsTrigger value="issued" className="data-[state=active]:bg-purple-600 data-[state=active]:text-white whitespace-nowrap">
+            <TabsTrigger value="issued" className="data-[state=active]:bg-amber-600 data-[state=active]:text-white whitespace-nowrap">
               Facturi Emise
             </TabsTrigger>
             <TabsTrigger value="paid" className="data-[state=active]:bg-emerald-600 data-[state=active]:text-white whitespace-nowrap">
               Facturi Încasate
             </TabsTrigger>
-            <TabsTrigger value="templates" className="data-[state=active]:bg-purple-600 data-[state=active]:text-white whitespace-nowrap">
+            <TabsTrigger value="templates" className="data-[state=active]:bg-amber-600 data-[state=active]:text-white whitespace-nowrap">
               Template-uri
             </TabsTrigger>
           </TabsList>

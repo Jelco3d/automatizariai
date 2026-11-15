@@ -22,7 +22,7 @@ export default function FidelizarePacienti() {
     <div className="min-h-screen bg-gradient-to-b from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] relative overflow-hidden">
       {/* Animated Background Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-amber-500/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '700ms' }}></div>
         <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1000ms' }}></div>
       </div>
@@ -34,7 +34,7 @@ export default function FidelizarePacienti() {
         <div className="max-w-5xl mx-auto text-center space-y-8">
           <h1 className="text-4xl md:text-6xl font-bold leading-tight">
             Cum pot clinicile dentare din România să-și{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300">
               tripleze programările
             </span>{" "}
             fără reclame noi
@@ -45,11 +45,11 @@ export default function FidelizarePacienti() {
           </p>
 
           {/* Video Player Placeholder */}
-          <div className="relative aspect-video max-w-4xl mx-auto rounded-2xl overflow-hidden bg-gray-900/50 backdrop-blur-sm shadow-2xl border border-purple-500/20">
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-600/80 to-pink-600/80">
+          <div className="relative aspect-video max-w-4xl mx-auto rounded-2xl overflow-hidden bg-gray-900/50 backdrop-blur-sm shadow-2xl border border-amber-500/20">
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-amber-600/80 to-pink-600/80">
               <div className="text-center space-y-4">
                 <div className="w-20 h-20 mx-auto rounded-full bg-white/90 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer hover:bg-white">
-                  <Play className="w-8 h-8 text-purple-600 ml-1" />
+                  <Play className="w-8 h-8 text-amber-600 ml-1" />
                 </div>
                 <p className="text-white text-lg font-medium">Video de prezentare – Cum funcționează sistemul</p>
               </div>
@@ -60,13 +60,13 @@ export default function FidelizarePacienti() {
             <Button 
               onClick={handleBookCall}
               size="lg"
-              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-lg px-8 py-6 h-auto transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
+              className="bg-gradient-to-r from-amber-500 to-pink-500 hover:from-amber-600 hover:to-pink-600 text-white text-lg px-8 py-6 h-auto transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-amber-500/25"
             >
               <Calendar className="mr-2" />
               Programează un Call Gratuit
             </Button>
             <p className="text-sm text-gray-400">
-              Află cum poți crește venitul clinicii cu <strong className="text-purple-400">+30–50%</strong> în 90 de zile.
+              Află cum poți crește venitul clinicii cu <strong className="text-amber-400">+30–50%</strong> în 90 de zile.
             </p>
           </div>
         </div>
@@ -77,7 +77,7 @@ export default function FidelizarePacienti() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-12">
             <div className="text-center space-y-4">
-              <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+              <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300">
                 De ce pierzi bani cu pacienții care nu revin
               </h2>
               <p className="text-xl text-gray-300">
@@ -93,7 +93,7 @@ export default function FidelizarePacienti() {
                 { title: "Fără recompense pentru revenire", desc: "Pacienții nu au niciun motiv să revină la tine" },
                 { title: "Nicio evidență clară a ratelor de retenție", desc: "Nu știi câți pacienți pierzi lunar și de ce" }
               ].map((problem, idx) => (
-                <Card key={idx} className="bg-gray-900/50 backdrop-blur-sm border-2 border-purple-500/20 hover:border-purple-400/50 transition-all hover:shadow-lg hover:shadow-purple-500/10">
+                <Card key={idx} className="bg-gray-900/50 backdrop-blur-sm border-2 border-amber-500/20 hover:border-amber-400/50 transition-all hover:shadow-lg hover:shadow-amber-500/10">
                   <CardContent className="p-6">
                     <h3 className="font-semibold text-lg mb-2 text-gray-100">{problem.title}</h3>
                     <p className="text-gray-400">{problem.desc}</p>
@@ -113,11 +113,11 @@ export default function FidelizarePacienti() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/20 backdrop-blur-sm border-2 border-purple-500/30">
+              <Card className="bg-gradient-to-br from-amber-900/30 to-pink-900/20 backdrop-blur-sm border-2 border-amber-500/30">
                 <CardContent className="p-5 md:p-8 text-center space-y-4">
-                   <TrendingUp className="w-12 h-12 mx-auto text-purple-400" />
-                  <h3 className="text-xl font-bold text-purple-400">Cu Fidelizare</h3>
-                  <p className="text-4xl font-bold text-purple-400">+200%</p>
+                   <TrendingUp className="w-12 h-12 mx-auto text-amber-400" />
+                  <h3 className="text-xl font-bold text-amber-400">Cu Fidelizare</h3>
+                  <p className="text-4xl font-bold text-amber-400">+200%</p>
                   <p className="text-sm text-gray-400">Creștere venit</p>
                 </CardContent>
               </Card>
@@ -135,7 +135,7 @@ export default function FidelizarePacienti() {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center space-y-4">
-              <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+              <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300">
                 Soluția: Sistemul automat de fidelizare pentru clinici dentare
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -164,15 +164,15 @@ export default function FidelizarePacienti() {
                   desc: "Programul se umple singur, fără efort din partea echipei tale"
                 }
               ].map((step, idx) => (
-                <Card key={idx} className="relative overflow-hidden bg-gray-900/50 backdrop-blur-sm border-2 border-purple-500/20 hover:border-purple-400/50 transition-all hover:shadow-xl hover:shadow-purple-500/20 hover:scale-105">
+                <Card key={idx} className="relative overflow-hidden bg-gray-900/50 backdrop-blur-sm border-2 border-amber-500/20 hover:border-amber-400/50 transition-all hover:shadow-xl hover:shadow-amber-500/20 hover:scale-105">
                   <CardContent className="p-5 md:p-8 space-y-4">
-                    <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-xl" />
+                    <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-amber-500/20 to-pink-500/20 rounded-full blur-xl" />
                     <div className="relative">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-purple-500/50">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-pink-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-amber-500/50">
                         {step.step}
                       </div>
                     </div>
-                    <step.icon className="w-10 h-10 text-purple-400" />
+                    <step.icon className="w-10 h-10 text-amber-400" />
                     <h3 className="font-bold text-lg text-gray-100">{step.title}</h3>
                     <p className="text-gray-400">{step.desc}</p>
                   </CardContent>
@@ -193,13 +193,13 @@ export default function FidelizarePacienti() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm border-2 border-purple-500/30">
+              <Card className="bg-gradient-to-br from-amber-900/30 to-pink-900/30 backdrop-blur-sm border-2 border-amber-500/30">
                 <CardContent className="p-5 md:p-8 text-center space-y-4">
-                  <h3 className="text-xl font-bold text-purple-400">Cu Sistem</h3>
+                  <h3 className="text-xl font-bold text-amber-400">Cu Sistem</h3>
                   <p className="text-lg text-gray-300">Calendar plin automat</p>
                   <div className="h-32 flex items-end justify-around gap-2">
                     {[75, 85, 90, 80, 95].map((height, i) => (
-                      <div key={i} className="flex-1 bg-gradient-to-t from-purple-500 to-pink-500 rounded-t shadow-lg" style={{ height: `${height}%` }} />
+                      <div key={i} className="flex-1 bg-gradient-to-t from-amber-500 to-pink-500 rounded-t shadow-lg" style={{ height: `${height}%` }} />
                     ))}
                   </div>
                 </CardContent>
@@ -207,7 +207,7 @@ export default function FidelizarePacienti() {
             </div>
 
             <p className="text-center text-lg font-semibold text-gray-300">
-              Implementare completă în <span className="text-purple-400">14 zile</span>, fără bătăi de cap pentru echipa ta.
+              Implementare completă în <span className="text-amber-400">14 zile</span>, fără bătăi de cap pentru echipa ta.
             </p>
           </div>
         </div>
@@ -218,7 +218,7 @@ export default function FidelizarePacienti() {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center space-y-4">
-              <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+              <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300">
                 Clinici care folosesc deja sistemul nostru
               </h2>
             </div>
@@ -244,16 +244,16 @@ export default function FidelizarePacienti() {
                   name: "Dr. Ana Marinescu"
                 }
               ].map((testimonial, idx) => (
-                <Card key={idx} className="relative bg-gray-900/50 backdrop-blur-sm border-2 border-purple-500/20 hover:border-purple-400/50 transition-all hover:shadow-lg hover:shadow-purple-500/20">
+                <Card key={idx} className="relative bg-gray-900/50 backdrop-blur-sm border-2 border-amber-500/20 hover:border-amber-400/50 transition-all hover:shadow-lg hover:shadow-amber-500/20">
                   <CardContent className="p-5 md:p-8 space-y-4">
                     <div className="flex gap-1 mb-2">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-purple-400 text-purple-400" />
+                        <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
                       ))}
                     </div>
-                    <p className="text-2xl font-bold text-purple-400">{testimonial.result}</p>
+                    <p className="text-2xl font-bold text-amber-400">{testimonial.result}</p>
                     <p className="text-gray-400 italic">"{testimonial.quote}"</p>
-                    <div className="pt-4 border-t border-purple-500/20">
+                    <div className="pt-4 border-t border-amber-500/20">
                       <p className="font-semibold text-gray-100">{testimonial.name}</p>
                       <p className="text-sm text-gray-400">{testimonial.clinic}</p>
                     </div>
@@ -270,12 +270,12 @@ export default function FidelizarePacienti() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-12">
             <div className="text-center space-y-4">
-              <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+              <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300">
                 Totul într-un singur sistem de fidelizare complet
               </h2>
             </div>
 
-            <Card className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 backdrop-blur-sm border-4 border-purple-500/50 shadow-2xl shadow-purple-500/20">
+            <Card className="bg-gradient-to-br from-amber-900/40 to-pink-900/40 backdrop-blur-sm border-4 border-amber-500/50 shadow-2xl shadow-amber-500/20">
               <CardContent className="p-5 md:p-12 space-y-6">
                 {[
                   "Instalare completă sistem",
@@ -285,7 +285,7 @@ export default function FidelizarePacienti() {
                   "Suport 90 zile + optimizări gratuite"
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-purple-500/50">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-pink-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-amber-500/50">
                       <Check className="w-5 h-5 text-white" />
                     </div>
                     <p className="text-lg font-medium pt-0.5 text-gray-200">{item}</p>
@@ -296,7 +296,7 @@ export default function FidelizarePacienti() {
 
             <p className="text-center text-lg font-semibold text-gray-300">
               Totul gata în 14 zile. Dacă în 90 de zile nu vezi dublarea pacienților recurenți,{" "}
-              <span className="text-purple-400">lucrăm gratis până o faci.</span>
+              <span className="text-amber-400">lucrăm gratis până o faci.</span>
             </p>
           </div>
         </div>
@@ -305,8 +305,8 @@ export default function FidelizarePacienti() {
       {/* Final CTA Section */}
       <section className="py-10 md:py-24 relative z-10">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8 bg-gradient-to-r from-purple-900/40 to-pink-900/40 backdrop-blur-sm rounded-2xl p-6 md:p-12 border-2 border-purple-500/30">
-            <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+          <div className="max-w-4xl mx-auto text-center space-y-8 bg-gradient-to-r from-amber-900/40 to-pink-900/40 backdrop-blur-sm rounded-2xl p-6 md:p-12 border-2 border-amber-500/30">
+            <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300">
               Află cât profit pierzi lunar din lipsa fidelizării
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -315,7 +315,7 @@ export default function FidelizarePacienti() {
             <Button 
               onClick={handleBookCall}
               size="lg"
-              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-lg md:text-xl px-6 py-5 md:px-12 md:py-8 h-auto shadow-2xl shadow-purple-500/30 hover:shadow-purple-500/50 transition-all hover:scale-105"
+              className="bg-gradient-to-r from-amber-500 to-pink-500 hover:from-amber-600 hover:to-pink-600 text-white text-lg md:text-xl px-6 py-5 md:px-12 md:py-8 h-auto shadow-2xl shadow-amber-500/30 hover:shadow-amber-500/50 transition-all hover:scale-105"
             >
               <Calendar className="mr-2 w-6 h-6" />
               Book a Call Gratuit

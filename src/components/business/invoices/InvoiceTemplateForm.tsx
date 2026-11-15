@@ -396,7 +396,7 @@ export function InvoiceTemplateForm({ open, onOpenChange, template }: InvoiceTem
                 <Button
                   type="submit"
                   disabled={createTemplate.isPending || updateTemplate.isPending}
-                  className="bg-purple-600 hover:bg-purple-700"
+                  className="bg-amber-600 hover:bg-amber-700"
                 >
                   {template ? 'Actualizează Template' : 'Creează Template'}
                 </Button>

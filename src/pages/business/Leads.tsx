@@ -88,7 +88,7 @@ const Leads = () => {
   const DetailRow = ({ label, value }: { label: string; value: string | number | null | undefined }) => {
     if (!value) return null;
     return (
-      <div className="flex flex-col gap-1 py-2 border-b border-purple-500/10 last:border-0">
+      <div className="flex flex-col gap-1 py-2 border-b border-amber-500/10 last:border-0">
         <span className="text-xs text-gray-400">{label}</span>
         <span className="text-sm text-white">{String(value)}</span>
       </div>
@@ -98,7 +98,7 @@ const Leads = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#0d0f1a] flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-purple-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-amber-400" />
       </div>
     );
   }
@@ -109,14 +109,14 @@ const Leads = () => {
       <main className="flex-1 p-4 md:p-8 pt-20 md:pt-8 overflow-auto">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="flex items-center gap-3">
-            <UserPlus className="h-6 w-6 text-purple-400" />
+            <UserPlus className="h-6 w-6 text-amber-400" />
             <h1 className="text-2xl font-bold text-white">Leads</h1>
-            <Badge variant="secondary" className="bg-purple-500/20 text-purple-300">
+            <Badge variant="secondary" className="bg-amber-500/20 text-amber-300">
               {leads.length}
             </Badge>
           </div>
 
-          <Card className="bg-[#1A1F2C] border-purple-500/20">
+          <Card className="bg-[#1A1F2C] border-amber-500/20">
             <CardHeader>
               <CardTitle className="text-white text-lg">Audit Strategic - Formulare completate</CardTitle>
             </CardHeader>
@@ -127,7 +127,7 @@ const Leads = () => {
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
-                      <TableRow className="border-purple-500/20">
+                      <TableRow className="border-amber-500/20">
                         <TableHead className="text-gray-400">Nume</TableHead>
                         <TableHead className="text-gray-400">Firmă</TableHead>
                         <TableHead className="text-gray-400">Telefon</TableHead>
@@ -141,7 +141,7 @@ const Leads = () => {
                       {leads.map((lead) => (
                         <TableRow
                           key={lead.id}
-                          className="border-purple-500/10 cursor-pointer hover:bg-purple-500/5"
+                          className="border-amber-500/10 cursor-pointer hover:bg-amber-500/5"
                           onClick={() => setSelectedLead(lead)}
                         >
                           <TableCell className="text-white font-medium">{lead.full_name}</TableCell>
@@ -163,7 +163,7 @@ const Leads = () => {
 
         {/* Lead Details Dialog */}
         <Dialog open={!!selectedLead} onOpenChange={(open) => !open && setSelectedLead(null)}>
-          <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white max-w-lg max-h-[80vh] overflow-y-auto">
+          <DialogContent className="bg-[#1A1F2C] border-amber-500/20 text-white max-w-lg max-h-[80vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="text-white">{selectedLead?.full_name}</DialogTitle>
             </DialogHeader>

@@ -9,8 +9,8 @@ const PrivacyPolicy = () => {
       <Navigation />
       <div className="container mx-auto px-4 py-16">
         <div className="flex items-center gap-4 mb-8">
-          <Eye className="w-8 h-8 text-purple-400" />
-          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+          <Eye className="w-8 h-8 text-amber-400" />
+          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300">
             Politica de Confidențialitate
           </h1>
         </div>
@@ -20,9 +20,9 @@ const PrivacyPolicy = () => {
             Această Politică de Confidențialitate descrie modul în care colectăm, utilizăm și protejăm informațiile dumneavoastră atunci când utilizați serviciile noastre.
           </p>
 
-          <div className="bg-[#1A1F2C] p-6 rounded-lg mb-8 border border-purple-500/20">
+          <div className="bg-[#1A1F2C] p-6 rounded-lg mb-8 border border-amber-500/20">
             <div className="flex items-center gap-3 mb-4">
-              <Shield className="w-6 h-6 text-purple-400" />
+              <Shield className="w-6 h-6 text-amber-400" />
               <h2 className="text-2xl font-semibold text-white m-0">Informații Colectate</h2>
             </div>
             <ul className="text-gray-300 space-y-2">
@@ -86,7 +86,7 @@ const PrivacyPolicy = () => {
               <h2 className="text-2xl font-semibold text-white">Contact</h2>
               <p className="text-gray-300">
                 Pentru orice întrebări sau preocupări legate de politica noastră de confidențialitate, ne puteți contacta la:
-                <a href="mailto:privacy@automationai.ro" className="text-purple-400 hover:text-purple-300 ml-1">
+                <a href="mailto:privacy@automationai.ro" className="text-amber-400 hover:text-amber-300 ml-1">
                   privacy@automationai.ro
                 </a>
               </p>

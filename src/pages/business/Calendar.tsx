@@ -60,10 +60,10 @@ const Calendar = () => {
             <div className="space-y-4">
               {activeBooking && (
                 <div className="space-y-2">
-                  <h3 className="text-sm font-medium text-purple-400 flex items-center gap-2">
+                  <h3 className="text-sm font-medium text-amber-400 flex items-center gap-2">
                     <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-400"></span>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
                     </span>
                     Apel Activ
                   </h3>

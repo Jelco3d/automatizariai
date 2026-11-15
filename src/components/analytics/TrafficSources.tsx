@@ -9,11 +9,11 @@ const sourceData = [
   { name: 'Referral', value: 200 },
 ];
 
-const COLORS = ['#8b5cf6', '#ec4899', '#6366f1', '#14b8a6'];
+const COLORS = ['#D97706', '#92400E', '#FBBF24', '#14b8a6'];
 
 export const TrafficSources = () => {
   return (
-    <Card className="bg-[#1A1F2C] border-purple-500/20">
+    <Card className="bg-[#1A1F2C] border-amber-500/20">
       <CardHeader>
         <CardTitle>Traffic Sources</CardTitle>
         <CardDescription>Distribution of visitor origins</CardDescription>

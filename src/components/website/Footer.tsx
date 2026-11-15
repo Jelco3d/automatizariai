@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
@@ -22,6 +22,8 @@ export const Footer = () => {
             <Link to="/services" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Servicii</Link>
             <Link to="/about" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Despre Noi</Link>
             <Link to="/portfolio" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Portofoliu</Link>
+            <Link to="/blog" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Blog</Link>
+            <Link to="/audit-gratuit" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Audit Gratuit</Link>
             <Link to="/contact" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Contact</Link>
             <Link to="/terms" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Termeni și Condiții</Link>
             <Link to="/gdpr" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Politica GDPR</Link>
@@ -41,9 +43,6 @@ export const Footer = () => {
               <p>Email: contact@aiautomatizari.ro</p>
             </div>
             <div className="flex space-x-4">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">
-                <Github className="w-6 h-6" />
-              </a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">
                 <Linkedin className="w-6 h-6" />
               </a>

@@ -48,7 +48,7 @@ export function PaidInvoicesTable() {
   };
 
   return (
-    <Card className="bg-[#1A1F2C] border-purple-500/20 p-3 md:p-6">
+    <Card className="bg-[#1A1F2C] border-amber-500/20 p-3 md:p-6">
       <div className="mb-3 md:mb-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />

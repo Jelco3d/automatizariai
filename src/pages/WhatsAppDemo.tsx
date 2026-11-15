@@ -22,9 +22,9 @@ const WhatsAppDemo = () => {
     dots.forEach((dot, index) => {
       if (index === currentSlide) {
         dot.classList.remove('bg-gray-600');
-        dot.classList.add('bg-purple-500');
+        dot.classList.add('bg-amber-500');
       } else {
-        dot.classList.remove('bg-purple-500');
+        dot.classList.remove('bg-amber-500');
         dot.classList.add('bg-gray-600');
       }
     });
@@ -48,13 +48,13 @@ const WhatsAppDemo = () => {
       
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden rounded-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-amber-500/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-1/2 -left-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 md:py-24 text-center relative py-0">
-        <h1 className="sm:text-4xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 leading-tight text-center text-2xl font-bold px-0 py-0 mx-[80px] lg:text-5xl">Oprește Pierderea Pacienților Din Cauza Răspunsurilor Întârziate pe WhatsApps</h1>
+        <h1 className="sm:text-4xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300 mb-6 leading-tight text-center text-2xl font-bold px-0 py-0 mx-[80px] lg:text-5xl">Oprește Pierderea Pacienților Din Cauza Răspunsurilor Întârziate pe WhatsApps</h1>
         <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto mb-8 px-0">
           <strong className="rounded-md">Asistentul nostru AI pe WhatsApp răspunde instant, face programări, trimite remindere și cere recenzii</strong> — 
           astfel adaugi peste 5.000€ în tratamente lunar, fără personal suplimentar.
@@ -64,7 +64,7 @@ const WhatsAppDemo = () => {
 
       {/* VSL Section */}
       <section className="container mx-auto px-4 py-12 md:py-16">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 sm:mb-8 px-2">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300 mb-6 sm:mb-8 px-2">
           Vezi cum funcționează Asistentul AI WhatsApp în 4 minute
         </h2>
         <div className="max-w-4xl mx-auto bg-gray-800/50 p-4 sm:p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50">
@@ -79,7 +79,7 @@ const WhatsAppDemo = () => {
             />
           </div>
           <div className="text-center">
-            <Button onClick={handleBooking} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-3 sm:py-4 text-sm sm:text-base rounded-lg px-4 sm:px-6 w-full sm:w-auto">
+            <Button onClick={handleBooking} className="bg-gradient-to-r from-amber-500 to-pink-500 hover:from-amber-600 hover:to-pink-600 text-white py-3 sm:py-4 text-sm sm:text-base rounded-lg px-4 sm:px-6 w-full sm:w-auto">
               Programează Un Apel Gratuit
               <ArrowRight className="ml-2 flex-shrink-0" />
             </Button>
@@ -93,23 +93,23 @@ const WhatsAppDemo = () => {
           {/* Icons Row */}
           <div className="grid grid-cols-4 gap-4 mb-6">
             <div className="text-center">
-              <div className="inline-flex p-3 rounded-full bg-purple-500/20 shadow-lg shadow-purple-500/50">
-                <Clock className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400" />
+              <div className="inline-flex p-3 rounded-full bg-amber-500/20 shadow-lg shadow-amber-500/50">
+                <Clock className="w-8 h-8 sm:w-10 sm:h-10 text-amber-400" />
               </div>
             </div>
             <div className="text-center">
-              <div className="inline-flex p-3 rounded-full bg-purple-500/20 shadow-lg shadow-purple-500/50">
-                <Calendar className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400" />
+              <div className="inline-flex p-3 rounded-full bg-amber-500/20 shadow-lg shadow-amber-500/50">
+                <Calendar className="w-8 h-8 sm:w-10 sm:h-10 text-amber-400" />
               </div>
             </div>
             <div className="text-center">
-              <div className="inline-flex p-3 rounded-full bg-purple-500/20 shadow-lg shadow-purple-500/50">
-                <Bell className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400" />
+              <div className="inline-flex p-3 rounded-full bg-amber-500/20 shadow-lg shadow-amber-500/50">
+                <Bell className="w-8 h-8 sm:w-10 sm:h-10 text-amber-400" />
               </div>
             </div>
             <div className="text-center">
-              <div className="inline-flex p-3 rounded-full bg-purple-500/20 shadow-lg shadow-purple-500/50">
-                <Star className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400" />
+              <div className="inline-flex p-3 rounded-full bg-amber-500/20 shadow-lg shadow-amber-500/50">
+                <Star className="w-8 h-8 sm:w-10 sm:h-10 text-amber-400" />
               </div>
             </div>
           </div>
@@ -151,7 +151,7 @@ const WhatsAppDemo = () => {
       {/* ROI / Proof Section */}
       <section className="container mx-auto px-4 py-12 md:py-16">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 px-2">
+          <h2 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300 mb-6 px-2">
             Un singur implant plătește 6 luni de serviciu
           </h2>
           <p className="text-lg sm:text-xl text-gray-300 mb-8 px-2">
@@ -167,7 +167,7 @@ const WhatsAppDemo = () => {
                 <div className="w-full flex-shrink-0">
                   <div className="bg-gray-800/50 p-6 sm:p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50">
                     <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
-                      <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto sm:mx-0 flex-shrink-0">
+                      <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mx-auto sm:mx-0 flex-shrink-0">
                         <Star className="w-6 h-6 text-white" />
                       </div>
                       <div className="text-center sm:text-left">
@@ -186,7 +186,7 @@ const WhatsAppDemo = () => {
                 <div className="w-full flex-shrink-0">
                   <div className="bg-gray-800/50 p-6 sm:p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50">
                     <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
-                      <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto sm:mx-0 flex-shrink-0">
+                      <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mx-auto sm:mx-0 flex-shrink-0">
                         <Star className="w-6 h-6 text-white" />
                       </div>
                       <div className="text-center sm:text-left">
@@ -205,7 +205,7 @@ const WhatsAppDemo = () => {
                 <div className="w-full flex-shrink-0">
                   <div className="bg-gray-800/50 p-6 sm:p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50">
                     <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
-                      <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto sm:mx-0 flex-shrink-0">
+                      <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mx-auto sm:mx-0 flex-shrink-0">
                         <Star className="w-6 h-6 text-white" />
                       </div>
                       <div className="text-center sm:text-left">
@@ -224,7 +224,7 @@ const WhatsAppDemo = () => {
                 <div className="w-full flex-shrink-0">
                   <div className="bg-gray-800/50 p-6 sm:p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50">
                     <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
-                      <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto sm:mx-0 flex-shrink-0">
+                      <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mx-auto sm:mx-0 flex-shrink-0">
                         <Star className="w-6 h-6 text-white" />
                       </div>
                       <div className="text-center sm:text-left">
@@ -243,10 +243,10 @@ const WhatsAppDemo = () => {
             
             {/* Navigation dots */}
             <div className="flex justify-center space-x-2 mt-6">
-              <button className="testimonial-dot w-3 h-3 rounded-full bg-purple-500 transition-all" data-slide="0"></button>
-              <button className="testimonial-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-purple-400 transition-all" data-slide="1"></button>
-              <button className="testimonial-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-purple-400 transition-all" data-slide="2"></button>
-              <button className="testimonial-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-purple-400 transition-all" data-slide="3"></button>
+              <button className="testimonial-dot w-3 h-3 rounded-full bg-amber-500 transition-all" data-slide="0"></button>
+              <button className="testimonial-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-amber-400 transition-all" data-slide="1"></button>
+              <button className="testimonial-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-amber-400 transition-all" data-slide="2"></button>
+              <button className="testimonial-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-amber-400 transition-all" data-slide="3"></button>
             </div>
           </div>
         </div>
@@ -255,8 +255,8 @@ const WhatsAppDemo = () => {
       {/* Guarantee Section */}
       <section className="container mx-auto px-4 py-12 md:py-16">
         <div className="max-w-2xl mx-auto text-center">
-          <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 p-6 sm:p-8 rounded-2xl border border-purple-500/30">
-            <Shield className="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 mx-auto mb-4" />
+          <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 p-6 sm:p-8 rounded-2xl border border-amber-500/30">
+            <Shield className="w-12 h-12 sm:w-16 sm:h-16 text-amber-400 mx-auto mb-4" />
             <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 px-2">
               10 pacienți noi în 30 de zile, sau nu plătești
             </h2>
@@ -270,14 +270,14 @@ const WhatsAppDemo = () => {
 
       {/* Final CTA Section */}
       <section id="demo-form" className="container mx-auto px-4 py-12 md:py-16 text-center">
-        <h2 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 px-2">
+        <h2 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300 mb-6 px-2">
           Ești pregătit să vezi viitorul clinicii tale?
         </h2>
         <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-8 px-2">
           Programează o demonstrație gratuită de 30 de minute și vezi exact cum 
           asistentul AI va transforma comunicarea cu pacienții tăi.
         </p>
-        <Button onClick={handleBooking} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl rounded-lg transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 w-full sm:w-auto">
+        <Button onClick={handleBooking} className="bg-gradient-to-r from-amber-500 to-pink-500 hover:from-amber-600 hover:to-pink-600 text-white px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl rounded-lg transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-amber-500/25 w-full sm:w-auto">
           Programează Un Apel Gratuit!
           <ArrowRight className="ml-2" />
         </Button>

@@ -105,7 +105,7 @@ export function EditInvoiceDialog({ open, onOpenChange, invoice }: EditInvoiceDi
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="bg-[#1A1F2C] border-amber-500/20 text-white max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Editează factura</DialogTitle>
         </DialogHeader>
@@ -113,10 +113,10 @@ export function EditInvoiceDialog({ open, onOpenChange, invoice }: EditInvoiceDi
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             {templates && templates.length > 0 && (
-              <div className="bg-purple-500/10 border border-purple-500/20 p-4 rounded-lg">
+              <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-lg">
                 <div className="flex items-center gap-2 mb-2">
-                  <FileText className="h-4 w-4 text-purple-400" />
-                  <span className="text-sm font-medium text-purple-300">Asociază cu un template</span>
+                  <FileText className="h-4 w-4 text-amber-400" />
+                  <span className="text-sm font-medium text-amber-300">Asociază cu un template</span>
                 </div>
                 <Select value={selectedTemplateId || undefined} onValueChange={handleTemplateSelect}>
                   <SelectTrigger className="bg-[#0F1117] border-gray-700 text-white">
@@ -232,7 +232,7 @@ export function EditInvoiceDialog({ open, onOpenChange, invoice }: EditInvoiceDi
               <Button
                 type="submit"
                 disabled={updateInvoice.isPending}
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-amber-600 hover:bg-amber-700"
               >
                 {updateInvoice.isPending ? 'Se salvează...' : 'Salvează modificările'}
               </Button>

@@ -162,15 +162,15 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto p-4 md:p-6">
+      <DialogContent className="bg-[#1A1F2C] border-amber-500/20 text-white w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto p-4 md:p-6">
         <DialogHeader>
           <DialogTitle className="text-lg md:text-xl">Adaugă Factură de Plată</DialogTitle>
         </DialogHeader>
 
         {/* PDF Upload Section */}
-        <div className="space-y-3 p-3 md:p-4 border border-purple-500/20 rounded-lg bg-[#0F1117]">
+        <div className="space-y-3 p-3 md:p-4 border border-amber-500/20 rounded-lg bg-[#0F1117]">
           <div className="flex items-center gap-2">
-            <FileText className="h-4 w-4 md:h-5 md:w-5 text-purple-400" />
+            <FileText className="h-4 w-4 md:h-5 md:w-5 text-amber-400" />
             <h3 className="font-medium text-sm md:text-base">Import Document și Extragere Automată</h3>
           </div>
           
@@ -193,7 +193,7 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
               type="button"
               onClick={handleExtractData}
               disabled={!selectedFile || isExtracting}
-              className="whitespace-nowrap bg-purple-600 hover:bg-purple-700 text-sm h-9 w-full md:w-auto"
+              className="whitespace-nowrap bg-amber-600 hover:bg-amber-700 text-sm h-9 w-full md:w-auto"
             >
               {isExtracting ? (
                 <>
@@ -373,7 +373,7 @@ export function PayableInvoiceForm({ open, onOpenChange }: PayableInvoiceFormPro
               >
                 Anulează
               </Button>
-              <Button type="submit" disabled={createPayableInvoice.isPending} className="bg-purple-600 hover:bg-purple-700 text-sm h-9 w-full md:w-auto">
+              <Button type="submit" disabled={createPayableInvoice.isPending} className="bg-amber-600 hover:bg-amber-700 text-sm h-9 w-full md:w-auto">
                 {createPayableInvoice.isPending ? "Se adaugă..." : "Adaugă Factură"}
               </Button>
             </div>

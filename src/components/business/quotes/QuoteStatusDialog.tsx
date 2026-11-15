@@ -56,7 +56,7 @@ export function QuoteStatusDialog({ open, onOpenChange, quote, onStatusChange }:
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white">
+      <DialogContent className="bg-[#1A1F2C] border-amber-500/20 text-white">
         <DialogHeader>
           <DialogTitle className="text-xl">Schimbă Statusul Ofertei</DialogTitle>
           <p className="text-gray-400 text-sm mt-2">

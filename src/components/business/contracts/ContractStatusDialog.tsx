@@ -85,7 +85,7 @@ export function ContractStatusDialog({
             </Button>
             <Button
               onClick={handleSubmit}
-              className="bg-purple-600 hover:bg-purple-700"
+              className="bg-amber-600 hover:bg-amber-700"
             >
               Salvează
             </Button>

@@ -6,7 +6,7 @@ export function BlogContent() {
   return (
     <div className="container mx-auto px-4 py-24 space-y-16 max-w-5xl">
       <header className="space-y-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+        <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300">
           Blog AI Automatizări
         </h1>
         <p className="text-lg text-gray-400 max-w-2xl">
@@ -20,20 +20,20 @@ export function BlogContent() {
           <Link
             key={post.slug}
             to={`/blog/${post.slug}`}
-            className="group block rounded-xl bg-white/[0.03] border border-white/[0.08] p-6 transition hover:bg-white/[0.05] hover:border-purple-400/30"
+            className="group block rounded-xl bg-white/[0.03] border border-white/[0.08] p-6 transition hover:bg-white/[0.05] hover:border-amber-400/30"
           >
             <article className="space-y-4">
               <div className="flex flex-wrap gap-2">
                 {post.tags.slice(0, 2).map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs px-3 py-1 rounded-full bg-purple-500/10 border border-purple-400/20 text-purple-300"
+                    className="text-xs px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/20 text-amber-300"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
-              <h2 className="text-xl md:text-2xl font-bold text-white group-hover:text-purple-300 transition">
+              <h2 className="text-xl md:text-2xl font-bold text-white group-hover:text-amber-300 transition">
                 {post.title}
               </h2>
               <p
@@ -62,7 +62,7 @@ export function BlogContent() {
                   <Clock className="w-3.5 h-3.5" />
                   <span>{post.readingTimeMin} min</span>
                 </div>
-                <span className="ml-auto inline-flex items-center gap-1 text-purple-300 group-hover:gap-2 transition-all">
+                <span className="ml-auto inline-flex items-center gap-1 text-amber-300 group-hover:gap-2 transition-all">
                   Citește <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </div>
@@ -71,7 +71,7 @@ export function BlogContent() {
         ))}
       </section>
 
-      <section className="rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-400/20 p-8 md:p-12">
+      <section className="rounded-xl bg-gradient-to-br from-amber-500/10 to-pink-500/10 border border-amber-400/20 p-8 md:p-12">
         <div className="max-w-2xl space-y-4">
           <h2 className="text-2xl md:text-3xl font-bold text-white">
             Vrei un audit gratuit pentru afacerea ta?
@@ -82,7 +82,7 @@ export function BlogContent() {
           </p>
           <Link
             to="/audit-gratuit"
-            className="inline-block mt-2 px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-lg transition"
+            className="inline-block mt-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition"
           >
             Cere auditul gratuit →
           </Link>

@@ -66,7 +66,7 @@ export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTablePr
       {/* Mobile Card View */}
       <div className="md:hidden space-y-3">
         {templates.map((template) => (
-          <div key={template.id} className="bg-[#1A1F2C] border border-purple-500/20 rounded-lg p-4">
+          <div key={template.id} className="bg-[#1A1F2C] border border-amber-500/20 rounded-lg p-4">
             <div className="space-y-3">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -90,7 +90,7 @@ export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTablePr
                 </div>
               </div>
 
-              <div className="flex gap-1 pt-2 border-t border-purple-500/20">
+              <div className="flex gap-1 pt-2 border-t border-amber-500/20">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -136,24 +136,24 @@ export function InvoiceTemplatesTable({ onUseTemplate }: InvoiceTemplatesTablePr
       </div>
 
       {/* Desktop Table View */}
-      <div className="hidden md:block rounded-md border border-purple-500/20 overflow-hidden">
+      <div className="hidden md:block rounded-md border border-amber-500/20 overflow-hidden">
         <div className="overflow-x-auto -mx-3 md:mx-0">
           <div className="inline-block min-w-full align-middle">
             <Table className="min-w-[700px]">
               <TableHeader>
-                <TableRow className="border-purple-500/20 hover:bg-purple-500/5">
-                  <TableHead className="text-purple-300 text-xs md:text-sm">Nume</TableHead>
-                  <TableHead className="text-purple-300 text-xs md:text-sm">Descriere</TableHead>
-                  <TableHead className="text-purple-300 text-xs md:text-sm text-center">Articole</TableHead>
-                  <TableHead className="text-purple-300 text-xs md:text-sm">Data</TableHead>
-                  <TableHead className="text-purple-300 text-xs md:text-sm text-right">Acțiuni</TableHead>
+                <TableRow className="border-amber-500/20 hover:bg-amber-500/5">
+                  <TableHead className="text-amber-300 text-xs md:text-sm">Nume</TableHead>
+                  <TableHead className="text-amber-300 text-xs md:text-sm">Descriere</TableHead>
+                  <TableHead className="text-amber-300 text-xs md:text-sm text-center">Articole</TableHead>
+                  <TableHead className="text-amber-300 text-xs md:text-sm">Data</TableHead>
+                  <TableHead className="text-amber-300 text-xs md:text-sm text-right">Acțiuni</TableHead>
                 </TableRow>
               </TableHeader>
           <TableBody>
               {templates.map((template) => (
                 <TableRow
                   key={template.id}
-                  className="border-purple-500/20 hover:bg-purple-500/5"
+                  className="border-amber-500/20 hover:bg-amber-500/5"
                 >
                   <TableCell className="font-medium text-white text-xs md:text-sm">
                     {template.name}

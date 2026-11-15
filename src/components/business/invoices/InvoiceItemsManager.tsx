@@ -51,7 +51,7 @@ export function InvoiceItemsManager({ form }: InvoiceItemsManagerProps) {
           onClick={addItem}
           variant="outline"
           size="sm"
-          className="bg-purple-600 hover:bg-purple-700 text-white border-0 text-xs md:text-sm h-8 md:h-9"
+          className="bg-amber-600 hover:bg-amber-700 text-white border-0 text-xs md:text-sm h-8 md:h-9"
         >
           <Plus className="h-3.5 w-3.5 md:h-4 md:w-4 md:mr-2" />
           <span className="hidden md:inline">Adaugă</span>
@@ -288,7 +288,7 @@ export function InvoiceItemsManager({ form }: InvoiceItemsManagerProps) {
         </div>
         <div className="flex justify-between text-base md:text-lg font-bold pt-1.5 md:pt-2 border-t border-gray-700">
           <span className="text-white">Total:</span>
-          <span className="text-purple-400">{formatCurrency(calculateTotal())}</span>
+          <span className="text-amber-400">{formatCurrency(calculateTotal())}</span>
         </div>
       </div>
     </div>

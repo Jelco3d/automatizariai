@@ -7,7 +7,7 @@ const Terms = () => {
     <div className="min-h-screen bg-[#0F1117] text-white">
       <Navigation />
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+        <h1 className="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300">
           Termeni și Condiții
         </h1>
         <div className="prose prose-invert max-w-none">

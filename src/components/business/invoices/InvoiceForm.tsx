@@ -100,7 +100,7 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white w-[95vw] max-w-4xl max-h-[90vh] md:w-full p-4 md:p-6">
+      <DialogContent className="bg-[#1A1F2C] border-amber-500/20 text-white w-[95vw] max-w-4xl max-h-[90vh] md:w-full p-4 md:p-6">
         <DialogHeader>
           <DialogTitle className="text-lg md:text-2xl">Factură nouă</DialogTitle>
         </DialogHeader>
@@ -109,18 +109,18 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 md:space-y-6">
               {templates && templates.length > 0 && (
-                <div className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 md:border-2 p-2.5 md:p-5 rounded-lg shadow-lg">
+                <div className="bg-gradient-to-r from-amber-500/20 to-blue-500/20 border border-amber-500/30 md:border-2 p-2.5 md:p-5 rounded-lg shadow-lg">
                   <div className="flex items-start gap-2 mb-2 md:mb-3">
-                    <FileText className="h-4 w-4 md:h-5 md:w-5 text-purple-400 flex-shrink-0 mt-0.5" />
+                    <FileText className="h-4 w-4 md:h-5 md:w-5 text-amber-400 flex-shrink-0 mt-0.5" />
                     <div className="flex-1 min-w-0">
-                      <span className="text-xs md:text-base font-semibold text-purple-300 block">Template</span>
+                      <span className="text-xs md:text-base font-semibold text-amber-300 block">Template</span>
                       <p className="text-xs text-gray-400 mt-0.5 hidden md:block">
                         Pre-completează factura cu date și articole salvate
                       </p>
                     </div>
                   </div>
                   <Select onValueChange={handleTemplateSelect} value={selectedTemplateId || undefined}>
-                    <SelectTrigger className="bg-[#0F1117] border-purple-500/30 text-white hover:border-purple-500/50 transition-colors text-sm md:text-base h-9 md:h-10">
+                    <SelectTrigger className="bg-[#0F1117] border-amber-500/30 text-white hover:border-amber-500/50 transition-colors text-sm md:text-base h-9 md:h-10">
                       <SelectValue placeholder="Selectează template..." />
                     </SelectTrigger>
                     <SelectContent>
@@ -155,7 +155,7 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
                           variant="outline"
                           size="icon"
                           onClick={() => setClientFormOpen(true)}
-                          className="bg-purple-600 hover:bg-purple-700 text-white border-0 shrink-0 h-9 w-9 md:h-10 md:w-10"
+                          className="bg-amber-600 hover:bg-amber-700 text-white border-0 shrink-0 h-9 w-9 md:h-10 md:w-10"
                         >
                           <Plus className="h-4 w-4" />
                         </Button>
@@ -246,7 +246,7 @@ export function InvoiceForm({ open, onOpenChange }: InvoiceFormProps) {
                 <Button
                   type="submit"
                   disabled={createInvoice.isPending}
-                  className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto text-sm h-9 md:h-10"
+                  className="bg-amber-600 hover:bg-amber-700 w-full sm:w-auto text-sm h-9 md:h-10"
                 >
                   {createInvoice.isPending ? 'Se creează...' : 'Creează factură'}
                 </Button>

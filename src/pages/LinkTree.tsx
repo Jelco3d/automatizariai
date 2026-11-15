@@ -41,18 +41,18 @@ const LinkTree = () => {
   
   return <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 relative overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-amber-600/10 to-pink-600/10"></div>
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse"></div>
       
       <div className="relative z-10 max-w-md mx-auto py-4 px-4">
         {/* Profile Section */}
         <div className="text-center mb-6 animate-fade-in">
           <div className="relative mb-4">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-xl opacity-30 animate-pulse"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-2xl opacity-40"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-amber-600 rounded-full blur-xl opacity-30 animate-pulse"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-amber-500 rounded-full blur-2xl opacity-40"></div>
             <div className="relative w-20 h-20 mx-auto rounded-full overflow-hidden ring-2 ring-gradient-to-r ring-blue-400/60 shadow-2xl">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 p-0.5">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-amber-400 p-0.5">
                 <div className="w-full h-full rounded-full overflow-hidden bg-slate-900 p-0.5">
                   <img src="/lovable-uploads/18adcde2-6fef-4f80-9177-96ee902a301b.png" alt="Jelco - Founder" className="w-full h-full object-cover rounded-full" />
                 </div>
@@ -91,9 +91,9 @@ const LinkTree = () => {
           <div className="flex items-center justify-center mt-3 space-x-2">
             <div className="w-6 h-0.5 bg-gradient-to-r from-transparent to-blue-400"></div>
             <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
-            <div className="w-12 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400"></div>
-            <div className="w-1.5 h-1.5 bg-purple-400 rounded-full"></div>
-            <div className="w-6 h-0.5 bg-gradient-to-r from-purple-400 to-transparent"></div>
+            <div className="w-12 h-0.5 bg-gradient-to-r from-blue-400 to-amber-400"></div>
+            <div className="w-1.5 h-1.5 bg-amber-400 rounded-full"></div>
+            <div className="w-6 h-0.5 bg-gradient-to-r from-amber-400 to-transparent"></div>
           </div>
         </div>
 
@@ -103,11 +103,11 @@ const LinkTree = () => {
           animationDelay: `${index * 0.1}s`
         }}>
               <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-amber-600/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <Card className="relative backdrop-blur-xl bg-slate-900/60 border border-slate-700/50 hover:border-slate-600/50 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group-hover:scale-[1.02]">
                   <CardContent className="p-0">
                     <a href={link.url.startsWith('/') ? link.url : link.url} className="flex items-center p-3 group/link" target={link.url.startsWith('http') ? '_blank' : '_self'} rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''}>
-                      <div className="w-10 h-10 bg-gradient-to-br from-slate-800/50 to-slate-700/50 rounded-lg flex items-center justify-center group-hover/link:from-blue-600/20 group-hover/link:to-purple-600/20 transition-all duration-300 mr-3">
+                      <div className="w-10 h-10 bg-gradient-to-br from-slate-800/50 to-slate-700/50 rounded-lg flex items-center justify-center group-hover/link:from-blue-600/20 group-hover/link:to-amber-600/20 transition-all duration-300 mr-3">
                         <div className="text-slate-400 group-hover/link:text-blue-400 transition-colors text-xs">
                           {link.icon}
                         </div>
@@ -118,7 +118,7 @@ const LinkTree = () => {
                         </h3>
                         <p className="text-xs text-slate-400 font-light">{link.description}</p>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-slate-500 group-hover/link:text-purple-400 group-hover/link:translate-x-1 transition-all duration-300" />
+                      <ArrowRight className="w-4 h-4 text-slate-500 group-hover/link:text-amber-400 group-hover/link:translate-x-1 transition-all duration-300" />
                     </a>
                   </CardContent>
                 </Card>
@@ -140,7 +140,7 @@ const LinkTree = () => {
                 </div>
                 <div className="space-y-2">
                   {contactInfo.map((contact, index) => <a key={index} href={contact.href} className="flex items-center p-3 rounded-lg bg-slate-800/30 hover:bg-slate-800/50 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 group/contact">
-                      <div className="w-8 h-8 bg-gradient-to-br from-slate-700/50 to-slate-600/50 rounded-lg flex items-center justify-center group-hover/contact:from-blue-600/20 group-hover/contact:to-purple-600/20 transition-all duration-300 mr-3">
+                      <div className="w-8 h-8 bg-gradient-to-br from-slate-700/50 to-slate-600/50 rounded-lg flex items-center justify-center group-hover/contact:from-blue-600/20 group-hover/contact:to-amber-600/20 transition-all duration-300 mr-3">
                         <div className="text-slate-400 group-hover/contact:text-blue-400 transition-colors text-xs">
                           {contact.icon}
                         </div>
@@ -151,7 +151,7 @@ const LinkTree = () => {
                           {contact.value}
                         </p>
                       </div>
-                      <ExternalLink className="w-3 h-3 text-slate-500 group-hover/contact:text-purple-400 transition-colors" />
+                      <ExternalLink className="w-3 h-3 text-slate-500 group-hover/contact:text-amber-400 transition-colors" />
                     </a>)}
                 </div>
               </CardContent>
@@ -163,7 +163,7 @@ const LinkTree = () => {
         <div className="text-center mt-6 animate-fade-in" style={{
         animationDelay: '0.6s'
       }}>
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600/10 to-purple-600/10 border border-slate-700/30 rounded-full">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600/10 to-amber-600/10 border border-slate-700/30 rounded-full">
             <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
             <p className="text-xs text-slate-400 font-medium tracking-wide">PREMIUM DIGITAL SERVICES</p>
           </div>

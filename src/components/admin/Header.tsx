@@ -4,7 +4,7 @@ import { User, LogOut } from "lucide-react";
 
 export function Header() {
   return (
-    <header className="bg-[#1A1F2C] border-b border-purple-500/20 p-4">
+    <header className="bg-[#1A1F2C] border-b border-amber-500/20 p-4">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Blog Dashboard</h1>
         <div className="flex items-center gap-4">

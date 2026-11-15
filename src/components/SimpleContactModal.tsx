@@ -87,9 +87,9 @@ export function SimpleContactModal({ isOpen, onClose }: SimpleContactModalProps)
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px] bg-gradient-to-br from-[#1A1F2C] via-[#1A1F2C] to-[#2C1F3C] border-purple-500/20">
+      <DialogContent className="sm:max-w-[500px] bg-gradient-to-br from-[#1A1F2C] via-[#1A1F2C] to-[#2C1F3C] border-amber-500/20">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-amber-400 via-amber-500 to-pink-500 bg-clip-text text-transparent">
             Obține Auditul Tău Complet 📊
           </DialogTitle>
           <DialogDescription className="text-base text-gray-300">
@@ -113,7 +113,7 @@ export function SimpleContactModal({ isOpen, onClose }: SimpleContactModalProps)
                       placeholder="Ion Popescu" 
                       {...field}
                       disabled={isSubmitting}
-                      className="bg-[#2C1F3C]/60 border-purple-500/30 text-white placeholder:text-gray-400 focus:border-purple-500/60"
+                      className="bg-[#2C1F3C]/60 border-amber-500/30 text-white placeholder:text-gray-400 focus:border-amber-500/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -136,7 +136,7 @@ export function SimpleContactModal({ isOpen, onClose }: SimpleContactModalProps)
                       placeholder="ion@example.com" 
                       {...field}
                       disabled={isSubmitting}
-                      className="bg-[#2C1F3C]/60 border-purple-500/30 text-white placeholder:text-gray-400 focus:border-purple-500/60"
+                      className="bg-[#2C1F3C]/60 border-amber-500/30 text-white placeholder:text-gray-400 focus:border-amber-500/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -158,7 +158,7 @@ export function SimpleContactModal({ isOpen, onClose }: SimpleContactModalProps)
                       placeholder="+40 722 123 456" 
                       {...field}
                       disabled={isSubmitting}
-                      className="bg-[#2C1F3C]/60 border-purple-500/30 text-white placeholder:text-gray-400 focus:border-purple-500/60"
+                      className="bg-[#2C1F3C]/60 border-amber-500/30 text-white placeholder:text-gray-400 focus:border-amber-500/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -172,14 +172,14 @@ export function SimpleContactModal({ isOpen, onClose }: SimpleContactModalProps)
                 variant="outline"
                 onClick={onClose}
                 disabled={isSubmitting}
-                className="flex-1 border-purple-500/30 text-gray-200 hover:bg-purple-500/10"
+                className="flex-1 border-amber-500/30 text-gray-200 hover:bg-amber-500/10"
               >
                 Anulează
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 bg-gradient-to-r from-purple-500 via-purple-600 to-pink-500 hover:from-purple-600 hover:via-purple-700 hover:to-pink-600"
+                className="flex-1 bg-gradient-to-r from-amber-500 via-amber-600 to-pink-500 hover:from-amber-600 hover:via-amber-700 hover:to-pink-600"
               >
                 {isSubmitting ? (
                   <>

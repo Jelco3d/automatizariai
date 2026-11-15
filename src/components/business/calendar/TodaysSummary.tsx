@@ -24,7 +24,7 @@ export const TodaysSummary = ({ bookings }: TodaysSummaryProps) => {
       title: "Timp Total",
       value: `${Math.floor(totalDuration / 60)}h ${totalDuration % 60}m`,
       icon: Clock,
-      color: "text-purple-500",
+      color: "text-amber-500",
     },
     {
       title: "Finalizate",

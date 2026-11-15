@@ -80,7 +80,7 @@ export function PayableInvoicesTable({ statusFilter }: { statusFilter?: string }
 
   return (
     <>
-      <Card className="bg-[#1A1F2C] border-purple-500/20 p-3 md:p-6">
+      <Card className="bg-[#1A1F2C] border-amber-500/20 p-3 md:p-6">
         <div className="mb-3 md:mb-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -133,7 +133,7 @@ export function PayableInvoicesTable({ statusFilter }: { statusFilter?: string }
                         variant="ghost"
                         size="sm"
                         onClick={() => handleDownloadPDF(invoice.pdf_file_path!, invoice.invoice_number)}
-                        className="flex-1 text-purple-400 hover:text-purple-300 hover:bg-purple-500/10 text-xs"
+                        className="flex-1 text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 text-xs"
                       >
                         <FileDown className="h-3 w-3 mr-1" />
                         PDF
@@ -207,7 +207,7 @@ export function PayableInvoicesTable({ statusFilter }: { statusFilter?: string }
                           variant="ghost"
                           size="icon"
                           onClick={() => handleDownloadPDF(invoice.pdf_file_path!, invoice.invoice_number)}
-                          className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10"
+                          className="text-amber-400 hover:text-amber-300 hover:bg-amber-500/10"
                           title="Descarcă PDF"
                         >
                           <FileDown className="h-4 w-4" />
@@ -222,7 +222,7 @@ export function PayableInvoicesTable({ statusFilter }: { statusFilter?: string }
                           variant="ghost"
                           size="icon"
                           onClick={() => setEditInvoice(invoice)}
-                          className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10"
+                          className="text-amber-400 hover:text-amber-300 hover:bg-amber-500/10"
                           title="Editează"
                         >
                           <Pencil className="h-4 w-4" />

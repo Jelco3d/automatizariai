@@ -215,7 +215,7 @@
   width: 3px;
   height: 60%;
   border-radius: 0 4px 4px 0;
-  background: linear-gradient(180deg, #a78bfa, #7c3aed);
+  background: linear-gradient(180deg, #FCD34D, #B45309);
 }
 
 .sidebar-link-inactive {
@@ -271,12 +271,12 @@
   .blog-article-theme {
     --background: 225 20% 7%;
     --foreground: 0 0% 100%;
-    --primary: 270 91% 85%;
+    --primary: 43 92% 56%;
     --primary-foreground: 225 20% 7%;
     --muted-foreground: 220 9% 80%;
     --border: 0 0% 100%;
-    --ring: 270 91% 85%;
-    --article-title-end: 315 100% 89%;
+    --ring: 43 92% 56%;
+    --article-title-end: 38 92% 50%;
   }
 }
 

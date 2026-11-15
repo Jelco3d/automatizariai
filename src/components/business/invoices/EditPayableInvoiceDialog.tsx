@@ -60,7 +60,7 @@ export function EditPayableInvoiceDialog({ open, onOpenChange, invoice }: EditPa
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#1A1F2C] border-purple-500/20 text-white w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto p-4 md:p-6">
+      <DialogContent className="bg-[#1A1F2C] border-amber-500/20 text-white w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto p-4 md:p-6">
         <DialogHeader>
           <DialogTitle className="text-lg md:text-xl">Editează factura de plată</DialogTitle>
         </DialogHeader>
@@ -228,7 +228,7 @@ export function EditPayableInvoiceDialog({ open, onOpenChange, invoice }: EditPa
               <Button
                 type="submit"
                 disabled={updatePayableInvoice.isPending}
-                className="bg-purple-600 hover:bg-purple-700 text-sm h-9 w-full md:w-auto"
+                className="bg-amber-600 hover:bg-amber-700 text-sm h-9 w-full md:w-auto"
               >
                 {updatePayableInvoice.isPending ? 'Se salvează...' : 'Salvează modificările'}
               </Button>

@@ -155,13 +155,13 @@ export default function BlogPost() {
       <article className="container mx-auto px-4 py-24 max-w-4xl">
         <Link
           to="/blog"
-          className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 mb-8"
+          className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 mb-8"
         >
           <ArrowLeft className="w-4 h-4" /> Înapoi la blog
         </Link>
 
         <header className="space-y-6 mb-12">
-          <h1 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 leading-tight">
+          <h1 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300 leading-tight">
             {post.title}
           </h1>
           <div className="flex flex-wrap items-center gap-6 text-gray-400 text-sm">
@@ -199,7 +199,7 @@ export default function BlogPost() {
           )}
         </header>
 
-        <div className="prose prose-invert max-w-none prose-p:text-gray-300 prose-li:text-gray-300 prose-strong:text-white prose-a:text-purple-300 space-y-8">
+        <div className="prose prose-invert max-w-none prose-p:text-gray-300 prose-li:text-gray-300 prose-strong:text-white prose-a:text-amber-300 space-y-8">
           <PostContent />
         </div>
       </article>

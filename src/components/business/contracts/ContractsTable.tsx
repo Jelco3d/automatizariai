@@ -35,7 +35,7 @@ export function ContractsTable({
             className={`rounded-lg border p-4 ${
               contract.fully_signed_at 
                 ? "bg-green-500/10 border-green-500/20" 
-                : "bg-[#1A1F2C] border-purple-500/20"
+                : "bg-[#1A1F2C] border-amber-500/20"
             }`}
           >
             <div className="space-y-3">
@@ -96,7 +96,7 @@ export function ContractsTable({
                       variant="ghost"
                       size="sm"
                       onClick={() => onGenerateSignatureLink(contract)}
-                      className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10 h-8 w-8 p-0"
+                      className="text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 h-8 w-8 p-0"
                       title="Link"
                     >
                       <Share2 className="h-4 w-4" />

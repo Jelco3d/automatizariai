@@ -128,10 +128,10 @@ export function CostAutomatizareAIRomania2026() {
         <p className="text-sm text-gray-400 italic">
           Surse: eComunicate (Workflow-uri AI 2026), Rifter (Cost digitalizare IMM 2026), date interne AI Automatizări.
         </p>
-        <div className="bg-purple-500/10 border-l-4 border-purple-400 p-4 rounded my-6">
+        <div className="bg-amber-500/10 border-l-4 border-amber-400 p-4 rounded my-6">
           <p className="m-0">
             💡 <strong>Nu ești sigur ce tier ți se potrivește?</strong>{" "}
-            <Link to="/audit-gratuit" className="text-purple-300 underline">
+            <Link to="/audit-gratuit" className="text-amber-300 underline">
               Fă un audit gratuit
             </Link>{" "}
             și primești o estimare personalizată în maxim 48 de ore, cu prioritizare pe ROI.
@@ -348,7 +348,7 @@ export function CostAutomatizareAIRomania2026() {
         </p>
         <p>
           Vezi detalii complete:{" "}
-          <Link to="/fidelizare-pacienti" className="text-purple-300 underline">
+          <Link to="/fidelizare-pacienti" className="text-amber-300 underline">
             Fidelizare pacienți pentru clinici dentare
           </Link>
           .
@@ -399,10 +399,10 @@ export function CostAutomatizareAIRomania2026() {
           → +12% trafic organic local. Tichete suport -60%. <strong>ROI la 4-5 luni.</strong>
         </p>
 
-        <div className="bg-purple-500/10 border-l-4 border-purple-400 p-4 rounded my-6">
+        <div className="bg-amber-500/10 border-l-4 border-amber-400 p-4 rounded my-6">
           <p className="m-0">
             💡 <strong>Vrei studii de caz reale cu cifre verificabile?</strong>{" "}
-            <Link to="/portfolio" className="text-purple-300 underline">
+            <Link to="/portfolio" className="text-amber-300 underline">
               Explorează portofoliul AI Automatizări
             </Link>
             .
@@ -565,7 +565,7 @@ Unde:
             <p>
               Pentru o afacere mică (50-200 conversații/zi), bugetul tipic este{" "}
               <strong>1.500-3.000 EUR setup + 150-250 EUR/lună</strong>. Detalii și demo live:{" "}
-              <Link to="/whatsapp-demo" className="text-purple-300 underline">
+              <Link to="/whatsapp-demo" className="text-amber-300 underline">
                 WhatsApp AI Demo
               </Link>
               .
@@ -593,7 +593,7 @@ Unde:
             <h3 className="text-lg font-bold text-white">Cât costă doar auditul?</h3>
             <p>
               La AI Automatizări,{" "}
-              <Link to="/audit-gratuit" className="text-purple-300 underline">
+              <Link to="/audit-gratuit" className="text-amber-300 underline">
                 auditul este gratuit
               </Link>{" "}
               — rezultate în 48h, fără angajament.
@@ -632,12 +632,12 @@ Unde:
           <li>Cere un audit gratuit — primești în 48h un raport concret cu ROI-uri</li>
         </ol>
 
-        <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 p-6 rounded-lg my-8">
+        <div className="bg-gradient-to-r from-amber-500/20 to-pink-500/20 border border-amber-400/30 p-6 rounded-lg my-8">
           <h3 className="text-xl font-bold text-white mb-3">Gata să afli ce poți automatiza?</h3>
           <p className="mb-4">
             <Link
               to="/audit-gratuit"
-              className="inline-block px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-lg transition"
+              className="inline-block px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition"
             >
               Cere auditul gratuit →
             </Link>

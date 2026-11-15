@@ -9,8 +9,8 @@ const GDPR = () => {
       <Navigation />
       <div className="container mx-auto px-4 py-16">
         <div className="flex items-center gap-4 mb-8">
-          <Shield className="w-8 h-8 text-purple-400" />
-          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">
+          <Shield className="w-8 h-8 text-amber-400" />
+          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300">
             Politica GDPR
           </h1>
         </div>
@@ -20,9 +20,9 @@ const GDPR = () => {
             Conform Regulamentului General privind Protecția Datelor (GDPR) și legislației române în vigoare, vă informăm despre modul în care colectăm și procesăm datele dumneavoastră personale.
           </p>
 
-          <div className="bg-[#1A1F2C] p-6 rounded-lg mb-8 border border-purple-500/20">
+          <div className="bg-[#1A1F2C] p-6 rounded-lg mb-8 border border-amber-500/20">
             <div className="flex items-center gap-3 mb-4">
-              <Lock className="w-6 h-6 text-purple-400" />
+              <Lock className="w-6 h-6 text-amber-400" />
               <h2 className="text-2xl font-semibold text-white m-0">Date Personale Colectate</h2>
             </div>
             <p className="text-gray-300">
@@ -69,7 +69,7 @@ const GDPR = () => {
             <h2 className="text-2xl font-semibold text-white">Contact DPO</h2>
             <p className="text-gray-300">
               Pentru orice întrebări sau solicitări legate de modul în care datele dumneavoastră personale sunt utilizate, ne puteți contacta la: 
-              <a href="mailto:dpo@automationai.ro" className="text-purple-400 hover:text-purple-300 ml-1">
+              <a href="mailto:dpo@automationai.ro" className="text-amber-400 hover:text-amber-300 ml-1">
                 dpo@automationai.ro
               </a>
             </p>

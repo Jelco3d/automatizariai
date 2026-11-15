@@ -120,7 +120,7 @@ export function ProposalPreviewDialog({ open, onOpenChange, proposal, onUpdatePr
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-5xl h-[85vh] bg-[#1A1F2C] border-purple-500/20 flex flex-col">
+      <DialogContent className="max-w-5xl h-[85vh] bg-[#1A1F2C] border-amber-500/20 flex flex-col">
         <DialogHeader className="flex-shrink-0">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-white">Propunere pentru {currentProposal?.business_name}</DialogTitle>
@@ -158,7 +158,7 @@ export function ProposalPreviewDialog({ open, onOpenChange, proposal, onUpdatePr
                   <Button
                     onClick={handleDownloadPDF}
                     disabled={!currentProposal?.generated_proposal || isGenerating}
-                    className="bg-purple-600 hover:bg-purple-700"
+                    className="bg-amber-600 hover:bg-amber-700"
                     size="sm"
                   >
                     <Download className="h-4 w-4 mr-2" />
@@ -172,7 +172,7 @@ export function ProposalPreviewDialog({ open, onOpenChange, proposal, onUpdatePr
         <ScrollArea className="flex-1 mt-4">
           <div className="space-y-4 pr-4">
             {currentProposal?.generated_proposal ? (
-              <div className="bg-white/5 border border-purple-500/20 rounded-lg p-6">
+              <div className="bg-white/5 border border-amber-500/20 rounded-lg p-6">
                 {isEditing ? (
                   <Textarea
                     value={editedText}

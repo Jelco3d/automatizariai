@@ -147,7 +147,7 @@ export function ProposalForm({ onSubmit, initialData, isSubmitting }: ProposalFo
         <Button
           type="submit"
           disabled={isSubmitting || isGenerating}
-          className="bg-purple-600 hover:bg-purple-700 w-full md:w-auto text-sm h-9 md:h-10"
+          className="bg-amber-600 hover:bg-amber-700 w-full md:w-auto text-sm h-9 md:h-10"
         >
           {isGenerating ? (
             <>

@@ -49,7 +49,7 @@ export function ClientsTable({ onEdit }: ClientsTableProps) {
 
   return (
     <>
-      <Card className="bg-[#1A1F2C] border-purple-500/20 p-3 md:p-6">
+      <Card className="bg-[#1A1F2C] border-amber-500/20 p-3 md:p-6">
         <div className="mb-3 md:mb-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -96,7 +96,7 @@ export function ClientsTable({ onEdit }: ClientsTableProps) {
                       variant="ghost"
                       size="sm"
                       onClick={() => onEdit(client)}
-                      className="flex-1 text-purple-400 hover:text-purple-300 hover:bg-purple-500/10 text-xs"
+                      className="flex-1 text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 text-xs"
                     >
                       <Edit className="h-3 w-3 mr-1" />
                       Editează
@@ -157,7 +157,7 @@ export function ClientsTable({ onEdit }: ClientsTableProps) {
                           variant="ghost"
                           size="sm"
                           onClick={() => onEdit(client)}
-                          className="text-purple-400 hover:text-purple-300 hover:bg-purple-500/10"
+                          className="text-amber-400 hover:text-amber-300 hover:bg-amber-500/10"
                         >
                           <Edit className="h-4 w-4" />
                         </Button>

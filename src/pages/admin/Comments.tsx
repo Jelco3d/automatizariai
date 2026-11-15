@@ -8,17 +8,17 @@ import { ArrowLeft, Search, Shield, MessageSquare, AlertTriangle, CheckCircle2, 
 export default function Comments() {
   return <div className="min-h-screen bg-[#0F1117] text-white">
       {/* Header */}
-      <header className="border-b border-purple-500/20 bg-[#1A1F2C] p-4">
+      <header className="border-b border-amber-500/20 bg-[#1A1F2C] p-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link to="/admin/blog">
               <Button variant="ghost" size="icon">
-                <ArrowLeft className="h-5 w-5 text-purple-400" />
+                <ArrowLeft className="h-5 w-5 text-amber-400" />
               </Button>
             </Link>
             <h1 className="text-xl font-semibold">Comments Management</h1>
           </div>
-          <Button variant="outline" className="gap-2 border-purple-500/20 text-gray-900">
+          <Button variant="outline" className="gap-2 border-amber-500/20 text-gray-900">
             <Shield className="h-4 w-4" />
             Update AI Moderation Rules
           </Button>
@@ -29,7 +29,7 @@ export default function Comments() {
         <div className="max-w-7xl mx-auto space-y-6">
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card className="bg-[#1A1F2C] border-purple-500/20">
+            <Card className="bg-[#1A1F2C] border-amber-500/20">
               <CardHeader>
                 <CardTitle className="text-lg text-slate-50">Total Comments</CardTitle>
                 <CardDescription>All time</CardDescription>
@@ -38,7 +38,7 @@ export default function Comments() {
                 <p className="text-3xl font-bold">1,234</p>
               </CardContent>
             </Card>
-            <Card className="bg-[#1A1F2C] border-purple-500/20">
+            <Card className="bg-[#1A1F2C] border-amber-500/20">
               <CardHeader>
                 <CardTitle className="text-lg text-gray-50">Pending Review</CardTitle>
                 <CardDescription>Needs moderation</CardDescription>
@@ -47,7 +47,7 @@ export default function Comments() {
                 <p className="text-3xl font-bold text-yellow-500">23</p>
               </CardContent>
             </Card>
-            <Card className="bg-[#1A1F2C] border-purple-500/20">
+            <Card className="bg-[#1A1F2C] border-amber-500/20">
               <CardHeader>
                 <CardTitle className="text-lg text-gray-50">Flagged</CardTitle>
                 <CardDescription>Potential violations</CardDescription>
@@ -56,7 +56,7 @@ export default function Comments() {
                 <p className="text-3xl font-bold text-red-500">5</p>
               </CardContent>
             </Card>
-            <Card className="bg-[#1A1F2C] border-purple-500/20">
+            <Card className="bg-[#1A1F2C] border-amber-500/20">
               <CardHeader>
                 <CardTitle className="text-lg text-slate-50">AI Approved</CardTitle>
                 <CardDescription>Auto-moderated</CardDescription>
@@ -68,13 +68,13 @@ export default function Comments() {
           </div>
 
           {/* Comments Table */}
-          <Card className="bg-[#1A1F2C] border-purple-500/20">
+          <Card className="bg-[#1A1F2C] border-amber-500/20">
             <CardHeader>
               <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
                 <CardTitle>Recent Comments</CardTitle>
                 <div className="relative w-full sm:w-96">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <Input placeholder="Search comments..." className="pl-10 bg-[#1A1F2C] border-purple-500/20" />
+                  <Input placeholder="Search comments..." className="pl-10 bg-[#1A1F2C] border-amber-500/20" />
                 </div>
               </div>
             </CardHeader>
@@ -108,7 +108,7 @@ export default function Comments() {
                       <p className="truncate">Great article on AI automation! I've been using similar tools in my workflow.</p>
                     </TableCell>
                     <TableCell>
-                      <Link to="/blog/post-1" className="text-purple-400 hover:underline">
+                      <Link to="/blog/post-1" className="text-amber-400 hover:underline">
                         Getting Started with AI
                       </Link>
                     </TableCell>
@@ -150,7 +150,7 @@ export default function Comments() {
                       <p className="truncate">This content seems promotional. Please review our guidelines.</p>
                     </TableCell>
                     <TableCell>
-                      <Link to="/blog/post-2" className="text-purple-400 hover:underline">
+                      <Link to="/blog/post-2" className="text-amber-400 hover:underline">
                         AI Tools Comparison
                       </Link>
                     </TableCell>

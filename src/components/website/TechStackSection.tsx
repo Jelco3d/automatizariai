@@ -7,42 +7,42 @@ export const TechStackSection = () => {
     {
       name: "Make (Integromat)",
       description: "Platformă avansată de automatizare pentru fluxuri de lucru complexe",
-      icon: <Workflow className="w-5 h-5 text-purple-300" />
+      icon: <Workflow className="w-5 h-5 text-amber-300" />
     },
     {
       name: "n8n",
       description: "Instrument open-source pentru automatizarea fluxurilor de lucru",
-      icon: <Network className="w-5 h-5 text-purple-300" />
+      icon: <Network className="w-5 h-5 text-amber-300" />
     },
     {
       name: "Relevance AI",
       description: "Procesare și analiză de date bazată pe AI",
-      icon: <Brain className="w-5 h-5 text-purple-300" />
+      icon: <Brain className="w-5 h-5 text-amber-300" />
     },
     {
       name: "Zapier",
       description: "Conectați și automatizați aplicațiile preferate",
-      icon: <Zap className="w-5 h-5 text-purple-300" />
+      icon: <Zap className="w-5 h-5 text-amber-300" />
     },
     {
       name: "OpenAI",
       description: "Modele de limbaj avansate și capabilități AI",
-      icon: <Sparkles className="w-5 h-5 text-purple-300" />
+      icon: <Sparkles className="w-5 h-5 text-amber-300" />
     },
     {
       name: "Langchain",
       description: "Framework pentru dezvoltarea aplicațiilor bazate pe AI",
-      icon: <Code2 className="w-5 h-5 text-purple-300" />
+      icon: <Code2 className="w-5 h-5 text-amber-300" />
     },
     {
       name: "AutoGPT",
       description: "Agent AI autonom pentru automatizarea sarcinilor",
-      icon: <Bot className="w-5 h-5 text-purple-300" />
+      icon: <Bot className="w-5 h-5 text-amber-300" />
     },
     {
       name: "Power Automate",
       description: "Soluția Microsoft pentru automatizarea proceselor de business",
-      icon: <Cpu className="w-5 h-5 text-purple-300" />
+      icon: <Cpu className="w-5 h-5 text-amber-300" />
     }
   ];
 
@@ -53,7 +53,7 @@ export const TechStackSection = () => {
           <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
             Tehnologiile Noastre
           </h2>
-          <p className="text-purple-200 text-xs max-w-xl mx-auto">
+          <p className="text-amber-200 text-xs max-w-xl mx-auto">
             Folosim instrumente și platforme de automatizare de ultimă generație pentru a oferi soluții puternice
           </p>
         </div>
@@ -62,14 +62,14 @@ export const TechStackSection = () => {
           {techStack.map((tech, index) => (
             <div
               key={tech.name}
-              className="p-2 rounded-lg bg-gradient-to-br from-purple-900/40 to-purple-800/30 border border-purple-500/40 hover:border-purple-400/60 transition-all duration-300 group backdrop-blur-sm shadow-lg hover:shadow-purple-500/20"
+              className="p-2 rounded-lg bg-gradient-to-br from-amber-900/40 to-amber-800/30 border border-amber-500/40 hover:border-amber-400/60 transition-all duration-300 group backdrop-blur-sm shadow-lg hover:shadow-amber-500/20"
             >
               <div className="flex flex-col items-center text-center space-y-1">
-                <div className="p-1 rounded-full bg-gradient-to-br from-purple-800/50 to-purple-700/40 group-hover:from-purple-700/60 group-hover:to-purple-600/50 transition-colors shadow-inner">
+                <div className="p-1 rounded-full bg-gradient-to-br from-amber-800/50 to-amber-700/40 group-hover:from-amber-700/60 group-hover:to-amber-600/50 transition-colors shadow-inner">
                   {tech.icon}
                 </div>
-                <h3 className="text-sm font-semibold text-purple-100">{tech.name}</h3>
-                <p className="text-purple-300 text-xs">{tech.description}</p>
+                <h3 className="text-sm font-semibold text-amber-100">{tech.name}</h3>
+                <p className="text-amber-300 text-xs">{tech.description}</p>
               </div>
             </div>
           ))}
