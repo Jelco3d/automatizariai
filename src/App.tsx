@@ -14,6 +14,7 @@ const GDPR = lazy(() => import('./pages/GDPR'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Cookies = lazy(() => import('./pages/Cookies'));
 const Blog = lazy(() => import('./pages/Blog'));
+const AutomatizariAI = lazy(() => import('./pages/AutomatizariAI'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
 const AdminBlog = lazy(() => import('./pages/admin/AdminBlog'));
@@ -67,6 +68,7 @@ const App = () => {
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/automatizari-ai" element={<AutomatizariAI />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/admin" element={<Dashboard />} />
           <Route path="/admin/blog" element={<AdminBlog />} />

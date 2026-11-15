@@ -36,7 +36,11 @@ export function BlogContent() {
               <h2 className="text-xl md:text-2xl font-bold text-white group-hover:text-purple-300 transition">
                 {post.title}
               </h2>
-              <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
+              <p
+                className={`text-gray-400 text-sm leading-relaxed ${
+                  post.slug === "automatizari-ai" ? "" : "line-clamp-3"
+                }`}
+              >
                 {post.description}
               </p>
               <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500 pt-2 border-t border-white/[0.05]">

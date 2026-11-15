@@ -267,6 +267,35 @@
   animation: webinar-entry 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+@layer base {
+  .blog-article-theme {
+    --background: 225 20% 7%;
+    --foreground: 0 0% 100%;
+    --primary: 270 91% 85%;
+    --primary-foreground: 225 20% 7%;
+    --muted-foreground: 220 9% 80%;
+    --border: 0 0% 100%;
+    --ring: 270 91% 85%;
+    --article-title-end: 315 100% 89%;
+  }
+}
+
+.blog-article-title {
+  color: transparent;
+  background: linear-gradient(
+    to right,
+    hsl(var(--primary)),
+    hsl(var(--article-title-end))
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.blog-article-summary {
+  border-left: 4px solid hsl(var(--primary));
+  background: hsl(var(--primary) / 0.08);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .webinar-entry {
     animation: none;
