@@ -76,7 +76,7 @@ const ARTICLE_SCHEMA = {
     url: "https://aiautomatizari.ro/",
     logo: {
       "@type": "ImageObject",
-      url: "https://aiautomatizari.ro/lovable-uploads/new-logo.png",
+      url: "https://aiautomatizari.ro/lovable-uploads/logo-256.png",
     },
   },
 };
