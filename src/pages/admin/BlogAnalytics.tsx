@@ -53,16 +53,16 @@ export default function BlogAnalytics() {
   return (
     <div className="min-h-screen bg-[#0F1117] text-white">
       <AdminPageHeader title="Statistici blog" actions={RANGES.map((r) => (
-        <Button key={r} size="sm" variant="ghost" onClick={() => setDays(r)} className={days === r ? "bg-amber-500 text-black hover:bg-amber-400" : "border border-amber-500/20"}>{r} zile</Button>
+        <Button key={r} size="sm" variant="ghost" onClick={() => setDays(r)} className={days === r ? "bg-amber-500 text-black hover:bg-amber-400" : "border border-amber-500/20 text-white"}>{r} zile</Button>
       ))} />
-      <main className="p-4 md:p-6">
+      <main className="p-4 md:p-6 overflow-x-hidden">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[["Citiri în ultimele " + days + " zile", views.length], ["Citiri totale (de la început)", total], ["Articole citite în perioadă", perPost.filter((p) => p.period > 0).length]].map(([l, v]) => (
-              <Card key={l as string} className="bg-[#1A1F2C] border-amber-500/20 p-4"><p className="text-sm text-gray-400">{l}</p><p className="text-2xl font-bold text-white mt-1">{loading ? "…" : v}</p></Card>
+              <Card key={l as string} className="bg-[#1A1F2C] text-white border-amber-500/20 p-4"><p className="text-sm text-gray-400">{l}</p><p className="text-2xl font-bold text-white mt-1">{loading ? "…" : v}</p></Card>
             ))}
           </div>
-          <Card className="bg-[#1A1F2C] border-amber-500/20 p-4">
+          <Card className="bg-[#1A1F2C] text-white border-amber-500/20 p-4">
             <h2 className="font-semibold mb-4">Citiri pe zi</h2>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -76,8 +76,8 @@ export default function BlogAnalytics() {
               </ResponsiveContainer>
             </div>
           </Card>
-          <div className="grid md:grid-cols-3 gap-4">
-            <Card className="bg-[#1A1F2C] border-amber-500/20 p-4 md:col-span-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Card className="bg-[#1A1F2C] text-white border-amber-500/20 p-4 md:col-span-2 min-w-0">
               <h2 className="font-semibold mb-3">Articole</h2>
               <ul className="divide-y divide-white/5">
                 {perPost.length === 0 && <li className="text-gray-400 py-3">Niciun articol.</li>}
@@ -89,7 +89,7 @@ export default function BlogAnalytics() {
                 ))}
               </ul>
             </Card>
-            <Card className="bg-[#1A1F2C] border-amber-500/20 p-4">
+            <Card className="bg-[#1A1F2C] text-white border-amber-500/20 p-4">
               <h2 className="font-semibold mb-3">De unde vin cititorii</h2>
               <ul className="space-y-2 text-sm">
                 {referrers.length === 0 && <li className="text-gray-400">Nicio citire în perioadă.</li>}

@@ -68,11 +68,11 @@ export default function Categories() {
   return (
     <div className="min-h-screen bg-[#0F1117] text-white">
       <AdminPageHeader title="Categorii" actions={<Button className="gap-2 bg-amber-500 hover:bg-amber-400 text-black" onClick={() => setForm({ ...empty })}><Plus className="h-4 w-4" />Categorie nouă</Button>} />
-      <main className="p-4 md:p-6">
+      <main className="p-4 md:p-6 overflow-x-hidden">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[["Total categorii", cats.length], ["Cea mai folosită", most && most.count ? `${most.name} (${most.count})` : "—"], ["Articole fără categorie", uncat]].map(([l, v]) => (
-              <Card key={l as string} className="bg-[#1A1F2C] border-amber-500/20 p-4">
+              <Card key={l as string} className="bg-[#1A1F2C] text-white border-amber-500/20 p-4">
                 <p className="text-sm text-gray-400">{l}</p>
                 <p className="text-2xl font-bold text-white mt-1">{loading ? "…" : v}</p>
               </Card>
@@ -80,13 +80,13 @@ export default function Categories() {
           </div>
 
           {form && (
-            <Card className="bg-[#1A1F2C] border-amber-500/30 p-4 space-y-3">
+            <Card className="bg-[#1A1F2C] text-white border-amber-500/30 p-4 space-y-3">
               <h2 className="font-semibold">{form.id ? "Editează categoria" : "Categorie nouă"}</h2>
               <div className="grid md:grid-cols-2 gap-3">
-                <Input placeholder="Nume" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value, slug: form.id ? form.slug : slugify(e.target.value) })} className="bg-[#0F1117] border-amber-500/20" />
-                <Input placeholder="slug" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} className="bg-[#0F1117] border-amber-500/20" />
+                <Input placeholder="Nume" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value, slug: form.id ? form.slug : slugify(e.target.value) })} className="bg-[#0F1117] border-amber-500/20 text-white" />
+                <Input placeholder="slug" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} className="bg-[#0F1117] border-amber-500/20 text-white" />
               </div>
-              <Textarea placeholder="Descriere (opțional)" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="bg-[#0F1117] border-amber-500/20" />
+              <Textarea placeholder="Descriere (opțional)" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="bg-[#0F1117] border-amber-500/20 text-white" />
               <div className="flex gap-2">
                 <Button onClick={save} disabled={saving} className="gap-2 bg-amber-500 hover:bg-amber-400 text-black"><Save className="h-4 w-4" />{saving ? "Se salvează…" : "Salvează"}</Button>
                 <Button variant="ghost" onClick={() => setForm(null)} className="gap-2"><X className="h-4 w-4" />Anulează</Button>
@@ -94,20 +94,20 @@ export default function Categories() {
             </Card>
           )}
 
-          <Card className="bg-[#1A1F2C] border-amber-500/20 p-4 space-y-4">
-            <Input placeholder="Caută categorii…" value={search} onChange={(e) => setSearch(e.target.value)} className="md:w-96 bg-[#0F1117] border-amber-500/20" />
+          <Card className="bg-[#1A1F2C] text-white border-amber-500/20 p-4 space-y-4">
+            <Input placeholder="Caută categorii…" value={search} onChange={(e) => setSearch(e.target.value)} className="md:w-96 bg-[#0F1117] border-amber-500/20 text-white" />
             <div className="overflow-x-auto">
               <Table>
-                <TableHeader><TableRow><TableHead>Nume</TableHead><TableHead>Descriere</TableHead><TableHead>Articole</TableHead><TableHead className="text-right">Acțiuni</TableHead></TableRow></TableHeader>
+                <TableHeader><TableRow><TableHead className="text-gray-400">Nume</TableHead><TableHead className="text-gray-400 hidden md:table-cell">Descriere</TableHead><TableHead className="text-gray-400">Articole</TableHead><TableHead className="text-right text-gray-400">Acțiuni</TableHead></TableRow></TableHeader>
                 <TableBody>
                   {!loading && shown.length === 0 && <TableRow><TableCell colSpan={4} className="text-center text-gray-400 py-8">Nicio categorie încă. Adaugă prima categorie.</TableCell></TableRow>}
                   {shown.map((c) => (
                     <TableRow key={c.id}>
-                      <TableCell className="font-medium">{c.name}<div className="text-xs text-gray-500">/{c.slug}</div></TableCell>
-                      <TableCell className="text-gray-300">{c.description || "—"}</TableCell>
-                      <TableCell>{c.count}</TableCell>
+                      <TableCell className="font-medium text-white">{c.name}<div className="text-xs text-gray-500">/{c.slug}</div></TableCell>
+                      <TableCell className="text-gray-300 hidden md:table-cell">{c.description || "—"}</TableCell>
+                      <TableCell className="text-white">{c.count}</TableCell>
                       <TableCell className="text-right whitespace-nowrap">
-                        <Button variant="ghost" size="icon" aria-label="Editează" onClick={() => setForm({ id: c.id, name: c.name, slug: c.slug, description: c.description ?? "" })}><Edit className="h-4 w-4" /></Button>
+                        <Button variant="ghost" size="icon" aria-label="Editează" onClick={() => setForm({ id: c.id, name: c.name, slug: c.slug, description: c.description ?? "" })}><Edit className="h-4 w-4 text-amber-400" /></Button>
                         <Button variant="ghost" size="icon" aria-label="Șterge" onClick={() => remove(c)}><Trash2 className="h-4 w-4 text-red-400" /></Button>
                       </TableCell>
                     </TableRow>

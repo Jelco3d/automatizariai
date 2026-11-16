@@ -44,19 +44,19 @@ export default function Comments() {
   return (
     <div className="min-h-screen bg-[#0F1117] text-white">
       <AdminPageHeader title="Comentarii" />
-      <main className="p-4 md:p-6">
+      <main className="p-4 md:p-6 overflow-x-hidden">
         <div className="max-w-5xl mx-auto space-y-5">
           <div className="flex flex-wrap gap-2">
             {tabs.map((t) => (
-              <Button key={t.k} variant="ghost" onClick={() => setTab(t.k)} className={tab === t.k ? "bg-amber-500 text-black hover:bg-amber-400" : "border border-amber-500/20"}>
+              <Button key={t.k} variant="ghost" onClick={() => setTab(t.k)} className={tab === t.k ? "bg-amber-500 text-black hover:bg-amber-400" : "border border-amber-500/20 text-white"}>
                 {t.l} ({count(t.k)})
               </Button>
             ))}
           </div>
           {loading ? <p className="text-gray-400">Se încarcă…</p> : shown.length === 0 ? (
-            <Card className="bg-[#1A1F2C] border-amber-500/20 p-8 text-center text-gray-400">Niciun comentariu aici.</Card>
+            <Card className="bg-[#1A1F2C] text-white border-amber-500/20 p-8 text-center text-gray-400">Niciun comentariu aici.</Card>
           ) : shown.map((c) => (
-            <Card key={c.id} className="bg-[#1A1F2C] border-amber-500/20 p-4 space-y-3">
+            <Card key={c.id} className="bg-[#1A1F2C] text-white border-amber-500/20 p-4 space-y-3">
               <div className="flex flex-wrap justify-between gap-2 text-sm">
                 <p><span className="font-semibold text-white">{c.author_name}</span> <span className="text-gray-400">· {c.author_email}</span></p>
                 <p className="text-gray-500">{formatRoDate(c.created_at)}</p>
@@ -65,8 +65,8 @@ export default function Comments() {
               <p className="text-gray-200 whitespace-pre-line break-words">{c.content}</p>
               <div className="flex flex-wrap gap-2">
                 {c.status !== "approved" && <Button size="sm" onClick={() => setStatus(c.id, "approved")} className="gap-1 bg-green-600 hover:bg-green-500 text-white"><Check className="h-4 w-4" />Aprobă</Button>}
-                {c.status !== "pending" && <Button size="sm" variant="ghost" onClick={() => setStatus(c.id, "pending")} className="gap-1 border border-amber-500/20"><Undo2 className="h-4 w-4" />În așteptare</Button>}
-                {c.status !== "spam" && <Button size="sm" variant="ghost" onClick={() => setStatus(c.id, "spam")} className="gap-1 border border-amber-500/20"><Ban className="h-4 w-4" />Spam</Button>}
+                {c.status !== "pending" && <Button size="sm" variant="ghost" onClick={() => setStatus(c.id, "pending")} className="gap-1 border border-amber-500/20 text-white"><Undo2 className="h-4 w-4" />În așteptare</Button>}
+                {c.status !== "spam" && <Button size="sm" variant="ghost" onClick={() => setStatus(c.id, "spam")} className="gap-1 border border-amber-500/20 text-white"><Ban className="h-4 w-4" />Spam</Button>}
                 <Button size="sm" variant="ghost" onClick={() => remove(c.id)} className="gap-1 text-red-400"><Trash2 className="h-4 w-4" />Șterge</Button>
               </div>
             </Card>

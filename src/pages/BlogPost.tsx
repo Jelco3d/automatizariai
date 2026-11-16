@@ -147,7 +147,7 @@ export default function BlogPost() {
     viewed.current = true;
     let sid = sessionStorage.getItem("blog_sid");
     if (!sid) { sid = crypto.randomUUID(); sessionStorage.setItem("blog_sid", sid); }
-    supabase.rpc("increment_post_view", { _slug: post.slug, _session: sid, _referrer: document.referrer || null });
+    supabase.rpc("increment_post_view", { _slug: post.slug, _session: sid, _referrer: document.referrer || null }).then(() => {});
   }, [post]);
 
   if (post === null) return <Navigate to="/blog" replace />;

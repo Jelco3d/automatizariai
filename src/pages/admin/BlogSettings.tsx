@@ -34,13 +34,13 @@ export default function BlogSettings() {
     else toast.success("Setările au fost salvate");
   };
 
-  const field = "bg-[#0F1117] border-amber-500/20";
+  const field = "bg-[#0F1117] border-amber-500/20 text-white";
   return (
     <div className="min-h-screen bg-[#0F1117] text-white">
       <AdminPageHeader title="Setări blog" actions={<Button onClick={save} disabled={saving || loading} className="gap-2 bg-amber-500 hover:bg-amber-400 text-black"><Save className="h-4 w-4" />{saving ? "Se salvează…" : "Salvează"}</Button>} />
-      <main className="p-4 md:p-6">
+      <main className="p-4 md:p-6 overflow-x-hidden">
         <div className="max-w-3xl mx-auto space-y-6">
-          <Card className="bg-[#1A1F2C] border-amber-500/20 p-5 space-y-4">
+          <Card className="bg-[#1A1F2C] text-white border-amber-500/20 p-5 space-y-4">
             <h2 className="font-semibold text-amber-400">General</h2>
             <label className="block space-y-1"><span className="text-sm text-gray-300">Titlul blogului</span>
               <Input className={field} value={v.blog_title} onChange={(e) => setV({ ...v, blog_title: e.target.value })} /></label>
@@ -49,10 +49,10 @@ export default function BlogSettings() {
             <label className="block space-y-1"><span className="text-sm text-gray-300">Autor implicit</span>
               <Input className={field} value={v.default_author} onChange={(e) => setV({ ...v, default_author: e.target.value })} /></label>
           </Card>
-          <Card className="bg-[#1A1F2C] border-amber-500/20 p-5 space-y-4">
+          <Card className="bg-[#1A1F2C] text-white border-amber-500/20 p-5 space-y-4">
             <h2 className="font-semibold text-amber-400">Comentarii</h2>
             <div className="flex items-center justify-between gap-4">
-              <div><p className="font-medium">Permite comentarii</p><p className="text-sm text-gray-400">Cititorii pot lăsa comentarii. Apar pe site doar după aprobare.</p></div>
+              <div><p className="font-medium text-white">Permite comentarii</p><p className="text-sm text-gray-400">Cititorii pot lăsa comentarii. Apar pe site doar după aprobare.</p></div>
               <Switch checked={v.comments_enabled} onCheckedChange={(c) => setV({ ...v, comments_enabled: c })} />
             </div>
           </Card>
