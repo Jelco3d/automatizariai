@@ -59,8 +59,9 @@ const LinkTree = () => {
               </div>
             </div>
           </div>
-          <h1 className="text-2xl font-bold text-white mb-1 tracking-tight">Jelco</h1>
-          <h2 className="text-lg font-semibold text-blue-300 mb-2">AI Automatizări</h2>
+          <p className="text-xs uppercase tracking-widest text-amber-300/80 mb-1">Jelco</p>
+          <h1 className="text-2xl font-bold text-white mb-1 tracking-tight">Profil și linkuri — AI Automatizări</h1>
+          <h2 className="text-lg font-semibold text-blue-300 mb-2">Servicii, portofoliu și contact direct</h2>
           <p className="text-slate-400 text-sm font-light">High Ticket  Automation</p>
           
           {/* Social Media Icons */}
