@@ -2,12 +2,13 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { openBooking } from "@/config/booking";
 
 export const CTASection = () => {
   console.log("Rendering CTASection");
   
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
+    openBooking();
   };
   
   return (

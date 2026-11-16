@@ -4,10 +4,11 @@ import { Check, TrendingUp, Calendar, Users, Star, ArrowRight, Play } from "luci
 import { useEffect } from "react";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
+import { openBooking } from "@/config/booking";
 
 export default function FidelizarePacienti() {
   const handleBookCall = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
+    openBooking();
   };
 
   useEffect(() => {

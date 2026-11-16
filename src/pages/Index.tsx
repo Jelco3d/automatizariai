@@ -5,11 +5,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Briefcase, Globe, Mail, Phone, User, Facebook, Instagram, Video, Twitter } from "lucide-react";
 import { WebsiteChatbot } from "@/components/website/WebsiteChatbot";
+import { openBooking } from "@/config/booking";
 
 const Index = () => {
   console.log("Rendering Index page");
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
+    openBooking();
   };
   return <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] flex items-center justify-center p-2 md:p-4">
       <Card className="w-full max-w-2xl bg-[#1A1F2C] border-amber-500/50">

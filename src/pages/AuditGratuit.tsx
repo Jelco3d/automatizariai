@@ -4,10 +4,11 @@ import { ArrowRight, MessageCircle, Target, TrendingUp } from "lucide-react";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { AuditChat } from "@/components/AuditChat";
+import { openBooking } from "@/config/booking";
 
 const AuditGratuit = () => {
   const handleStartAnalysis = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
+    openBooking();
   };
 
   return (

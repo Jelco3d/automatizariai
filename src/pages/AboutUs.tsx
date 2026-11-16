@@ -6,12 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { WebsiteChatbot } from "@/components/website/WebsiteChatbot";
 import { ArrowRight } from "lucide-react";
+import { openBooking } from "@/config/booking";
 
 const AboutUs = () => {
   console.log("Rendering AboutUs page");
 
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
+    openBooking();
   };
 
   return (

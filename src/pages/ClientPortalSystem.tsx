@@ -25,6 +25,7 @@ import {
   Calendar,
 } from "lucide-react";
 import { Navigation } from "@/components/website/Navigation";
+import { openBooking } from "@/config/booking";
 
 const Footer = lazy(() =>
   import("@/components/website/Footer").then((m) => ({ default: m.Footer }))
@@ -121,7 +122,7 @@ const faqs = [
 
 const ClientPortalSystem = () => {
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
-  const openModal = () => window.open("https://calendly.com/erdeleanjelco90/1-1-implementare-agen-i-ai", "_blank", "noopener,noreferrer");
+  const openModal = () => openBooking();
 
   useEffect(() => {
     document.title = "Portal Clienți + WhatsApp Automation | 14 zile, ROI 60 zile";

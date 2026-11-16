@@ -3,6 +3,7 @@ import { Footer } from '@/components/website/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { WebsiteChatbot } from '@/components/website/WebsiteChatbot';
+import { openBooking } from '@/config/booking';
 
 const Contact = () => {
   return (
@@ -57,7 +58,7 @@ const Contact = () => {
                   Programează o consultație gratuită și să discutăm despre nevoile tale.
                 </p>
                 <button 
-                  onClick={() => window.open('https://calendly.com/cosmincatalin-ai/30min', '_blank')}
+                  onClick={openBooking}
                   className="w-full btn-3d-gold px-6 py-3 rounded-lg animate-glow-pulse"
                 >
                   Programează Consultație Gratuită

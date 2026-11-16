@@ -2,9 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { QrCode, Car, TrendingUp, Users, Settings, Shield, Clock, ArrowRight, Bell, CheckCircle2 } from "lucide-react";
+import { openBooking } from "@/config/booking";
 const ShowroomVSL = () => {
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
+    openBooking();
   };
   return <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] text-foreground relative overflow-hidden">
       {/* Animated Background Elements */}

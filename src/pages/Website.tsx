@@ -3,6 +3,7 @@ import { Navigation } from "@/components/website/Navigation";
 import { HeroSection } from "@/components/website/HeroSection";
 import { VSLSection } from "@/components/website/VSLSection";
 import { AuditFormModal } from "@/components/website/AuditFormModal";
+import { openBooking } from "@/config/booking";
 
 const ProblemSection = lazy(() => import("@/components/website/ProblemSection").then(m => ({ default: m.ProblemSection })));
 const SolutionSection = lazy(() => import("@/components/website/SolutionSection").then(m => ({ default: m.SolutionSection })));
@@ -13,7 +14,7 @@ const WebsiteChatbot = lazy(() => import("@/components/website/WebsiteChatbot").
 
 const Website = () => {
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
-  const openAuditModal = () => window.open("https://calendly.com/erdeleanjelco90/1-1-implementare-agen-i-ai", "_blank", "noopener,noreferrer");
+  const openAuditModal = () => openBooking();
 
   return (
     <div className="min-h-screen bg-[#0a0e1a] relative overflow-hidden">

@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { BOOKING_URL } from '@/config/booking';
 
 // Store API key in memory (in a production app, this should be handled more securely)
 let apiKey = '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';  // Replace with your actual OpenAI API key
@@ -21,7 +22,7 @@ Your main services include:
 4. Sales growth strategies
 
 Your goal is to be helpful, answer questions about AI automation services, and guide the conversation 
-towards booking a free consultation at https://calendly.com/aiautomatizari/automatizari-ai.
+towards booking a free consultation at ${BOOKING_URL}.
 
 If asked about pricing, mention that you offer custom solutions and that's why a free consultation is 
 the best way to get accurate pricing information.

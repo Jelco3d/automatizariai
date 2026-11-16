@@ -3,6 +3,7 @@ import { Footer } from "@/components/website/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, Calendar, Bell, Star, Shield, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
+import { openBooking } from "@/config/booking";
 const WhatsAppDemo = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 4;
@@ -41,7 +42,7 @@ const WhatsAppDemo = () => {
     });
   };
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
+    openBooking();
   };
   return <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C1F3C] to-[#1A1F2C] relative overflow-hidden">
       <Navigation />

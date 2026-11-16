@@ -9,12 +9,13 @@ import { TechnicalCapabilities } from "@/components/website/services/TechnicalCa
 import { IntegrationOptions } from "@/components/website/services/IntegrationOptions";
 import { CTASection } from "@/components/website/services/CTASection";
 import { WebsiteChatbot } from "@/components/website/WebsiteChatbot";
+import { openBooking } from "@/config/booking";
 
 const Services = () => {
   console.log("Rendering Services page");
 
   const handleBooking = () => {
-    window.open('https://calendly.com/aiautomatizari/automatizari-ai', '_blank');
+    openBooking();
   };
 
   return (
