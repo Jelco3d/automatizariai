@@ -1,0 +1,3 @@
+DROP POLICY IF EXISTS "Anyone submits pending comments" ON public.blog_comments;
+CREATE POLICY "Anyone submits pending comments" ON public.blog_comments FOR INSERT TO anon, authenticated
+WITH CHECK (status IN ('pending'::comment_status, 'spam'::comment_status) AND is_staff_reply = false AND EXISTS (SELECT 1 FROM public.blog_posts p WHERE p.id = blog_comments.post_id AND p.status = 'published' AND p.published_at <= now() AND p.allow_comments));

@@ -143,11 +143,29 @@ export default function BlogPost() {
   const { html, headings } = useMemo(() => (post ? withHeadingIds(sanitizeHtml(post.content)) : { html: "", headings: [] }), [post]);
   const viewed = useRef(false);
   useEffect(() => {
-    if (!post || viewed.current) return;
+    if (!post) return;
     viewed.current = true;
     let sid = sessionStorage.getItem("blog_sid");
     if (!sid) { sid = crypto.randomUUID(); sessionStorage.setItem("blog_sid", sid); }
-    supabase.rpc("increment_post_view", { _slug: post.slug, _session: sid, _referrer: document.referrer || null }).then(() => {});
+    const w = window.innerWidth;
+    const device = /Mobi|Android|iPhone/i.test(navigator.userAgent) && w < 768 ? "mobile" : w < 1024 ? "tablet" : "desktop";
+    const started = Date.now();
+    let viewId: string | null = null;
+    let active = 0, last = Date.now(), visible = document.visibilityState === "visible";
+    const flush = () => {
+      if (visible) active += Date.now() - last;
+      last = Date.now();
+      if (!viewId) return;
+      const secs = Math.round(active / 1000);
+      if (secs > 0) supabase.rpc("record_post_read_time", { _view_id: viewId, _session: sid!, _seconds: secs }).then(() => {});
+    };
+    const onVis = () => { if (document.visibilityState === "hidden") { flush(); visible = false; } else { visible = true; last = Date.now(); } };
+    supabase.rpc("increment_post_view", { _slug: post.slug, _session: sid, _referrer: document.referrer || null, _device: device }).then(({ data }) => { viewId = (data as string | null) ?? null; });
+    document.addEventListener("visibilitychange", onVis);
+    window.addEventListener("pagehide", flush);
+    const iv = setInterval(flush, 15000);
+    void started;
+    return () => { flush(); clearInterval(iv); document.removeEventListener("visibilitychange", onVis); window.removeEventListener("pagehide", flush); };
   }, [post]);
 
   if (post === null) return <Navigate to="/blog" replace />;
@@ -166,7 +184,7 @@ export default function BlogPost() {
           <>
             <header className="mb-8">
               <h1 className="text-[2rem] md:text-[2.6rem] font-black tracking-tight leading-[1.15] text-white">{post.title}</h1>
-              {post.excerpt && <p className="mt-3 text-lg md:text-xl font-light text-gray-400 leading-snug">{post.excerpt}</p>}
+              {(post.subtitle || post.excerpt) && <p className="mt-3 text-lg md:text-xl font-light text-gray-400 leading-snug">{post.subtitle || post.excerpt}</p>}
               <div className="mt-6 flex items-center gap-3">
                 <img src="/lovable-uploads/logo-256.webp" alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover ring-1 ring-amber-400/40" />
                 <div className="leading-tight">
@@ -199,7 +217,7 @@ export default function BlogPost() {
               <ShareButtons title={post.title} />
               <a href="https://calendly.com/erdeleanjelco8/30min" target="_blank" rel="noopener noreferrer" className="inline-flex justify-center items-center h-11 px-6 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-semibold transition">Cere auditul gratuit</a>
             </footer>
-            <BlogComments postId={post.id} />
+            <BlogComments postId={post.id} allowComments={post.allow_comments !== false} />
           </>
         )}
       </article>

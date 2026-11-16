@@ -5,3 +5,4 @@
 - [x] Real analytics
 - [ ] AI assist in editor
 - [x] Categories/Settings admin pages
+- [x] Substack-style redesign of all /admin/blog pages

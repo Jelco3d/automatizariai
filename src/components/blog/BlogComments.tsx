@@ -3,9 +3,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { fetchBlogSettings } from "@/lib/blogSettings";
 import { formatRoDate } from "@/lib/blog";
 
-type C = { id: string | null; author_name: string | null; content: string | null; created_at: string | null };
+type C = { id: string | null; author_name: string | null; content: string | null; created_at: string | null; is_staff_reply: boolean | null };
 
-export default function BlogComments({ postId }: { postId: string }) {
+export default function BlogComments({ postId, allowComments = true }: { postId: string; allowComments?: boolean }) {
   const [enabled, setEnabled] = useState(true);
   const [items, setItems] = useState<C[]>([]);
   const [f, setF] = useState({ name: "", email: "", content: "" });
@@ -13,7 +13,7 @@ export default function BlogComments({ postId }: { postId: string }) {
 
   useEffect(() => {
     fetchBlogSettings().then((s) => setEnabled(s.comments_enabled));
-    supabase.from("blog_comments_public").select("id,author_name,content,created_at").eq("post_id", postId).order("created_at")
+    supabase.from("blog_comments_public").select("id,author_name,content,created_at,is_staff_reply").eq("post_id", postId).order("created_at")
       .then(({ data }) => setItems(data ?? []));
   }, [postId]);
 
@@ -37,12 +37,12 @@ export default function BlogComments({ postId }: { postId: string }) {
         {items.length === 0 && <li className="text-gray-400">Încă nu sunt comentarii.</li>}
         {items.map((c) => (
           <li key={c.id} className="border-l-2 border-amber-400/40 pl-4">
-            <p className="text-sm font-semibold text-white">{c.author_name} <span className="font-normal text-gray-500">· {c.created_at && formatRoDate(c.created_at)}</span></p>
+            <p className="text-sm font-semibold text-white">{c.author_name} {c.is_staff_reply && <span className="ml-1 rounded-full bg-amber-400/15 px-1.5 py-0.5 text-[10px] font-bold text-amber-300">AUTOR</span>} <span className="font-normal text-gray-500">· {c.created_at && formatRoDate(c.created_at)}</span></p>
             <p className="mt-1 text-gray-200 whitespace-pre-line break-words">{c.content}</p>
           </li>
         ))}
       </ul>
-      {enabled && (
+      {enabled && allowComments && (
         state === "sent" ? (
           <p className="mt-8 rounded-md border border-amber-400/30 bg-amber-400/10 p-4 text-amber-100">Mulțumim! Comentariul tău va apărea după ce este aprobat.</p>
         ) : (

@@ -6,13 +6,24 @@ export type BlogPostRow = {
   cover_image: string | null; status: string; published_at: string | null; scheduled_at: string | null;
   category_id: string | null; seo_title: string | null; seo_description: string | null; og_image: string | null;
   reading_time: number; views: number; author_name: string | null; json_ld: unknown; updated_at: string; created_at: string;
+  subtitle?: string | null; allow_comments?: boolean;
 };
 
 export const SITE_URL = "https://aiautomatizari.ro";
 
 /** Only safe formatting tags survive — no scripts, no inline handlers. */
+// Only YouTube embeds may survive as iframes.
+DOMPurify.addHook("uponSanitizeElement", (node, data) => {
+  if (data.tagName !== "iframe") return;
+  const src = (node as Element).getAttribute("src") ?? "";
+  if (!/^https:\/\/(www\.)?(youtube-nocookie\.com|youtube\.com)\/embed\//.test(src)) node.parentNode?.removeChild(node);
+});
+
 export const sanitizeHtml = (html: string) =>
-  DOMPurify.sanitize(html, { USE_PROFILES: { html: true }, FORBID_TAGS: ["style", "form", "input"], FORBID_ATTR: ["style"] });
+  DOMPurify.sanitize(html, {
+    USE_PROFILES: { html: true }, FORBID_TAGS: ["style", "form", "input"], FORBID_ATTR: ["style"],
+    ADD_TAGS: ["iframe"], ADD_ATTR: ["allowfullscreen", "frameborder", "allow", "data-youtube-video"],
+  });
 
 export const slugify = (s: string) =>
   s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()

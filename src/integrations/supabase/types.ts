@@ -202,25 +202,31 @@ export type Database = {
       }
       blog_categories: {
         Row: {
+          color: string
           created_at: string
           description: string | null
           id: string
           name: string
           slug: string
+          sort_order: number
         }
         Insert: {
+          color?: string
           created_at?: string
           description?: string | null
           id?: string
           name: string
           slug: string
+          sort_order?: number
         }
         Update: {
+          color?: string
           created_at?: string
           description?: string | null
           id?: string
           name?: string
           slug?: string
+          sort_order?: number
         }
         Relationships: []
       }
@@ -232,6 +238,7 @@ export type Database = {
           created_at: string
           id: string
           ip_hash: string | null
+          is_staff_reply: boolean
           parent_id: string | null
           post_id: string
           status: Database["public"]["Enums"]["comment_status"]
@@ -243,6 +250,7 @@ export type Database = {
           created_at?: string
           id?: string
           ip_hash?: string | null
+          is_staff_reply?: boolean
           parent_id?: string | null
           post_id: string
           status?: Database["public"]["Enums"]["comment_status"]
@@ -254,6 +262,7 @@ export type Database = {
           created_at?: string
           id?: string
           ip_hash?: string | null
+          is_staff_reply?: boolean
           parent_id?: string | null
           post_id?: string
           status?: Database["public"]["Enums"]["comment_status"]
@@ -314,6 +323,8 @@ export type Database = {
       }
       blog_post_views: {
         Row: {
+          device: string | null
+          duration_seconds: number | null
           id: string
           post_id: string
           referrer: string | null
@@ -321,6 +332,8 @@ export type Database = {
           viewed_at: string
         }
         Insert: {
+          device?: string | null
+          duration_seconds?: number | null
           id?: string
           post_id: string
           referrer?: string | null
@@ -328,6 +341,8 @@ export type Database = {
           viewed_at?: string
         }
         Update: {
+          device?: string | null
+          duration_seconds?: number | null
           id?: string
           post_id?: string
           referrer?: string | null
@@ -346,6 +361,7 @@ export type Database = {
       }
       blog_posts: {
         Row: {
+          allow_comments: boolean
           author_id: string | null
           author_name: string | null
           category_id: string | null
@@ -363,11 +379,13 @@ export type Database = {
           seo_title: string | null
           slug: string
           status: Database["public"]["Enums"]["post_status"]
+          subtitle: string | null
           title: string
           updated_at: string
           views: number
         }
         Insert: {
+          allow_comments?: boolean
           author_id?: string | null
           author_name?: string | null
           category_id?: string | null
@@ -385,11 +403,13 @@ export type Database = {
           seo_title?: string | null
           slug: string
           status?: Database["public"]["Enums"]["post_status"]
+          subtitle?: string | null
           title: string
           updated_at?: string
           views?: number
         }
         Update: {
+          allow_comments?: boolean
           author_id?: string | null
           author_name?: string | null
           category_id?: string | null
@@ -407,6 +427,7 @@ export type Database = {
           seo_title?: string | null
           slug?: string
           status?: Database["public"]["Enums"]["post_status"]
+          subtitle?: string | null
           title?: string
           updated_at?: string
           views?: number
@@ -1340,6 +1361,7 @@ export type Database = {
           content: string | null
           created_at: string | null
           id: string | null
+          is_staff_reply: boolean | null
           parent_id: string | null
           post_id: string | null
         }
@@ -1348,6 +1370,7 @@ export type Database = {
           content?: string | null
           created_at?: string | null
           id?: string | null
+          is_staff_reply?: boolean | null
           parent_id?: string | null
           post_id?: string | null
         }
@@ -1356,6 +1379,7 @@ export type Database = {
           content?: string | null
           created_at?: string | null
           id?: string | null
+          is_staff_reply?: boolean | null
           parent_id?: string | null
           post_id?: string | null
         }
@@ -1393,14 +1417,23 @@ export type Database = {
         Returns: boolean
       }
       increment_post_view: {
-        Args: { _referrer?: string; _session: string; _slug: string }
-        Returns: undefined
+        Args: {
+          _device?: string
+          _referrer?: string
+          _session: string
+          _slug: string
+        }
+        Returns: string
       }
       is_blog_staff: { Args: { _user_id: string }; Returns: boolean }
+      record_post_read_time: {
+        Args: { _seconds: number; _session: string; _view_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "admin" | "user" | "editor"
-      comment_status: "pending" | "approved" | "spam"
+      comment_status: "pending" | "approved" | "spam" | "trash"
       contract_status:
         | "draft"
         | "active"
@@ -1539,7 +1572,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user", "editor"],
-      comment_status: ["pending", "approved", "spam"],
+      comment_status: ["pending", "approved", "spam", "trash"],
       contract_status: [
         "draft",
         "active",

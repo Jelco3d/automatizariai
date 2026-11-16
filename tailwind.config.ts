@@ -21,8 +21,16 @@ export default {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
         "webinar-heading": ["Barlow Condensed", "sans-serif"],
+        serif: ["Lora", "Georgia", "serif"],
       },
       colors: {
+        surface: "hsl(var(--surface, var(--background)))",
+        status: {
+          published: "hsl(var(--status-published))",
+          draft: "hsl(var(--status-draft))",
+          scheduled: "hsl(var(--status-scheduled))",
+          spam: "hsl(var(--status-spam))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -36,6 +36,27 @@
       "when": 1794840388867,
       "tag": "0004_blog_reading_time_strip_html",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1794843690055,
+      "tag": "0005_blog_admin_redesign",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1794843762580,
+      "tag": "0006_blog_comment_spam_filter",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1794843775491,
+      "tag": "0007_blog_comment_policy_spam",
+      "breakpoints": true
     }
   ]
 }

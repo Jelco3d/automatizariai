@@ -1,123 +1,138 @@
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useQueryClient } from "@tanstack/react-query";
+import { ArrowDown, ArrowUp, FolderOpen, GripVertical, Pencil, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card } from "@/components/ui/card";
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { Plus, Edit, Trash2, Save, X } from "lucide-react";
-import AdminPageHeader from "@/components/admin/AdminPageHeader";
+import { supabase } from "@/integrations/supabase/client";
+import BlogAdminLayout from "@/components/admin/blog/BlogAdminLayout";
+import { ConfirmDialog, EmptyState, ErrorState, FieldLabel, ListSkeleton, PageHeader, Panel, SectionTitle } from "@/components/admin/blog/ui";
+import { AdminCategory, blogKeys, useCategories, useInvalidateBlog, usePosts } from "@/hooks/useBlogAdmin";
 import { slugify } from "@/lib/blog";
+import { cn } from "@/lib/utils";
 
-type Cat = { id: string; name: string; slug: string; description: string | null; created_at: string; count: number };
-const empty = { id: "", name: "", slug: "", description: "" };
+const COLORS = ["#D97706", "#DC2626", "#16A34A", "#2563EB", "#7C3AED", "#DB2777", "#0891B2", "#525252"];
+const blank = { name: "", slug: "", description: "", color: COLORS[0] };
 
 export default function Categories() {
-  const [cats, setCats] = useState<Cat[]>([]);
-  const [uncat, setUncat] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [form, setForm] = useState<typeof empty | null>(null);
+  const qc = useQueryClient();
+  const cats = useCategories();
+  const { data: posts = [] } = usePosts();
+  const invalidate = useInvalidateBlog();
+  const [editing, setEditing] = useState<AdminCategory | null>(null);
+  const [form, setForm] = useState(blank);
+  const [slugTouched, setSlugTouched] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [search, setSearch] = useState("");
+  const [confirm, setConfirm] = useState<AdminCategory | null>(null);
+  const [dragId, setDragId] = useState<string | null>(null);
+  const list = cats.data ?? [];
+  const countOf = (id: string) => posts.filter((p) => p.category_id === id).length;
+  const uncategorized = posts.filter((p) => !p.category_id).length;
 
-  const load = async () => {
-    setLoading(true);
-    const [{ data: c, error }, { data: p }] = await Promise.all([
-      supabase.from("blog_categories").select("*").order("name"),
-      supabase.from("blog_posts").select("category_id"),
-    ]);
-    if (error) toast.error(error.message);
-    const counts: Record<string, number> = {};
-    let u = 0;
-    (p ?? []).forEach((r) => (r.category_id ? (counts[r.category_id] = (counts[r.category_id] ?? 0) + 1) : u++));
-    setCats((c ?? []).map((x) => ({ ...x, count: counts[x.id] ?? 0 })));
-    setUncat(u);
-    setLoading(false);
-  };
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    if (editing) { setForm({ name: editing.name, slug: editing.slug, description: editing.description ?? "", color: editing.color }); setSlugTouched(true); }
+    else { setForm(blank); setSlugTouched(false); }
+  }, [editing]);
 
-  const save = async () => {
-    if (!form) return;
-    const name = form.name.trim();
-    const slug = slugify(form.slug || name);
-    if (!name || !slug) return toast.error("Numele este obligatoriu");
+  const save = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const name = form.name.trim(), slug = slugify(form.slug || form.name);
+    if (!name || !slug) return toast.error("Adaugă un nume");
+    if (list.some((c) => c.slug === slug && c.id !== editing?.id)) return toast.error("Există deja o categorie cu această adresă");
     setSaving(true);
-    const payload = { name, slug, description: form.description.trim() || null };
-    const { error } = form.id
-      ? await supabase.from("blog_categories").update(payload).eq("id", form.id)
-      : await supabase.from("blog_categories").insert(payload);
+    const payload = { name, slug, description: form.description.trim() || null, color: form.color };
+    const { error } = editing
+      ? await supabase.from("blog_categories").update(payload).eq("id", editing.id)
+      : await supabase.from("blog_categories").insert({ ...payload, sort_order: list.length });
     setSaving(false);
-    if (error) return toast.error(error.code === "23505" ? "Există deja o categorie cu acest slug" : error.message);
-    toast.success("Categoria a fost salvată");
-    setForm(null);
-    load();
+    if (error) return toast.error("Salvarea a eșuat");
+    toast.success(editing ? "Categorie actualizată" : "Categorie adăugată");
+    setEditing(null); setForm(blank); invalidate();
   };
 
-  const remove = async (c: Cat) => {
-    if (!confirm(`Ștergi categoria „${c.name}"? Articolele (${c.count}) rămân fără categorie.`)) return;
+  const remove = async (c: AdminCategory) => {
+    qc.setQueryData<AdminCategory[]>(blogKeys.categories, (old) => (old ?? []).filter((x) => x.id !== c.id));
+    setConfirm(null);
+    await supabase.from("blog_posts").update({ category_id: null }).eq("category_id", c.id);
     const { error } = await supabase.from("blog_categories").delete().eq("id", c.id);
-    if (error) return toast.error(error.message);
-    toast.success("Categorie ștearsă");
-    load();
+    if (error) toast.error("Ștergerea a eșuat"); else toast.success("Categorie ștearsă");
+    if (editing?.id === c.id) setEditing(null);
+    invalidate();
   };
 
-  const most = [...cats].sort((a, b) => b.count - a.count)[0];
-  const shown = cats.filter((c) => c.name.toLowerCase().includes(search.toLowerCase()));
+  const reorder = async (next: AdminCategory[]) => {
+    const withOrder = next.map((c, i) => ({ ...c, sort_order: i }));
+    qc.setQueryData(blogKeys.categories, withOrder);
+    const results = await Promise.all(withOrder.map((c) => supabase.from("blog_categories").update({ sort_order: c.sort_order }).eq("id", c.id)));
+    if (results.some((r) => r.error)) { toast.error("Ordinea nu s-a salvat"); invalidate(); } else toast.success("Ordine salvată");
+  };
+  const move = (from: number, to: number) => {
+    if (to < 0 || to >= list.length || from === to) return;
+    const next = [...list]; const [it] = next.splice(from, 1); next.splice(to, 0, it); reorder(next);
+  };
 
   return (
-    <div className="min-h-screen bg-[#0F1117] text-white">
-      <AdminPageHeader title="Categorii" actions={<Button className="gap-2 bg-amber-500 hover:bg-amber-400 text-black" onClick={() => setForm({ ...empty })}><Plus className="h-4 w-4" />Categorie nouă</Button>} />
-      <main className="p-4 md:p-6 overflow-x-hidden">
-        <div className="max-w-7xl mx-auto space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[["Total categorii", cats.length], ["Cea mai folosită", most && most.count ? `${most.name} (${most.count})` : "—"], ["Articole fără categorie", uncat]].map(([l, v]) => (
-              <Card key={l as string} className="bg-[#1A1F2C] text-white border-amber-500/20 p-4">
-                <p className="text-sm text-gray-400">{l}</p>
-                <p className="text-2xl font-bold text-white mt-1">{loading ? "…" : v}</p>
-              </Card>
-            ))}
-          </div>
-
-          {form && (
-            <Card className="bg-[#1A1F2C] text-white border-amber-500/30 p-4 space-y-3">
-              <h2 className="font-semibold">{form.id ? "Editează categoria" : "Categorie nouă"}</h2>
-              <div className="grid md:grid-cols-2 gap-3">
-                <Input placeholder="Nume" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value, slug: form.id ? form.slug : slugify(e.target.value) })} className="bg-[#0F1117] border-amber-500/20 text-white" />
-                <Input placeholder="slug" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} className="bg-[#0F1117] border-amber-500/20 text-white" />
-              </div>
-              <Textarea placeholder="Descriere (opțional)" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="bg-[#0F1117] border-amber-500/20 text-white" />
-              <div className="flex gap-2">
-                <Button onClick={save} disabled={saving} className="gap-2 bg-amber-500 hover:bg-amber-400 text-black"><Save className="h-4 w-4" />{saving ? "Se salvează…" : "Salvează"}</Button>
-                <Button variant="ghost" onClick={() => setForm(null)} className="gap-2"><X className="h-4 w-4" />Anulează</Button>
-              </div>
-            </Card>
-          )}
-
-          <Card className="bg-[#1A1F2C] text-white border-amber-500/20 p-4 space-y-4">
-            <Input placeholder="Caută categorii…" value={search} onChange={(e) => setSearch(e.target.value)} className="md:w-96 bg-[#0F1117] border-amber-500/20 text-white" />
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow><TableHead className="text-gray-400">Nume</TableHead><TableHead className="text-gray-400 hidden md:table-cell">Descriere</TableHead><TableHead className="text-gray-400">Articole</TableHead><TableHead className="text-right text-gray-400">Acțiuni</TableHead></TableRow></TableHeader>
-                <TableBody>
-                  {!loading && shown.length === 0 && <TableRow><TableCell colSpan={4} className="text-center text-gray-400 py-8">Nicio categorie încă. Adaugă prima categorie.</TableCell></TableRow>}
-                  {shown.map((c) => (
-                    <TableRow key={c.id}>
-                      <TableCell className="font-medium text-white">{c.name}<div className="text-xs text-gray-500">/{c.slug}</div></TableCell>
-                      <TableCell className="text-gray-300 hidden md:table-cell">{c.description || "—"}</TableCell>
-                      <TableCell className="text-white">{c.count}</TableCell>
-                      <TableCell className="text-right whitespace-nowrap">
-                        <Button variant="ghost" size="icon" aria-label="Editează" onClick={() => setForm({ id: c.id, name: c.name, slug: c.slug, description: c.description ?? "" })}><Edit className="h-4 w-4 text-amber-400" /></Button>
-                        <Button variant="ghost" size="icon" aria-label="Șterge" onClick={() => remove(c)}><Trash2 className="h-4 w-4 text-red-400" /></Button>
-                      </TableCell>
-                    </TableRow>
+    <BlogAdminLayout>
+      <PageHeader title="Categorii" description="Organizează articolele pe teme. Trage ca să schimbi ordinea." actions={editing && <Button variant="outline" onClick={() => setEditing(null)} className="gap-2"><Plus className="h-4 w-4" />Categorie nouă</Button>} />
+      <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
+        <section>
+          <SectionTitle>{list.length} categorii{uncategorized > 0 && ` · ${uncategorized} articole fără categorie`}</SectionTitle>
+          <Panel>
+            {cats.isError ? <ErrorState onRetry={() => cats.refetch()} /> : cats.isLoading ? <ListSkeleton rows={3} /> : list.length === 0 ? (
+              <EmptyState icon={FolderOpen} title="Nicio categorie încă" description="Creează prima categorie din formularul alăturat." />
+            ) : (
+              <ul className="divide-y divide-border">
+                {list.map((c, i) => (
+                  <li key={c.id} draggable onDragStart={() => setDragId(c.id)} onDragEnd={() => setDragId(null)}
+                    onDragOver={(e) => e.preventDefault()} onDrop={() => { const from = list.findIndex((x) => x.id === dragId); if (from >= 0) move(from, i); }}
+                    className={cn("group flex items-center gap-3 px-4 py-3 transition-colors", dragId === c.id && "opacity-50", editing?.id === c.id && "bg-primary/5")}>
+                    <GripVertical className="hidden h-4 w-4 cursor-grab text-muted-foreground sm:block" aria-hidden />
+                    <span className="h-3 w-3 shrink-0 rounded-full" style={{ background: c.color }} aria-hidden />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium text-foreground">{c.name}</p>
+                      <p className="truncate text-xs text-muted-foreground">/{c.slug}{c.description && ` · ${c.description}`}</p>
+                    </div>
+                    <span className="text-xs tabular-nums text-muted-foreground">{countOf(c.id)} art.</span>
+                    <div className="flex">
+                      <Button variant="ghost" size="icon" className="h-8 w-8" aria-label="Mută sus" disabled={i === 0} onClick={() => move(i, i - 1)}><ArrowUp className="h-3.5 w-3.5" /></Button>
+                      <Button variant="ghost" size="icon" className="h-8 w-8" aria-label="Mută jos" disabled={i === list.length - 1} onClick={() => move(i, i + 1)}><ArrowDown className="h-3.5 w-3.5" /></Button>
+                      <Button variant="ghost" size="icon" className="h-8 w-8" aria-label={`Editează ${c.name}`} onClick={() => setEditing(c)}><Pencil className="h-3.5 w-3.5" /></Button>
+                      <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive hover:text-destructive" aria-label={`Șterge ${c.name}`} onClick={() => setConfirm(c)}><Trash2 className="h-3.5 w-3.5" /></Button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Panel>
+        </section>
+        <section>
+          <SectionTitle>{editing ? "Editează categoria" : "Categorie nouă"}</SectionTitle>
+          <Panel className="p-5">
+            <form onSubmit={save} className="space-y-4">
+              <div><FieldLabel htmlFor="cname">Nume</FieldLabel><Input id="cname" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value, slug: slugTouched ? f.slug : slugify(e.target.value) }))} placeholder="ex. Studii de caz" /></div>
+              <div><FieldLabel htmlFor="cslug" hint="generat automat">Adresă</FieldLabel><Input id="cslug" value={form.slug} onChange={(e) => { setSlugTouched(true); setForm((f) => ({ ...f, slug: e.target.value })); }} onBlur={() => setForm((f) => ({ ...f, slug: slugify(f.slug) }))} /></div>
+              <div><FieldLabel htmlFor="cdesc">Descriere</FieldLabel><Textarea id="cdesc" rows={3} value={form.description} onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))} /></div>
+              <div>
+                <FieldLabel>Culoare</FieldLabel>
+                <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Culoare">
+                  {COLORS.map((c) => (
+                    <button key={c} type="button" role="radio" aria-checked={form.color === c} aria-label={c} onClick={() => setForm((f) => ({ ...f, color: c }))}
+                      className={cn("h-7 w-7 rounded-full ring-offset-2 ring-offset-background transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", form.color === c && "ring-2 ring-foreground")} style={{ background: c }} />
                   ))}
-                </TableBody>
-              </Table>
-            </div>
-          </Card>
-        </div>
-      </main>
-    </div>
+                </div>
+              </div>
+              <div className="flex gap-2 pt-1">
+                <Button type="submit" disabled={saving} className="flex-1">{editing ? "Salvează" : "Adaugă categoria"}</Button>
+                {editing && <Button type="button" variant="ghost" onClick={() => setEditing(null)}>Anulează</Button>}
+              </div>
+            </form>
+          </Panel>
+        </section>
+      </div>
+      <ConfirmDialog open={!!confirm} onOpenChange={(o) => !o && setConfirm(null)} title={`Ștergi „${confirm?.name}”?`}
+        description={confirm && countOf(confirm.id) > 0 ? `${countOf(confirm.id)} articole vor rămâne fără categorie. Articolele nu se șterg.` : "Nicio postare nu folosește această categorie."}
+        onConfirm={() => confirm && remove(confirm)} />
+    </BlogAdminLayout>
   );
 }

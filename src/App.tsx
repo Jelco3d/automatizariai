@@ -24,6 +24,7 @@ const Categories = lazy(() => import('./pages/admin/Categories'));
 const Comments = lazy(() => import('./pages/admin/Comments'));
 const BlogAnalytics = lazy(() => import('./pages/admin/BlogAnalytics'));
 const BlogSettings = lazy(() => import('./pages/admin/BlogSettings'));
+const BlogPosts = lazy(() => import('./pages/admin/BlogPosts'));
 const Contact = lazy(() => import('./pages/Contact'));
 const BusinessCard = lazy(() => import('./pages/BusinessCard'));
 const LinkTree = lazy(() => import('./pages/LinkTree'));
@@ -70,7 +71,9 @@ const App = () => {
           <Route path="/admin/blog" element={<BlogStaffGuard><AdminBlog /></BlogStaffGuard>} />
           <Route path="/admin/blog/new" element={<BlogStaffGuard><NewBlogPost /></BlogStaffGuard>} />
           <Route path="/admin/blog/edit/:id" element={<BlogStaffGuard><NewBlogPost /></BlogStaffGuard>} />
-          <Route path="/admin/categories" element={<BlogStaffGuard><Categories /></BlogStaffGuard>} />
+          <Route path="/admin/blog/posts" element={<BlogStaffGuard><BlogPosts /></BlogStaffGuard>} />
+          <Route path="/admin/blog/categories" element={<BlogStaffGuard><Categories /></BlogStaffGuard>} />
+          <Route path="/admin/categories" element={<Navigate to="/admin/blog/categories" replace />} />
           <Route path="/admin/blog/comments" element={<BlogStaffGuard><Comments /></BlogStaffGuard>} />
           <Route path="/admin/blog/analytics" element={<BlogStaffGuard><BlogAnalytics /></BlogStaffGuard>} />
           <Route path="/admin/blog/settings" element={<BlogStaffGuard><BlogSettings /></BlogStaffGuard>} />
