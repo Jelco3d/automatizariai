@@ -1,161 +1,64 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Card, CardContent } from "@/components/ui/card";
-import { toast } from "sonner";
-import { ArrowLeft, Save, Settings, Globe, MessageSquare, Link as LinkIcon, Palette, Bot, Shield, HelpCircle, RotateCcw } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Card } from "@/components/ui/card";
+import { Save } from "lucide-react";
+import AdminPageHeader from "@/components/admin/AdminPageHeader";
+import { BLOG_SETTING_DEFAULTS, type BlogSettingsValues } from "@/lib/blogSettings";
+
 export default function BlogSettings() {
-  const handleSave = () => {
-    toast.success("Settings saved successfully!");
+  const [v, setV] = useState<BlogSettingsValues>(BLOG_SETTING_DEFAULTS);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    supabase.from("blog_settings").select("key,value").then(({ data, error }) => {
+      if (error) toast.error(error.message);
+      const next = { ...BLOG_SETTING_DEFAULTS } as Record<string, unknown>;
+      (data ?? []).forEach((r) => { if (r.key in next) next[r.key] = r.value; });
+      setV(next as BlogSettingsValues);
+      setLoading(false);
+    });
+  }, []);
+
+  const save = async () => {
+    setSaving(true);
+    const rows = Object.entries(v).map(([key, value]) => ({ key, value, is_public: true, updated_at: new Date().toISOString() }));
+    const { error } = await supabase.from("blog_settings").upsert(rows, { onConflict: "key" });
+    setSaving(false);
+    if (error) toast.error(error.code === "42501" ? "Doar administratorii pot salva setările" : error.message);
+    else toast.success("Setările au fost salvate");
   };
-  return <div className="min-h-screen bg-[#0F1117] text-white">
-      {/* Header */}
-      <header className="border-b border-amber-500/20 bg-[#1A1F2C] p-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link to="/admin/blog">
-              <Button variant="ghost" size="icon">
-                <ArrowLeft className="h-5 w-5 text-amber-400" />
-              </Button>
-            </Link>
-            <h1 className="text-xl font-semibold">Blog Settings</h1>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" className="gap-2 border-amber-500/20 bg-white text-gray-950 font-medium">
-              <RotateCcw className="h-4 w-4" />
-              Reset
-            </Button>
-            <Button className="gap-2" onClick={handleSave}>
-              <Save className="h-4 w-4" />
-              Save Changes
-            </Button>
-          </div>
-        </div>
-      </header>
 
-      <main className="p-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-12 gap-6">
-          {/* Settings Navigation */}
-          <div className="col-span-12 md:col-span-3">
-            <nav className="space-y-2">
-              <Link to="#general">
-                <Button variant="ghost" className="w-full justify-start gap-2 bg-[#ac41e9]/0">
-                  <Settings className="h-4 w-4" />
-                  General Settings
-                </Button>
-              </Link>
-              <Link to="#seo">
-                <Button variant="ghost" className="w-full justify-start gap-2 hover:bg-amber-500/10">
-                  <Globe className="h-4 w-4" />
-                  SEO & Metadata
-                </Button>
-              </Link>
-              <Link to="#comments">
-                <Button variant="ghost" className="w-full justify-start gap-2 hover:bg-amber-500/10">
-                  <MessageSquare className="h-4 w-4" />
-                  Comments
-                </Button>
-              </Link>
-              <Link to="#integrations">
-                <Button variant="ghost" className="w-full justify-start gap-2 hover:bg-amber-500/10">
-                  <LinkIcon className="h-4 w-4" />
-                  Integrations
-                </Button>
-              </Link>
-              <Link to="#appearance">
-                <Button variant="ghost" className="w-full justify-start gap-2 bg-[#ac41e9]/0">
-                  <Palette className="h-4 w-4" />
-                  Appearance
-                </Button>
-              </Link>
-              <Link to="#ai">
-                <Button variant="ghost" className="w-full justify-start gap-2 hover:bg-amber-500/10">
-                  <Bot className="h-4 w-4" />
-                  AI Tools
-                </Button>
-              </Link>
-              <Link to="#security">
-                <Button variant="ghost" className="w-full justify-start gap-2 hover:bg-amber-500/10">
-                  <Shield className="h-4 w-4" />
-                  Security
-                </Button>
-              </Link>
-            </nav>
-          </div>
-
-          {/* Settings Content */}
-          <div className="col-span-12 md:col-span-9 space-y-6">
-            {/* General Settings */}
-            <Card className="bg-[#1A1F2C] border-amber-500/20">
-              <CardContent className="p-6 space-y-4">
-                <h2 className="text-xl font-semibold flex items-center gap-2 text-neutral-50">
-                  <Settings className="h-5 w-5" />
-                  General Settings
-                </h2>
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium rounded bg-slate-50">Blog Title</label>
-                    <Input placeholder="Enter blog title..." className="bg-[#1A1F2C] border-amber-500/20" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium bg-slate-50">Blog Description</label>
-                    <Textarea placeholder="Enter blog description..." className="bg-[#1A1F2C] border-amber-500/20" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium bg-gray-50">Default Author</label>
-                    <Input placeholder="Select default author..." className="bg-[#1A1F2C] border-amber-500/20" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* SEO & Metadata */}
-            <Card className="bg-[#1A1F2C] border-amber-500/20">
-              <CardContent className="p-6 space-y-4">
-                <h2 className="text-xl font-semibold flex items-center gap-2 text-slate-50">
-                  <Globe className="h-5 w-5" />
-                  SEO & Metadata
-                </h2>
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium bg-zinc-50">Meta Title Template</label>
-                    <Input placeholder="%post_title% | %site_name%" className="bg-[#1A1F2C] border-amber-500/20" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium bg-slate-50">Meta Description Template</label>
-                    <Textarea placeholder="Enter meta description template..." className="bg-[#1A1F2C] border-amber-500/20" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Help Sheet */}
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="outline" size="icon" className="fixed bottom-6 right-6 h-12 w-12 rounded-full border-amber-500/20">
-                  <HelpCircle className="h-6 w-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent className="bg-[#1A1F2C] border-amber-500/20">
-                <SheetHeader>
-                  <SheetTitle className="text-white">Settings Help</SheetTitle>
-                </SheetHeader>
-                <div className="mt-4 space-y-4">
-                  <h3 className="font-medium">General Settings</h3>
-                  <p className="text-sm text-gray-400">
-                    Configure basic blog information like title, description, and default author.
-                  </p>
-                  <h3 className="font-medium">SEO & Metadata</h3>
-                  <p className="text-sm text-gray-400">
-                    Optimize your blog's search engine visibility with meta titles and descriptions.
-                  </p>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+  const field = "bg-[#0F1117] border-amber-500/20";
+  return (
+    <div className="min-h-screen bg-[#0F1117] text-white">
+      <AdminPageHeader title="Setări blog" actions={<Button onClick={save} disabled={saving || loading} className="gap-2 bg-amber-500 hover:bg-amber-400 text-black"><Save className="h-4 w-4" />{saving ? "Se salvează…" : "Salvează"}</Button>} />
+      <main className="p-4 md:p-6">
+        <div className="max-w-3xl mx-auto space-y-6">
+          <Card className="bg-[#1A1F2C] border-amber-500/20 p-5 space-y-4">
+            <h2 className="font-semibold text-amber-400">General</h2>
+            <label className="block space-y-1"><span className="text-sm text-gray-300">Titlul blogului</span>
+              <Input className={field} value={v.blog_title} onChange={(e) => setV({ ...v, blog_title: e.target.value })} /></label>
+            <label className="block space-y-1"><span className="text-sm text-gray-300">Descrierea blogului</span>
+              <Textarea className={field} value={v.blog_description} onChange={(e) => setV({ ...v, blog_description: e.target.value })} /></label>
+            <label className="block space-y-1"><span className="text-sm text-gray-300">Autor implicit</span>
+              <Input className={field} value={v.default_author} onChange={(e) => setV({ ...v, default_author: e.target.value })} /></label>
+          </Card>
+          <Card className="bg-[#1A1F2C] border-amber-500/20 p-5 space-y-4">
+            <h2 className="font-semibold text-amber-400">Comentarii</h2>
+            <div className="flex items-center justify-between gap-4">
+              <div><p className="font-medium">Permite comentarii</p><p className="text-sm text-gray-400">Cititorii pot lăsa comentarii. Apar pe site doar după aprobare.</p></div>
+              <Switch checked={v.comments_enabled} onCheckedChange={(c) => setV({ ...v, comments_enabled: c })} />
+            </div>
+          </Card>
+          <p className="text-xs text-gray-500">{loading ? "Se încarcă…" : "Valorile sunt citite din baza de date."}</p>
         </div>
       </main>
-    </div>;
+    </div>
+  );
 }

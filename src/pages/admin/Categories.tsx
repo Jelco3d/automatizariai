@@ -1,142 +1,120 @@
-
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
+import { Card } from "@/components/ui/card";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { ArrowLeft, Plus, Search, Sparkles, Edit, Trash2, Grid, List } from "lucide-react";
+import { Plus, Edit, Trash2, Save, X } from "lucide-react";
+import AdminPageHeader from "@/components/admin/AdminPageHeader";
+import { slugify } from "@/lib/blog";
+
+type Cat = { id: string; name: string; slug: string; description: string | null; created_at: string; count: number };
+const empty = { id: "", name: "", slug: "", description: "" };
 
 export default function Categories() {
+  const [cats, setCats] = useState<Cat[]>([]);
+  const [uncat, setUncat] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [form, setForm] = useState<typeof empty | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [search, setSearch] = useState("");
+
+  const load = async () => {
+    setLoading(true);
+    const [{ data: c, error }, { data: p }] = await Promise.all([
+      supabase.from("blog_categories").select("*").order("name"),
+      supabase.from("blog_posts").select("category_id"),
+    ]);
+    if (error) toast.error(error.message);
+    const counts: Record<string, number> = {};
+    let u = 0;
+    (p ?? []).forEach((r) => (r.category_id ? (counts[r.category_id] = (counts[r.category_id] ?? 0) + 1) : u++));
+    setCats((c ?? []).map((x) => ({ ...x, count: counts[x.id] ?? 0 })));
+    setUncat(u);
+    setLoading(false);
+  };
+  useEffect(() => { load(); }, []);
+
+  const save = async () => {
+    if (!form) return;
+    const name = form.name.trim();
+    const slug = slugify(form.slug || name);
+    if (!name || !slug) return toast.error("Numele este obligatoriu");
+    setSaving(true);
+    const payload = { name, slug, description: form.description.trim() || null };
+    const { error } = form.id
+      ? await supabase.from("blog_categories").update(payload).eq("id", form.id)
+      : await supabase.from("blog_categories").insert(payload);
+    setSaving(false);
+    if (error) return toast.error(error.code === "23505" ? "Există deja o categorie cu acest slug" : error.message);
+    toast.success("Categoria a fost salvată");
+    setForm(null);
+    load();
+  };
+
+  const remove = async (c: Cat) => {
+    if (!confirm(`Ștergi categoria „${c.name}"? Articolele (${c.count}) rămân fără categorie.`)) return;
+    const { error } = await supabase.from("blog_categories").delete().eq("id", c.id);
+    if (error) return toast.error(error.message);
+    toast.success("Categorie ștearsă");
+    load();
+  };
+
+  const most = [...cats].sort((a, b) => b.count - a.count)[0];
+  const shown = cats.filter((c) => c.name.toLowerCase().includes(search.toLowerCase()));
+
   return (
     <div className="min-h-screen bg-[#0F1117] text-white">
-      {/* Header */}
-      <header className="border-b border-amber-500/20 bg-[#1A1F2C] p-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link to="/admin/blog">
-              <Button variant="ghost" size="icon">
-                <ArrowLeft className="h-5 w-5 text-amber-400" />
-              </Button>
-            </Link>
-            <h1 className="text-xl font-semibold">Categories</h1>
-          </div>
-          <Button className="gap-2 bg-gradient-to-r from-amber-500 to-pink-500">
-            <Plus className="h-4 w-4" />
-            New Category
-          </Button>
-        </div>
-      </header>
-
-      <main className="p-6">
+      <AdminPageHeader title="Categorii" actions={<Button className="gap-2 bg-amber-500 hover:bg-amber-400 text-black" onClick={() => setForm({ ...empty })}><Plus className="h-4 w-4" />Categorie nouă</Button>} />
+      <main className="p-4 md:p-6">
         <div className="max-w-7xl mx-auto space-y-6">
-          {/* Search and Filters */}
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-            <div className="relative w-full sm:w-96">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <Input 
-                placeholder="Search categories..." 
-                className="pl-10 bg-[#1A1F2C] border-amber-500/20"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" size="icon" className="border-amber-500/20">
-                <Grid className="h-4 w-4" />
-              </Button>
-              <Button variant="outline" size="icon" className="border-amber-500/20">
-                <List className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-
-          {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="bg-[#1A1F2C] border-amber-500/20">
-              <CardHeader>
-                <CardTitle className="text-lg">Total Categories</CardTitle>
-                <CardDescription>Across all blog posts</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-3xl font-bold">24</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#1A1F2C] border-amber-500/20">
-              <CardHeader>
-                <CardTitle className="text-lg">Most Used</CardTitle>
-                <CardDescription>Popular category</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-3xl font-bold">AI Tools</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#1A1F2C] border-amber-500/20">
-              <CardHeader>
-                <CardTitle className="text-lg">Uncategorized</CardTitle>
-                <CardDescription>Posts without category</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-3xl font-bold">3</p>
-              </CardContent>
-            </Card>
+            {[["Total categorii", cats.length], ["Cea mai folosită", most && most.count ? `${most.name} (${most.count})` : "—"], ["Articole fără categorie", uncat]].map(([l, v]) => (
+              <Card key={l as string} className="bg-[#1A1F2C] border-amber-500/20 p-4">
+                <p className="text-sm text-gray-400">{l}</p>
+                <p className="text-2xl font-bold text-white mt-1">{loading ? "…" : v}</p>
+              </Card>
+            ))}
           </div>
 
-          {/* Categories Table */}
-          <Card className="bg-[#1A1F2C] border-amber-500/20">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle>All Categories</CardTitle>
-                <Button variant="outline" className="gap-2 border-amber-500/20">
-                  <Sparkles className="h-4 w-4" />
-                  AI Suggestions
-                </Button>
+          {form && (
+            <Card className="bg-[#1A1F2C] border-amber-500/30 p-4 space-y-3">
+              <h2 className="font-semibold">{form.id ? "Editează categoria" : "Categorie nouă"}</h2>
+              <div className="grid md:grid-cols-2 gap-3">
+                <Input placeholder="Nume" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value, slug: form.id ? form.slug : slugify(e.target.value) })} className="bg-[#0F1117] border-amber-500/20" />
+                <Input placeholder="slug" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} className="bg-[#0F1117] border-amber-500/20" />
               </div>
-            </CardHeader>
-            <CardContent>
+              <Textarea placeholder="Descriere (opțional)" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="bg-[#0F1117] border-amber-500/20" />
+              <div className="flex gap-2">
+                <Button onClick={save} disabled={saving} className="gap-2 bg-amber-500 hover:bg-amber-400 text-black"><Save className="h-4 w-4" />{saving ? "Se salvează…" : "Salvează"}</Button>
+                <Button variant="ghost" onClick={() => setForm(null)} className="gap-2"><X className="h-4 w-4" />Anulează</Button>
+              </div>
+            </Card>
+          )}
+
+          <Card className="bg-[#1A1F2C] border-amber-500/20 p-4 space-y-4">
+            <Input placeholder="Caută categorii…" value={search} onChange={(e) => setSearch(e.target.value)} className="md:w-96 bg-[#0F1117] border-amber-500/20" />
+            <div className="overflow-x-auto">
               <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Description</TableHead>
-                    <TableHead>Posts</TableHead>
-                    <TableHead>Last Updated</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
+                <TableHeader><TableRow><TableHead>Nume</TableHead><TableHead>Descriere</TableHead><TableHead>Articole</TableHead><TableHead className="text-right">Acțiuni</TableHead></TableRow></TableHeader>
                 <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">AI Tools</TableCell>
-                    <TableCell>Reviews and comparisons of AI tools</TableCell>
-                    <TableCell>15</TableCell>
-                    <TableCell>2 days ago</TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        <Button variant="ghost" size="icon">
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon">
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Machine Learning</TableCell>
-                    <TableCell>ML concepts and tutorials</TableCell>
-                    <TableCell>12</TableCell>
-                    <TableCell>5 days ago</TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        <Button variant="ghost" size="icon">
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon">
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
+                  {!loading && shown.length === 0 && <TableRow><TableCell colSpan={4} className="text-center text-gray-400 py-8">Nicio categorie încă. Adaugă prima categorie.</TableCell></TableRow>}
+                  {shown.map((c) => (
+                    <TableRow key={c.id}>
+                      <TableCell className="font-medium">{c.name}<div className="text-xs text-gray-500">/{c.slug}</div></TableCell>
+                      <TableCell className="text-gray-300">{c.description || "—"}</TableCell>
+                      <TableCell>{c.count}</TableCell>
+                      <TableCell className="text-right whitespace-nowrap">
+                        <Button variant="ghost" size="icon" aria-label="Editează" onClick={() => setForm({ id: c.id, name: c.name, slug: c.slug, description: c.description ?? "" })}><Edit className="h-4 w-4" /></Button>
+                        <Button variant="ghost" size="icon" aria-label="Șterge" onClick={() => remove(c)}><Trash2 className="h-4 w-4 text-red-400" /></Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
-            </CardContent>
+            </div>
           </Card>
         </div>
       </main>

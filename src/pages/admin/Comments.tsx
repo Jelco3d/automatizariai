@@ -1,185 +1,78 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { ArrowLeft, Search, Shield, MessageSquare, AlertTriangle, CheckCircle2, XCircle, Flag, MoreVertical } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Check, Ban, Trash2, Undo2 } from "lucide-react";
+import AdminPageHeader from "@/components/admin/AdminPageHeader";
+import { formatRoDate } from "@/lib/blog";
+
+type Status = "pending" | "approved" | "spam";
+type Row = { id: string; author_name: string; author_email: string; content: string; status: Status; created_at: string; blog_posts: { title: string; slug: string } | null };
+const tabs: { k: Status; l: string }[] = [{ k: "pending", l: "În așteptare" }, { k: "approved", l: "Aprobate" }, { k: "spam", l: "Spam" }];
+
 export default function Comments() {
-  return <div className="min-h-screen bg-[#0F1117] text-white">
-      {/* Header */}
-      <header className="border-b border-amber-500/20 bg-[#1A1F2C] p-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link to="/admin/blog">
-              <Button variant="ghost" size="icon">
-                <ArrowLeft className="h-5 w-5 text-amber-400" />
+  const [rows, setRows] = useState<Row[]>([]);
+  const [tab, setTab] = useState<Status>("pending");
+  const [loading, setLoading] = useState(true);
+
+  const load = async () => {
+    setLoading(true);
+    const { data, error } = await supabase.from("blog_comments").select("id,author_name,author_email,content,status,created_at,blog_posts(title,slug)").order("created_at", { ascending: false });
+    if (error) toast.error(error.message);
+    setRows((data as unknown as Row[]) ?? []);
+    setLoading(false);
+  };
+  useEffect(() => { load(); }, []);
+
+  const setStatus = async (id: string, status: Status) => {
+    const { error } = await supabase.from("blog_comments").update({ status }).eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success(status === "approved" ? "Comentariu aprobat — apare acum pe site" : status === "spam" ? "Marcat ca spam" : "Mutat în așteptare");
+    setRows((r) => r.map((x) => (x.id === id ? { ...x, status } : x)));
+  };
+  const remove = async (id: string) => {
+    if (!confirm("Ștergi definitiv comentariul?")) return;
+    const { error } = await supabase.from("blog_comments").delete().eq("id", id);
+    if (error) return toast.error(error.message);
+    setRows((r) => r.filter((x) => x.id !== id));
+  };
+
+  const count = (s: Status) => rows.filter((r) => r.status === s).length;
+  const shown = rows.filter((r) => r.status === tab);
+
+  return (
+    <div className="min-h-screen bg-[#0F1117] text-white">
+      <AdminPageHeader title="Comentarii" />
+      <main className="p-4 md:p-6">
+        <div className="max-w-5xl mx-auto space-y-5">
+          <div className="flex flex-wrap gap-2">
+            {tabs.map((t) => (
+              <Button key={t.k} variant="ghost" onClick={() => setTab(t.k)} className={tab === t.k ? "bg-amber-500 text-black hover:bg-amber-400" : "border border-amber-500/20"}>
+                {t.l} ({count(t.k)})
               </Button>
-            </Link>
-            <h1 className="text-xl font-semibold">Comments Management</h1>
+            ))}
           </div>
-          <Button variant="outline" className="gap-2 border-amber-500/20 text-gray-900">
-            <Shield className="h-4 w-4" />
-            Update AI Moderation Rules
-          </Button>
-        </div>
-      </header>
-
-      <main className="p-6">
-        <div className="max-w-7xl mx-auto space-y-6">
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card className="bg-[#1A1F2C] border-amber-500/20">
-              <CardHeader>
-                <CardTitle className="text-lg text-slate-50">Total Comments</CardTitle>
-                <CardDescription>All time</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-3xl font-bold">1,234</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#1A1F2C] border-amber-500/20">
-              <CardHeader>
-                <CardTitle className="text-lg text-gray-50">Pending Review</CardTitle>
-                <CardDescription>Needs moderation</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-3xl font-bold text-yellow-500">23</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#1A1F2C] border-amber-500/20">
-              <CardHeader>
-                <CardTitle className="text-lg text-gray-50">Flagged</CardTitle>
-                <CardDescription>Potential violations</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-3xl font-bold text-red-500">5</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#1A1F2C] border-amber-500/20">
-              <CardHeader>
-                <CardTitle className="text-lg text-slate-50">AI Approved</CardTitle>
-                <CardDescription>Auto-moderated</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-3xl font-bold text-green-500">891</p>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Comments Table */}
-          <Card className="bg-[#1A1F2C] border-amber-500/20">
-            <CardHeader>
-              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-                <CardTitle>Recent Comments</CardTitle>
-                <div className="relative w-full sm:w-96">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <Input placeholder="Search comments..." className="pl-10 bg-[#1A1F2C] border-amber-500/20" />
-                </div>
+          {loading ? <p className="text-gray-400">Se încarcă…</p> : shown.length === 0 ? (
+            <Card className="bg-[#1A1F2C] border-amber-500/20 p-8 text-center text-gray-400">Niciun comentariu aici.</Card>
+          ) : shown.map((c) => (
+            <Card key={c.id} className="bg-[#1A1F2C] border-amber-500/20 p-4 space-y-3">
+              <div className="flex flex-wrap justify-between gap-2 text-sm">
+                <p><span className="font-semibold text-white">{c.author_name}</span> <span className="text-gray-400">· {c.author_email}</span></p>
+                <p className="text-gray-500">{formatRoDate(c.created_at)}</p>
               </div>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>User</TableHead>
-                    <TableHead>Comment</TableHead>
-                    <TableHead>Post</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Date</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <Avatar className="h-8 w-8">
-                          <AvatarImage src="https://github.com/shadcn.png" />
-                          <AvatarFallback>JD</AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <p className="font-medium">John Doe</p>
-                          <p className="text-xs text-gray-400">john@example.com</p>
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell className="max-w-md">
-                      <p className="truncate">Great article on AI automation! I've been using similar tools in my workflow.</p>
-                    </TableCell>
-                    <TableCell>
-                      <Link to="/blog/post-1" className="text-amber-400 hover:underline">
-                        Getting Started with AI
-                      </Link>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-1">
-                        <CheckCircle2 className="h-4 w-4 text-green-500" />
-                        <span className="text-sm">Approved</span>
-                      </div>
-                    </TableCell>
-                    <TableCell>2h ago</TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        <Button variant="ghost" size="icon" className="text-zinc-50">
-                          <Flag className="h-4 w-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="text-gray-50">
-                          <MessageSquare className="h-4 w-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="text-gray-50">
-                          <MoreVertical className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <Avatar className="h-8 w-8">
-                          <AvatarImage src="https://github.com/shadcn.png" />
-                          <AvatarFallback>JS</AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <p className="font-medium">Jane Smith</p>
-                          <p className="text-xs text-gray-400">jane@example.com</p>
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell className="max-w-md">
-                      <p className="truncate">This content seems promotional. Please review our guidelines.</p>
-                    </TableCell>
-                    <TableCell>
-                      <Link to="/blog/post-2" className="text-amber-400 hover:underline">
-                        AI Tools Comparison
-                      </Link>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-1">
-                        <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                        <span className="text-sm">Pending</span>
-                      </div>
-                    </TableCell>
-                    <TableCell>5h ago</TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        <Button variant="ghost" size="icon">
-                          <Flag className="h-4 w-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon">
-                          <MessageSquare className="h-4 w-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon">
-                          <MoreVertical className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
+              {c.blog_posts && <a href={`/blog/${c.blog_posts.slug}`} target="_blank" rel="noreferrer" className="text-xs text-amber-400 hover:underline">la: {c.blog_posts.title}</a>}
+              <p className="text-gray-200 whitespace-pre-line break-words">{c.content}</p>
+              <div className="flex flex-wrap gap-2">
+                {c.status !== "approved" && <Button size="sm" onClick={() => setStatus(c.id, "approved")} className="gap-1 bg-green-600 hover:bg-green-500 text-white"><Check className="h-4 w-4" />Aprobă</Button>}
+                {c.status !== "pending" && <Button size="sm" variant="ghost" onClick={() => setStatus(c.id, "pending")} className="gap-1 border border-amber-500/20"><Undo2 className="h-4 w-4" />În așteptare</Button>}
+                {c.status !== "spam" && <Button size="sm" variant="ghost" onClick={() => setStatus(c.id, "spam")} className="gap-1 border border-amber-500/20"><Ban className="h-4 w-4" />Spam</Button>}
+                <Button size="sm" variant="ghost" onClick={() => remove(c.id)} className="gap-1 text-red-400"><Trash2 className="h-4 w-4" />Șterge</Button>
+              </div>
+            </Card>
+          ))}
         </div>
       </main>
-    </div>;
+    </div>
+  );
 }

@@ -1,3 +1,4 @@
+import BlogComments from "@/components/blog/BlogComments";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { ArrowLeft, Share2, Link2, Check } from "lucide-react";
@@ -198,6 +199,7 @@ export default function BlogPost() {
               <ShareButtons title={post.title} />
               <a href="/audit-gratuit" className="inline-flex justify-center items-center h-11 px-6 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-semibold transition">Cere auditul gratuit</a>
             </footer>
+            <BlogComments postId={post.id} />
           </>
         )}
       </article>
