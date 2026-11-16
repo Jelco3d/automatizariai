@@ -93,7 +93,7 @@ export default function AdminBlog() {
               <Database className="h-8 w-8 text-amber-400" />
               <div>
                 <p className="text-sm text-gray-400">Total Posts</p>
-                <p className="text-2xl font-bold">{count()}</p>
+                <p className="text-2xl font-bold text-white">{count()}</p>
               </div>
             </div>
           </Card>
@@ -102,7 +102,7 @@ export default function AdminBlog() {
               <FileText className="h-8 w-8 text-amber-400" />
               <div>
                 <p className="text-sm text-gray-400">Drafts</p>
-                <p className="text-2xl font-bold">{count("draft")}</p>
+                <p className="text-2xl font-bold text-white">{count("draft")}</p>
               </div>
             </div>
           </Card>
@@ -111,7 +111,7 @@ export default function AdminBlog() {
               <CheckSquare className="h-8 w-8 text-amber-400" />
               <div>
                 <p className="text-sm text-gray-400">Published</p>
-                <p className="text-2xl font-bold">{count("published")}</p>
+                <p className="text-2xl font-bold text-white">{count("published")}</p>
               </div>
             </div>
           </Card>
@@ -143,10 +143,10 @@ export default function AdminBlog() {
                 {loading ? <TableRow><TableCell colSpan={5} className="text-gray-400">Se încarcă...</TableCell></TableRow>
                 : filtered.length === 0 ? <TableRow><TableCell colSpan={5} className="text-gray-400">Niciun articol încă.</TableCell></TableRow>
                 : filtered.map(p => <TableRow key={p.id}>
-                    <TableCell className="font-medium">{p.title}</TableCell>
+                    <TableCell className="font-medium text-white">{p.title}</TableCell>
                     <TableCell>—</TableCell>
                     <TableCell><span className="px-2 py-1 rounded-full text-xs bg-amber-500/20 text-amber-400">{p.status}</span></TableCell>
-                    <TableCell>{(p.published_at ?? p.created_at).slice(0, 10)}</TableCell>
+                    <TableCell className="text-gray-300">{(p.published_at ?? p.created_at).slice(0, 10)}</TableCell>
                     <TableCell>
                       <div className="flex gap-2">
                         <Button variant="ghost" size="icon" aria-label="Vezi" onClick={() => window.open(`/blog/${p.slug}`, "_blank")}><Eye className="h-4 w-4 text-gray-400" /></Button>
