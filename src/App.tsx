@@ -1,3 +1,4 @@
+import { BlogStaffGuard } from "@/components/admin/BlogStaffGuard";
 import ScrollToTop from "@/components/ScrollToTop";
 
 import { useEffect, lazy, Suspense } from 'react';
@@ -72,13 +73,13 @@ const App = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/automatizari-ai" element={<AutomatizariAI />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/admin" element={<Dashboard />} />
-          <Route path="/admin/blog" element={<AdminBlog />} />
-          <Route path="/admin/blog/new" element={<NewBlogPost />} />
-          <Route path="/admin/categories" element={<Categories />} />
-          <Route path="/admin/blog/comments" element={<Comments />} />
-          <Route path="/admin/blog/analytics" element={<BlogAnalytics />} />
-          <Route path="/admin/blog/settings" element={<BlogSettings />} />
+          <Route path="/admin" element={<BlogStaffGuard><Dashboard /></BlogStaffGuard>} />
+          <Route path="/admin/blog" element={<BlogStaffGuard><AdminBlog /></BlogStaffGuard>} />
+          <Route path="/admin/blog/new" element={<BlogStaffGuard><NewBlogPost /></BlogStaffGuard>} />
+          <Route path="/admin/categories" element={<BlogStaffGuard><Categories /></BlogStaffGuard>} />
+          <Route path="/admin/blog/comments" element={<BlogStaffGuard><Comments /></BlogStaffGuard>} />
+          <Route path="/admin/blog/analytics" element={<BlogStaffGuard><BlogAnalytics /></BlogStaffGuard>} />
+          <Route path="/admin/blog/settings" element={<BlogStaffGuard><BlogSettings /></BlogStaffGuard>} />
           <Route path="/whatsapp-demo" element={<WhatsAppDemo />} />
           <Route path="/audit-gratuit" element={<AuditGratuit />} />
           <Route path="/AI" element={<AuditGratuit />} />

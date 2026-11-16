@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +10,24 @@ import { LayoutDashboard, List, FilePlus, Tag, MessageSquare, ChartBar, Settings
 export default function AdminBlog() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const [posts, setPosts] = useState<{ id: string; title: string; slug: string; status: string; published_at: string | null; created_at: string }[]>([]);
+  const [loading, setLoading] = useState(true);
+  const load = async () => {
+    const { data, error } = await supabase.from("blog_posts").select("id,title,slug,status,published_at,created_at").order("created_at", { ascending: false });
+    if (error) toast.error("Nu am putut încărca articolele");
+    setPosts(data ?? []);
+    setLoading(false);
+  };
+  useEffect(() => { load(); }, []);
+  const filtered = useMemo(() => posts.filter(p => p.title.toLowerCase().includes(searchTerm.toLowerCase())), [posts, searchTerm]);
+  const count = (s?: string) => (s ? posts.filter(p => p.status === s).length : posts.length);
+  const handleDelete = async (id: string) => {
+    if (!confirm("Ștergi definitiv acest articol?")) return;
+    const { error } = await supabase.from("blog_posts").delete().eq("id", id);
+    if (error) return toast.error("Ștergerea a eșuat");
+    setPosts(p => p.filter(x => x.id !== id));
+  };
+  const handleSignOut = async () => { await supabase.auth.signOut(); navigate("/auth"); };
   const handleNewPost = () => {
     navigate("/admin/blog/new");
   };
@@ -27,7 +47,7 @@ export default function AdminBlog() {
             <List className="h-5 w-5" />
             Blog Posts
           </Link>
-          <Button onClick={handleNewPost} className="w-full justify-start gap-2 bg-gradient-to-r from-amber-500 to-pink-500">
+          <Button onClick={handleNewPost} className="w-full justify-start gap-2 bg-amber-500 text-black hover:bg-amber-400">
             <FilePlus className="h-5 w-5" />
             New Post
           </Button>
@@ -35,15 +55,15 @@ export default function AdminBlog() {
             <Tag className="h-5 w-5" />
             Categories
           </Link>
-          <Link to="/admin/comments" className="flex items-center gap-2 text-gray-400 hover:text-amber-400 p-2 rounded-lg hover:bg-amber-500/10">
+          <Link to="/admin/blog/comments" className="flex items-center gap-2 text-gray-400 hover:text-amber-400 p-2 rounded-lg hover:bg-amber-500/10">
             <MessageSquare className="h-5 w-5" />
             Comments
           </Link>
-          <Link to="/admin/analytics" className="flex items-center gap-2 text-gray-400 hover:text-amber-400 p-2 rounded-lg hover:bg-amber-500/10">
+          <Link to="/admin/blog/analytics" className="flex items-center gap-2 text-gray-400 hover:text-amber-400 p-2 rounded-lg hover:bg-amber-500/10">
             <ChartBar className="h-5 w-5" />
             Analytics
           </Link>
-          <Link to="/admin/settings" className="flex items-center gap-2 text-gray-400 hover:text-amber-400 p-2 rounded-lg hover:bg-amber-500/10">
+          <Link to="/admin/blog/settings" className="flex items-center gap-2 text-gray-400 hover:text-amber-400 p-2 rounded-lg hover:bg-amber-500/10">
             <Settings className="h-5 w-5" />
             Settings
           </Link>
@@ -59,7 +79,7 @@ export default function AdminBlog() {
               <Button variant="ghost" size="icon">
                 <User className="h-5 w-5 text-gray-400" />
               </Button>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" onClick={handleSignOut} aria-label="Ieșire">
                 <LogOut className="h-5 w-5 text-gray-400" />
               </Button>
             </div>
@@ -73,7 +93,7 @@ export default function AdminBlog() {
               <Database className="h-8 w-8 text-amber-400" />
               <div>
                 <p className="text-sm text-gray-400">Total Posts</p>
-                <p className="text-2xl font-bold">24</p>
+                <p className="text-2xl font-bold">{count()}</p>
               </div>
             </div>
           </Card>
@@ -82,7 +102,7 @@ export default function AdminBlog() {
               <FileText className="h-8 w-8 text-amber-400" />
               <div>
                 <p className="text-sm text-gray-400">Drafts</p>
-                <p className="text-2xl font-bold">8</p>
+                <p className="text-2xl font-bold">{count("draft")}</p>
               </div>
             </div>
           </Card>
@@ -91,7 +111,7 @@ export default function AdminBlog() {
               <CheckSquare className="h-8 w-8 text-amber-400" />
               <div>
                 <p className="text-sm text-gray-400">Published</p>
-                <p className="text-2xl font-bold">16</p>
+                <p className="text-2xl font-bold">{count("published")}</p>
               </div>
             </div>
           </Card>
@@ -105,9 +125,6 @@ export default function AdminBlog() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input type="search" placeholder="Search posts..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 bg-[#1A1F2C]/50 border-amber-500/20" />
             </div>
-            <Button variant="outline" className="border-amber-500/20 bg-[#c605e9]">
-              Filter
-            </Button>
           </div>
 
           {/* Posts Table */}
@@ -123,28 +140,17 @@ export default function AdminBlog() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {[1, 2, 3].map(i => <TableRow key={i}>
-                    <TableCell className="font-medium bg-black/0">
-                      How AI is Changing Business
-                    </TableCell>
-                    <TableCell>Alex Ionescu</TableCell>
-                    <TableCell>
-                      <span className="px-2 py-1 rounded-full text-xs bg-amber-500/20 text-amber-400">
-                        Published
-                      </span>
-                    </TableCell>
-                    <TableCell>2024-03-15</TableCell>
+                {loading ? <TableRow><TableCell colSpan={5} className="text-gray-400">Se încarcă...</TableCell></TableRow>
+                : filtered.length === 0 ? <TableRow><TableCell colSpan={5} className="text-gray-400">Niciun articol încă.</TableCell></TableRow>
+                : filtered.map(p => <TableRow key={p.id}>
+                    <TableCell className="font-medium">{p.title}</TableCell>
+                    <TableCell>—</TableCell>
+                    <TableCell><span className="px-2 py-1 rounded-full text-xs bg-amber-500/20 text-amber-400">{p.status}</span></TableCell>
+                    <TableCell>{(p.published_at ?? p.created_at).slice(0, 10)}</TableCell>
                     <TableCell>
                       <div className="flex gap-2">
-                        <Button variant="ghost" size="icon">
-                          <Edit className="h-4 w-4 text-gray-400" />
-                        </Button>
-                        <Button variant="ghost" size="icon">
-                          <Eye className="h-4 w-4 text-gray-400" />
-                        </Button>
-                        <Button variant="ghost" size="icon">
-                          <Trash className="h-4 w-4 text-gray-400" />
-                        </Button>
+                        <Button variant="ghost" size="icon" aria-label="Vezi" onClick={() => window.open(`/blog/${p.slug}`, "_blank")}><Eye className="h-4 w-4 text-gray-400" /></Button>
+                        <Button variant="ghost" size="icon" aria-label="Șterge" onClick={() => handleDelete(p.id)}><Trash className="h-4 w-4 text-gray-400" /></Button>
                       </div>
                     </TableCell>
                   </TableRow>)}
@@ -156,11 +162,8 @@ export default function AdminBlog() {
         {/* Footer */}
         <footer className="bg-[#1A1F2C] border-t border-amber-500/20 p-4">
           <div className="flex justify-between items-center text-sm text-gray-400">
-            <p>Last synced: 2 minutes ago</p>
+            <p>{posts.length} articole</p>
             <div className="flex gap-4">
-              <Link to="/admin/help" className="hover:text-amber-400">
-                Help
-              </Link>
               <span>Version 1.0.0</span>
             </div>
           </div>
