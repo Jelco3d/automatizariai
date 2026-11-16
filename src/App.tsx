@@ -24,9 +24,6 @@ const Categories = lazy(() => import('./pages/admin/Categories'));
 const Comments = lazy(() => import('./pages/admin/Comments'));
 const BlogAnalytics = lazy(() => import('./pages/admin/BlogAnalytics'));
 const BlogSettings = lazy(() => import('./pages/admin/BlogSettings'));
-const WhatsAppDemo = lazy(() => import('./pages/WhatsAppDemo'));
-const ShowroomVSL = lazy(() => import('./pages/ShowroomVSL'));
-const AuditGratuit = lazy(() => import('./pages/AuditGratuit'));
 const Contact = lazy(() => import('./pages/Contact'));
 const BusinessCard = lazy(() => import('./pages/BusinessCard'));
 const LinkTree = lazy(() => import('./pages/LinkTree'));
@@ -43,8 +40,6 @@ const ContractSignature = lazy(() => import('./pages/ContractSignature'));
 const FidelizarePacienti = lazy(() => import('./pages/FidelizarePacienti'));
 const CerereOferta = lazy(() => import('./pages/CerereOferta'));
 const Leads = lazy(() => import('./pages/business/Leads'));
-const ClientPortalSystem = lazy(() => import('./pages/ClientPortalSystem'));
-const Webinar = lazy(() => import('./pages/Webinar'));
 
 const App = () => {
   useEffect(() => {
@@ -79,9 +74,6 @@ const App = () => {
           <Route path="/admin/blog/comments" element={<BlogStaffGuard><Comments /></BlogStaffGuard>} />
           <Route path="/admin/blog/analytics" element={<BlogStaffGuard><BlogAnalytics /></BlogStaffGuard>} />
           <Route path="/admin/blog/settings" element={<BlogStaffGuard><BlogSettings /></BlogStaffGuard>} />
-          <Route path="/whatsapp-demo" element={<WhatsAppDemo />} />
-          <Route path="/audit-gratuit" element={<AuditGratuit />} />
-          <Route path="/AI" element={<AuditGratuit />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/business-card" element={<BusinessCard />} />
           <Route path="/linktree" element={<LinkTree />} />
@@ -97,10 +89,7 @@ const App = () => {
           <Route path="/business-dashboard/leads" element={<Leads />} />
           <Route path="/contract-signature/:token" element={<ContractSignature />} />
           <Route path="/fidelizare-pacienti" element={<FidelizarePacienti />} />
-          <Route path="/showroom-vsl" element={<ShowroomVSL />} />
           <Route path="/cerere-oferta" element={<CerereOferta />} />
-          <Route path="/client-portal-system" element={<ClientPortalSystem />} />
-          <Route path="/webinar-afacere-autonoma" element={<Webinar />} />
         </Routes>
       </Suspense>
       <CookieConsent />

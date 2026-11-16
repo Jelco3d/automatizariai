@@ -48,7 +48,7 @@ export function BlogContent() {
         <div className="max-w-2xl space-y-4">
           <h2 className="text-2xl md:text-3xl font-bold text-white">Vrei un audit gratuit pentru afacerea ta?</h2>
           <p className="text-gray-300">Primești în 48h un raport cu procesele din firma ta care pot fi automatizate, prioritizate după ROI. Zero risc, zero angajament.</p>
-          <Link to="/audit-gratuit" className="inline-block mt-2 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-black font-semibold rounded-lg transition">Cere auditul gratuit</Link>
+          <a href="https://calendly.com/erdeleanjelco8/30min" target="_blank" rel="noopener noreferrer" className="inline-block mt-2 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-black font-semibold rounded-lg transition">Cere auditul gratuit</a>
         </div>
       </section>
     </div>

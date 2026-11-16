@@ -197,7 +197,7 @@ export default function BlogPost() {
             />
             <footer className="mt-14 border-t border-white/10 pt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
               <ShareButtons title={post.title} />
-              <a href="/audit-gratuit" className="inline-flex justify-center items-center h-11 px-6 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-semibold transition">Cere auditul gratuit</a>
+              <a href="https://calendly.com/erdeleanjelco8/30min" target="_blank" rel="noopener noreferrer" className="inline-flex justify-center items-center h-11 px-6 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-semibold transition">Cere auditul gratuit</a>
             </footer>
             <BlogComments postId={post.id} />
           </>
