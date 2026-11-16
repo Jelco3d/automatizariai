@@ -10,10 +10,10 @@ import { LayoutDashboard, List, FilePlus, Tag, MessageSquare, ChartBar, Settings
 export default function AdminBlog() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  const [posts, setPosts] = useState<{ id: string; title: string; slug: string; status: string; published_at: string | null; created_at: string }[]>([]);
+  const [posts, setPosts] = useState<{ id: string; title: string; slug: string; status: string; author_name: string | null; published_at: string | null; created_at: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const load = async () => {
-    const { data, error } = await supabase.from("blog_posts").select("id,title,slug,status,published_at,created_at").order("created_at", { ascending: false });
+    const { data, error } = await supabase.from("blog_posts").select("id,title,slug,status,author_name,published_at,created_at").order("created_at", { ascending: false });
     if (error) toast.error("Nu am putut încărca articolele");
     setPosts(data ?? []);
     setLoading(false);
@@ -144,11 +144,12 @@ export default function AdminBlog() {
                 : filtered.length === 0 ? <TableRow><TableCell colSpan={5} className="text-gray-400">Niciun articol încă.</TableCell></TableRow>
                 : filtered.map(p => <TableRow key={p.id}>
                     <TableCell className="font-medium text-white">{p.title}</TableCell>
-                    <TableCell>—</TableCell>
+                    <TableCell className="text-gray-300">{p.author_name ?? "—"}</TableCell>
                     <TableCell><span className="px-2 py-1 rounded-full text-xs bg-amber-500/20 text-amber-400">{p.status}</span></TableCell>
                     <TableCell className="text-gray-300">{(p.published_at ?? p.created_at).slice(0, 10)}</TableCell>
                     <TableCell>
                       <div className="flex gap-2">
+                        <Button variant="ghost" size="icon" aria-label="Editează" onClick={() => navigate(`/admin/blog/edit/${p.id}`)}><Edit className="h-4 w-4 text-gray-400" /></Button>
                         <Button variant="ghost" size="icon" aria-label="Vezi" onClick={() => window.open(`/blog/${p.slug}`, "_blank")}><Eye className="h-4 w-4 text-gray-400" /></Button>
                         <Button variant="ghost" size="icon" aria-label="Șterge" onClick={() => handleDelete(p.id)}><Trash className="h-4 w-4 text-gray-400" /></Button>
                       </div>

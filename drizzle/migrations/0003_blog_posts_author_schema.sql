@@ -1,0 +1,1 @@
+ALTER TABLE public.blog_posts ADD COLUMN author_name text, ADD COLUMN json_ld jsonb;

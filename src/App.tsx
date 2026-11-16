@@ -4,6 +4,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
+import { Toaster as Sonner } from '@/components/ui/sonner';
 import Website from './pages/Website';
 import { CookieConsent } from './components/CookieConsent';
 
@@ -16,7 +17,6 @@ const GDPR = lazy(() => import('./pages/GDPR'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Cookies = lazy(() => import('./pages/Cookies'));
 const Blog = lazy(() => import('./pages/Blog'));
-const AutomatizariAI = lazy(() => import('./pages/AutomatizariAI'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
 const AdminBlog = lazy(() => import('./pages/admin/AdminBlog'));
@@ -71,11 +71,11 @@ const App = () => {
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/automatizari-ai" element={<AutomatizariAI />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/admin" element={<BlogStaffGuard><Dashboard /></BlogStaffGuard>} />
           <Route path="/admin/blog" element={<BlogStaffGuard><AdminBlog /></BlogStaffGuard>} />
           <Route path="/admin/blog/new" element={<BlogStaffGuard><NewBlogPost /></BlogStaffGuard>} />
+          <Route path="/admin/blog/edit/:id" element={<BlogStaffGuard><NewBlogPost /></BlogStaffGuard>} />
           <Route path="/admin/categories" element={<BlogStaffGuard><Categories /></BlogStaffGuard>} />
           <Route path="/admin/blog/comments" element={<BlogStaffGuard><Comments /></BlogStaffGuard>} />
           <Route path="/admin/blog/analytics" element={<BlogStaffGuard><BlogAnalytics /></BlogStaffGuard>} />
@@ -106,6 +106,7 @@ const App = () => {
       </Suspense>
       <CookieConsent />
       <Toaster />
+      <Sonner />
     </Router>
   );
 };

@@ -347,12 +347,14 @@ export type Database = {
       blog_posts: {
         Row: {
           author_id: string | null
+          author_name: string | null
           category_id: string | null
           content: string
           cover_image: string | null
           created_at: string
           excerpt: string | null
           id: string
+          json_ld: Json | null
           og_image: string | null
           published_at: string | null
           reading_time: number
@@ -367,12 +369,14 @@ export type Database = {
         }
         Insert: {
           author_id?: string | null
+          author_name?: string | null
           category_id?: string | null
           content?: string
           cover_image?: string | null
           created_at?: string
           excerpt?: string | null
           id?: string
+          json_ld?: Json | null
           og_image?: string | null
           published_at?: string | null
           reading_time?: number
@@ -387,12 +391,14 @@ export type Database = {
         }
         Update: {
           author_id?: string | null
+          author_name?: string | null
           category_id?: string | null
           content?: string
           cover_image?: string | null
           created_at?: string
           excerpt?: string | null
           id?: string
+          json_ld?: Json | null
           og_image?: string | null
           published_at?: string | null
           reading_time?: number

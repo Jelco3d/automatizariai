@@ -1,207 +1,116 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { Calendar, Clock, User, ArrowLeft } from "lucide-react";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
-import { getPostBySlug } from "@/data/blog-posts";
-import { CostAutomatizareAIRomania2026 } from "@/data/blog-posts/cost-automatizare-ai-romania-2026";
+import { supabase } from "@/integrations/supabase/client";
+import { absUrl, formatRoDate, sanitizeHtml, SITE_URL, type BlogPostRow } from "@/lib/blog";
 
-const POST_COMPONENTS: Record<string, () => JSX.Element> = {
-  "cost-automatizare-ai-romania-2026": CostAutomatizareAIRomania2026,
-};
-
-export default function BlogPost() {
-  const { slug } = useParams<{ slug: string }>();
-  const post = slug ? getPostBySlug(slug) : undefined;
-  const PostContent = slug ? POST_COMPONENTS[slug] : undefined;
-
+function useHeadTags(post: BlogPostRow | null) {
   useEffect(() => {
     if (!post) return;
-
+    const url = `${SITE_URL}/blog/${post.slug}`;
+    const title = post.seo_title || post.title;
+    const desc = post.seo_description || post.excerpt || "";
+    const image = absUrl(post.og_image || post.cover_image);
     const prevTitle = document.title;
-    document.title = post.title;
-
-    const descMeta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    const prevDesc = descMeta?.content;
-    if (descMeta) descMeta.content = post.description;
-
-    const canonicalUrl = `https://aiautomatizari.ro/blog/${post.slug}`;
-    let canonicalLink = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    if (!canonicalLink) {
-      canonicalLink = document.createElement("link");
-      canonicalLink.rel = "canonical";
-      document.head.appendChild(canonicalLink);
-    }
-    const prevCanonical = canonicalLink.href;
-    canonicalLink.href = canonicalUrl;
-
-    const articleSchema = {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: post.title,
-      description: post.description,
-      author: {
-        "@type": "Person",
-        name: post.author,
-        url: "https://aiautomatizari.ro/about",
+    document.title = title;
+    const restore: Array<() => void> = [];
+    const meta = (attr: string, key: string, content: string) => {
+      let t = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+      const created = !t;
+      if (!t) { t = document.createElement("meta"); t.setAttribute(attr, key); document.head.appendChild(t); }
+      const prev = t.getAttribute("content");
+      t.setAttribute("content", content);
+      restore.push(() => (created ? t!.remove() : prev !== null && t!.setAttribute("content", prev)));
+    };
+    meta("name", "description", desc);
+    meta("property", "og:title", title);
+    meta("property", "og:description", desc);
+    meta("property", "og:url", url);
+    meta("property", "og:type", "article");
+    meta("property", "og:image", image);
+    let canon = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    const canonCreated = !canon;
+    if (!canon) { canon = document.createElement("link"); canon.rel = "canonical"; document.head.appendChild(canon); }
+    const prevCanon = canon.getAttribute("href");
+    canon.href = url;
+    const schemas: unknown[] = [
+      {
+        "@context": "https://schema.org", "@type": "Article", headline: post.title, description: desc,
+        author: { "@type": "Person", name: post.author_name || "Erdelean Jelco", url: `${SITE_URL}/about` },
+        publisher: { "@type": "Organization", name: "AI Automatizări", url: SITE_URL, logo: { "@type": "ImageObject", url: `${SITE_URL}/lovable-uploads/logo-256.png` } },
+        datePublished: post.published_at, dateModified: post.updated_at, mainEntityOfPage: { "@type": "WebPage", "@id": url },
+        image, inLanguage: "ro-RO",
       },
-      publisher: {
-        "@type": "Organization",
-        name: "AI Automatizări",
-        url: "https://aiautomatizari.ro",
-        logo: {
-          "@type": "ImageObject",
-          url: "https://aiautomatizari.ro/lovable-uploads/logo-256.png",
-        },
+      {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Acasă", item: `${SITE_URL}/` },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+          { "@type": "ListItem", position: 3, name: post.title, item: url },
+        ],
       },
-      datePublished: post.publishedAt,
-      dateModified: post.updatedAt,
-      mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
-      image: `https://aiautomatizari.ro${post.heroImage ?? "/og-image.png"}`,
-      inLanguage: "ro-RO",
-      keywords: post.tags.join(", "),
-    };
-
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "Cât durează implementarea unei automatizări AI simple?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Pentru un flow simplu (chatbot cu 3-5 intenții, sau o automatizare email), implementarea durează 3-7 zile lucrătoare. Un pachet Standard (3-5 flows integrate) durează 2-4 săptămâni.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Am nevoie de dev intern pentru a gestiona o automatizare AI?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Nu, dacă alegi un stack managed (n8n Cloud sau Make) și cineva în echipă e confortabil cu no-code. Da, dacă alegi self-hosted sau vrei integrări custom cu sisteme legacy.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Cât costă un chatbot WhatsApp AI pentru o afacere mică?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Pentru o afacere mică (50-200 conversații/zi), bugetul tipic este 1.500-3.000 EUR setup plus 150-250 EUR/lună (inclusiv WhatsApp Business API).",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Este compatibil cu GDPR?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Da, dacă e implementat corect: DPA cu fiecare furnizor, infrastructură în UE, anonimizare/pseudonimizare datelor sensibile înainte de trimitere la LLM, logs accesibile pentru exercitarea drepturilor GDPR.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Cât costă doar auditul?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "La AI Automatizări, auditul este gratuit — rezultate în 48h, fără angajament. Primești o listă concretă de procese automatizabile, prioritizate după ROI.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Diferența între RPA clasic și automatizare AI — care e mai ieftin?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Automatizarea AI e tipic 3-5 ori mai ieftină pentru IMM-uri față de RPA clasic enterprise, pentru cazuri de uz echivalente. AI automation câștigă la procese cu text liber și decizii contextuale.",
-          },
-        },
-      ],
-    };
-
-    const breadcrumbSchema = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Acasă", item: "https://aiautomatizari.ro/" },
-        { "@type": "ListItem", position: 2, name: "Blog", item: "https://aiautomatizari.ro/blog" },
-        { "@type": "ListItem", position: 3, name: post.title, item: canonicalUrl },
-      ],
-    };
-
-    const scripts: HTMLScriptElement[] = [];
-    for (const data of [articleSchema, faqSchema, breadcrumbSchema]) {
+      ...(Array.isArray(post.json_ld) ? post.json_ld : []),
+    ];
+    const scripts = schemas.map((d) => {
       const s = document.createElement("script");
-      s.type = "application/ld+json";
-      s.dataset.blogPostSeo = "true";
-      s.text = JSON.stringify(data);
-      document.head.appendChild(s);
-      scripts.push(s);
-    }
-
+      s.type = "application/ld+json"; s.text = JSON.stringify(d);
+      document.head.appendChild(s); return s;
+    });
     return () => {
       document.title = prevTitle;
-      if (descMeta && prevDesc !== undefined) descMeta.content = prevDesc;
-      if (canonicalLink && prevCanonical) canonicalLink.href = prevCanonical;
+      restore.forEach((r) => r());
+      if (canonCreated) canon!.remove(); else if (prevCanon) canon!.href = prevCanon;
       scripts.forEach((s) => s.remove());
     };
   }, [post]);
+}
 
-  if (!slug || !post || !PostContent) {
-    return <Navigate to="/blog" replace />;
-  }
+export default function BlogPost() {
+  const { slug } = useParams<{ slug: string }>();
+  const [post, setPost] = useState<BlogPostRow | null | undefined>(undefined);
+
+  useEffect(() => {
+    if (!slug) return;
+    setPost(undefined);
+    supabase.from("blog_posts").select("*").eq("slug", slug).maybeSingle()
+      .then(({ data }) => setPost((data as BlogPostRow) ?? null));
+  }, [slug]);
+
+  useHeadTags(post ?? null);
+  const html = useMemo(() => (post ? sanitizeHtml(post.content) : ""), [post]);
+
+  if (post === null) return <Navigate to="/blog" replace />;
 
   return (
     <div className="min-h-screen bg-[#0F1117] text-white">
       <Navigation />
       <article className="container mx-auto px-4 py-24 max-w-4xl">
-        <Link
-          to="/blog"
-          className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 mb-8"
-        >
+        <Link to="/blog" className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 mb-8">
           <ArrowLeft className="w-4 h-4" /> Înapoi la blog
         </Link>
-
-        <header className="space-y-6 mb-12">
-          <h1 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-300 leading-tight">
-            {post.title}
-          </h1>
-          <div className="flex flex-wrap items-center gap-6 text-gray-400 text-sm">
-            <div className="flex items-center gap-2">
-              <User className="w-4 h-4" />
-              <span>{post.author}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4" />
-              <span>
-                Publicat{" "}
-                {new Date(post.publishedAt).toLocaleDateString("ro-RO", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4" />
-              <span>{post.readingTimeMin} min citire</span>
-            </div>
-          </div>
-          {post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs px-3 py-1 rounded-full bg-white/[0.05] border border-white/10"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </header>
-
-        <div className="prose prose-invert max-w-none prose-p:text-gray-300 prose-li:text-gray-300 prose-strong:text-white prose-a:text-amber-300 space-y-8">
-          <PostContent />
-        </div>
+        {post === undefined ? (
+          <div className="space-y-4 animate-pulse"><div className="h-12 bg-white/5 rounded w-3/4" /><div className="h-4 bg-white/5 rounded w-1/3" /><div className="h-96 bg-white/5 rounded" /></div>
+        ) : (
+          <>
+            <header className="space-y-6 mb-12">
+              <h1 className="text-3xl md:text-5xl font-bold text-amber-400 leading-tight">{post.title}</h1>
+              <div className="flex flex-wrap items-center gap-6 text-gray-400 text-sm">
+                {post.author_name && <div className="flex items-center gap-2"><User className="w-4 h-4" /><span>{post.author_name}</span></div>}
+                {post.published_at && <div className="flex items-center gap-2"><Calendar className="w-4 h-4" /><span>Publicat {formatRoDate(post.published_at)}</span></div>}
+                <div className="flex items-center gap-2"><Clock className="w-4 h-4" /><span>{post.reading_time} min citire</span></div>
+              </div>
+              {post.cover_image && !post.cover_image.endsWith("/og-image.png") && (
+                <img src={post.cover_image} alt="" className="w-full rounded-xl aspect-video object-cover" />
+              )}
+            </header>
+            <div
+              className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-gray-300 prose-li:text-gray-300 prose-strong:text-white prose-a:text-amber-300 prose-th:text-amber-300 prose-td:text-gray-300 [&_table]:block [&_table]:overflow-x-auto [&_table]:max-w-full md:[&_table]:table prose-img:rounded-lg [&_pre]:overflow-x-auto [&_pre]:whitespace-pre-wrap [&_pre]:break-words"
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+          </>
+        )}
       </article>
       <Footer />
     </div>

@@ -22,6 +22,20 @@
       "when": 1794839861234,
       "tag": "0002_blog_module",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1794840314644,
+      "tag": "0003_blog_posts_author_schema",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1794840388867,
+      "tag": "0004_blog_reading_time_strip_html",
+      "breakpoints": true
     }
   ]
 }
