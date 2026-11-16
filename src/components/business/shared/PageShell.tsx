@@ -4,6 +4,15 @@ import { supabase } from "@/integrations/supabase/client";
 import { Sidebar } from "@/components/admin/Sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
 
+// Load all dashboard pages in the background so sidebar navigation doesn't flash a blank screen.
+let preloaded = false;
+function preloadBusinessPages() {
+  if (preloaded) return;
+  preloaded = true;
+  void Promise.all(["BusinessDashboard","Invoices","Quotes","Proposals","Contracts","Clients","Payments","Calendar","Leads"]
+    .map((n) => import(`../../../pages/business/${n}.tsx`)));
+}
+
 interface PageShellProps {
   children: ReactNode;
   loading?: boolean;
@@ -16,6 +25,7 @@ export function PageShell({ children, loading = false }: PageShellProps) {
   const [authLoading, setAuthLoading] = useState(!authChecked);
   const navigate = useNavigate();
 
+  useEffect(() => { preloadBusinessPages(); }, []);
   useEffect(() => {
     let mounted = true;
 
