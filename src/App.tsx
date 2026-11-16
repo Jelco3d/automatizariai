@@ -1,3 +1,4 @@
+import RouteMeta from "@/components/seo/RouteMeta";
 import { BlogStaffGuard } from "@/components/admin/BlogStaffGuard";
 import ScrollToTop from "@/components/ScrollToTop";
 
@@ -55,6 +56,7 @@ const App = () => {
     <Router>
       <Suspense fallback={<div className="min-h-screen bg-[#0a0e1a]" />}>
         <ScrollToTop />
+        <RouteMeta />
         <Routes>
           <Route path="/acasă" element={<Index />} />
           <Route path="/" element={<Website />} />
