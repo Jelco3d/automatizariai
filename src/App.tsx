@@ -2,7 +2,7 @@ import { BlogStaffGuard } from "@/components/admin/BlogStaffGuard";
 import ScrollToTop from "@/components/ScrollToTop";
 
 import { useEffect, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import { Toaster as Sonner } from '@/components/ui/sonner';
 import Website from './pages/Website';
@@ -18,7 +18,6 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const Cookies = lazy(() => import('./pages/Cookies'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
-const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
 const AdminBlog = lazy(() => import('./pages/admin/AdminBlog'));
 const NewBlogPost = lazy(() => import('./pages/admin/NewBlogPost'));
 const Categories = lazy(() => import('./pages/admin/Categories'));
@@ -72,7 +71,7 @@ const App = () => {
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/admin" element={<BlogStaffGuard><Dashboard /></BlogStaffGuard>} />
+          <Route path="/admin" element={<Navigate to="/admin/blog" replace />} />
           <Route path="/admin/blog" element={<BlogStaffGuard><AdminBlog /></BlogStaffGuard>} />
           <Route path="/admin/blog/new" element={<BlogStaffGuard><NewBlogPost /></BlogStaffGuard>} />
           <Route path="/admin/blog/edit/:id" element={<BlogStaffGuard><NewBlogPost /></BlogStaffGuard>} />

@@ -34,16 +34,16 @@ export default function AdminBlog() {
   return <div className="min-h-screen bg-[#0F1117] text-white flex">
       {/* Sidebar Navigation */}
       <aside className="w-64 bg-[#1A1F2C] border-r border-amber-500/20 p-4 hidden md:block">
-        <Link to="/admin" className="flex items-center mb-8">
+        <Link to="/admin/blog" className="flex items-center mb-8">
           <img src="/lovable-uploads/ed45f672-b988-4257-832b-bec499caad23.png" alt="Logo" className="h-16 w-auto rounded-xl" />
         </Link>
 
         <nav className="space-y-2">
-          <Link to="/admin" className="flex items-center gap-2 text-gray-400 hover:text-amber-400 p-2 rounded-lg hover:bg-amber-500/10">
+          <Link to="/admin/blog" className="flex items-center gap-2 text-amber-400 bg-amber-500/10 p-2 rounded-lg">
             <LayoutDashboard className="h-5 w-5" />
             Dashboard
           </Link>
-          <Link to="/admin/blog" className="flex items-center gap-2 text-amber-400 bg-amber-500/10 p-2 rounded-lg">
+          <Link to="/admin/blog" className="flex items-center gap-2 text-gray-400 hover:text-amber-400 p-2 rounded-lg hover:bg-amber-500/10">
             <List className="h-5 w-5" />
             Blog Posts
           </Link>
