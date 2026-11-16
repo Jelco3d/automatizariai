@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
-import { Calendar, Clock, User, ArrowLeft } from "lucide-react";
+import { ArrowLeft, Share2, Link2, Check } from "lucide-react";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
 import { supabase } from "@/integrations/supabase/client";
-import { absUrl, formatRoDate, sanitizeHtml, SITE_URL, type BlogPostRow } from "@/lib/blog";
+import { absUrl, sanitizeHtml, SITE_URL, type BlogPostRow } from "@/lib/blog";
 
 function useHeadTags(post: BlogPostRow | null) {
   useEffect(() => {
@@ -67,6 +67,66 @@ function useHeadTags(post: BlogPostRow | null) {
   }, [post]);
 }
 
+type Heading = { id: string; text: string };
+
+/** Adds ids to h2s so the side outline can jump to them. */
+function withHeadingIds(html: string): { html: string; headings: Heading[] } {
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  const headings: Heading[] = [];
+  doc.querySelectorAll("h2").forEach((h, i) => {
+    const id = `s-${i + 1}`;
+    h.id = id;
+    headings.push({ id, text: h.textContent?.trim() ?? "" });
+  });
+  return { html: doc.body.innerHTML, headings };
+}
+
+function ShareButtons({ title }: { title: string }) {
+  const [copied, setCopied] = useState(false);
+  const url = typeof window !== "undefined" ? window.location.href : "";
+  const share = async () => {
+    if (navigator.share) { try { await navigator.share({ title, url }); } catch { /* cancelled */ } return; }
+    await navigator.clipboard.writeText(url); setCopied(true); setTimeout(() => setCopied(false), 2000);
+  };
+  const copy = async () => { await navigator.clipboard.writeText(url); setCopied(true); setTimeout(() => setCopied(false), 2000); };
+  const pill = "inline-flex items-center gap-2 h-10 px-4 rounded-full border border-white/15 text-sm font-semibold text-gray-200 hover:bg-white/5 hover:border-amber-400/40 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400";
+  return (
+    <div className="flex items-center gap-2">
+      <button type="button" onClick={share} className={pill}><Share2 className="w-4 h-4" />Distribuie</button>
+      <button type="button" onClick={copy} aria-label="Copiază linkul" className={`${pill} px-3`}>{copied ? <Check className="w-4 h-4 text-amber-400" /> : <Link2 className="w-4 h-4" />}</button>
+    </div>
+  );
+}
+
+function Outline({ headings }: { headings: Heading[] }) {
+  const [active, setActive] = useState<string | null>(null);
+  useEffect(() => {
+    const els = headings.map((h) => document.getElementById(h.id)).filter(Boolean) as HTMLElement[];
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.isIntersecting && setActive(e.target.id));
+    }, { rootMargin: "0px 0px -70% 0px" });
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [headings]);
+  if (headings.length < 2) return null;
+  return (
+    <nav aria-label="Cuprins" className="group hidden xl:block fixed left-6 top-1/2 -translate-y-1/2 z-30">
+      <ul className="space-y-2.5">
+        {headings.map((h) => (
+          <li key={h.id}>
+            <a href={`#${h.id}`} className="flex items-center gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400 rounded">
+              <span className={`block h-0.5 rounded-full transition-all ${active === h.id ? "w-6 bg-amber-400" : "w-4 bg-gray-500"}`} />
+              <span className={`max-w-[220px] truncate text-sm opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition ${active === h.id ? "text-amber-300" : "text-gray-400"}`}>{h.text}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+const shortDate = (d: string) => new Date(d).toLocaleDateString("ro-RO", { day: "numeric", month: "short", year: "numeric" }).toUpperCase();
+
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<BlogPostRow | null | undefined>(undefined);
@@ -79,36 +139,65 @@ export default function BlogPost() {
   }, [slug]);
 
   useHeadTags(post ?? null);
-  const html = useMemo(() => (post ? sanitizeHtml(post.content) : ""), [post]);
+  const { html, headings } = useMemo(() => (post ? withHeadingIds(sanitizeHtml(post.content)) : { html: "", headings: [] }), [post]);
+  const viewed = useRef(false);
+  useEffect(() => {
+    if (!post || viewed.current) return;
+    viewed.current = true;
+    let sid = sessionStorage.getItem("blog_sid");
+    if (!sid) { sid = crypto.randomUUID(); sessionStorage.setItem("blog_sid", sid); }
+    supabase.rpc("increment_post_view", { _slug: post.slug, _session: sid, _referrer: document.referrer || null });
+  }, [post]);
 
   if (post === null) return <Navigate to="/blog" replace />;
 
   return (
-    <div className="min-h-screen bg-[#0F1117] text-white">
+    <div className="min-h-screen bg-[#1F2633] text-white">
       <Navigation />
-      <article className="container mx-auto px-4 py-24 max-w-4xl">
-        <Link to="/blog" className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 mb-8">
-          <ArrowLeft className="w-4 h-4" /> Înapoi la blog
+      {post && <Outline headings={headings} />}
+      <article className="mx-auto w-full max-w-[728px] px-5 pt-24 pb-20 md:pt-28">
+        <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-amber-300 mb-8">
+          <ArrowLeft className="w-4 h-4" /> Toate articolele
         </Link>
         {post === undefined ? (
-          <div className="space-y-4 animate-pulse"><div className="h-12 bg-white/5 rounded w-3/4" /><div className="h-4 bg-white/5 rounded w-1/3" /><div className="h-96 bg-white/5 rounded" /></div>
+          <div className="space-y-4 animate-pulse"><div className="h-12 bg-white/5 rounded w-3/4" /><div className="h-4 bg-white/5 rounded w-1/2" /><div className="h-96 bg-white/5 rounded" /></div>
         ) : (
           <>
-            <header className="space-y-6 mb-12">
-              <h1 className="text-3xl md:text-5xl font-bold text-amber-400 leading-tight">{post.title}</h1>
-              <div className="flex flex-wrap items-center gap-6 text-gray-400 text-sm">
-                {post.author_name && <div className="flex items-center gap-2"><User className="w-4 h-4" /><span>{post.author_name}</span></div>}
-                {post.published_at && <div className="flex items-center gap-2"><Calendar className="w-4 h-4" /><span>Publicat {formatRoDate(post.published_at)}</span></div>}
-                <div className="flex items-center gap-2"><Clock className="w-4 h-4" /><span>{post.reading_time} min citire</span></div>
+            <header className="mb-8">
+              <h1 className="text-[2rem] md:text-[2.6rem] font-black tracking-tight leading-[1.15] text-white">{post.title}</h1>
+              {post.excerpt && <p className="mt-3 text-lg md:text-xl font-light text-gray-400 leading-snug">{post.excerpt}</p>}
+              <div className="mt-6 flex items-center gap-3">
+                <img src="/lovable-uploads/logo-256.webp" alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover ring-1 ring-amber-400/40" />
+                <div className="leading-tight">
+                  <p className="text-xs font-bold tracking-wide text-white">{(post.author_name || "AI Automatizări").toUpperCase()}</p>
+                  <p className="mt-1 text-xs text-gray-400">{post.published_at && shortDate(post.published_at)} · {post.reading_time} MIN CITIRE</p>
+                </div>
+              </div>
+              <div className="mt-5 flex items-center justify-between border-y border-white/10 py-3">
+                <span className="text-sm text-gray-400">{post.views > 0 ? `${post.views} citiri` : ""}</span>
+                <ShareButtons title={post.title} />
               </div>
               {post.cover_image && !post.cover_image.endsWith("/og-image.png") && (
-                <img src={post.cover_image} alt="" className="w-full rounded-xl aspect-video object-cover" />
+                <img src={post.cover_image} alt="" className="mt-8 w-full rounded-lg aspect-video object-cover" />
               )}
             </header>
             <div
-              className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-gray-300 prose-li:text-gray-300 prose-strong:text-white prose-a:text-amber-300 prose-th:text-amber-300 prose-td:text-gray-300 [&_table]:block [&_table]:overflow-x-auto [&_table]:max-w-full md:[&_table]:table prose-img:rounded-lg [&_pre]:overflow-x-auto [&_pre]:whitespace-pre-wrap [&_pre]:break-words"
+              className="prose prose-invert max-w-none text-[1.075rem] md:text-[1.15rem] leading-[1.75]
+                prose-p:text-gray-200 prose-p:my-5 prose-li:text-gray-200 prose-li:my-1.5 prose-strong:text-white
+                prose-headings:text-white prose-headings:font-black prose-headings:tracking-tight prose-headings:scroll-mt-24
+                prose-h2:text-[1.6rem] md:prose-h2:text-[1.9rem] prose-h2:mt-14 prose-h2:mb-5 prose-h3:text-xl prose-h3:mt-10
+                prose-a:text-amber-300 prose-a:underline-offset-4
+                prose-blockquote:border-l-4 prose-blockquote:border-amber-400 prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-gray-100 prose-blockquote:pl-5 prose-blockquote:[quotes:none]
+                prose-hr:border-white/10 prose-hr:my-12 prose-img:rounded-lg
+                prose-th:text-amber-300 prose-td:text-gray-300 prose-code:text-amber-200
+                [&_table]:block [&_table]:overflow-x-auto [&_table]:max-w-full md:[&_table]:table
+                [&_pre]:overflow-x-auto [&_pre]:whitespace-pre-wrap [&_pre]:break-words"
               dangerouslySetInnerHTML={{ __html: html }}
             />
+            <footer className="mt-14 border-t border-white/10 pt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+              <ShareButtons title={post.title} />
+              <a href="/audit-gratuit" className="inline-flex justify-center items-center h-11 px-6 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-semibold transition">Cere auditul gratuit</a>
+            </footer>
           </>
         )}
       </article>
