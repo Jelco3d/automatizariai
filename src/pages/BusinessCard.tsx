@@ -50,7 +50,7 @@ const BusinessCard = () => {
       <div className="max-w-5xl w-full relative z-10">
         <div className="text-center mb-6">
           <h1 className="text-4xl font-extralight text-white mb-3 tracking-wide">
-            Premium <span className="font-bold bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent">Business Card</span>
+            Card de vizită digital — <span className="font-bold bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent">Jelco, AI Automatizări</span>
           </h1>
           <p className="text-slate-400 text-lg font-light">Experiență digitală de înaltă calitate</p>
         </div>

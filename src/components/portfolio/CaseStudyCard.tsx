@@ -40,24 +40,24 @@ export const CaseStudyCard = ({
       onClick={() => navigate('/portfolio')}
     >
       <CardContent className="p-4 md:p-6">
-        <h3 className="text-2xl font-bold text-yellow-400 mb-4">{client}</h3>
+        <h2 className="text-2xl font-bold text-yellow-400 mb-4">{client}</h2>
         <p className="text-white/60 mb-4">{industry}</p>
         
         <div className="space-y-6">
           <div>
-            <h4 className="text-lg font-semibold mb-2 text-white">Provocare:</h4>
+            <h3 className="text-lg font-semibold mb-2 text-white">Provocare:</h3>
             <p className="text-white/60">{challenge}</p>
-            <h4 className="text-lg font-semibold mt-4 mb-2 text-white">Soluție:</h4>
+            <h3 className="text-lg font-semibold mt-4 mb-2 text-white">Soluție:</h3>
             <p className="text-white/60">{solution}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-4 bg-yellow-400/5 p-4 rounded-lg text-white">
             <div>
-              <h5 className="font-semibold text-yellow-400 mb-2">Înainte</h5>
+              <h4 className="font-semibold text-yellow-400 mb-2">Înainte</h4>
               <p className="text-white/60">{beforeAfter.before}</p>
             </div>
             <div>
-              <h5 className="font-semibold text-yellow-400 mb-2">După</h5>
+              <h4 className="font-semibold text-yellow-400 mb-2">După</h4>
               <p className="text-white/60">{beforeAfter.after}</p>
             </div>
           </div>

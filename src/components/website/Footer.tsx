@@ -6,18 +6,18 @@ export const Footer = () => {
     <div className="container mx-auto px-4 py-10 md:py-16 border-t border-white/[0.08]">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+          <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
             Soluții de Automatizare AI
-          </h3>
+          </h2>
           <p className="text-white/50">
             Transformăm afacerile prin soluții inteligente de automatizare.
           </p>
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+          <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
             Link-uri Rapide
-          </h3>
+          </h2>
           <div className="flex flex-col space-y-2">
             <Link to="/services" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Servicii</Link>
             <Link to="/about" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Despre Noi</Link>
@@ -34,9 +34,9 @@ export const Footer = () => {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
+          <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-400">
             Conectează-te cu Noi
-          </h3>
+          </h2>
           <div className="space-y-3">
             <div className="text-white/50">
               <p>Telefon: +40754274528</p>
