@@ -202,7 +202,7 @@ export default function BlogPost() {
   }, [post]);
 
   if (post === null) return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-[#1F2633] text-white">
       <Navigation />
       <main className="mx-auto w-full max-w-[728px] px-5 pt-24 pb-20 md:pt-28">
         <p>Articolul nu a fost găsit.</p>
