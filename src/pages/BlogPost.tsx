@@ -1,6 +1,6 @@
 import BlogComments from "@/components/blog/BlogComments";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Link, useParams, Navigate } from "react-router-dom";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, Share2, Link2, Check } from "lucide-react";
 import { Navigation } from "@/components/website/Navigation";
 import { Footer } from "@/components/website/Footer";
@@ -23,7 +23,8 @@ function useHeadTags(post: BlogPostRow | null) {
       if (!t) { t = document.createElement("meta"); t.setAttribute(attr, key); document.head.appendChild(t); }
       const prev = t.getAttribute("content");
       t.setAttribute("content", content);
-      restore.push(() => (created ? t!.remove() : prev !== null && t!.setAttribute("content", prev)));
+      const tag = t;
+      if (key !== "og:url") restore.push(() => (created ? tag.remove() : prev !== null && tag.setAttribute("content", prev)));
     };
     meta("name", "description", desc);
     meta("property", "og:title", title);
@@ -32,9 +33,7 @@ function useHeadTags(post: BlogPostRow | null) {
     meta("property", "og:type", "article");
     meta("property", "og:image", image);
     let canon = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    const canonCreated = !canon;
     if (!canon) { canon = document.createElement("link"); canon.rel = "canonical"; document.head.appendChild(canon); }
-    const prevCanon = canon.getAttribute("href");
     canon.href = url;
     const schemas: unknown[] = [
       {
@@ -62,7 +61,6 @@ function useHeadTags(post: BlogPostRow | null) {
     return () => {
       document.title = prevTitle;
       restore.forEach((r) => r());
-      if (canonCreated) canon!.remove(); else if (prevCanon) canon!.href = prevCanon;
       scripts.forEach((s) => s.remove());
     };
   }, [post]);
@@ -132,12 +130,47 @@ export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<BlogPostRow | null | undefined>(undefined);
 
+  useLayoutEffect(() => {
+    if (!slug) return;
+    const url = `https://aiautomatizari.ro/blog/${slug}`;
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
+    canonical.href = url;
+    const setMeta = (attr: string, key: string, value: string) => {
+      let tag = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+      if (!tag) { tag = document.createElement("meta"); tag.setAttribute(attr, key); document.head.appendChild(tag); }
+      tag.content = value;
+    };
+    setMeta("property", "og:url", url);
+    setMeta("name", "robots", "index, follow");
+    setPost(undefined);
+  }, [slug]);
+
   useEffect(() => {
     if (!slug) return;
-    setPost(undefined);
-    supabase.from("blog_posts").select("*").eq("slug", slug).maybeSingle()
-      .then(({ data }) => setPost((data as BlogPostRow) ?? null));
+    let cancelled = false;
+    let retryTimer: ReturnType<typeof setTimeout> | undefined;
+    const fetchPost = (retried = false) => {
+      supabase.from("blog_posts").select("*").eq("slug", slug).maybeSingle()
+        .then(({ data, error }) => {
+          if (cancelled) return;
+          if (error) {
+            if (!retried) retryTimer = setTimeout(() => fetchPost(true), 1500);
+            return;
+          }
+          setPost((data as BlogPostRow) ?? null);
+        });
+    };
+    fetchPost();
+    return () => { cancelled = true; clearTimeout(retryTimer); };
   }, [slug]);
+
+  useLayoutEffect(() => {
+    if (post !== null) return;
+    let robots = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
+    if (!robots) { robots = document.createElement("meta"); robots.name = "robots"; document.head.appendChild(robots); }
+    robots.content = "noindex, follow";
+  }, [post]);
 
   useHeadTags(post ?? null);
   const { html, headings } = useMemo(() => (post ? withHeadingIds(sanitizeHtml(post.content)) : { html: "", headings: [] }), [post]);
@@ -168,7 +201,16 @@ export default function BlogPost() {
     return () => { flush(); clearInterval(iv); document.removeEventListener("visibilitychange", onVis); window.removeEventListener("pagehide", flush); };
   }, [post]);
 
-  if (post === null) return <Navigate to="/blog" replace />;
+  if (post === null) return (
+    <div className="min-h-screen bg-background text-foreground">
+      <Navigation />
+      <main className="mx-auto w-full max-w-[728px] px-5 pt-24 pb-20 md:pt-28">
+        <p>Articolul nu a fost găsit.</p>
+        <Link to="/blog" className="text-primary underline">Vezi toate articolele</Link>
+      </main>
+      <Footer />
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-[#1F2633] text-white">

@@ -14,7 +14,7 @@ AI Automatizări este o companie din **Timișoara, România**, fondată de **Erd
 ## Ce facem
 
 - [Servicii de automatizare AI](https://aiautomatizari.ro/services): portofoliu complet
-- [Audit gratuit](https://aiautomatizari.ro/audit-gratuit): analiză gratuită a proceselor tale pentru a identifica oportunități de automatizare
+- [Programează o discuție de 30 de minute](https://calendly.com/erdeleanjelco8/30min): discutăm procesele firmei tale și ce merită automatizat
 - [Cerere ofertă](https://aiautomatizari.ro/cerere-oferta): ofertă personalizată pentru proiectul tău
 - [WhatsApp AI Demo](https://aiautomatizari.ro/whatsapp-demo): demo chatbot WhatsApp Business cu AI
 - [Fidelizare pacienți](https://aiautomatizari.ro/fidelizare-pacienti): automatizare fidelizare pentru clinici și cabinete medicale
@@ -26,12 +26,22 @@ AI Automatizări este o companie din **Timișoara, România**, fondată de **Erd
 - [Blog](https://aiautomatizari.ro/blog): articole despre automatizare AI, GEO/AEO, studii de caz
 - [Contact](https://aiautomatizari.ro/contact): formular contact
 
+## Articole
+- [Chatbot pentru site: ce face, cum îl alegi și cum îl pui la lucru](https://aiautomatizari.ro/blog/chatbot-pentru-site)
+- [Chatbot WhatsApp Business: ce face, ce reguli are și cum îl pui la lucru](https://aiautomatizari.ro/blog/chatbot-whatsapp-business)
+- [Automatizări AI în Timișoara: ce poți automatiza în firma ta și cum începi](https://aiautomatizari.ro/blog/automatizari-ai-timisoara)
+- [Agenție automatizări AI: ce face și cum o alegi pentru firma ta](https://aiautomatizari.ro/blog/agentie-automatizari-ai)
+- [Agent AI pentru firme: ghid practic pentru patronii de IMM](https://aiautomatizari.ro/blog/agent-ai-pentru-firme)
+- [Agent AI vs chatbot: ce alegi pentru firma ta](https://aiautomatizari.ro/blog/agent-ai-vs-chatbot)
+- [Automatizări AI pentru IMM-uri: ghid practic pentru patroni](https://aiautomatizari.ro/blog/automatizari-ai)
+- [Cât costă automatizarea cu AI în România 2026](https://aiautomatizari.ro/blog/cost-automatizare-ai-romania-2026)
+
 ## Diferențiatori
 
 - **Timp de implementare: 5 zile sau mai puțin** pentru prima automatizare
 - **Focus local**: servim piața din România, cunoaștem integrările locale (Smartbill, FacturaImm, RoMobil, etc.)
 - **Stack modern**: AI (Claude, GPT), n8n, Supabase, integrări custom
-- **Transparență**: audit gratuit înainte de orice angajament
+- **Transparență**: discuție de 30 de minute înainte de orice angajament
 
 ## Contact
 
@@ -48,4 +58,4 @@ AI Automatizări este o companie din **Timișoara, România**, fondată de **Erd
 
 ---
 
-Ultima actualizare: 2026-04-20
+Ultima actualizare: 2026-11-18
