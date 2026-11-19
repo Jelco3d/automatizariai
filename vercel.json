@@ -12,6 +12,11 @@
       "has": [{ "type": "host", "value": "www.aiautomatizari.ro" }],
       "destination": "https://aiautomatizari.ro/:path*",
       "permanent": true
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy",
+      "permanent": true
     }
   ],
   "headers": [

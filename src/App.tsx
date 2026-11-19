@@ -67,6 +67,7 @@ const App = () => {
           <Route path="/terms" element={<Terms />} />
           <Route path="/gdpr" element={<GDPR />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/privacy-policy" element={<Navigate to="/privacy" replace />} />
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
