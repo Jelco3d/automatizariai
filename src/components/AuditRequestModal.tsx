@@ -105,7 +105,7 @@ export function AuditRequestModal({ isOpen, onClose, conversationData }: AuditRe
         {step === 1 ? (
           <>
             <DialogHeader>
-              <DialogTitle>Obține un audit gratuit</DialogTitle>
+              <DialogTitle>Programează o discuție de 30 de minute</DialogTitle>
               <DialogDescription>
                 Completează datele tale pentru a primi auditul companiei tale
               </DialogDescription>
@@ -177,7 +177,7 @@ export function AuditRequestModal({ isOpen, onClose, conversationData }: AuditRe
                     ) : (
                       <>
                         <Send className="h-4 w-4" />
-                        Obține Audit!
+                        Programează o discuție de 30 de minute
                       </>
                     )}
                   </Button>

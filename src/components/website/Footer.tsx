@@ -23,7 +23,7 @@ export const Footer = () => {
             <Link to="/about" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Despre Noi</Link>
             <Link to="/portfolio" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Portofoliu</Link>
             <Link to="/blog" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Blog</Link>
-            <a href="https://calendly.com/erdeleanjelco8/30min" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Audit Gratuit</a>
+            <a href="https://calendly.com/erdeleanjelco8/30min" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Programează o discuție de 30 de minute</a>
             <Link to="/contact" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Contact</Link>
             <Link to="/terms" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Termeni și Condiții</Link>
             <Link to="/gdpr" className="text-white/50 hover:text-yellow-400 transition-colors duration-300">Politica GDPR</Link>

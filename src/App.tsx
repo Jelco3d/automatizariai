@@ -42,6 +42,7 @@ const ContractSignature = lazy(() => import('./pages/ContractSignature'));
 const FidelizarePacienti = lazy(() => import('./pages/FidelizarePacienti'));
 const CerereOferta = lazy(() => import('./pages/CerereOferta'));
 const Leads = lazy(() => import('./pages/business/Leads'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const App = () => {
   useEffect(() => {
@@ -95,6 +96,7 @@ const App = () => {
           <Route path="/contract-signature/:token" element={<ContractSignature />} />
           <Route path="/fidelizare-pacienti" element={<FidelizarePacienti />} />
           <Route path="/cerere-oferta" element={<CerereOferta />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <CookieConsent />

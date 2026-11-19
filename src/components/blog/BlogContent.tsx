@@ -93,9 +93,9 @@ export function BlogContent() {
       </section>
 
       <section className="mt-14 rounded-xl border border-border p-6 md:p-8">
-        <h2 className="text-xl md:text-2xl font-bold text-foreground">Vrei un audit gratuit pentru afacerea ta?</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-foreground">Vrei să discutăm 30 de minute despre afacerea ta?</h2>
         <p className="mt-2 text-muted-foreground">Primești în 48h un raport cu procesele din firma ta care pot fi automatizate, prioritizate după ROI.</p>
-        <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-3d-gold inline-block mt-4 px-5 py-2.5 rounded-lg font-semibold">Cere auditul gratuit</a>
+        <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-3d-gold inline-block mt-4 px-5 py-2.5 rounded-lg font-semibold">Programează o discuție de 30 de minute</a>
       </section>
     </div>
   );

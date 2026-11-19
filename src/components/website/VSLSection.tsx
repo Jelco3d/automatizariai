@@ -11,7 +11,7 @@ export const VSLSection = ({ onOpenAuditModal }: VSLSectionProps) => {
   const [showVideo, setShowVideo] = useState(false);
 
   const handleBooking = () => {
-    onOpenAuditModal?.();
+    window.open("https://calendly.com/erdeleanjelco8/30min", "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -75,7 +75,7 @@ export const VSLSection = ({ onOpenAuditModal }: VSLSectionProps) => {
             onClick={handleBooking}
             className="btn-3d-gold text-base md:text-lg px-8 py-6 h-auto rounded-xl"
           >
-            Programează AI Audit Gratuit!
+            Programează o discuție de 30 de minute
             <ArrowRight className="ml-2 w-5 h-5" />
           </Button>
         </motion.div>

@@ -51,7 +51,7 @@ export function Navigation({ onOpenAuditModal }: NavigationProps) {
               Servicii
             </Link>
             <a href="https://calendly.com/erdeleanjelco8/30min" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-yellow-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-yellow-400/[0.06]">
-              Audit Gratuit
+              Programează o discuție de 30 de minute
             </a>
             <Link to="/about" className="text-white/70 hover:text-yellow-400 transition-all duration-300 px-4 py-2 rounded-lg hover:bg-yellow-400/[0.06]">
               Despre Noi

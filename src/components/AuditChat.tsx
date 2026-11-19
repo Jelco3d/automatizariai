@@ -227,7 +227,7 @@ ${answers[5] || 'N/A'}`;
                   className="bg-gradient-to-r from-amber-500 via-pink-500 to-amber-600 hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl text-white px-8 py-6 text-lg font-semibold rounded-xl"
                 >
                   <FileText className="mr-2 h-5 w-5" />
-                  Obține Auditul Gratuit
+                  Programează o discuție de 30 de minute
                 </Button>
               </div>
             )}
