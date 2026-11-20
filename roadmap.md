@@ -6,3 +6,8 @@
 - [ ] AI assist in editor
 - [x] Categories/Settings admin pages
 - [x] Substack-style redesign of all /admin/blog pages
+- [x] Add raw HTML metadata for four public routes
+- [ ] Sweep every public route, blog article and sitemap for indexing metadata consistency
+- [ ] Provide meaningful raw HTML for the 7 reported URLs and other public routes
+- [ ] Recheck the reported /terms 404 and /blog/agentie-automatizari-ai redirect
+- [ ] Fix remaining metadata gaps and verify the complete sweep

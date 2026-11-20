@@ -15,7 +15,7 @@ const META: Record<string, Meta> = {
   "/gdpr": { title: "Politica GDPR | AI Automatizări", description: "Cum respectăm Regulamentul GDPR și ce drepturi ai asupra datelor tale personale." },
   "/privacy": { title: "Politica de confidențialitate | AI Automatizări", description: "Ce date colectăm, de ce le folosim și cum le protejăm." },
   "/cookies": { title: "Politica de cookie-uri | AI Automatizări", description: "Ce cookie-uri folosește site-ul AI Automatizări și cum le poți gestiona." },
-  "/blog": { title: "Blog AI Automatizări — ghiduri despre AI pentru afaceri", description: "Articole practice despre automatizări cu AI, costuri, unelte și studii de caz pentru IMM-urile din România." },
+  "/blog": { title: "Blog AI și automatizări pentru firme | AI Automatizări", description: "Articole practice despre AI și automatizări pentru firme din România: ghiduri, costuri reale, agenți AI și exemple pe care le poți aplica imediat." },
   "/contact": { title: "Contact | AI Automatizări", description: "Contactează-ne pentru o discuție despre automatizarea afacerii tale cu AI. Telefon, email și programare directă." },
   "/business-card": { title: "Card de vizită digital — Jelco, AI Automatizări", description: "Cardul de vizită digital al lui Jelco: date de contact, rețele sociale și servicii AI Automatizări." },
   "/linktree": { title: "Profil și linkuri — Jelco, AI Automatizări", description: "Toate linkurile importante: website, servicii, portofoliu, rețele sociale și contact direct." },
