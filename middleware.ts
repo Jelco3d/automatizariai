@@ -11,6 +11,10 @@ const STATIC_META: Record<string, { title: string; description: string }> = {
   '/about': { title: 'Despre noi — Povestea AI Automatizări', description: 'Cine suntem, cum lucrăm și de ce ne-am specializat în automatizări cu AI pentru antreprenorii din România.' },
   '/portfolio': { title: 'Portofoliu și studii de caz | AI Automatizări', description: 'Povești de succes și rezultate reale obținute de clienții noștri prin automatizări cu AI.' },
   '/contact': { title: 'Contact | AI Automatizări', description: 'Contactează-ne pentru o discuție despre automatizarea afacerii tale cu AI. Telefon, email și programare directă.' },
+  '/cerere-oferta': { title: 'Cerere ofertă personalizată | AI Automatizări', description: 'Completează formularul și primești o ofertă personalizată de automatizare AI pentru afacerea ta.' },
+  '/fidelizare-pacienti': { title: 'Sistem de fidelizare automată pentru clinici dentare', description: 'Cum pot clinicile dentare să-și crească programările cu un sistem automat de fidelizare a pacienților, fără reclame.' },
+  '/business-card': { title: 'Card de vizită digital — Jelco, AI Automatizări', description: 'Cardul de vizită digital al lui Jelco: date de contact, rețele sociale și servicii AI Automatizări.' },
+  '/linktree': { title: 'Profil și linkuri — Jelco, AI Automatizări', description: 'Toate linkurile importante: website, servicii, portofoliu, rețele sociale și contact direct.' },
   '/terms': { title: 'Termeni și condiții | AI Automatizări', description: 'Termenii și condițiile de utilizare a site-ului și serviciilor AI Automatizări.' },
   '/gdpr': { title: 'Politica GDPR | AI Automatizări', description: 'Cum respectăm Regulamentul GDPR și ce drepturi ai asupra datelor tale personale.' },
   '/privacy': { title: 'Politica de confidențialitate | AI Automatizări', description: 'Ce date colectăm, de ce le folosim și cum le protejăm.' },
@@ -19,7 +23,7 @@ const STATIC_META: Record<string, { title: string; description: string }> = {
 };
 
 // Other app routes (served normally with status 200, no injected tags).
-const OTHER_ROUTES = [/^\/acas(ă|%C4%83)$/i, /^\/business-card$/, /^\/linktree$/, /^\/fidelizare-pacienti$/, /^\/cerere-oferta$/, /^\/auth$/, /^\/admin(\/.*)?$/, /^\/business-dashboard(\/.*)?$/, /^\/contract-signature\/[^/]+$/, /^\/index$/];
+const OTHER_ROUTES = [/^\/acas(ă|%C4%83)$/i, /^\/auth$/, /^\/admin(\/.*)?$/, /^\/business-dashboard(\/.*)?$/, /^\/contract-signature\/[^/]+$/, /^\/index$/];
 
 const publicKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV0dXRkc2t1eWtkb3NtYmdqa3poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkxNzcyOTcsImV4cCI6MjA3NDc1MzI5N30.1UFcL1voItB0K0ilcgCvSVdaoOBfwaRc2I5K1LjngKY';
 
