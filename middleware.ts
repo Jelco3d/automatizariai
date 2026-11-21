@@ -134,9 +134,14 @@ export default async function middleware(request: Request): Promise<Response | u
     if (!shell.ok || !result.ok || !shell.headers.get('content-type')?.includes('text/html')) return undefined;
     const posts = await result.json();
     const post = Array.isArray(posts) ? posts[0] : undefined;
-    if (!post || typeof post.title !== 'string') return undefined;
     let html = await shell.text();
     if (!/<\/head\s*>/i.test(html)) return undefined;
+    if (!post || typeof post.title !== 'string') {
+      return new Response(notFoundHtml(html), { status: 404, headers: {
+        'content-type': 'text/html; charset=utf-8',
+        'cache-control': 'public, max-age=0, s-maxage=300',
+      } });
+    }
     const title = post.seo_title || post.title;
     const description = post.seo_description || post.excerpt || '';
     const canonical = `https://aiautomatizari.ro/blog/${slug}`;
