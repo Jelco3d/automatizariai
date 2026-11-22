@@ -12,3 +12,5 @@
 - [x] Recheck the reported /terms 404 and /blog/agentie-automatizari-ai redirect
 - [x] Fix remaining metadata gaps and verify the complete sweep
 - [x] Return a real 404 with noindex for missing blog articles
+- [x] Render the real homepage hero in middleware HTML and measure mobile LCP before/after
+- [x] Add an explicit permanent www root redirect and preserve subpath redirects

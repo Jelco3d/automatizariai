@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/website/HeroSection";
 import { VSLSection } from "@/components/website/VSLSection";
 import { AuditFormModal } from "@/components/website/AuditFormModal";
 import { openBooking } from "@/config/booking";
+import { HERO_CLASSES } from "@/components/website/heroContent";
 
 const ProblemSection = lazy(() => import("@/components/website/ProblemSection").then(m => ({ default: m.ProblemSection })));
 const SolutionSection = lazy(() => import("@/components/website/SolutionSection").then(m => ({ default: m.SolutionSection })));
@@ -17,7 +18,7 @@ const Website = () => {
   const openAuditModal = () => openBooking();
 
   return (
-    <div className="min-h-screen bg-[#0a0e1a] relative overflow-hidden">
+    <div className={HERO_CLASSES.page}>
       <Navigation onOpenAuditModal={openAuditModal} />
 
       {/* Animated background orbs */}

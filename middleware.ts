@@ -1,3 +1,5 @@
+import { HERO_CLASSES, HERO_COPY } from './src/components/website/heroContent';
+
 export const config = { matcher: ['/((?!assets/|lovable-uploads/|api/|.*\\.[a-zA-Z0-9]+$).*)'] };
 
 const SITE = 'https://aiautomatizari.ro';
@@ -83,6 +85,10 @@ function staticFallback(path: string, meta: { title: string; description: string
     extra = '<section><h2>Jelco — AI Automatizări</h2><p>Automatizare &amp; Dezvoltare Web</p><address><a href="tel:+40754274528">+40754274528</a><br><a href="mailto:contact@aiautomatizari.ro">contact@aiautomatizari.ro</a></address><p><a href="/linktree">Vezi profilul și toate linkurile</a></p></section>';
   }
   return `${navigationHtml()}<main style="max-width:46rem;margin:2rem auto;padding:0 1rem"><h1>${escapeHtml(meta.title)}</h1><p>${escapeHtml(meta.description)}</p>${extra}</main>`;
+}
+
+function renderHomepageHero(): string {
+  return `<div class="${HERO_CLASSES.page}"><main><section class="${HERO_CLASSES.section}"><div class="${HERO_CLASSES.container}"><h1 class="${HERO_CLASSES.heading}">${escapeHtml(HERO_COPY.headlineStart)} <span class="${HERO_CLASSES.accent}">${escapeHtml(HERO_COPY.headlineAccent)}</span> ${escapeHtml(HERO_COPY.headlineEnd)}</h1><p class="${HERO_CLASSES.description}">${escapeHtml(HERO_COPY.description)}</p></div></section></main></div>`;
 }
 
 function renderBlogIndex(meta: { title: string; description: string }, posts: Array<{ slug: string; title: string; excerpt: string | null }>): string {
@@ -232,7 +238,7 @@ async function handleOther(request: Request, rawPath: string): Promise<Response 
     if (meta) {
       const canonical = path === '/' ? `${SITE}/` : `${SITE}${encodeURI(path)}`;
       html = injectHead(html, { ...meta, canonical, image: DEFAULT_IMAGE, type: 'website' });
-      let content = staticFallback(path, meta);
+      let content = path === '/' ? renderHomepageHero() : staticFallback(path, meta);
       if (path === '/blog' && postsResult?.ok) {
         const posts = await postsResult.json();
         if (Array.isArray(posts)) content = renderBlogIndex(meta, posts);

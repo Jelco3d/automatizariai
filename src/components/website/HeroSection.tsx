@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { HERO_CLASSES, HERO_COPY } from "./heroContent";
 
 interface HeroSectionProps {
   onOpenAuditModal?: () => void;
@@ -12,8 +13,8 @@ export const HeroSection = ({ onOpenAuditModal }: HeroSectionProps) => {
   };
 
   return (
-    <section className="flex items-center justify-center relative px-4 md:px-6 pt-24 pb-12 md:pt-44 md:pb-20">
-      <div className="max-w-5xl mx-auto text-center">
+    <section className={HERO_CLASSES.section}>
+      <div className={HERO_CLASSES.container}>
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -26,21 +27,21 @@ export const HeroSection = ({ onOpenAuditModal }: HeroSectionProps) => {
           </span>
         </motion.div>
 
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 max-w-4xl mx-auto text-white tracking-tight">
-          Ajut Antreprenorii Din România Să Implementeze{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-amber-400 to-orange-500">
-            Infrastructura Internă, Agenți AI
+        <h1 className={HERO_CLASSES.heading}>
+          {HERO_COPY.headlineStart}{" "}
+          <span className={HERO_CLASSES.accent}>
+            {HERO_COPY.headlineAccent}
           </span>{" "}
-          Și Automatizări Eficiente
+          {HERO_COPY.headlineEnd}
         </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-lg md:text-xl text-white/60 mb-10 max-w-2xl mx-auto font-normal leading-relaxed"
+          className={HERO_CLASSES.description}
         >
-          Recuperând timp, crescând veniturile și livrând rezultate în mai puțin de 30 de zile.
+          {HERO_COPY.description}
         </motion.p>
 
         <motion.div
