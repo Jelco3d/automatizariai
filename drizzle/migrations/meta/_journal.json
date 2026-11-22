@@ -57,6 +57,13 @@
       "when": 1794843775491,
       "tag": "0007_blog_comment_policy_spam",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1795376278105,
+      "tag": "0008_restrict_blog_metadata_leads_and_images",
+      "breakpoints": true
     }
   ]
 }
