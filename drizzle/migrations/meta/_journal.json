@@ -64,6 +64,13 @@
       "when": 1795376278105,
       "tag": "0008_restrict_blog_metadata_leads_and_images",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1795599300202,
+      "tag": "0009_restrict_public_bucket_listing",
+      "breakpoints": true
     }
   ]
 }
